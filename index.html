@@ -427,41 +427,6 @@
   }
   .card-post:hover .post-arrow { opacity: 1; transform: translateX(0); }
 
-  /* Coming soon cards: 4 cols */
-  .card-soon {
-    grid-column: span 4;
-    cursor: default;
-    position: relative;
-  }
-  .card-soon:hover { transform: none; box-shadow: none; }
-  .card-soon .img-wrap { height: 160px; position: relative; overflow: hidden; }
-  .card-soon .lazy-wrap { height: 100%; filter: grayscale(0.4); }
-  .card-soon-body { padding: 1.4rem; }
-  .soon-pill {
-    display: inline-flex; align-items: center; gap: 0.3rem;
-    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
-    color: var(--ink-3); background: var(--bg-3); border: 1px solid var(--border);
-    border-radius: 100px; padding: 0.18rem 0.55rem; margin-bottom: 0.6rem; width: fit-content;
-  }
-  .card-soon .card-title { font-size: 0.9rem; color: var(--ink-2); font-style: italic; line-height: 1.45; margin-bottom: 0; }
-  /* Hover unlock overlay */
-  .card-soon-overlay {
-    position: absolute; inset: 0; border-radius: inherit;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(3px);
-    opacity: 0; transition: opacity 0.25s; z-index: 5;
-  }
-  .card-soon:hover .card-soon-overlay { opacity: 1; }
-  .notify-btn {
-    display: flex; align-items: center; gap: 0.45rem;
-    background: var(--ink); color: #fff;
-    border-radius: 100px; padding: 0.55rem 1.1rem;
-    font-size: 0.8rem; font-weight: 600; text-decoration: none;
-    transition: background 0.2s;
-  }
-  .notify-btn:hover { background: var(--amber); }
-
   /* ── SUBSCRIBE ──────────────────────── */
   .subscribe-section {
     max-width: 1080px; margin: 3rem auto 0; padding: 0 2rem;
@@ -564,7 +529,7 @@
   @media (max-width: 920px) {
     .card-featured { grid-column: span 12; min-height: 420px; }
     .card-post     { grid-column: span 12; }
-    .card-soon     { grid-column: span 12; }
+
     .sub-card      { grid-template-columns: 1fr; gap: 1.75rem; padding: 2rem; }
     .about-card    { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
     .stats-inner   { flex-wrap: wrap; }
