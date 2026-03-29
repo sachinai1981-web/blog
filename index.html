@@ -6,367 +6,257 @@
   <title>Sachin Rai — AI + Enterprise Sales</title>
   <meta name="description" content="Notes from the intersection of AI and enterprise GTM. Tools I'm building, strategies that work, and what's changing in sales." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black: #0a0a0a;
-      --white: #ffffff;
-      --gray-50: #f9fafb;
-      --gray-100: #f3f4f6;
-      --gray-300: #d1d5db;
-      --gray-500: #6b7280;
-      --gray-700: #374151;
-      --gray-900: #111827;
-      --accent: #1a1a2e;
-      --accent-light: #16213e;
-      --highlight: #e8f4fd;
-      --tag-ai: #dbeafe;
-      --tag-ai-text: #1d4ed8;
-      --tag-sales: #dcfce7;
-      --tag-sales-text: #15803d;
-      --tag-tools: #fef3c7;
-      --tag-tools-text: #b45309;
+      --bg:           #faf9f6;
+      --bg-2:         #f3f1ea;
+      --surface:      #eceae1;
+      --border:       #dedad0;
+      --border-light: #eae8de;
+      --ink:          #1c1a16;
+      --ink-2:        #6a6455;
+      --ink-3:        #a09488;
+      --amber:        #c96b1a;
+      --amber-light:  #fdf3e7;
+      --amber-border: #f0c898;
+      --navy:         #0f1221;
+      --navy-2:       #1a2038;
+      --tag-ai-bg:    #dbeafe; --tag-ai: #1d4ed8;
+      --tag-sales-bg: #dcfce7; --tag-sales: #15803d;
+      --tag-tools-bg: #fef3c7; --tag-tools: #b45309;
+      --tag-feat-bg:  #ede9fe; --tag-feat: #7c3aed;
     }
 
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: var(--white);
-      color: var(--gray-900);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
       line-height: 1.6;
     }
 
-    /* NAV */
+    /* ── ANIMATIONS ─────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .anim { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .d1 { animation-delay: 0.04s; }
+    .d2 { animation-delay: 0.12s; }
+    .d3 { animation-delay: 0.20s; }
+    .d4 { animation-delay: 0.28s; }
+    .d5 { animation-delay: 0.36s; }
+    .d6 { animation-delay: 0.44s; }
+    .d7 { animation-delay: 0.52s; }
+
+    /* ── NAV ───────────────────────────────── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--gray-100);
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,249,246,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
       padding: 0 2rem;
     }
     .nav-inner {
-      max-width: 760px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 56px;
+      max-width: 800px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 58px;
     }
     .nav-logo {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--black);
-      text-decoration: none;
-      letter-spacing: -0.01em;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--ink); text-decoration: none; letter-spacing: -0.02em;
     }
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
+    .nav-logo span { color: var(--amber); }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
     .nav-links a {
-      font-size: 0.875rem;
-      color: var(--gray-500);
-      text-decoration: none;
-      transition: color 0.15s;
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.01em;
+      color: var(--ink-2); text-decoration: none; transition: color 0.15s;
     }
-    .nav-links a:hover { color: var(--black); }
+    .nav-links a:hover { color: var(--ink); }
 
-    /* HERO */
+    /* ── HERO ──────────────────────────────── */
     .hero {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 4rem 2rem 3rem;
-      border-bottom: 1px solid var(--gray-100);
+      max-width: 800px; margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; top: -60px; right: -80px;
+      width: 480px; height: 480px;
+      background: radial-gradient(ellipse at 65% 35%, rgba(201,107,26,0.09) 0%, transparent 60%);
+      pointer-events: none;
     }
     .hero-eyebrow {
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--gray-500);
-      margin-bottom: 1rem;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 1.25rem;
     }
     .hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      line-height: 1.15;
-      color: var(--black);
-      letter-spacing: -0.02em;
-      margin-bottom: 1.25rem;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(2.5rem, 6vw, 3.8rem);
+      font-weight: 700; line-height: 1.07;
+      color: var(--ink); letter-spacing: -0.03em; margin-bottom: 1.5rem;
     }
-    .hero p {
-      font-size: 1.05rem;
-      color: var(--gray-700);
-      max-width: 560px;
-      line-height: 1.7;
-      margin-bottom: 1.75rem;
+    .hero h1 em {
+      font-style: italic; color: var(--amber);
     }
-    .hero-meta {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
+    .hero-desc {
+      font-size: 1rem; color: var(--ink-2);
+      max-width: 500px; line-height: 1.78;
+      margin-bottom: 2rem; font-weight: 400;
     }
-    .author-chip {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+    .hero-meta { display: flex; align-items: center; gap: 0.875rem; flex-wrap: wrap; }
+    .author-chip { display: flex; align-items: center; gap: 0.5rem; }
     .author-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 0.75rem;
-      font-weight: 600;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 0.7rem; font-weight: 600;
     }
-    .author-name {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--gray-700);
-    }
+    .author-name { font-size: 0.85rem; font-weight: 500; color: var(--ink); }
     .hero-cred {
-      font-size: 0.8rem;
-      color: var(--gray-500);
-      background: var(--gray-50);
-      border: 1px solid var(--gray-100);
-      border-radius: 100px;
-      padding: 0.3rem 0.75rem;
+      font-size: 0.75rem; font-weight: 500; color: var(--ink-2);
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: 100px; padding: 0.25rem 0.8rem;
     }
 
-    /* POSTS */
-    .posts-section {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-    }
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gray-500);
+    /* ── WRITING SECTION ─────────────────── */
+    .writing-section { max-width: 800px; margin: 0 auto; padding: 3.5rem 2rem 1rem; }
+    .section-header {
+      display: flex; align-items: baseline; justify-content: space-between;
       margin-bottom: 2rem;
     }
+    .section-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--ink-3);
+    }
+    .section-count { font-size: 0.78rem; color: var(--ink-3); }
 
-    /* FEATURED POST */
-    .post-featured {
-      border: 1px solid var(--gray-100);
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 1.5rem;
-      transition: box-shadow 0.2s, transform 0.2s;
-      text-decoration: none;
-      display: block;
-      background: var(--white);
+    /* ── POST LIST ─────────────────────── */
+    .post-list { border-top: 2px solid var(--ink); }
+
+    .post-row {
+      display: grid;
+      grid-template-columns: 54px 1fr auto;
+      gap: 0 1.5rem;
+      align-items: start;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border-light);
+      text-decoration: none; color: inherit;
+      position: relative;
     }
-    .post-featured:hover {
-      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-      transform: translateY(-2px);
+    .post-row::before {
+      content: '';
+      position: absolute; left: -2rem; right: -2rem; top: 0; bottom: 0;
+      transition: background 0.18s; pointer-events: none;
     }
-    .post-featured-inner {
-      padding: 2rem;
+    a.post-row:hover::before { background: var(--bg-2); }
+
+    .post-num {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.9rem; font-weight: 700;
+      color: var(--border); line-height: 1.15;
+      padding-top: 0.1rem; transition: color 0.2s;
+      position: relative; z-index: 1;
     }
-    .post-tags {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
-    }
+    a.post-row:hover .post-num { color: var(--amber-border); }
+    .post-row.is-lead .post-num { color: var(--amber-border); }
+
+    .post-body { position: relative; z-index: 1; }
+    .post-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.55rem; }
     .tag {
-      font-size: 0.72rem;
-      font-weight: 500;
-      padding: 0.2rem 0.6rem;
-      border-radius: 100px;
-      letter-spacing: 0.02em;
+      font-size: 0.67rem; font-weight: 600; padding: 0.18rem 0.55rem;
+      border-radius: 100px; letter-spacing: 0.03em;
     }
-    .tag-ai { background: var(--tag-ai); color: var(--tag-ai-text); }
-    .tag-sales { background: var(--tag-sales); color: var(--tag-sales-text); }
-    .tag-tools { background: var(--tag-tools); color: var(--tag-tools-text); }
-    .featured-badge {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #7c3aed;
-      background: #ede9fe;
-      padding: 0.2rem 0.6rem;
-      border-radius: 100px;
-    }
-    .post-featured h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--black);
-      letter-spacing: -0.02em;
-      line-height: 1.25;
-      margin-bottom: 0.75rem;
-    }
-    .post-featured p {
-      font-size: 0.95rem;
-      color: var(--gray-700);
-      line-height: 1.65;
-      margin-bottom: 1.25rem;
-    }
-    .post-meta {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      font-size: 0.8rem;
-      color: var(--gray-500);
-    }
-    .post-meta span { display: flex; align-items: center; gap: 0.3rem; }
-    .read-more {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--black);
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-    .read-more::after { content: '→'; transition: transform 0.15s; }
-    .post-featured:hover .read-more::after { transform: translateX(4px); }
+    .tag-ai    { background: var(--tag-ai-bg);    color: var(--tag-ai);    }
+    .tag-sales { background: var(--tag-sales-bg); color: var(--tag-sales); }
+    .tag-tools { background: var(--tag-tools-bg); color: var(--tag-tools); }
+    .tag-feat  { background: var(--tag-feat-bg);  color: var(--tag-feat);  }
 
-    /* POST GRID */
-    .post-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
-      margin-bottom: 3rem;
+    .post-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.15rem; font-weight: 600; line-height: 1.3;
+      color: var(--ink); letter-spacing: -0.01em; margin-bottom: 0.45rem;
     }
-    @media (max-width: 600px) { .post-grid { grid-template-columns: 1fr; } }
+    .post-row.is-soon .post-title { color: var(--ink-3); font-weight: 400; font-style: italic; }
 
-    .post-card {
-      border: 1px solid var(--gray-100);
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-decoration: none;
-      display: block;
-      background: var(--white);
-      transition: box-shadow 0.2s, transform 0.2s;
+    .post-excerpt {
+      font-size: 0.875rem; color: var(--ink-2); line-height: 1.65; max-width: 520px;
     }
-    .post-card:hover {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-      transform: translateY(-2px);
-    }
-    .post-card h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--black);
-      line-height: 1.4;
-      margin: 0.75rem 0 0.5rem;
-    }
-    .post-card p {
-      font-size: 0.85rem;
-      color: var(--gray-500);
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-    .post-card .post-meta { font-size: 0.75rem; }
+    .post-foot { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.65rem; }
+    .post-meta { font-size: 0.73rem; color: var(--ink-3); display: flex; gap: 0.75rem; }
+    .soon-note { font-size: 0.72rem; color: var(--ink-3); font-style: italic; }
 
-    /* COMING SOON CARD */
-    .post-card-soon {
-      border: 1px dashed var(--gray-300);
-      border-radius: 12px;
-      padding: 1.5rem;
-      background: var(--gray-50);
+    .post-cta {
+      font-size: 0.8rem; font-weight: 500; color: var(--amber);
+      white-space: nowrap; align-self: center;
+      position: relative; z-index: 1;
+      opacity: 0; transform: translateX(-4px);
+      transition: opacity 0.18s, transform 0.18s;
     }
-    .post-card-soon h3 {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--gray-500);
-      line-height: 1.4;
-      margin: 0.75rem 0 0.5rem;
-    }
-    .soon-badge {
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--gray-500);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
+    a.post-row:hover .post-cta { opacity: 1; transform: translateX(0); }
 
-    /* ABOUT STRIP */
-    .about-strip {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 0 2rem 4rem;
-    }
+    /* ── ABOUT ─────────────────────────── */
+    .about-section { max-width: 800px; margin: 3.5rem auto 0; padding: 0 2rem 5rem; }
     .about-card {
-      background: var(--accent);
-      border-radius: 16px;
-      padding: 2rem;
-      color: white;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 1.5rem;
-      align-items: center;
+      background: var(--navy);
+      border-radius: 20px; padding: 2.5rem;
+      display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start;
     }
-    @media (max-width: 600px) { .about-card { grid-template-columns: 1fr; } }
-    .about-card h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-    .about-card p {
-      font-size: 0.875rem;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.6;
-    }
-    .creds {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      min-width: 180px;
-    }
-    .cred-item {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.6);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .cred-item strong { color: white; }
+    @media (max-width: 640px) { .about-card { grid-template-columns: 1fr; gap: 1.5rem; } }
 
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--gray-100);
-      padding: 2rem;
-      text-align: center;
+    .about-eyebrow {
+      font-size: 0.67rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 0.6rem;
     }
+    .about-card h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.5rem; font-weight: 700; line-height: 1.25;
+      color: #f0eff4; margin-bottom: 0.8rem; letter-spacing: -0.02em;
+    }
+    .about-card p { font-size: 0.875rem; color: rgba(240,239,244,0.6); line-height: 1.75; }
+
+    .creds { display: flex; flex-direction: column; gap: 0.45rem; min-width: 195px; }
+    .cred-item {
+      font-size: 0.8rem; color: rgba(240,239,244,0.5);
+      display: flex; align-items: center; gap: 0.45rem;
+    }
+    .cred-item strong { color: rgba(240,239,244,0.9); }
+    .cred-rule { height: 1px; background: rgba(240,239,244,0.1); margin: 0.2rem 0; }
+
+    /* ── FOOTER ────────────────────────── */
+    footer { border-top: 1px solid var(--border); padding: 2rem; }
     .footer-inner {
-      max-width: 760px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
+      max-width: 800px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
     }
-    footer p { font-size: 0.8rem; color: var(--gray-500); }
-    .footer-links { display: flex; gap: 1.25rem; }
+    footer p { font-size: 0.77rem; color: var(--ink-3); }
+    .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a {
-      font-size: 0.8rem;
-      color: var(--gray-500);
-      text-decoration: none;
+      font-size: 0.77rem; color: var(--ink-3); text-decoration: none; transition: color 0.15s;
     }
-    .footer-links a:hover { color: var(--black); }
+    .footer-links a:hover { color: var(--ink); }
+
+    @media (max-width: 540px) {
+      .hero { padding: 3.5rem 1.5rem 3rem; }
+      .writing-section { padding: 2.5rem 1.5rem 1rem; }
+      .about-section { padding: 0 1.5rem 4rem; }
+      .post-row { grid-template-columns: 42px 1fr; }
+      .post-cta { display: none; }
+    }
   </style>
 </head>
 <body>
 
   <nav>
     <div class="nav-inner">
-      <a href="/blog" class="nav-logo">Sachin Rai</a>
+      <a href="/blog" class="nav-logo">Sachin<span>.</span></a>
       <ul class="nav-links">
         <li><a href="/blog">Writing</a></li>
         <li><a href="#about">About</a></li>
@@ -376,10 +266,10 @@
   </nav>
 
   <section class="hero">
-    <p class="hero-eyebrow">AI · Enterprise Sales · GTM</p>
-    <h1>Where AI meets<br/>enterprise selling.</h1>
-    <p>I'm an enterprise AE at Freshworks. I build AI tools to sell faster, close bigger, and prospect smarter. This is my build log — what works, what doesn't, and what's changing.</p>
-    <div class="hero-meta">
+    <p class="hero-eyebrow anim d1">AI · Enterprise Sales · GTM</p>
+    <h1 class="anim d2">Where <em>AI</em> meets<br>enterprise selling.</h1>
+    <p class="hero-desc anim d3">Enterprise AE at Freshworks. Building AI tools to sell faster, close bigger, prospect smarter. This is my build log — what works, what doesn't, and what's changing.</p>
+    <div class="hero-meta anim d4">
       <div class="author-chip">
         <div class="author-avatar">SR</div>
         <span class="author-name">Sachin Rai</span>
@@ -389,92 +279,106 @@
     </div>
   </section>
 
-  <section class="posts-section">
-    <p class="section-label">Latest Posts</p>
+  <section class="writing-section">
+    <div class="section-header anim d5">
+      <span class="section-label">Writing</span>
+      <span class="section-count">5 posts</span>
+    </div>
 
-    <!-- FEATURED POST 1 -->
-    <a href="posts/linkedin-claude-code.html" class="post-featured">
-      <div class="post-featured-inner">
-        <div class="post-tags">
-          <span class="tag featured-badge">Featured</span>
-          <span class="tag tag-ai">AI Tools</span>
-          <span class="tag tag-sales">Job Hunt</span>
-        </div>
-        <h2>How I used Claude Code to scrape LinkedIn and land interviews at Anthropic + OpenAI</h2>
-        <p>I built a prospecting workflow that scraped LinkedIn via Apify, identified the right GTM contacts at two of the most sought-after AI companies, drafted personalised cold emails using my sales credentials, and tracked everything in Obsidian. Here's the full build.</p>
-        <div class="post-meta">
-          <span>📅 March 2026</span>
-          <span>⏱ 8 min read</span>
-          <span class="read-more">Read post</span>
-        </div>
-      </div>
-    </a>
+    <div class="post-list">
 
-    <!-- POST GRID -->
-    <div class="post-grid">
-
-      <!-- POST 2 -->
-      <a href="posts/ai-sales-stack-2026.html" class="post-card">
-        <div class="post-tags">
-          <span class="tag tag-tools">Tools</span>
-          <span class="tag tag-sales">Sales</span>
+      <a href="posts/linkedin-claude-code.html" class="post-row is-lead anim d5">
+        <div class="post-num">01</div>
+        <div class="post-body">
+          <div class="post-tags">
+            <span class="tag tag-feat">Featured</span>
+            <span class="tag tag-ai">AI Tools</span>
+            <span class="tag tag-sales">Job Hunt</span>
+          </div>
+          <div class="post-title">How I used Claude Code to scrape LinkedIn and land interviews at Anthropic + OpenAI</div>
+          <div class="post-excerpt">I built a prospecting workflow that scraped LinkedIn via Apify, identified the right GTM contacts at two of the most sought-after AI companies, drafted personalised cold emails using my sales credentials, and tracked everything in Obsidian. Here's the full build.</div>
+          <div class="post-foot">
+            <div class="post-meta">
+              <span>March 2026</span>
+              <span>8 min read</span>
+            </div>
+          </div>
         </div>
-        <h3>The AI tools replacing my sales stack in 2026</h3>
-        <p>From cold email scoring to deal review to prospect research — what I've actually replaced and what still needs a human.</p>
-        <div class="post-meta">
-          <span>📅 March 2026</span>
-          <span>⏱ 6 min read</span>
-        </div>
+        <div class="post-cta">Read →</div>
       </a>
 
-      <!-- COMING SOON 1 -->
-      <div class="post-card-soon">
-        <div class="post-tags">
-          <span class="soon-badge">Coming soon</span>
+      <a href="posts/ai-sales-stack-2026.html" class="post-row anim d6">
+        <div class="post-num">02</div>
+        <div class="post-body">
+          <div class="post-tags">
+            <span class="tag tag-tools">Tools</span>
+            <span class="tag tag-sales">Sales</span>
+          </div>
+          <div class="post-title">The AI tools replacing my sales stack in 2026</div>
+          <div class="post-excerpt">From cold email scoring to deal review to prospect research — what I've actually replaced with AI tools and what still needs a human.</div>
+          <div class="post-foot">
+            <div class="post-meta">
+              <span>March 2026</span>
+              <span>6 min read</span>
+            </div>
+          </div>
         </div>
-        <h3>How I run a multi-agent research pipeline before every enterprise discovery call</h3>
-        <div class="post-meta" style="margin-top:auto">
-          <span style="font-size:0.75rem;color:#9ca3af;">Publishing soon</span>
+        <div class="post-cta">Read →</div>
+      </a>
+
+      <div class="post-row is-soon anim d6">
+        <div class="post-num">03</div>
+        <div class="post-body">
+          <div class="post-tags"><span class="soon-note">Coming soon</span></div>
+          <div class="post-title">How I run a multi-agent research pipeline before every enterprise discovery call</div>
+          <div class="post-foot">
+            <div class="post-meta"><span>Publishing soon</span></div>
+          </div>
         </div>
+        <div class="post-cta"></div>
       </div>
 
-      <!-- COMING SOON 2 -->
-      <div class="post-card-soon">
-        <div class="post-tags">
-          <span class="soon-badge">Coming soon</span>
+      <div class="post-row is-soon anim d7">
+        <div class="post-num">04</div>
+        <div class="post-body">
+          <div class="post-tags"><span class="soon-note">Coming soon</span></div>
+          <div class="post-title">Why Anthropic doesn't use sales quotas — and what that means for AEs</div>
+          <div class="post-foot">
+            <div class="post-meta"><span>Publishing soon</span></div>
+          </div>
         </div>
-        <h3>Why Anthropic doesn't use sales quotas — and what that means for AEs</h3>
-        <div class="post-meta" style="margin-top:auto">
-          <span style="font-size:0.75rem;color:#9ca3af;">Publishing soon</span>
-        </div>
+        <div class="post-cta"></div>
       </div>
 
-      <!-- COMING SOON 3 -->
-      <div class="post-card-soon">
-        <div class="post-tags">
-          <span class="soon-badge">Coming soon</span>
+      <div class="post-row is-soon anim d7">
+        <div class="post-num">05</div>
+        <div class="post-body">
+          <div class="post-tags"><span class="soon-note">Coming soon</span></div>
+          <div class="post-title">I automated my cold email follow-up with n8n + Claude — here's what happened</div>
+          <div class="post-foot">
+            <div class="post-meta"><span>Publishing soon</span></div>
+          </div>
         </div>
-        <h3>I automated my cold email follow-up with n8n + Claude — here's what happened</h3>
-        <div class="post-meta" style="margin-top:auto">
-          <span style="font-size:0.75rem;color:#9ca3af;">Publishing soon</span>
-        </div>
+        <div class="post-cta"></div>
       </div>
 
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section class="about-strip" id="about">
+  <section class="about-section" id="about">
     <div class="about-card">
       <div>
-        <h3>Enterprise AE · AI Builder · 7× Club Winner</h3>
+        <div class="about-eyebrow">About</div>
+        <h3>Enterprise AE.<br>AI Builder. 7× Club.</h3>
         <p>I sell enterprise software at Freshworks and spend my nights building AI tools that make the job faster. I write about what I'm building, what's working in enterprise sales, and what AI is actually changing at the GTM layer — not the hype version.</p>
       </div>
       <div class="creds">
         <div class="cred-item">🏆 <strong>7× President's Club</strong></div>
         <div class="cred-item">💰 <strong>$2.3M ACV</strong> · 200% quota</div>
+        <div class="cred-rule"></div>
         <div class="cred-item">🏭 <strong>Seagate</strong> — Fortune 500 net new</div>
         <div class="cred-item">🔩 <strong>Nucor</strong> — $350K → $700K</div>
+        <div class="cred-rule"></div>
         <div class="cred-item">🤖 Building with <strong>Claude Code</strong> daily</div>
       </div>
     </div>
