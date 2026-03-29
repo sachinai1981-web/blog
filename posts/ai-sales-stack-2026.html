@@ -155,6 +155,38 @@
       text-transform: uppercase; color: var(--amber-border); margin-bottom: 1rem;
     }
 
+    /* subscribe */
+    .sub-card {
+      background: var(--navy); border-radius: 16px; padding: 2.5rem;
+      margin: 3.5rem 0 0; text-align: center;
+    }
+    .sub-card-eyebrow {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 0.5rem;
+    }
+    .sub-card h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 0.5rem;
+    }
+    .sub-card p { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 1.5rem; }
+    .sub-form { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+    .sub-input {
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      color: #fff; border-radius: 100px; padding: 0.7rem 1.25rem; outline: none;
+      width: 240px; transition: border-color 0.2s;
+    }
+    .sub-input::placeholder { color: rgba(255,255,255,0.3); }
+    .sub-input:focus { border-color: var(--amber); }
+    .sub-btn {
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 700;
+      background: var(--amber); color: #fff; border: none;
+      padding: 0.7rem 1.5rem; border-radius: 100px; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .sub-btn:hover { opacity: 0.85; }
+
     /* post nav */
     .post-nav { border-top: 1px solid var(--border-light); padding-top: 2rem; margin-top: 3rem; }
     .back-link {
@@ -176,6 +208,29 @@
     }
     .footer-links a:hover { color: var(--ink); }
   </style>
+<script>
+function handleSub(e) {
+  e.preventDefault();
+  const form  = e.target;
+  const input = form.querySelector('.sub-input');
+  const btn   = form.querySelector('.sub-btn');
+  btn.textContent = 'Sending…'; btn.disabled = true;
+  fetch('https://formspree.io/f/xwvwlybd', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: input.value, source: 'ai-sales-stack post' })
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.ok) {
+      btn.textContent = 'You\'re in ✓'; btn.style.background = '#16a34a'; btn.disabled = false;
+      input.value = '';
+      setTimeout(() => { btn.textContent = 'Notify me →'; btn.style.background = ''; }, 4000);
+    } else { btn.textContent = 'Try again'; btn.style.background = '#dc2626'; btn.disabled = false; }
+  })
+  .catch(() => { btn.textContent = 'Try again'; btn.style.background = '#dc2626'; btn.disabled = false; });
+}
+</script>
 </head>
 <body>
 
@@ -312,6 +367,16 @@
 
       <p>If you're an enterprise AE and want to build any of these — subscribe below. I'm writing up each one with the exact code and setup.</p>
 
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-card-eyebrow">Next post</div>
+      <h3>The full LangGraph pipeline — with code.</h3>
+      <p>Lead scoring, ITSM signal detection, auto-generated Gmail drafts. I'll send it when it's ready.</p>
+      <form class="sub-form" onsubmit="handleSub(event)">
+        <input type="email" class="sub-input" name="email" placeholder="you@company.com" required />
+        <button type="submit" class="sub-btn">Notify me →</button>
+      </form>
     </div>
 
     <div class="post-nav">
