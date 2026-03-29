@@ -275,21 +275,61 @@
 
       <p>Recruiters at AI companies see hundreds of "passionate about AI" emails. One specific, verifiable number cuts through.</p>
 
-      <h2>The Full Code</h2>
+      <h2>How to Build It Yourself</h2>
 
-      <p>The <code>/job-prospect</code> and <code>/job-update</code> skills are saved in my Claude Code setup. The full system — Apify integration, Obsidian tracker, memory across sessions — took one evening to build.</p>
+      <p>The whole system lives in two Claude Code skills. Here's exactly how it works:</p>
 
-      <div class="coming-soon-banner">
-        <div class="coming-soon-badge">Full post coming soon</div>
-        <h3>I'm writing up the complete build with all the code</h3>
-        <p>The /job-prospect skill, the Obsidian Base tracker, the memory system, and the exact email templates. Publishing in the next few weeks.</p>
+      <p><strong>Step 1: Open a terminal and type <code>claude</code> to start Claude Code.</strong> Then run:</p>
+
+      <div class="step-block">
+        <div class="step-number">Command</div>
+        <h4>/job-prospect [Company] | [Role]</h4>
+        <p>Examples: <code>/job-prospect Anthropic | Enterprise Account Executive</code> or <code>/job-prospect OpenAI | Account Director</code>. The skill runs the full pipeline: LinkedIn scrape → email format → ranked contacts → personalised emails → Obsidian note. Takes 3–4 minutes.</p>
       </div>
+
+      <p>The skill searches LinkedIn for people by keyword (not company URL — that returns zero results on the Apify actor I use). It queries three separate searches: "[Company] GTM recruiter", "[Company] enterprise sales", and "[Company] revenue". Then it dedups, ranks, and removes irrelevant roles.</p>
+
+      <p><strong>One thing that took me two tries to figure out:</strong> Anthropic's recruiting team is split. Nick B. handles GTM roles (sales, marketing, partnerships). Anne Marie Riffle handles Applied AI roles (solutions engineers, technical AEs). Debora Floriano covers EMEA. If you're applying for a US-based enterprise AE role, Nick is your person — not the generic "recruiting" contact.</p>
+
+      <h2>The Obsidian Tracker</h2>
+
+      <p>Every company gets its own Obsidian note with YAML frontmatter that acts as a database:</p>
+
+      <div class="step-block">
+        <div class="step-number">Frontmatter fields</div>
+        <h4>email_sent / reply_received / call_booked / contacts_emailed</h4>
+        <p>These feed directly into an Obsidian Base view — a table that shows every company, contact, and status in one place. When I open the terminal the next day and say "I sent an email to Debora Floriano at Anthropic", Claude reads the note, updates the fields, and opens the tracker. No manual data entry.</p>
+      </div>
+
+      <p>The second skill — <code>/job-update</code> — handles the ongoing pipeline. You just describe what happened in plain English. Claude figures out which note to update, which fields to change, and what the next step should be. It's the kind of CRM update I'd normally spend 10 minutes on.</p>
+
+      <h2>The Numbers That Got Responses</h2>
+
+      <p>I sent 8 emails across Anthropic and OpenAI. The emails that performed best were built around one specific, verifiable number rather than a list of achievements. The opening that worked:</p>
+
+      <div class="callout">
+        <p><em>"I closed Seagate as a net new Fortune 500 logo — largest TCV deal in our company's history. Year two, I hit $2.3M ACV at 200% of quota — first rep to do it. I built a prospecting pipeline in Claude Code to find the right people at Anthropic before sending this. Happy to walk you through how it works on a 15-minute call."</em></p>
+      </div>
+
+      <p>The last line — about building the pipeline in Claude Code — generated the most curiosity. Recruiters at AI companies get hundreds of "passionate about AI" emails. Showing up with something you actually built is a different signal.</p>
+
+      <h2>Want to Run It for Your Target Company?</h2>
+
+      <p>The system works for any company. You need:</p>
+
+      <ul>
+        <li>Claude Code installed (<code>npm install -g @anthropic-ai/claude-code</code>)</li>
+        <li>An Apify account (free tier covers ~50 scrapes/month)</li>
+        <li>Your credentials written out once in a memory file — Claude reuses them in every email automatically</li>
+      </ul>
+
+      <p>The full skill files (<code>/job-prospect</code> and <code>/job-update</code>) live in my <code>~/.claude/commands/</code> folder. I'll publish them properly when I've run the full pipeline through a few more companies — Cohere, Mistral, and Salesforce AI are next.</p>
 
       <h2>What's Next</h2>
 
-      <p>The pipeline is live. Emails are sent. The tracker is running. I'll write up what happens — whether I hear back, what the interview process looks like, and what I'd change.</p>
+      <p>The pipeline is live. Emails are sent to Nick B. and Ryan Ball at Anthropic. The tracker is running. I'll write up what happens — whether I hear back, what the interview process looks like, and what I'd change if I were starting over.</p>
 
-      <p>If you're an enterprise AE trying to move into AI sales and want to talk shop — find me on LinkedIn.</p>
+      <p>If you're an enterprise AE trying to make the same move and want to talk shop — I'm on LinkedIn. Or subscribe below and I'll send you the update when it comes.</p>
 
     </div>
 
