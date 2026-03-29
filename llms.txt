@@ -1,0 +1,26 @@
+# Sachin Rai — Where AI Meets Enterprise Selling
+
+> A build log from an Enterprise AE at Freshworks who ships AI tools at night.
+> 7× President's Club · $2.3M ACV · 200% quota attainment.
+
+## About
+
+Sachin Rai writes about the intersection of AI and enterprise GTM:
+- AI tools he's built to prospect faster, close bigger, and automate the grind
+- What's actually changing in enterprise sales (not the hype version)
+- Claude Code workflows, multi-agent pipelines, and real build logs
+
+## Posts
+
+- [How I used Claude Code to scrape LinkedIn and land interviews at Anthropic + OpenAI](https://sachinai1981-web.github.io/blog/posts/linkedin-claude-code.html)
+- [The AI tools replacing my sales stack in 2026](https://sachinai1981-web.github.io/blog/posts/ai-sales-stack-2026.html)
+
+## Tools Built
+
+- [Cold Email Generator](https://sachinai1981-web.github.io/cold-email-generator) — AI-powered cold email writer
+- [Subject Line Scorer](https://sachinai1981-web.github.io/subject-line-scorer) — Score and rewrite cold email subject lines
+
+## Contact
+
+- LinkedIn: https://www.linkedin.com/in/sachinr1/
+- Email: sachinai1981@gmail.com

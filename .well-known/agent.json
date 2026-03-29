@@ -1,0 +1,24 @@
+{
+  "name": "Sachin Rai — AI + Enterprise Sales Blog",
+  "description": "Build log from an Enterprise AE at Freshworks building AI tools to sell faster. Covers Claude Code workflows, AI prospecting, GTM automation, and enterprise sales strategy.",
+  "url": "https://sachinai1981-web.github.io/blog/",
+  "author": {
+    "name": "Sachin Rai",
+    "role": "Enterprise Account Executive",
+    "company": "Freshworks",
+    "linkedin": "https://www.linkedin.com/in/sachinr1/"
+  },
+  "topics": [
+    "AI sales tools",
+    "enterprise sales",
+    "Claude Code",
+    "GTM automation",
+    "AI prospecting",
+    "Freshworks",
+    "sales AI 2026"
+  ],
+  "content_type": "blog",
+  "language": "en",
+  "llms_txt": "https://sachinai1981-web.github.io/blog/llms.txt",
+  "sitemap": "https://sachinai1981-web.github.io/blog/sitemap.xml"
+}
