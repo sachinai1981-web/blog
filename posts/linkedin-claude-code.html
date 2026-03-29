@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How I used Claude Code to scrape LinkedIn and land interviews at Anthropic + OpenAI — Sachin Rai</title>
+  <meta name="description" content="I built a prospecting workflow using Claude Code + Apify to find GTM recruiters at Anthropic and OpenAI, draft personalised outreach, and track everything automatically in Obsidian." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a; --white: #ffffff;
+      --gray-50: #f9fafb; --gray-100: #f3f4f6;
+      --gray-300: #d1d5db; --gray-500: #6b7280;
+      --gray-700: #374151; --gray-900: #111827;
+      --accent: #1a1a2e;
+      --tag-ai: #dbeafe; --tag-ai-text: #1d4ed8;
+      --tag-sales: #dcfce7; --tag-sales-text: #15803d;
+    }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--white); color: var(--gray-900); line-height: 1.6; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-100); padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 760px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 56px;
+    }
+    .nav-logo { font-weight: 600; font-size: 0.95rem; color: var(--black); text-decoration: none; }
+    .nav-back { font-size: 0.875rem; color: var(--gray-500); text-decoration: none; display: flex; align-items: center; gap: 0.3rem; }
+    .nav-back:hover { color: var(--black); }
+
+    .post-wrapper { max-width: 680px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+    .post-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .tag { font-size: 0.72rem; font-weight: 500; padding: 0.2rem 0.6rem; border-radius: 100px; }
+    .tag-ai { background: var(--tag-ai); color: var(--tag-ai-text); }
+    .tag-sales { background: var(--tag-sales); color: var(--tag-sales-text); }
+    .featured-badge { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #7c3aed; background: #ede9fe; padding: 0.2rem 0.6rem; border-radius: 100px; }
+
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700; line-height: 1.2;
+      color: var(--black); letter-spacing: -0.02em; margin-bottom: 1.25rem;
+    }
+    .post-meta {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.8rem; color: var(--gray-500);
+      padding-bottom: 2rem; border-bottom: 1px solid var(--gray-100); margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .author-chip { display: flex; align-items: center; gap: 0.5rem; }
+    .author-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 0.65rem; font-weight: 600;
+    }
+
+    /* POST BODY */
+    .post-body { font-size: 1.05rem; line-height: 1.8; color: var(--gray-700); }
+    .post-body h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--black); margin: 2.5rem 0 1rem;
+      letter-spacing: -0.01em;
+    }
+    .post-body h3 { font-size: 1.05rem; font-weight: 600; color: var(--black); margin: 2rem 0 0.75rem; }
+    .post-body p { margin-bottom: 1.25rem; }
+    .post-body ul { padding-left: 1.5rem; margin-bottom: 1.25rem; }
+    .post-body li { margin-bottom: 0.5rem; }
+    .post-body strong { color: var(--black); font-weight: 600; }
+
+    .callout {
+      background: var(--gray-50); border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0; padding: 1.25rem 1.5rem;
+      margin: 2rem 0; font-size: 0.95rem;
+    }
+    .callout p { margin: 0; color: var(--gray-700); }
+
+    .coming-soon-banner {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 16px; padding: 2.5rem 2rem;
+      text-align: center; margin: 3rem 0;
+      color: white;
+    }
+    .coming-soon-banner h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .coming-soon-banner p { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin: 0; }
+    .coming-soon-badge {
+      display: inline-block; background: rgba(255,255,255,0.15);
+      border-radius: 100px; padding: 0.3rem 0.85rem;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em;
+      text-transform: uppercase; color: white; margin-bottom: 1rem;
+    }
+
+    .step-block {
+      background: var(--gray-50); border: 1px solid var(--gray-100);
+      border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0;
+    }
+    .step-number {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--gray-500); margin-bottom: 0.5rem;
+    }
+    .step-block h4 { font-size: 0.95rem; font-weight: 600; color: var(--black); margin-bottom: 0.5rem; }
+    .step-block p { font-size: 0.9rem; color: var(--gray-500); margin: 0; }
+
+    /* NAV BOTTOM */
+    .post-nav { border-top: 1px solid var(--gray-100); padding-top: 2rem; margin-top: 3rem; }
+    .back-link { font-size: 0.875rem; color: var(--gray-500); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .back-link:hover { color: var(--black); }
+
+    footer { border-top: 1px solid var(--gray-100); padding: 2rem; text-align: center; }
+    .footer-inner { max-width: 760px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    footer p { font-size: 0.8rem; color: var(--gray-500); }
+    .footer-links { display: flex; gap: 1.25rem; }
+    .footer-links a { font-size: 0.8rem; color: var(--gray-500); text-decoration: none; }
+    .footer-links a:hover { color: var(--black); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/blog" class="nav-logo">Sachin Rai</a>
+      <a href="/blog" class="nav-back">← All posts</a>
+    </div>
+  </nav>
+
+  <article class="post-wrapper">
+
+    <div class="post-tags">
+      <span class="featured-badge">Featured</span>
+      <span class="tag tag-ai">AI Tools</span>
+      <span class="tag tag-sales">Job Hunt</span>
+    </div>
+
+    <h1>How I used Claude Code to scrape LinkedIn and land interviews at Anthropic + OpenAI</h1>
+
+    <div class="post-meta">
+      <div class="author-chip">
+        <div class="author-avatar">SR</div>
+        <span>Sachin Rai</span>
+      </div>
+      <span>📅 March 2026</span>
+      <span>⏱ 8 min read</span>
+    </div>
+
+    <div class="post-body">
+
+      <p>I'm an enterprise AE at Freshworks. I've won President's Club seven times and closed a Seagate deal that was the largest TCV in company history. But when I decided I wanted to move into AI sales — specifically targeting Anthropic and OpenAI — I had the same problem every sales rep has: I didn't know the right people.</p>
+
+      <p>So I built a system.</p>
+
+      <p>Instead of scrolling LinkedIn manually and sending generic connection requests, I used Claude Code and Apify to scrape the right GTM contacts at both companies, discover their email formats, draft personalised cold emails using my actual credentials, and track everything in Obsidian automatically. The whole pipeline runs from a single slash command.</p>
+
+      <div class="callout">
+        <p><strong>The meta point:</strong> Using an AI tool to apply to AI companies isn't just clever — it's the right signal. Anthropic and OpenAI want AEs who understand the product from the inside. Showing up with a scraper and a pipeline is the application.</p>
+      </div>
+
+      <h2>The Problem With Normal Job Applications</h2>
+
+      <p>Cold applications to Anthropic and OpenAI go into an ATS black hole. Both companies receive thousands of applications for every GTM role. Data from Glassdoor and Blind shows Anthropic responds to sales applicants within 5–14 days if they're interested — meaning if you're past 4 weeks with no response, the cold application is dead.</p>
+
+      <p>The move is direct outreach to recruiters and sales leaders before or alongside the application. But that requires knowing who to contact, their emails, and what to say. That's the problem I automated.</p>
+
+      <h2>The System I Built</h2>
+
+      <p>I created a Claude Code skill called <code>/job-prospect</code> that runs the full pipeline end-to-end:</p>
+
+      <div class="step-block">
+        <div class="step-number">Step 1</div>
+        <h4>LinkedIn Scrape via Apify</h4>
+        <p>Runs 3 search queries against harvestapi/linkedin-profile-search: recruiters, enterprise AEs, and sales leaders. Filters to TIER 1 (recruiters) and TIER 2 (sales leaders). No manual searching.</p>
+      </div>
+
+      <div class="step-block">
+        <div class="step-number">Step 2</div>
+        <h4>Email Format Discovery</h4>
+        <p>Web searches RocketReach and Hunter.io to find the confirmed email pattern. Anthropic is firstname@anthropic.com (61% confidence). OpenAI is firstname@openai.com (41% confidence).</p>
+      </div>
+
+      <div class="step-block">
+        <div class="step-number">Step 3</div>
+        <h4>Personalised Email Drafts</h4>
+        <p>Drafts one email per TIER 1 recruiter and one per TIER 2 sales leader. Each email uses my real credentials: 7× Club, Seagate Fortune 500 close, $2.3M ACV at 200% of quota. No generic templates.</p>
+      </div>
+
+      <div class="step-block">
+        <div class="step-number">Step 4</div>
+        <h4>Obsidian Note + Tracker</h4>
+        <p>Saves everything to a structured Obsidian note with frontmatter properties (email_sent, reply_received, call_booked) that feed into a Base tracker. Every future session can see exactly where each company is in the pipeline.</p>
+      </div>
+
+      <div class="step-block">
+        <div class="step-number">Step 5</div>
+        <h4>Memory Across Sessions</h4>
+        <p>A memory file in Claude Code's project memory stores all contacts, sent status, and next steps. In the next session, I just say "I sent an email to Debora Floriano at Anthropic" and the system updates everything automatically.</p>
+      </div>
+
+      <h2>What I Found at Anthropic</h2>
+
+      <p>The scrape returned 9 contacts across TIER 1 and TIER 2. The key insight: Anthropic's recruiting team is split by geography and function. GTM recruiting (Nick B.) handles sales roles separately from Applied AI recruiting (Anne Marie Riffle, New York) and SF Bay Area recruiting (Lynda Galliano). Emailing the right person matters.</p>
+
+      <p>For US roles specifically: Debora Floriano is EMEA recruiting — skip her if you're applying stateside. That's the kind of thing you only know if you look at their LinkedIn profiles, not just the company recruiter list.</p>
+
+      <h2>What I Found at OpenAI</h2>
+
+      <p>OpenAI calls the role "Account Director" not "Account Executive." This matters more than it sounds — job postings, ATS keywords, and the recruiters who own the role all use AD language. Applying for "AE" roles when they're listed as "AD" means your application might not surface in their search.</p>
+
+      <p>OpenAI's enterprise motion is more mature than Anthropic's. They have vertical-specific ADs (Healthcare, Financial Services, Retail, Digital Natives), territory design, and a more structured SDR/BDR function. The comp is higher base today; Anthropic equity is likely the bigger long-term bet.</p>
+
+      <h2>The Email That Actually Works</h2>
+
+      <p>After testing multiple approaches, the email that gets responses leads with one specific number, not a list of credentials:</p>
+
+      <p><em>"I closed Seagate as a net new Fortune 500 logo — largest TCV deal in our company's history. I'd love 15 minutes to learn more about how you're building the enterprise team."</em></p>
+
+      <p>Recruiters at AI companies see hundreds of "passionate about AI" emails. One specific, verifiable number cuts through.</p>
+
+      <h2>The Full Code</h2>
+
+      <p>The <code>/job-prospect</code> and <code>/job-update</code> skills are saved in my Claude Code setup. The full system — Apify integration, Obsidian tracker, memory across sessions — took one evening to build.</p>
+
+      <div class="coming-soon-banner">
+        <div class="coming-soon-badge">Full post coming soon</div>
+        <h3>I'm writing up the complete build with all the code</h3>
+        <p>The /job-prospect skill, the Obsidian Base tracker, the memory system, and the exact email templates. Publishing in the next few weeks.</p>
+      </div>
+
+      <h2>What's Next</h2>
+
+      <p>The pipeline is live. Emails are sent. The tracker is running. I'll write up what happens — whether I hear back, what the interview process looks like, and what I'd change.</p>
+
+      <p>If you're an enterprise AE trying to move into AI sales and want to talk shop — find me on LinkedIn.</p>
+
+    </div>
+
+    <div class="post-nav">
+      <a href="/blog" class="back-link">← Back to all posts</a>
+    </div>
+
+  </article>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2026 Sachin Rai · AI + Enterprise Sales</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/sachinrai" target="_blank">LinkedIn</a>
+        <a href="https://sachinai1981-web.github.io/cold-email-generator" target="_blank">Email Generator</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

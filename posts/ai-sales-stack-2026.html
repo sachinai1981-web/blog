@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The AI tools replacing my sales stack in 2026 — Sachin Rai</title>
+  <meta name="description" content="From cold email scoring to deal review to prospect research — what I've actually replaced with AI tools and what still needs a human." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a; --white: #ffffff;
+      --gray-50: #f9fafb; --gray-100: #f3f4f6;
+      --gray-300: #d1d5db; --gray-500: #6b7280;
+      --gray-700: #374151; --gray-900: #111827;
+      --accent: #1a1a2e;
+      --tag-tools: #fef3c7; --tag-tools-text: #b45309;
+      --tag-sales: #dcfce7; --tag-sales-text: #15803d;
+    }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--white); color: var(--gray-900); line-height: 1.6; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-100); padding: 0 2rem;
+    }
+    .nav-inner { max-width: 760px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .nav-logo { font-weight: 600; font-size: 0.95rem; color: var(--black); text-decoration: none; }
+    .nav-back { font-size: 0.875rem; color: var(--gray-500); text-decoration: none; display: flex; align-items: center; gap: 0.3rem; }
+    .nav-back:hover { color: var(--black); }
+
+    .post-wrapper { max-width: 680px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+    .post-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .tag { font-size: 0.72rem; font-weight: 500; padding: 0.2rem 0.6rem; border-radius: 100px; }
+    .tag-tools { background: var(--tag-tools); color: var(--tag-tools-text); }
+    .tag-sales { background: var(--tag-sales); color: var(--tag-sales-text); }
+
+    h1 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; line-height: 1.2; color: var(--black); letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+    .post-meta { display: flex; align-items: center; gap: 1rem; font-size: 0.8rem; color: var(--gray-500); padding-bottom: 2rem; border-bottom: 1px solid var(--gray-100); margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .author-chip { display: flex; align-items: center; gap: 0.5rem; }
+    .author-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #1a1a2e, #16213e); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.65rem; font-weight: 600; }
+
+    .post-body { font-size: 1.05rem; line-height: 1.8; color: var(--gray-700); }
+    .post-body h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.4rem; font-weight: 700; color: var(--black); margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+    .post-body p { margin-bottom: 1.25rem; }
+    .post-body ul { padding-left: 1.5rem; margin-bottom: 1.25rem; }
+    .post-body li { margin-bottom: 0.5rem; }
+    .post-body strong { color: var(--black); font-weight: 600; }
+
+    .tool-card {
+      border: 1px solid var(--gray-100); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0;
+      display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start;
+    }
+    .tool-icon { font-size: 1.5rem; }
+    .tool-name { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-500); margin-bottom: 0.3rem; }
+    .tool-title { font-size: 1rem; font-weight: 600; color: var(--black); margin-bottom: 0.4rem; }
+    .tool-desc { font-size: 0.875rem; color: var(--gray-500); line-height: 1.6; margin: 0; }
+    .tool-verdict {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-size: 0.72rem; font-weight: 600; padding: 0.2rem 0.6rem;
+      border-radius: 100px; margin-top: 0.6rem;
+    }
+    .verdict-replaced { background: #dcfce7; color: #15803d; }
+    .verdict-augmented { background: #dbeafe; color: #1d4ed8; }
+    .verdict-human { background: #fee2e2; color: #b91c1c; }
+
+    .callout { background: var(--gray-50); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 1.25rem 1.5rem; margin: 2rem 0; font-size: 0.95rem; }
+    .callout p { margin: 0; color: var(--gray-700); }
+
+    .coming-soon-banner { background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 16px; padding: 2.5rem 2rem; text-align: center; margin: 3rem 0; color: white; }
+    .coming-soon-banner h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .coming-soon-banner p { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin: 0; }
+    .coming-soon-badge { display: inline-block; background: rgba(255,255,255,0.15); border-radius: 100px; padding: 0.3rem 0.85rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: white; margin-bottom: 1rem; }
+
+    .post-nav { border-top: 1px solid var(--gray-100); padding-top: 2rem; margin-top: 3rem; }
+    .back-link { font-size: 0.875rem; color: var(--gray-500); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .back-link:hover { color: var(--black); }
+
+    footer { border-top: 1px solid var(--gray-100); padding: 2rem; text-align: center; }
+    .footer-inner { max-width: 760px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    footer p { font-size: 0.8rem; color: var(--gray-500); }
+    .footer-links { display: flex; gap: 1.25rem; }
+    .footer-links a { font-size: 0.8rem; color: var(--gray-500); text-decoration: none; }
+    .footer-links a:hover { color: var(--black); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/blog" class="nav-logo">Sachin Rai</a>
+      <a href="/blog" class="nav-back">← All posts</a>
+    </div>
+  </nav>
+
+  <article class="post-wrapper">
+
+    <div class="post-tags">
+      <span class="tag tag-tools">Tools</span>
+      <span class="tag tag-sales">Sales</span>
+    </div>
+
+    <h1>The AI tools replacing my sales stack in 2026</h1>
+
+    <div class="post-meta">
+      <div class="author-chip">
+        <div class="author-avatar">SR</div>
+        <span>Sachin Rai</span>
+      </div>
+      <span>📅 March 2026</span>
+      <span>⏱ 6 min read</span>
+    </div>
+
+    <div class="post-body">
+
+      <p>I've been in enterprise sales for years. I've used Salesforce, Outreach, LinkedIn Sales Navigator, ZoomInfo, Gong, and every other tool the stack tells you to buy. In 2026, I'm replacing most of them — not with SaaS products, but with AI agents I built myself using Claude Code.</p>
+
+      <p>This is not a hot take. It's a build log. Here's what I've actually replaced, what I've augmented, and what still needs a human.</p>
+
+      <div class="callout">
+        <p><strong>Context:</strong> I run enterprise deals at Freshworks — $200K–$2M+ ACV, 6–18 month cycles, 5–12 stakeholder deals. The tools I'm replacing are in that context. Your mileage varies for SMB or transactional sales.</p>
+      </div>
+
+      <h2>What I've Actually Replaced</h2>
+
+      <div class="tool-card">
+        <div class="tool-icon">🔍</div>
+        <div>
+          <div class="tool-name">Replaced</div>
+          <div class="tool-title">ZoomInfo / Apollo for prospect research</div>
+          <p class="tool-desc">I run a multi-agent pipeline (3 parallel Claude agents) that researches any prospect in under 3 minutes: ITSM tools in use, recent IT incidents, decision maker backgrounds, ServiceNow contract signals, and a SPIN script tailored to that account. ZoomInfo gave me contact data. This gives me a sales brief.</p>
+          <span class="tool-verdict verdict-replaced">✓ Replaced</span>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon">✉️</div>
+        <div>
+          <div class="tool-name">Replaced</div>
+          <div class="tool-title">Subject line A/B testing tools</div>
+          <p class="tool-desc">I built a subject line scorer that runs via terminal and grades any subject line on 6 dimensions (curiosity, specificity, spam risk, CTA clarity, tone). It also rewrites the subject if the score is below 70. Took one evening to build, saved a monthly SaaS subscription.</p>
+          <span class="tool-verdict verdict-replaced">✓ Replaced</span>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon">📊</div>
+        <div>
+          <div class="tool-name">Replaced</div>
+          <div class="tool-title">Manual LinkedIn prospecting</div>
+          <p class="tool-desc">Apify + Claude Code scrapes the right contacts, discovers email formats, and drafts personalised outreach — all from a single /job-prospect command. What used to take 2 hours of manual LinkedIn work now takes 4 minutes.</p>
+          <span class="tool-verdict verdict-replaced">✓ Replaced</span>
+        </div>
+      </div>
+
+      <h2>What I've Augmented (Not Replaced)</h2>
+
+      <div class="tool-card">
+        <div class="tool-icon">🎯</div>
+        <div>
+          <div class="tool-name">Augmented</div>
+          <div class="tool-title">Deal review and MEDDIC qualification</div>
+          <p class="tool-desc">I run /deal-review before every pipeline call. It scores deal health, surfaces MEDDIC gaps, and gives me the 3 questions I need to ask. But I still have to ask them. The AI can't read the room or handle the emotional dynamics of a stalled deal — yet.</p>
+          <span class="tool-verdict verdict-augmented">→ Augmented</span>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon">📞</div>
+        <div>
+          <div class="tool-name">Augmented</div>
+          <div class="tool-title">Meeting prep (was: 45 min scramble)</div>
+          <p class="tool-desc">/prep gives me a researched brief in 60 seconds: 3 tailored opening questions, ServiceNow displacement angles, the right close for the meeting, and a follow-up subject line. The call itself is still mine. But I show up sharper.</p>
+          <span class="tool-verdict verdict-augmented">→ Augmented</span>
+        </div>
+      </div>
+
+      <h2>What Still Needs a Human</h2>
+
+      <div class="tool-card">
+        <div class="tool-icon">🤝</div>
+        <div>
+          <div class="tool-name">Human required</div>
+          <div class="tool-title">Executive relationship building</div>
+          <p class="tool-desc">No AI closes a CIO relationship. The trust, the reading of political dynamics inside an account, knowing when to push and when to wait — that's still entirely human. AI helps me prep for the conversation. It can't have it.</p>
+          <span class="tool-verdict verdict-human">Human required</span>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon">🔮</div>
+        <div>
+          <div class="tool-name">Human required</div>
+          <div class="tool-title">Sensing when a deal is actually dead</div>
+          <p class="tool-desc">AI will tell you a deal is at risk based on signals. It won't tell you that the champion just lost political capital in a reorg, or that the CFO is about to go on leave and nothing will get signed for 6 weeks. That intuition comes from years of pattern matching, not data.</p>
+          <span class="tool-verdict verdict-human">Human required</span>
+        </div>
+      </div>
+
+      <h2>The Honest Assessment</h2>
+
+      <p>I'm not replacing my sales career with AI. I'm removing the administrative tax that eats 40% of a rep's week — manual research, writing and rewriting emails, building decks, formatting call notes — and redirecting that time to the things only humans can do: building trust, navigating politics, and closing.</p>
+
+      <p>The reps who will struggle in the next 3 years aren't the ones AI replaces. They're the ones who refuse to use it and get outgunned by the reps who do.</p>
+
+      <div class="coming-soon-banner">
+        <div class="coming-soon-badge">Full post coming soon</div>
+        <h3>I'm writing up every tool with build instructions</h3>
+        <p>The exact Claude Code skills, terminal commands, and Obsidian setup I use daily. Publishing in the next few weeks — follow on LinkedIn to get notified.</p>
+      </div>
+
+    </div>
+
+    <div class="post-nav">
+      <a href="/blog" class="back-link">← Back to all posts</a>
+    </div>
+
+  </article>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2026 Sachin Rai · AI + Enterprise Sales</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/sachinrai" target="_blank">LinkedIn</a>
+        <a href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank">Subject Scorer</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

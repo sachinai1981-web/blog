@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sachin Rai — AI + Enterprise Sales</title>
+  <meta name="description" content="Notes from the intersection of AI and enterprise GTM. Tools I'm building, strategies that work, and what's changing in sales." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-300: #d1d5db;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --accent: #1a1a2e;
+      --accent-light: #16213e;
+      --highlight: #e8f4fd;
+      --tag-ai: #dbeafe;
+      --tag-ai-text: #1d4ed8;
+      --tag-sales: #dcfce7;
+      --tag-sales-text: #15803d;
+      --tag-tools: #fef3c7;
+      --tag-tools-text: #b45309;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--white);
+      color: var(--gray-900);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-100);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--black);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--gray-500);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--black); }
+
+    /* HERO */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4rem 2rem 3rem;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--black);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--gray-700);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .author-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .author-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .author-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--gray-700);
+    }
+    .hero-cred {
+      font-size: 0.8rem;
+      color: var(--gray-500);
+      background: var(--gray-50);
+      border: 1px solid var(--gray-100);
+      border-radius: 100px;
+      padding: 0.3rem 0.75rem;
+    }
+
+    /* POSTS */
+    .posts-section {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 2rem;
+    }
+
+    /* FEATURED POST */
+    .post-featured {
+      border: 1px solid var(--gray-100);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+      text-decoration: none;
+      display: block;
+      background: var(--white);
+    }
+    .post-featured:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .post-featured-inner {
+      padding: 2rem;
+    }
+    .post-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      letter-spacing: 0.02em;
+    }
+    .tag-ai { background: var(--tag-ai); color: var(--tag-ai-text); }
+    .tag-sales { background: var(--tag-sales); color: var(--tag-sales-text); }
+    .tag-tools { background: var(--tag-tools); color: var(--tag-tools-text); }
+    .featured-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #7c3aed;
+      background: #ede9fe;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+    }
+    .post-featured h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+    .post-featured p {
+      font-size: 0.95rem;
+      color: var(--gray-700);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: var(--gray-500);
+    }
+    .post-meta span { display: flex; align-items: center; gap: 0.3rem; }
+    .read-more {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--black);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .read-more::after { content: '→'; transition: transform 0.15s; }
+    .post-featured:hover .read-more::after { transform: translateX(4px); }
+
+    /* POST GRID */
+    .post-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 600px) { .post-grid { grid-template-columns: 1fr; } }
+
+    .post-card {
+      border: 1px solid var(--gray-100);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      display: block;
+      background: var(--white);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .post-card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      transform: translateY(-2px);
+    }
+    .post-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1.4;
+      margin: 0.75rem 0 0.5rem;
+    }
+    .post-card p {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .post-card .post-meta { font-size: 0.75rem; }
+
+    /* COMING SOON CARD */
+    .post-card-soon {
+      border: 1px dashed var(--gray-300);
+      border-radius: 12px;
+      padding: 1.5rem;
+      background: var(--gray-50);
+    }
+    .post-card-soon h3 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--gray-500);
+      line-height: 1.4;
+      margin: 0.75rem 0 0.5rem;
+    }
+    .soon-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ABOUT STRIP */
+    .about-strip {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+    .about-card {
+      background: var(--accent);
+      border-radius: 16px;
+      padding: 2rem;
+      color: white;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    @media (max-width: 600px) { .about-card { grid-template-columns: 1fr; } }
+    .about-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .about-card p {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+    }
+    .creds {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      min-width: 180px;
+    }
+    .cred-item {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .cred-item strong { color: white; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--gray-100);
+      padding: 2rem;
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer p { font-size: 0.8rem; color: var(--gray-500); }
+    .footer-links { display: flex; gap: 1.25rem; }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--gray-500);
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--black); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/blog" class="nav-logo">Sachin Rai</a>
+      <ul class="nav-links">
+        <li><a href="/blog">Writing</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="https://linkedin.com/in/sachinrai" target="_blank">LinkedIn</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-eyebrow">AI · Enterprise Sales · GTM</p>
+    <h1>Where AI meets<br/>enterprise selling.</h1>
+    <p>I'm an enterprise AE at Freshworks. I build AI tools to sell faster, close bigger, and prospect smarter. This is my build log — what works, what doesn't, and what's changing.</p>
+    <div class="hero-meta">
+      <div class="author-chip">
+        <div class="author-avatar">SR</div>
+        <span class="author-name">Sachin Rai</span>
+      </div>
+      <span class="hero-cred">7× President's Club</span>
+      <span class="hero-cred">$2.3M ACV · 200% quota</span>
+    </div>
+  </section>
+
+  <section class="posts-section">
+    <p class="section-label">Latest Posts</p>
+
+    <!-- FEATURED POST 1 -->
+    <a href="posts/linkedin-claude-code.html" class="post-featured">
+      <div class="post-featured-inner">
+        <div class="post-tags">
+          <span class="tag featured-badge">Featured</span>
+          <span class="tag tag-ai">AI Tools</span>
+          <span class="tag tag-sales">Job Hunt</span>
+        </div>
+        <h2>How I used Claude Code to scrape LinkedIn and land interviews at Anthropic + OpenAI</h2>
+        <p>I built a prospecting workflow that scraped LinkedIn via Apify, identified the right GTM contacts at two of the most sought-after AI companies, drafted personalised cold emails using my sales credentials, and tracked everything in Obsidian. Here's the full build.</p>
+        <div class="post-meta">
+          <span>📅 March 2026</span>
+          <span>⏱ 8 min read</span>
+          <span class="read-more">Read post</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- POST GRID -->
+    <div class="post-grid">
+
+      <!-- POST 2 -->
+      <a href="posts/ai-sales-stack-2026.html" class="post-card">
+        <div class="post-tags">
+          <span class="tag tag-tools">Tools</span>
+          <span class="tag tag-sales">Sales</span>
+        </div>
+        <h3>The AI tools replacing my sales stack in 2026</h3>
+        <p>From cold email scoring to deal review to prospect research — what I've actually replaced and what still needs a human.</p>
+        <div class="post-meta">
+          <span>📅 March 2026</span>
+          <span>⏱ 6 min read</span>
+        </div>
+      </a>
+
+      <!-- COMING SOON 1 -->
+      <div class="post-card-soon">
+        <div class="post-tags">
+          <span class="soon-badge">Coming soon</span>
+        </div>
+        <h3>How I run a multi-agent research pipeline before every enterprise discovery call</h3>
+        <div class="post-meta" style="margin-top:auto">
+          <span style="font-size:0.75rem;color:#9ca3af;">Publishing soon</span>
+        </div>
+      </div>
+
+      <!-- COMING SOON 2 -->
+      <div class="post-card-soon">
+        <div class="post-tags">
+          <span class="soon-badge">Coming soon</span>
+        </div>
+        <h3>Why Anthropic doesn't use sales quotas — and what that means for AEs</h3>
+        <div class="post-meta" style="margin-top:auto">
+          <span style="font-size:0.75rem;color:#9ca3af;">Publishing soon</span>
+        </div>
+      </div>
+
+      <!-- COMING SOON 3 -->
+      <div class="post-card-soon">
+        <div class="post-tags">
+          <span class="soon-badge">Coming soon</span>
+        </div>
+        <h3>I automated my cold email follow-up with n8n + Claude — here's what happened</h3>
+        <div class="post-meta" style="margin-top:auto">
+          <span style="font-size:0.75rem;color:#9ca3af;">Publishing soon</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-strip" id="about">
+    <div class="about-card">
+      <div>
+        <h3>Enterprise AE · AI Builder · 7× Club Winner</h3>
+        <p>I sell enterprise software at Freshworks and spend my nights building AI tools that make the job faster. I write about what I'm building, what's working in enterprise sales, and what AI is actually changing at the GTM layer — not the hype version.</p>
+      </div>
+      <div class="creds">
+        <div class="cred-item">🏆 <strong>7× President's Club</strong></div>
+        <div class="cred-item">💰 <strong>$2.3M ACV</strong> · 200% quota</div>
+        <div class="cred-item">🏭 <strong>Seagate</strong> — Fortune 500 net new</div>
+        <div class="cred-item">🔩 <strong>Nucor</strong> — $350K → $700K</div>
+        <div class="cred-item">🤖 Building with <strong>Claude Code</strong> daily</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2026 Sachin Rai · AI + Enterprise Sales</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/sachinrai" target="_blank">LinkedIn</a>
+        <a href="https://sachinai1981-web.github.io/cold-email-generator" target="_blank">Email Generator</a>
+        <a href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank">Subject Scorer</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
