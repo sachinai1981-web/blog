@@ -792,344 +792,152 @@ function initLazyImages() {
 }
 initLazyImages();
 
-/* ── Hero Canvas — Tech Landscape v2 ────────────────────────────── */
+/* ── Hero Canvas — Neural Network Animation ─────────────────────── */
 (function initHeroCanvas() {
   const canvas = document.getElementById('heroCanvas');
   const ctx    = canvas.getContext('2d');
-  let W, H, raf, tick = 0;
 
-  /* ── palette ── */
-  const C = {
-    bg:      '#060912',
-    navy:    '#0a0f1e',
-    blue:    [100,160,255],   // AI nodes
-    cyan:    [80,220,210],    // data stream
-    amber:   [217,119,6],     // energy / power
-    green:   [80,200,120],    // datacenter
-    white:   [220,230,255],   // base nodes
+  /* ── config ── */
+  const CONFIG = {
+    nodeCount:     90,       // total particles
+    connectDist:   160,      // max px between connected nodes
+    speed:         0.35,     // base drift speed
+    nodeSizeMin:   1.2,
+    nodeSizeMax:   3.2,
+    amberRatio:    0.12,     // fraction of nodes that glow amber
+    pulseSpeed:    0.018,
+    bgColor:       '#080b14', // deep navy
+    lineColorBase: 'rgba(255,255,255,',
+    amberColor:    '#d97706',
+    amberGlow:     'rgba(217,119,6,',
+    nodeColor:     'rgba(200,210,255,',
   };
-  function rgb(c,a){ return `rgba(${c[0]},${c[1]},${c[2]},${a})`; }
 
-  /* ══════════════════════════════════════════
-     LAYER 1 — circuit-board dot grid
-  ══════════════════════════════════════════ */
-  function drawGrid() {
-    const spacing = 38;
-    ctx.fillStyle = 'rgba(80,120,200,0.07)';
-    for (let x = (tick*0.12) % spacing; x < W; x += spacing) {
-      for (let y = 0; y < H; y += spacing) {
+  let W, H, nodes = [], raf;
+
+  /* ── Node class ── */
+  class Node {
+    constructor() { this.reset(true); }
+    reset(init) {
+      this.x    = Math.random() * (W || window.innerWidth);
+      this.y    = init ? Math.random() * (H || window.innerHeight) : (Math.random() < 0.5 ? -10 : H + 10);
+      const ang = Math.random() * Math.PI * 2;
+      const spd = CONFIG.speed * (0.4 + Math.random() * 0.9);
+      this.vx   = Math.cos(ang) * spd;
+      this.vy   = Math.sin(ang) * spd;
+      this.r    = CONFIG.nodeSizeMin + Math.random() * (CONFIG.nodeSizeMax - CONFIG.nodeSizeMin);
+      this.alpha = 0.25 + Math.random() * 0.55;
+      this.amber = Math.random() < CONFIG.amberRatio;
+      this.phase = Math.random() * Math.PI * 2; // pulse offset
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.phase += CONFIG.pulseSpeed;
+      /* soft wrap — fade back in from opposite edge */
+      const pad = 60;
+      if (this.x < -pad || this.x > W + pad || this.y < -pad || this.y > H + pad) this.reset(false);
+    }
+    draw() {
+      const pulse = 0.85 + 0.15 * Math.sin(this.phase);
+      const a     = this.alpha * pulse;
+      if (this.amber) {
+        /* amber glow node */
+        ctx.save();
+        ctx.shadowColor  = CONFIG.amberColor;
+        ctx.shadowBlur   = 10;
         ctx.beginPath();
-        ctx.arc(x, y, 0.8, 0, Math.PI*2);
+        ctx.arc(this.x, this.y, this.r * pulse, 0, Math.PI * 2);
+        ctx.fillStyle = CONFIG.amberGlow + a + ')';
+        ctx.fill();
+        ctx.restore();
+      } else {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r * pulse, 0, Math.PI * 2);
+        ctx.fillStyle = CONFIG.nodeColor + a + ')';
         ctx.fill();
       }
     }
   }
 
-  /* ══════════════════════════════════════════
-     LAYER 2 — chip die clusters (static hubs)
-  ══════════════════════════════════════════ */
-  let hubs = [];
-  function initHubs() {
-    hubs = [];
-    // 4-6 chip clusters scattered across canvas
-    const count = Math.min(6, Math.floor(W / 220));
-    for (let i = 0; i < count; i++) {
-      hubs.push({
-        x: W * (0.12 + i * (0.76/(count-1||1))),
-        y: H * (0.25 + Math.sin(i * 1.3) * 0.22 + 0.15),
-        size: 18 + Math.random() * 14,
-        type: ['chip','chip','datacenter','energy','ai'][i % 5],
-        pulse: Math.random() * Math.PI * 2,
-        ring: 0, ringAlpha: 0,
-      });
-    }
-  }
-
-  function drawHub(h) {
-    h.pulse += 0.022;
-    const glow = 0.6 + 0.4 * Math.sin(h.pulse);
-    const s = h.size;
-    ctx.save();
-    ctx.translate(h.x, h.y);
-
-    let col;
-    if      (h.type === 'chip')       col = C.blue;
-    else if (h.type === 'datacenter') col = C.green;
-    else if (h.type === 'energy')     col = C.amber;
-    else                              col = C.cyan;
-
-    /* outer glow ring */
-    const grd = ctx.createRadialGradient(0,0,s*0.5, 0,0,s*2.2);
-    grd.addColorStop(0, rgb(col, 0.18*glow));
-    grd.addColorStop(1, rgb(col, 0));
-    ctx.fillStyle = grd;
-    ctx.beginPath(); ctx.arc(0,0,s*2.2,0,Math.PI*2); ctx.fill();
-
-    /* chip square body */
-    ctx.strokeStyle = rgb(col, 0.55 * glow);
-    ctx.lineWidth = 1.2;
-    ctx.strokeRect(-s/2, -s/2, s, s);
-
-    /* inner die square */
-    ctx.strokeStyle = rgb(col, 0.3 * glow);
-    ctx.lineWidth = 0.6;
-    ctx.strokeRect(-s/4, -s/4, s/2, s/2);
-
-    /* pin traces — short lines on all 4 sides */
-    const pins = h.type === 'chip' ? 4 : 3;
-    const step = s / (pins + 1);
-    ctx.strokeStyle = rgb(col, 0.4 * glow);
-    ctx.lineWidth = 0.8;
-    for (let i = 1; i <= pins; i++) {
-      const p = -s/2 + i * step;
-      // top
-      ctx.beginPath(); ctx.moveTo(p, -s/2); ctx.lineTo(p, -s/2 - 7); ctx.stroke();
-      // bottom
-      ctx.beginPath(); ctx.moveTo(p, s/2);  ctx.lineTo(p, s/2 + 7);  ctx.stroke();
-      // left
-      ctx.beginPath(); ctx.moveTo(-s/2, p); ctx.lineTo(-s/2 - 7, p); ctx.stroke();
-      // right
-      ctx.beginPath(); ctx.moveTo(s/2, p);  ctx.lineTo(s/2 + 7, p);  ctx.stroke();
-    }
-
-    /* centre dot */
-    ctx.beginPath(); ctx.arc(0,0,2,0,Math.PI*2);
-    ctx.fillStyle = rgb(col, 0.9*glow); ctx.fill();
-
-    ctx.restore();
-
-    /* expanding pulse ring every ~3s */
-    if (Math.random() < 0.003) { h.ring = 0; h.ringAlpha = 0.6; }
-    if (h.ringAlpha > 0) {
-      h.ring += 2.2;
-      h.ringAlpha -= 0.012;
-      ctx.beginPath();
-      ctx.arc(h.x, h.y, h.ring, 0, Math.PI*2);
-      ctx.strokeStyle = rgb(col, Math.max(0, h.ringAlpha));
-      ctx.lineWidth = 1;
-      ctx.stroke();
-    }
-  }
-
-  /* ══════════════════════════════════════════
-     LAYER 3 — inter-hub backbone traces
-     (L-shaped PCB-style routing)
-  ══════════════════════════════════════════ */
-  function drawBackbone() {
-    if (hubs.length < 2) return;
-    for (let i = 0; i < hubs.length - 1; i++) {
-      const a = hubs[i], b = hubs[i+1];
-      const mid = a.x + (b.x - a.x) * 0.5;
-      // animated dash offset
-      const dash = (tick * 0.4) % 24;
-      ctx.save();
-      ctx.setLineDash([6, 18]);
-      ctx.lineDashOffset = -dash;
-      ctx.strokeStyle = 'rgba(100,160,255,0.18)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(a.x, a.y);
-      ctx.lineTo(mid, a.y);   // horizontal leg
-      ctx.lineTo(mid, b.y);   // vertical leg
-      ctx.lineTo(b.x, b.y);   // horizontal leg
-      ctx.stroke();
-      ctx.restore();
-    }
-  }
-
-  /* ══════════════════════════════════════════
-     LAYER 4 — floating particle field
-  ══════════════════════════════════════════ */
-  let particles = [];
-  const PTYPES = [
-    { col: C.white,  ratio: 0.45, speed: 0.28, r: [1.0,2.2] },  // base
-    { col: C.blue,   ratio: 0.22, speed: 0.32, r: [1.2,2.5] },  // AI
-    { col: C.amber,  ratio: 0.14, speed: 0.40, r: [1.5,3.0] },  // energy
-    { col: C.green,  ratio: 0.10, speed: 0.25, r: [1.0,2.0] },  // datacenter
-    { col: C.cyan,   ratio: 0.09, speed: 0.55, r: [0.8,1.8] },  // data stream (faster)
-  ];
-
-  function pickType() {
-    const r = Math.random();
-    let acc = 0;
-    for (const t of PTYPES) { acc += t.ratio; if (r < acc) return t; }
-    return PTYPES[0];
-  }
-
-  class Particle {
-    constructor(init) {
-      this.init(init);
-    }
-    init(placing) {
-      const t  = pickType();
-      this.col = t.col;
-      const ang = Math.random() * Math.PI * 2;
-      const spd = t.speed * (0.5 + Math.random() * 0.8);
-      this.vx  = Math.cos(ang) * spd;
-      this.vy  = Math.sin(ang) * spd;
-      this.r   = t.r[0] + Math.random() * (t.r[1] - t.r[0]);
-      this.a   = 0.2 + Math.random() * 0.5;
-      this.ph  = Math.random() * Math.PI * 2;
-      this.x   = placing ? Math.random()*W : (Math.random()<0.5 ? -8 : W+8);
-      this.y   = placing ? Math.random()*H : Math.random()*H;
-    }
-    update() {
-      this.x  += this.vx;
-      this.y  += this.vy;
-      this.ph += 0.016;
-      if (this.x < -30 || this.x > W+30 || this.y < -30 || this.y > H+30) this.init(false);
-    }
-    draw() {
-      const pulse = 0.82 + 0.18*Math.sin(this.ph);
-      const a = this.a * pulse;
-      const isBright = this.col === C.amber || this.col === C.cyan;
-      if (isBright) {
-        ctx.save();
-        ctx.shadowColor = rgb(this.col, 0.8);
-        ctx.shadowBlur  = 8;
-      }
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.r*pulse, 0, Math.PI*2);
-      ctx.fillStyle = rgb(this.col, a);
-      ctx.fill();
-      if (isBright) ctx.restore();
-    }
-  }
-
-  function initParticles() {
-    particles = [];
-    const count = Math.min(110, Math.floor(W * H / 9000) + 60);
-    for (let i = 0; i < count; i++) particles.push(new Particle(true));
-  }
-
-  /* ══════════════════════════════════════════
-     LAYER 5 — proximity connections
-  ══════════════════════════════════════════ */
-  function drawConnections() {
-    const D = 145;
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i+1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const d  = Math.sqrt(dx*dx+dy*dy);
-        if (d > D) continue;
-        const t  = 1 - d/D;
-        const la = t*t*0.38;
-        // pick color based on node types
-        const ci = particles[i].col, cj = particles[j].col;
-        const useCol = (ci===C.amber||cj===C.amber) ? C.amber
-                     : (ci===C.cyan ||cj===C.cyan ) ? C.cyan
-                     : (ci===C.blue ||cj===C.blue ) ? C.blue
-                     : C.white;
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = rgb(useCol, la);
-        ctx.lineWidth   = (useCol===C.amber||useCol===C.cyan) ? 0.8 : 0.5;
-        ctx.stroke();
-      }
-    }
-  }
-
-  /* ══════════════════════════════════════════
-     LAYER 6 — data packets travelling on backbone
-  ══════════════════════════════════════════ */
-  let packets = [];
-  function spawnPacket() {
-    if (hubs.length < 2) return;
-    const from = hubs[Math.floor(Math.random()*hubs.length)];
-    const to   = hubs[(hubs.indexOf(from)+1) % hubs.length];
-    packets.push({ x: from.x, y: from.y, tx: to.x, ty: to.y, t: 0, col: C.cyan });
-  }
-  function updatePackets() {
-    if (Math.random() < 0.015) spawnPacket();
-    packets = packets.filter(p => p.t < 1);
-    packets.forEach(p => {
-      p.t += 0.008;
-      const mid = p.x + (p.tx - p.x) * 0.5; // replicate L-shape midpoint
-      let cx, cy;
-      if (p.t < 0.5) {
-        const u = p.t * 2;
-        cx = p.x  + (mid - p.x) * u;
-        cy = p.y;
-      } else {
-        const u = (p.t - 0.5) * 2;
-        cx = mid;
-        cy = p.y + (p.ty - p.y) * u;
-      }
-      ctx.save();
-      ctx.shadowColor = rgb(C.cyan, 0.9);
-      ctx.shadowBlur  = 12;
-      ctx.beginPath(); ctx.arc(cx, cy, 2.5, 0, Math.PI*2);
-      ctx.fillStyle = rgb(C.cyan, 0.95); ctx.fill();
-      ctx.restore();
-    });
-  }
-
-  /* ══════════════════════════════════════════
-     LAYER 7 — energy scan line (horizontal sweep)
-  ══════════════════════════════════════════ */
-  let scanY = 0;
-  function drawScan() {
-    scanY = (scanY + 0.6) % H;
-    const sg = ctx.createLinearGradient(0, scanY-40, 0, scanY+2);
-    sg.addColorStop(0, 'rgba(217,119,6,0)');
-    sg.addColorStop(1, 'rgba(217,119,6,0.04)');
-    ctx.fillStyle = sg;
-    ctx.fillRect(0, scanY-40, W, 42);
-    // thin bright edge
-    ctx.fillStyle = 'rgba(217,119,6,0.12)';
-    ctx.fillRect(0, scanY, W, 1);
-  }
-
-  /* ══════════════════════════════════════════
-     MAIN LOOP
-  ══════════════════════════════════════════ */
+  /* ── resize ── */
   function resize() {
     W = canvas.width  = canvas.offsetWidth;
     H = canvas.height = canvas.offsetHeight;
   }
 
+  /* ── init nodes ── */
+  function initNodes() {
+    nodes = [];
+    for (let i = 0; i < CONFIG.nodeCount; i++) nodes.push(new Node());
+  }
+
+  /* ── draw frame ── */
   function frame() {
-    tick++;
-    ctx.clearRect(0,0,W,H);
+    ctx.clearRect(0, 0, W, H);
 
-    // Background gradient — deep navy → near-black
-    const bg = ctx.createLinearGradient(0,0,W,H);
-    bg.addColorStop(0,   '#060912');
-    bg.addColorStop(0.5, '#080d1a');
-    bg.addColorStop(1,   '#04060f');
-    ctx.fillStyle = bg;
-    ctx.fillRect(0,0,W,H);
+    /* background */
+    ctx.fillStyle = CONFIG.bgColor;
+    ctx.fillRect(0, 0, W, H);
 
-    drawGrid();
-    drawBackbone();
-    drawConnections();
-    particles.forEach(p => { p.update(); p.draw(); });
-    hubs.forEach(h => drawHub(h));
-    updatePackets();
-    drawScan();
+    /* subtle radial vignette — lighter in centre */
+    const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.max(W, H) * 0.72);
+    grad.addColorStop(0,   'rgba(15,25,60,0.0)');
+    grad.addColorStop(1,   'rgba(4,6,15,0.55)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
 
-    // Vignette
-    const vg = ctx.createRadialGradient(W/2,H/2,0, W/2,H/2,Math.max(W,H)*0.75);
-    vg.addColorStop(0, 'rgba(0,0,0,0)');
-    vg.addColorStop(1, 'rgba(0,0,0,0.62)');
-    ctx.fillStyle = vg; ctx.fillRect(0,0,W,H);
+    /* update + draw nodes */
+    nodes.forEach(n => n.update());
+
+    /* connections */
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx   = nodes[i].x - nodes[j].x;
+        const dy   = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist > CONFIG.connectDist) continue;
+
+        const t = 1 - dist / CONFIG.connectDist;  // 0→1 as nodes get closer
+        const lineAlpha = t * t * 0.45;
+
+        const isAmber = nodes[i].amber || nodes[j].amber;
+        if (isAmber) {
+          ctx.strokeStyle = CONFIG.amberGlow + (lineAlpha * 0.9) + ')';
+          ctx.lineWidth   = 0.7;
+        } else {
+          ctx.strokeStyle = CONFIG.lineColorBase + lineAlpha + ')';
+          ctx.lineWidth   = 0.5;
+        }
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.stroke();
+      }
+    }
+
+    /* draw nodes on top of lines */
+    nodes.forEach(n => n.draw());
 
     raf = requestAnimationFrame(frame);
   }
 
-  resize(); initHubs(); initParticles(); frame();
+  /* ── boot ── */
+  resize();
+  initNodes();
+  frame();
 
+  /* pause when tab hidden (battery / perf) */
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) cancelAnimationFrame(raf);
-    else raf = requestAnimationFrame(frame);
+    if (document.hidden) { cancelAnimationFrame(raf); }
+    else { raf = requestAnimationFrame(frame); }
   });
 
-  let rt;
+  /* handle resize */
+  let resizeTimer;
   window.addEventListener('resize', () => {
-    clearTimeout(rt);
-    rt = setTimeout(() => { resize(); initHubs(); initParticles(); }, 200);
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { resize(); initNodes(); }, 200);
   }, { passive: true });
 })();
 
