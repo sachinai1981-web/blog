@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7 AI trends I'm tracking in 2026 — and the breakthrough nobody's talking about — Sachin Rai</title>
+  <meta name="description" content="From compute explosions to org design collapse — what my AI research vault is actually telling me about where this goes next. Plus one non-obvious conclusion." />
+  <meta name="author" content="Sachin Rai" />
+  <link rel="canonical" href="https://sachinai1981-web.github.io/blog/posts/ai-trends-2026-breakthrough-idea.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://sachinai1981-web.github.io/blog/posts/ai-trends-2026-breakthrough-idea.html" />
+  <meta property="og:title" content="7 AI trends I'm tracking in 2026 — and the breakthrough nobody's talking about" />
+  <meta property="og:description" content="From compute explosions to org design collapse — what my AI research vault is actually telling me about where this goes next." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&h=630&fit=crop&auto=format&q=85" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #faf9f6;
+      --bg-2:         #f3f1ea;
+      --surface:      #eceae1;
+      --border:       #dedad0;
+      --border-light: #eae8de;
+      --ink:          #1c1a16;
+      --ink-2:        #6a6455;
+      --ink-3:        #a09488;
+      --amber:        #c96b1a;
+      --amber-light:  #fdf3e7;
+      --amber-border: #f0c898;
+      --navy:         #0f1221;
+      --navy-2:       #1a2038;
+      --blue:         #1d4ed8;
+      --blue-light:   #dbeafe;
+      --blue-border:  #bfdbfe;
+      --green:        #15803d;
+      --green-light:  #dcfce7;
+      --green-border: #bbf7d0;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg); color: var(--ink); line-height: 1.6;
+    }
+
+    /* ── NAV ─────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,249,246,0.92);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border); padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 800px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 58px;
+    }
+    .nav-logo {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--ink); text-decoration: none; letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--amber); }
+    .nav-back {
+      font-size: 0.8rem; font-weight: 500; color: var(--ink-2);
+      text-decoration: none; display: flex; align-items: center; gap: 0.3rem;
+      transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--ink); }
+
+    /* ── HERO IMAGE ──────────────────── */
+    .post-hero {
+      width: 100%; max-width: 800px; margin: 0 auto;
+      padding: 2.5rem 2rem 0;
+    }
+    .post-hero-img {
+      width: 100%; height: 340px; object-fit: cover;
+      border-radius: 16px; display: block;
+    }
+
+    /* ── ARTICLE ─────────────────────── */
+    article { max-width: 680px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+
+    .post-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .tag {
+      font-size: 0.67rem; font-weight: 600; padding: 0.18rem 0.55rem;
+      border-radius: 100px; letter-spacing: 0.03em;
+    }
+    .tag-ai   { background: var(--blue-light); color: var(--blue); }
+    .tag-saas { background: var(--green-light); color: var(--green); }
+    .tag-tool { background: var(--amber-light); color: var(--amber); }
+
+    h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.85rem, 4.5vw, 2.7rem);
+      font-weight: 700; line-height: 1.12;
+      color: var(--ink); letter-spacing: -0.025em; margin-bottom: 1.25rem;
+    }
+
+    .post-meta {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.78rem; color: var(--ink-3);
+      padding-bottom: 2rem; border-bottom: 1px solid var(--border-light);
+      margin-bottom: 2.5rem; flex-wrap: wrap;
+    }
+    .author-chip { display: flex; align-items: center; gap: 0.45rem; }
+    .author-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 0.65rem; font-weight: 600;
+    }
+
+    /* body */
+    .post-body { font-size: 1.05rem; line-height: 1.82; color: var(--ink-2); }
+    .post-body h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--ink); margin: 2.75rem 0 1rem; letter-spacing: -0.02em;
+    }
+    .post-body h3 {
+      font-size: 1.05rem; font-weight: 600;
+      color: var(--ink); margin: 1.75rem 0 0.6rem;
+    }
+    .post-body p { margin-bottom: 1.3rem; }
+    .post-body ul, .post-body ol { padding-left: 1.5rem; margin-bottom: 1.3rem; }
+    .post-body li { margin-bottom: 0.5rem; }
+    .post-body strong { color: var(--ink); font-weight: 600; }
+    .post-body em { font-style: italic; }
+
+    /* section image */
+    .section-img {
+      width: 100%; height: 220px; object-fit: cover;
+      border-radius: 12px; margin: 2.5rem 0;
+    }
+
+    /* callout */
+    .callout {
+      background: var(--amber-light); border-left: 3px solid var(--amber);
+      border-radius: 0 10px 10px 0; padding: 1.25rem 1.5rem;
+      margin: 2rem 0; font-size: 0.95rem;
+    }
+    .callout p { margin: 0; color: var(--ink-2); }
+    .callout.blue {
+      background: var(--blue-light);
+      border-left-color: var(--blue);
+    }
+    .callout.blue p { color: #1e3a8a; }
+
+    /* trend card */
+    .trend-card {
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.5rem 1.6rem; margin: 1.5rem 0;
+      display: grid; grid-template-columns: 2.5rem 1fr; gap: 1rem; align-items: start;
+    }
+    .trend-num {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.6rem; font-weight: 700; line-height: 1;
+      color: var(--amber); padding-top: 0.15rem;
+    }
+    .trend-label {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.3rem;
+    }
+    .trend-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.05rem; font-weight: 700; color: var(--ink);
+      margin-bottom: 0.5rem; letter-spacing: -0.01em; line-height: 1.3;
+    }
+    .trend-body { font-size: 0.875rem; color: var(--ink-2); line-height: 1.7; margin: 0; }
+
+    /* breakthrough block */
+    .breakthrough {
+      background: var(--navy);
+      border-radius: 16px; padding: 2.5rem 2rem;
+      margin: 3rem 0;
+    }
+    .breakthrough-eyebrow {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--amber-border);
+      margin-bottom: 0.75rem; display: block;
+    }
+    .breakthrough h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.55rem; font-weight: 700; letter-spacing: -0.025em;
+      color: #fff; margin: 0 0 1rem; line-height: 1.2;
+    }
+    .breakthrough p {
+      font-size: 0.925rem; color: rgba(255,255,255,0.68);
+      line-height: 1.8; margin-bottom: 1rem;
+    }
+    .breakthrough p:last-child { margin-bottom: 0; }
+    .breakthrough strong { color: rgba(255,255,255,0.92); }
+
+    /* quote */
+    blockquote {
+      border-left: 3px solid var(--amber);
+      padding: 0.5rem 1.5rem; margin: 2rem 0;
+      font-style: italic; color: var(--ink-3); font-size: 1rem;
+    }
+
+    /* stat row */
+    .stat-row {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      background: var(--surface); border-radius: 12px;
+      padding: 1.25rem 1.5rem; margin: 2rem 0;
+    }
+    .stat-item { display: flex; flex-direction: column; gap: 0.15rem; }
+    .stat-num {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.65rem; font-weight: 700; letter-spacing: -0.04em;
+      color: var(--amber); line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-3);
+    }
+
+    /* subscribe */
+    .sub-card {
+      background: var(--navy); border-radius: 16px; padding: 2.5rem;
+      margin: 3.5rem 0 0; text-align: center;
+    }
+    .sub-card-eyebrow {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 0.5rem;
+    }
+    .sub-card h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 0.5rem;
+    }
+    .sub-card p { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 1.5rem; }
+    .sub-form { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+    .sub-input {
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      color: #fff; border-radius: 100px; padding: 0.7rem 1.25rem; outline: none;
+      width: 240px; transition: border-color 0.2s;
+    }
+    .sub-input::placeholder { color: rgba(255,255,255,0.3); }
+    .sub-input:focus { border-color: var(--amber); }
+    .sub-btn {
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 700;
+      background: var(--amber); color: #fff; border: none;
+      padding: 0.7rem 1.5rem; border-radius: 100px; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .sub-btn:hover { opacity: 0.85; }
+
+    /* post nav */
+    .post-nav { border-top: 1px solid var(--border-light); padding-top: 2rem; margin-top: 3rem; }
+    .back-link {
+      font-size: 0.875rem; color: var(--ink-3); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.4rem; transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--ink); }
+
+    /* footer */
+    footer { border-top: 1px solid var(--border); padding: 2rem; }
+    .footer-inner {
+      max-width: 800px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-size: 0.77rem; color: var(--ink-3); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-size: 0.77rem; color: var(--ink-3); text-decoration: none; transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--ink); }
+
+    @media (max-width: 640px) {
+      .trend-card { grid-template-columns: 1fr; gap: 0.5rem; }
+      .trend-num { font-size: 1.1rem; }
+      .stat-row { gap: 1rem; }
+    }
+  </style>
+
+  <script>
+  function handleSub(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.sub-btn');
+    const input = e.target.querySelector('.sub-input');
+    btn.textContent = 'Sending…'; btn.disabled = true;
+    fetch('https://formspree.io/f/xwvwlybd', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: input.value, source: 'ai-trends-2026 post' })
+    })
+    .then(r => r.json())
+    .then(data => {
+      if (data.ok) {
+        btn.textContent = 'You\'re in ✓'; btn.style.background = '#16a34a'; btn.disabled = false;
+        input.value = '';
+        setTimeout(() => { btn.textContent = 'Notify me →'; btn.style.background = ''; }, 4000);
+      } else { btn.textContent = 'Try again'; btn.style.background = '#dc2626'; btn.disabled = false; }
+    })
+    .catch(() => { btn.textContent = 'Try again'; btn.style.background = '#dc2626'; btn.disabled = false; });
+  }
+  </script>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/blog" class="nav-logo">Sachin<span>.</span></a>
+      <a href="/blog" class="nav-back">← All posts</a>
+    </div>
+  </nav>
+
+  <div class="post-hero">
+    <img
+      class="post-hero-img"
+      src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1400&h=680&fit=crop&auto=format&q=80"
+      alt="AI neural network visualization"
+      loading="eager"
+    />
+  </div>
+
+  <article>
+
+    <div class="post-tags">
+      <span class="tag tag-ai">AI Trends</span>
+      <span class="tag tag-saas">Enterprise SaaS</span>
+      <span class="tag tag-tool">Strategy</span>
+    </div>
+
+    <h1>7 AI trends I'm tracking in 2026 — and the breakthrough nobody's talking about</h1>
+
+    <div class="post-meta">
+      <div class="author-chip">
+        <div class="author-avatar">SR</div>
+        <span>Sachin Rai</span>
+      </div>
+      <span>April 2026</span>
+      <span>9 min read</span>
+    </div>
+
+    <div class="post-body">
+
+      <p>I've been running a personal AI research system for the past few months — a vault that processes everything I read, watch, and listen to about AI and automatically surfaces the non-obvious conclusions. Every piece of content goes through a "ghost lens" that asks: what wasn't said? What's the idea hiding in the gap?</p>
+
+      <p>Here's what it's actually telling me about AI in 2026. Seven trends, one synthesis — and a breakthrough idea at the end that I think is genuinely undervalued.</p>
+
+      <div class="callout">
+        <p><strong>Scope note:</strong> This isn't a list of tools. It's a structural read on where AI is going at the infrastructure, org design, and enterprise software layers. The stuff that compounds over years, not quarters.</p>
+      </div>
+
+      <img
+        class="section-img"
+        src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=400&fit=crop&auto=format&q=80"
+        alt="Circuit board representing AI infrastructure"
+        loading="lazy"
+      />
+
+      <h2>The 7 trends</h2>
+
+      <div class="trend-card">
+        <div class="trend-num">01</div>
+        <div>
+          <div class="trend-label">Structural</div>
+          <div class="trend-title">AI is an industrial restructuring cycle — not a software cycle</div>
+          <p class="trend-body">The dominant narrative is that AI is a software story. It's not. The largest value creation is happening in silicon, energy, infrastructure, and robotics — the physical layer underneath the models. One of the most telling signals from YC's Winter 2026 batch: a startup using AI to identify uranium deposits in North America to power AI data centers. That's a pick-and-shovel play three layers below the app layer. The thesis: <strong>infrastructure &gt; narrative, every time.</strong> Models commoditize. Compute stays constrained. Energy is the real choke point.</p>
+        </div>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-num">02</div>
+        <div>
+          <div class="trend-label">Compute</div>
+          <div class="trend-title">Three inflection points. Each one is 100x more compute.</div>
+          <p class="trend-body">Jensen Huang's framework at GTC 2026 is the clearest map I've seen of where we are. Three inflections: ChatGPT (AI enters public consciousness) → Reasoning models (grounded answers, first real revenue) → Agentic computing (AI that acts, not just responds). Each step requires roughly 100x more compute than the previous. That's a 10,000x compute increase in two years. The implication: whatever you're building on today's agentic infrastructure will look primitive within 18 months.</p>
+        </div>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-num">03</div>
+        <div>
+          <div class="trend-label">Economics</div>
+          <div class="trend-title">Intelligence is becoming a commodity. Agents are digital workers.</div>
+          <p class="trend-body">The distinction that matters: <strong>a chatbot answers questions. An agent performs tasks.</strong> Agents represent labor, not just assistance. When intelligence becomes cheap and scalable, every industry built on knowledge scarcity and friction changes. One implication most people are sleeping on: SaaS switching costs may collapse. Agents can automate data migrations that previously trapped customers. The moat shifts from lock-in to product quality and network effects. AI-native companies will operate with small human teams and large agent pools — this is already happening.</p>
+        </div>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-num">04</div>
+        <div>
+          <div class="trend-label">Architecture</div>
+          <div class="trend-title">The model is a commodity. The harness is the moat.</div>
+          <p class="trend-body">Teams obsess over which model to use. The actual strategic question is how you've built the operating layer — the harness — around it. The harness handles state, tools, permissions, coordination, and memory. Model quality is converging across providers. Harness design is diverging. Your real lock-in risk isn't vendor pricing — it's process lock-in. The teams building durable AI competitive advantage are building harnesses, not just prompts. This is the Nate Jones thesis that I keep coming back to: <em>AI harnesses are the real strategy, not the models.</em></p>
+        </div>
+      </div>
+
+      <img
+        class="section-img"
+        src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=350&fit=crop&auto=format&q=80"
+        alt="Modern office representing org design transformation"
+        loading="lazy"
+      />
+
+      <div class="trend-card">
+        <div class="trend-num">05</div>
+        <div>
+          <div class="trend-label">Org Design</div>
+          <div class="trend-title">Organizational hierarchy is structurally obsolete.</div>
+          <p class="trend-body">This is the Jack Dorsey thesis and it's the one I find most consequential. Hierarchy exists for one reason: to relay information up and down a chain at human scale. Every artifact a company produces — messages, emails, code, documents, recorded meetings — can now be fed into an AI model. Anyone in the company can query that model and get a real-time answer about what's happening. The relay function is gone. Block cut 40% of its workforce and is compressing from 5 management layers to 2–3, with an eventual goal of everyone reporting directly to the CEO. Three roles survive: ICs who do the work (augmented by agents), DRIs who own outcomes, and Player Coaches who build human capability. That's it.</p>
+        </div>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-num">06</div>
+        <div>
+          <div class="trend-label">Compliance</div>
+          <div class="trend-title">AI policy enforcement is the next enterprise category.</div>
+          <p class="trend-body">Every organization has human-readable policies: compliance rules, brand guidelines, HR frameworks, security requirements. When they deploy AI, those policies don't automatically transfer. The AI doesn't know your rules. A startup called Moonbounce raised $12M in early 2026 to solve exactly this — converting existing org policies into consistent, predictable AI behavior. They called it "content moderation for the AI era" but the real product is a policy compiler for AI systems. The market they're underselling: every regulated industry (healthcare, finance, legal, government) where policy violations carry legal consequences. This is a $100M+ category in the making.</p>
+        </div>
+      </div>
+
+      <div class="trend-card">
+        <div class="trend-num">07</div>
+        <div>
+          <div class="trend-label">Adoption</div>
+          <div class="trend-title">Geek orgs vs waterfall orgs — the gap is compounding.</div>
+          <p class="trend-body">MIT's Andy McAfee put the sharpest framework on this at the HBR Strategy Summit in 2026. "Geek organizations" — defined by agile iteration, data-driven decisions, and distributed power — are pulling away from "waterfall organizations" that still run on process hierarchies. The mechanism: AI amplifies what's already there. Geek orgs use AI to go faster. Waterfall orgs use AI to generate more output in the same broken process. McAfee coined a term for the latter: <strong>workslop</strong> — process-busy AI output that looks productive but isn't. Power users in geek orgs generate 4–10x the output of median employees. The playbook: find them, study what they're doing, and systematically spread it.</p>
+        </div>
+      </div>
+
+      <img
+        class="section-img"
+        src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=350&fit=crop&auto=format&q=80"
+        alt="Data visualization representing the intelligence layer"
+        loading="lazy"
+      />
+
+      <div class="breakthrough">
+        <span class="breakthrough-eyebrow">The Breakthrough Idea</span>
+        <h2>Your ITSM platform is already your company's intelligence layer. Nobody's built the interface.</h2>
+        <p>Here's the synthesis that keeps surfacing when I run these trends together.</p>
+        <p>Jack Dorsey's thesis says organizations need an intelligence layer — a queryable model of the company fed by all its digital artifacts. Every message, document, decision, and action. The management hierarchy that existed to relay information is replaced by an AI layer that anyone can query directly.</p>
+        <p>Now look at enterprise IT service management (ITSM). Every organization — regardless of size, industry, or geography — digitizes its entire operations through an ITSM platform. Every incident. Every change request. Every approval workflow. Every SLA breach. Every escalation. Every policy. The ITSM platform holds the complete digital record of how an organization actually operates at the infrastructure and process layer.</p>
+        <p><strong>That's Dorsey's intelligence layer. It already exists. It's called your ITSM platform.</strong></p>
+        <p>The gap: nobody has built the intelligence interface on top of it. Today, ITSM platforms are sophisticated ticketing systems with increasingly capable AI assistants bolted on. That's not the same thing as a queryable operational intelligence that a CIO can ask: "What is our current change risk given our upcoming system migrations and our historical incident rate on Thursdays?" and get a real, data-grounded answer.</p>
+        <p>The opportunity: whoever builds the genuine intelligence layer on top of ITSM operational data — not a chatbot, not a dashboard, but a real-time queryable model of operational reality — owns the operational brain of every enterprise customer. The incumbent vendors are moving too slowly. The window is open.</p>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-item">
+          <span class="stat-num">10,000×</span>
+          <span class="stat-label">Compute increase in 2 yrs</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">40%</span>
+          <span class="stat-label">Block workforce cut</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">4–10×</span>
+          <span class="stat-label">Power user output advantage</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">$12M</span>
+          <span class="stat-label">Moonbounce raise (AI policy)</span>
+        </div>
+      </div>
+
+      <h2>What I'm watching next</h2>
+
+      <p>The trends that feel early but are compounding fast:</p>
+
+      <ul>
+        <li><strong>Agentic security</strong> — YC W26 had a startup detecting website spoofs created by AI agents. As agents interact with the web on our behalf, a new attack surface opens. This is a real category emerging.</li>
+        <li><strong>The operator-to-investor pipeline</strong> — successful enterprise operators want to become angels and GPs but have no structured path to get there. The infrastructure doesn't exist. Leah Solivan (TaskRabbit) is making this argument publicly. The market is there.</li>
+        <li><strong>Multi-agent orchestration as a discipline</strong> — running one AI agent is a tool. Running ten AI agents in a coordinated workflow is a system design problem. The teams building sustainable AI advantage are already working on this. Most enterprise SaaS vendors haven't started.</li>
+      </ul>
+
+      <blockquote>
+        "You're not going to lose your job to AI. You're going to lose your job to somebody using AI." — Jensen Huang, GTC 2026
+      </blockquote>
+
+      <p>The through-line across all seven trends: AI doesn't replace the underlying business logic. It amplifies whatever structure is already there. Good orgs get better faster. Bad orgs generate more workslop faster. The strategic question isn't "are we using AI?" — it's "what are we amplifying?"</p>
+
+      <div class="callout blue">
+        <p><strong>If you're in enterprise SaaS:</strong> The harness, the policy layer, and the intelligence interface are the three strategic bets that will separate market leaders from followers in 2026–2028. Pick one and go deep.</p>
+      </div>
+
+      <div class="sub-card">
+        <div class="sub-card-eyebrow">Stay in the loop</div>
+        <h3>I write when I find something worth writing about.</h3>
+        <p>AI tools, enterprise GTM, and the occasional non-obvious synthesis. No filler.</p>
+        <form class="sub-form" onsubmit="handleSub(event)">
+          <input class="sub-input" type="email" placeholder="your@email.com" required />
+          <button class="sub-btn" type="submit">Notify me →</button>
+        </form>
+      </div>
+
+      <div class="post-nav">
+        <a href="/blog" class="back-link">← Back to all posts</a>
+      </div>
+
+    </div>
+  </article>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2026 Sachin Rai</p>
+      <div class="footer-links">
+        <a href="/blog">Blog</a>
+        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
