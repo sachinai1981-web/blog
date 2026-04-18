@@ -59,10 +59,21 @@
     display: flex; align-items: center; justify-content: space-between;
     padding: 1rem 2rem;
   }
-  .nav-logo { font-family: var(--font-d); font-weight: 400; font-size: 1.1rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--forest); }
+  .nav-logo { font-family: var(--font-d); font-weight: 400; font-size: 1.1rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--forest); transition: opacity 0.2s; }
+  .nav-logo:hover { opacity: 0.7; }
   .nav-links { display: flex; gap: 2rem; list-style: none; font-size: 0.875rem; }
-  .nav-links a { color: var(--charcoal); transition: color 0.15s; }
+  .nav-links a {
+    color: var(--charcoal); transition: color 0.2s;
+    position: relative; padding-bottom: 2px;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 1px; background: var(--amber);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
   .nav-links a:hover { color: var(--forest); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta::after { display: none !important; }
   .nav-cta {
     border: 1px solid var(--forest) !important; padding: 0.4rem 1rem;
     color: var(--forest) !important; transition: all 0.2s var(--ease-std) !important;
