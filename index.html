@@ -403,6 +403,35 @@
     opacity: 0.7;
   }
 
+  /* ── CURRENTLY BUILDING ── */
+  .building-section { background: var(--forest); padding: 5rem 2rem; }
+  .building-inner { max-width: 1280px; margin: 0 auto; }
+  .building-header { margin-bottom: 2.5rem; }
+  .building-eyebrow { font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.6rem; }
+  .building-title { font-family: var(--font-d); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; letter-spacing: -0.025em; color: var(--cream-light); line-height: 1; }
+  .building-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(221,213,190,0.1); }
+  .build-card {
+    background: rgba(249,246,238,0.04); padding: 2rem;
+    display: flex; flex-direction: column; gap: 0.6rem;
+    border: 1px solid transparent; text-decoration: none;
+    transition: background 0.25s, border-color 0.25s;
+    cursor: pointer;
+  }
+  .build-card:hover { background: rgba(249,246,238,0.08); border-color: rgba(212,169,106,0.3); }
+  .build-card--wip { cursor: default; }
+  .build-card--wip:hover { background: rgba(249,246,238,0.04); border-color: transparent; }
+  .build-status { font-family: var(--font-m); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .build-status--live { color: #86efac; }
+  .build-status--wip { color: rgba(221,213,190,0.45); }
+  .build-name { font-family: var(--font-d); font-size: 1.2rem; font-weight: 300; color: var(--cream-light); line-height: 1.2; margin-top: 0.25rem; }
+  .build-desc { font-size: 0.82rem; color: rgba(221,213,190,0.55); line-height: 1.7; flex: 1; }
+  .build-meta { font-family: var(--font-m); font-size: 0.58rem; letter-spacing: 0.08em; color: rgba(212,169,106,0.6); text-transform: uppercase; }
+  .build-arrow { font-size: 1rem; color: var(--amber); margin-top: 0.25rem; transition: transform 0.2s; }
+  .build-card:hover .build-arrow { transform: translateX(4px); }
+  .build-arrow--muted { color: rgba(221,213,190,0.2); }
+  @media (max-width: 1024px) { .building-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .building-grid { grid-template-columns: 1fr; } }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) { .card-featured { grid-column: span 12; min-height: 460px; } .card-post { grid-column: span 12; } .card-stat { grid-column: span 12; } .card-soon { grid-column: span 12; } }
   @media (max-width: 768px) {
@@ -610,6 +639,46 @@
       <a href="#subscribe" class="card-soon-overlay"><span class="notify-btn">🔔 Notify me</span></a>
     </div>
 
+  </div>
+</section>
+
+<!-- ── CURRENTLY BUILDING ── -->
+<section class="building-section" aria-label="Currently building">
+  <div class="building-inner">
+    <div class="building-header">
+      <p class="building-eyebrow">Live now</p>
+      <h2 class="building-title">Currently building</h2>
+    </div>
+    <div class="building-grid">
+      <a href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank" rel="noopener" class="build-card reveal">
+        <div class="build-status build-status--live">● Live</div>
+        <div class="build-name">Subject Line Scorer</div>
+        <div class="build-desc">AI scores your cold email subject lines. Built with pure HTML/JS.</div>
+        <div class="build-meta">Claude Code · 1 weekend</div>
+        <div class="build-arrow">→</div>
+      </a>
+      <a href="https://sachinai1981-web.github.io/cold-email-generator" target="_blank" rel="noopener" class="build-card reveal">
+        <div class="build-status build-status--live">● Live</div>
+        <div class="build-name">Cold Email Generator</div>
+        <div class="build-desc">Generate personalised cold emails with tone control and copy-paste output.</div>
+        <div class="build-meta">Claude Code · 1 weekend</div>
+        <div class="build-arrow">→</div>
+      </a>
+      <div class="build-card build-card--wip reveal">
+        <div class="build-status build-status--wip">◐ In progress</div>
+        <div class="build-name">Google Docs AI Bot</div>
+        <div class="build-desc">@mention the bot in any Google Doc comment — Gemini reads the doc and replies in-thread.</div>
+        <div class="build-meta">Gemini 2.5 Pro · Tavily</div>
+        <div class="build-arrow build-arrow--muted">◻</div>
+      </div>
+      <div class="build-card build-card--wip reveal">
+        <div class="build-status build-status--wip">◐ In progress</div>
+        <div class="build-name">Portfolio Monitor</div>
+        <div class="build-desc">Runs at 5am daily — scans my portfolio, flags signals, sends a digest.</div>
+        <div class="build-meta">Python · Claude API</div>
+        <div class="build-arrow build-arrow--muted">◻</div>
+      </div>
+    </div>
   </div>
 </section>
 
