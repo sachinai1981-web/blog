@@ -80,6 +80,83 @@
   [data-theme="dark"] .build-name,
   [data-theme="dark"] .building-title { color: #E8E0CC; }
   [data-theme="dark"] .build-desc { color: #8A9E8E; }
+  /* ── SEARCH OVERLAY ── */
+  #search-overlay {
+    position: fixed; inset: 0; z-index: 9000;
+    background: rgba(15,26,18,0.82); backdrop-filter: blur(16px);
+    display: flex; align-items: flex-start; justify-content: center;
+    padding-top: 12vh;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s var(--ease-std);
+  }
+  #search-overlay.open { opacity: 1; pointer-events: all; }
+  #search-box {
+    width: min(640px, 92vw);
+    background: var(--cream-light); border: 1px solid var(--tan);
+    border-radius: 4px; overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.35);
+    transform: translateY(-12px);
+    transition: transform 0.22s var(--ease-out);
+  }
+  #search-overlay.open #search-box { transform: translateY(0); }
+  #search-input-wrap {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--tan);
+  }
+  #search-input-wrap svg { flex-shrink: 0; opacity: 0.45; }
+  #search-q {
+    flex: 1; border: none; background: none; outline: none;
+    font-family: var(--font-b); font-size: 1.05rem; color: var(--forest);
+    caret-color: var(--amber);
+  }
+  #search-q::placeholder { color: var(--charcoal); opacity: 0.5; }
+  #search-esc {
+    font-family: var(--font-m); font-size: 0.6rem; letter-spacing: 0.05em;
+    color: var(--charcoal); opacity: 0.45; border: 1px solid var(--tan);
+    padding: 0.15rem 0.4rem; border-radius: 3px; flex-shrink: 0;
+  }
+  #search-results { padding: 0.5rem 0; max-height: 380px; overflow-y: auto; }
+  #search-results:empty::after {
+    content: 'No results'; display: block;
+    padding: 1.5rem 1.25rem; font-family: var(--font-b);
+    font-size: 0.9rem; color: var(--charcoal); opacity: 0.5;
+  }
+  .sr-item {
+    display: block; padding: 0.9rem 1.25rem;
+    border-bottom: 1px solid rgba(221,213,190,0.4);
+    text-decoration: none; transition: background 0.15s;
+  }
+  .sr-item:last-child { border-bottom: none; }
+  .sr-item:hover { background: var(--cream-card); }
+  .sr-title { font-family: var(--font-d); font-size: 1.05rem; font-weight: 400; color: var(--forest); line-height: 1.3; margin-bottom: 0.3rem; }
+  .sr-meta { font-family: var(--font-m); font-size: 0.6rem; letter-spacing: 0.05em; color: var(--charcoal); opacity: 0.55; }
+  .sr-excerpt { font-size: 0.82rem; color: var(--charcoal); opacity: 0.7; margin-top: 0.25rem; line-height: 1.5; }
+  mark { background: rgba(212,169,106,0.25); color: inherit; border-radius: 2px; padding: 0 1px; }
+  [data-theme="dark"] #search-box { background: var(--cream-card); border-color: rgba(232,224,204,0.12); }
+  [data-theme="dark"] #search-input-wrap { border-color: rgba(232,224,204,0.1); }
+  [data-theme="dark"] .sr-item:hover { background: rgba(232,224,204,0.06); }
+  [data-theme="dark"] .sr-item { border-color: rgba(232,224,204,0.06); }
+
+  /* ── BACK TO TOP ── */
+  #btt {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 500;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--forest); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+    pointer-events: none;
+  }
+  #btt.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+  #btt:hover { background: var(--forest-btn); }
+  #btt svg { stroke: var(--cream-light); fill: none; width: 16px; height: 16px; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  [data-theme="dark"] #btt { background: var(--forest); }
+
+  /* ── search icon clickable ── */
+  #searchTrigger { cursor: pointer; transition: opacity 0.2s; }
+  #searchTrigger:hover { opacity: 0.65; }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body, nav, .card-post, .card-stat, .card-soon, .about-card, .categories-section, footer { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
@@ -643,7 +720,7 @@
       <svg id="themeIconSun" viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--forest);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       <svg id="themeIconMoon" viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--forest);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
-    <svg viewBox="0 0 24 24" aria-label="Search"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+    <svg id="searchTrigger" viewBox="0 0 24 24" aria-label="Search" role="button" tabindex="0"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
     <svg id="navToggle" viewBox="0 0 24 24" aria-label="Menu" role="button" tabindex="0"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
   </div>
 </nav>
@@ -1332,6 +1409,59 @@ initLazyImages();
   links.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
 })();
 
+/* ── Search ── */
+(function() {
+  const POSTS = [
+    { title: '7 AI trends I\'m tracking in 2026 — and the breakthrough nobody\'s talking about', excerpt: 'From compute explosions to org hierarchy collapse — what my research vault is telling me.', meta: 'April 2026 · 9 min read', url: 'posts/ai-trends-2026-breakthrough-idea.html' },
+    { title: 'How I used Claude Code to scrape LinkedIn and land interviews at Anthropic + OpenAI', excerpt: 'Built a prospecting workflow: Apify → contacts → cold emails → Obsidian. Here\'s the full build.', meta: 'March 2026 · 8 min read', url: 'posts/linkedin-claude-code.html' },
+    { title: 'The AI tools replacing my sales stack in 2026', excerpt: 'From cold email scoring to deal review — what I\'ve actually replaced with AI and what still needs a human.', meta: 'March 2026 · 6 min read', url: 'posts/ai-sales-stack-2026.html' },
+    { title: 'I built a personal LLM knowledge base in Obsidian. Here\'s what it actually looks like.', excerpt: 'Raw data in, compiled wiki out. The AI workflow nobody is talking about.', meta: 'April 2026 · 8 min read', url: 'posts/llm-knowledge-base-obsidian.html' },
+  ];
+
+  const overlay  = document.getElementById('search-overlay');
+  const input    = document.getElementById('search-q');
+  const results  = document.getElementById('search-results');
+  const trigger  = document.getElementById('searchTrigger');
+  if (!overlay || !trigger) return;
+
+  function hl(str, q) {
+    if (!q) return str;
+    return str.replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi'), '<mark>$1</mark>');
+  }
+  function render(q) {
+    const lq = q.toLowerCase().trim();
+    const hits = lq ? POSTS.filter(p => p.title.toLowerCase().includes(lq) || p.excerpt.toLowerCase().includes(lq)) : POSTS;
+    results.innerHTML = hits.map(p => `
+      <a class="sr-item" href="${p.url}">
+        <div class="sr-title">${hl(p.title, q)}</div>
+        <div class="sr-meta">${p.meta}</div>
+        <div class="sr-excerpt">${hl(p.excerpt, q)}</div>
+      </a>`).join('');
+  }
+
+  function open() { overlay.classList.add('open'); input.value = ''; render(''); requestAnimationFrame(() => input.focus()); }
+  function close() { overlay.classList.remove('open'); }
+
+  trigger.addEventListener('click', open);
+  trigger.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') open(); });
+  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); open(); }
+    if (e.key === 'Escape') close();
+  });
+  input.addEventListener('input', () => render(input.value));
+})();
+
+/* ── Back to top ── */
+(function() {
+  const btn = document.getElementById('btt');
+  if (!btn) return;
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 500);
+  }, { passive: true });
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+})();
+
 /* ── Subscribe ── */
 function handleSub(e) {
   e.preventDefault();
@@ -1340,6 +1470,23 @@ function handleSub(e) {
   setTimeout(() => { btn.textContent = 'Subscribe →'; btn.style.background = ''; }, 3000);
 }
 </script>
+
+<!-- ── SEARCH OVERLAY ── -->
+<div id="search-overlay" role="dialog" aria-modal="true" aria-label="Search posts">
+  <div id="search-box">
+    <div id="search-input-wrap">
+      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      <input id="search-q" type="text" placeholder="Search posts…" autocomplete="off" spellcheck="false" />
+      <span id="search-esc">ESC</span>
+    </div>
+    <div id="search-results"></div>
+  </div>
+</div>
+
+<!-- ── BACK TO TOP ── -->
+<button id="btt" aria-label="Back to top">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
 </body>
 </html>
