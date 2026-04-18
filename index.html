@@ -42,8 +42,27 @@
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --ease-std: cubic-bezier(0.4, 0, 0.2, 1);
   }
+  [data-theme="dark"] {
+    --cream:        #0F1A12;
+    --cream-light:  #141F17;
+    --cream-card:   #1A2B1E;
+    --forest:       #E8E0CC;
+    --forest-btn:   #C8B88A;
+    --forest-hover: #D4C49A;
+    --amber:        #D4A96A;
+    --tan:          #4A5A4E;
+    --charcoal:     #8A9E8E;
+  }
+  [data-theme="dark"] nav {
+    background: rgba(15,26,18,0.94);
+    border-bottom-color: rgba(232,224,204,0.08);
+  }
+  [data-theme="dark"] .hero-overlay {
+    background: linear-gradient(to bottom, rgba(15,26,18,0.1) 0%, rgba(15,26,18,0.75) 100%);
+  }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  body, nav, .card-post, .card-stat, .card-soon, .about-card, .categories-section, footer { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
   body { font-family: var(--font-b); font-size: 1rem; line-height: 1.6; color: var(--forest); background: var(--cream); overflow-x: hidden; }
   img { display: block; max-width: 100%; }
   a { text-decoration: none; color: inherit; }
@@ -530,6 +549,10 @@
     <li><a href="#subscribe" class="nav-cta">Subscribe</a></li>
   </ul>
   <div class="nav-icons">
+    <button id="themeToggle" aria-label="Toggle dark mode" style="background:none;border:none;cursor:pointer;padding:2px;display:flex;align-items:center;">
+      <svg id="themeIconSun" viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--forest);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg id="themeIconMoon" viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--forest);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
     <svg viewBox="0 0 24 24" aria-label="Search"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
     <svg id="navToggle" viewBox="0 0 24 24" aria-label="Menu" role="button" tabindex="0"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
   </div>
@@ -1140,6 +1163,31 @@ initLazyImages();
     });
   }, { threshold: 0.6 });
   document.querySelectorAll('[data-count]').forEach(el => io.observe(el));
+})();
+
+/* ── Dark mode toggle ── */
+(function() {
+  const root   = document.documentElement;
+  const btn    = document.getElementById('themeToggle');
+  const sun    = document.getElementById('themeIconSun');
+  const moon   = document.getElementById('themeIconMoon');
+  if (!btn) return;
+
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initial = saved || (prefersDark ? 'dark' : 'light');
+
+  function apply(theme) {
+    root.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    sun.style.display  = theme === 'dark'  ? 'block' : 'none';
+    moon.style.display = theme === 'light' ? 'block' : 'none';
+  }
+
+  apply(initial);
+  btn.addEventListener('click', () => {
+    apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
 })();
 
 /* ── Mobile nav ── */
