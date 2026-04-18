@@ -457,6 +457,32 @@
   @media (max-width: 1024px) { .building-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 640px) { .building-grid { grid-template-columns: 1fr; } }
 
+  /* ── TOOLS SECTION ── */
+  .tools-section { padding: 5rem 2rem; background: var(--cream-light); border-top: 1px solid rgba(28,41,31,0.08); }
+  .tools-inner { max-width: 1280px; margin: 0 auto; }
+  .tools-header { margin-bottom: 2.5rem; }
+  .tools-eyebrow { font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 0.6rem; }
+  .tools-title { font-family: var(--font-d); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 300; letter-spacing: -0.025em; color: var(--forest); line-height: 1.1; }
+  .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(28,41,31,0.08); }
+  .tool-card {
+    background: var(--cream-light); text-decoration: none;
+    transition: background 0.2s;
+  }
+  .tool-card:hover { background: var(--cream-card); }
+  .tool-card-inner { padding: 2rem; display: flex; flex-direction: column; gap: 1rem; height: 100%; }
+  .tool-icon { font-size: 1.5rem; line-height: 1; }
+  .tool-content { flex: 1; }
+  .tool-name { font-family: var(--font-d); font-size: 1.25rem; font-weight: 300; color: var(--forest); margin-bottom: 0.4rem; line-height: 1.2; }
+  .tool-desc { font-size: 0.85rem; color: var(--charcoal); line-height: 1.7; }
+  .tool-cta {
+    font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.08em;
+    color: var(--amber); text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    transition: gap 0.2s;
+  }
+  .tool-card:hover .tool-cta { gap: 0.55rem; }
+  @media (max-width: 768px) { .tools-grid { grid-template-columns: 1fr; } }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) { .card-featured { grid-column: span 12; min-height: 460px; } .card-post { grid-column: span 12; } .card-stat { grid-column: span 12; } .card-soon { grid-column: span 12; } }
   @media (max-width: 768px) {
@@ -776,6 +802,48 @@
       <span class="marquee-sep">✦</span>
       <span class="marquee-item muted">Build Logs</span>
       <span class="marquee-sep">✦</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── TOOLS ── -->
+<section class="tools-section" aria-label="Free tools">
+  <div class="tools-inner">
+    <div class="tools-header reveal">
+      <p class="tools-eyebrow">Free tools</p>
+      <h2 class="tools-title">Built while writing this blog</h2>
+    </div>
+    <div class="tools-grid">
+      <a href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank" rel="noopener" class="tool-card reveal">
+        <div class="tool-card-inner">
+          <div class="tool-icon">✉</div>
+          <div class="tool-content">
+            <div class="tool-name">Subject Line Scorer</div>
+            <div class="tool-desc">Paste a subject line. Get an AI score, a rewrite, and 3 alternatives. Free forever.</div>
+          </div>
+          <div class="tool-cta">Try it →</div>
+        </div>
+      </a>
+      <a href="https://sachinai1981-web.github.io/cold-email-generator" target="_blank" rel="noopener" class="tool-card reveal">
+        <div class="tool-card-inner">
+          <div class="tool-icon">⚡</div>
+          <div class="tool-content">
+            <div class="tool-name">Cold Email Generator</div>
+            <div class="tool-desc">Generate personalised cold emails in seconds. Tone control, copy-paste output, no signup.</div>
+          </div>
+          <div class="tool-cta">Try it →</div>
+        </div>
+      </a>
+      <a href="https://sachinai1981-web.github.io/servicenow-migration-calculator" target="_blank" rel="noopener" class="tool-card reveal">
+        <div class="tool-card-inner">
+          <div class="tool-icon">🔢</div>
+          <div class="tool-content">
+            <div class="tool-name">ServiceNow Migration Calculator</div>
+            <div class="tool-desc">Estimate the real cost and ROI of moving from ServiceNow to Freshservice. For enterprise CIOs.</div>
+          </div>
+          <div class="tool-cta">Try it →</div>
+        </div>
+      </a>
     </div>
   </div>
 </section>
