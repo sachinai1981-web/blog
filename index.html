@@ -274,6 +274,8 @@
   .card-post:hover .lazy-img.loaded { transform: scale(1.04); }
   .card-post-body { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
   .card-post .card-title { font-size: 1.15rem; color: var(--forest); margin-bottom: 0.5rem; font-weight: 400; }
+  .card-post:first-of-type .card-title { font-size: 1.3rem; font-weight: 300; letter-spacing: -0.01em; }
+  .card-post:first-of-type .card-excerpt { font-size: 0.9rem; }
   .card-post .card-excerpt { font-size: 0.875rem; color: var(--charcoal); line-height: 1.72; flex: 1; }
   .card-post .card-meta { color: var(--tan); margin-top: 1rem; }
   .post-arrow {
@@ -337,28 +339,53 @@
   }
   .notify-btn:hover { background: var(--forest-hover); }
 
-  /* ── SUBSCRIBE (dark forest section) ── */
-  .subscribe-section { background: var(--forest); color: var(--cream-light); padding: 5rem 2rem; margin-top: 3rem; }
-  .sub-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center; }
-  .sub-eyebrow { font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem; }
-  .sub-head { font-family: var(--font-d); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; letter-spacing: -0.025em; margin-bottom: 0.75rem; line-height: 1.1; }
-  .sub-desc { font-size: 0.9rem; color: var(--tan); line-height: 1.75; }
-  .sub-form { display: flex; gap: 0.5rem; flex-shrink: 0; }
+  /* ── SUBSCRIBE (redesigned) ── */
+  .subscribe-section {
+    background: var(--forest); color: var(--cream-light);
+    padding: 8rem 2rem; margin-top: 3rem;
+    position: relative; overflow: hidden;
+  }
+  .subscribe-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.6; mix-blend-mode: overlay; pointer-events: none;
+  }
+  .sub-inner {
+    max-width: 760px; margin: 0 auto; text-align: center;
+    position: relative; z-index: 1;
+  }
+  .sub-eyebrow { font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.25rem; }
+  .sub-pullquote {
+    font-family: var(--font-d); font-style: italic; font-weight: 300;
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    color: rgba(249,246,238,0.45); line-height: 1.7;
+    margin-bottom: 2rem; letter-spacing: 0.01em;
+  }
+  .sub-head {
+    font-family: var(--font-d); font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 300; letter-spacing: -0.035em; line-height: 1;
+    margin-bottom: 1.25rem;
+  }
+  .sub-desc { font-size: 0.9rem; color: rgba(221,213,190,0.55); line-height: 1.75; margin-bottom: 2.5rem; }
+  .sub-form { display: flex; gap: 0; max-width: 440px; margin: 0 auto; }
   .sub-input {
     font-family: var(--font-b); font-size: 0.9rem;
     background: rgba(249,246,238,0.07); border: 1px solid rgba(221,213,190,0.2);
-    color: var(--cream-light); padding: 0.75rem 1.25rem; outline: none; width: 240px;
+    border-right: none;
+    color: var(--cream-light); padding: 0.85rem 1.25rem; outline: none; flex: 1;
     transition: border-color 0.2s;
   }
-  .sub-input::placeholder { color: rgba(221,213,190,0.35); }
+  .sub-input::placeholder { color: rgba(221,213,190,0.3); }
   .sub-input:focus { border-color: var(--amber); }
   .sub-btn {
     font-family: var(--font-b); font-size: 0.9rem;
     background: var(--amber); color: var(--forest); border: none;
-    padding: 0.75rem 1.5rem; cursor: pointer; white-space: nowrap;
-    transition: opacity 0.2s; font-weight: 500;
+    padding: 0.85rem 1.75rem; cursor: pointer; white-space: nowrap;
+    transition: opacity 0.2s; font-weight: 500; flex-shrink: 0;
   }
   .sub-btn:hover { opacity: 0.88; }
+  .sub-note { font-family: var(--font-m); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(221,213,190,0.25); margin-top: 1rem; }
 
   /* ── ABOUT ── */
   .about-section { max-width: 1280px; margin: 3rem auto; padding: 0 2rem 5rem; }
@@ -435,21 +462,29 @@
     width: max-content;
     animation: marquee-scroll 28s linear infinite;
   }
-  .marquee-track:hover { animation-play-state: paused; }
+  .marquee-track.reverse {
+    animation: marquee-scroll-rev 32s linear infinite;
+    margin-top: 0.5rem;
+  }
+  .marquee-track:hover, .marquee-track.reverse:hover { animation-play-state: paused; }
   @keyframes marquee-scroll {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
   }
+  @keyframes marquee-scroll-rev {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+  }
   .marquee-item {
     font-family: var(--font-d); font-weight: 300;
-    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-size: clamp(2.2rem, 5.5vw, 4.5rem);
     letter-spacing: -0.035em; line-height: 1;
     white-space: nowrap; flex-shrink: 0;
     color: var(--forest);
   }
   .marquee-item.muted { color: var(--tan); }
   .marquee-sep {
-    font-family: var(--font-m); font-size: 0.85rem;
+    font-family: var(--font-m); font-size: 0.75rem;
     color: var(--amber); flex-shrink: 0; align-self: center;
     opacity: 0.7;
   }
@@ -508,6 +543,23 @@
   }
   .tool-card:hover .tool-cta { gap: 0.55rem; }
   @media (max-width: 768px) { .tools-grid { grid-template-columns: 1fr; } }
+
+  /* ── SCROLL INDICATOR ── */
+  .scroll-indicator {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: rgba(249,246,238,0.4); cursor: pointer;
+    animation: si-fade-in 1s ease 2s both;
+  }
+  @keyframes si-fade-in { from { opacity: 0; transform: translateX(-50%) translateY(8px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+  .scroll-indicator span { font-family: var(--font-m); font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, transparent, rgba(212,169,106,0.6));
+    animation: scroll-pulse 2s ease-in-out infinite;
+  }
+  @keyframes scroll-pulse { 0%,100% { opacity: 0.4; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(1.2); } }
+  .scroll-indicator:hover { color: rgba(212,169,106,0.7); }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) { .card-featured { grid-column: span 12; min-height: 460px; } .card-post { grid-column: span 12; } .card-stat { grid-column: span 12; } .card-soon { grid-column: span 12; } }
@@ -578,6 +630,10 @@
       </div>
       <span class="chip chip-amber">7× President's Club</span>
       <span class="chip">$2.3M ACV · 200% quota</span>
+    </div>
+    <div class="scroll-indicator" onclick="window.scrollTo({top:window.innerHeight,behavior:'smooth'})">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
     </div>
   </div>
 </section>
@@ -781,15 +837,15 @@
 <!-- ── SUBSCRIBE ── -->
 <section class="subscribe-section" id="subscribe" aria-label="Newsletter subscription">
   <div class="sub-inner reveal">
-    <div>
-      <div class="sub-eyebrow">Stay in the loop</div>
-      <div class="sub-head">Get notified when I publish.</div>
-      <div class="sub-desc">No spam. Just the next post on AI tools, enterprise GTM, and what's actually working in sales.</div>
-    </div>
+    <div class="sub-eyebrow">Stay in the loop</div>
+    <p class="sub-pullquote">"The best AI sales insights I've found — no hype, just what's actually working."</p>
+    <div class="sub-head">Get the next post<br>in your inbox.</div>
+    <div class="sub-desc">AI tools, enterprise GTM, build logs. No spam. Unsubscribe anytime.</div>
     <form class="sub-form" id="subForm" onsubmit="handleSub(event)">
       <input type="email" class="sub-input" name="email" placeholder="you@company.com" required />
       <button type="submit" class="sub-btn">Subscribe →</button>
     </form>
+    <p class="sub-note">Joining 200+ enterprise sellers</p>
   </div>
 </section>
 
@@ -835,6 +891,24 @@
       <span class="marquee-item">Sales Strategy</span>
       <span class="marquee-sep">✦</span>
       <span class="marquee-item muted">Build Logs</span>
+      <span class="marquee-sep">✦</span>
+    </div>
+    <div class="marquee-track reverse">
+      <span class="marquee-item muted">Cold Emails</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Deal Reviews</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item muted">Prospecting</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">AI Agents</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item muted">Cold Emails</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Deal Reviews</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item muted">Prospecting</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">AI Agents</span>
       <span class="marquee-sep">✦</span>
     </div>
   </div>
