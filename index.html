@@ -411,19 +411,36 @@
   .categories-title .muted { color: var(--tan); }
 
   /* ── FOOTER ── */
-  footer { background: var(--forest); color: var(--tan); padding: 3.5rem 2rem 2.5rem; }
-  .footer-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
-  .footer-logo { font-family: var(--font-d); font-size: 1.1rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream-light); margin-bottom: 0.5rem; }
-  .footer-tagline { font-size: 0.82rem; line-height: 1.7; max-width: 220px; font-style: italic; }
-  .footer-links { display: flex; align-items: center; gap: 1.75rem; flex-wrap: wrap; }
-  .footer-links a { font-size: 0.82rem; color: var(--tan); transition: color 0.15s; }
+  footer { background: var(--forest); color: var(--tan); padding: 5rem 2rem 2.5rem; }
+  .footer-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 4rem;
+    padding-bottom: 4rem; border-bottom: 1px solid rgba(221,213,190,0.1);
+  }
+  .footer-logo { font-family: var(--font-d); font-size: 1.3rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream-light); margin-bottom: 0.75rem; }
+  .footer-tagline { font-size: 0.88rem; line-height: 1.8; font-style: italic; color: rgba(221,213,190,0.5); max-width: 240px; margin-bottom: 1.5rem; }
+  .footer-social { display: flex; gap: 1rem; }
+  .footer-social a {
+    width: 34px; height: 34px; border: 1px solid rgba(221,213,190,0.15);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(221,213,190,0.45); font-family: var(--font-m); font-size: 0.6rem;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    transition: border-color 0.2s, color 0.2s;
+    text-decoration: none;
+  }
+  .footer-social a:hover { border-color: var(--amber); color: var(--amber); }
+  .footer-col-head { font-family: var(--font-m); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(221,213,190,0.35); margin-bottom: 1.25rem; }
+  .footer-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-links a { font-size: 0.88rem; color: rgba(221,213,190,0.55); transition: color 0.15s; line-height: 1.4; }
   .footer-links a:hover { color: var(--cream-light); }
+  .footer-latest-label { font-family: var(--font-m); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.5rem; }
+  .footer-latest-title { font-family: var(--font-d); font-size: 1rem; font-weight: 300; color: var(--cream-light); line-height: 1.4; margin-bottom: 0.4rem; }
+  .footer-latest-meta { font-family: var(--font-m); font-size: 0.58rem; letter-spacing: 0.05em; color: rgba(221,213,190,0.3); }
   .footer-bottom {
-    max-width: 1280px; margin: 2.5rem auto 0;
-    padding-top: 1.5rem; border-top: 1px solid rgba(221,213,190,0.12);
+    max-width: 1280px; margin: 2rem auto 0;
     display: flex; justify-content: space-between; align-items: center;
-    font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.05em;
-    color: rgba(221,213,190,0.4); flex-wrap: wrap; gap: 0.75rem;
+    font-family: var(--font-m); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(221,213,190,0.25); flex-wrap: wrap; gap: 0.75rem;
   }
 
   /* ── SCROLL REVEAL ── */
@@ -583,6 +600,7 @@
     .sub-input { width: 100%; }
     .about-card { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
     .post-grid { gap: 1px; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2.5rem; }
   }
   </style>
 </head>
@@ -961,17 +979,32 @@
   <div class="footer-inner">
     <div>
       <div class="footer-logo">Sachin Rai</div>
-      <p class="footer-tagline">Where AI meets enterprise selling.</p>
+      <p class="footer-tagline">Enterprise AE by day. AI builder by night. Writing about what's actually working at the GTM layer.</p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+        <a href="#subscribe" aria-label="Subscribe">✉</a>
+      </div>
     </div>
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a href="https://sachinai1981-web.github.io/cold-email-generator" target="_blank" rel="noopener">Email Generator</a>
-      <a href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank" rel="noopener">Subject Scorer</a>
+    <div>
+      <div class="footer-col-head">Writing</div>
+      <div class="footer-links">
+        <a href="posts/ai-trends-2026-breakthrough-idea.html">7 AI trends in 2026</a>
+        <a href="posts/linkedin-claude-code.html">LinkedIn + Claude Code</a>
+        <a href="posts/ai-sales-stack-2026.html">AI sales stack 2026</a>
+        <a href="posts/llm-knowledge-base-obsidian.html">LLM knowledge base</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-latest-label">Latest post</div>
+      <a href="posts/ai-trends-2026-breakthrough-idea.html" style="text-decoration:none">
+        <div class="footer-latest-title">7 AI trends I'm tracking in 2026 — and the breakthrough nobody's talking about</div>
+        <div class="footer-latest-meta">April 2026 · 9 min read</div>
+      </a>
     </div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 Sachin Rai</span>
-    <span>Built with Claude Code</span>
+    <span>Built with Claude Code · San Francisco</span>
   </div>
 </footer>
 
