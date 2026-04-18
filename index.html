@@ -337,6 +337,61 @@
     color: rgba(221,213,190,0.4); flex-wrap: wrap; gap: 0.75rem;
   }
 
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .post-grid .reveal:nth-child(1) { transition-delay: 0ms; }
+  .post-grid .reveal:nth-child(2) { transition-delay: 80ms; }
+  .post-grid .reveal:nth-child(3) { transition-delay: 160ms; }
+  .post-grid .reveal:nth-child(4) { transition-delay: 240ms; }
+  .post-grid .reveal:nth-child(5) { transition-delay: 320ms; }
+  .post-grid .reveal:nth-child(6) { transition-delay: 400ms; }
+  .post-grid .reveal:nth-child(7) { transition-delay: 480ms; }
+  .stats-inner .stat-item.reveal:nth-child(1) { transition-delay: 0ms; }
+  .stats-inner .stat-item.reveal:nth-child(2) { transition-delay: 80ms; }
+  .stats-inner .stat-item.reveal:nth-child(3) { transition-delay: 160ms; }
+  .stats-inner .stat-item.reveal:nth-child(4) { transition-delay: 240ms; }
+
+  /* ── CURSOR GLOW ── */
+  #cursor-glow {
+    position: fixed; pointer-events: none; z-index: 0;
+    width: 480px; height: 480px; border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(212,169,106,0.07) 0%, transparent 65%);
+    opacity: 0; transition: opacity 0.5s;
+    will-change: left, top;
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-outer { overflow: hidden; padding: 2rem 0 0; }
+  .marquee-track {
+    display: flex; align-items: baseline; gap: 2.5rem;
+    width: max-content;
+    animation: marquee-scroll 28s linear infinite;
+  }
+  .marquee-track:hover { animation-play-state: paused; }
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .marquee-item {
+    font-family: var(--font-d); font-weight: 300;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    letter-spacing: -0.035em; line-height: 1;
+    white-space: nowrap; flex-shrink: 0;
+    color: var(--forest);
+  }
+  .marquee-item.muted { color: var(--tan); }
+  .marquee-sep {
+    font-family: var(--font-m); font-size: 0.85rem;
+    color: var(--amber); flex-shrink: 0; align-self: center;
+    opacity: 0.7;
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) { .card-featured { grid-column: span 12; min-height: 460px; } .card-post { grid-column: span 12; } .card-stat { grid-column: span 12; } .card-soon { grid-column: span 12; } }
   @media (max-width: 768px) {
@@ -353,6 +408,7 @@
 </head>
 <body>
 
+<div id="cursor-glow" aria-hidden="true"></div>
 <div id="prog"></div>
 
 <!-- ── NAV ── -->
@@ -393,10 +449,10 @@
 <!-- ── STATS ── -->
 <div class="stats-section">
   <div class="stats-inner">
-    <div class="stat-item"><div class="stat-num" data-count="7" data-suffix="×">7×</div><div class="stat-label">President's Club</div></div>
-    <div class="stat-item"><div class="stat-num">$2.3M</div><div class="stat-label">Peak ACV</div></div>
-    <div class="stat-item"><div class="stat-num" data-count="200" data-suffix="%">200%</div><div class="stat-label">Quota attained</div></div>
-    <div class="stat-item"><div class="stat-num" data-count="4">4</div><div class="stat-label">Posts published</div></div>
+    <div class="stat-item reveal"><div class="stat-num" data-count="7" data-suffix="×">7×</div><div class="stat-label">President's Club</div></div>
+    <div class="stat-item reveal"><div class="stat-num">$2.3M</div><div class="stat-label">Peak ACV</div></div>
+    <div class="stat-item reveal"><div class="stat-num" data-count="200" data-suffix="%">200%</div><div class="stat-label">Quota attained</div></div>
+    <div class="stat-item reveal"><div class="stat-num" data-count="4">4</div><div class="stat-label">Posts published</div></div>
   </div>
 </div>
 
@@ -410,7 +466,7 @@
   <div class="post-grid">
 
     <!-- Featured -->
-    <a href="posts/ai-trends-2026-breakthrough-idea.html" class="card-featured">
+    <a href="posts/ai-trends-2026-breakthrough-idea.html" class="card-featured reveal">
       <div class="lazy-wrap"
            data-src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&h=700&fit=crop&auto=format&q=80"
            data-fallback="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=900&h=700&fit=crop&auto=format&q=80">
@@ -432,7 +488,7 @@
     </a>
 
     <!-- Post 2 -->
-    <a href="posts/linkedin-claude-code.html" class="card-post">
+    <a href="posts/linkedin-claude-code.html" class="card-post reveal">
       <div class="img-wrap">
         <div class="lazy-wrap"
              data-src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=700&h=400&fit=crop&auto=format&q=80"
@@ -454,7 +510,7 @@
     </a>
 
     <!-- Post 3 -->
-    <a href="posts/ai-sales-stack-2026.html" class="card-post">
+    <a href="posts/ai-sales-stack-2026.html" class="card-post reveal">
       <div class="img-wrap">
         <div class="lazy-wrap"
              data-src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=700&h=400&fit=crop&auto=format&q=80"
@@ -476,7 +532,7 @@
     </a>
 
     <!-- Post 4 -->
-    <a href="posts/llm-knowledge-base-obsidian.html" class="card-post">
+    <a href="posts/llm-knowledge-base-obsidian.html" class="card-post reveal">
       <div class="img-wrap">
         <div class="lazy-wrap"
              data-src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=700&h=400&fit=crop&auto=format&q=80"
@@ -498,7 +554,7 @@
     </a>
 
     <!-- Stat card -->
-    <div class="card-stat">
+    <div class="card-stat reveal">
       <p class="card-stat-eyebrow">About the writer</p>
       <h3>Enterprise AE.<br>AI Builder. 7× Club.</h3>
       <p>Building AI tools at night, selling enterprise software by day.</p>
@@ -510,7 +566,7 @@
     </div>
 
     <!-- Coming soon 1 -->
-    <div class="card-soon">
+    <div class="card-soon reveal">
       <div class="img-wrap">
         <div class="lazy-wrap"
              data-src="https://images.unsplash.com/photo-1640158615573-cd28feb1bf4e?w=500&h=300&fit=crop&auto=format&q=75"
@@ -527,7 +583,7 @@
     </div>
 
     <!-- Coming soon 2 -->
-    <div class="card-soon">
+    <div class="card-soon reveal">
       <div class="img-wrap">
         <div class="lazy-wrap"
              data-src="https://images.unsplash.com/photo-1580894742597-87bc8789db3d?w=500&h=300&fit=crop&auto=format&q=75"
@@ -548,7 +604,7 @@
 
 <!-- ── SUBSCRIBE ── -->
 <section class="subscribe-section" id="subscribe" aria-label="Newsletter subscription">
-  <div class="sub-inner">
+  <div class="sub-inner reveal">
     <div>
       <div class="sub-eyebrow">Stay in the loop</div>
       <div class="sub-head">Get notified when I publish.</div>
@@ -563,7 +619,7 @@
 
 <!-- ── ABOUT ── -->
 <section class="about-section" id="about" aria-labelledby="about-heading">
-  <div class="about-card">
+  <div class="about-card reveal">
     <div>
       <div class="about-eyebrow">About</div>
       <h3 id="about-heading">Enterprise AE.<br>AI Builder. 7× Club.</h3>
@@ -585,11 +641,25 @@
 <section class="categories-section" aria-label="Topics">
   <div class="categories-inner">
     <p class="categories-eyebrow">What I write about</p>
-    <div class="categories-title">
-      <span>AI Tools</span>
-      <span class="muted">Enterprise GTM</span>
-      <span>Sales Strategy</span>
-      <span class="muted">Build Logs</span>
+  </div>
+  <div class="marquee-outer">
+    <div class="marquee-track">
+      <span class="marquee-item">AI Tools</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item muted">Enterprise GTM</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Sales Strategy</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item muted">Build Logs</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">AI Tools</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item muted">Enterprise GTM</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item">Sales Strategy</span>
+      <span class="marquee-sep">✦</span>
+      <span class="marquee-item muted">Build Logs</span>
+      <span class="marquee-sep">✦</span>
     </div>
   </div>
 </section>
@@ -741,6 +811,80 @@ initLazyImages();
   window.addEventListener('resize', resize);
   resize();
   frame();
+})();
+
+/* ── Cursor glow ── */
+(function() {
+  const glow = document.getElementById('cursor-glow');
+  if (!glow) return;
+  let raf;
+  document.addEventListener('mousemove', e => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top  = e.clientY + 'px';
+      glow.style.opacity = '1';
+    });
+  }, { passive: true });
+  document.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
+})();
+
+/* ── Hero entrance ── */
+(function() {
+  const seq = [
+    ['.hero-eyebrow', 150],
+    ['.hero-title',   350],
+    ['.hero-sub',     600],
+    ['.hero-chips',   800],
+  ];
+  seq.forEach(([sel, delay]) => {
+    const el = document.querySelector(sel);
+    if (!el) return;
+    Object.assign(el.style, { opacity:'0', transform:'translateY(22px)', willChange:'opacity,transform' });
+    setTimeout(() => {
+      el.style.transition = 'opacity 1s cubic-bezier(0,0,0.2,1), transform 1s cubic-bezier(0,0,0.2,1)';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      setTimeout(() => { el.style.willChange = 'auto'; }, 1200);
+    }, delay);
+  });
+})();
+
+/* ── Scroll reveal ── */
+(function() {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+
+/* ── Count-up stats ── */
+(function() {
+  function countUp(el, target, suffix, dur) {
+    const start = performance.now();
+    const isInt = Number.isInteger(target);
+    function tick(now) {
+      const p  = Math.min((now - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      const val  = target * ease;
+      el.textContent = isInt ? Math.round(val) + suffix : val.toFixed(1) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const n  = parseFloat(el.dataset.count);
+      const sx = el.dataset.suffix || '';
+      if (!isNaN(n)) countUp(el, n, sx, 1400);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('[data-count]').forEach(el => io.observe(el));
 })();
 
 /* ── Subscribe ── */
