@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brutalist Preview — Sachin Rai</title>
+  <meta name="description" content="Swiss industrial brutalist variant. Carbon ink on unbleached paper, aviation red accent." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ════════════════════════════════════════════════════════════
+       SWISS INDUSTRIAL BRUTALIST
+       Variance 9 · Motion 3 · Density 7
+       Substrate: light · No gradients · No radius · Aviation red.
+       ════════════════════════════════════════════════════════════ */
+
+    :root {
+      /* Substrate — unbleached documentation paper */
+      --paper:      #F4F4F0;
+      --paper-2:    #EAE8E3;
+      --paper-3:    #DCD9D1;
+
+      /* Carbon ink */
+      --ink:        #050505;
+      --ink-2:      #1a1a1a;
+      --ink-mute:   #6b6b66;
+      --rule:       #050505;
+
+      /* Aviation hazard red — single accent */
+      --red:        #E61919;
+      --red-2:      #FF2A2A;
+
+      --font-display: 'Archivo Black', 'Archivo', system-ui, sans-serif;
+      --font-grotesk: 'Archivo', system-ui, sans-serif;
+      --font-mono:    'IBM Plex Mono', ui-monospace, monospace;
+
+      --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-grotesk);
+      font-weight: 400;
+      line-height: 1.4;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img { display: block; max-width: 100%; }
+
+    /* ── PREVIEW BANNER (red hazard strip) ── */
+    .preview-banner {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--red);
+      color: var(--paper);
+      padding: 0.45rem 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-align: center;
+      font-weight: 600;
+      border-bottom: 2px solid var(--ink);
+    }
+    body { padding-top: 1.85rem; }
+
+    /* ── HALFTONE TEXTURE (subtle, on paper) ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0.06;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='3' cy='3' r='0.6' fill='%23050505'/%3E%3C/svg%3E");
+      background-size: 6px 6px;
+      mix-blend-mode: multiply;
+    }
+
+    /* ── SYSTEM STRIP (always-on telemetry, all caps mono) ── */
+    .sysbar {
+      position: fixed;
+      top: 1.85rem; left: 0; right: 0;
+      z-index: 80;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1.25rem;
+      background: var(--paper);
+      border-bottom: 2px solid var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      overflow-x: auto;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+    .sysbar-cell {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0 1rem;
+      border-right: 1px solid var(--ink);
+    }
+    .sysbar-cell:last-child { border-right: 0; }
+    .sysbar-cell .k { color: var(--ink-mute); font-weight: 400; }
+    .sysbar-cell .v { color: var(--ink); font-weight: 600; }
+    .sysbar-cell .v.red { color: var(--red); }
+    .sysbar-cell .square {
+      display: inline-block;
+      width: 8px; height: 8px;
+      background: var(--red);
+      animation: blink 1.4s steps(2) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    body { padding-top: 4.3rem; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 4.3rem; left: 0; right: 0;
+      z-index: 70;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--paper);
+      border-bottom: 2px solid var(--ink);
+    }
+    .brand {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .brand-mark {
+      display: inline-block;
+      width: 28px; height: 28px;
+      border: 2px solid var(--ink);
+      display: grid; place-items: center;
+      font-size: 0.62rem;
+      font-weight: 700;
+      transition: background 0.2s, color 0.2s;
+    }
+    .brand:hover .brand-mark { background: var(--red); color: var(--paper); border-color: var(--red); }
+    .nav-links { display: flex; gap: 0; }
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-left: 1px solid var(--ink);
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { background: var(--ink); color: var(--paper); }
+    .nav-links a.alert { background: var(--red); color: var(--paper); border-left-color: var(--red); }
+    .nav-links a.alert:hover { background: var(--ink); color: var(--paper); border-left-color: var(--ink); }
+
+    body { padding-top: 7rem; }
+
+    /* ════════════════════════════════════════════════════════════
+       HERO — Swiss spread
+       ════════════════════════════════════════════════════════════ */
+    .hero {
+      border-bottom: 2px solid var(--ink);
+      position: relative;
+    }
+
+    .hero-meta-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .hero-meta-cell {
+      padding: 0.85rem 1rem;
+      border-right: 1px solid var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .hero-meta-cell:last-child { border-right: 0; }
+    .hero-meta-cell .label { color: var(--ink-mute); font-size: 0.58rem; }
+    .hero-meta-cell .val { color: var(--ink); font-weight: 600; }
+
+    .hero-title-zone {
+      padding: 3rem 1.25rem 4rem;
+      position: relative;
+    }
+    @media (min-width: 768px) {
+      .hero-title-zone { padding: 4rem 2rem 5rem; }
+    }
+    @media (min-width: 1024px) {
+      .hero-title-zone { padding: 6rem 3rem 7rem; }
+    }
+
+    .hero-num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-weight: 500;
+    }
+    .hero-num::before {
+      content: '';
+      width: 28px; height: 2px;
+      background: var(--red);
+    }
+    .hero-num .red { color: var(--red); }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 13vw, 12rem);
+      line-height: 0.86;
+      letter-spacing: -0.045em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 2rem;
+      font-weight: 900;
+    }
+    h1 .strike { text-decoration: line-through; text-decoration-color: var(--red); text-decoration-thickness: 6px; }
+    h1 .red { color: var(--red); }
+    h1 .ink-frame {
+      display: inline-block;
+      padding: 0 0.15em;
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .hero-grid-bottom {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border-top: 2px solid var(--ink);
+    }
+    @media (min-width: 1024px) {
+      .hero-grid-bottom { grid-template-columns: 7fr 5fr; }
+    }
+
+    .hero-lede {
+      padding: 2rem 1.25rem;
+      border-bottom: 1px solid var(--ink);
+    }
+    @media (min-width: 1024px) {
+      .hero-lede { padding: 2.5rem 3rem 2.5rem 3rem; border-bottom: 0; border-right: 1px solid var(--ink); }
+    }
+    .hero-lede .kicker {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .hero-lede p {
+      font-size: 1.05rem;
+      line-height: 1.55;
+      max-width: 48ch;
+      margin-bottom: 1.5rem;
+      color: var(--ink-2);
+    }
+    .hero-lede p strong { font-weight: 700; color: var(--ink); }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-top: 1.5rem;
+      border: 2px solid var(--ink);
+      width: fit-content;
+    }
+    .btn {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.25rem;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-right: 2px solid var(--ink);
+    }
+    .btn:last-child { border-right: 0; }
+    .btn-primary {
+      background: var(--red);
+      color: var(--paper);
+    }
+    .btn-primary:hover { background: var(--ink); color: var(--paper); }
+    .btn-ghost {
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .btn-ghost:hover { background: var(--ink); color: var(--paper); }
+    .btn .arrow { font-family: var(--font-mono); }
+
+    /* RIGHT — credentials grid (cockpit-density) */
+    .hero-creds-block {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+    }
+    @media (min-width: 1024px) {
+      .hero-creds-block { grid-template-rows: repeat(3, 1fr); }
+    }
+    .cred-cell {
+      padding: 1rem 1.1rem;
+      border-bottom: 1px solid var(--ink);
+      border-right: 1px solid var(--ink);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100px;
+    }
+    .cred-cell:nth-child(2n) { border-right: 0; }
+    .cred-cell:nth-last-child(-n+2) { border-bottom: 0; }
+    .cred-num {
+      font-family: var(--font-display);
+      font-size: 1.85rem;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      font-weight: 900;
+    }
+    .cred-num .red { color: var(--red); }
+    .cred-num .delta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--red);
+      margin-left: 0.3rem;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+    .cred-label {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      color: var(--ink-mute);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+
+    /* ── HAZARD STRIPE / MARQUEE ── */
+    .hazard-stripe {
+      background: var(--ink);
+      color: var(--paper);
+      border-top: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      overflow: hidden;
+      position: relative;
+    }
+    .hazard-track {
+      display: flex;
+      gap: 2.5rem;
+      width: max-content;
+      animation: hazard-scroll 32s linear infinite;
+      padding: 0.85rem 0;
+    }
+    .hazard-track:hover { animation-play-state: paused; }
+    .hazard-track span {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 2.5rem;
+      font-weight: 600;
+    }
+    .hazard-track span::after {
+      content: '///';
+      color: var(--red);
+      letter-spacing: 0;
+    }
+    @keyframes hazard-scroll { to { transform: translateX(-50%); } }
+
+    /* ════════════════════════════════════════════════════════════
+       SECTION HEADERS — Swiss numbered manifesto
+       ════════════════════════════════════════════════════════════ */
+    .section-header {
+      display: grid;
+      grid-template-columns: 1fr;
+      padding: 1.25rem;
+      border-bottom: 2px solid var(--ink);
+      align-items: end;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .section-header { grid-template-columns: 80px 1fr auto; padding: 1.5rem 2rem; gap: 2rem; }
+    }
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 600;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 0.9;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .section-meta {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      font-weight: 500;
+      text-align: right;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       INFRA STORY — image with hazard tint
+       ════════════════════════════════════════════════════════════ */
+    .infra-story {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-bottom: 2px solid var(--ink);
+    }
+    @media (min-width: 1024px) {
+      .infra-story { grid-template-columns: 5fr 7fr; }
+    }
+    .story-image {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      border-bottom: 2px solid var(--ink);
+      background-image: url('https://images.unsplash.com/photo-1591405351990-4726e331f141?w=1400&q=85&fit=crop');
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(100%) contrast(1.2);
+    }
+    @media (min-width: 1024px) {
+      .story-image { border-bottom: 0; border-right: 2px solid var(--ink); }
+    }
+    .story-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--red);
+      mix-blend-mode: multiply;
+      opacity: 0.25;
+    }
+    .story-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(5,5,5,0.4));
+    }
+    .story-image .data-strip {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-weight: 600;
+      z-index: 2;
+    }
+    .story-image .crosshair {
+      position: absolute;
+      bottom: 1rem; right: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--paper);
+      z-index: 2;
+      letter-spacing: 0.15em;
+    }
+    .story-image .crosshair::before {
+      content: '+ ';
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    .story-text {
+      padding: 2rem 1.25rem;
+    }
+    @media (min-width: 1024px) {
+      .story-text { padding: 3rem 3rem; }
+    }
+    .story-text .num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .story-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.85rem, 4.2vw, 3.25rem);
+      line-height: 0.95;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      color: var(--ink);
+    }
+    .story-text h2 .red { color: var(--red); }
+    .story-text p {
+      font-size: 1rem;
+      line-height: 1.55;
+      color: var(--ink-2);
+      max-width: 48ch;
+      margin-bottom: 1rem;
+    }
+    .story-text p strong { font-weight: 700; color: var(--ink); }
+
+    /* ════════════════════════════════════════════════════════════
+       WRITING — newspaper list
+       ════════════════════════════════════════════════════════════ */
+    .post-list { border-bottom: 2px solid var(--ink); }
+
+    .post-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+      padding: 1.5rem 1.25rem;
+      border-bottom: 1px solid var(--ink);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      transition: background 0.2s, color 0.2s;
+    }
+    .post-row:last-child { border-bottom: 0; }
+    @media (min-width: 768px) {
+      .post-row {
+        grid-template-columns: 80px 2fr 1fr 140px 110px;
+        gap: 1.5rem;
+        padding: 1.5rem 2rem;
+        align-items: center;
+      }
+    }
+    .post-row:hover { background: var(--ink); color: var(--paper); }
+    .post-row:hover .post-num { color: var(--red); }
+    .post-row:hover .post-tag { background: var(--red); border-color: var(--red); color: var(--paper); }
+    .post-row:hover .post-meta-num { color: var(--paper); }
+    .post-row:hover .post-read { color: var(--red); }
+    .post-row:hover .arrow { color: var(--red); }
+    .post-row:hover .post-extras .k { color: var(--red); }
+
+    .post-num {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      color: var(--ink);
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+    .post-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: inherit;
+    }
+    .post-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .post-tag {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.18rem 0.5rem;
+      border: 1.5px solid currentColor;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .post-extras {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .post-extras .row { display: flex; gap: 0.6rem; }
+    .post-extras .k { color: var(--ink-mute); transition: color 0.2s; }
+    .post-extras .v { color: inherit; font-weight: 600; }
+    .post-meta {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-weight: 500;
+    }
+    @media (min-width: 768px) { .post-meta { text-align: right; } }
+    .post-read {
+      color: var(--red);
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+    .arrow {
+      display: inline-block;
+      margin-left: 0.3rem;
+      transition: transform 0.3s var(--ease), color 0.2s;
+    }
+    .post-row:hover .arrow { transform: translateX(4px); }
+
+    /* ════════════════════════════════════════════════════════════
+       BUILDING — 4-cell engineering ledger
+       ════════════════════════════════════════════════════════════ */
+    .build-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-bottom: 2px solid var(--ink);
+    }
+    @media (min-width: 768px) {
+      .build-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1280px) {
+      .build-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .build-card {
+      position: relative;
+      padding: 1.5rem 1.25rem;
+      border-bottom: 1px solid var(--ink);
+      border-right: 1px solid var(--ink);
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.2s, color 0.2s;
+    }
+    @media (min-width: 1280px) {
+      .build-card:last-child { border-right: 0; }
+    }
+    @media (min-width: 768px) and (max-width: 1279px) {
+      .build-card:nth-child(2n) { border-right: 0; }
+    }
+    @media (max-width: 767px) {
+      .build-card { border-right: 0; }
+    }
+    .build-card:hover { background: var(--ink); color: var(--paper); }
+    .build-card:hover .build-num { color: var(--red); }
+    .build-card:hover .build-status { background: var(--red); color: var(--paper); border-color: var(--red); }
+    .build-card:hover .build-metric .k { color: var(--red); }
+
+    .build-num {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+    .build-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.65rem;
+      color: inherit;
+    }
+    .build-desc {
+      font-size: 0.92rem;
+      line-height: 1.45;
+      color: inherit;
+      opacity: 0.85;
+      margin-bottom: auto;
+    }
+    .build-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0.6rem;
+      border: 2px solid var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      align-self: flex-start;
+      margin-top: 1rem;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .build-status .square {
+      width: 7px; height: 7px;
+      background: var(--red);
+      animation: blink 1.4s steps(2) infinite;
+    }
+    .build-card:hover .build-status .square { background: var(--paper); }
+    .build-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-top: 0.85rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid currentColor;
+      font-family: var(--font-mono);
+    }
+    .build-metric { display: flex; flex-direction: column; gap: 0.15rem; }
+    .build-metric .k {
+      color: var(--ink-mute);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-size: 0.55rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .build-metric .v {
+      color: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       MANIFESTO STRIP — closing CTA, all-caps red on black
+       ════════════════════════════════════════════════════════════ */
+    .manifesto {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 4rem 1.25rem;
+      border-bottom: 2px solid var(--ink);
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 1024px) { .manifesto { padding: 6rem 3rem; } }
+
+    .manifesto-num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      margin-bottom: 1.25rem;
+      font-weight: 600;
+    }
+    .manifesto h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 5rem);
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      max-width: 22ch;
+    }
+    .manifesto h2 .red { color: var(--red); }
+    .manifesto h2 .strike {
+      text-decoration: line-through;
+      text-decoration-color: var(--red);
+      text-decoration-thickness: 4px;
+    }
+
+    .manifesto-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.95rem 1.5rem;
+      background: var(--red);
+      color: var(--paper);
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
+      border: 2px solid var(--red);
+    }
+    .manifesto-cta:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 1.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    @media (min-width: 768px) {
+      footer { flex-direction: row; justify-content: space-between; align-items: center; padding: 1.5rem 2rem; }
+    }
+    .footer-links { display: flex; gap: 0; }
+    .footer-links a {
+      padding: 0.4rem 0.85rem;
+      color: var(--ink);
+      text-decoration: none;
+      border: 2px solid var(--ink);
+      margin-left: -2px;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+    }
+    .footer-links a:first-child { margin-left: 0; }
+    .footer-links a:hover { background: var(--red); color: var(--paper); border-color: var(--red); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="preview-banner">
+  &laquo; INDUSTRIAL BRUTALIST ░ SWISS-PRINT MODE ░ NOT PUSHED &raquo;
+</div>
+
+<div class="sysbar">
+  <span class="sysbar-cell"><span class="square"></span><span class="k">SYS</span><span class="v red">LIVE</span></span>
+  <span class="sysbar-cell"><span class="k">UNIT</span><span class="v">D-047</span></span>
+  <span class="sysbar-cell"><span class="k">REV</span><span class="v">2.6</span></span>
+  <span class="sysbar-cell"><span class="k">CYCLE</span><span class="v">2026.W17</span></span>
+  <span class="sysbar-cell"><span class="k">UPTIME</span><span class="v">214d 06h</span></span>
+  <span class="sysbar-cell"><span class="k">POSTS</span><span class="v">04 / 06</span></span>
+  <span class="sysbar-cell"><span class="k">REGION</span><span class="v">SF / PT</span></span>
+  <span class="sysbar-cell"><span class="k">CLEARANCE</span><span class="v red">PUBLIC</span></span>
+</div>
+
+<nav>
+  <a href="#" class="brand">
+    <span class="brand-mark">SR</span>
+    <span>SACHIN RAI / BUILD LOG</span>
+  </a>
+  <div class="nav-links">
+    <a href="#writing">Writing</a>
+    <a href="#building">Building</a>
+    <a href="#about" class="alert">Manifesto</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-meta-strip">
+    <div class="hero-meta-cell">
+      <span class="label">[ Document ]</span>
+      <span class="val">UNIT D-047</span>
+    </div>
+    <div class="hero-meta-cell">
+      <span class="label">[ Class ]</span>
+      <span class="val">PUBLIC / EDITORIAL</span>
+    </div>
+    <div class="hero-meta-cell">
+      <span class="label">[ Filed ]</span>
+      <span class="val">2026.04.24</span>
+    </div>
+    <div class="hero-meta-cell">
+      <span class="label">[ Auth ]</span>
+      <span class="val">S.RAI</span>
+    </div>
+  </div>
+
+  <div class="hero-title-zone">
+    <p class="hero-num">001 <span class="red">///</span> Where AI meets the quota</p>
+    <h1>
+      Selling AI is<br />
+      <span class="strike">just selling</span><br />
+      <span class="red">selling</span> infrastructure.
+    </h1>
+  </div>
+
+  <div class="hero-grid-bottom">
+    <div class="hero-lede">
+      <p class="kicker">[ Editorial directive ]</p>
+      <p>
+        <strong>Most enterprise AE blogs talk about pipeline math and email cadences.</strong>
+        This one traces every sales tool I use back to the chip it runs on, the
+        eval that gates it, the agent that closes the ticket.
+      </p>
+      <p>
+        Field-tested takes from someone who sells against ServiceNow and debugs
+        LangGraph pipelines on the same day. The notes nobody writes because
+        nobody else has both stacks open.
+      </p>
+      <div class="cta-row">
+        <a href="#writing" class="btn btn-primary">Read &rsaquo;</a>
+        <a href="#building" class="btn btn-ghost">Tools shipped</a>
+      </div>
+    </div>
+
+    <div class="hero-creds-block">
+      <div class="cred-cell">
+        <div class="cred-num"><span class="red">7&times;</span><span class="delta">+1</span></div>
+        <div class="cred-label">Pres Club</div>
+      </div>
+      <div class="cred-cell">
+        <div class="cred-num">$2.3M</div>
+        <div class="cred-label">Peak ACV</div>
+      </div>
+      <div class="cred-cell">
+        <div class="cred-num">200%</div>
+        <div class="cred-label">Quota</div>
+      </div>
+      <div class="cred-cell">
+        <div class="cred-num">04</div>
+        <div class="cred-label">Tools shipped</div>
+      </div>
+      <div class="cred-cell">
+        <div class="cred-num">591</div>
+        <div class="cred-label">Sigs graded</div>
+      </div>
+      <div class="cred-cell">
+        <div class="cred-num"><span class="red">56.7%</span></div>
+        <div class="cred-label">Hit rate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hazard-stripe">
+  <div class="hazard-track">
+    <span>Sales engineering for AI agents</span>
+    <span>The 90/10 reliability wall</span>
+    <span>Outcome-based pricing</span>
+    <span>Eval-first product design</span>
+    <span>Distribution before product</span>
+    <span>Boring verticals win</span>
+    <span>Karpathy autoresearch loop</span>
+    <span>Sales engineering for AI agents</span>
+    <span>The 90/10 reliability wall</span>
+    <span>Outcome-based pricing</span>
+    <span>Eval-first product design</span>
+    <span>Distribution before product</span>
+    <span>Boring verticals win</span>
+    <span>Karpathy autoresearch loop</span>
+  </div>
+</div>
+
+<section class="infra-story">
+  <div class="story-image">
+    <div class="data-strip">CHIP / A100 / 80GB / 400W</div>
+    <div class="crosshair">001.SILICON</div>
+  </div>
+  <div class="story-text">
+    <div class="num">[ 002 ] / Why this exists</div>
+    <h2>Every tool I use traces back to a <span class="red">chip</span> I'll never touch.</h2>
+    <p><strong>Most enterprise AE blogs talk about pipeline math.</strong> This one traces back to silicon.</p>
+    <p>Why the model is 90% accurate &mdash; and what that last 10% costs at the GTM layer. Field-tested takes from someone who sells against ServiceNow and debugs LangGraph pipelines on the same day.</p>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="section-header">
+    <div class="section-num">[ 003 ] // FIELD NOTES</div>
+    <h2 class="section-title">The Writing</h2>
+    <span class="section-meta">04 published / 02 in draft</span>
+  </div>
+
+  <div class="post-list">
+    <a href="posts/ai-trends-2026-breakthrough-idea.html" class="post-row">
+      <div class="post-num">001</div>
+      <div>
+        <div class="post-title">7 AI trends I'm tracking in 2026 &mdash; and the breakthrough nobody's talking about</div>
+      </div>
+      <div class="post-tags">
+        <span class="post-tag">Strategy</span>
+        <span class="post-tag">AI</span>
+      </div>
+      <div class="post-extras">
+        <div class="row"><span class="k">Words</span><span class="v post-meta-num">1,847</span></div>
+        <div class="row"><span class="k">Reads</span><span class="v post-meta-num">3.2k</span></div>
+      </div>
+      <div class="post-meta">
+        <span>Apr 2026</span>
+        <span class="post-read">09 min<span class="arrow">&rsaquo;</span></span>
+      </div>
+    </a>
+
+    <a href="posts/linkedin-claude-code.html" class="post-row">
+      <div class="post-num">002</div>
+      <div>
+        <div class="post-title">Scraping LinkedIn with Claude Code</div>
+      </div>
+      <div class="post-tags">
+        <span class="post-tag">Build</span>
+        <span class="post-tag">Sales</span>
+      </div>
+      <div class="post-extras">
+        <div class="row"><span class="k">Words</span><span class="v post-meta-num">1,403</span></div>
+        <div class="row"><span class="k">Reads</span><span class="v post-meta-num">1.7k</span></div>
+      </div>
+      <div class="post-meta">
+        <span>Mar 2026</span>
+        <span class="post-read">07 min<span class="arrow">&rsaquo;</span></span>
+      </div>
+    </a>
+
+    <a href="posts/llm-knowledge-base-obsidian.html" class="post-row">
+      <div class="post-num">003</div>
+      <div>
+        <div class="post-title">Turning an Obsidian vault into an LLM-queryable knowledge base</div>
+      </div>
+      <div class="post-tags">
+        <span class="post-tag">Build</span>
+        <span class="post-tag">Workflow</span>
+      </div>
+      <div class="post-extras">
+        <div class="row"><span class="k">Words</span><span class="v post-meta-num">2,210</span></div>
+        <div class="row"><span class="k">Reads</span><span class="v post-meta-num">2.1k</span></div>
+      </div>
+      <div class="post-meta">
+        <span>Mar 2026</span>
+        <span class="post-read">11 min<span class="arrow">&rsaquo;</span></span>
+      </div>
+    </a>
+
+    <a href="posts/ai-sales-stack-2026.html" class="post-row">
+      <div class="post-num">004</div>
+      <div>
+        <div class="post-title">The AI sales stack I'd build if I started today</div>
+      </div>
+      <div class="post-tags">
+        <span class="post-tag">Strategy</span>
+        <span class="post-tag">Tools</span>
+      </div>
+      <div class="post-extras">
+        <div class="row"><span class="k">Words</span><span class="v post-meta-num">1,612</span></div>
+        <div class="row"><span class="k">Reads</span><span class="v post-meta-num">2.8k</span></div>
+      </div>
+      <div class="post-meta">
+        <span>Feb 2026</span>
+        <span class="post-read">08 min<span class="arrow">&rsaquo;</span></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section id="building">
+  <div class="section-header">
+    <div class="section-num">[ 004 ] // SHIPPED</div>
+    <h2 class="section-title">What I'm Building</h2>
+    <span class="section-meta">04 active / public source</span>
+  </div>
+
+  <div class="build-grid">
+    <article class="build-card">
+      <div class="build-num">UNIT 01</div>
+      <h3 class="build-name">Signal Forge</h3>
+      <p class="build-desc">AI-powered trading rule evolution. Karpathy's autoresearch pattern applied to options signals.</p>
+      <span class="build-status"><span class="square"></span>v6 LIVE</span>
+      <div class="build-metrics">
+        <div class="build-metric"><span class="k">Sigs</span><span class="v">591</span></div>
+        <div class="build-metric"><span class="k">Wr</span><span class="v">56.7%</span></div>
+      </div>
+    </article>
+
+    <article class="build-card">
+      <div class="build-num">UNIT 02</div>
+      <h3 class="build-name">Account Brain</h3>
+      <p class="build-desc">Weekly 4-agent pipeline on top accounts. Intel &rarr; triggers &rarr; angle &rarr; message.</p>
+      <span class="build-status"><span class="square"></span>ACTIVE</span>
+      <div class="build-metrics">
+        <div class="build-metric"><span class="k">Accounts</span><span class="v">05</span></div>
+        <div class="build-metric"><span class="k">Cadence</span><span class="v">Weekly</span></div>
+      </div>
+    </article>
+
+    <article class="build-card">
+      <div class="build-num">UNIT 03</div>
+      <h3 class="build-name">NemoClaw OS</h3>
+      <p class="build-desc">Always-on personal AI agent. Slack interface. Memory. Cron. The OS layer for everything else.</p>
+      <span class="build-status"><span class="square"></span>50% BUILT</span>
+      <div class="build-metrics">
+        <div class="build-metric"><span class="k">Agents</span><span class="v">06</span></div>
+        <div class="build-metric"><span class="k">Skills</span><span class="v">12</span></div>
+      </div>
+    </article>
+
+    <article class="build-card">
+      <div class="build-num">UNIT 04</div>
+      <h3 class="build-name">Harness</h3>
+      <p class="build-desc">Verification layer for AI agents. Evals as the new moat &mdash; the skill nobody teaches.</p>
+      <span class="build-status"><span class="square"></span>SPRINT</span>
+      <div class="build-metrics">
+        <div class="build-metric"><span class="k">Evals</span><span class="v">23</span></div>
+        <div class="build-metric"><span class="k">Pass</span><span class="v">81%</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="manifesto" id="about">
+  <div class="manifesto-num">[ 005 ] /// THE THESIS</div>
+  <h2>I'm not <span class="strike">predicting</span> the future of enterprise sales &mdash; I'm <span class="red">shipping</span> the toolkit it'll need.</h2>
+  <a href="#writing" class="manifesto-cta">Start with the writing &rsaquo;</a>
+</section>
+
+<footer>
+  <span>&copy; 2026 / SACHIN RAI / SAN FRANCISCO / REV 2.6 / DOCUMENT D-047</span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/sachinr1/">LinkedIn</a>
+    <a href="#">RSS</a>
+    <a href="mailto:sachinai1981@gmail.com">Email</a>
+  </div>
+</footer>
+
+</body>
+</html>

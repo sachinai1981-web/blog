@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preview — Taste-Skill Applied to Sachin Rai Blog</title>
+  <meta name="description" content="Taste-skill preview. Dark OLED premium aesthetic applied to existing blog content. Preview only — does not replace index.html." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ══════════════════════════════════════════════════════════
+       TASTE-SKILL PREVIEW — dark OLED premium
+       Variance 8 · Motion 6 · Density 8 (cockpit)
+       ══════════════════════════════════════════════════════════ */
+
+    :root {
+      /* Off-black, never pure #000 (taste-skill rule) */
+      --bg:          #0a0a0b;
+      --bg-raised:   #111113;
+      --bg-inset:    #08080a;
+
+      /* Neutrals — Zinc family, disciplined single accent */
+      --fg:          #fafafa;
+      --fg-dim:      #a1a1aa;
+      --fg-mute:     #71717a;
+      --hairline:    #27272a;
+
+      /* Single accent — desaturated emerald, <80% saturation */
+      --accent:      #10b981;
+      --accent-dim:  #065f46;
+
+      --font-display: 'Outfit', system-ui, sans-serif;
+      --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-feature-settings: "ss01", "ss02", "cv11";
+      min-height: 100dvh;
+      overflow-x: hidden;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Grain texture — fixed, pointer-events-none (taste-skill performance rule) */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 40;
+      padding: 1.5rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(10, 10, 11, 0.7);
+      backdrop-filter: blur(12px) saturate(140%);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease-out);
+    }
+    nav.scrolled { border-bottom-color: var(--hairline); }
+    nav .brand {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+    }
+    nav .brand strong { color: var(--fg); font-weight: 500; }
+    nav .nav-links { display: flex; gap: 2rem; }
+    nav .nav-links a {
+      font-size: 0.825rem;
+      color: var(--fg-dim);
+      text-decoration: none;
+      position: relative;
+      padding: 0.25rem 0;
+      transition: color 0.2s var(--ease-out);
+    }
+    nav .nav-links a:hover { color: var(--fg); }
+    nav .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.3s var(--ease-out);
+    }
+    nav .nav-links a:hover::after { width: 100%; }
+
+    /* ══════════════════════════════════════════════════════════
+       HERO — asymmetric split, anti-center bias (taste-skill Rule 3)
+       ══════════════════════════════════════════════════════════ */
+    .hero {
+      min-height: 100dvh;
+      display: grid;
+      grid-template-columns: 1fr;
+      padding: 8rem 2.5rem 4rem;
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 1024px) {
+      .hero {
+        grid-template-columns: 2fr 1fr;
+        gap: 4rem;
+        padding: 9rem 4rem 5rem;
+      }
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 900px;
+    }
+
+    /* Eyebrow — mono, wide-tracked, subtle */
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--fg-mute);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 1.5rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    /* Headline — controlled scale, weight hierarchy not size */
+    h1 {
+      font-size: clamp(2.75rem, 6vw, 5.5rem);
+      font-weight: 300;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin-bottom: 2rem;
+    }
+    h1 .accent {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent);
+    }
+    h1 .break { display: block; }
+
+    /* Subtle stagger-on-load */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: rise 0.9s var(--ease-out) forwards;
+    }
+    .fade-in:nth-child(1) { animation-delay: 0.1s; }
+    .fade-in:nth-child(2) { animation-delay: 0.2s; }
+    .fade-in:nth-child(3) { animation-delay: 0.35s; }
+    .fade-in:nth-child(4) { animation-delay: 0.5s; }
+    .fade-in:nth-child(5) { animation-delay: 0.65s; }
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .lede {
+      font-size: 1.125rem;
+      color: var(--fg-dim);
+      max-width: 52ch;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    /* CTA row */
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    .btn {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      padding: 0.875rem 1.5rem;
+      border-radius: 0;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-out);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn:active { transform: translateY(1px); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--fg-dim);
+      border-color: var(--hairline);
+    }
+    .btn-ghost:hover {
+      color: var(--fg);
+      border-color: var(--fg);
+    }
+
+    .btn .arrow {
+      display: inline-block;
+      transition: transform 0.25s var(--ease-out);
+    }
+    .btn:hover .arrow { transform: translateX(3px); }
+
+    /* Credential strip — not cards (taste-skill Rule 4) */
+    .creds {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      padding-top: 2rem;
+      border-top: 1px solid var(--hairline);
+    }
+    .cred {
+      padding: 0 1.5rem;
+      border-right: 1px solid var(--hairline);
+    }
+    .cred:first-child { padding-left: 0; }
+    .cred:last-child { border-right: 0; }
+    .cred-num {
+      font-family: var(--font-mono);
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--fg);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .cred-label {
+      font-size: 0.7rem;
+      color: var(--fg-mute);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+    }
+
+    /* ── RIGHT: asymmetric data strip ── */
+    .hero-right {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .hero-right {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-bottom: 2rem;
+      }
+    }
+
+    .meta-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+    .meta-row {
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .meta-row:last-child { border-bottom: 0; }
+    .meta-key {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--fg-mute);
+      margin-bottom: 0.5rem;
+    }
+    .meta-val {
+      color: var(--fg);
+      font-size: 0.9rem;
+    }
+    .meta-val .dim { color: var(--fg-dim); }
+    .status-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      animation: pulse 2.4s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ── SECTION: WRITING PREVIEW ── */
+    .writing {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 4rem 2.5rem;
+      border-top: 1px solid var(--hairline);
+    }
+    @media (min-width: 1024px) {
+      .writing { padding: 6rem 4rem; }
+    }
+
+    .section-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .section-label h2 {
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .section-label .count {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--fg-mute);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Zig-zag 2-col list (anti "3 equal cards" rule) */
+    .post-list {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    .post-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--hairline);
+      text-decoration: none;
+      color: inherit;
+      transition: padding-left 0.4s var(--ease-out);
+    }
+    @media (min-width: 768px) {
+      .post-row {
+        grid-template-columns: 80px 1fr 200px;
+        gap: 3rem;
+        align-items: baseline;
+      }
+    }
+    .post-row:hover { padding-left: 1rem; }
+    .post-row:hover .post-title { color: var(--accent); }
+
+    .post-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--fg-mute);
+      letter-spacing: 0.1em;
+    }
+    .post-title {
+      font-size: clamp(1.125rem, 2vw, 1.5rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      transition: color 0.25s var(--ease-out);
+    }
+    .post-title .desc {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--fg-dim);
+      margin-top: 0.5rem;
+      line-height: 1.5;
+    }
+    .post-meta {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--fg-mute);
+      letter-spacing: 0.05em;
+      text-align: left;
+    }
+    @media (min-width: 768px) {
+      .post-meta { text-align: right; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      border-top: 1px solid var(--hairline);
+    }
+    @media (min-width: 768px) {
+      footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 3rem 4rem;
+      }
+    }
+    footer .copyright {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--fg-mute);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    footer .links { display: flex; gap: 2rem; }
+    footer .links a {
+      font-size: 0.825rem;
+      color: var(--fg-dim);
+      text-decoration: none;
+      transition: color 0.2s var(--ease-out);
+    }
+    footer .links a:hover { color: var(--fg); }
+
+    /* Preview banner */
+    .preview-banner {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.5rem 2.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* ── SYSBAR (density 8) ── */
+    .sysbar {
+      position: fixed;
+      top: 2.25rem; left: 0; right: 0;
+      z-index: 80;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1.5rem;
+      background: rgba(10,10,11,0.7);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--hairline);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .sysbar-cell {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0 1rem;
+      border-right: 1px solid var(--hairline);
+    }
+    .sysbar-cell:last-child { border-right: 0; }
+    .sysbar-cell .k { color: var(--fg-mute); }
+    .sysbar-cell .v { color: var(--fg); }
+    .sysbar-cell .v.green { color: var(--accent); }
+    .sysbar-cell .dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: sb-pulse 1.8s infinite;
+    }
+    @keyframes sb-pulse { 50% { opacity: 0.4; } }
+
+    /* Push body for banner + sysbar */
+    body { padding-top: 4.6rem; }
+    nav { top: 4.6rem; }
+
+    /* Density 8 — denser creds (6 cols) */
+    .creds {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+    @media (min-width: 768px) {
+      .creds { grid-template-columns: repeat(6, 1fr) !important; }
+    }
+    .cred .cred-num { font-size: 1.05rem !important; }
+    .cred .cred-label { font-size: 0.6rem !important; }
+    .cred-num .delta {
+      font-size: 0.65rem;
+      color: var(--accent);
+      margin-left: 0.25rem;
+      font-family: var(--font-mono);
+    }
+
+    /* Density 8 — post stat columns */
+    @media (min-width: 768px) {
+      .post-row {
+        grid-template-columns: 80px 1fr 160px 140px !important;
+        gap: 2rem !important;
+      }
+    }
+    .post-extras {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--fg-mute);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .post-extras span { display: flex; gap: 0.4rem; }
+    .post-extras .tag-num { color: var(--fg); }
+    .post-meta .read { color: var(--accent); font-weight: 500; }
+
+    /* Density 8 — tighter sections */
+    .writing { padding: 4rem 2.5rem !important; }
+    @media (min-width: 1024px) {
+      .writing { padding: 5rem 4rem !important; }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="preview-banner">
+  TASTE-SKILL PREVIEW · density 8 · cockpit overlay · not pushed
+</div>
+
+<div class="sysbar">
+  <span class="sysbar-cell"><span class="dot"></span><span class="k">SYS</span><span class="v green">LIVE</span></span>
+  <span class="sysbar-cell"><span class="k">NODE</span><span class="v">047 · IAD</span></span>
+  <span class="sysbar-cell"><span class="k">UPTIME</span><span class="v">214d 06h</span></span>
+  <span class="sysbar-cell"><span class="k">POSTS</span><span class="v">04 / 06</span></span>
+  <span class="sysbar-cell"><span class="k">BUILDS</span><span class="v">04</span></span>
+  <span class="sysbar-cell"><span class="k">LAT</span><span class="v">37ms</span></span>
+  <span class="sysbar-cell"><span class="k">REG</span><span class="v">SF · PT</span></span>
+  <span class="sysbar-cell"><span class="k">CYCLE</span><span class="v">2026.W17</span></span>
+</div>
+
+<nav id="nav">
+  <div class="brand"><strong>SR</strong> · Sachin Rai</div>
+  <div class="nav-links">
+    <a href="#writing">Writing</a>
+    <a href="#building">Building</a>
+    <a href="#about">About</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="eyebrow fade-in">AI · Enterprise Sales · GTM</p>
+    <h1 class="fade-in">
+      Where <span class="accent">AI</span><span class="break"></span>
+      meets enterprise<span class="break"></span>
+      selling.
+    </h1>
+    <p class="lede fade-in">
+      Enterprise AE. Building AI tools to sell faster, close bigger,
+      prospect smarter. Build log of what's actually working at the GTM
+      layer — not the hype.
+    </p>
+    <div class="cta-row fade-in">
+      <a href="#writing" class="btn btn-primary">
+        Read the writing <span class="arrow">→</span>
+      </a>
+      <a href="#building" class="btn btn-ghost">
+        Tools I've shipped
+      </a>
+    </div>
+    <div class="creds fade-in">
+      <div class="cred">
+        <div class="cred-num">7×<span class="delta">+1</span></div>
+        <div class="cred-label">Pres Club</div>
+      </div>
+      <div class="cred">
+        <div class="cred-num">$2.3M</div>
+        <div class="cred-label">Peak ACV</div>
+      </div>
+      <div class="cred">
+        <div class="cred-num">200%</div>
+        <div class="cred-label">Quota</div>
+      </div>
+      <div class="cred">
+        <div class="cred-num">04</div>
+        <div class="cred-label">Tools</div>
+      </div>
+      <div class="cred">
+        <div class="cred-num">591</div>
+        <div class="cred-label">Sigs graded</div>
+      </div>
+      <div class="cred">
+        <div class="cred-num">56.7%</div>
+        <div class="cred-label">Hit rate</div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="hero-right">
+    <div class="meta-stack">
+      <div class="meta-row">
+        <div class="meta-key">Currently</div>
+        <div class="meta-val"><span class="status-dot"></span>Building an ITSM-native AI reliability layer</div>
+      </div>
+      <div class="meta-row">
+        <div class="meta-key">Writing</div>
+        <div class="meta-val">04 essays <span class="dim">· 02 in draft</span></div>
+      </div>
+      <div class="meta-row">
+        <div class="meta-key">Latest</div>
+        <div class="meta-val">7 AI trends for 2026 <span class="dim">· 09 min read</span></div>
+      </div>
+      <div class="meta-row">
+        <div class="meta-key">Signal</div>
+        <div class="meta-val">San Francisco <span class="dim">· PT</span></div>
+      </div>
+    </div>
+  </aside>
+</section>
+
+<section class="writing" id="writing">
+  <div class="section-label">
+    <h2>Writing</h2>
+    <span class="count">04 published · 02 coming</span>
+  </div>
+
+  <div class="post-list">
+    <a href="posts/ai-trends-2026-breakthrough-idea.html" class="post-row">
+      <div class="post-num">001</div>
+      <div class="post-title">
+        7 AI trends I'm tracking in 2026 — and the breakthrough nobody's talking about
+        <span class="desc">From compute explosions to org hierarchy collapse — what my research vault is telling me.</span>
+      </div>
+      <div class="post-extras">
+        <span><span>WORDS</span><span class="tag-num">1,847</span></span>
+        <span><span>READS</span><span class="tag-num">3.2k</span></span>
+      </div>
+      <div class="post-meta">Apr 2026 · <span class="read">09 min →</span></div>
+    </a>
+    <a href="posts/linkedin-claude-code.html" class="post-row">
+      <div class="post-num">002</div>
+      <div class="post-title">
+        Scraping LinkedIn with Claude Code
+        <span class="desc">The prospecting stack I built in 3 weekends that replaced three subscriptions.</span>
+      </div>
+      <div class="post-extras">
+        <span><span>WORDS</span><span class="tag-num">1,403</span></span>
+        <span><span>READS</span><span class="tag-num">1.7k</span></span>
+      </div>
+      <div class="post-meta">Mar 2026 · <span class="read">07 min →</span></div>
+    </a>
+    <a href="posts/llm-knowledge-base-obsidian.html" class="post-row">
+      <div class="post-num">003</div>
+      <div class="post-title">
+        Turning an Obsidian vault into an LLM-queryable knowledge base
+        <span class="desc">Compiling a personal wiki so Claude answers from my actual notes — not training data.</span>
+      </div>
+      <div class="post-extras">
+        <span><span>WORDS</span><span class="tag-num">2,210</span></span>
+        <span><span>READS</span><span class="tag-num">2.1k</span></span>
+      </div>
+      <div class="post-meta">Mar 2026 · <span class="read">11 min →</span></div>
+    </a>
+    <a href="posts/ai-sales-stack-2026.html" class="post-row">
+      <div class="post-num">004</div>
+      <div class="post-title">
+        The AI sales stack I'd build if I started today
+        <span class="desc">Four tools. Under $200/mo. Replaces what most AEs pay $2,000/mo for.</span>
+      </div>
+      <div class="post-extras">
+        <span><span>WORDS</span><span class="tag-num">1,612</span></span>
+        <span><span>READS</span><span class="tag-num">2.8k</span></span>
+      </div>
+      <div class="post-meta">Feb 2026 · <span class="read">08 min →</span></div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="copyright">© 2026 · Sachin Rai</div>
+  <div class="links">
+    <a href="https://www.linkedin.com/in/sachinr1/">LinkedIn</a>
+    <a href="#writing">RSS</a>
+    <a href="mailto:sachinai1981@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  // Nav border on scroll
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', scrollY > 40);
+  }, { passive: true });
+</script>
+
+</body>
+</html>
