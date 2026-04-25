@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sachin Rai — Resume / Sr. Strategic Account Executive · AI & GTM Builder</title>
+  <meta name="description" content="20+ years enterprise SaaS sales — Freshworks, Salesforce, Oracle. Now building AI tools for sellers and operators." />
+  <meta name="author" content="Sachin Rai" />
+  <link rel="canonical" href="https://sachinai1981-web.github.io/blog/resume.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --paper: #F4F3EE;
+      --paper-2: #EAE8E1;
+      --ink: #0A0A0A;
+      --ink-2: #1a1a1a;
+      --ink-3: #2a2a2a;
+      --ink-mute: #6b6b66;
+      --hairline: #cfccc1;
+
+      --red:    #E63946;
+      --orange: #F77F00;
+      --green:  #2A9D5F;
+
+      --font-display: 'Archivo Black', system-ui, sans-serif;
+      --font-sans:    'Inter', system-ui, sans-serif;
+      --font-serif:   'Source Serif 4', Georgia, serif;
+      --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #5a5a55;  /* dark frame around pages on screen */
+      color: var(--ink);
+      font-family: var(--font-sans);
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+      padding: 2rem 1rem;
+    }
+
+    /* ── PAGE — A4 print-ready ── */
+    .page {
+      width: 210mm;
+      max-width: 100%;
+      min-height: 297mm;
+      margin: 0 auto 1.5rem;
+      background: var(--paper);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+      padding: 14mm 12mm;
+    }
+
+    /* Halftone grain */
+    .page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.45' fill='%230a0a0a'/%3E%3C/svg%3E");
+      background-size: 4px 4px;
+      mix-blend-mode: multiply;
+      z-index: 1;
+    }
+    .page > * { position: relative; z-index: 2; }
+
+    /* ── HEADER ── */
+    .header {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 1.4rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 1.5rem;
+      align-items: start;
+    }
+
+    /* Bauhaus avatar — black square with R/O/G corner shapes */
+    .avatar {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      background: var(--ink);
+      color: var(--paper);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .avatar .initials {
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      letter-spacing: -0.06em;
+      line-height: 1;
+      z-index: 2;
+    }
+    .avatar .corner-r {
+      position: absolute;
+      top: 0; left: 0;
+      width: 32px; height: 32px;
+      background: var(--red);
+    }
+    .avatar .corner-o {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 38px; height: 38px;
+      background: var(--orange);
+      clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    }
+    .avatar .corner-g {
+      position: absolute;
+      top: 50%; right: -16px;
+      width: 28px; height: 28px;
+      background: var(--green);
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
+
+    .header-text h1 {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      letter-spacing: -0.035em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .header-text h1 .accent { color: var(--red); }
+    .header-text .title {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 0.85rem;
+    }
+    .header-text .lede {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--ink-2);
+      max-width: 60ch;
+      margin-bottom: 0.85rem;
+    }
+    .header-text .lede strong { font-weight: 600; }
+    .header-text .lede .mark-o {
+      background: var(--orange);
+      color: var(--paper);
+      padding: 0.05em 0.3em;
+    }
+    .header-contact {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .header-contact a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 1px;
+    }
+    .header-contact a:hover { color: var(--red); border-color: var(--red); }
+    .header-contact .pin-r { color: var(--red); }
+    .header-contact .pin-o { color: var(--orange); }
+    .header-contact .pin-g { color: var(--green); }
+
+    /* ── STAT STRIP ── */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 2px solid var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .stat-cell {
+      padding: 0.9rem 0.85rem;
+      border-right: 2px solid var(--ink);
+      color: var(--paper);
+    }
+    .stat-cell:last-child { border-right: 0; }
+    .stat-1 { background: var(--red); }
+    .stat-2 { background: var(--orange); }
+    .stat-3 { background: var(--green); }
+    .stat-4 { background: var(--ink); }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: -0.025em;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 1.3;
+      opacity: 0.95;
+    }
+
+    /* ── SECTION LABEL ── */
+    .sec-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .sec-label::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+    }
+    .sec-label.r::before { background: var(--red); }
+    .sec-label.o::before { background: var(--orange); }
+    .sec-label.g::before { background: var(--green); }
+    .sec-label .num { color: var(--ink); font-weight: 600; }
+
+    /* ── 2-COL LAYOUT ── */
+    .cols {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 1.5rem;
+    }
+
+    /* ── CAREER JOURNEY ── */
+    .journey { position: relative; }
+    .journey-rail {
+      position: absolute;
+      left: 38px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--ink);
+    }
+    .job {
+      position: relative;
+      padding-left: 76px;
+      margin-bottom: 1.1rem;
+    }
+    .job:last-child { margin-bottom: 0; }
+    .job .marker {
+      position: absolute;
+      left: 28px;
+      top: 4px;
+      width: 22px;
+      height: 22px;
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      z-index: 2;
+    }
+    .job:nth-child(2) .marker { background: var(--red); border-color: var(--red); }
+    .job:nth-child(3) .marker { background: var(--orange); border-color: var(--orange); border-radius: 50%; }
+    .job:nth-child(4) .marker {
+      background: transparent;
+      width: 0; height: 0;
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-bottom: 19px solid var(--green);
+      border-top: 0;
+      top: 6px;
+    }
+    .job:nth-child(5) .marker { background: var(--ink); border-color: var(--ink); }
+    .job:nth-child(6) .marker { background: var(--paper); border: 2px solid var(--ink); border-radius: 50%; }
+    .job .logo {
+      position: absolute;
+      left: -2px;
+      top: -2px;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      letter-spacing: -0.02em;
+      color: var(--paper);
+      background: var(--ink);
+    }
+    .job-name {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin-bottom: 0.15rem;
+    }
+    .job-role {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.15rem;
+    }
+    .job-dates {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 0.4rem;
+    }
+    .job-desc {
+      font-family: var(--font-serif);
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: var(--ink-2);
+      max-width: 50ch;
+    }
+
+    /* ── KEY ACHIEVEMENTS ── */
+    .achievements .ach {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 0.75rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--hairline);
+      align-items: start;
+    }
+    .achievements .ach:last-child { border-bottom: 0; }
+    .ach-icon {
+      width: 36px; height: 36px;
+      display: grid;
+      place-items: center;
+      color: var(--paper);
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      letter-spacing: -0.01em;
+    }
+    .ach-icon.r { background: var(--red); }
+    .ach-icon.o { background: var(--orange); }
+    .ach-icon.g { background: var(--green); }
+    .ach-icon.ink { background: var(--ink); }
+    .ach-icon.r-circle { background: var(--red); border-radius: 50%; }
+    .ach-icon.o-tri {
+      background: transparent;
+      width: 0; height: 0;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-bottom: 31px solid var(--orange);
+      align-self: center;
+    }
+    .ach-text .h {
+      font-family: var(--font-serif);
+      font-size: 0.82rem;
+      color: var(--ink-2);
+      line-height: 1.45;
+      margin-bottom: 0.15rem;
+    }
+    .ach-text .n {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--ink);
+      margin-bottom: 0.15rem;
+      text-transform: uppercase;
+    }
+    .ach-text .n .accent-r { color: var(--red); }
+    .ach-text .n .accent-o { color: var(--orange); }
+    .ach-text .n .accent-g { color: var(--green); }
+
+    /* ════════════════════════════════════════════════════════════
+       PAGE 2
+       ════════════════════════════════════════════════════════════ */
+    .page-2-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 1.4rem;
+    }
+    .page-2-head h2 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    .page-2-head h2 .accent-r { color: var(--red); }
+    .page-2-head h2 .accent-o { color: var(--orange); }
+    .page-2-head h2 .accent-g { color: var(--green); }
+    .page-2-head .hdr-meta {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      text-align: right;
+    }
+
+    /* Expertise grid */
+    .expertise {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 2px solid var(--ink);
+      margin-bottom: 1.4rem;
+    }
+    .exp-cell {
+      padding: 0.85rem 0.85rem 0.95rem;
+      border-right: 2px solid var(--ink);
+    }
+    .exp-cell:last-child { border-right: 0; }
+    .exp-cell .icon {
+      width: 26px; height: 26px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 0.55rem;
+      color: var(--paper);
+      font-family: var(--font-display);
+      font-size: 0.6rem;
+    }
+    .exp-cell:nth-child(1) .icon { background: var(--red); }
+    .exp-cell:nth-child(2) .icon { background: var(--orange); border-radius: 50%; }
+    .exp-cell:nth-child(3) .icon {
+      background: transparent;
+      width: 0; height: 0;
+      border-left: 13px solid transparent;
+      border-right: 13px solid transparent;
+      border-bottom: 22px solid var(--green);
+    }
+    .exp-cell:nth-child(4) .icon { background: var(--ink); }
+    .exp-cell h3 {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .exp-cell ul {
+      list-style: none;
+      font-family: var(--font-sans);
+      font-size: 0.66rem;
+      line-height: 1.45;
+      color: var(--ink-2);
+    }
+    .exp-cell li {
+      padding-left: 0.7rem;
+      position: relative;
+      margin-bottom: 0.18rem;
+    }
+    .exp-cell li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+    .exp-cell:nth-child(1) li::before { color: var(--red); }
+    .exp-cell:nth-child(2) li::before { color: var(--orange); }
+    .exp-cell:nth-child(3) li::before { color: var(--green); }
+    .exp-cell:nth-child(4) li::before { color: var(--ink); }
+
+    /* Known For + Care About columns */
+    .known-care {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.4rem;
+    }
+    .kc-block {
+      padding: 0;
+    }
+    .kc-block h3 {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .kc-block h3::before {
+      content: '';
+      width: 22px; height: 2px;
+    }
+    .kc-block.r h3::before { background: var(--red); }
+    .kc-block.o h3::before { background: var(--orange); }
+    .kc-block ul {
+      list-style: none;
+      font-family: var(--font-serif);
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--ink-2);
+    }
+    .kc-block li {
+      padding-left: 1.5rem;
+      position: relative;
+      margin-bottom: 0.45rem;
+    }
+    .kc-block li::before {
+      content: '✓';
+      position: absolute;
+      left: 0; top: 0;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+    }
+    .kc-block.r li::before { color: var(--red); }
+    .kc-block.o li::before { color: var(--orange); }
+
+    /* Unique edge dark banner */
+    .edge {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 1.4rem 1.4rem;
+      border: 2px solid var(--ink);
+      margin-bottom: 1.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .edge::after {
+      content: '✦';
+      position: absolute;
+      top: 0.65rem; right: 0.85rem;
+      color: var(--orange);
+      font-size: 1rem;
+    }
+    .edge-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.6rem;
+    }
+    .edge-quote {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      text-transform: uppercase;
+      max-width: 32ch;
+    }
+    .edge-quote .accent-r { color: var(--red); }
+    .edge-quote .accent-o { color: var(--orange); }
+    .edge-quote .accent-g { color: var(--green); }
+    .edge-tag {
+      margin-top: 0.85rem;
+      font-family: var(--font-serif);
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: rgba(244, 243, 238, 0.8);
+      max-width: 72ch;
+    }
+
+    /* Bottom strip — Recognition / Languages / Education / Connect */
+    .bot-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 2px solid var(--ink);
+    }
+    .bot-cell {
+      padding: 0.8rem 0.85rem;
+      border-right: 2px solid var(--ink);
+    }
+    .bot-cell:last-child { border-right: 0; }
+    .bot-cell .icon {
+      width: 22px; height: 22px;
+      display: grid;
+      place-items: center;
+      color: var(--paper);
+      margin-bottom: 0.5rem;
+      font-family: var(--font-display);
+      font-size: 0.55rem;
+    }
+    .bot-cell:nth-child(1) .icon { background: var(--red); }
+    .bot-cell:nth-child(2) .icon { background: var(--orange); border-radius: 50%; }
+    .bot-cell:nth-child(3) .icon {
+      background: transparent;
+      width: 0; height: 0;
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-bottom: 19px solid var(--green);
+    }
+    .bot-cell:nth-child(4) .icon { background: var(--ink); }
+    .bot-cell h4 {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 0.4rem;
+    }
+    .bot-cell p {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      line-height: 1.45;
+      color: var(--ink-2);
+    }
+    .bot-cell p strong {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      display: block;
+      color: var(--ink);
+      margin-bottom: 0.15rem;
+    }
+    .bot-cell a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--ink);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .bot-cell a:hover { color: var(--red); border-color: var(--red); }
+
+    /* Page footer */
+    .page-foot {
+      position: absolute;
+      bottom: 8mm;
+      left: 12mm;
+      right: 12mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--hairline);
+    }
+    .page-foot a {
+      color: var(--red);
+      text-decoration: none;
+      border-bottom: 1px solid var(--red);
+    }
+
+    /* Companies worked at — logo strip */
+    .companies-strip {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      padding: 0.85rem 1rem;
+      background: var(--paper-2);
+      border: 2px solid var(--ink);
+      margin-bottom: 1.4rem;
+    }
+    .companies-strip .label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      padding-right: 1rem;
+      border-right: 1px solid var(--hairline);
+    }
+    .co-logo {
+      display: inline-flex;
+      align-items: center;
+      height: 24px;
+    }
+    .co-logo svg { height: 100%; width: auto; }
+    .co-oracle svg { height: 18px; }
+    .co-salesforce svg { height: 24px; }
+    .co-freshworks {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--green);
+      letter-spacing: -0.02em;
+    }
+    .co-att {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--orange);
+      letter-spacing: -0.02em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; padding: 0; }
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+      @page { size: A4; margin: 0; }
+    }
+
+    @media (max-width: 820px) {
+      .page { padding: 8mm 6mm; }
+      .header { grid-template-columns: 80px 1fr; gap: 0.85rem; }
+      .avatar { width: 80px; height: 80px; }
+      .avatar .initials { font-size: 1.9rem; }
+      .header-text h1 { font-size: 1.6rem; }
+      .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      .stat-cell { border-bottom: 2px solid var(--ink); }
+      .stat-cell:nth-child(2) { border-right: 0; }
+      .stat-cell:nth-last-child(-n+2) { border-bottom: 0; }
+      .cols { grid-template-columns: 1fr; }
+      .expertise { grid-template-columns: repeat(2, 1fr); }
+      .exp-cell { border-bottom: 2px solid var(--ink); }
+      .exp-cell:nth-child(2) { border-right: 0; }
+      .exp-cell:nth-last-child(-n+2) { border-bottom: 0; }
+      .known-care { grid-template-columns: 1fr; }
+      .bot-strip { grid-template-columns: repeat(2, 1fr); }
+      .bot-cell { border-bottom: 2px solid var(--ink); }
+      .bot-cell:nth-child(2) { border-right: 0; }
+      .bot-cell:nth-last-child(-n+2) { border-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PAGE 1
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="avatar">
+      <div class="corner-r"></div>
+      <div class="corner-o"></div>
+      <div class="corner-g"></div>
+      <div class="initials">SR</div>
+    </div>
+    <div class="header-text">
+      <h1>Sachin <span class="accent">Rai</span></h1>
+      <div class="title">Sr. Strategic Account Executive · AI &amp; GTM Builder · San Francisco</div>
+      <p class="lede">
+        20+ years in enterprise SaaS sales — <strong>Freshworks, Salesforce, Oracle</strong> —
+        now also building AI tools for <span class="mark-o">sellers and operators</span>.
+        I sell AI by day. I ship code at night. The only AE I know solving the same
+        problem from both sides.
+      </p>
+      <div class="header-contact">
+        <span><span class="pin-r">●</span> San Francisco · PT</span>
+        <a href="mailto:sachinjob12@gmail.com">sachinjob12@gmail.com</a>
+        <a href="https://www.linkedin.com/in/sachinr1" target="_blank" rel="noopener">linkedin.com/in/sachinr1</a>
+        <a href="https://sachinai1981-web.github.io/blog/" target="_blank" rel="noopener">Blog ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- STAT STRIP -->
+  <div class="stat-strip">
+    <div class="stat-cell stat-1">
+      <div class="stat-num">20+ YRS</div>
+      <div class="stat-label">Enterprise SaaS sales · AE → Strategic AE</div>
+    </div>
+    <div class="stat-cell stat-2">
+      <div class="stat-num">$2M+</div>
+      <div class="stat-label">In total individual sales · multi-year SaaS deals</div>
+    </div>
+    <div class="stat-cell stat-3">
+      <div class="stat-num">NA + LATAM</div>
+      <div class="stat-label">Territory coverage · 2 continents · C-suite access</div>
+    </div>
+    <div class="stat-cell stat-4">
+      <div class="stat-num">04 TOOLS</div>
+      <div class="stat-label">AI products shipped this year · public source</div>
+    </div>
+  </div>
+
+  <!-- COMPANIES WORKED AT -->
+  <div class="companies-strip">
+    <span class="label">Built career at</span>
+    <span class="co-logo co-freshworks">Freshworks</span>
+    <span class="co-logo co-salesforce" aria-label="Salesforce">
+      <svg viewBox="0 0 220 56" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(0, 6)">
+          <path d="M 20 8 C 20 4, 24 0, 30 0 C 36 0, 40 4, 41 8 C 44 6, 48 6, 50 9 C 54 7, 60 8, 62 13 C 66 12, 70 14, 70 19 C 70 23, 66 26, 62 26 L 18 26 C 12 26, 8 22, 8 17 C 8 13, 12 9, 16 9 C 17 9, 18 9, 20 8 Z" fill="#00A1E0"/>
+        </g>
+        <text x="78" y="36" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#0A0A0A" letter-spacing="-0.5">salesforce</text>
+      </svg>
+    </span>
+    <span class="co-logo co-oracle" aria-label="Oracle">
+      <svg viewBox="0 0 200 36" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="28" font-family="Arial Black, Helvetica, sans-serif" font-size="32" font-weight="900" letter-spacing="-1" fill="#C74634">ORACLE</text>
+      </svg>
+    </span>
+    <span class="co-logo co-att">AT&amp;T</span>
+  </div>
+
+  <!-- 2-COL: JOURNEY + ACHIEVEMENTS -->
+  <div class="cols">
+
+    <!-- CAREER JOURNEY -->
+    <div>
+      <div class="sec-label r"><span class="num">001</span> · Career Journey</div>
+      <div class="journey">
+        <div class="journey-rail"></div>
+
+        <div class="job">
+          <div class="marker"></div>
+          <div class="job-name">Freshworks</div>
+          <div class="job-role">Sr. Strategic Account Executive</div>
+          <div class="job-dates">Oct 2023 — Present · San Francisco</div>
+          <p class="job-desc">Owned and expanded strategic enterprise accounts within large, complex organizations. Partnered with C-suite to drive AI-powered ITSM and CX transformation. Full-cycle sales — discovery to close — with cross-functional teams.</p>
+        </div>
+
+        <div class="job">
+          <div class="marker"></div>
+          <div class="job-name">Salesforce</div>
+          <div class="job-role">Account Executive · Auto, Manufacturing &amp; Enterprise</div>
+          <div class="job-dates">Jul 2014 — Apr 2023 · 8 yrs 10 mo · 3 promotions</div>
+          <p class="job-desc">Drove enterprise sales across automotive and manufacturing sectors. Closed multi-year SaaS agreements with Fortune 500. Net-new logo acquisition + named-account expansion across multiple territories.</p>
+        </div>
+
+        <div class="job">
+          <div class="marker"></div>
+          <div class="job-name">Selectiva</div>
+          <div class="job-role">Business Analyst</div>
+          <div class="job-dates">Feb 2014 — Jun 2014 · San Francisco</div>
+          <p class="job-desc">Bridge role transitioning from Oracle product sales into the SaaS-native cycle. Solution architecture and qualification work.</p>
+        </div>
+
+        <div class="job">
+          <div class="marker"></div>
+          <div class="job-name">Oracle</div>
+          <div class="job-role">Principal &amp; Sr. Account Manager · Linux, Oracle VM, CRM On-Demand</div>
+          <div class="job-dates">Jul 2007 — Jan 2014 · 6 yrs 7 mo · NA + LATAM</div>
+          <p class="job-desc">Spearheaded C-level conversations on technology investments. Managed NA + Latin America territory. Exceeded $2M+ in total sales. Coached sales teams + business development consultants.</p>
+        </div>
+
+        <div class="job">
+          <div class="marker"></div>
+          <div class="job-name">AT&amp;T · Hosting &amp; Application Services</div>
+          <div class="job-role">Sr. Consultant ERP &amp; Team Lead</div>
+          <div class="job-dates">May 2005 — Jun 2007 · East USA</div>
+          <p class="job-desc">Led East-region sales for Oracle &amp; PeopleSoft license + support. Managed a team of 6. Cross-functional delivery with pre-sales and operations.</p>
+        </div>
+
+        <div class="job">
+          <div class="marker"></div>
+          <div class="job-name">ICICI OneSource</div>
+          <div class="job-role">CSA · Customer Sales Associate</div>
+          <div class="job-dates">Jan 2002 — May 2003 · Foundational role</div>
+          <p class="job-desc">First sales chapter — built the playbook on outbound, qualification, and relationship-building that compounds 20 years later.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- KEY ACHIEVEMENTS -->
+    <div>
+      <div class="sec-label g"><span class="num">002</span> · Key Achievements</div>
+      <div class="achievements">
+
+        <div class="ach">
+          <div class="ach-icon r">↑</div>
+          <div class="ach-text">
+            <div class="h">Closed</div>
+            <div class="n"><span class="accent-r">$2M+</span> IN INDIVIDUAL SALES</div>
+            <div class="h">at Oracle as Sr Account Manager — multi-year deals across NA + LATAM.</div>
+          </div>
+        </div>
+
+        <div class="ach">
+          <div class="ach-icon o-tri"></div>
+          <div class="ach-text">
+            <div class="h">Owned</div>
+            <div class="n"><span class="accent-o">3 PROMOTIONS</span> AT SALESFORCE</div>
+            <div class="h">in 8 years — Enterprise Corporate Sales → Named New Business → Auto/Manufacturing AE.</div>
+          </div>
+        </div>
+
+        <div class="ach">
+          <div class="ach-icon g-circle" style="background:var(--green); border-radius:50%;">●</div>
+          <div class="ach-text">
+            <div class="h">Built</div>
+            <div class="n">C-LEVEL <span class="accent-g">RELATIONSHIPS</span></div>
+            <div class="h">with hundreds of enterprise decision-makers across Fortune 500 auto, manufacturing, and tech firms.</div>
+          </div>
+        </div>
+
+        <div class="ach">
+          <div class="ach-icon ink">★</div>
+          <div class="ach-text">
+            <div class="h">Closed</div>
+            <div class="n">MULTI-YEAR <span class="accent-r">SAAS</span> AGREEMENTS</div>
+            <div class="h">at Salesforce — strategic-account expansion, complex negotiation, multi-stakeholder alignment.</div>
+          </div>
+        </div>
+
+        <div class="ach">
+          <div class="ach-icon r">⌬</div>
+          <div class="ach-text">
+            <div class="h">Operating</div>
+            <div class="n"><span class="accent-o">04 AI TOOLS</span> IN PRODUCTION</div>
+            <div class="h">Signal Forge · Account Brain · NemoClaw OS · Harness — public build log at <strong>sachinai1981-web.github.io/blog</strong></div>
+          </div>
+        </div>
+
+        <div class="ach">
+          <div class="ach-icon o">→</div>
+          <div class="ach-text">
+            <div class="h">Currently selling</div>
+            <div class="n"><span class="accent-g">AI ITSM &amp; CX</span> AT FRESHWORKS</div>
+            <div class="h">to Fortune-1000 customers. AI-driven solutions, partnered with C-suite stakeholders.</div>
+          </div>
+        </div>
+
+        <div class="ach">
+          <div class="ach-icon ink">+</div>
+          <div class="ach-text">
+            <div class="h">Subject Matter Expert</div>
+            <div class="n"><span class="accent-r">SaaS</span> · <span class="accent-o">Middleware</span> · <span class="accent-g">BI</span></div>
+            <div class="h">Thesis on SaaS approved by Belgium University. National economic planning + executive communication.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="page-foot">
+    <span>Sachin Rai · Resume · 2026</span>
+    <span><a href="https://sachinai1981-web.github.io/blog/">sachinai1981-web.github.io/blog</a></span>
+    <span>Page 01 / 02</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PAGE 2
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <!-- PAGE 2 HEADER -->
+  <div class="page-2-head">
+    <h2>Expertise · <span class="accent-r">Edge</span> · <span class="accent-o">Edu</span> · <span class="accent-g">Connect</span></h2>
+    <div class="hdr-meta">
+      Sachin Rai<br/>
+      Continued · Page 02 / 02
+    </div>
+  </div>
+
+  <!-- EXPERTISE GRID -->
+  <div class="sec-label r"><span class="num">003</span> · Expertise</div>
+  <div class="expertise">
+    <div class="exp-cell">
+      <div class="icon">◎</div>
+      <h3>Enterprise Sales</h3>
+      <ul>
+        <li>Strategic account ownership</li>
+        <li>Full-cycle SaaS sales</li>
+        <li>Multi-year contract closing</li>
+        <li>Net-new logo acquisition</li>
+        <li>Pipeline forecasting</li>
+        <li>Outbound prospecting</li>
+      </ul>
+    </div>
+    <div class="exp-cell">
+      <div class="icon">●</div>
+      <h3>AI &amp; GTM</h3>
+      <ul>
+        <li>AI-driven ITSM &amp; CX</li>
+        <li>Eval-first product selling</li>
+        <li>Outcome-based pricing</li>
+        <li>The 90/10 reliability frame</li>
+        <li>LangGraph + MCP tooling</li>
+        <li>Claude / GPT integration</li>
+      </ul>
+    </div>
+    <div class="exp-cell">
+      <div class="icon"></div>
+      <h3>Executive Relationships</h3>
+      <ul>
+        <li>C-suite engagement</li>
+        <li>VP-level discovery</li>
+        <li>Stakeholder alignment</li>
+        <li>Cross-functional partnership</li>
+        <li>Solution architecture</li>
+        <li>Long-cycle negotiation</li>
+      </ul>
+    </div>
+    <div class="exp-cell">
+      <div class="icon">▤</div>
+      <h3>Industry Depth</h3>
+      <ul>
+        <li>Auto &amp; Manufacturing</li>
+        <li>Enterprise IT / ITSM</li>
+        <li>Middleware + BI</li>
+        <li>SaaS platforms</li>
+        <li>North America + LATAM</li>
+        <li>Linux / Oracle VM / CRM</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- KNOWN FOR + CARE ABOUT -->
+  <div class="known-care">
+    <div class="kc-block r">
+      <h3>What I'm known for</h3>
+      <ul>
+        <li>Closing what nobody else can — multi-stakeholder, multi-year, multi-region.</li>
+        <li>Translating chip-level infrastructure into CFO-friendly business outcomes.</li>
+        <li>Showing up to a CIO meeting with a working prototype, not a slide deck.</li>
+        <li>Compounding domain knowledge across three decades of enterprise software.</li>
+      </ul>
+    </div>
+    <div class="kc-block o">
+      <h3>What I care about</h3>
+      <ul>
+        <li>Selling tools that actually solve customer problems, not features.</li>
+        <li>Building AI that respects evals, not the demo-day vibe.</li>
+        <li>Mentoring the next generation of AEs into operators.</li>
+        <li>Curiosity, continuous learning, and tech that earns its budget.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- UNIQUE EDGE -->
+  <div class="edge">
+    <div class="edge-label">004 · My Unique Edge</div>
+    <div class="edge-quote">
+      I sit at the intersection of <span class="accent-r">enterprise sales</span>,
+      <span class="accent-o">AI engineering</span>, and
+      <span class="accent-g">executive trust</span>.
+    </div>
+    <div class="edge-tag">
+      Twenty years of selling enterprise software · four AI products shipped this year ·
+      C-suite relationships across Fortune-500. The only AE I know who can pitch a
+      reliability layer to a CIO and then go home and build it.
+    </div>
+  </div>
+
+  <!-- BOTTOM STRIP -->
+  <div class="bot-strip">
+    <div class="bot-cell">
+      <div class="icon">★</div>
+      <h4>Recognition</h4>
+      <p>
+        <strong>Subject Matter Expert</strong>
+        SaaS · National Economic Planning · Executive Communication. Multi-quarter quota achievement at Salesforce + Oracle.
+      </p>
+    </div>
+    <div class="bot-cell">
+      <div class="icon">◊</div>
+      <h4>Languages</h4>
+      <p>
+        <strong>English</strong> Native or Bilingual<br/>
+        <strong>Hindi</strong> Native or Bilingual
+      </p>
+    </div>
+    <div class="bot-cell">
+      <div class="icon"></div>
+      <h4>Education</h4>
+      <p>
+        <strong>MBA · Marketing &amp; Finance</strong>
+        Indian Institute of Planning and Management<br/>
+        2003 — 2005<br/>
+        SaaS thesis approved by Belgium University.
+      </p>
+    </div>
+    <div class="bot-cell">
+      <div class="icon">→</div>
+      <h4>Let's connect</h4>
+      <p>
+        <a href="mailto:sachinjob12@gmail.com">sachinjob12@gmail.com</a><br/>
+        <a href="https://www.linkedin.com/in/sachinr1" target="_blank" rel="noopener">linkedin.com/in/sachinr1</a><br/>
+        <a href="https://sachinai1981-web.github.io/blog/" target="_blank" rel="noopener">sachinai1981-web.github.io/blog</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="page-foot">
+    <span>Sachin Rai · Resume · 2026</span>
+    <span><a href="https://sachinai1981-web.github.io/blog/">sachinai1981-web.github.io/blog</a></span>
+    <span>Page 02 / 02</span>
+  </div>
+</div>
+
+</body>
+</html>
