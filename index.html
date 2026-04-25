@@ -1341,9 +1341,10 @@
           GTM teams actually need.
         </p>
         <p class="bio-body">
-          Seven years in enterprise software sales — most recent stint at
-          Freshworks before going independent. Now building AI tooling
-          for sellers, evaluators, and operators. Based in San Francisco.
+          Twenty years in enterprise software sales — Oracle and
+          Salesforce in earlier chapters, most recent stint independent.
+          Now building AI tooling for sellers, evaluators, and operators.
+          Based in San Francisco.
         </p>
         <p class="bio-body">
           This blog is a build log. Every post is a problem I hit, a
@@ -1353,7 +1354,7 @@
 
         <div class="bio-creds">
           <div class="cred-block cred-r">
-            <div class="cred-num">7+ YRS</div>
+            <div class="cred-num">20 YRS</div>
             <div class="cred-label">Enterprise SaaS sales</div>
           </div>
           <div class="cred-block cred-o">
@@ -1370,6 +1371,26 @@
           <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener" class="bio-link bio-link-r">LinkedIn ↗</a>
           <a href="https://x.com/sachinrai" target="_blank" rel="noopener" class="bio-link bio-link-o">X ↗</a>
           <a href="mailto:sachinai1981@gmail.com" class="bio-link bio-link-g">Email →</a>
+        </div>
+
+        <div class="bio-previously">
+          <div class="prev-label">Previously at</div>
+          <div class="prev-logos">
+            <div class="prev-logo prev-oracle" aria-label="Oracle">
+              <svg viewBox="0 0 200 36" xmlns="http://www.w3.org/2000/svg">
+                <text x="0" y="28" font-family="Arial Black, Helvetica, sans-serif" font-size="32" font-weight="900" letter-spacing="-1" fill="#C74634">ORACLE</text>
+              </svg>
+            </div>
+            <div class="prev-logo prev-salesforce" aria-label="Salesforce">
+              <svg viewBox="0 0 220 56" xmlns="http://www.w3.org/2000/svg">
+                <!-- Salesforce cloud silhouette -->
+                <g transform="translate(0, 6)">
+                  <path d="M 20 8 C 20 4, 24 0, 30 0 C 36 0, 40 4, 41 8 C 44 6, 48 6, 50 9 C 54 7, 60 8, 62 13 C 66 12, 70 14, 70 19 C 70 23, 66 26, 62 26 L 18 26 C 12 26, 8 22, 8 17 C 8 13, 12 9, 16 9 C 17 9, 18 9, 20 8 Z" fill="#00A1E0"/>
+                </g>
+                <text x="78" y="36" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#0A0A0A" letter-spacing="-0.5">salesforce</text>
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1541,6 +1562,50 @@
   .bio-link-r:hover { background: var(--red); color: var(--paper); }
   .bio-link-o:hover { background: var(--orange); color: var(--paper); }
   .bio-link-g:hover { background: var(--green); color: var(--paper); }
+
+  /* Previously at — company logos block */
+  .bio-previously {
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--hairline);
+  }
+  .prev-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+  .prev-label::before {
+    content: ''; width: 22px; height: 1px; background: var(--ink);
+  }
+  .prev-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  .prev-logo {
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    transition: transform 0.3s var(--ease-spring), opacity 0.3s;
+    opacity: 0.85;
+  }
+  .prev-logo:hover {
+    transform: translateY(-2px);
+    opacity: 1;
+  }
+  .prev-logo svg {
+    height: 100%;
+    width: auto;
+  }
+  .prev-oracle svg { height: 28px; }
+  .prev-salesforce svg { height: 36px; }
 </style>
 
 <!-- ════════════════════════════════════════════════════════════════
