@@ -1075,6 +1075,7 @@
   </span>
   <div class="nav-links">
     <a href="#about">About</a>
+    <a href="#thesis">Thesis</a>
     <a href="https://x.com/sachinrai" target="_blank" rel="noopener">X ↗</a>
     <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
     <a href="#subscribe" class="cta">Subscribe</a>
@@ -1318,11 +1319,236 @@
 </section>
 
 <!-- ════════════════════════════════════════════════════════════════
-     ABOUT — billboard thesis (dark)
+     ABOUT — bio + credentials
      ════════════════════════════════════════════════════════════════ -->
-<section class="about" id="about">
+<section class="about-bio" id="about">
+  <div class="about-bio-inner">
+    <div class="bio-label">005 · About</div>
+
+    <div class="bio-grid">
+      <div class="bio-portrait">
+        <div class="bio-avatar">SR</div>
+        <div class="bio-corner-r"></div>
+        <div class="bio-corner-o"></div>
+        <div class="bio-corner-g"></div>
+      </div>
+
+      <div class="bio-text">
+        <h2 class="bio-title">Hi, I'm <span class="bio-accent-r">Sachin</span>.</h2>
+        <p class="bio-lead">
+          I write about the <span class="bio-mark-o">infrastructure work</span>
+          between a chip and a quota — and I ship the AI tools enterprise
+          GTM teams actually need.
+        </p>
+        <p class="bio-body">
+          Seven years in enterprise software sales — most recent stint at
+          Freshworks before going independent. Now building AI tooling
+          for sellers, evaluators, and operators. Based in San Francisco.
+        </p>
+        <p class="bio-body">
+          This blog is a build log. Every post is a problem I hit, a
+          tool I shipped, or a thesis I'm pressure-testing in the wild.
+          No daily digest. No reposts.
+        </p>
+
+        <div class="bio-creds">
+          <div class="cred-block cred-r">
+            <div class="cred-num">7+ YRS</div>
+            <div class="cred-label">Enterprise SaaS sales</div>
+          </div>
+          <div class="cred-block cred-o">
+            <div class="cred-num">04</div>
+            <div class="cred-label">AI tools shipped</div>
+          </div>
+          <div class="cred-block cred-g">
+            <div class="cred-num">SF</div>
+            <div class="cred-label">San Francisco · PT</div>
+          </div>
+        </div>
+
+        <div class="bio-contact">
+          <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener" class="bio-link bio-link-r">LinkedIn ↗</a>
+          <a href="https://x.com/sachinrai" target="_blank" rel="noopener" class="bio-link bio-link-o">X ↗</a>
+          <a href="mailto:sachinai1981@gmail.com" class="bio-link bio-link-g">Email →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-bio {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  @media (min-width: 1024px) { .about-bio { padding: 7rem 3rem; } }
+  .about-bio-inner { max-width: 1300px; margin: 0 auto; }
+
+  .bio-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .bio-label::before { content: ''; width: 32px; height: 2px; background: var(--green); }
+
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (min-width: 1024px) {
+    .bio-grid { grid-template-columns: 320px 1fr; gap: 5rem; align-items: start; }
+  }
+
+  /* Portrait — Bauhaus avatar with R/O/G corner shapes */
+  .bio-portrait {
+    position: relative;
+    aspect-ratio: 1;
+    background: var(--ink);
+    color: var(--paper);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    max-width: 320px;
+  }
+  .bio-avatar {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 14vw, 9rem);
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+    z-index: 2;
+  }
+  .bio-corner-r,
+  .bio-corner-o,
+  .bio-corner-g {
+    position: absolute;
+    z-index: 1;
+  }
+  .bio-corner-r {
+    top: 0; left: 0;
+    width: 60px; height: 60px;
+    background: var(--red);
+  }
+  .bio-corner-o {
+    bottom: 0; right: 0;
+    width: 80px; height: 80px;
+    background: var(--orange);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  }
+  .bio-corner-g {
+    top: 50%; right: -30px;
+    width: 60px; height: 60px;
+    background: var(--green);
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+
+  .bio-text { max-width: 56ch; }
+
+  .bio-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+  .bio-accent-r { color: var(--red); }
+
+  .bio-lead {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+  .bio-mark-o {
+    background: var(--orange);
+    color: var(--paper);
+    padding: 0.05em 0.3em;
+    font-style: normal;
+  }
+
+  .bio-body {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin-bottom: 1rem;
+  }
+
+  .bio-creds {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 2.5rem;
+    border: 2px solid var(--ink);
+  }
+  .cred-block {
+    padding: 1.25rem 1rem;
+    border-right: 2px solid var(--ink);
+    color: var(--paper);
+  }
+  .cred-block:last-child { border-right: 0; }
+  .cred-r { background: var(--red); }
+  .cred-o { background: var(--orange); }
+  .cred-g { background: var(--green); }
+  .cred-num {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+  .cred-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .bio-contact {
+    display: flex;
+    gap: 0;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    border: 2px solid var(--ink);
+    width: fit-content;
+  }
+  .bio-link {
+    padding: 0.85rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border-right: 2px solid var(--ink);
+    transition: background 0.2s, color 0.2s;
+    color: var(--ink);
+  }
+  .bio-link:last-child { border-right: 0; }
+  .bio-link-r:hover { background: var(--red); color: var(--paper); }
+  .bio-link-o:hover { background: var(--orange); color: var(--paper); }
+  .bio-link-g:hover { background: var(--green); color: var(--paper); }
+</style>
+
+<!-- ════════════════════════════════════════════════════════════════
+     THESIS — billboard (dark)
+     ════════════════════════════════════════════════════════════════ -->
+<section class="about" id="thesis">
   <div class="about-inner">
-    <div class="about-label" style="color:var(--orange)">005 · The thesis</div>
+    <div class="about-label" style="color:var(--orange)">006 · The thesis</div>
 
     <div class="about-billboard">
       <div class="about-row">
