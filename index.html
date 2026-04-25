@@ -699,9 +699,151 @@
     .post-grid { gap: 1px; }
     .footer-inner { grid-template-columns: 1fr; gap: 2.5rem; }
   }
+
+  /* ════════════════════════════════════════════════════════════
+     ENHANCEMENT LAYER — telemetry · marquee · motion
+     Cream/forest/amber palette. Default cursor preserved.
+     ════════════════════════════════════════════════════════════ */
+
+  /* Top telemetry sysbar */
+  .sysbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.45rem 1.25rem;
+    background: var(--forest);
+    color: var(--cream-light);
+    border-bottom: 1px solid rgba(212, 169, 106, 0.25);
+    font-family: var(--font-m);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  [data-theme="dark"] .sysbar {
+    background: var(--cream-card);
+    border-bottom-color: rgba(212, 169, 106, 0.3);
+  }
+  .sysbar-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 0.85rem;
+    border-right: 1px solid rgba(221, 213, 190, 0.15);
+  }
+  .sysbar-cell:last-child { border-right: 0; }
+  .sysbar-cell .k { opacity: 0.55; }
+  .sysbar-cell .v { color: var(--amber); font-weight: 500; }
+  .sysbar-cell .v.cream { color: var(--cream-light); }
+  .sysbar-cell .dot {
+    width: 6px; height: 6px;
+    background: var(--amber);
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(212, 169, 106, 0.6);
+    animation: sb-pulse 1.8s infinite;
+  }
+  @keyframes sb-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+  body { padding-top: 1.85rem; }
+
+  /* Push existing nav down to sit under sysbar */
+  nav[aria-label="Main navigation"] { top: 1.85rem !important; }
+
+  /* Marquee strip — chip codenames between hero and stats */
+  .marquee-strip {
+    position: relative;
+    padding: 0.85rem 0;
+    border-top: 1px solid rgba(28, 41, 31, 0.12);
+    border-bottom: 1px solid rgba(28, 41, 31, 0.12);
+    overflow: hidden;
+    background: var(--cream-light);
+  }
+  [data-theme="dark"] .marquee-strip {
+    border-color: rgba(232, 224, 204, 0.12);
+    background: var(--cream-light);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 2.5rem;
+    width: max-content;
+    animation: marquee-flow 56s linear infinite;
+  }
+  .marquee-track:hover { animation-play-state: paused; }
+  .marquee-strip span {
+    font-family: var(--font-m);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--forest);
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 2.5rem;
+    font-weight: 500;
+  }
+  [data-theme="dark"] .marquee-strip span { color: var(--forest); }
+  .marquee-strip span::after {
+    content: '◆';
+    color: var(--amber);
+    font-size: 0.55rem;
+  }
+  @keyframes marquee-flow { to { transform: translateX(-50%); } }
+
+  /* Sparkline added to stats section */
+  .stat-sparkline {
+    display: block;
+    width: 100%;
+    max-width: 60px;
+    height: 18px;
+    margin-top: 0.5rem;
+  }
+  .stat-sparkline path { stroke: var(--amber); stroke-width: 1.4; fill: none; opacity: 0.85; }
+  .stat-sparkline .area { fill: var(--amber); opacity: 0.12; stroke: none; }
+
+  /* 3D tilt baseline — applied to post cards via JS */
+  .card-post, .card-featured, .build-card, .tool-card {
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+    will-change: transform;
+  }
+
+  /* Magnetic CTA baseline */
+  .nav-cta, .subscribe-form button, .submit-btn, [class*="cta"] {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s, color 0.25s;
+    will-change: transform;
+  }
+
+  /* Subtle breathing on featured card at rest */
+  @keyframes breathe {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+  }
+  .card-featured { animation: breathe 6s ease-in-out infinite; }
+  .card-featured:hover { animation-play-state: paused; }
+
+  /* Reduced motion respect */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track, .card-featured { animation: none !important; }
+    .sparkline path { animation: none !important; }
+  }
   </style>
 </head>
 <body>
+
+<div class="sysbar" aria-hidden="true">
+  <span class="sysbar-cell"><span class="dot"></span><span class="k">SYS</span><span class="v">LIVE</span></span>
+  <span class="sysbar-cell"><span class="k">ISSUE</span><span class="v cream">047 / 2026.W17</span></span>
+  <span class="sysbar-cell"><span class="k">POSTS</span><span class="v cream">04 / 06</span></span>
+  <span class="sysbar-cell"><span class="k">MODELS TRACKED</span><span class="v cream">23</span></span>
+  <span class="sysbar-cell"><span class="k">CITATIONS</span><span class="v cream">412</span></span>
+  <span class="sysbar-cell"><span class="k">REGION</span><span class="v cream">SF · PT</span></span>
+</div>
 
 <div id="cursor-glow" aria-hidden="true"></div>
 <div id="prog"></div>
@@ -752,6 +894,32 @@
     </div>
   </div>
 </section>
+
+<!-- ── MARQUEE STRIP — chip codenames + thesis terms ── -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span>H100 · 80GB · HBM3</span>
+    <span>B200 · Blackwell · 192GB</span>
+    <span>TPU v5p · trillium</span>
+    <span>Trainium 2 · 3nm</span>
+    <span>The 90/10 reliability wall</span>
+    <span>Outcome-based pricing</span>
+    <span>InfiniBand NDR · 400Gb/s</span>
+    <span>NVLink 5 · 1.8 TB/s</span>
+    <span>Eval-first product design</span>
+    <span>Karpathy autoresearch loop</span>
+    <span>H100 · 80GB · HBM3</span>
+    <span>B200 · Blackwell · 192GB</span>
+    <span>TPU v5p · trillium</span>
+    <span>Trainium 2 · 3nm</span>
+    <span>The 90/10 reliability wall</span>
+    <span>Outcome-based pricing</span>
+    <span>InfiniBand NDR · 400Gb/s</span>
+    <span>NVLink 5 · 1.8 TB/s</span>
+    <span>Eval-first product design</span>
+    <span>Karpathy autoresearch loop</span>
+  </div>
+</div>
 
 <!-- ── STATS ── -->
 <div class="stats-section">
@@ -1486,6 +1654,63 @@ function handleSub(e) {
 <button id="btt" aria-label="Back to top">
   <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
+
+<!-- ── ENHANCEMENT JS — 3D tilt + magnetic + sparklines ── -->
+<script>
+(() => {
+  // 3D tilt on cards (subtle, ~3deg max)
+  const tiltSelector = '.card-post, .card-featured, .build-card, .tool-card';
+  document.querySelectorAll(tiltSelector).forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const cx = (e.clientX - r.left) / r.width - 0.5;
+      const cy = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transition = 'transform 0.15s ease-out';
+      card.style.transform = `perspective(1200px) rotateX(${cy * -3}deg) rotateY(${cx * 3}deg) translateZ(0)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      card.style.transform = '';
+    });
+  });
+
+  // Magnetic CTA — Subscribe button + nav-cta only (subtle pull)
+  document.querySelectorAll('.nav-cta, .sub-btn, .submit-btn').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) * 0.18;
+      const y = (e.clientY - r.top - r.height / 2) * 0.28;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
+
+  // Inject sparklines into stat-items that have data-count
+  document.querySelectorAll('.stat-item').forEach((item, i) => {
+    const sparkPaths = [
+      'M0,14 L10,12 L20,13 L30,9 L40,7 L50,5 L60,3',
+      'M0,12 L10,14 L20,10 L30,11 L40,7 L50,8 L60,4',
+      'M0,16 L10,11 L20,13 L30,8 L40,9 L50,5 L60,2',
+      'M0,15 L10,13 L20,9 L30,12 L40,6 L50,7 L60,3',
+    ];
+    const path = sparkPaths[i % sparkPaths.length];
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'stat-sparkline');
+    svg.setAttribute('viewBox', '0 0 60 18');
+    svg.setAttribute('preserveAspectRatio', 'none');
+    const area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    area.setAttribute('class', 'area');
+    area.setAttribute('d', path + ' L60,18 L0,18 Z');
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    line.setAttribute('d', path);
+    svg.appendChild(area);
+    svg.appendChild(line);
+    item.appendChild(svg);
+  });
+})();
+</script>
 
 </body>
 </html>
