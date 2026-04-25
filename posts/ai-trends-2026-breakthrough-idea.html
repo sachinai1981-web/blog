@@ -340,6 +340,185 @@
     .catch(() => { btn.textContent = 'Try again'; btn.style.background = '#dc2626'; btn.disabled = false; });
   }
   </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style id="design-genius-override">
+  :root {
+    --paper:    #F4F3EE !important;
+    --paper-2:  #EAE8E1 !important;
+    --ink:      #0A0A0A !important;
+    --ink-2:    #1a1a1a !important;
+    --ink-mute: #6b6b66 !important;
+    --hairline: #cfccc1 !important;
+    --red:    #E63946;
+    --orange: #F77F00;
+    --green:  #2A9D5F;
+    --amber:  #F77F00 !important;
+    --forest: #0A0A0A !important;
+    --forest-btn: #E63946 !important;
+    --forest-hover: #1a1a1a !important;
+    --cream: #F4F3EE !important;
+    --cream-light: #F4F3EE !important;
+    --cream-card: #EAE8E1 !important;
+    --tan: #DDD8C8 !important;
+    --d-font: 'Archivo Black', system-ui, sans-serif;
+    --s-font: 'Source Serif 4', Georgia, serif;
+    --m-font: 'JetBrains Mono', ui-monospace, monospace;
+    --font-d: 'Archivo Black', system-ui, sans-serif;
+    --font-s: 'Source Serif 4', Georgia, serif;
+    --font-m: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  body {
+    background: #F4F3EE !important;
+    color: #0A0A0A !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 50;
+    pointer-events: none; opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%230a0a0a'/%3E%3C/svg%3E");
+    background-size: 4px 4px; mix-blend-mode: multiply;
+  }
+  /* Nav transformation */
+  nav {
+    background: #F4F3EE !important;
+    border-bottom: 2px solid #0A0A0A !important;
+    padding: 1rem 1.5rem !important;
+  }
+  .nav-inner {
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+  .nav-logo {
+    font-family: 'Archivo Black', system-ui, sans-serif !important;
+    font-size: 0.95rem !important;
+    letter-spacing: -0.02em !important;
+    text-transform: uppercase !important;
+    color: #0A0A0A !important;
+    position: relative !important;
+    padding-left: 2.6rem !important;
+  }
+  .nav-logo::before {
+    content: ''; position: absolute; left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 10px; height: 10px;
+    background: #E63946;
+    box-shadow: 14px 0 0 #F77F00, 28px 0 0 #2A9D5F;
+  }
+  .nav-logo span { color: #E63946 !important; }
+  .nav-back, .back-link {
+    font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.16em !important;
+    text-transform: uppercase !important;
+    color: #0A0A0A !important;
+    padding: 0.5rem 1rem !important;
+    border: 2px solid #0A0A0A !important;
+    background: #F4F3EE !important;
+    transition: background 0.2s, color 0.2s !important;
+  }
+  .nav-back:hover, .back-link:hover {
+    background: #E63946 !important;
+    color: #F4F3EE !important;
+    border-color: #E63946 !important;
+  }
+  /* Headings — Archivo Black bauhaus */
+  h1, h2, .post-title, .article-title, [class*="title"] {
+    font-family: 'Archivo Black', system-ui, sans-serif !important;
+    color: #0A0A0A !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1 !important;
+  }
+  h3, h4 {
+    font-family: 'Archivo Black', system-ui, sans-serif !important;
+    color: #0A0A0A !important;
+    letter-spacing: -0.02em !important;
+    text-transform: uppercase;
+  }
+  /* Body prose — Source Serif for readability */
+  article p, .post-content p, .article-body p, main p {
+    font-family: 'Source Serif 4', Georgia, serif !important;
+    font-size: 1.075rem !important;
+    line-height: 1.65 !important;
+    color: #1a1a1a !important;
+  }
+  article a, .post-content a, main a {
+    color: #E63946 !important;
+    text-decoration: underline !important;
+    text-decoration-thickness: 1.5px !important;
+    text-underline-offset: 3px !important;
+    transition: color 0.2s;
+  }
+  article a:hover, .post-content a:hover, main a:hover { color: #F77F00 !important; }
+  /* Tags / pill / chip — repaint */
+  .tag, [class*="chip"], [class*="badge"], .post-tag {
+    font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+    font-size: 0.55rem !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    padding: 0.25rem 0.55rem !important;
+    border: 1.5px solid #0A0A0A !important;
+    color: #0A0A0A !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+  }
+  .tag:nth-child(3n+1), [class*="tag-feat"] { background: #E63946 !important; color: #F4F3EE !important; border-color: #E63946 !important; }
+  .tag:nth-child(3n+2), [class*="tag-ai"] { background: #F77F00 !important; color: #F4F3EE !important; border-color: #F77F00 !important; }
+  .tag:nth-child(3n), [class*="tag-tool"] { background: #2A9D5F !important; color: #F4F3EE !important; border-color: #2A9D5F !important; }
+  /* Buttons */
+  button, .btn, [class*="cta"], .submit-btn {
+    border-radius: 0 !important;
+    font-family: 'Archivo Black', system-ui, sans-serif !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+  }
+  /* Footer */
+  footer {
+    background: #EAE8E1 !important;
+    color: #0A0A0A !important;
+    border-top: 2px solid #0A0A0A !important;
+  }
+  footer a { color: #0A0A0A !important; }
+  footer a:hover { color: #E63946 !important; }
+  /* Block quotes */
+  blockquote {
+    border-left: 4px solid #E63946 !important;
+    background: #EAE8E1 !important;
+    color: #0A0A0A !important;
+    font-family: 'Source Serif 4', Georgia, serif !important;
+    font-style: italic !important;
+    padding: 1.25rem 1.5rem !important;
+  }
+  /* Code blocks */
+  pre, code {
+    font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+    background: #0A0A0A !important;
+    color: #F4F3EE !important;
+    border-radius: 0 !important;
+  }
+  pre { border: 2px solid #0A0A0A !important; padding: 1.25rem !important; }
+  code { padding: 0.15em 0.4em !important; }
+  /* Images / cover */
+  .cover-image, .article-cover, .lazy-wrap {
+    border: 2px solid #0A0A0A !important;
+    border-radius: 0 !important;
+  }
+  /* Author / share / footer-meta cards — flatten + repaint */
+  .author-card, .share-section, .related-posts, .post-footer {
+    background: #F4F3EE !important;
+    border: 2px solid #0A0A0A !important;
+    border-radius: 0 !important;
+  }
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+
 </head>
 <body>
 
