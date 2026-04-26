@@ -549,6 +549,47 @@
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   }
+
+  /* ── DARK SECTION CONTRAST FIX ──
+     The blanket `article p { color: #1a1a1a }` rule above kills text inside
+     navy-background blocks (.highlight, .code-block, .sub-card). Force light text. */
+  .highlight, .code-block, .sub-card {
+    background: #0f1221 !important;
+    border: 2px solid #0A0A0A !important;
+    border-radius: 0 !important;
+  }
+  .highlight .highlight-eyebrow,
+  .sub-card .sub-card-eyebrow {
+    color: #F77F00 !important;
+    font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  }
+  .highlight h2,
+  .highlight h3,
+  .sub-card h3 {
+    color: #F4F3EE !important;
+    font-family: 'Archivo Black', system-ui, sans-serif !important;
+  }
+  article .highlight p,
+  article .sub-card p,
+  .highlight p,
+  .sub-card p {
+    color: rgba(244, 243, 238, 0.85) !important;
+  }
+  .highlight strong,
+  .sub-card strong {
+    color: #F4F3EE !important;
+    font-weight: 700 !important;
+  }
+  .highlight a,
+  .sub-card a {
+    color: #F77F00 !important;
+  }
+  .code-block code,
+  .code-block pre {
+    color: rgba(244, 243, 238, 0.92) !important;
+    background: transparent !important;
+    border: 0 !important;
+  }
 </style>
 
 </head>
@@ -556,7 +597,7 @@
 
   <nav>
     <div class="nav-inner">
-      <span class="nav-logo">Sachin<span>.</span></span>
+      <a class="nav-logo" href="https://sachinai1981-web.github.io/blog/">Sachin<span>.</span></a>
       <a href="https://sachinai1981-web.github.io/blog/" class="nav-back">← All posts</a>
     </div>
   </nav>
