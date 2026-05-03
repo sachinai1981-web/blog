@@ -276,3 +276,322 @@ When refining existing screens generated with this design system:
 4. **Audit color sprawl.** If a color outside `#000`, `#1a1a1a`, `#757575`, `#e2e8f0`, `#ffffff`, `#057dbc` appears in chrome (not photography), remove it. WIRED's restraint is non-negotiable.
 5. **Audit kickers.** Every story should have an UPPERCASE mono kicker. Without it, the page reads as a generic blog, not WIRED.
 6. **Audit rules.** Add hairline `1px solid #000` dividers wherever two stories or modules meet without a clear visual break. Rules are the connective tissue.
+
+---
+
+## 10. iPhone App Guidelines (iOS / SwiftUI)
+
+This section maps the blog's editorial×terminal design language onto Apple's Human Interface Guidelines. Every principle from Sections 1–9 carries forward — the iPhone app is the same visual system running natively on glass.
+
+---
+
+### 10.1 Font Stack — iOS Mapping
+
+The web stack uses licensed fonts. On iOS, map to the closest available equivalents:
+
+| Web Role | Web Font | iOS Equivalent | SwiftUI Usage |
+|---|---|---|---|
+| Display / Hero | Archivo Black | Embed Archivo Black via `Info.plist` | `.font(.custom("ArchivoBlack-Regular", size: 36))` |
+| UI / Sans | Inter | SF Pro (system default) | `.font(.system(size: 14, weight: .medium, design: .default))` |
+| Serif / Body | Source Serif 4 | Embed Source Serif 4 or fallback to New York | `.font(.custom("SourceSerif4-Regular", size: 16))` or `.font(.system(size: 16, design: .serif))` |
+| Mono / Kickers | JetBrains Mono | Embed JetBrains Mono or use SF Mono | `.font(.custom("JetBrainsMono-Regular", size: 11))` or `.font(.system(size: 11, design: .monospaced))` |
+
+**Rules:**
+- Embed Archivo Black and JetBrains Mono — they ARE the brand voice; SF alternatives are fallbacks only
+- All mono usage: `.textCase(.uppercase)` + `.kerning(2.5)` — non-negotiable
+- Never let Dynamic Type scale the display font below 28pt — the hero must stay large
+- Support Dynamic Type for body (Source Serif 4) and UI (Inter/SF Pro) — use `scaledFont` for accessible sizing
+
+---
+
+### 10.2 Color System — iOS Tokens
+
+Same palette, mapped to `Color` assets in Xcode:
+
+```swift
+extension Color {
+    static let paper      = Color("Paper")       // #F4F3EE — light canvas
+    static let paper2     = Color("Paper2")      // #EAE8E1
+    static let ink        = Color("Ink")         // #0A0A0A
+    static let inkMute    = Color("InkMute")     // #6b6b66
+    static let hairline   = Color("Hairline")    // #cfccc1
+    static let cadmium    = Color("Cadmium")     // #E63946 — red
+    static let amber      = Color("Amber")       // #F77F00 — orange
+    static let viridian   = Color("Viridian")    // #2A9D5F — green
+}
+```
+
+**Dark Mode Adaptation:**
+The blog is light-first. For dark mode on iPhone, keep the warm tone — not system black:
+
+| Light | Dark | Role |
+|---|---|---|
+| `#F4F3EE` (paper) | `#0F0F0C` (warm near-black) | Canvas |
+| `#0A0A0A` (ink) | `#F0EFE9` (warm near-white) | Primary text |
+| `#6b6b66` (ink-mute) | `#8a8a83` | Muted text |
+| `#cfccc1` (hairline) | `#2a2a27` | Dividers |
+| `#E63946` (red) | `#E63946` | Unchanged — semantic color |
+| `#F77F00` (orange) | `#F77F00` | Unchanged |
+| `#2A9D5F` (green) | `#2A9D5F` | Unchanged |
+
+Dark mode = night-lit newsprint, not generic `systemBackground`.
+
+---
+
+### 10.3 Touch Targets — HIG Compliance
+
+| Element | Minimum Size | Note |
+|---|---|---|
+| All tappable elements | **44×44pt** | Apple HIG non-negotiable |
+| Icon-only buttons | **44×44pt** footprint | Extend with `.contentShape(Rectangle())` |
+| Tab bar items | System default (~49pt tall) | Don't override height |
+| Inline text links | Pad to 44pt vertically | `.padding(.vertical, 12)` on small links |
+| Sysbar cells | 44pt height minimum | Even if visually compact |
+
+```swift
+Button(action: {}) {
+    Image(systemName: "square.and.arrow.up")
+        .frame(width: 20, height: 20)
+}
+.frame(width: 44, height: 44)
+.contentShape(Rectangle())
+```
+
+---
+
+### 10.4 Safe Area & Layout
+
+- **Top**: respect Dynamic Island / notch — use `.safeAreaInset(edge: .top)`
+- **Bottom**: respect home indicator — use `.safeAreaInset(edge: .bottom)`, `ignoresSafeArea(.keyboard)` for input screens only
+- **Sides**: minimum 16pt horizontal padding inside safe area — never clip to screen edge
+
+**Padding rhythm (web 8px base unit → iOS pt):**
+```
+Horizontal page margin:  16pt (iPhone) → 24pt (iPad)
+Section vertical gap:    32–48pt
+Component inner padding: 16pt
+Tight inline gap:        8pt
+Hairline spacing:        4pt
+```
+
+Full-bleed elements (hero images, black ribbons, sysbar) use `.ignoresSafeArea()` — text and interactive elements never do.
+
+---
+
+### 10.5 Corners — Same Three Radii
+
+iOS default `cornerRadius: 10` breaks the editorial contract. Override everywhere:
+
+| Radius | Where | SwiftUI |
+|---|---|---|
+| `0` | All containers, images, buttons, cells | No `.cornerRadius` modifier |
+| `.infinity` | Pill tags only ("LIVE", status badges) | `.clipShape(Capsule())` |
+| `50%` | Avatar circles, status pulse dots | `.clipShape(Circle())` |
+
+```swift
+// Correct
+RoundedRectangle(cornerRadius: 0)
+    .stroke(Color.ink, lineWidth: 2)
+
+// Never — breaks editorial contract
+RoundedRectangle(cornerRadius: 10)
+```
+
+---
+
+### 10.6 Depth — No Shadows
+
+Zero `shadow()` modifiers on tiles, cards, or navigation elements. Depth = border weight only.
+
+```swift
+// Correct — hairline rule as separator
+VStack { ... }
+    .overlay(Rectangle().stroke(Color.hairline, lineWidth: 1), alignment: .bottom)
+
+// Never this
+.shadow(color: .black.opacity(0.1), radius: 8, y: 4)
+```
+
+**Border weight scale:** 0.5pt hairline → 1pt rule → 2pt hard border → filled black ribbon.
+
+---
+
+### 10.7 Typography Hierarchy — iOS Scale
+
+| Role | Font | Size | Letter Spacing | Notes |
+|---|---|---|---|---|
+| Hero Headline | Archivo Black | 36–48pt | -0.5pt | Full-bleed hero |
+| Section Headline | Archivo Black | 24–28pt | -0.3pt | Feed section titles |
+| Story Headline | Source Serif 4 | 18–22pt | 0pt | Article list items |
+| Body / Reading | Source Serif 4 | 16pt | 0.1pt | Long-form body |
+| UI Label | Inter / SF Pro | 14pt | 0.2pt | Buttons, nav |
+| Eyebrow / Kicker | JetBrains Mono | 10–11pt | 2.5pt | UPPERCASE always |
+| Caption / Meta | JetBrains Mono | 10pt | 1.8pt | UPPERCASE timestamps |
+| Sysbar Cell | JetBrains Mono | 9–10pt | 2.5pt | UPPERCASE always |
+
+---
+
+### 10.8 Haptics — Semantic Mapping
+
+| Color | Semantic | Haptic |
+|---|---|---|
+| 🔴 Red `#E63946` | Critical / CTA | `.heavy` impact or `.error` notification |
+| 🟠 Orange `#F77F00` | Warning / in-progress | `.medium` impact |
+| 🟢 Green `#2A9D5F` | Success / live | `.light` impact or `.success` notification |
+| Neutral | Standard tap | `.light` impact |
+
+```swift
+Button("Subscribe") {
+    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+}
+```
+
+- Never decorative — haptics on state-changing actions only
+- Live pulse dot: no haptic — ambient only
+- Match weight to color: green tap lighter than red tap
+
+---
+
+### 10.9 Navigation Patterns
+
+**Tab Bar:**
+- Max 5 items
+- Labels: JetBrains Mono 10pt UPPERCASE 1.8pt tracking
+- Active: `cadmium` (`#E63946`) tint
+- Inactive: `inkMute` (`#6b6b66`)
+- Flatten with `UITabBar.appearance()` — no rounded background
+
+**Navigation Bar:**
+- Large title: Archivo Black 34pt, `ink`
+- Inline title: Archivo Black 17pt
+- Bottom border: 1pt `hairline` — mirrors the web divider rule
+- Back button: icon only, no label text
+
+**Sheet / Modal:**
+- `paper` background, square-cornered inner content
+- Dismiss: swipe down always works + explicit × in JetBrains Mono
+- No default rounded white card — override background
+
+**iOS Sysbar:**
+Fixed strip below nav bar: `ink` background, JetBrains Mono 9pt UPPERCASE cells, accent pulse dots, 1pt hairline bottom border.
+
+---
+
+### 10.10 Component Patterns
+
+**Story Cell (Feed Item):**
+```
+[16:9 Image — square corners, full width, no padding]
+[EYEBROW — JetBrains Mono 10pt UPPERCASE, colored by category (amber/red/green)]
+[Headline — Source Serif 4 20pt, ink]
+[Meta — JetBrains Mono 10pt UPPERCASE, inkMute — "4 MIN READ · 2H AGO"]
+[1pt hairline — full width]
+```
+No card. No shadow. No cornerRadius. The hairline IS the separator.
+
+**Black Ribbon Section Header:**
+```
+[Full-bleed ink (#0A0A0A) bar, 40pt tall, ignoresSafeArea horizontal]
+[JetBrains Mono 11pt UPPERCASE 2.5pt tracking, paper white]
+```
+
+**Primary Button:**
+```
+Background:  paper (#F4F3EE)
+Border:      2pt solid ink (#0A0A0A), cornerRadius 0
+Text:        Inter 700 15pt UPPERCASE 0.3pt tracking
+Pressed:     invert (ink bg, paper text) 120ms linear
+```
+
+**Status Badge / Pill:**
+```
+Background:  cadmium / amber / viridian
+Shape:       Capsule()
+Text:        JetBrains Mono 9pt UPPERCASE, paper white
+Padding:     4pt vertical, 8pt horizontal
+```
+
+---
+
+### 10.11 Grain Texture on iOS
+
+The web halftone grain (`opacity: 0.06`) translates to a `Canvas` overlay:
+
+```swift
+struct GrainOverlay: View {
+    var body: some View {
+        Canvas { context, size in
+            var y: CGFloat = 0
+            while y < size.height {
+                var x: CGFloat = 0
+                while x < size.width {
+                    context.fill(
+                        Path(ellipseIn: CGRect(x: x+1.5, y: y+1.5, width: 1, height: 1)),
+                        with: .color(.black.opacity(0.06))
+                    )
+                    x += 4
+                }
+                y += 4
+            }
+        }
+        .allowsHitTesting(false)
+        .blendMode(.multiply)
+    }
+}
+```
+
+Apply as `.overlay(GrainOverlay())` on the root `ZStack`. Not optional — this is what makes the app feel like the blog.
+
+---
+
+### 10.12 Animation
+
+| Interaction | Duration | Easing | SwiftUI |
+|---|---|---|---|
+| Tap state (button invert) | 120ms | Linear | `.animation(.linear(duration: 0.12), value: isPressed)` |
+| Screen transition | 300ms | Expo out | `.animation(.timingCurve(0.16, 1, 0.3, 1, duration: 0.3), value: ...)` |
+| Feed item appearance | 250ms | Expo out | `.transition(.opacity.combined(with: .move(edge: .bottom)))` |
+| Status pulse dot | 1.6s | easeInOut | `.animation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: ...)` |
+| Spring (playful only) | — | Spring | `.animation(.spring(response: 0.4, dampingFraction: 0.6), value: ...)` |
+
+Always respect `@Environment(\.accessibilityReduceMotion)`:
+```swift
+if !reduceMotion {
+    withAnimation(.timingCurve(0.16, 1, 0.3, 1, duration: 0.3)) { ... }
+}
+```
+
+---
+
+### 10.13 Do / Don't — iOS Specific
+
+**Do:**
+- Embed Archivo Black and JetBrains Mono — non-negotiable brand fonts
+- `cornerRadius: 0` on every container and image
+- Extend hit areas to 44×44pt with `.contentShape(Rectangle())`
+- Match haptic weight to color semantic (red = heavy, green = light)
+- Apply grain overlay on root view
+- Dark mode: warm `#0F0F0C` canvas, not system black
+
+**Don't:**
+- No `RoundedRectangle(cornerRadius: 10)` — iOS default breaks editorial contract
+- No `.shadow()` on any tile or container
+- No `.ultraThinMaterial` or glassmorphism — flat by religion
+- No lowercase mono labels — UPPERCASE always
+- No red/orange/green outside their semantic roles
+- No blocking system gestures (swipe-back, edge swipe)
+- No animating `frame`, `width`, or `height` — compositor properties only (`opacity`, `offset`, `scaleEffect`)
+
+---
+
+### 10.14 Quick Prompt Reference for AI-Assisted iOS Build
+
+1. *"Build a SwiftUI feed cell: full-width square-corner image (16:9), JetBrains Mono 10pt UPPERCASE amber kicker, Source Serif 4 20pt ink headline, JetBrains Mono 10pt UPPERCASE inkMute meta. Separated by 1pt hairline. No card, no shadow, no cornerRadius."*
+
+2. *"Create a SwiftUI primary button: 2pt solid ink border, cornerRadius 0, paper background, Inter 700 15pt UPPERCASE 0.3pt tracking. Pressed: invert (ink bg, paper text) 120ms linear."*
+
+3. *"Build a SwiftUI section ribbon: full-bleed 40pt ink bar, JetBrains Mono 11pt UPPERCASE 2.5pt tracking paper white text, cornerRadius 0, ignoresSafeArea horizontally."*
+
+4. *"Design a SwiftUI sysbar: ink background, JetBrains Mono 9pt UPPERCASE key/value cells, green pulse dot 1.6s animation, 1pt hairline bottom border."*
+
+5. *"Apply grain overlay: Canvas 1pt dots on 4pt grid at 6% opacity, .multiply blend mode, allowsHitTesting false, on root ZStack."*
