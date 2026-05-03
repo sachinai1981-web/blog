@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thirteen Agents in One Saturday. — Sachin Rai</title>
+  <meta name="description" content="I spawned 13 parallel Claude Code agents on a Saturday morning. Each shipped one feature for my trading system. One of them overturned the hypothesis from feature #1." />
+  <link rel="canonical" href="https://sachinai1981-web.github.io/blog/posts/13-agents-one-saturday.html" />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="claude code, parallel agents, autoquant, ai engineering, automation, agentic workflow, counterfactual replay, trading system" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://sachinai1981-web.github.io/blog/posts/13-agents-one-saturday.html" />
+  <meta property="og:title" content="Thirteen Agents in One Saturday." />
+  <meta property="og:description" content="I spawned 13 parallel Claude Code agents on a Saturday morning. Each shipped one feature for my trading system. One of them overturned the hypothesis from feature #1." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&h=630&fit=crop&auto=format&q=85" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Sachin Rai" />
+  <meta property="article:published_time" content="2026-05-02" />
+  <meta property="article:author" content="Sachin Rai" />
+  <meta property="article:tag" content="AI" />
+  <meta property="article:tag" content="Engineering" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Thirteen Agents in One Saturday." />
+  <meta name="twitter:description" content="I spawned 13 parallel Claude Code agents on a Saturday morning. Each shipped one feature for my trading system. One of them overturned the hypothesis from feature #1." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&h=630&fit=crop&auto=format&q=85" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Thirteen Agents in One Saturday.",
+    "url": "https://sachinai1981-web.github.io/blog/posts/13-agents-one-saturday.html",
+    "datePublished": "2026-05-02",
+    "dateModified": "2026-05-02",
+    "author": {
+      "@type": "Person",
+      "name": "Sachin Rai",
+      "url": "https://sachinai1981-web.github.io/blog/",
+      "sameAs": ["https://www.linkedin.com/in/sachinr1/"]
+    },
+    "publisher": { "@type": "Person", "name": "Sachin Rai", "url": "https://sachinai1981-web.github.io/blog/" },
+    "description": "I spawned 13 parallel Claude Code agents on a Saturday morning. Each shipped one feature for my trading system. One of them overturned the hypothesis from feature #1.",
+    "image": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&h=630&fit=crop&auto=format&q=85"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper:    #F4F3EE;
+      --paper-2:  #EAE8E1;
+      --ink:      #0A0A0A;
+      --ink-2:    #1a1a1a;
+      --ink-mute: #6b6b66;
+      --hairline: #cfccc1;
+      --red:      #E63946;
+      --orange:   #F77F00;
+      --green:    #2A9D5F;
+      --blue:     #1d4ed8;
+      --blue-l:   #3b82f6;
+    }
+
+    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      background: #F4F3EE;
+      color: #0A0A0A;
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 50;
+      pointer-events: none; opacity: 0.06;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%230a0a0a'/%3E%3C/svg%3E");
+      background-size: 4px 4px; mix-blend-mode: multiply;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #F4F3EE;
+      border-bottom: 2px solid #0A0A0A;
+      padding: 1rem 1.5rem;
+    }
+    .nav-inner {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: #0A0A0A;
+      position: relative;
+      padding-left: 2.6rem;
+      text-decoration: none;
+    }
+    .nav-logo::before {
+      content: ''; position: absolute; left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 10px; height: 10px;
+      background: #1d4ed8;
+      box-shadow: 14px 0 0 #F77F00, 28px 0 0 #2A9D5F;
+    }
+    .nav-logo span { color: #1d4ed8; }
+    .nav-back {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #0A0A0A;
+      padding: 0.5rem 1rem;
+      border: 2px solid #0A0A0A;
+      background: #F4F3EE;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-back:hover {
+      background: #1d4ed8;
+      color: #F4F3EE;
+      border-color: #1d4ed8;
+    }
+
+    /* ── ARTICLE ── */
+    article { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+    .post-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .tag {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.55rem;
+      border: 1.5px solid #0A0A0A;
+      color: #0A0A0A;
+    }
+    .tag.r { background: #E63946; color: #F4F3EE; border-color: #E63946; }
+    .tag.o { background: #F77F00; color: #F4F3EE; border-color: #F77F00; }
+
+    /* ── HERO STAGE — red circle + chip blend + corner labels ── */
+    .hero-stage {
+      position: relative;
+      margin: 1rem -2rem 3rem;
+      padding: 4.5rem 1.5rem 4rem;
+      overflow: visible;
+      isolation: isolate;
+      background: #F4F3EE;
+    }
+    .hero-corner {
+      position: absolute; z-index: 4;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #0A0A0A;
+      line-height: 1.5;
+    }
+    .hero-corner.tl { top: 1.2rem; left: 1.5rem; }
+    .hero-corner.tr { top: 1.2rem; right: 1.5rem; text-align: right; }
+    .hero-corner.bl { bottom: 1.2rem; left: 1.5rem; }
+    .hero-corner.br { bottom: 1.2rem; right: 1.5rem; text-align: right; }
+    .hero-corner strong { font-weight: 900; display: block; }
+
+    .hero-circle {
+      position: absolute; z-index: 0;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -48%);
+      width: 640px; height: 640px;
+      max-width: 90vw; max-height: 90vw;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #f87171 0%, #E63946 55%, #991b1b 100%);
+      box-shadow:
+        0 40px 90px -25px rgba(230, 57, 70, 0.45),
+        inset -50px -50px 120px rgba(150, 20, 30, 0.35);
+      pointer-events: none;
+    }
+
+    .hero-title {
+      position: relative; z-index: 2;
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 1.5rem 0;
+    }
+    .hero-title .line {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: clamp(4rem, 13vw, 8.5rem);
+      line-height: 0.88;
+      letter-spacing: -0.045em;
+      color: #F4F3EE;
+      display: block;
+      text-shadow: 0 3px 0 rgba(10,10,10,0.12);
+    }
+    .hero-title .line.agents {
+      color: #2A9D5F;
+      text-align: right;
+      margin-top: -0.15em;
+    }
+
+    .hero-blocks {
+      position: relative; z-index: 2;
+      display: flex; gap: 0.5rem;
+      margin: 0.5rem 0;
+      justify-content: center;
+    }
+    .hero-blocks .blk {
+      height: 14px; border-radius: 2px;
+      border: 2px solid #0A0A0A;
+    }
+    .hero-blocks .blk.r { width: 56px; background: #E63946; }
+    .hero-blocks .blk.o { width: 36px; background: #F77F00; }
+    .hero-blocks .blk.g { width: 28px; background: #2A9D5F; }
+    .hero-blocks .blk.k { width: 76px; background: #0A0A0A; }
+
+    .hero-3d {
+      position: absolute; z-index: 3;
+      width: 640px; height: 440px;
+      right: -7%; bottom: 14%;
+      transform: rotate(-5deg) scale(1.02);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0.95;
+      filter:
+        contrast(1.28) saturate(1.25) brightness(1.05)
+        drop-shadow(0 35px 60px rgba(230,57,70,0.55))
+        drop-shadow(0 12px 18px rgba(0,0,0,0.45));
+      border-radius: 6px;
+      overflow: hidden;
+      animation: hero-float 6s ease-in-out infinite;
+    }
+    .hero-3d img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @keyframes hero-float {
+      0%, 100% { transform: rotate(-5deg) scale(1.02) translateY(0); }
+      50%      { transform: rotate(-5deg) scale(1.02) translateY(-8px); }
+    }
+    .section-3d-img.invert {
+      filter: invert(1) hue-rotate(180deg) contrast(1.05) brightness(1.05);
+      box-shadow: 12px 12px 0 #E63946, 0 0 60px rgba(230, 57, 70, 0.15);
+    }
+
+    .hero-eyebrow {
+      position: relative; z-index: 2;
+      text-align: center;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #F4F3EE;
+      background: #0A0A0A;
+      border: 2px solid #0A0A0A;
+      padding: 0.65rem 1.2rem;
+      margin: 1.5rem auto 0;
+      max-width: fit-content;
+    }
+    .hero-eyebrow .num { color: #F77F00; }
+
+    @media (max-width: 700px) {
+      .hero-stage { margin: 0.5rem -1rem 2rem; padding: 3.5rem 1rem 3rem; }
+      .hero-circle { width: 460px; height: 460px; transform: translate(-50%, -45%); }
+      .hero-3d { width: 320px; height: 220px; right: -8%; bottom: 22%; }
+      .hero-corner { font-size: 0.52rem; }
+      .hero-corner.tr, .hero-corner.br { display: none; }
+    }
+
+    /* ── POST META ── */
+    .post-meta {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.78rem; color: #6b6b66;
+      padding-bottom: 2rem; border-bottom: 1px solid #cfccc1;
+      margin-bottom: 2.5rem; flex-wrap: wrap;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      letter-spacing: 0.04em;
+    }
+    .author-chip { display: flex; align-items: center; gap: 0.45rem; }
+    .author-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, #E63946, #f87171);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 0.65rem; font-weight: 600;
+      font-family: 'Archivo Black', sans-serif;
+    }
+
+    /* ── BODY ── */
+    .post-body { font-size: 1.075rem; line-height: 1.65; color: #1a1a1a; }
+    .post-body p {
+      font-family: 'Source Serif 4', Georgia, serif;
+      margin-bottom: 1.3rem;
+    }
+    .post-body h2 {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: 1.75rem;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: #0A0A0A;
+      margin: 3rem 0 1.25rem;
+      text-transform: uppercase;
+    }
+    .post-body strong { color: #0A0A0A; font-weight: 700; }
+    .post-body ol, .post-body ul { padding-left: 1.5rem; margin-bottom: 1.3rem; font-family: 'Source Serif 4', Georgia, serif; }
+    .post-body li { margin-bottom: 0.6rem; }
+    .post-body a { color: #1d4ed8; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+    .post-body a:hover { color: #F77F00; }
+
+    .post-body code {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.85em;
+      background: #0A0A0A;
+      color: #F4F3EE;
+      padding: 0.15em 0.45em;
+    }
+
+    .callout {
+      background: #EAE8E1;
+      border-left: 4px solid #E63946;
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: #0A0A0A;
+    }
+    .callout p { margin: 0; }
+    .callout strong { font-style: normal; }
+
+    .stat-card {
+      background: #F4F3EE;
+      border: 2px solid #0A0A0A;
+      padding: 1.4rem 1.6rem;
+      margin: 1.75rem 0;
+      box-shadow: 8px 8px 0 #E63946;
+    }
+    .stat-card .stat-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #6b6b66;
+      margin-bottom: 0.85rem;
+    }
+    .stat-row {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 0.5rem; padding: 0.55rem 0;
+      border-bottom: 1px dashed #cfccc1;
+      font-size: 0.92rem;
+      font-family: 'Source Serif 4', Georgia, serif;
+    }
+    .stat-row:last-child { border-bottom: 0; }
+    .stat-row .label { color: #1a1a1a; }
+    .stat-row .val {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      color: #0A0A0A;
+    }
+    .stat-row .val.bad  { color: #b91c1c; }
+    .stat-row .val.good { color: #2A9D5F; }
+
+    .formula {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      background: #0A0A0A;
+      color: #F4F3EE;
+      border: 2px solid #0A0A0A;
+      padding: 1.2rem 1.4rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      margin: 1.5rem 0;
+    }
+
+    /* ── SECTION 3D IMAGES ── */
+    .section-3d {
+      margin: 3rem -1rem 2rem;
+      padding: 1rem;
+    }
+    .section-3d-img {
+      width: 100%; height: 280px;
+      object-fit: cover;
+      border: 2px solid #0A0A0A;
+      box-shadow: 12px 12px 0 #E63946;
+      display: block;
+    }
+    .section-3d-cap {
+      margin-top: 0.85rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #6b6b66;
+    }
+
+    /* ── FEATURE LIST TABLE ── */
+    .feature-list {
+      border: 2px solid #0A0A0A;
+      margin: 1.75rem 0;
+      font-size: 0.9rem;
+    }
+    .feature-list-head {
+      background: #0A0A0A;
+      color: #F4F3EE;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.65rem 1rem;
+      display: grid;
+      grid-template-columns: 2.5rem 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .feature-row {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr 1fr;
+      gap: 0.75rem;
+      padding: 0.65rem 1rem;
+      border-top: 1px dashed #cfccc1;
+      font-family: 'Source Serif 4', Georgia, serif;
+      align-items: baseline;
+    }
+    .feature-row:nth-child(even) { background: #EAE8E1; }
+    .feature-num {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-weight: 700;
+      color: #E63946;
+      font-size: 0.78rem;
+    }
+    .feature-name { color: #0A0A0A; font-weight: 600; }
+    .feature-desc { color: #6b6b66; font-size: 0.88rem; font-style: italic; }
+
+    /* ── SUBSCRIBE ── */
+    .sub-card {
+      background: #0A0A0A;
+      border: 2px solid #0A0A0A;
+      padding: 2.5rem;
+      margin: 3.5rem 0 0;
+      text-align: center;
+    }
+    .sub-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #F77F00;
+      margin-bottom: 0.5rem;
+    }
+    .sub-card h3 {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: 1.4rem;
+      line-height: 1.1;
+      color: #F4F3EE;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+    .sub-card p { font-size: 0.9rem; color: rgba(244,243,238,0.55); margin-bottom: 1.5rem; font-family: 'Source Serif 4', serif; }
+    .sub-form { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+    .sub-input {
+      font-family: 'Inter', sans-serif; font-size: 0.85rem;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      color: #fff; padding: 0.7rem 1.1rem; outline: none; width: 240px;
+    }
+    .sub-input::placeholder { color: rgba(255,255,255,0.3); }
+    .sub-input:focus { border-color: #F77F00; }
+    .sub-btn {
+      font-family: 'Archivo Black', sans-serif; font-size: 0.78rem;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      background: #F77F00; color: #0A0A0A; border: none;
+      padding: 0.7rem 1.5rem; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .sub-btn:hover { opacity: 0.85; }
+
+    /* ── READ NEXT ── */
+    .read-next { border-top: 1px solid #cfccc1; padding-top: 2rem; margin-top: 3rem; }
+    .read-next-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: #6b6b66;
+      margin-bottom: 1.25rem;
+    }
+    .rn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .rn-card {
+      display: flex; gap: 0.85rem; align-items: flex-start;
+      text-decoration: none;
+      background: #F4F3EE;
+      border: 2px solid #0A0A0A;
+      padding: 1rem;
+      transition: background 0.18s;
+    }
+    .rn-card:hover { background: #EAE8E1; }
+    .rn-card img { width: 60px; height: 60px; object-fit: cover; flex-shrink: 0; border: 1.5px solid #0A0A0A; }
+    .rn-tag {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.55rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #6b6b66;
+      margin-bottom: 0.3rem;
+    }
+    .rn-title {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: 0.88rem; line-height: 1.2;
+      color: #0A0A0A; letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+    @media (max-width: 700px) { .rn-grid { grid-template-columns: 1fr; } }
+
+    .post-nav { border-top: 1px solid #cfccc1; padding-top: 2rem; margin-top: 3rem; }
+    .back-link {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: #0A0A0A;
+      padding: 0.5rem 1rem;
+      border: 2px solid #0A0A0A;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .back-link:hover { background: #1d4ed8; color: #F4F3EE; border-color: #1d4ed8; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #EAE8E1;
+      border-top: 2px solid #0A0A0A;
+      padding: 2rem;
+    }
+    .footer-inner {
+      max-width: 800px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: #0A0A0A;
+    }
+    footer a { color: #0A0A0A; text-decoration: none; }
+    footer a:hover { color: #E63946; }
+    .footer-links { display: flex; gap: 1.5rem; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+
+  <script>
+    function handleSub(e) {
+      e.preventDefault();
+      const form = e.target;
+      const input = form.querySelector('.sub-input');
+      const btn = form.querySelector('.sub-btn');
+      btn.textContent = 'Sending…'; btn.disabled = true;
+      fetch('https://formspree.io/f/xwvwlybd', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: input.value, source: '13-agents post' })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.ok) {
+          btn.textContent = "You're in ✓"; btn.style.background = '#2A9D5F'; btn.style.color = '#F4F3EE'; btn.disabled = false;
+          input.value = '';
+          setTimeout(() => { btn.textContent = 'Notify me →'; btn.style.background = ''; btn.style.color = ''; }, 4000);
+        } else { btn.textContent = 'Try again'; btn.style.background = '#E63946'; btn.disabled = false; }
+      })
+      .catch(() => { btn.textContent = 'Try again'; btn.style.background = '#E63946'; btn.disabled = false; });
+    }
+  </script>
+
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="https://sachinai1981-web.github.io/blog/">Sachin<span>.</span></a>
+      <a href="https://sachinai1981-web.github.io/blog/" class="nav-back">← All posts</a>
+    </div>
+  </nav>
+
+  <article>
+
+    <div class="post-tags">
+      <span class="tag r">AI</span>
+      <span class="tag o">Engineering</span>
+    </div>
+
+    <div class="hero-stage">
+      <div class="hero-circle" aria-hidden="true"></div>
+
+      <div class="hero-corner tl">
+        <strong>13-Agent Sprint</strong>
+        Vol.06 // 2026
+      </div>
+      <div class="hero-corner tr">
+        <strong>Issue 05.02</strong>
+        AI × Engineering
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line">Thirteen</span>
+        <span class="hero-blocks" aria-hidden="true">
+          <span class="blk r"></span>
+          <span class="blk o"></span>
+          <span class="blk g"></span>
+          <span class="blk k"></span>
+        </span>
+        <span class="line agents">Agents.</span>
+      </h1>
+
+      <div class="hero-3d" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&h=900&fit=crop&auto=format&q=90" alt="" loading="eager"/>
+      </div>
+
+      <p class="hero-eyebrow"><span class="num">13</span> features · <span class="num">1</span> session · One thesis overturned</p>
+
+    </div>
+
+    <div class="post-meta">
+      <div class="author-chip">
+        <div class="author-avatar">SR</div>
+        <span>Sachin Rai</span>
+      </div>
+      <span>·</span>
+      <span>May 2026</span>
+      <span>·</span>
+      <span>9 min read</span>
+    </div>
+
+    <div class="post-body">
+
+      <h2>The Saturday I gave up sequential.</h2>
+
+      <p>It started with a task list. Seven steps for the trading system's next version — expanding analytics, hardening the signal grader, adding new diagnostic tools. Work I'd been deferring for weeks because I couldn't find a 10-hour block to do it linearly. The right way. The way I always had.</p>
+
+      <p>I stared at the list for a few minutes and noticed something. Every task was independent. Separate file. Separate test. Separate commit. There was no reason task four needed task two to exist first. The dependency graph was completely flat. So I asked a different question: what if each task ran in parallel?</p>
+
+      <p><span style="color:#E63946"><strong>Thirteen Claude Code agents.</strong></span> One per feature. Each given a scoped brief: here is the file you're touching, here is what it should do, here is how to verify it. All thirteen launched inside 10 minutes. Total elapsed time from "go" to all agents reporting done: under 90 minutes.</p>
+
+      <p>The same work done sequentially would have taken 10 to 14 hours. The ratio is roughly <strong>10×</strong>. But the bigger lesson wasn't speed. It was what the parallel architecture revealed that a sequential run never could have.</p>
+
+      <p>The discipline isn't parallelising everything. It's developing the instinct for which problems are <em>actually</em> parallelizable. When the dependency graph is flat — and it's flat more often than you expect — sequential is just a habit, not a constraint.</p>
+
+      <h2>What 13 agents shipped.</h2>
+
+      <p>Each agent had a narrow mandate. Here's what came out the other end — <span style="color:#2A9D5F"><strong>17 new files, 8 modified files, 3 new scheduled jobs</strong></span> — described in terms that translate beyond trading:</p>
+
+      <div class="feature-list">
+        <div class="feature-list-head">
+          <span>#</span>
+          <span>Feature</span>
+          <span>What it tracks</span>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">01</span>
+          <span class="feature-name">Regime-tagged stats</span>
+          <span class="feature-desc">Every metric sliced by market regime — bull, bear, sideways</span>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">02</span>
+          <span class="feature-name">Score buckets</span>
+          <span class="feature-desc">Separates trades by conviction tier, not just signal name</span>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">03</span>
+          <span class="feature-name">Skipped-signal tracking</span>
+          <span class="feature-desc">Logs what didn't trade — the negative space of the post-mortem</span>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">04</span>
+          <span class="feature-name">Post-exit drift</span>
+          <span class="feature-desc">Measures where price went after the trade closed, not just before</span>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">05</span>
+          <span class="feature-name">Rule citations</span>
+          <span class="feature-desc">Every executed trade tags which strategy rule it triggered</span>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">06</span>
+          <span class="feature-name">Per-signal benchmark</span>
+          <span class="feature-desc">Alpha decomposed per signal vs. market — not at portfolio level</span>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">07</span>
+          <span class="feature-name">Slippage tracker</span>
+          <span class="feature-desc">Measures fill quality — the silent tax on every execution</span>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">08</span>
+          <span class="feature-name">Correlation matrix</span>
+          <span class="feature-desc">Which signals fire together — clustering the portfolio's actual bets</span>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">09</span>
+          <span class="feature-name">Regime-shift detection</span>
+          <span class="feature-desc">Flags when underlying market conditions change underneath you</span>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">10</span>
+          <span class="feature-name">Rule effectiveness</span>
+          <span class="feature-desc">Do rules added 6 months ago still pull their weight today?</span>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">11</span>
+          <span class="feature-name">Semantic autopsy search</span>
+          <span class="feature-desc">Failures re-findable by theme, not just by date</span>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">12</span>
+          <span class="feature-name">Counterfactual replay</span>
+          <span class="feature-desc">What would have happened if you'd gated on a different rule?</span>
+        </div>
+        <div class="feature-row">
+          <span class="feature-num">13</span>
+          <span class="feature-name">Quarterly retrospective</span>
+          <span class="feature-desc">Calendar-driven review — not triggered by heat-of-the-moment losses</span>
+        </div>
+      </div>
+
+      <p>Each agent ate roughly the same context budget, running in parallel on a flat per-token cost. The marginal cost of agent 13 was not appreciably higher than agent 1. That arithmetic matters: in sequential work, every extra task adds real elapsed time. In parallel work, every extra task adds cost but not wall-clock delay — <em>as long as the independence holds</em>.</p>
+
+      <h2>The agent that broke its sibling.</h2>
+
+      <p>Feature 01 was regime-tagged stats. Once it landed, the first read was encouraging: the signal grader was generating a hypothesis. When you gate a specific signal to run only during certain market regimes, the apparent lift looks meaningful. Roughly speaking: the signal performed noticeably better in some regimes than others, enough that restricting it to those regimes seemed like a clear improvement.</p>
+
+      <p>Feature 12 was counterfactual replay. Its job was different: given any rule applied retroactively to the full historical trade log, what would the outcome have been? Not a forward simulation — a backward one. Take every trade the system ever made, filter it through the new rule, and measure the difference.</p>
+
+      <p>When counterfactual replay was run against the regime-gating hypothesis from Feature 01, it overturned it. The apparent lift dissolved. The sample size on the gated subset was thin enough that what looked like a pattern in a slice of the data was noise when you ran the replay across the full history. The improvement was an artefact of the slice, not a property of the signal.</p>
+
+      <p>This was <span style="color:#E63946"><strong>the most important moment of the day</strong></span> — and not because of the trading conclusion. It was important because the parallel-agent architecture had, in the same session, built its own falsifier. Agent 12 ran the same morning as Agent 01. If the sprint had been sequential, counterfactual replay might have shipped three weeks later. The hypothesis would have been acted on first.</p>
+
+      <div class="callout">
+        <p><strong>The rule this taught me:</strong> In any parallel sprint, design at least one agent as a falsifier, not a confirmer. Its job is to attack the outputs of the other agents. If you build 13 confirmers, you get 13 reasons to be wrong simultaneously. One falsifier changes the architecture of what the whole sprint can learn.</p>
+      </div>
+
+      <h2>What went up alpha-wise. (And what didn't.)</h2>
+
+      <p>The honest version of this post requires publishing the Q2 dry-run results, not just the features shipped. So here they are.</p>
+
+      <p>The equity curve over the quarter was approximately flat. The market index, over the same period, returned in the high single digits. On net, <span style="color:#E63946"><strong>the system underperformed the index by approximately ten percentage points</strong></span> over the quarter. I am publishing that number.</p>
+
+      <div class="stat-card">
+        <div class="stat-eyebrow">Sprint execution — time comparison</div>
+        <div class="stat-row">
+          <span class="label">Sequential time (estimate)</span>
+          <span class="val">~10–14 hours</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Parallel time (actual)</span>
+          <span class="val good">~90 minutes</span>
+        </div>
+        <div class="stat-row">
+          <span class="label">Ratio</span>
+          <span class="val good">~10×</span>
+        </div>
+      </div>
+
+      <p>Most trading-system writeups omit the part where the system loses to the index. The dashboard looked fine — it always looks fine when you're measuring what you chose to measure. But the counterfactual replay and the per-signal benchmark together revealed the gap clearly. The system was generating activity. It was not generating alpha above what passive exposure would have delivered.</p>
+
+      <p>One signal that previously generated a five-figure dollar amount in absolute returns was simultaneously losing approximately five percentage points of alpha versus the market benchmark over the same period. Same trade. Two dashboards. Two different conclusions about whether to keep running it. <strong>Absolute dollars and alpha are not the same metric.</strong> A rising market lifts all boats, including the leaky ones. The per-signal benchmark is what separates genuine edge from the tide.</p>
+
+      <p>This connects directly to the last post on win rate: the dashboard you celebrate is not necessarily the dashboard the market is scoring you on. Run both. The gap between them is where the honest answer lives.</p>
+
+      <figure class="section-3d">
+        <img class="section-3d-img invert" src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=1400&h=560&fit=crop&auto=format&q=85" alt="Abstract data visualisation — inverted to light tone." loading="lazy" />
+        <figcaption class="section-3d-cap">// absolute performance and relative alpha are two different dashboards. the gap between them is the honest answer.</figcaption>
+      </figure>
+
+      <h2>Score 9–10 traded twice as well as score 7–8.</h2>
+
+      <p>Feature 02 — score buckets — was the second most load-bearing finding of the day. The signal grader assigns a conviction score to every potential trade. High is 9–10. Medium-high is 7–8. The same signal name can appear across both bands.</p>
+
+      <p>When the session's score-bucket analysis landed, the number was stark: trades scored <span style="color:#2A9D5F"><strong>9–10 hit a win rate roughly double</strong></span> that of trades scored 7–8 from the same signal. Not the same signal performing differently in different regimes. The same signal, same conditions, same market — different conviction score, dramatically different outcome.</p>
+
+      <p>The signal name was lying. The conviction score was the actual carrier of edge. The average was hiding a bimodal distribution. If you optimise on the average, you trade both halves equally. The lower half erodes the gains from the upper half, and you end up with a mediocre aggregate metric and no understanding of why.</p>
+
+      <p>The translation to sales is immediate. Take any lead source that looks average in aggregate — say, inbound from a specific content channel. Now split it by how the rep scored the lead at first touch: high confidence, moderate confidence, low confidence. The pattern is almost always the same. <span style="color:#F77F00"><strong>High-confidence MQLs from that source close at a multiple of low-confidence MQLs.</strong></span> The source name is not the variable. The conviction at first touch is the variable.</p>
+
+      <p>The same principle applies in engineering. If you're tracking test signal reliability, the aggregate pass rate hides the distribution. High-confidence test signals — the ones that fire deterministically on known inputs — behave completely differently from low-confidence smoke signals that fire on edge-case conditions. Aggregating them produces a number that is neither one thing nor the other. Stop looking at average. Look at the conviction-weighted average. The distribution is the answer.</p>
+
+      <h2>Why this changes my ceiling.</h2>
+
+      <p>The takeaway from the 13-agent sprint is not "the trading system got better." The systems did improve — but the more durable finding is what happened to my sense of what fits in a Saturday.</p>
+
+      <p>Parallel agent sprints are a primitive, the same way a for-loop is a primitive or a batch job is a primitive. Once you've used one and seen the ratio, your intuition about how much work maps to a unit of time gets recalibrated. A Saturday is no longer a 6-hour block. It's a 6-hour block times however many independent tasks you can decompose it into.</p>
+
+      <p>Three rules I'd give for running one yourself:</p>
+
+      <ol>
+        <li><strong>Independence test first.</strong> If two features touch the same file, or if one agent's output is another agent's input, they cannot run as true parallel agents. Dependency equals sequential. Map the dependency graph before you launch anything. Most tasks are more independent than you think — but some that look independent are not, and conflating the two is where parallel sprints fail.</li>
+        <li><strong>At least one falsifier.</strong> Do not let all agents argue for the same conclusion. Designate one agent whose explicit brief is to attack the hypotheses that the other agents are likely to generate. In a 12-feature sprint, the 13th agent should be the one that asks whether any of the first 12 were wrong. The falsifier's job is to prevent the sprint from producing a coherent but incorrect worldview.</li>
+        <li><strong>Budget for re-merging.</strong> Parallel agents create 13 branches in your head even if you don't make them in git. When all agents report done, you owe yourself a 30-minute consolidation pass: read every output, identify any contradictions, and synthesise them into a coherent picture before acting on any one finding. Skipping the merge pass turns 13 correct findings into 13 unrelated facts with no through-line.</li>
+      </ol>
+
+      <h2>The honest takeaway.</h2>
+
+      <p>The system underperformed the index this quarter. The per-session dashboard said it was working. The per-signal benchmark and the counterfactual replay said the dashboard was lying. I would rather have the falsifier than the dashboard. I would rather spend 90 minutes with 13 agents than 14 hours in a linear queue.</p>
+
+      <p>Parallel sprints change what a weekend can produce. But they only work on problems that are genuinely decomposable — and most engineers and builders overclaim independence before they've actually drawn the dependency graph. The discipline is in the decomposition, not the parallelism itself.</p>
+
+      <p>The constraint on what you can ship in a day is no longer time. It's how cleanly you can decompose the problem into independent units. That's a skill. It gets better with practice. And once you've done it once, sequential starts to feel like a habit you're carrying for no reason.</p>
+
+      <p><em>"The agent that overturned my own hypothesis was the most expensive one I shipped this quarter. It was also the one that justified all twelve others."</em></p>
+
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-eyebrow">Next post</div>
+      <h3>Five Cheap Fixes, 7.5 → 9.5.</h3>
+      <p>How a 90-minute lint pass took my second-brain vault from passable to ship-ready. The five fixes anyone running Obsidian + Claude can apply this week.</p>
+      <form class="sub-form" onsubmit="handleSub(event)">
+        <input type="email" class="sub-input" name="email" placeholder="you@company.com" required />
+        <button type="submit" class="sub-btn">Notify me →</button>
+      </form>
+    </div>
+
+    <div class="read-next">
+      <p class="read-next-eyebrow">Read next</p>
+      <div class="rn-grid">
+        <a class="rn-card" href="win-rate-trap.html">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=120&h=120&fit=crop&auto=format&q=75" alt="" loading="lazy" />
+          <div>
+            <p class="rn-tag">Strategy</p>
+            <p class="rn-title">Win Rate Lies. (When the dashboard flatters)</p>
+          </div>
+        </a>
+        <a class="rn-card" href="llm-knowledge-base-obsidian.html">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=120&h=120&fit=crop&auto=format&q=75" alt="" loading="lazy" />
+          <div>
+            <p class="rn-tag">Knowledge</p>
+            <p class="rn-title">Turning an Obsidian vault into an LLM-queryable knowledge base</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="post-nav">
+      <a href="https://sachinai1981-web.github.io/blog/" class="back-link">← Back to all posts</a>
+    </div>
+
+  </article>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2026 Sachin Rai · AI + Enterprise Sales</p>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank">LinkedIn</a>
+        <a href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank">Subject Scorer</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

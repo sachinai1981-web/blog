@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I Renamed Seven AI Agents. — Sachin Rai</title>
+  <meta name="description" content="Brick, Owl, Bull, Falcon, Spider, Arrow, Sage are dead. Scanner, Grader, SwingTrader, DayPut, DayCondor, Outreach, Vault are alive. The rename touched 26 files. The lessons compound." />
+  <link rel="canonical" href="https://sachinai1981-web.github.io/blog/posts/renamed-seven-agents.html" />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="ai agents, naming, persona, claude code, single brain, functional naming, layer architecture, vocabulary, kunal shah" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://sachinai1981-web.github.io/blog/posts/renamed-seven-agents.html" />
+  <meta property="og:title" content="I Renamed Seven AI Agents." />
+  <meta property="og:description" content="Brick, Owl, Bull, Falcon, Spider, Arrow, Sage are dead. Scanner, Grader, SwingTrader, DayPut, DayCondor, Outreach, Vault are alive. The rename touched 26 files. The lessons compound." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200&h=630&fit=crop&auto=format&q=85" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Sachin Rai" />
+  <meta property="article:published_time" content="2026-05-02" />
+  <meta property="article:author" content="Sachin Rai" />
+  <meta property="article:tag" content="Engineering" />
+  <meta property="article:tag" content="Discipline" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="I Renamed Seven AI Agents." />
+  <meta name="twitter:description" content="Brick, Owl, Bull, Falcon, Spider, Arrow, Sage are dead. Scanner, Grader, SwingTrader, DayPut, DayCondor, Outreach, Vault are alive. The rename touched 26 files." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200&h=630&fit=crop&auto=format&q=85" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "I Renamed Seven AI Agents.",
+    "url": "https://sachinai1981-web.github.io/blog/posts/renamed-seven-agents.html",
+    "datePublished": "2026-05-02",
+    "dateModified": "2026-05-02",
+    "author": {
+      "@type": "Person",
+      "name": "Sachin Rai",
+      "url": "https://sachinai1981-web.github.io/blog/",
+      "sameAs": ["https://www.linkedin.com/in/sachinr1/"]
+    },
+    "publisher": { "@type": "Person", "name": "Sachin Rai", "url": "https://sachinai1981-web.github.io/blog/" },
+    "description": "Brick, Owl, Bull, Falcon, Spider, Arrow, Sage are dead. Scanner, Grader, SwingTrader, DayPut, DayCondor, Outreach, Vault are alive. The rename touched 26 files. The lessons compound.",
+    "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200&h=630&fit=crop&auto=format&q=85"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper:    #F4F3EE;
+      --paper-2:  #EAE8E1;
+      --ink:      #0A0A0A;
+      --ink-2:    #1a1a1a;
+      --ink-mute: #6b6b66;
+      --hairline: #cfccc1;
+      --red:      #E63946;
+      --orange:   #F77F00;
+      --green:    #2A9D5F;
+      --blue:     #1d4ed8;
+      --blue-l:   #3b82f6;
+    }
+
+    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      background: #F4F3EE;
+      color: #0A0A0A;
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 50;
+      pointer-events: none; opacity: 0.06;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%230a0a0a'/%3E%3C/svg%3E");
+      background-size: 4px 4px; mix-blend-mode: multiply;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #F4F3EE;
+      border-bottom: 2px solid #0A0A0A;
+      padding: 1rem 1.5rem;
+    }
+    .nav-inner {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: #0A0A0A;
+      position: relative;
+      padding-left: 2.6rem;
+      text-decoration: none;
+    }
+    .nav-logo::before {
+      content: ''; position: absolute; left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 10px; height: 10px;
+      background: #1d4ed8;
+      box-shadow: 14px 0 0 #F77F00, 28px 0 0 #2A9D5F;
+    }
+    .nav-logo span { color: #1d4ed8; }
+    .nav-back {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #0A0A0A;
+      padding: 0.5rem 1rem;
+      border: 2px solid #0A0A0A;
+      background: #F4F3EE;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-back:hover {
+      background: #1d4ed8;
+      color: #F4F3EE;
+      border-color: #1d4ed8;
+    }
+
+    /* ── ARTICLE ── */
+    article { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+    .post-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .tag {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.55rem;
+      border: 1.5px solid #0A0A0A;
+      color: #0A0A0A;
+    }
+    .tag.r { background: #E63946; color: #F4F3EE; border-color: #E63946; }
+    .tag.o { background: #F77F00; color: #F4F3EE; border-color: #F77F00; }
+
+    /* ── HERO STAGE — orange circle + chip blend + corner labels ── */
+    .hero-stage {
+      position: relative;
+      margin: 1rem -2rem 3rem;
+      padding: 4.5rem 1.5rem 4rem;
+      overflow: visible;
+      isolation: isolate;
+      background: #F4F3EE;
+    }
+    .hero-corner {
+      position: absolute; z-index: 4;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #0A0A0A;
+      line-height: 1.5;
+    }
+    .hero-corner.tl { top: 1.2rem; left: 1.5rem; }
+    .hero-corner.tr { top: 1.2rem; right: 1.5rem; text-align: right; }
+    .hero-corner.bl { bottom: 1.2rem; left: 1.5rem; }
+    .hero-corner.br { bottom: 1.2rem; right: 1.5rem; text-align: right; }
+    .hero-corner strong { font-weight: 900; display: block; }
+
+    .hero-circle {
+      position: absolute; z-index: 0;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -48%);
+      width: 640px; height: 640px;
+      max-width: 90vw; max-height: 90vw;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fb923c 0%, #F77F00 55%, #9a3412 100%);
+      box-shadow:
+        0 40px 90px -25px rgba(247, 127, 0, 0.45),
+        inset -50px -50px 120px rgba(120, 50, 0, 0.35);
+      pointer-events: none;
+    }
+
+    .hero-title {
+      position: relative; z-index: 2;
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 1.5rem 0;
+    }
+    .hero-title .line {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: clamp(4rem, 13vw, 8.5rem);
+      line-height: 0.88;
+      letter-spacing: -0.045em;
+      color: #F4F3EE;
+      display: block;
+      text-shadow: 0 3px 0 rgba(10,10,10,0.12);
+    }
+    .hero-title .line.agents {
+      color: #1d4ed8;
+      text-align: right;
+      margin-top: -0.15em;
+    }
+
+    .hero-blocks {
+      position: relative; z-index: 2;
+      display: flex; gap: 0.5rem;
+      margin: 0.5rem 0;
+      justify-content: center;
+    }
+    .hero-blocks .blk {
+      height: 14px; border-radius: 2px;
+      border: 2px solid #0A0A0A;
+    }
+    .hero-blocks .blk.r { width: 56px; background: #E63946; }
+    .hero-blocks .blk.o { width: 36px; background: #F77F00; }
+    .hero-blocks .blk.g { width: 28px; background: #2A9D5F; }
+    .hero-blocks .blk.k { width: 76px; background: #0A0A0A; }
+
+    .hero-3d {
+      position: absolute; z-index: 3;
+      width: 640px; height: 440px;
+      right: -7%; bottom: 14%;
+      transform: rotate(-5deg) scale(1.02);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0.95;
+      filter:
+        contrast(1.28) saturate(1.25) brightness(1.05)
+        drop-shadow(0 35px 60px rgba(247,127,0,0.55))
+        drop-shadow(0 12px 18px rgba(0,0,0,0.45));
+      border-radius: 6px;
+      overflow: hidden;
+      animation: hero-float 6s ease-in-out infinite;
+    }
+    .hero-3d img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @keyframes hero-float {
+      0%, 100% { transform: rotate(-5deg) scale(1.02) translateY(0); }
+      50%      { transform: rotate(-5deg) scale(1.02) translateY(-8px); }
+    }
+    .section-3d-img.invert {
+      filter: invert(1) hue-rotate(180deg) contrast(1.05) brightness(1.05);
+      box-shadow: 12px 12px 0 #F77F00, 0 0 60px rgba(247, 127, 0, 0.15);
+    }
+
+    .hero-eyebrow {
+      position: relative; z-index: 2;
+      text-align: center;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #F4F3EE;
+      background: #0A0A0A;
+      border: 2px solid #0A0A0A;
+      padding: 0.65rem 1.2rem;
+      margin: 1.5rem auto 0;
+      max-width: fit-content;
+    }
+    .hero-eyebrow .num { color: #F77F00; }
+
+    @media (max-width: 700px) {
+      .hero-stage { margin: 0.5rem -1rem 2rem; padding: 3.5rem 1rem 3rem; }
+      .hero-circle { width: 460px; height: 460px; transform: translate(-50%, -45%); }
+      .hero-3d { width: 320px; height: 220px; right: -8%; bottom: 22%; }
+      .hero-corner { font-size: 0.52rem; }
+      .hero-corner.tr, .hero-corner.br { display: none; }
+    }
+
+    /* ── POST META ── */
+    .post-meta {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.78rem; color: #6b6b66;
+      padding-bottom: 2rem; border-bottom: 1px solid #cfccc1;
+      margin-bottom: 2.5rem; flex-wrap: wrap;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      letter-spacing: 0.04em;
+    }
+    .author-chip { display: flex; align-items: center; gap: 0.45rem; }
+    .author-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, #fb923c, #F77F00);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 0.65rem; font-weight: 600;
+      font-family: 'Archivo Black', sans-serif;
+    }
+
+    /* ── BODY ── */
+    .post-body { font-size: 1.075rem; line-height: 1.65; color: #1a1a1a; }
+    .post-body p {
+      font-family: 'Source Serif 4', Georgia, serif;
+      margin-bottom: 1.3rem;
+    }
+    .post-body h2 {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: 1.75rem;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: #0A0A0A;
+      margin: 3rem 0 1.25rem;
+      text-transform: uppercase;
+    }
+    .post-body strong { color: #0A0A0A; font-weight: 700; }
+    .post-body ol, .post-body ul { padding-left: 1.5rem; margin-bottom: 1.3rem; font-family: 'Source Serif 4', Georgia, serif; }
+    .post-body li { margin-bottom: 0.6rem; }
+    .post-body a { color: #1d4ed8; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+    .post-body a:hover { color: #F77F00; }
+
+    .post-body code {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.85em;
+      background: #0A0A0A;
+      color: #F4F3EE;
+      padding: 0.15em 0.45em;
+    }
+
+    .callout {
+      background: #EAE8E1;
+      border-left: 4px solid #E63946;
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: #0A0A0A;
+    }
+    .callout p { margin: 0; }
+    .callout strong { font-style: normal; }
+
+    .callout.orange {
+      border-left-color: #F77F00;
+    }
+
+    .pull-quote {
+      border-left: 4px solid #F77F00;
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: #0A0A0A;
+      background: #EAE8E1;
+    }
+    .pull-quote p { margin: 0; font-style: italic; }
+
+    /* ── COMPARISON TABLE ── */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.75rem 0;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 0.92rem;
+    }
+    .compare-table thead tr {
+      background: #0A0A0A;
+      color: #F4F3EE;
+    }
+    .compare-table thead th {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-weight: 700;
+    }
+    .compare-table thead th.orange { color: #F77F00; }
+    .compare-table thead th.blue { color: #3b82f6; }
+    .compare-table tbody tr {
+      border-bottom: 1px dashed #cfccc1;
+    }
+    .compare-table tbody tr:last-child { border-bottom: none; }
+    .compare-table tbody td {
+      padding: 0.65rem 1rem;
+      vertical-align: top;
+      color: #1a1a1a;
+    }
+    .compare-table tbody td:first-child {
+      border-right: 2px solid #0A0A0A;
+      color: #E63946;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.82rem;
+    }
+    .compare-table tbody td:last-child {
+      color: #2A9D5F;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.82rem;
+    }
+    .compare-table-wrap {
+      border: 2px solid #0A0A0A;
+      box-shadow: 8px 8px 0 #F77F00;
+      margin: 1.75rem 0;
+      overflow: hidden;
+    }
+
+    .stat-card {
+      background: #F4F3EE;
+      border: 2px solid #0A0A0A;
+      padding: 1.4rem 1.6rem;
+      margin: 1.75rem 0;
+      box-shadow: 8px 8px 0 #F77F00;
+    }
+    .stat-card .stat-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #6b6b66;
+      margin-bottom: 0.85rem;
+    }
+    .stat-row {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 0.5rem; padding: 0.55rem 0;
+      border-bottom: 1px dashed #cfccc1;
+      font-size: 0.92rem;
+      font-family: 'Source Serif 4', Georgia, serif;
+    }
+    .stat-row:last-child { border-bottom: 0; }
+    .stat-row .label { color: #1a1a1a; }
+    .stat-row .val {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      color: #0A0A0A;
+    }
+    .stat-row .val.old  { color: #E63946; }
+    .stat-row .val.new  { color: #2A9D5F; }
+
+    /* ── SECTION 3D IMAGES ── */
+    .section-3d {
+      margin: 3rem -1rem 2rem;
+      padding: 1rem;
+    }
+    .section-3d-img {
+      width: 100%; height: 280px;
+      object-fit: cover;
+      border: 2px solid #0A0A0A;
+      box-shadow: 12px 12px 0 #F77F00;
+      display: block;
+    }
+    .section-3d-cap {
+      margin-top: 0.85rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #6b6b66;
+    }
+
+    /* ── INLINE COLOR CHIPS ── */
+    .chip-r { background: #E63946; color: #F4F3EE; padding: 0.1em 0.4em; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.82em; }
+    .chip-o { background: #F77F00; color: #F4F3EE; padding: 0.1em 0.4em; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.82em; }
+    .chip-g { background: #2A9D5F; color: #F4F3EE; padding: 0.1em 0.4em; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.82em; }
+
+    /* ── SUBSCRIBE ── */
+    .sub-card {
+      background: #0A0A0A;
+      border: 2px solid #0A0A0A;
+      padding: 2.5rem;
+      margin: 3.5rem 0 0;
+      text-align: center;
+    }
+    .sub-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #F77F00;
+      margin-bottom: 0.5rem;
+    }
+    .sub-card h3 {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: 1.4rem;
+      line-height: 1.1;
+      color: #F4F3EE;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+    .sub-card p { font-size: 0.9rem; color: rgba(244,243,238,0.55); margin-bottom: 1.5rem; font-family: 'Source Serif 4', serif; }
+    .sub-form { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+    .sub-input {
+      font-family: 'Inter', sans-serif; font-size: 0.85rem;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      color: #fff; padding: 0.7rem 1.1rem; outline: none; width: 240px;
+    }
+    .sub-input::placeholder { color: rgba(255,255,255,0.3); }
+    .sub-input:focus { border-color: #F77F00; }
+    .sub-btn {
+      font-family: 'Archivo Black', sans-serif; font-size: 0.78rem;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      background: #F77F00; color: #0A0A0A; border: none;
+      padding: 0.7rem 1.5rem; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .sub-btn:hover { opacity: 0.85; }
+
+    /* ── READ NEXT ── */
+    .read-next { border-top: 1px solid #cfccc1; padding-top: 2rem; margin-top: 3rem; }
+    .read-next-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: #6b6b66;
+      margin-bottom: 1.25rem;
+    }
+    .rn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .rn-card {
+      display: flex; gap: 0.85rem; align-items: flex-start;
+      text-decoration: none;
+      background: #F4F3EE;
+      border: 2px solid #0A0A0A;
+      padding: 1rem;
+      transition: background 0.18s;
+    }
+    .rn-card:hover { background: #EAE8E1; }
+    .rn-card img { width: 60px; height: 60px; object-fit: cover; flex-shrink: 0; border: 1.5px solid #0A0A0A; }
+    .rn-tag {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.55rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #6b6b66;
+      margin-bottom: 0.3rem;
+    }
+    .rn-title {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: 0.88rem; line-height: 1.2;
+      color: #0A0A0A; letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+    @media (max-width: 700px) { .rn-grid { grid-template-columns: 1fr; } }
+
+    .post-nav { border-top: 1px solid #cfccc1; padding-top: 2rem; margin-top: 3rem; }
+    .back-link {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: #0A0A0A;
+      padding: 0.5rem 1rem;
+      border: 2px solid #0A0A0A;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .back-link:hover { background: #1d4ed8; color: #F4F3EE; border-color: #1d4ed8; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #EAE8E1;
+      border-top: 2px solid #0A0A0A;
+      padding: 2rem;
+    }
+    .footer-inner {
+      max-width: 800px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: #0A0A0A;
+    }
+    footer a { color: #0A0A0A; text-decoration: none; }
+    footer a:hover { color: #E63946; }
+    .footer-links { display: flex; gap: 1.5rem; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+
+  <script>
+    function handleSub(e) {
+      e.preventDefault();
+      const form = e.target;
+      const input = form.querySelector('.sub-input');
+      const btn = form.querySelector('.sub-btn');
+      btn.textContent = 'Sending…'; btn.disabled = true;
+      fetch('https://formspree.io/f/xwvwlybd', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: input.value, source: 'renamed-agents post' })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.ok) {
+          btn.textContent = "You're in ✓"; btn.style.background = '#2A9D5F'; btn.style.color = '#F4F3EE'; btn.disabled = false;
+          input.value = '';
+          setTimeout(() => { btn.textContent = 'Notify me →'; btn.style.background = ''; btn.style.color = ''; }, 4000);
+        } else { btn.textContent = 'Try again'; btn.style.background = '#E63946'; btn.disabled = false; }
+      })
+      .catch(() => { btn.textContent = 'Try again'; btn.style.background = '#E63946'; btn.disabled = false; });
+    }
+  </script>
+
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="https://sachinai1981-web.github.io/blog/">Sachin<span>.</span></a>
+      <a href="https://sachinai1981-web.github.io/blog/" class="nav-back">← All posts</a>
+    </div>
+  </nav>
+
+  <article>
+
+    <div class="post-tags">
+      <span class="tag r">Engineering</span>
+      <span class="tag o">Discipline</span>
+    </div>
+
+    <div class="hero-stage">
+      <div class="hero-circle" aria-hidden="true"></div>
+
+      <div class="hero-corner tl">
+        <strong>Functional Naming</strong>
+        Vol.08 // 2026
+      </div>
+      <div class="hero-corner tr">
+        <strong>Issue 05.02</strong>
+        Engineering × Discipline
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line">I Renamed</span>
+        <span class="hero-blocks" aria-hidden="true">
+          <span class="blk r"></span>
+          <span class="blk o"></span>
+          <span class="blk g"></span>
+          <span class="blk k"></span>
+        </span>
+        <span class="line agents">Seven Agents.</span>
+      </h1>
+
+      <div class="hero-3d" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1400&h=900&fit=crop&auto=format&q=90" alt="" loading="eager"/>
+      </div>
+
+      <p class="hero-eyebrow"><span class="num">26</span> Files Touched · <span class="num">30</span> Minutes · One Doctrine Found</p>
+
+      <div class="hero-corner bl">
+        <strong>SR // 05.02</strong>
+        9 min read
+      </div>
+      <div class="hero-corner br">
+        <strong>Field Notes</strong>
+        from the build layer
+      </div>
+    </div>
+
+    <div class="post-meta">
+      <div class="author-chip">
+        <div class="author-avatar">SR</div>
+        <span>Sachin Rai</span>
+      </div>
+      <span>·</span>
+      <span>May 2026</span>
+      <span>·</span>
+      <span>9 min read</span>
+    </div>
+
+    <div class="post-body">
+
+      <p>The moment of recognition came on a Tuesday, reading a daily note I had written six days earlier.</p>
+
+      <p>The note referenced Falcon twice, Spider once, and Owl in a context that made no obvious sense without knowing what Owl did. I had written the note. I still had to pause and mentally load a seven-item glossary before the sentences resolved into meaning. That is a bad sign. That is the sign that the vocabulary is doing negative work.</p>
+
+      <p>I run a seven-agent AI system I call the Single Brain. At the time, the agents had names: <strong>Brick</strong> (signal scanner), <strong>Owl</strong> (Bayesian grader), <strong>Bull</strong> (swing trade executor), <strong>Falcon</strong> (0-DTE put spread specialist), <strong>Spider</strong> (0-DTE iron condor specialist), <strong>Arrow</strong> (sales outreach pipeline), and <strong>Sage</strong> (knowledge vault). The names were memorable. They were also debt.</p>
+
+      <h2>Animal names are debt.</h2>
+
+      <p>The names came from a good instinct — give the system a personality, make the agents feel like a crew rather than a codebase. That instinct is reasonable for customer-facing products. It is actively harmful for internal vocabulary.</p>
+
+      <p><strong>A new reader had to memorize a seven-word legend before parsing a daily note.</strong> Not seven functions. Seven proper nouns mapped to functions via metaphor. Falcon and Spider — both drawn from nature, both referring to adjacent 0-DTE strategies on the same underlying — required tribal knowledge to differentiate. If you didn't already know that Falcon ran put spreads and Spider ran iron condors, the distinction between them was invisible. They were just two fast, predatory things.</p>
+
+      <p>Sage and Owl both coded as "wise." Brick was the only one that even gestured at structure (heavy, solid, foundation-like). Bull was the most misleading: the name implied bullish directional bias, but the agent traded both directions on a 21–60 day timeframe. The names told you nothing reliable about what each agent did.</p>
+
+      <p>And the system was growing. More agents would be added. Each new animal name would compound the legend. The glossary was going to keep getting longer. That's when I decided to kill all seven names and start again.</p>
+
+      <h2>What functional names actually buy you.</h2>
+
+      <p>The new names: <strong>Scanner</strong> / <strong>Grader</strong> / <strong>SwingTrader</strong> / <strong>DayPut</strong> / <strong>DayCondor</strong> / <strong>Outreach</strong> / <strong>Vault</strong>. Each one says exactly what its agent does. Self-documenting. No legend required.</p>
+
+      <p>A new reader — or the future you, six months out — reads "Scanner says NEUTRAL_BEAR" and the meaning is intact. Compare to "Brick says NEUTRAL_BEAR." Without the glossary, meaningless. The functional name carries its own payload. The metaphorical name requires a lookup every single time.</p>
+
+      <p>The disambiguation problem that plagued Falcon and Spider is gone. <span class="chip-o">DayPut</span> and <span class="chip-g">DayCondor</span> differ on the obvious axis — the strategy each runs. You don't have to know which bird is which. You read the word and you know the thing.</p>
+
+      <div class="pull-quote">
+        <p>Kunal Shah's framing applies here directly: <em>soulfulness ≠ efficiency.</em> Soul belongs in the products you ship to customers — the front door. Internal vocabulary is plumbing. Plumbing should be efficient, not soulful.</p>
+      </div>
+
+      <p>Three properties of a good functional name:</p>
+      <ol>
+        <li><strong>The function is obvious from the word alone.</strong> No supplementary knowledge required. "Scanner" tells you it scans. "Vault" tells you it stores. "SwingTrader" tells you it executes multi-week trades.</li>
+        <li><strong>No metaphor required.</strong> A six-month-removed reader doesn't need to load the legend. The name is the legend.</li>
+        <li><strong>Disambiguation is automatic.</strong> <span class="chip-r">DayPut</span> and DayCondor differ on the obvious axis. Falcon and Spider did not differ on any observable axis without context.</li>
+      </ol>
+
+      <h2>What it actually touched.</h2>
+
+      <p>The mechanical reality. Renaming "vocabulary" sounds small. <strong>It touched 26 files.</strong></p>
+
+      <p>Daily notes that referenced the old names. Concept articles in the wiki that cited the doctrine. Memory entries in Claude's project memory pointing future sessions to the old vocabulary. Project tracker rows in Obsidian. The cross-domain query skill specification. Two <code>CLAUDE.md</code> files — the root file and the vault file. One Codex sync file. An <code>AGENTS.md</code>. Around twenty concept articles in the compiled wiki.</p>
+
+      <p>Why touch all 26? Because the old names were doing <strong>work</strong> — they weren't inert labels, they were vocabulary the whole system spoke. The daily brief referenced them. The ask-anything skill referenced them. The memory system used them as anchors for cross-session continuity. <strong>Names doing work are not free to change.</strong> A simple global find-and-replace would have broken doctrine notes that explicitly named the old system as legacy — some references had to stay as historical record, some had to flip to the new vocabulary.</p>
+
+      <div class="stat-card">
+        <div class="stat-eyebrow">The seven-name swap — old vs new</div>
+        <div class="stat-row"><span class="label">Signal scanner</span><span class="val old">Brick</span></div>
+        <div class="stat-row"><span class="label">Bayesian grader</span><span class="val old">Owl</span></div>
+        <div class="stat-row"><span class="label">Swing trade executor (21–60 DTE)</span><span class="val old">Bull</span></div>
+        <div class="stat-row"><span class="label">0-DTE put spread specialist</span><span class="val old">Falcon</span></div>
+        <div class="stat-row"><span class="label">0-DTE iron condor specialist</span><span class="val old">Spider</span></div>
+        <div class="stat-row"><span class="label">Sales outreach pipeline</span><span class="val old">Arrow</span></div>
+        <div class="stat-row"><span class="label">Knowledge vault</span><span class="val old">Sage</span></div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-eyebrow">The seven-name swap — new vocabulary</div>
+        <div class="stat-row"><span class="label">Signal scanner</span><span class="val new">Scanner</span></div>
+        <div class="stat-row"><span class="label">Bayesian grader</span><span class="val new">Grader</span></div>
+        <div class="stat-row"><span class="label">Swing trade executor (21–60 DTE)</span><span class="val new">SwingTrader</span></div>
+        <div class="stat-row"><span class="label">0-DTE put spread specialist</span><span class="val new">DayPut</span></div>
+        <div class="stat-row"><span class="label">0-DTE iron condor specialist</span><span class="val new">DayCondor</span></div>
+        <div class="stat-row"><span class="label">Sales outreach pipeline</span><span class="val new">Outreach</span></div>
+        <div class="stat-row"><span class="label">Knowledge vault</span><span class="val new">Vault</span></div>
+      </div>
+
+      <p>The fix took roughly 30 minutes via a Python script with sentinels — protect folder paths first (so <code>bull-trading/</code> doesn't become <code>swingtrader-trading/</code>), then word-boundary replace on prose, then unprotect. The decision to do it took longer than the doing. Most naming decisions do.</p>
+
+      <h2>Layer 1 vs Layer 2.</h2>
+
+      <p>The doctrine that fell out of the rename. <strong>Two layers. Two rules.</strong></p>
+
+      <p><strong>Layer 1 is anything that runs.</strong> Folder paths, Python file names, signal IDs, launchd job names, log filenames, database tables, cron job identifiers. Do not rename Layer 1. It breaks scripts. It breaks scheduled jobs. It corrupts audit history. The old folder paths — <code>bull-trading/</code>, <code>falcon-trading/</code>, <code>spider-trading/</code> — stayed exactly as they were. The Python file names stayed exactly as they were. Layer 1 is stable by default.</p>
+
+      <p><strong>Layer 2 is anything that's prose.</strong> Documentation, daily notes, concept articles, briefings, commit messages, memory files, CLAUDE.md files, skill specifications. Always rename Layer 2 when the vocabulary improves. This is the layer where readers live. Cost of confusion compounds; cost of a rename is bounded and one-time.</p>
+
+      <div class="compare-table-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th class="orange">Layer 1 — stays (it runs)</th>
+              <th class="blue">Layer 2 — rename (it's prose)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>bull-trading/ (folder path)</td>
+              <td>Daily notes referencing "Bull"</td>
+            </tr>
+            <tr>
+              <td>falcon-trading/ (folder path)</td>
+              <td>Concept articles citing "Falcon"</td>
+            </tr>
+            <tr>
+              <td>agent4_grader.py (filename)</td>
+              <td>Memory entries using "Owl"</td>
+            </tr>
+            <tr>
+              <td>agent2_signals.py (filename)</td>
+              <td>CLAUDE.md persona descriptions</td>
+            </tr>
+            <tr>
+              <td>launchd job: com.sachin.bull</td>
+              <td>Cross-domain query skill spec</td>
+            </tr>
+            <tr>
+              <td>Log file: bull_eod_YYYYMMDD.log</td>
+              <td>Commit messages (going forward)</td>
+            </tr>
+            <tr>
+              <td>Signal ID: scanner_bull_high</td>
+              <td>Project briefings + briefings in docs</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>The mistake most teams make: they treat code names as load-bearing. They are not — they are pet names that happen to live inside the codebase. The vocabulary your team speaks in standups, briefings, and documentation is what needs the discipline. Layer 2 is where real cost of confusion accumulates.</p>
+
+      <h2>The Kunal Shah lesson.</h2>
+
+      <p>A long aside on naming as a discipline, not a preference.</p>
+
+      <p>Kunal Shah has a framing about Indian status culture — and more broadly, about any organization that optimizes for visible symbols of status over actual outcomes. The pattern: put the peacock vehicles in the lobby, give everyone an impressive title, run a lengthy credentialing process. The result is an organization that looks excellent and performs poorly. The signal-to-noise ratio on visible status is zero.</p>
+
+      <p>The same dynamic plays out in naming. Cute internal names flatter the team's sense of itself ("we're a clever shop, we have a crew with memorable names") at the cost of clarity for anyone not in the room. The future hire who reads your briefings. The contractor who runs your scripts for a week. The future you, returning from three weeks offline and needing to parse a system you built six months ago.</p>
+
+      <p><strong>The discipline:</strong> internal vocabulary is for the work, not for the team's self-image. Soul belongs in customer-facing brand. Plumbing should be efficient.</p>
+
+      <p>A second framing: <strong>names that compress meaning don't need a glossary.</strong> "Scanner says BEARISH" requires no preamble. "Brick says BEARISH" requires you to hold a seven-entry lookup table in working memory before you can parse the sentence. Every time. For as long as the system exists. Across every reader who ever interacts with it.</p>
+
+      <p>That lookup cost is tiny per instance. It compounds. Six months of daily notes, briefings, and cross-agent synthesis, all taxed by a glossary that should never have been necessary. <span class="chip-r">Naming debt</span> accrues silently, in the reader's working memory, not in the codebase.</p>
+
+      <figure class="section-3d">
+        <img class="section-3d-img invert" src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=1400&h=560&fit=crop&auto=format&q=85" alt="Name tags and identity labels arranged on a surface." loading="lazy" />
+        <figcaption class="section-3d-cap">// a name that needs a label is a name that hasn't earned its place in the system</figcaption>
+      </figure>
+
+      <h2>Why bother — the salvage value.</h2>
+
+      <p>Five concrete returns from the rename:</p>
+
+      <ol>
+        <li>
+          <strong>Onboarding cost dropped to zero.</strong> A new collaborator — or the future you returning from sabbatical — reads "Scanner says NEUTRAL_BEAR, Grader flags low confidence, SwingTrader is long-loaded" and the sentence is complete. No glossary lookup. No mental translation. The names do the work the names are supposed to do. This matters most at 6am before coffee when you're parsing a daily brief before market open.
+        </li>
+        <li>
+          <strong>Cross-system synthesis became cleaner.</strong> "Scanner is bearish but SwingTrader is long-loaded — risk concentration" is parseable in two seconds and actionable in three. With animal names, the reader had to mentally translate three proper nouns before the sentence even registered as a coherent thought. The cognitive overhead was not large. It was constant. That's worse.
+        </li>
+        <li>
+          <strong>Productization became thinkable.</strong> A starter kit for solo operators with the old animal names would have shipped with a glossary appendix before page one. Functional names ship without one. <span class="chip-g">Scanner / Grader / SwingTrader</span> need no explanation to someone who has never seen the system. That's the product pitch — immediate legibility.
+        </li>
+        <li>
+          <strong>Refactoring exposed hidden ambiguity.</strong> Two cases where the old vocabulary was concealing weak doctrine: Owl and Sage both coded as "wise knowledge agents," obscuring the real functional difference between a probabilistic grader and a static knowledge store. Falcon and Spider both coded as "fast, precise predators," obscuring the real difference between a defined-risk put spread and a defined-risk iron condor. The rename forced precision. The ambiguity was in the names, and the names were hiding it.
+        </li>
+        <li>
+          <strong>It set the rule for next time.</strong> Roster cap is seven functional names. Any new agent must justify a name that says what it does in one word, or fold under an existing function. DayPut and DayCondor are at capacity for 0-DTE. If a third strategy gets added, it either replaces one of them or it doesn't get its own agent. The naming rule enforces the architecture.
+        </li>
+      </ol>
+
+      <h2>The honest takeaway.</h2>
+
+      <p>Naming is debt or it is leverage. Animal names felt clever and were debt. Functional names feel boring and are leverage. The rename took 30 minutes — considerably less time than the cumulative minutes I had spent over the prior two weeks justifying the metaphors to myself when re-reading old notes.</p>
+
+      <p>Most teams won't make this rename because the problem is invisible. The cost doesn't show up in a dashboard. It shows up in a half-second pause, a brief wrinkle of mental effort, each time someone reads a sentence that contains "Brick" instead of "Scanner." That pause happens hundreds of times. The cost is real. It's just small enough to ignore — which is exactly how naming debt compounds.</p>
+
+      <p>Soul belongs at the front door. In the products you ship to customers. In the brand voice that greets a new user. Internal vocabulary is plumbing. <strong>Plumbing should be efficient.</strong></p>
+
+      <p>The old names — Brick, Owl, Bull, Falcon, Spider, Arrow, Sage — are now in the historical record. They served their purpose when the system was small enough that the builder was also the only reader. The system isn't that small anymore. The names had to grow up.</p>
+
+      <div class="callout orange">
+        <p><em>"Names that need a glossary are names that haven't earned the work they're doing."</em></p>
+      </div>
+
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-eyebrow">Next post</div>
+      <h3>FIVE CHEAP FIXES, 7.5 → 9.5.</h3>
+      <p>How a 90-minute lint pass took my second-brain vault from passable to ship-ready. Five fixes anyone running Obsidian + Claude can apply this week.</p>
+      <form class="sub-form" onsubmit="handleSub(event)">
+        <input type="email" class="sub-input" name="email" placeholder="you@company.com" required />
+        <button type="submit" class="sub-btn">Notify me →</button>
+      </form>
+    </div>
+
+    <div class="read-next">
+      <p class="read-next-eyebrow">Read next</p>
+      <div class="rn-grid">
+        <a class="rn-card" href="compounding-systems.html">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=120&h=120&fit=crop&auto=format&q=75" alt="" loading="lazy" />
+          <div>
+            <p class="rn-tag">Knowledge</p>
+            <p class="rn-title">Most Second Brains Just Rotate. (Three Laws of compounding)</p>
+          </div>
+        </a>
+        <a class="rn-card" href="win-rate-trap.html">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=120&h=120&fit=crop&auto=format&q=75" alt="" loading="lazy" />
+          <div>
+            <p class="rn-tag">Strategy</p>
+            <p class="rn-title">Win Rate Lies. (When the dashboard flatters)</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="post-nav">
+      <a href="https://sachinai1981-web.github.io/blog/" class="back-link">← Back to all posts</a>
+    </div>
+
+  </article>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2026 Sachin Rai · AI + Enterprise Sales</p>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank">LinkedIn</a>
+        <a href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank">Subject Scorer</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

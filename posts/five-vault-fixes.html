@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Five Cheap Fixes Took My Vault From 7.5 To 9.5. — Sachin Rai</title>
+  <meta name="description" content="A 90-minute lint pass on a knowledge vault: 19 missing banners, 132 unindexed notes, 24 confidence gaps, 6 open concept gaps, plus a contradiction scan. Score 7.5 → 9.5. Here's the whole pass, the failures, and the pattern." />
+  <link rel="canonical" href="https://sachinai1981-web.github.io/blog/posts/five-vault-fixes.html" />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="obsidian, vault lint, second brain, knowledge management, audit, pkm, claude code, vault hygiene, knowledge graph, llm wiki" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://sachinai1981-web.github.io/blog/posts/five-vault-fixes.html" />
+  <meta property="og:title" content="Five Cheap Fixes Took My Vault From 7.5 To 9.5." />
+  <meta property="og:description" content="A 90-minute lint pass on a knowledge vault: 19 missing banners, 132 unindexed notes, 24 confidence gaps, 6 open concept gaps, plus a contradiction scan. Score 7.5 → 9.5." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop&auto=format&q=85" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Sachin Rai" />
+  <meta property="article:published_time" content="2026-05-02" />
+  <meta property="article:author" content="Sachin Rai" />
+  <meta property="article:tag" content="Knowledge" />
+  <meta property="article:tag" content="Operations" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Five Cheap Fixes Took My Vault From 7.5 To 9.5." />
+  <meta name="twitter:description" content="A 90-minute lint pass: 19 missing banners, 132 unindexed notes, 24 confidence gaps. Score 7.5 → 9.5. Here's the whole pass." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop&auto=format&q=85" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Five Cheap Fixes Took My Vault From 7.5 To 9.5.",
+    "url": "https://sachinai1981-web.github.io/blog/posts/five-vault-fixes.html",
+    "datePublished": "2026-05-02",
+    "dateModified": "2026-05-02",
+    "author": {
+      "@type": "Person",
+      "name": "Sachin Rai",
+      "url": "https://sachinai1981-web.github.io/blog/",
+      "sameAs": ["https://www.linkedin.com/in/sachinr1/"]
+    },
+    "publisher": { "@type": "Person", "name": "Sachin Rai", "url": "https://sachinai1981-web.github.io/blog/" },
+    "description": "A 90-minute lint pass on a knowledge vault: 19 missing banners, 132 unindexed notes, 24 confidence gaps, 6 open concept gaps, plus a contradiction scan. Score 7.5 → 9.5.",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop&auto=format&q=85"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper:    #F4F3EE;
+      --paper-2:  #EAE8E1;
+      --ink:      #0A0A0A;
+      --ink-2:    #1a1a1a;
+      --ink-mute: #6b6b66;
+      --hairline: #cfccc1;
+      --red:      #E63946;
+      --orange:   #F77F00;
+      --green:    #2A9D5F;
+      --blue:     #1d4ed8;
+      --blue-l:   #3b82f6;
+    }
+
+    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      background: #F4F3EE;
+      color: #0A0A0A;
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 50;
+      pointer-events: none; opacity: 0.06;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%230a0a0a'/%3E%3C/svg%3E");
+      background-size: 4px 4px; mix-blend-mode: multiply;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #F4F3EE;
+      border-bottom: 2px solid #0A0A0A;
+      padding: 1rem 1.5rem;
+    }
+    .nav-inner {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: #0A0A0A;
+      position: relative;
+      padding-left: 2.6rem;
+      text-decoration: none;
+    }
+    .nav-logo::before {
+      content: ''; position: absolute; left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 10px; height: 10px;
+      background: #1d4ed8;
+      box-shadow: 14px 0 0 #F77F00, 28px 0 0 #2A9D5F;
+    }
+    .nav-logo span { color: #1d4ed8; }
+    .nav-back {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #0A0A0A;
+      padding: 0.5rem 1rem;
+      border: 2px solid #0A0A0A;
+      background: #F4F3EE;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-back:hover {
+      background: #1d4ed8;
+      color: #F4F3EE;
+      border-color: #1d4ed8;
+    }
+
+    /* ── ARTICLE ── */
+    article { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+    .post-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .tag {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.55rem;
+      border: 1.5px solid #0A0A0A;
+      color: #0A0A0A;
+    }
+    .tag.r { background: #E63946; color: #F4F3EE; border-color: #E63946; }
+    .tag.o { background: #F77F00; color: #F4F3EE; border-color: #F77F00; }
+
+    /* ── HERO STAGE — ink monochrome circle + chip blend + corner labels ── */
+    .hero-stage {
+      position: relative;
+      margin: 1rem -2rem 3rem;
+      padding: 4.5rem 1.5rem 4rem;
+      overflow: visible;
+      isolation: isolate;
+      background: #F4F3EE;
+    }
+    .hero-corner {
+      position: absolute; z-index: 4;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #0A0A0A;
+      line-height: 1.5;
+    }
+    .hero-corner.tl { top: 1.2rem; left: 1.5rem; }
+    .hero-corner.tr { top: 1.2rem; right: 1.5rem; text-align: right; }
+    .hero-corner.bl { bottom: 1.2rem; left: 1.5rem; }
+    .hero-corner.br { bottom: 1.2rem; right: 1.5rem; text-align: right; }
+    .hero-corner strong { font-weight: 900; display: block; }
+
+    .hero-circle {
+      position: absolute; z-index: 0;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -48%);
+      width: 640px; height: 640px;
+      max-width: 90vw; max-height: 90vw;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #1a1a1a 0%, #0A0A0A 55%, #000000 100%);
+      box-shadow:
+        0 40px 90px -25px rgba(0, 0, 0, 0.50),
+        inset -50px -50px 120px rgba(0, 0, 0, 0.45);
+      pointer-events: none;
+    }
+
+    .hero-title {
+      position: relative; z-index: 2;
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 1.5rem 0;
+    }
+    .hero-title .line {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: clamp(4rem, 13vw, 8.5rem);
+      line-height: 0.88;
+      letter-spacing: -0.045em;
+      color: #F4F3EE;
+      display: block;
+      text-shadow: 0 3px 0 rgba(10,10,10,0.12);
+    }
+    .hero-title .line.score {
+      color: #F77F00;
+      text-align: right;
+      margin-top: -0.15em;
+    }
+
+    .hero-blocks {
+      position: relative; z-index: 2;
+      display: flex; gap: 0.5rem;
+      margin: 0.5rem 0;
+      justify-content: center;
+    }
+    .hero-blocks .blk {
+      height: 14px; border-radius: 2px;
+      border: 2px solid #0A0A0A;
+    }
+    .hero-blocks .blk.r { width: 56px; background: #E63946; }
+    .hero-blocks .blk.o { width: 36px; background: #F77F00; }
+    .hero-blocks .blk.g { width: 28px; background: #2A9D5F; }
+    .hero-blocks .blk.k { width: 76px; background: #0A0A0A; }
+
+    .hero-3d {
+      position: absolute; z-index: 3;
+      width: 640px; height: 440px;
+      right: -7%; bottom: 14%;
+      transform: rotate(-5deg) scale(1.02);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0.95;
+      filter:
+        contrast(1.28) saturate(1.25) brightness(1.05)
+        drop-shadow(0 35px 60px rgba(0,0,0,0.55))
+        drop-shadow(0 12px 18px rgba(0,0,0,0.45));
+      border-radius: 6px;
+      overflow: hidden;
+      animation: hero-float 6s ease-in-out infinite;
+    }
+    .hero-3d img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @keyframes hero-float {
+      0%, 100% { transform: rotate(-5deg) scale(1.02) translateY(0); }
+      50%      { transform: rotate(-5deg) scale(1.02) translateY(-8px); }
+    }
+    .section-3d-img.invert {
+      filter: invert(1) hue-rotate(180deg) contrast(1.05) brightness(1.05);
+      box-shadow: 12px 12px 0 #0A0A0A, 0 0 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .hero-eyebrow {
+      position: relative; z-index: 2;
+      text-align: center;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #F4F3EE;
+      background: #0A0A0A;
+      border: 2px solid #0A0A0A;
+      padding: 0.65rem 1.2rem;
+      margin: 1.5rem auto 0;
+      max-width: fit-content;
+    }
+    .hero-eyebrow .num { color: #F77F00; }
+
+    @media (max-width: 700px) {
+      .hero-stage { margin: 0.5rem -1rem 2rem; padding: 3.5rem 1rem 3rem; }
+      .hero-circle { width: 460px; height: 460px; transform: translate(-50%, -45%); }
+      .hero-3d { width: 320px; height: 220px; right: -8%; bottom: 22%; }
+      .hero-corner { font-size: 0.52rem; }
+      .hero-corner.tr, .hero-corner.br { display: none; }
+    }
+
+    /* ── POST META ── */
+    .post-meta {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.78rem; color: #6b6b66;
+      padding-bottom: 2rem; border-bottom: 1px solid #cfccc1;
+      margin-bottom: 2.5rem; flex-wrap: wrap;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      letter-spacing: 0.04em;
+    }
+    .author-chip { display: flex; align-items: center; gap: 0.45rem; }
+    .author-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, #1a1a1a, #3d3d3d);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 0.65rem; font-weight: 600;
+      font-family: 'Archivo Black', sans-serif;
+    }
+
+    /* ── BODY ── */
+    .post-body { font-size: 1.075rem; line-height: 1.65; color: #1a1a1a; }
+    .post-body p {
+      font-family: 'Source Serif 4', Georgia, serif;
+      margin-bottom: 1.3rem;
+    }
+    .post-body h2 {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: 1.75rem;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: #0A0A0A;
+      margin: 3rem 0 1.25rem;
+      text-transform: uppercase;
+    }
+    .post-body strong { color: #0A0A0A; font-weight: 700; }
+    .post-body ol, .post-body ul { padding-left: 1.5rem; margin-bottom: 1.3rem; font-family: 'Source Serif 4', Georgia, serif; }
+    .post-body li { margin-bottom: 0.6rem; }
+    .post-body a { color: #1d4ed8; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+    .post-body a:hover { color: #F77F00; }
+
+    .post-body code {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.85em;
+      background: #0A0A0A;
+      color: #F4F3EE;
+      padding: 0.15em 0.45em;
+    }
+
+    .callout {
+      background: #EAE8E1;
+      border-left: 4px solid #E63946;
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: #0A0A0A;
+    }
+    .callout p { margin: 0; }
+    .callout strong { font-style: normal; }
+
+    /* Pull quote with R/O/G triple-color top border */
+    .pull-quote {
+      background: #F4F3EE;
+      border-top: 5px solid transparent;
+      border-image: linear-gradient(90deg, #E63946 33%, #F77F00 33% 66%, #2A9D5F 66%) 1;
+      padding: 1.6rem 1.75rem 1.4rem;
+      margin: 2.5rem 0;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid #cfccc1;
+    }
+    .pull-quote p {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: 1.2rem;
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      color: #0A0A0A;
+      margin: 0;
+      font-style: normal;
+    }
+    .pull-quote cite {
+      display: block;
+      margin-top: 0.8rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #6b6b66;
+      font-style: normal;
+    }
+
+    /* Before/after table */
+    .audit-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0 2rem;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 0.92rem;
+    }
+    .audit-table thead tr {
+      background: #0A0A0A;
+      color: #F4F3EE;
+    }
+    .audit-table thead th {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.65rem 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+    .audit-table tbody tr { border-bottom: 1px solid #cfccc1; }
+    .audit-table tbody tr:last-child { border-bottom: 2px solid #0A0A0A; }
+    .audit-table tbody td {
+      padding: 0.6rem 1rem;
+      color: #1a1a1a;
+    }
+    .audit-table tbody td:first-child { font-weight: 500; }
+    .audit-table .before { color: #b91c1c; font-family: 'Archivo Black', sans-serif; font-size: 0.9rem; }
+    .audit-table .after  { color: #2A9D5F; font-family: 'Archivo Black', sans-serif; font-size: 0.9rem; }
+
+    .stat-card {
+      background: #F4F3EE;
+      border: 2px solid #0A0A0A;
+      padding: 1.4rem 1.6rem;
+      margin: 1.75rem 0;
+      box-shadow: 8px 8px 0 #0A0A0A;
+    }
+    .stat-card .stat-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #6b6b66;
+      margin-bottom: 0.85rem;
+    }
+    .stat-row {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 0.5rem; padding: 0.55rem 0;
+      border-bottom: 1px dashed #cfccc1;
+      font-size: 0.92rem;
+      font-family: 'Source Serif 4', Georgia, serif;
+    }
+    .stat-row:last-child { border-bottom: 0; }
+    .stat-row .label { color: #1a1a1a; }
+    .stat-row .val {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      color: #0A0A0A;
+    }
+    .stat-row .val.bad  { color: #b91c1c; }
+    .stat-row .val.good { color: #2A9D5F; }
+
+    .formula {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      background: #0A0A0A;
+      color: #F4F3EE;
+      border: 2px solid #0A0A0A;
+      padding: 1.2rem 1.4rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      margin: 1.5rem 0;
+    }
+
+    /* ── SECTION 3D IMAGES ── */
+    .section-3d {
+      margin: 3rem -1rem 2rem;
+      padding: 1rem;
+    }
+    .section-3d-img {
+      width: 100%; height: 280px;
+      object-fit: cover;
+      border: 2px solid #0A0A0A;
+      box-shadow: 12px 12px 0 #0A0A0A;
+      display: block;
+    }
+    .section-3d-cap {
+      margin-top: 0.85rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #6b6b66;
+    }
+
+    /* Inline color accent spans */
+    .accent-r { color: #E63946; font-weight: 700; }
+    .accent-o { color: #F77F00; font-weight: 700; }
+    .accent-g { color: #2A9D5F; font-weight: 700; }
+
+    /* ── SUBSCRIBE ── */
+    .sub-card {
+      background: #0A0A0A;
+      border: 2px solid #0A0A0A;
+      padding: 2.5rem;
+      margin: 3.5rem 0 0;
+      text-align: center;
+    }
+    .sub-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #F77F00;
+      margin-bottom: 0.5rem;
+    }
+    .sub-card h3 {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: 1.4rem;
+      line-height: 1.1;
+      color: #F4F3EE;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+    .sub-card p { font-size: 0.9rem; color: rgba(244,243,238,0.55); margin-bottom: 1.5rem; font-family: 'Source Serif 4', serif; }
+    .sub-form { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+    .sub-input {
+      font-family: 'Inter', sans-serif; font-size: 0.85rem;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      color: #fff; padding: 0.7rem 1.1rem; outline: none; width: 240px;
+    }
+    .sub-input::placeholder { color: rgba(255,255,255,0.3); }
+    .sub-input:focus { border-color: #F77F00; }
+    .sub-btn {
+      font-family: 'Archivo Black', sans-serif; font-size: 0.78rem;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      background: #F77F00; color: #0A0A0A; border: none;
+      padding: 0.7rem 1.5rem; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .sub-btn:hover { opacity: 0.85; }
+
+    /* ── READ NEXT ── */
+    .read-next { border-top: 1px solid #cfccc1; padding-top: 2rem; margin-top: 3rem; }
+    .read-next-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: #6b6b66;
+      margin-bottom: 1.25rem;
+    }
+    .rn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .rn-card {
+      display: flex; gap: 0.85rem; align-items: flex-start;
+      text-decoration: none;
+      background: #F4F3EE;
+      border: 2px solid #0A0A0A;
+      padding: 1rem;
+      transition: background 0.18s;
+    }
+    .rn-card:hover { background: #EAE8E1; }
+    .rn-card img { width: 60px; height: 60px; object-fit: cover; flex-shrink: 0; border: 1.5px solid #0A0A0A; }
+    .rn-tag {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.55rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #6b6b66;
+      margin-bottom: 0.3rem;
+    }
+    .rn-title {
+      font-family: 'Archivo Black', system-ui, sans-serif;
+      font-size: 0.88rem; line-height: 1.2;
+      color: #0A0A0A; letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+    @media (max-width: 700px) { .rn-grid { grid-template-columns: 1fr; } }
+
+    .post-nav { border-top: 1px solid #cfccc1; padding-top: 2rem; margin-top: 3rem; }
+    .back-link {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: #0A0A0A;
+      padding: 0.5rem 1rem;
+      border: 2px solid #0A0A0A;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .back-link:hover { background: #1d4ed8; color: #F4F3EE; border-color: #1d4ed8; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #EAE8E1;
+      border-top: 2px solid #0A0A0A;
+      padding: 2rem;
+    }
+    .footer-inner {
+      max-width: 800px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: #0A0A0A;
+    }
+    footer a { color: #0A0A0A; text-decoration: none; }
+    footer a:hover { color: #E63946; }
+    .footer-links { display: flex; gap: 1.5rem; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+
+  <script>
+    function handleSub(e) {
+      e.preventDefault();
+      const form = e.target;
+      const input = form.querySelector('.sub-input');
+      const btn = form.querySelector('.sub-btn');
+      btn.textContent = 'Sending…'; btn.disabled = true;
+      fetch('https://formspree.io/f/xwvwlybd', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: input.value, source: 'five-fixes post' })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.ok) {
+          btn.textContent = "You're in ✓"; btn.style.background = '#2A9D5F'; btn.style.color = '#F4F3EE'; btn.disabled = false;
+          input.value = '';
+          setTimeout(() => { btn.textContent = 'Notify me →'; btn.style.background = ''; btn.style.color = ''; }, 4000);
+        } else { btn.textContent = 'Try again'; btn.style.background = '#E63946'; btn.disabled = false; }
+      })
+      .catch(() => { btn.textContent = 'Try again'; btn.style.background = '#E63946'; btn.disabled = false; });
+    }
+  </script>
+
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="https://sachinai1981-web.github.io/blog/">Sachin<span>.</span></a>
+      <a href="https://sachinai1981-web.github.io/blog/" class="nav-back">← All posts</a>
+    </div>
+  </nav>
+
+  <article>
+
+    <div class="post-tags">
+      <span class="tag r">Knowledge</span>
+      <span class="tag o">Operations</span>
+    </div>
+
+    <div class="hero-stage">
+      <div class="hero-circle" aria-hidden="true"></div>
+
+      <div class="hero-corner tl">
+        <strong>Vault Lint Pass</strong>
+        Vol.09 // 2026
+      </div>
+      <div class="hero-corner tr">
+        <strong>Issue 05.02</strong>
+        Knowledge × Operations
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line">Five Fixes.</span>
+        <span class="hero-blocks" aria-hidden="true">
+          <span class="blk r"></span>
+          <span class="blk o"></span>
+          <span class="blk g"></span>
+          <span class="blk k"></span>
+        </span>
+        <span class="line score">9.5/10.</span>
+      </h1>
+
+      <div class="hero-3d" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&h=900&fit=crop&auto=format&q=90" alt="" loading="eager"/>
+      </div>
+
+      <p class="hero-eyebrow"><span class="num">19</span> Banners · <span class="num">132</span> Unindexed · <span class="num">90</span> Minutes · One Pattern</p>
+
+      <div class="hero-corner bl">
+        <strong>SR // 05.02</strong>
+        9 min read
+      </div>
+      <div class="hero-corner br">
+        <strong>Field Notes</strong>
+        from the knowledge layer
+      </div>
+    </div>
+
+    <div class="post-meta">
+      <div class="author-chip">
+        <div class="author-avatar">SR</div>
+        <span>Sachin Rai</span>
+      </div>
+      <span>·</span>
+      <span>May 2026</span>
+      <span>·</span>
+      <span>9 min read</span>
+    </div>
+
+    <div class="post-body">
+
+      <h2>The audit you don't want to run.</h2>
+
+      <p>Most people running an Obsidian vault — or Roam, or Logseq, or any linked note system — have a quiet suspicion that it has rotted. That a meaningful fraction of what they've built is broken, orphaned, or invisible to the tooling they rely on. They don't run the audit because <strong>the audit will tell them</strong>. So the suspicion stays a suspicion. The rot compounds. The vault that should be the most maintained is the one running closest to the LLM — and every gap in the vault is a gap in the answer the LLM can give you.</p>
+
+      <p>Here's the situation with mine. The vault: 88 concept articles, 301 source files, 13 production agents querying it, approximately six months old. The audit: a slash command — <code>/vault-lint</code> — that runs nine checks across frontmatter, backlinks, retrieval coverage, concept gaps, forgetting curves, and contradiction detection. The score before the lint: <strong>7.5/10.</strong> After: <strong>9.5/10.</strong> Total time: ninety minutes.</p>
+
+      <p>This post is the full receipt. Every check. Every fix. Every file touched. And the one pattern that fell out when it was done.</p>
+
+      <h2>What the lint actually checks.</h2>
+
+      <p>Before walking through the fixes, it's worth knowing exactly what the lint is measuring. Most "vault hygiene" posts cover banners and orphaned notes and call it done. The interesting checks — contradiction detection, forgetting curves, retrieval coverage — are where the actual rot lives. Here's the full nine, with the before/after numbers:</p>
+
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Before</th>
+            <th>After</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Banners present</td>
+            <td class="before">95.4%</td>
+            <td class="after">97.0%</td>
+          </tr>
+          <tr>
+            <td>Index coverage</td>
+            <td class="before">56%</td>
+            <td class="after">100%</td>
+          </tr>
+          <tr>
+            <td>Concept gaps</td>
+            <td class="before">2 open</td>
+            <td class="after">0 open</td>
+          </tr>
+          <tr>
+            <td>Confidence missing</td>
+            <td class="before">24 articles</td>
+            <td class="after">4 (admin only)</td>
+          </tr>
+          <tr>
+            <td>Forgetting curves</td>
+            <td class="before">0 flagged</td>
+            <td class="after">0 flagged</td>
+          </tr>
+          <tr>
+            <td>Score</td>
+            <td class="before">7.5 / 10</td>
+            <td class="after">9.5 / 10</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>And here are the nine checks in full:</p>
+
+      <ol>
+        <li><strong>Missing banners.</strong> Checks frontmatter for the <code>banner:</code> field on every concept article. Notes without one look half-written regardless of content quality. <span class="accent-r">19 flagged</span> in this pass.</li>
+        <li><strong>Orphaned notes.</strong> Notes with zero backlinks — they exist in the vault but nothing points to them. <span class="accent-o">13 flagged</span>, of which 12 were intentional (admin and index files). One genuine orphan found.</li>
+        <li><strong>Concept gaps.</strong> Topics with three or more source notes but no concept article synthesizing them. The lint flags these as unwritten syntheses. Two still open at audit time — both got written.</li>
+        <li><strong>Raw inbox age.</strong> Files sitting in the raw intake folder older than seven days without being compiled. Zero flagged — inbox was clean.</li>
+        <li><strong>VAULT-INDEX coverage.</strong> The navigation index lists every note the LLM can retrieve during a query. 132 notes were on disk but unlisted. <span class="accent-r">Biggest gap: 56% coverage.</span></li>
+        <li><strong>Contradictions across concept articles.</strong> A semantic scan comparing claims across the trading-related articles. Two tensions found. Zero hard contradictions.</li>
+        <li><strong>Stale claims.</strong> Deferred in this pass — too expensive to run without a targeted scope. Marked for next quarterly audit.</li>
+        <li><strong>Forgetting curves.</strong> Notes with low confidence and no recent confirmation flag as candidates for re-confirmation. Zero flagged — all high-risk notes had been confirmed within the last two months.</li>
+        <li><strong>Confidence distribution.</strong> Checks for the v2 frontmatter fields (<code>confidence</code>, <code>sources_count</code>, <code>last_confirmed</code>, <code>memory_tier</code>) that the forgetting curve check reads. <span class="accent-o">24 articles missing</span> at least one field.</li>
+      </ol>
+
+      <h2>Fix #1 — Banners (cosmetic, but invisible without).</h2>
+
+      <p>The cheapest fix. Approximately three minutes of scripting. Banner frontmatter — a hero image at the top of every note — is what makes Obsidian's reading mode feel like a magazine rather than a text dump. Notes without banners feel half-finished even when the content is strong. <strong>The visual cue is a quality signal.</strong> The rule: every concept article gets a <code>picsum.photos</code> banner with a two-keyword seed, chosen to reflect the topic.</p>
+
+      <p>The fix was a Python script that walked the flagged files, protected paths that intentionally have no banner (Excalidraw drawings, admin indexes, template files), inserted the frontmatter block at the top of each note, and wrapped any edge cases where the frontmatter already existed but the banner key was missing. Eleven files updated. Eight skipped intentionally.</p>
+
+      <p>The lesson from this one: <strong>when a hygiene rule has clear inclusions and exclusions, a script is faster than a thread of "is this one a banner case?" decisions.</strong> The triage cost — reading each note, deciding, acting — exceeds the fix cost by a factor of ten. Don't manually triage what a regex can filter in milliseconds.</p>
+
+      <div class="pull-quote">
+        <p>"The vault you don't audit is the vault you don't trust. The vault you do audit becomes the only one you do."</p>
+        <cite>— Pattern that fell out at the end of this pass</cite>
+      </div>
+
+      <h2>Fix #2 — Confidence backfill (versioning your claims).</h2>
+
+      <p>The audit found 24 concept articles missing the v2 confidence fields: <code>confidence</code>, <code>sources_count</code>, <code>last_confirmed</code>, and <code>memory_tier</code>. These four fields are what the forgetting curve check reads. <strong>Without them, the lint can't run decay analysis on those notes.</strong> They're invisible to the temporal health check — and therefore invisible to any LLM query that weights notes by recency and confidence.</p>
+
+      <p>Fix: another script. Default fields were backfilled across all flagged articles (confidence 0.7, sources_count 1, last_confirmed set to audit date, memory_tier semantic). Load-bearing notes — the ones that underpin the entire query architecture — got higher confidence overrides applied manually: <span class="accent-g">Single Brain Pattern at 0.9</span>, Persona Roster at 0.95, Cross-domain Synthesis at 0.85. Twenty files updated. Four admin files skipped.</p>
+
+      <p>The lesson: <strong>frontmatter is your file's metadata layer. If your tooling can't query it, your tooling can't audit it.</strong> Backfill the fields that any future pass will need to read. The cost of missing a field is invisible until you try to run the check — and then the entire category silently fails.</p>
+
+      <h2>Fix #3 — Retrieval coverage (the biggest gap).</h2>
+
+      <p>This was the headline finding of the audit. The vault had 301 resource notes on disk. Only 169 were referenced in the navigation index — the file the LLM reads first when answering a query. That's 56% coverage. <strong>44% of the vault was invisible</strong> to any agent querying through the navigation layer.</p>
+
+      <p>The reason this matters so much: the LLM querying pattern used in this vault — the one Karpathy describes as an LLM-queryable wiki — reads the index file first, then pulls only the notes that the index indicates are relevant. If a note isn't in the index, the LLM doesn't know to pull it. <span class="accent-r">It might as well not exist</span> for query-time purposes. 132 notes were effectively off the map.</p>
+
+      <p>The fix: a Python pass grouped the 132 unlisted files by subfolder and appended a "RECENTLY ADDED" section to the navigation index, organized by subfolder with one-line descriptions for each note. Coverage moved from 56% to 100% in a single script run. The unlisted files broke down roughly as: 33 in news clips, 20 in version-archives, 12 in autoquant-v6 signal notes, 7 in interview series transcripts, and the remainder scattered across concept subtopics that had grown faster than the index was updated.</p>
+
+      <p>The lesson: <strong>retrieval is the ceiling on compounding.</strong> A vault with 1,000 articles and broken indexing is worth less than 100 articles in a perfect index — because the LLM can only compound what it can reach. Every unlisted note is latent value that never surfaces. This fix alone accounts for the largest jump in score of any single change made in this pass.</p>
+
+      <figure class="section-3d">
+        <img class="section-3d-img invert" src="https://images.unsplash.com/photo-1542621334-a254cf47733d?w=1400&h=560&fit=crop&auto=format&q=85" alt="Clean paperwork and documents in an organized workspace." loading="lazy" />
+        <figcaption class="section-3d-cap">// 132 notes off the map — the index is the retrieval ceiling</figcaption>
+      </figure>
+
+      <h2>Fix #4 — Closing concept gaps (the slow one).</h2>
+
+      <p>Six concept gaps had been listed in the navigation index since April. Four had quietly closed themselves — other compile passes had filled them, and the index entry had never been updated to reflect that. <strong>Two remained genuinely open: Compounding Systems and ESM.</strong> Both had abundant source material — three-plus source notes each, collected over months — but nobody had sat down and written the synthesis.</p>
+
+      <p>The fix: write both. Approximately thirty minutes per concept article. The pattern for each was the same: synthesize across the source notes, structure by H2 sections (What it is / Three Laws / Anti-patterns / Ghost notes / Venture opportunities), add banner and section images, cross-link to adjacent concept articles. Both got written. <span class="accent-g">All six prior concept gaps now resolved.</span> Navigation index updated to mark them done.</p>
+
+      <p>The lesson: <strong>gaps don't close themselves. They close when you decide to write them.</strong> A note unwritten is the most expensive note in the vault — every query that should hit it either goes elsewhere or returns nothing. The source notes that should feed it are already paying storage costs, reading costs, and maintenance costs. They compound nothing until the synthesis exists.</p>
+
+      <p>There's no script for this one. The work is the work.</p>
+
+      <h2>Fix #5 — Contradiction scan (the one that rewards re-reading).</h2>
+
+      <p>The most ambitious of the five. A semantic scan across the trading-related concept articles — five of them — looking for claims that conflict with each other. The goal wasn't to find errors. It was to find the spots where two articles disagreed because the author learned something between writing them, and hadn't gone back to mark the first one as updated.</p>
+
+      <p><strong>Two tensions surfaced. Zero hard contradictions.</strong> Both were resolvable with a one-line clarifier:</p>
+
+      <p><span class="accent-r">Tension 1:</span> One article said "the bear-high signal moved from MARGINAL to REAL_EDGE." Another said "the bear-high signal is losing money." Both claims were true — but they were describing different timeframes. One was forward-looking (the signal had improved recently). The other was describing lifetime payoff across the full history. Fix: a single inline clarifier on the first article noting the timeframe distinction, with a backlink to the lifetime-stats article.</p>
+
+      <p><span class="accent-o">Tension 2:</span> One article cited a 90% historical win rate as the basis for boosting a new signal. The same vault had documented — in the Win Rate Lies article — that high win rates can mask losing expectancy. Fix: a <code>&gt; [!warning]</code> callout on the new-signal article noting the Trojan Horse risk explicitly, with a backlink to the lifetime-payoff article so any reader (human or LLM) could follow the chain.</p>
+
+      <p>The lesson: <strong>the contradiction scan is not just for finding errors. It's for finding the spots where two articles disagree because the author learned something between them.</strong> Those tensions are the most valuable annotations a vault can have — they show the learning arc, not just the current position. A vault with annotated tensions is more honest and more useful than a vault where every article pretends to be timeless.</p>
+
+      <h2>The pattern that fell out.</h2>
+
+      <p>Five fixes. Ninety minutes. Score from 7.5 to 9.5. The pattern is clean enough to be a rule:</p>
+
+      <p><span class="accent-r">Cheap fixes are scriptable.</span> Banners, confidence backfill, index coverage — none of these require judgment. They require a decision about the rule, and then a script that applies it. Don't think about them. Decide once. Script once. Run forever.</p>
+
+      <p><span class="accent-o">Coverage fixes need decisions.</span> The index gap required categorizing 132 files and writing one-line descriptions for each. That's not a script problem — it's a judgment problem. But the judgment is fast once you commit to doing it. The work took twenty minutes. The indecision had been costing compounding value for months.</p>
+
+      <p><span class="accent-g">Contradiction scans need patience.</span> You have to read carefully, hold two articles in your head at once, and decide whether the disagreement is an error or a learning artifact. It can't be rushed. The reward isn't a bug fix — it's a richer, more honest document that will serve future queries better.</p>
+
+      <p>And the meta-rule, the one that applies before any of this: <strong>the audit you don't want to run is the audit you most need to run.</strong> The vault that's closest to your LLM agents — the one doing the most work, the one you rely on most — is the one most worth fixing.</p>
+
+      <p>I ran the audit because I had a quiet suspicion that something was wrong. The suspicion turned out to be correct. Forty-four percent of my vault was invisible. Two syntheses I needed had never been written. Twenty-four articles were blind spots in the decay model. None of that was obvious until I ran the check.</p>
+
+      <p>Run the check. The vault you audit becomes the only one you trust.</p>
+
+    </div>
+
+    <div class="sub-card">
+      <div class="sub-eyebrow">Next post</div>
+      <h3>MOST BRAINS JUST ROTATE.</h3>
+      <p>Three Laws decide whether a knowledge stack compounds or rotates. The 88-article vault, the retrieval ceiling, and the patience problem most knowledge workers ignore.</p>
+      <form class="sub-form" onsubmit="handleSub(event)">
+        <input type="email" class="sub-input" name="email" placeholder="you@company.com" required />
+        <input type="hidden" name="source" value="five-fixes post" />
+        <button type="submit" class="sub-btn">Notify me →</button>
+      </form>
+    </div>
+
+    <div class="read-next">
+      <p class="read-next-eyebrow">Read next</p>
+      <div class="rn-grid">
+        <a class="rn-card" href="compounding-systems.html">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=120&h=120&fit=crop&auto=format&q=75" alt="" loading="lazy" />
+          <div>
+            <p class="rn-tag">Knowledge</p>
+            <p class="rn-title">Most Second Brains Just Rotate. (Three Laws of compounding)</p>
+          </div>
+        </a>
+        <a class="rn-card" href="llm-knowledge-base-obsidian.html">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=120&h=120&fit=crop&auto=format&q=75" alt="" loading="lazy" />
+          <div>
+            <p class="rn-tag">Knowledge</p>
+            <p class="rn-title">Turning an Obsidian vault into an LLM-queryable knowledge base</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="post-nav">
+      <a href="https://sachinai1981-web.github.io/blog/" class="back-link">← Back to all posts</a>
+    </div>
+
+  </article>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2026 Sachin Rai · AI + Enterprise Sales</p>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank">LinkedIn</a>
+        <a href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank">Subject Scorer</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
