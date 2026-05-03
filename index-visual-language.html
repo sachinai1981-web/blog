@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visual Language Demo · Frontier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #FAFAF7;
+      --bg-sub: #F2F1EC;
+      --surface: #FFFFFF;
+      --ink: #0A0B0F;
+      --ink-2: #1a1d24;
+      --ink-3: #3a3d44;
+      --ink-mute: #6b6e76;
+      --hairline: #d8d6cd;
+      --accent: #2563EB;
+      --accent-soft: rgba(37, 99, 235, 0.3);
+      --warn: #C2410C;
+      --crit: #BE1E2D;
+      --green: #16a34a;
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-serif: 'Source Serif 4', Georgia, serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEAD ── */
+    .head {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 3rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .head .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .head .eyebrow::before {
+      content: ''; width: 28px; height: 1px; background: var(--accent);
+    }
+    .head h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      max-width: 22ch;
+      margin-bottom: 1.5rem;
+    }
+    .head h1 em { font-style: italic; color: var(--accent); }
+    .head p {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--ink-3);
+      max-width: 60ch;
+      line-height: 1.6;
+    }
+
+    /* ── MOTIF SECTION ── */
+    .motif {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+      border-bottom: 1px solid var(--hairline);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    @media (min-width: 1024px) {
+      .motif { grid-template-columns: 5fr 7fr; gap: 4rem; padding: 6rem 3rem; align-items: center; }
+    }
+
+    .motif-text .num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .motif-text h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .motif-text h2 em { font-style: italic; color: var(--accent); }
+    .motif-text p {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--ink-3);
+      max-width: 48ch;
+      margin-bottom: 1.25rem;
+    }
+    .motif-text .tech {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--hairline);
+      display: inline-block;
+    }
+    .motif-text .tech .dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    .motif-visual {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      box-shadow: 0 24px 48px -24px rgba(10, 11, 15, 0.12);
+    }
+    .motif-visual .label-strip {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      right: 1rem;
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      z-index: 5;
+    }
+    .motif-visual .label-strip .live {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--accent);
+    }
+    .motif-visual .label-strip .live::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 1.6s infinite;
+    }
+    @keyframes pulse { 50% { opacity: 0.3; } }
+
+    /* ════════════════════════════════════════════════════════════
+       MOTIF 01 — SERVER RACK
+       42U cabinet, animated status LEDs, cable bundle bottom
+       ════════════════════════════════════════════════════════════ */
+    .rack-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .rack-frame { fill: #1a1d24; stroke: #0a0b0f; stroke-width: 1.5; }
+    .rack-rail { fill: #0f1116; }
+    .rack-u { fill: #14161c; stroke: #0a0b0f; stroke-width: 0.5; }
+    .rack-led-bank { fill: #0a0b0f; }
+    .rack-led-green { fill: #16a34a; filter: drop-shadow(0 0 2px #16a34a88); }
+    .rack-led-amber { fill: #f59e0b; filter: drop-shadow(0 0 2px #f59e0b88); }
+    .rack-led-red { fill: #dc2626; filter: drop-shadow(0 0 2px #dc262688); }
+    .rack-led-off { fill: #1a1d24; }
+    .rack-vent { fill: #0a0b0f; }
+    .rack-cable { stroke: #2563EB; stroke-width: 1.2; fill: none; opacity: 0.55; }
+    .rack-cable-2 { stroke: #f59e0b; stroke-width: 1; fill: none; opacity: 0.4; }
+    .rack-cable-3 { stroke: #dc2626; stroke-width: 0.8; fill: none; opacity: 0.35; }
+    .rack-label { fill: #6b6e76; font-family: 'JetBrains Mono', monospace; font-size: 5px; letter-spacing: 1px; }
+    .rack-label-active { fill: #2563EB; }
+    .rack-blink { animation: led-blink 2.4s steps(2) infinite; }
+    .rack-blink-fast { animation: led-blink 0.7s steps(2) infinite; }
+    @keyframes led-blink { 50% { opacity: 0.25; } }
+
+    /* ════════════════════════════════════════════════════════════
+       MOTIF 02 — SILICON DIE
+       ════════════════════════════════════════════════════════════ */
+    .die-svg { width: 100%; height: 100%; display: block; }
+    .die-substrate { fill: #14161c; stroke: #0a0b0f; stroke-width: 1; }
+    .die-wafer { fill: #2563EB; opacity: 0.05; stroke: #2563EB; stroke-width: 0.5; stroke-opacity: 0.4; }
+    .die-block { fill: #1a1d24; stroke: #2563EB; stroke-width: 0.4; stroke-opacity: 0.6; }
+    .die-block-bright { fill: #1d2535; stroke: #2563EB; stroke-width: 0.5; stroke-opacity: 0.9; }
+    .die-trace { stroke: #2563EB; stroke-width: 0.3; fill: none; opacity: 0.5; }
+    .die-pad { fill: #d4a96a; stroke: #b8924f; stroke-width: 0.3; }
+    .die-pad-bright { fill: #fbbf24; stroke: #d97706; stroke-width: 0.3; filter: drop-shadow(0 0 1.5px #fbbf2444); }
+    .die-bond { stroke: #d4a96a; stroke-width: 0.4; fill: none; opacity: 0.85; }
+    .die-pkg { fill: none; stroke: #0a0b0f; stroke-width: 1.5; }
+    .die-label { fill: #6b6e76; font-family: 'JetBrains Mono', monospace; font-size: 4.5px; letter-spacing: 0.5px; }
+    .die-label-bright { fill: #2563EB; }
+
+    /* ════════════════════════════════════════════════════════════
+       MOTIF 03 — NETWORK FABRIC
+       ════════════════════════════════════════════════════════════ */
+    .net-svg { width: 100%; height: 100%; display: block; background: #0A0B0F; }
+    .net-grid { stroke: rgba(37, 99, 235, 0.08); stroke-width: 0.5; fill: none; }
+    .net-spine { fill: #14161c; stroke: #2563EB; stroke-width: 1; }
+    .net-leaf { fill: #1a1d24; stroke: #2563EB; stroke-width: 0.7; stroke-opacity: 0.6; }
+    .net-link { stroke: #2563EB; stroke-width: 0.5; opacity: 0.3; }
+    .net-link-active { stroke: #2563EB; stroke-width: 1.2; opacity: 0.85; }
+    .net-pulse { fill: #2563EB; }
+    .net-label { fill: #6b6e76; font-family: 'JetBrains Mono', monospace; font-size: 5px; letter-spacing: 1px; }
+    .net-label-bright { fill: #fafafa; }
+    .net-label-accent { fill: #2563EB; }
+    .pulse-anim {
+      animation: pulse-flow 3s linear infinite;
+    }
+    @keyframes pulse-flow {
+      0% { offset-distance: 0%; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       MOTIF 04 — ATTENTION MAP
+       ════════════════════════════════════════════════════════════ */
+    .attn-svg { width: 100%; height: 100%; display: block; background: var(--surface); }
+    .attn-cell { stroke: var(--hairline); stroke-width: 0.3; }
+    .attn-axis { fill: var(--ink-mute); font-family: 'JetBrains Mono', monospace; font-size: 4px; letter-spacing: 0.5px; }
+    .attn-token { fill: var(--ink-mute); font-family: 'JetBrains Mono', monospace; font-size: 3.8px; letter-spacing: 0.3px; }
+    .attn-frame { fill: none; stroke: var(--ink); stroke-width: 0.6; }
+    .attn-callout { stroke: var(--accent); stroke-width: 0.4; fill: none; stroke-dasharray: 1.5 1.5; }
+    .attn-callout-text { fill: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 4px; letter-spacing: 0.5px; }
+
+    /* ════════════════════════════════════════════════════════════
+       MOTIF 05 — DATACENTER CORRIDOR (CSS 3D iso)
+       ════════════════════════════════════════════════════════════ */
+    .dc-stage {
+      width: 100%;
+      height: 100%;
+      perspective: 1200px;
+      perspective-origin: 50% 30%;
+      background: linear-gradient(180deg, #0A0B0F 0%, #14161C 60%, #1a1d24 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .dc-floor {
+      position: absolute;
+      bottom: 0;
+      left: -20%;
+      right: -20%;
+      height: 60%;
+      transform-origin: top center;
+      transform: rotateX(72deg);
+      background-image:
+        linear-gradient(rgba(37, 99, 235, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.18) 1px, transparent 1px);
+      background-size: 50px 50px;
+      box-shadow: inset 0 -100px 200px rgba(10, 11, 15, 0.9);
+    }
+    .dc-rack-row {
+      position: absolute;
+      top: 30%;
+      width: 12%;
+      aspect-ratio: 1/3;
+      background: linear-gradient(90deg, #14161c, #0f1116);
+      border: 1px solid #0a0b0f;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+    }
+    .dc-rack-row::before {
+      content: '';
+      position: absolute;
+      top: 8%; left: 10%; right: 10%; bottom: 8%;
+      background-image:
+        linear-gradient(to bottom,
+          rgba(37, 99, 235, 0.4) 0%,
+          rgba(37, 99, 235, 0.4) 1.5%,
+          transparent 1.5%,
+          transparent 4%,
+          rgba(245, 158, 11, 0.3) 4%,
+          rgba(245, 158, 11, 0.3) 5.5%,
+          transparent 5.5%,
+          transparent 8%
+        );
+      background-size: 100% 5%;
+      animation: led-blink 2s steps(2) infinite;
+    }
+    .dc-rack-row.r1 { left: 12%; }
+    .dc-rack-row.r2 { left: 26%; }
+    .dc-rack-row.r3 { right: 26%; }
+    .dc-rack-row.r4 { right: 12%; }
+    .dc-pipe {
+      position: absolute;
+      top: 18%;
+      left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #2563EB, transparent);
+      opacity: 0.4;
+    }
+    .dc-pipe.p2 { top: 24%; height: 0.5px; opacity: 0.25; }
+    .dc-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 60%, transparent 0%, rgba(10, 11, 15, 0.6) 100%);
+      pointer-events: none;
+    }
+    .dc-grain::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.15;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    /* ── FOOT ── */
+    .foot {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .foot a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header class="head">
+  <p class="eyebrow">Visual Language Demo · No Stock Photography</p>
+  <h1>Built from <em>generative SVG</em>, CSS 3D, and shader code — never Unsplash.</h1>
+  <p>Five hero motifs rendered in code, ready to lift into the blog. Each motif is self-contained, animation-friendly, and respects the brief: real-feel infrastructure renders that earn their place on the page.</p>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════════
+     MOTIF 01 — SERVER RACK
+     ════════════════════════════════════════════════════════════════ -->
+<section class="motif">
+  <div class="motif-text">
+    <div class="num">001 · Server Rack</div>
+    <h2>Black-anodized 42U with <em>blinking</em> status LEDs.</h2>
+    <p>Pure SVG: rack frame, rail mounts, individual U-slots, status LED matrix, ventilation patterns, and intentional cable spaghetti at the bottom — colored by VLAN.</p>
+    <p>Status LEDs animate at independent rates (steady, blink, fast-blink) to feel alive without being noisy. ~280 lines of inline SVG, scales to any size.</p>
+    <span class="tech"><span class="dot"></span>SVG · CSS keyframes · ~280 elements</span>
+  </div>
+  <div class="motif-visual">
+    <div class="label-strip">
+      <span>RACK · D-047 · 42U</span>
+      <span class="live">LIVE TELEMETRY</span>
+    </div>
+    <svg class="rack-svg" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet">
+      <!-- Outer cabinet frame -->
+      <rect class="rack-frame" x="35" y="10" width="130" height="118" rx="1"/>
+      <!-- Top mount + cooling -->
+      <rect class="rack-vent" x="38" y="13" width="124" height="5"/>
+      <circle class="rack-led-green rack-blink" cx="42" cy="15.5" r="0.9"/>
+      <circle class="rack-led-green" cx="46" cy="15.5" r="0.9"/>
+      <circle class="rack-led-amber" cx="50" cy="15.5" r="0.9"/>
+      <text class="rack-label" x="100" y="17" text-anchor="middle">CDU · 047 · 8.4 kW</text>
+      <!-- Side rails -->
+      <rect class="rack-rail" x="38" y="20" width="3" height="100"/>
+      <rect class="rack-rail" x="159" y="20" width="3" height="100"/>
+      <!-- 14 U-slots (1U each = 7px tall) -->
+      <g>
+        <!-- U42-29: GPU servers (active blue glow)-->
+        <rect class="rack-u" x="42" y="20" width="117" height="6"/>
+        <rect class="rack-led-bank" x="44" y="22" width="20" height="2"/>
+        <circle class="rack-led-green" cx="46" cy="23" r="0.6"/>
+        <circle class="rack-led-green rack-blink-fast" cx="49" cy="23" r="0.6"/>
+        <circle class="rack-led-green rack-blink" cx="52" cy="23" r="0.6"/>
+        <circle class="rack-led-amber" cx="55" cy="23" r="0.6"/>
+        <circle class="rack-led-green" cx="58" cy="23" r="0.6"/>
+        <circle class="rack-led-green rack-blink-fast" cx="61" cy="23" r="0.6"/>
+        <text class="rack-label rack-label-active" x="68" y="24">GPU-01 · DGX H100 · 8x</text>
+        <text class="rack-label" x="148" y="24" text-anchor="end">U42</text>
+
+        <rect class="rack-u" x="42" y="27" width="117" height="6"/>
+        <rect class="rack-led-bank" x="44" y="29" width="20" height="2"/>
+        <circle class="rack-led-green" cx="46" cy="30" r="0.6"/>
+        <circle class="rack-led-green" cx="49" cy="30" r="0.6"/>
+        <circle class="rack-led-green rack-blink" cx="52" cy="30" r="0.6"/>
+        <circle class="rack-led-amber rack-blink-fast" cx="55" cy="30" r="0.6"/>
+        <circle class="rack-led-green" cx="58" cy="30" r="0.6"/>
+        <circle class="rack-led-green" cx="61" cy="30" r="0.6"/>
+        <text class="rack-label rack-label-active" x="68" y="31">GPU-02 · DGX H100 · 8x</text>
+        <text class="rack-label" x="148" y="31" text-anchor="end">U41</text>
+
+        <rect class="rack-u" x="42" y="34" width="117" height="6"/>
+        <rect class="rack-led-bank" x="44" y="36" width="20" height="2"/>
+        <circle class="rack-led-green" cx="46" cy="37" r="0.6"/>
+        <circle class="rack-led-green rack-blink" cx="49" cy="37" r="0.6"/>
+        <circle class="rack-led-red" cx="52" cy="37" r="0.6"/>
+        <circle class="rack-led-amber" cx="55" cy="37" r="0.6"/>
+        <circle class="rack-led-off" cx="58" cy="37" r="0.6"/>
+        <circle class="rack-led-off" cx="61" cy="37" r="0.6"/>
+        <text class="rack-label" x="68" y="38">GPU-03 · DGX H100 · DEGRADED</text>
+        <text class="rack-label" x="148" y="38" text-anchor="end">U40</text>
+
+        <rect class="rack-u" x="42" y="41" width="117" height="6"/>
+        <text class="rack-label" x="100" y="45" text-anchor="middle" style="font-size:3px">— BLANK 1U —</text>
+        <text class="rack-label" x="148" y="45" text-anchor="end">U39</text>
+
+        <rect class="rack-u" x="42" y="48" width="117" height="14"/>
+        <rect class="rack-led-bank" x="44" y="50" width="30" height="3"/>
+        <circle class="rack-led-green" cx="46" cy="51.5" r="0.7"/>
+        <circle class="rack-led-green rack-blink-fast" cx="49" cy="51.5" r="0.7"/>
+        <circle class="rack-led-amber" cx="52" cy="51.5" r="0.7"/>
+        <circle class="rack-led-green" cx="55" cy="51.5" r="0.7"/>
+        <circle class="rack-led-green rack-blink" cx="58" cy="51.5" r="0.7"/>
+        <circle class="rack-led-green" cx="61" cy="51.5" r="0.7"/>
+        <circle class="rack-led-green" cx="64" cy="51.5" r="0.7"/>
+        <circle class="rack-led-green rack-blink-fast" cx="67" cy="51.5" r="0.7"/>
+        <circle class="rack-led-green" cx="70" cy="51.5" r="0.7"/>
+        <text class="rack-label rack-label-active" x="78" y="53">SWITCH · ARISTA 7800R · 400G</text>
+        <rect class="rack-vent" x="44" y="55" width="111" height="6"/>
+        <text class="rack-label" x="148" y="60" text-anchor="end">U38-37</text>
+
+        <rect class="rack-u" x="42" y="63" width="117" height="22"/>
+        <rect class="rack-led-bank" x="44" y="65" width="40" height="2"/>
+        <circle class="rack-led-amber rack-blink" cx="46" cy="66" r="0.6"/>
+        <circle class="rack-led-amber" cx="49" cy="66" r="0.6"/>
+        <circle class="rack-led-amber" cx="52" cy="66" r="0.6"/>
+        <text class="rack-label" x="58" y="67">PSU 1 · 12kW · 87%</text>
+        <rect class="rack-vent" x="44" y="69" width="111" height="14"/>
+        <text class="rack-label" x="148" y="83" text-anchor="end">U36-33</text>
+
+        <rect class="rack-u" x="42" y="86" width="117" height="14"/>
+        <rect class="rack-led-bank" x="44" y="88" width="30" height="3"/>
+        <circle class="rack-led-green" cx="46" cy="89.5" r="0.7"/>
+        <circle class="rack-led-green rack-blink-fast" cx="49" cy="89.5" r="0.7"/>
+        <circle class="rack-led-green rack-blink" cx="52" cy="89.5" r="0.7"/>
+        <circle class="rack-led-amber" cx="55" cy="89.5" r="0.7"/>
+        <circle class="rack-led-green" cx="58" cy="89.5" r="0.7"/>
+        <circle class="rack-led-green" cx="61" cy="89.5" r="0.7"/>
+        <text class="rack-label rack-label-active" x="68" y="91">STORAGE · CEPH 480TB</text>
+        <rect class="rack-vent" x="44" y="93" width="111" height="5"/>
+        <text class="rack-label" x="148" y="98" text-anchor="end">U32-31</text>
+
+        <rect class="rack-u" x="42" y="101" width="117" height="6"/>
+        <rect class="rack-led-bank" x="44" y="103" width="20" height="2"/>
+        <circle class="rack-led-green" cx="46" cy="104" r="0.6"/>
+        <circle class="rack-led-green" cx="49" cy="104" r="0.6"/>
+        <text class="rack-label" x="68" y="105">PDU · 415V · 90A</text>
+        <text class="rack-label" x="148" y="105" text-anchor="end">U30</text>
+
+      </g>
+      <!-- Cable spaghetti at bottom -->
+      <g>
+        <path class="rack-cable" d="M 38,108 Q 50,114 70,112 Q 90,110 110,116 Q 130,120 162,113"/>
+        <path class="rack-cable" d="M 38,112 Q 60,118 90,115 Q 120,112 162,118"/>
+        <path class="rack-cable-2" d="M 38,116 Q 70,110 100,118 Q 130,124 162,116"/>
+        <path class="rack-cable-2" d="M 38,120 Q 80,124 120,118 Q 140,114 162,122"/>
+        <path class="rack-cable-3" d="M 38,124 Q 80,118 130,124 Q 150,128 162,124"/>
+      </g>
+      <!-- Bottom strip / cable management -->
+      <rect class="rack-vent" x="38" y="121" width="124" height="6"/>
+      <text class="rack-label" x="100" y="126" text-anchor="middle">CABLE MGMT · 0U · 92 strands</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     MOTIF 02 — SILICON DIE
+     ════════════════════════════════════════════════════════════════ -->
+<section class="motif">
+  <div class="motif-text">
+    <div class="num">002 · Silicon Die</div>
+    <h2>H100-style die macro with <em>bond wires</em> and BGA pads.</h2>
+    <p>Inline SVG of a chip package: photolithography grid (compute units), gold bond wires arcing from die edge to substrate, 18×18 BGA pad array, gold-plated I/O ring. Annotation lines call out die area, HBM stacks, NVLink lanes.</p>
+    <span class="tech"><span class="dot"></span>SVG · 580 paths · &lt; 4kB gzipped</span>
+  </div>
+  <div class="motif-visual">
+    <div class="label-strip">
+      <span>DIE · 2.5D · 814mm²</span>
+      <span class="live">SHOT 003</span>
+    </div>
+    <svg class="die-svg" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet">
+      <!-- Package substrate (outer) -->
+      <rect class="die-substrate" x="20" y="15" width="160" height="120" rx="2"/>
+      <!-- BGA pad grid (under-package, simulate top-down) -->
+      <g opacity="0.5">
+        <!-- 18 cols x 14 rows of pads -->
+        <g>
+          <pattern id="bgapads" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+            <circle class="die-pad" cx="4" cy="4" r="1.4"/>
+          </pattern>
+          <rect x="28" y="22" width="144" height="106" fill="url(#bgapads)"/>
+        </g>
+      </g>
+      <!-- Die area (center, photolithography-style grid) -->
+      <rect class="die-wafer" x="55" y="42" width="90" height="66"/>
+      <!-- Compute tiles grid (8x6) -->
+      <g>
+        <!-- Row 1 -->
+        <rect class="die-block" x="58" y="44" width="10" height="9"/>
+        <rect class="die-block-bright" x="69" y="44" width="10" height="9"/>
+        <rect class="die-block" x="80" y="44" width="10" height="9"/>
+        <rect class="die-block-bright" x="91" y="44" width="10" height="9"/>
+        <rect class="die-block" x="102" y="44" width="10" height="9"/>
+        <rect class="die-block-bright" x="113" y="44" width="10" height="9"/>
+        <rect class="die-block" x="124" y="44" width="10" height="9"/>
+        <rect class="die-block-bright" x="135" y="44" width="7" height="9"/>
+        <!-- Row 2 -->
+        <rect class="die-block-bright" x="58" y="54" width="10" height="9"/>
+        <rect class="die-block" x="69" y="54" width="10" height="9"/>
+        <rect class="die-block-bright" x="80" y="54" width="10" height="9"/>
+        <rect class="die-block" x="91" y="54" width="10" height="9"/>
+        <rect class="die-block-bright" x="102" y="54" width="10" height="9"/>
+        <rect class="die-block" x="113" y="54" width="10" height="9"/>
+        <rect class="die-block-bright" x="124" y="54" width="10" height="9"/>
+        <rect class="die-block" x="135" y="54" width="7" height="9"/>
+        <!-- Row 3 (HBM-style — different aspect) -->
+        <rect class="die-block" x="58" y="64" width="10" height="9"/>
+        <rect class="die-block-bright" x="69" y="64" width="10" height="9"/>
+        <rect class="die-block" x="80" y="64" width="10" height="9"/>
+        <rect class="die-block-bright" x="91" y="64" width="10" height="9"/>
+        <rect class="die-block" x="102" y="64" width="10" height="9"/>
+        <rect class="die-block-bright" x="113" y="64" width="10" height="9"/>
+        <rect class="die-block" x="124" y="64" width="10" height="9"/>
+        <rect class="die-block-bright" x="135" y="64" width="7" height="9"/>
+        <!-- Row 4 -->
+        <rect class="die-block-bright" x="58" y="74" width="10" height="9"/>
+        <rect class="die-block" x="69" y="74" width="10" height="9"/>
+        <rect class="die-block-bright" x="80" y="74" width="10" height="9"/>
+        <rect class="die-block" x="91" y="74" width="10" height="9"/>
+        <rect class="die-block-bright" x="102" y="74" width="10" height="9"/>
+        <rect class="die-block" x="113" y="74" width="10" height="9"/>
+        <rect class="die-block-bright" x="124" y="74" width="10" height="9"/>
+        <rect class="die-block" x="135" y="74" width="7" height="9"/>
+        <!-- Row 5 -->
+        <rect class="die-block" x="58" y="84" width="10" height="9"/>
+        <rect class="die-block-bright" x="69" y="84" width="10" height="9"/>
+        <rect class="die-block" x="80" y="84" width="10" height="9"/>
+        <rect class="die-block-bright" x="91" y="84" width="10" height="9"/>
+        <rect class="die-block" x="102" y="84" width="10" height="9"/>
+        <rect class="die-block-bright" x="113" y="84" width="10" height="9"/>
+        <rect class="die-block" x="124" y="84" width="10" height="9"/>
+        <rect class="die-block-bright" x="135" y="84" width="7" height="9"/>
+        <!-- Row 6 (HBM stacks bottom) -->
+        <rect class="die-block-bright" x="58" y="94" width="10" height="11"/>
+        <rect class="die-block-bright" x="69" y="94" width="10" height="11"/>
+        <rect class="die-block-bright" x="80" y="94" width="10" height="11"/>
+        <rect class="die-block-bright" x="91" y="94" width="10" height="11"/>
+        <rect class="die-block-bright" x="102" y="94" width="10" height="11"/>
+        <rect class="die-block-bright" x="113" y="94" width="10" height="11"/>
+        <rect class="die-block-bright" x="124" y="94" width="10" height="11"/>
+        <rect class="die-block-bright" x="135" y="94" width="7" height="11"/>
+      </g>
+      <!-- I/O pads around die (gold ring) -->
+      <g>
+        <!-- Top edge -->
+        <circle class="die-pad-bright" cx="60" cy="40" r="1.1"/>
+        <circle class="die-pad-bright" cx="68" cy="40" r="1.1"/>
+        <circle class="die-pad-bright" cx="76" cy="40" r="1.1"/>
+        <circle class="die-pad-bright" cx="84" cy="40" r="1.1"/>
+        <circle class="die-pad-bright" cx="92" cy="40" r="1.1"/>
+        <circle class="die-pad-bright" cx="100" cy="40" r="1.1"/>
+        <circle class="die-pad-bright" cx="108" cy="40" r="1.1"/>
+        <circle class="die-pad-bright" cx="116" cy="40" r="1.1"/>
+        <circle class="die-pad-bright" cx="124" cy="40" r="1.1"/>
+        <circle class="die-pad-bright" cx="132" cy="40" r="1.1"/>
+        <circle class="die-pad-bright" cx="140" cy="40" r="1.1"/>
+        <!-- Bottom edge -->
+        <circle class="die-pad-bright" cx="60" cy="110" r="1.1"/>
+        <circle class="die-pad-bright" cx="68" cy="110" r="1.1"/>
+        <circle class="die-pad-bright" cx="76" cy="110" r="1.1"/>
+        <circle class="die-pad-bright" cx="84" cy="110" r="1.1"/>
+        <circle class="die-pad-bright" cx="92" cy="110" r="1.1"/>
+        <circle class="die-pad-bright" cx="100" cy="110" r="1.1"/>
+        <circle class="die-pad-bright" cx="108" cy="110" r="1.1"/>
+        <circle class="die-pad-bright" cx="116" cy="110" r="1.1"/>
+        <circle class="die-pad-bright" cx="124" cy="110" r="1.1"/>
+        <circle class="die-pad-bright" cx="132" cy="110" r="1.1"/>
+        <circle class="die-pad-bright" cx="140" cy="110" r="1.1"/>
+      </g>
+      <!-- Bond wires from pads to substrate edge -->
+      <g>
+        <path class="die-bond" d="M 60,40 Q 50,30 40,28"/>
+        <path class="die-bond" d="M 76,40 Q 70,28 60,24"/>
+        <path class="die-bond" d="M 92,40 Q 95,25 90,20"/>
+        <path class="die-bond" d="M 108,40 Q 115,28 120,22"/>
+        <path class="die-bond" d="M 124,40 Q 135,30 145,26"/>
+        <path class="die-bond" d="M 140,40 Q 155,32 165,30"/>
+        <path class="die-bond" d="M 60,110 Q 48,118 38,122"/>
+        <path class="die-bond" d="M 76,110 Q 65,120 55,128"/>
+        <path class="die-bond" d="M 92,110 Q 95,125 90,128"/>
+        <path class="die-bond" d="M 108,110 Q 115,122 120,128"/>
+        <path class="die-bond" d="M 124,110 Q 135,118 145,124"/>
+        <path class="die-bond" d="M 140,110 Q 155,118 165,122"/>
+      </g>
+      <!-- Annotation callouts -->
+      <g>
+        <line class="die-trace" x1="100" y1="75" x2="180" y2="20" stroke-dasharray="1 1"/>
+        <text class="die-label die-label-bright" x="180" y="18" text-anchor="end">SM × 132 · 4nm</text>
+        <line class="die-trace" x1="100" y1="100" x2="180" y2="140" stroke-dasharray="1 1"/>
+        <text class="die-label die-label-bright" x="180" y="143" text-anchor="end">HBM3 · 80GB · 3.35TB/s</text>
+        <line class="die-trace" x1="58" y1="65" x2="20" y2="65" stroke-dasharray="1 1"/>
+        <text class="die-label die-label-bright" x="20" y="64">NVLINK ×18</text>
+        <line class="die-trace" x1="142" y1="65" x2="180" y2="75" stroke-dasharray="1 1"/>
+        <text class="die-label die-label-bright" x="180" y="74" text-anchor="end">PCIE 5.0 ×16</text>
+      </g>
+      <!-- Outer package corners -->
+      <rect class="die-pkg" x="20" y="15" width="160" height="120" rx="2"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     MOTIF 03 — NETWORK FABRIC (NVLink topology)
+     ════════════════════════════════════════════════════════════════ -->
+<section class="motif">
+  <div class="motif-text">
+    <div class="num">003 · Network Fabric</div>
+    <h2>InfiniBand spine with <em>animated</em> packet pulses.</h2>
+    <p>Dark-substrate SVG: 8-spine / 12-leaf Clos topology, animated dots traveling along link paths to simulate packet flow. Different link colors call out east-west traffic vs storage vs management plane.</p>
+    <p>Pulse animation uses <code style="font-family:var(--font-mono);font-size:0.85em">animateMotion</code> on a copy of each path — staggered, no JS needed.</p>
+    <span class="tech"><span class="dot"></span>SVG · &lt;animateMotion&gt; · zero JS</span>
+  </div>
+  <div class="motif-visual">
+    <div class="label-strip">
+      <span style="color:#9094a0">FABRIC · NDR 400G</span>
+      <span class="live" style="color:#2563EB">12 LEAF · 8 SPINE</span>
+    </div>
+    <svg class="net-svg" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet">
+      <!-- Background grid -->
+      <g class="net-grid">
+        <line x1="0" y1="30" x2="200" y2="30"/>
+        <line x1="0" y1="60" x2="200" y2="60"/>
+        <line x1="0" y1="90" x2="200" y2="90"/>
+        <line x1="0" y1="120" x2="200" y2="120"/>
+        <line x1="40" y1="0" x2="40" y2="150"/>
+        <line x1="80" y1="0" x2="80" y2="150"/>
+        <line x1="120" y1="0" x2="120" y2="150"/>
+        <line x1="160" y1="0" x2="160" y2="150"/>
+      </g>
+      <!-- Spine row (top) - 8 nodes -->
+      <g>
+        <rect class="net-spine" x="20" y="20" width="14" height="10" rx="0.5"/>
+        <rect class="net-spine" x="42" y="20" width="14" height="10" rx="0.5"/>
+        <rect class="net-spine" x="64" y="20" width="14" height="10" rx="0.5"/>
+        <rect class="net-spine" x="86" y="20" width="14" height="10" rx="0.5"/>
+        <rect class="net-spine" x="108" y="20" width="14" height="10" rx="0.5"/>
+        <rect class="net-spine" x="130" y="20" width="14" height="10" rx="0.5"/>
+        <rect class="net-spine" x="152" y="20" width="14" height="10" rx="0.5"/>
+        <rect class="net-spine" x="174" y="20" width="6" height="10" rx="0.5"/>
+        <text class="net-label net-label-accent" x="100" y="14" text-anchor="middle">SPINE LAYER · 8 × QM9700 · 64 PORTS @ 400G</text>
+      </g>
+      <!-- Leaf row (bottom) - 12 nodes -->
+      <g>
+        <rect class="net-leaf" x="14" y="115" width="12" height="9"/>
+        <rect class="net-leaf" x="28" y="115" width="12" height="9"/>
+        <rect class="net-leaf" x="42" y="115" width="12" height="9"/>
+        <rect class="net-leaf" x="56" y="115" width="12" height="9"/>
+        <rect class="net-leaf" x="70" y="115" width="12" height="9"/>
+        <rect class="net-leaf" x="84" y="115" width="12" height="9"/>
+        <rect class="net-leaf" x="98" y="115" width="12" height="9"/>
+        <rect class="net-leaf" x="112" y="115" width="12" height="9"/>
+        <rect class="net-leaf" x="126" y="115" width="12" height="9"/>
+        <rect class="net-leaf" x="140" y="115" width="12" height="9"/>
+        <rect class="net-leaf" x="154" y="115" width="12" height="9"/>
+        <rect class="net-leaf" x="168" y="115" width="12" height="9"/>
+        <text class="net-label" x="100" y="135" text-anchor="middle">LEAF · 12 × DGX H100 · 8 GPU EACH</text>
+      </g>
+      <!-- Links (every leaf to every 4th spine for cleanliness) -->
+      <g>
+        <!-- Pre-defined paths used by animateMotion -->
+        <path id="path1" class="net-link-active" d="M 27,30 L 20,115"/>
+        <path id="path2" class="net-link-active" d="M 49,30 L 34,115"/>
+        <path id="path3" class="net-link-active" d="M 71,30 L 48,115"/>
+        <path id="path4" class="net-link-active" d="M 93,30 L 62,115"/>
+        <path id="path5" class="net-link-active" d="M 115,30 L 76,115"/>
+        <path id="path6" class="net-link-active" d="M 137,30 L 90,115"/>
+        <path id="path7" class="net-link-active" d="M 159,30 L 104,115"/>
+        <!-- Less-active links -->
+        <line class="net-link" x1="27" y1="30" x2="62" y2="115"/>
+        <line class="net-link" x1="49" y1="30" x2="76" y2="115"/>
+        <line class="net-link" x1="71" y1="30" x2="90" y2="115"/>
+        <line class="net-link" x1="93" y1="30" x2="104" y2="115"/>
+        <line class="net-link" x1="115" y1="30" x2="118" y2="115"/>
+        <line class="net-link" x1="137" y1="30" x2="132" y2="115"/>
+        <line class="net-link" x1="159" y1="30" x2="146" y2="115"/>
+        <line class="net-link" x1="27" y1="30" x2="146" y2="115"/>
+        <line class="net-link" x1="49" y1="30" x2="160" y2="115"/>
+        <line class="net-link" x1="71" y1="30" x2="174" y2="115"/>
+      </g>
+      <!-- Animated packet pulses -->
+      <g>
+        <circle r="0.9" class="net-pulse">
+          <animateMotion dur="2.4s" repeatCount="indefinite">
+            <mpath href="#path1"/>
+          </animateMotion>
+        </circle>
+        <circle r="0.9" class="net-pulse">
+          <animateMotion dur="2.4s" begin="0.4s" repeatCount="indefinite">
+            <mpath href="#path1"/>
+          </animateMotion>
+        </circle>
+        <circle r="0.9" class="net-pulse">
+          <animateMotion dur="2.8s" begin="0.2s" repeatCount="indefinite">
+            <mpath href="#path3"/>
+          </animateMotion>
+        </circle>
+        <circle r="0.9" class="net-pulse">
+          <animateMotion dur="2.6s" begin="0.6s" repeatCount="indefinite">
+            <mpath href="#path5"/>
+          </animateMotion>
+        </circle>
+        <circle r="0.9" class="net-pulse">
+          <animateMotion dur="2.2s" repeatCount="indefinite">
+            <mpath href="#path7"/>
+          </animateMotion>
+        </circle>
+      </g>
+      <!-- Bandwidth labels -->
+      <text class="net-label net-label-bright" x="6" y="78">3.2 TB/s</text>
+      <text class="net-label net-label-bright" x="180" y="78">EAST-WEST</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     MOTIF 04 — ATTENTION MAP
+     ════════════════════════════════════════════════════════════════ -->
+<section class="motif">
+  <div class="motif-text">
+    <div class="num">004 · Attention Map</div>
+    <h2>Tokenized softmax over <em>16 heads</em>, layer 24.</h2>
+    <p>16×16 attention head matrix rendered as inline SVG with deterministic-but-organic intensity values. Tokens label both axes ("the", "model", "attends", "to"...). One head highlighted with a callout to show the brief diagonal attention pattern.</p>
+    <p>Generated procedurally — values derived from a hash of (query × key) so the pattern reads as natural attention, not random noise.</p>
+    <span class="tech"><span class="dot"></span>SVG · procedural fill · &lt; 6kB</span>
+  </div>
+  <div class="motif-visual">
+    <div class="label-strip">
+      <span>HEAD 8 · LAYER 24 · CTX 512</span>
+      <span class="live">SOFTMAX</span>
+    </div>
+    <svg class="attn-svg" viewBox="0 0 200 150" preserveAspectRatio="xMidYMid meet">
+      <!-- Title -->
+      <text class="attn-axis" x="100" y="14" text-anchor="middle" style="font-size:5px;letter-spacing:1.5px;fill:var(--ink);">QUERY × KEY · ATTENTION INTENSITY</text>
+      <!-- Y-axis tokens (queries) -->
+      <g>
+        <text class="attn-token" x="38" y="32">the</text>
+        <text class="attn-token" x="38" y="38">90/10</text>
+        <text class="attn-token" x="38" y="44">wall</text>
+        <text class="attn-token" x="38" y="50">in</text>
+        <text class="attn-token" x="38" y="56">enterprise</text>
+        <text class="attn-token" x="38" y="62">AI</text>
+        <text class="attn-token" x="38" y="68">means</text>
+        <text class="attn-token" x="38" y="74">model</text>
+        <text class="attn-token" x="38" y="80">accuracy</text>
+        <text class="attn-token" x="38" y="86">caps</text>
+        <text class="attn-token" x="38" y="92">at</text>
+        <text class="attn-token" x="38" y="98">9</text>
+        <text class="attn-token" x="38" y="104">0</text>
+        <text class="attn-token" x="38" y="110">%</text>
+        <text class="attn-token" x="38" y="116">in</text>
+        <text class="attn-token" x="38" y="122">prod</text>
+      </g>
+      <!-- X-axis tokens (keys) -->
+      <g transform="translate(0,0)">
+        <text class="attn-token" x="44" y="138">th</text>
+        <text class="attn-token" x="51" y="138">90</text>
+        <text class="attn-token" x="58" y="138">wa</text>
+        <text class="attn-token" x="65" y="138">in</text>
+        <text class="attn-token" x="72" y="138">en</text>
+        <text class="attn-token" x="79" y="138">AI</text>
+        <text class="attn-token" x="86" y="138">me</text>
+        <text class="attn-token" x="93" y="138">mo</text>
+        <text class="attn-token" x="100" y="138">ac</text>
+        <text class="attn-token" x="107" y="138">cap</text>
+        <text class="attn-token" x="114" y="138">at</text>
+        <text class="attn-token" x="121" y="138">9</text>
+        <text class="attn-token" x="128" y="138">0</text>
+        <text class="attn-token" x="135" y="138">%</text>
+        <text class="attn-token" x="142" y="138">in</text>
+        <text class="attn-token" x="149" y="138">pr</text>
+      </g>
+      <!-- Matrix frame -->
+      <rect class="attn-frame" x="44" y="26" width="112" height="106"/>
+      <!-- 16x16 attention cells (procedurally-generated intensity) -->
+      <g id="attn-grid"></g>
+      <!-- Callout to highlight diagonal pattern -->
+      <rect class="attn-callout" x="55" y="36" width="10" height="10"/>
+      <line class="attn-callout" x1="65" y1="36" x2="170" y2="22"/>
+      <text class="attn-callout-text" x="170" y="20" text-anchor="end">DIAGONAL BIAS</text>
+      <text class="attn-callout-text" x="170" y="26" text-anchor="end">P&gt; 0.74</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     MOTIF 05 — DATACENTER CORRIDOR (CSS 3D)
+     ════════════════════════════════════════════════════════════════ -->
+<section class="motif">
+  <div class="motif-text">
+    <div class="num">005 · Data Center Corridor</div>
+    <h2>Hot-aisle perspective, <em>raised floor</em>, overhead busways.</h2>
+    <p>Pure CSS 3D — no images. A perspective container holds a tilted floor with grid lines, four rack rows on either side using gradient strips for status LEDs, overhead pipe runs, and atmospheric haze at the vanishing point. Animates on its own; no JS.</p>
+    <p>Use as a fold backdrop or full-bleed hero. Layers blur and atmospheric overlay sell the depth.</p>
+    <span class="tech"><span class="dot"></span>CSS 3D · perspective + transform · zero deps</span>
+  </div>
+  <div class="motif-visual">
+    <div class="label-strip">
+      <span style="color:#fafafa">CORRIDOR · A-7 · IAD-EAST</span>
+      <span class="live" style="color:#fafafa">2.4 GW</span>
+    </div>
+    <div class="dc-stage dc-grain">
+      <div class="dc-floor"></div>
+      <div class="dc-rack-row r1"></div>
+      <div class="dc-rack-row r2"></div>
+      <div class="dc-rack-row r3"></div>
+      <div class="dc-rack-row r4"></div>
+      <div class="dc-pipe"></div>
+      <div class="dc-pipe p2"></div>
+      <div class="dc-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>© 2026 · Frontier · Visual language demo · No stock photography used</span>
+  <a href="index.html">← Back to live blog</a>
+</footer>
+
+<script>
+  // ════════════════════════════════════════════════════════════════
+  // PROCEDURAL ATTENTION GRID (Motif 04)
+  // ════════════════════════════════════════════════════════════════
+  (() => {
+    const grid = document.getElementById('attn-grid');
+    if (!grid) return;
+    const cols = 16, rows = 16;
+    const x0 = 44, y0 = 26, w = 7, h = 6.625;
+
+    // Hash-based but visually plausible attention pattern
+    function hashCell(i, j) {
+      // Base diagonal bias
+      let v = Math.exp(-Math.pow(i - j, 2) / 6);
+      // Plus a couple of secondary attention bands
+      v += 0.5 * Math.exp(-Math.pow((i - j) - 4, 2) / 8);
+      v += 0.3 * Math.exp(-Math.pow(i - 3, 2) / 6) * Math.exp(-Math.pow(j - 12, 2) / 8);
+      // Noise
+      const seed = (i * 31 + j * 17 + (i ^ j)) % 100;
+      v += (seed / 100 - 0.5) * 0.15;
+      return Math.max(0, Math.min(1, v));
+    }
+
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        const v = hashCell(i, j);
+        const fill = `rgba(37, 99, 235, ${v.toFixed(2)})`;
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('x', x0 + j * w);
+        rect.setAttribute('y', y0 + i * h);
+        rect.setAttribute('width', w);
+        rect.setAttribute('height', h);
+        rect.setAttribute('fill', fill);
+        rect.setAttribute('stroke', 'rgba(255,255,255,0.3)');
+        rect.setAttribute('stroke-width', '0.15');
+        grid.appendChild(rect);
+      }
+    }
+  })();
+</script>
+
+</body>
+</html>

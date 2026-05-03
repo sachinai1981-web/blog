@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animation Preview — Sachin Rai Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+  :root {
+    --cream:        #F2EDE0;
+    --cream-light:  #F9F6EE;
+    --cream-card:   #EDE7D4;
+    --forest:       #1C291F;
+    --forest-btn:   #3A5040;
+    --amber:        #D4A96A;
+    --tan:          #DDD5BE;
+    --charcoal:     #4A4840;
+    --font-d: 'Cormorant Garamond', serif;
+    --font-b: 'EB Garamond', serif;
+    --font-m: 'Space Mono', monospace;
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-b); background: var(--cream); color: var(--forest); overflow-x: hidden; }
+
+  /* ── PREVIEW LABEL ── */
+  .preview-banner {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999;
+    background: var(--forest); color: var(--amber);
+    font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 0.6rem 1.2rem; border: 1px solid rgba(212,169,106,0.3);
+  }
+
+  /* ──────────────────────────────────────────
+     ANIMATION 1: HERO WORD REVEAL
+  ────────────────────────────────────────── */
+  .demo-section {
+    padding: 3rem 2rem 1.5rem;
+    max-width: 960px; margin: 0 auto;
+  }
+  .demo-label {
+    font-family: var(--font-m); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--amber); margin-bottom: 0.5rem;
+  }
+  .demo-desc {
+    font-family: var(--font-m); font-size: 0.6rem; letter-spacing: 0.08em;
+    color: var(--charcoal); margin-bottom: 2rem; line-height: 1.6;
+  }
+
+  /* Hero section */
+  .hero-demo {
+    position: relative; height: 100vh; min-height: 600px; overflow: hidden;
+    background: #060c0a;
+  }
+  #heroCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .hero-overlay {
+    position: absolute; inset: 0; z-index: 2;
+    background: linear-gradient(to bottom, rgba(28,41,31,0.08) 0%, rgba(28,41,31,0.65) 100%);
+  }
+  .hero-content {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
+    padding: 0 2rem 4rem; max-width: 1280px; margin: 0 auto;
+    color: var(--cream-light);
+  }
+  .hero-eyebrow {
+    font-family: var(--font-m); font-size: 0.7rem; letter-spacing: 0.25em;
+    text-transform: uppercase; opacity: 0; margin-bottom: 1.25rem;
+    transform: translateY(12px);
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+  }
+  .hero-eyebrow.visible { opacity: 0.75; transform: translateY(0); }
+
+  /* Word-by-word reveal */
+  .hero-title {
+    font-family: var(--font-d); font-weight: 300;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+    max-width: 880px;
+  }
+  .hero-title .line { display: block; overflow: hidden; }
+  .hero-title .word {
+    display: inline-block;
+    transform: translateY(110%);
+    opacity: 0;
+    transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.5s ease;
+  }
+  .hero-title .word.visible { transform: translateY(0); opacity: 1; }
+  .hero-title em { font-style: italic; color: var(--amber); }
+
+  .hero-sub {
+    font-size: 1rem; color: rgba(249,246,238,0.7); max-width: 440px;
+    line-height: 1.75; margin-bottom: 2.25rem;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+  }
+  .hero-sub.visible { opacity: 1; transform: translateY(0); }
+
+  .hero-chips {
+    display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+  }
+  .hero-chips.visible { opacity: 1; transform: translateY(0); }
+  .chip-author {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: rgba(28,41,31,0.5); border: 1px solid rgba(221,213,190,0.3);
+    padding: 0.3rem 0.9rem 0.3rem 0.35rem; backdrop-filter: blur(8px);
+  }
+  .chip-avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: linear-gradient(135deg, #2D3B2F, var(--amber));
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-m); font-size: 0.55rem; color: var(--cream-light);
+  }
+  .chip { font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.05em; background: rgba(28,41,31,0.4); border: 1px solid rgba(221,213,190,0.25); color: rgba(249,246,238,0.8); padding: 0.28rem 0.85rem; backdrop-filter: blur(8px); }
+  .chip-amber { background: rgba(212,169,106,0.25); border-color: rgba(212,169,106,0.4); color: var(--amber); }
+
+  /* ──────────────────────────────────────────
+     ANIMATION 2: MAGNETIC CARDS
+  ────────────────────────────────────────── */
+  .cards-demo { padding: 5rem 2rem; max-width: 960px; margin: 0 auto; }
+  .cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+  .mag-card {
+    background: var(--cream-light); border: 1px solid rgba(221,213,190,0.6);
+    overflow: hidden; cursor: pointer;
+    transform-style: preserve-3d;
+    transition: box-shadow 0.3s ease, border-color 0.3s;
+    will-change: transform;
+    position: relative;
+  }
+  .mag-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 2px; background: var(--amber);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .mag-card:hover { box-shadow: 0 20px 60px rgba(28,41,31,0.18); border-color: rgba(212,169,106,0.3); }
+  .mag-card:hover::after { transform: scaleX(1); }
+  .mag-card-img { height: 180px; overflow: hidden; }
+  .mag-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease-out); }
+  .mag-card:hover .mag-card-img img { transform: scale(1.04); }
+  .mag-card-body { padding: 1.5rem; }
+  .mag-card-tag { font-family: var(--font-m); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--charcoal); background: var(--cream-card); border: 1px solid var(--tan); padding: 0.2rem 0.65rem; display: inline-block; margin-bottom: 0.75rem; }
+  .mag-card-title { font-family: var(--font-d); font-size: 1.15rem; font-weight: 300; color: var(--forest); margin-bottom: 0.4rem; line-height: 1.2; }
+  .mag-card-meta { font-family: var(--font-m); font-size: 0.6rem; letter-spacing: 0.05em; color: var(--tan); margin-top: 0.75rem; }
+  .mag-card-arrow { margin-top: 0.75rem; font-size: 0.8rem; color: var(--amber); opacity: 0; transform: translateX(-4px); transition: opacity 0.2s, transform 0.2s; }
+  .mag-card:hover .mag-card-arrow { opacity: 1; transform: translateX(0); }
+
+  /* ──────────────────────────────────────────
+     ANIMATION 3: SCROLL PARALLAX
+  ────────────────────────────────────────── */
+  .parallax-demo {
+    position: relative; height: 80vh; overflow: hidden;
+    background: #060c0a; margin-top: 4rem;
+  }
+  #parallaxCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .parallax-overlay {
+    position: absolute; inset: 0; z-index: 2;
+    background: linear-gradient(to bottom, rgba(28,41,31,0.05) 0%, rgba(28,41,31,0.6) 100%);
+  }
+  .parallax-content {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
+    padding: 0 2rem 4rem; max-width: 1280px; margin: 0 auto;
+    color: var(--cream-light);
+    /* Parallax: this moves slower than scroll */
+    will-change: transform;
+  }
+  .parallax-eyebrow { font-family: var(--font-m); font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.6; margin-bottom: 1rem; }
+  .parallax-title { font-family: var(--font-d); font-weight: 300; font-size: clamp(3rem, 7vw, 6rem); line-height: 1; letter-spacing: -0.03em; margin-bottom: 1rem; }
+  .parallax-title em { font-style: italic; color: var(--amber); }
+  .parallax-hint { font-family: var(--font-m); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-top: 3rem; opacity: 0.7; animation: bounce 2s ease-in-out infinite; }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+  /* Section labels */
+  .section-label {
+    background: var(--forest); color: var(--amber);
+    font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 0.5rem 2rem; display: flex; align-items: center; gap: 1rem;
+  }
+  .section-label span { color: rgba(221,213,190,0.4); }
+  </style>
+</head>
+<body>
+
+<div class="preview-banner">Animation Preview — Not deployed</div>
+
+<!-- ── LABEL 1 ── -->
+<div class="section-label">Animation 01 <span>Hero word-by-word reveal — reload page to replay</span></div>
+
+<!-- ── ANIMATION 1: HERO WORD REVEAL ── -->
+<section class="hero-demo">
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow" id="heroEyebrow">AI · Enterprise Sales · GTM</p>
+    <h1 class="hero-title" id="heroTitle">
+      <span class="line"><span class="word">Where</span> <span class="word"><em>AI</em></span></span>
+      <span class="line"><span class="word">meets</span> <span class="word">enterprise</span></span>
+      <span class="line"><span class="word">selling.</span></span>
+    </h1>
+    <p class="hero-sub" id="heroSub">Enterprise AE at Freshworks. Building AI tools to sell faster, close bigger, prospect smarter. This is my build log.</p>
+    <div class="hero-chips" id="heroChips">
+      <div class="chip-author">
+        <div class="chip-avatar">SR</div>
+        <span style="font-size:0.82rem">Sachin Rai</span>
+      </div>
+      <span class="chip chip-amber">7× President's Club</span>
+      <span class="chip">$2.3M ACV · 200% quota</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── LABEL 2 ── -->
+<div class="section-label" style="margin-top:0">Animation 02 <span>Magnetic 3D card tilt — hover each card</span></div>
+
+<!-- ── ANIMATION 2: MAGNETIC CARDS ── -->
+<div class="cards-demo">
+  <div class="cards-row">
+    <div class="mag-card" data-magnetic>
+      <div class="mag-card-img">
+        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&h=360&fit=crop&auto=format&q=80" alt="" />
+      </div>
+      <div class="mag-card-body">
+        <span class="mag-card-tag">AI Tools</span>
+        <div class="mag-card-title">How I used Claude Code to scrape LinkedIn and land interviews</div>
+        <div class="mag-card-meta">March 2026 · 8 min</div>
+        <div class="mag-card-arrow">Read more →</div>
+      </div>
+    </div>
+    <div class="mag-card" data-magnetic>
+      <div class="mag-card-img">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=360&fit=crop&auto=format&q=80" alt="" />
+      </div>
+      <div class="mag-card-body">
+        <span class="mag-card-tag">Sales</span>
+        <div class="mag-card-title">The AI tools replacing my sales stack in 2026</div>
+        <div class="mag-card-meta">March 2026 · 6 min</div>
+        <div class="mag-card-arrow">Read more →</div>
+      </div>
+    </div>
+    <div class="mag-card" data-magnetic>
+      <div class="mag-card-img">
+        <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&h=360&fit=crop&auto=format&q=80" alt="" />
+      </div>
+      <div class="mag-card-body">
+        <span class="mag-card-tag">PKM</span>
+        <div class="mag-card-title">I built a personal LLM knowledge base in Obsidian</div>
+        <div class="mag-card-meta">April 2026 · 8 min</div>
+        <div class="mag-card-arrow">Read more →</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── LABEL 3 ── -->
+<div class="section-label">Animation 03 <span>Scroll parallax — canvas zooms, text drifts at different speed</span></div>
+
+<!-- ── ANIMATION 3: SCROLL PARALLAX ── -->
+<section class="parallax-demo" id="parallaxSection">
+  <canvas id="parallaxCanvas" aria-hidden="true"></canvas>
+  <div class="parallax-overlay"></div>
+  <div class="parallax-content" id="parallaxContent">
+    <p class="parallax-eyebrow">Currently writing</p>
+    <h2 class="parallax-title">7 AI trends I'm tracking<br>in <em>2026</em></h2>
+    <p class="parallax-hint">↓ Scroll to see parallax</p>
+  </div>
+</section>
+
+<!-- spacer for scroll -->
+<div style="height:60vh;background:var(--cream);display:flex;align-items:center;justify-content:center">
+  <p style="font-family:var(--font-m);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--charcoal);opacity:0.5">↑ Scroll back up to replay parallax</p>
+</div>
+
+<script>
+/* ────────────────────────────────────────
+   HERO CANVAS (same as live blog)
+──────────────────────────────────────── */
+(function initHeroCanvas() {
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, tick = 0, hubs = [];
+  const C = { bg: '#060c0a', blue:[100,160,255], cyan:[80,220,210], amber:[212,169,106], green:[80,200,120] };
+  function rgb(c,a){ return `rgba(${c[0]},${c[1]},${c[2]},${a})`; }
+  function resize(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; initHubs(); }
+  function initHubs(){
+    hubs=[];
+    const count=Math.min(6,Math.max(3,Math.floor(W/220)));
+    for(let i=0;i<count;i++) hubs.push({x:W*(0.1+i*(0.8/(count-1||1))),y:H*(0.3+Math.sin(i*1.4)*0.2+0.12),size:16+Math.random()*14,type:['chip','chip','datacenter','energy','ai'][i%5],pulse:Math.random()*Math.PI*2});
+  }
+  function drawGrid(){ const sp=38; ctx.fillStyle='rgba(80,180,120,0.05)'; for(let x=(tick*0.1)%sp;x<W;x+=sp) for(let y=0;y<H;y+=sp){ctx.beginPath();ctx.arc(x,y,0.8,0,Math.PI*2);ctx.fill();} }
+  function drawHub(h){ h.pulse+=0.02; const glow=0.6+0.4*Math.sin(h.pulse),s=h.size; ctx.save();ctx.translate(h.x,h.y); const col=h.type==='energy'?C.amber:h.type==='datacenter'?C.green:h.type==='ai'?C.cyan:C.blue; const grd=ctx.createRadialGradient(0,0,s*0.5,0,0,s*2.5); grd.addColorStop(0,rgb(col,0.18*glow));grd.addColorStop(1,rgb(col,0)); ctx.fillStyle=grd;ctx.beginPath();ctx.arc(0,0,s*2.5,0,Math.PI*2);ctx.fill(); ctx.strokeStyle=rgb(col,0.5*glow);ctx.lineWidth=1.2;ctx.strokeRect(-s/2,-s/2,s,s); ctx.strokeStyle=rgb(col,0.25*glow);ctx.lineWidth=0.6;ctx.strokeRect(-s/4,-s/4,s/2,s/2); const pins=3,step=s/(pins+1); ctx.strokeStyle=rgb(col,0.4*glow);ctx.lineWidth=0.8; for(let i=1;i<=pins;i++){const p=-s/2+i*step;ctx.beginPath();ctx.moveTo(p,-s/2);ctx.lineTo(p,-s/2-6);ctx.stroke();ctx.beginPath();ctx.moveTo(p,s/2);ctx.lineTo(p,s/2+6);ctx.stroke();ctx.beginPath();ctx.moveTo(-s/2,p);ctx.lineTo(-s/2-6,p);ctx.stroke();ctx.beginPath();ctx.moveTo(s/2,p);ctx.lineTo(s/2+6,p);ctx.stroke();} ctx.restore(); }
+  function drawConnections(){ for(let i=0;i<hubs.length;i++){for(let j=i+1;j<hubs.length;j++){const a=hubs[i],b=hubs[j],dist=Math.hypot(a.x-b.x,a.y-b.y); if(dist>W*0.55)continue; const alpha=(1-dist/(W*0.55))*0.18; ctx.beginPath();ctx.strokeStyle=`rgba(80,180,120,${alpha})`;ctx.lineWidth=0.6;ctx.setLineDash([4,8]);ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.setLineDash([]); const t=((tick*0.004)%1),px=a.x+(b.x-a.x)*t,py=a.y+(b.y-a.y)*t; ctx.beginPath();ctx.fillStyle='rgba(212,169,106,0.7)';ctx.arc(px,py,1.5,0,Math.PI*2);ctx.fill();}} }
+  function frame(){ ctx.fillStyle=C.bg;ctx.fillRect(0,0,W,H);drawGrid();drawConnections();hubs.forEach(drawHub);tick++;requestAnimationFrame(frame); }
+  window.addEventListener('resize',resize); resize(); frame();
+})();
+
+/* ────────────────────────────────────────
+   PARALLAX CANVAS (same neural pattern)
+──────────────────────────────────────── */
+(function initParallaxCanvas() {
+  const canvas = document.getElementById('parallaxCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, tick = 0, hubs = [];
+  const C = { bg: '#060c0a', blue:[100,160,255], cyan:[80,220,210], amber:[212,169,106], green:[80,200,120] };
+  function rgb(c,a){ return `rgba(${c[0]},${c[1]},${c[2]},${a})`; }
+  function resize(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; initHubs(); }
+  function initHubs(){ hubs=[]; const count=Math.min(5,Math.max(3,Math.floor(W/220))); for(let i=0;i<count;i++) hubs.push({x:W*(0.1+i*(0.8/(count-1||1))),y:H*(0.3+Math.sin(i*1.8)*0.18+0.15),size:14+Math.random()*12,type:['chip','ai','datacenter','energy','chip'][i%5],pulse:Math.random()*Math.PI*2}); }
+  function drawGrid(){ const sp=38; ctx.fillStyle='rgba(80,180,120,0.04)'; for(let x=(tick*0.08)%sp;x<W;x+=sp) for(let y=0;y<H;y+=sp){ctx.beginPath();ctx.arc(x,y,0.7,0,Math.PI*2);ctx.fill();} }
+  function drawHub(h){ h.pulse+=0.018; const glow=0.5+0.5*Math.sin(h.pulse),s=h.size; ctx.save();ctx.translate(h.x,h.y); const col=h.type==='energy'?C.amber:h.type==='datacenter'?C.green:h.type==='ai'?C.cyan:C.blue; const grd=ctx.createRadialGradient(0,0,s*0.5,0,0,s*2.5); grd.addColorStop(0,rgb(col,0.15*glow));grd.addColorStop(1,rgb(col,0)); ctx.fillStyle=grd;ctx.beginPath();ctx.arc(0,0,s*2.5,0,Math.PI*2);ctx.fill(); ctx.strokeStyle=rgb(col,0.45*glow);ctx.lineWidth=1;ctx.strokeRect(-s/2,-s/2,s,s); ctx.restore(); }
+  function drawConnections(){ for(let i=0;i<hubs.length;i++){for(let j=i+1;j<hubs.length;j++){const a=hubs[i],b=hubs[j],dist=Math.hypot(a.x-b.x,a.y-b.y); if(dist>W*0.6)continue; const alpha=(1-dist/(W*0.6))*0.15; ctx.beginPath();ctx.strokeStyle=`rgba(80,180,120,${alpha})`;ctx.lineWidth=0.5;ctx.setLineDash([3,9]);ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.setLineDash([]);}} }
+  function frame(){ ctx.fillStyle=C.bg;ctx.fillRect(0,0,W,H);drawGrid();drawConnections();hubs.forEach(drawHub);tick++;requestAnimationFrame(frame); }
+  window.addEventListener('resize',resize); resize(); frame();
+})();
+
+/* ────────────────────────────────────────
+   ANIMATION 1: HERO WORD REVEAL
+──────────────────────────────────────── */
+(function() {
+  const words = document.querySelectorAll('.hero-title .word');
+  const eyebrow = document.getElementById('heroEyebrow');
+  const sub = document.getElementById('heroSub');
+  const chips = document.getElementById('heroChips');
+
+  // Eyebrow
+  setTimeout(() => eyebrow.classList.add('visible'), 300);
+
+  // Words stagger — each word slides up from clip
+  words.forEach((word, i) => {
+    setTimeout(() => word.classList.add('visible'), 550 + i * 130);
+  });
+
+  // Sub + chips
+  setTimeout(() => sub.classList.add('visible'), 550 + words.length * 130 + 100);
+  setTimeout(() => chips.classList.add('visible'), 550 + words.length * 130 + 300);
+})();
+
+/* ────────────────────────────────────────
+   ANIMATION 2: MAGNETIC 3D CARD TILT
+──────────────────────────────────────── */
+(function() {
+  const STRENGTH = 12; // max tilt degrees
+  const LIFT = 'translateZ(20px)';
+
+  document.querySelectorAll('[data-magnetic]').forEach(card => {
+    let bounds;
+
+    card.addEventListener('mouseenter', () => {
+      bounds = card.getBoundingClientRect();
+      card.style.transition = 'transform 0.1s ease, box-shadow 0.3s ease, border-color 0.3s';
+    });
+
+    card.addEventListener('mousemove', e => {
+      if (!bounds) bounds = card.getBoundingClientRect();
+      const cx = bounds.left + bounds.width  / 2;
+      const cy = bounds.top  + bounds.height / 2;
+      const dx = (e.clientX - cx) / (bounds.width  / 2);
+      const dy = (e.clientY - cy) / (bounds.height / 2);
+      const rotateX = -dy * STRENGTH;
+      const rotateY =  dx * STRENGTH;
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) ${LIFT}`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease, border-color 0.3s';
+      card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+      bounds = null;
+    });
+  });
+})();
+
+/* ────────────────────────────────────────
+   ANIMATION 3: SCROLL PARALLAX
+──────────────────────────────────────── */
+(function() {
+  const section  = document.getElementById('parallaxSection');
+  const canvas   = document.getElementById('parallaxCanvas');
+  const content  = document.getElementById('parallaxContent');
+  if (!section || !canvas || !content) return;
+
+  let ticking = false;
+
+  function update() {
+    const rect   = section.getBoundingClientRect();
+    const viewH  = window.innerHeight;
+    // progress: 0 when section enters bottom, 1 when it leaves top
+    const progress = 1 - (rect.bottom / (viewH + rect.height));
+    const clamped  = Math.max(0, Math.min(1, progress));
+
+    // Canvas zooms in as you scroll
+    const scale = 1 + clamped * 0.12;
+    canvas.style.transform = `scale(${scale})`;
+    canvas.style.transformOrigin = 'center center';
+
+    // Text drifts up slower than scroll (parallax offset)
+    const textDrift = clamped * -60;
+    content.style.transform = `translateY(${textDrift}px)`;
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+
+  update();
+})();
+</script>
+</body>
+</html>

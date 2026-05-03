@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Genius Demo · Frontier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700;800;900&family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --paper:  #F4F3EE;
+      --paper-2: #EAE8E1;
+      --ink:    #0A0A0A;
+      --ink-2:  #1a1a1a;
+      --ink-mute: #6b6b66;
+      --hairline: #d8d6cd;
+
+      /* Three accents per user spec */
+      --red:    #E63946;   /* cadmium */
+      --orange: #F77F00;   /* sodium amber */
+      --green:  #2A9D5F;   /* viridian */
+
+      --font-display: 'Archivo Black', 'Archivo', system-ui, sans-serif;
+      --font-sans:    'Inter', system-ui, sans-serif;
+      --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Halftone grain */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%230a0a0a'/%3E%3C/svg%3E");
+      background-size: 4px 4px;
+      mix-blend-mode: multiply;
+    }
+
+    /* ── PAGE HEAD ── */
+    .head {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 3rem;
+      border-bottom: 2px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .head .num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 1rem;
+    }
+    .head h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      letter-spacing: -0.035em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      max-width: 18ch;
+    }
+    .head .meta {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      text-align: right;
+      line-height: 1.6;
+    }
+    .head .meta strong { color: var(--ink); }
+
+    /* ════════════════════════════════════════════════════════════
+       TECHNIQUE 01 — GIANT SHAPE BEHIND TYPE
+       ════════════════════════════════════════════════════════════ */
+    .t1 {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .t1-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .t1-label::before {
+      content: ''; width: 32px; height: 2px; background: var(--red);
+    }
+
+    .t1-stage {
+      position: relative;
+      min-height: 540px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 4rem 0;
+    }
+    .t1-circle {
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: var(--red);
+      z-index: 1;
+      animation: shape-float-1 14s ease-in-out infinite;
+      will-change: transform;
+    }
+    .t1-square {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      background: var(--orange);
+      z-index: 2;
+      transform: rotate(-8deg);
+      top: 50%; left: 50%;
+      margin-left: -210px;
+      margin-top: -210px;
+      opacity: 0;
+      animation: shape-cycle-square 12s 4s infinite;
+    }
+    .t1-tri {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 240px solid transparent;
+      border-right: 240px solid transparent;
+      border-bottom: 420px solid var(--green);
+      z-index: 3;
+      top: 50%; left: 50%;
+      margin-left: -240px;
+      margin-top: -210px;
+      opacity: 0;
+      animation: shape-cycle-tri 12s 8s infinite;
+    }
+    @keyframes shape-float-1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(40px, -20px) scale(1.05); }
+      66% { transform: translate(-30px, 25px) scale(0.95); }
+    }
+    @keyframes shape-cycle-square {
+      0%, 25%, 100% { opacity: 0; transform: rotate(-8deg) scale(0.8); }
+      33%, 58% { opacity: 1; transform: rotate(-8deg) scale(1); }
+    }
+    @keyframes shape-cycle-tri {
+      0%, 58%, 100% { opacity: 0; transform: scale(0.8); }
+      66%, 91% { opacity: 1; transform: scale(1); }
+    }
+
+    .t1-title {
+      position: relative;
+      z-index: 10;
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 11vw, 9rem);
+      line-height: 0.85;
+      letter-spacing: -0.045em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-align: center;
+      mix-blend-mode: difference;
+      filter: invert(1);
+    }
+    /* Use mix-blend-mode trick so text reads on any shape behind it */
+    .t1-title-inner {
+      mix-blend-mode: difference;
+      color: white;
+    }
+
+    .t1-meta {
+      position: absolute;
+      z-index: 11;
+      bottom: 2rem;
+      right: 2rem;
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .t1-meta strong { display: block; font-size: 0.75rem; }
+
+    .t1-note {
+      max-width: 1300px;
+      margin: 2rem auto 0;
+      padding: 0 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .t1-note { grid-template-columns: 2fr 1fr 1fr; }
+    }
+    .t1-note-block {
+      padding: 1rem;
+      border-left: 4px solid var(--red);
+    }
+    .t1-note-block:nth-child(2) { border-left-color: var(--orange); }
+    .t1-note-block:nth-child(3) { border-left-color: var(--green); }
+    .t1-note-block .k {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 0.5rem;
+    }
+    .t1-note-block .v {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       TECHNIQUE 02 — 3D SHAPE ON TOP OF BOLD TEXT
+       ════════════════════════════════════════════════════════════ */
+    .t2 {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .t2-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .t2-label::before {
+      content: ''; width: 32px; height: 2px; background: var(--green);
+    }
+
+    .t2-stage {
+      position: relative;
+      min-height: 600px;
+      display: grid;
+      place-items: center;
+    }
+    .t2-text {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 15vw, 14rem);
+      line-height: 0.85;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-align: center;
+    }
+    .t2-text .frontier { display: block; }
+    .t2-text .ai {
+      display: block;
+      color: var(--orange);
+    }
+
+    /* The "3D shape" — CSS-rendered chip die / sphere */
+    .t2-3d {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotateX(20deg) rotateZ(-15deg);
+      z-index: 2;
+      width: 280px;
+      height: 280px;
+      transform-style: preserve-3d;
+      animation: spin-3d 20s linear infinite;
+      filter: drop-shadow(20px 30px 30px rgba(10, 10, 10, 0.35));
+    }
+    @keyframes spin-3d {
+      from { transform: translate(-50%, -50%) rotateX(20deg) rotateY(0deg) rotateZ(-15deg); }
+      to   { transform: translate(-50%, -50%) rotateX(20deg) rotateY(360deg) rotateZ(-15deg); }
+    }
+
+    /* Render a chip die-style 3D cube */
+    .cube {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      transform-style: preserve-3d;
+      margin: 40px auto;
+    }
+    .cube .face {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: var(--green);
+      border: 3px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cube .face::before {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      background-image:
+        linear-gradient(rgba(10, 10, 10, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(10, 10, 10, 0.18) 1px, transparent 1px);
+      background-size: 14px 14px;
+    }
+    .cube .face::after {
+      content: '';
+      position: absolute;
+      width: 12px; height: 12px;
+      top: 16px; left: 16px;
+      background: var(--orange);
+      box-shadow:
+        0 18px 0 var(--red),
+        0 36px 0 var(--orange),
+        18px 0 0 var(--red),
+        36px 0 0 var(--orange);
+    }
+    .cube .top    { transform: rotateX(90deg)  translateZ(100px); background: #f2f0ea; }
+    .cube .bottom { transform: rotateX(-90deg) translateZ(100px); background: #1a1a1a; }
+    .cube .left   { transform: rotateY(-90deg) translateZ(100px); background: var(--green); filter: brightness(0.85); }
+    .cube .right  { transform: rotateY(90deg)  translateZ(100px); background: var(--green); filter: brightness(0.95); }
+    .cube .front  { transform: translateZ(100px); }
+    .cube .back   { transform: rotateY(180deg) translateZ(100px); background: var(--green); filter: brightness(0.7); }
+
+    .t2-meta {
+      max-width: 600px;
+      margin: 2rem auto 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .t2-meta strong { color: var(--ink); display: block; font-size: 0.85rem; margin-bottom: 0.4rem; }
+
+    /* ════════════════════════════════════════════════════════════
+       TECHNIQUE 03 — SHAPES BETWEEN TYPOGRAPHY
+       ════════════════════════════════════════════════════════════ */
+    .t3 {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .t3-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .t3-label::before {
+      content: ''; width: 32px; height: 2px; background: var(--orange);
+    }
+
+    .t3-billboard {
+      background: var(--paper);
+      padding: 3rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border: 2px solid var(--ink);
+    }
+    @media (min-width: 768px) {
+      .t3-billboard { padding: 4rem 2rem; gap: 1rem; }
+    }
+
+    .t3-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 6rem);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+    @media (min-width: 768px) {
+      .t3-row { gap: 1rem; flex-wrap: nowrap; }
+    }
+    .t3-block {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.4em 0.6em;
+      color: var(--paper);
+      letter-spacing: 0;
+      flex-shrink: 0;
+    }
+    .t3-block-red { background: var(--red); }
+    .t3-block-orange { background: var(--orange); }
+    .t3-block-green { background: var(--green); }
+    .t3-block-ink { background: var(--ink); }
+
+    .t3-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 0.9em;
+      height: 0.9em;
+      margin: 0 0.1em;
+    }
+    .t3-icon svg { width: 100%; height: 100%; }
+
+    .t3-block-tag {
+      font-family: var(--font-mono);
+      font-size: 0.45em;
+      letter-spacing: 0.18em;
+      padding: 0.5em 0.85em;
+    }
+
+    .t3-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .t3-foot .barcode {
+      display: inline-flex;
+      align-items: center;
+      gap: 1px;
+    }
+    .t3-foot .bar {
+      display: inline-block;
+      width: 1.5px;
+      height: 24px;
+      background: var(--ink);
+    }
+    .t3-foot .bar.thin { width: 1px; }
+    .t3-foot .bar.thick { width: 3px; }
+
+    /* ════════════════════════════════════════════════════════════
+       TECHNIQUE 03B — POSTCARD VARIANT (Songtrust style)
+       ════════════════════════════════════════════════════════════ */
+    .t3b {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+    .t3b-billboard {
+      background: var(--ink);
+      padding: 3rem 2rem;
+      border: 2px solid var(--ink);
+    }
+    .t3b-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 6vw, 5.5rem);
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: var(--paper);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── FOOT ── */
+    .foot {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    .foot a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 1px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="head">
+  <div>
+    <div class="num">DEMO 047 / DESIGN GENIUS · 3 TECHNIQUES</div>
+    <h1>Three ways to <br/>look like you <br/>know what you're doing.</h1>
+  </div>
+  <div class="meta">
+    <strong>FRONTIER · DESIGN STUDIES</strong>
+    APPLIED TO BLOG CONTENT<br />
+    PALETTE · CADMIUM / AMBER / VIRIDIAN<br />
+    DATE · 2026.04.25
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════════
+     TECHNIQUE 01 — Giant shape behind type (cycles R / O / G)
+     ════════════════════════════════════════════════════════════════ -->
+<section class="t1">
+  <div class="t1-label">Technique 001 · Giant shape behind type</div>
+
+  <div class="t1-stage">
+    <div class="t1-circle"></div>
+    <div class="t1-square"></div>
+    <div class="t1-tri"></div>
+
+    <h2 class="t1-title"><span class="t1-title-inner">FRONTIER<br/>BUILD<br/>LOG.</span></h2>
+
+    <div class="t1-meta">
+      <strong>ISSUE 047</strong>
+      2026.04.25 · SF<br />
+      THE 90/10 WALL
+    </div>
+  </div>
+
+  <div class="t1-note">
+    <div class="t1-note-block">
+      <div class="k">Why this works</div>
+      <div class="v">A pure-color shape fills negative space, creates depth, and lets the type read as graphic mass instead of just letters.</div>
+    </div>
+    <div class="t1-note-block">
+      <div class="k">Shape rotation</div>
+      <div class="v">Cycles every 4s · Circle (red) → Square (orange) → Triangle (green).</div>
+    </div>
+    <div class="t1-note-block">
+      <div class="k">Type trick</div>
+      <div class="v">Mix-blend-mode: difference inverts text against any background — readable on any shape underneath.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     TECHNIQUE 02 — 3D shape on top of bold text
+     ════════════════════════════════════════════════════════════════ -->
+<section class="t2">
+  <div class="t2-label">Technique 002 · 3D shape on top of bold text</div>
+
+  <div class="t2-stage">
+    <div class="t2-text">
+      <span class="frontier">FRONT</span>
+      <span class="ai">IER</span>
+    </div>
+
+    <div class="t2-3d">
+      <div class="cube">
+        <div class="face front"></div>
+        <div class="face back"></div>
+        <div class="face left"></div>
+        <div class="face right"></div>
+        <div class="face top"></div>
+        <div class="face bottom"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="t2-meta">
+    <strong>3D ON TOP OF 2D · PRODUCT-MARKETING ENERGY</strong>
+    Cube renders in pure CSS · 6 faces · transform-style preserve-3d · 20s spin loop
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     TECHNIQUE 03 — Shapes between typography (Songtrust / Bauhaus)
+     ════════════════════════════════════════════════════════════════ -->
+<section class="t3">
+  <div class="t3-label">Technique 003 · Shapes between typography</div>
+
+  <div class="t3-billboard">
+    <div class="t3-row">
+      <span>WRITE</span>
+      <span class="t3-block t3-block-red">THE</span>
+      <span>BEST</span>
+    </div>
+    <div class="t3-row">
+      <span class="t3-block t3-block-green">AI</span>
+      <span>NOTES</span>
+      <span class="t3-block t3-block-orange">IN</span>
+    </div>
+    <div class="t3-row">
+      <span>THE</span>
+      <span class="t3-block t3-block-ink" style="color:var(--paper)">GAME</span>
+      <span class="t3-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </span>
+    </div>
+
+    <div class="t3-foot">
+      <span>FRONTIER · ISSUE 047 · 2026.04.25</span>
+      <span class="barcode">
+        <span class="bar"></span>
+        <span class="bar thin"></span>
+        <span class="bar thick"></span>
+        <span class="bar"></span>
+        <span class="bar thin"></span>
+        <span class="bar"></span>
+        <span class="bar thick"></span>
+        <span class="bar thin"></span>
+        <span class="bar"></span>
+        <span class="bar thick"></span>
+        <span class="bar"></span>
+        <span class="bar thin"></span>
+        <span class="bar"></span>
+        <span class="bar thick"></span>
+        <span class="bar"></span>
+      </span>
+      <span>SUBSCRIBE · sachinrai.io</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     TECHNIQUE 03B — Dark variant for contrast
+     ════════════════════════════════════════════════════════════════ -->
+<section class="t3b">
+  <div class="t3b-billboard">
+    <div class="t3b-row">
+      <span>SHIP</span>
+      <span class="t3-block t3-block-orange">EVALS</span>
+      <span>FIRST</span>
+    </div>
+    <div class="t3b-row">
+      <span class="t3-block t3-block-green">PRICE</span>
+      <span>ON</span>
+      <span class="t3-block t3-block-red">OUT</span>
+    </div>
+    <div class="t3b-row">
+      <span>COMES</span>
+      <span style="border-bottom: 4px solid var(--orange);">·NOT·</span>
+      <span class="t3-block t3-block-ink" style="background:var(--paper);color:var(--ink)">SEATS</span>
+    </div>
+    <div style="margin-top:2rem;font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:#9094a0;">— THESIS · FRONTIER 047 —</div>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>© 2026 · Frontier · Design genius demo</span>
+  <a href="index.html">← Back to live blog</a>
+</footer>
+
+</body>
+</html>

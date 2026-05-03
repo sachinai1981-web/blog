@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARCH — The Architecture of Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    /* ─── DESIGN TOKENS (Mode Designs palette) ─── */
+    :root {
+      --cream:        #F2EDE0;
+      --cream-light:  #F9F6EE;
+      --cream-card:   #EDE7D4;
+      --forest:       #1C291F;
+      --forest-btn:   #3A5040;
+      --forest-hover: #2D3B2F;
+      --amber:        #D4A96A;
+      --tan:          #DDD5BE;
+      --charcoal:     #4A4840;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body:    'EB Garamond', serif;
+      --font-mono:    'Space Mono', monospace;
+      --ease-out:     cubic-bezier(0, 0, 0.2, 1);
+      --ease-std:     cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--forest);
+      background: var(--cream);
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--cream);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid rgba(28,41,31,0.08);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 400; font-size: 1.1rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+      font-size: 0.875rem; letter-spacing: 0.04em;
+    }
+    .nav-links a:hover { opacity: 0.6; }
+    .nav-icons { display: flex; gap: 1.25rem; align-items: center; }
+    .nav-icons svg {
+      width: 20px; height: 20px;
+      stroke: var(--forest); fill: none;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+      cursor: pointer;
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font-family: var(--font-body); font-size: 0.9rem;
+      cursor: pointer; border: 1px solid transparent;
+      transition: all 0.2s var(--ease-std);
+    }
+    .btn-primary   { background: var(--forest-btn); color: var(--cream-light); border-color: var(--forest-btn); }
+    .btn-primary:hover { background: var(--forest-hover); border-color: var(--forest-hover); }
+    .btn-secondary { background: transparent; color: var(--cream-light); border-color: rgba(249,246,238,0.55); }
+    .btn-secondary:hover { border-color: var(--cream-light); }
+    .btn-outline   { background: transparent; color: var(--forest); border-color: var(--forest); }
+    .btn-outline:hover { background: var(--forest); color: var(--cream-light); }
+    .btn-muted     { background: transparent; color: var(--charcoal); border-color: var(--tan); }
+    .btn-muted:hover { border-color: var(--charcoal); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; height: 100svh; min-height: 620px; overflow: hidden;
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(28,41,31,0.1) 0%, rgba(28,41,31,0.62) 100%);
+    }
+    /* dithered grain — Mode's decorative overlay */
+    .dithered-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.7; mix-blend-mode: overlay;
+    }
+    .hero-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-end;
+      padding-bottom: 5rem; text-align: center;
+      color: var(--cream-light);
+    }
+    .hero-eyebrow {
+      font-size: 0.8rem; letter-spacing: 0.25em;
+      text-transform: uppercase; margin-bottom: 1.25rem; opacity: 0.8;
+    }
+    .hero-title {
+      font-family: var(--font-display); font-weight: 300;
+      font-size: clamp(3.5rem, 10vw, 8.5rem);
+      line-height: 1; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+    }
+    .hero-year {
+      font-family: var(--font-mono); font-size: 0.75rem;
+      letter-spacing: 0.35em; opacity: 0.6; margin-bottom: 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    /* ─── INTRO ─── */
+    .section-intro {
+      padding: 6rem 2rem; max-width: 860px; margin: 0 auto; text-align: center;
+    }
+    .section-intro h2 {
+      font-family: var(--font-display); font-weight: 300;
+      font-size: clamp(2.25rem, 5.5vw, 4.5rem);
+      letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 1.5rem;
+    }
+    .section-intro p {
+      font-size: 1.1rem; color: var(--charcoal); max-width: 580px;
+      margin: 0 auto; line-height: 1.75;
+    }
+
+    /* ─── CHIP GALLERY ─── */
+    .chip-gallery { padding: 2rem 2rem 5rem; }
+    .chip-gallery-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .chip-media {
+      position: relative; aspect-ratio: 3/2;
+      overflow: hidden; background: var(--cream-card);
+    }
+    .gallery-item {
+      position: absolute; inset: 0;
+      transition: opacity 0.3s var(--ease-out);
+    }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-item.active  { opacity: 1; }
+    .gallery-item.hidden  { opacity: 0; pointer-events: none; }
+
+    .chip-info h2 {
+      font-family: var(--font-display); font-weight: 300;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      letter-spacing: -0.025em; line-height: 1.05; margin-bottom: 1.25rem;
+    }
+    .chip-info p { color: var(--charcoal); line-height: 1.75; margin-bottom: 1.75rem; }
+    .chip-swatches { display: flex; gap: 0.6rem; margin-bottom: 1.75rem; flex-wrap: wrap; }
+    .swatch {
+      padding: 0.35rem 0.85rem;
+      border: 1px solid var(--tan);
+      font-family: var(--font-mono); font-size: 0.65rem;
+      letter-spacing: 0.05em; cursor: pointer;
+      transition: all 0.15s var(--ease-std); color: var(--charcoal);
+      background: transparent;
+    }
+    .swatch:hover, .swatch.active {
+      border-color: var(--forest); color: var(--forest); background: var(--cream-card);
+    }
+    .spec-table { border-top: 1px solid var(--tan); padding-top: 1.25rem; margin-top: 0.25rem; }
+    .spec-row {
+      display: flex; justify-content: space-between;
+      padding: 0.5rem 0; border-bottom: 1px solid rgba(221,213,190,0.5);
+      font-size: 0.85rem;
+    }
+    .spec-label { color: var(--charcoal); }
+    .spec-val   { font-family: var(--font-mono); font-size: 0.72rem; color: var(--forest); }
+
+    /* ─── EDITORIAL GRID (4px gap, Mode pattern) ─── */
+    .editorial-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+    }
+    .editorial-grid-item { position: relative; overflow: hidden; }
+    .editorial-grid-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s var(--ease-out);
+      display: block;
+    }
+    .editorial-grid-item:hover img { transform: scale(1.03); }
+    .editorial-grid-item.short { aspect-ratio: 3/2; }
+    .editorial-grid-item.tall  { grid-row: span 2; }
+    .editorial-grid-item.tall img { height: 100%; }
+    .editorial-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1.5rem;
+      background: linear-gradient(transparent, rgba(28,41,31,0.72));
+      color: var(--cream-light);
+    }
+    .editorial-caption h3 {
+      font-family: var(--font-display); font-weight: 300;
+      font-size: 1.4rem; letter-spacing: -0.01em;
+    }
+    .editorial-caption p {
+      font-family: var(--font-mono); font-size: 0.68rem;
+      opacity: 0.72; margin-top: 0.3rem; letter-spacing: 0.05em;
+    }
+
+    /* ─── VIDEO / AMBIENT ─── */
+    .ambient-section {
+      position: relative; aspect-ratio: 16/9;
+      overflow: hidden; background: var(--forest);
+      min-height: 320px;
+    }
+    .ambient-section img {
+      width: 100%; height: 100%; object-fit: cover; opacity: 0.75;
+    }
+    .ambient-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; color: var(--cream-light);
+      background: rgba(28,41,31,0.3);
+      padding: 2rem;
+    }
+    .ambient-overlay h2 {
+      font-family: var(--font-display); font-weight: 300;
+      font-size: clamp(2.25rem, 5vw, 5rem);
+      letter-spacing: -0.025em; line-height: 1; margin-bottom: 1rem;
+    }
+    .ambient-overlay p {
+      font-family: var(--font-mono); font-size: 0.72rem;
+      letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75;
+    }
+
+    /* ─── 3-COL BROWSE ─── */
+    .browse-section { padding: 5rem 2rem; background: var(--cream-card); }
+    .browse-header {
+      max-width: 1280px; margin: 0 auto 3rem;
+      display: flex; align-items: baseline; justify-content: space-between;
+    }
+    .browse-header h2 {
+      font-family: var(--font-display); font-weight: 300;
+      font-size: clamp(2rem, 3.5vw, 3rem); letter-spacing: -0.02em;
+    }
+    .browse-grid {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .browse-card { background: var(--cream); overflow: hidden; cursor: pointer; }
+    .browse-card-img { aspect-ratio: 3/2; overflow: hidden; }
+    .browse-card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s var(--ease-out);
+    }
+    .browse-card:hover .browse-card-img img { transform: scale(1.04); }
+    .browse-card-body { padding: 1.25rem 1.25rem 1.6rem; }
+    .browse-card-eyebrow {
+      font-family: var(--font-mono); font-size: 0.62rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 0.5rem;
+    }
+    .browse-card-title {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: 1.5rem; letter-spacing: -0.01em;
+      margin-bottom: 0.5rem; line-height: 1.2;
+    }
+    .browse-card-desc { font-size: 0.875rem; color: var(--charcoal); line-height: 1.65; }
+
+    /* ─── FOUNDRY (dark forest section) ─── */
+    .foundry-section { background: var(--forest); color: var(--cream-light); padding: 6rem 2rem; }
+    .foundry-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .amber-tag {
+      display: inline-block; background: var(--amber); color: var(--forest);
+      padding: 0.3rem 0.8rem; font-family: var(--font-mono);
+      font-size: 0.62rem; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 1.25rem;
+    }
+    .foundry-text h2 {
+      font-family: var(--font-display); font-weight: 300;
+      font-size: clamp(2.5rem, 4.5vw, 4rem);
+      letter-spacing: -0.025em; line-height: 1.05; margin-bottom: 1.5rem;
+    }
+    .foundry-text p { color: var(--tan); line-height: 1.8; margin-bottom: 2rem; }
+    .foundry-img { aspect-ratio: 3/2; overflow: hidden; }
+    .foundry-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ─── MODELS ─── */
+    .models-section { padding: 6rem 2rem; }
+    .models-header { max-width: 1280px; margin: 0 auto 3rem; text-align: center; }
+    .models-header h2 {
+      font-family: var(--font-display); font-weight: 300;
+      font-size: clamp(2.5rem, 4.5vw, 3.75rem); letter-spacing: -0.025em; margin-bottom: 0.75rem;
+    }
+    .models-header p { font-size: 1rem; color: var(--charcoal); }
+    .models-grid {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--tan);
+    }
+    .model-card { background: var(--cream); padding: 2.5rem 2rem; }
+    .model-family {
+      font-family: var(--font-mono); font-size: 0.62rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 0.5rem;
+    }
+    .model-name {
+      font-family: var(--font-display); font-weight: 300;
+      font-size: 2.25rem; letter-spacing: -0.02em;
+      line-height: 1; margin-bottom: 1rem;
+    }
+    .model-desc { font-size: 0.875rem; color: var(--charcoal); line-height: 1.7; margin-bottom: 1.5rem; }
+    .model-stats {
+      border-top: 1px solid var(--tan); padding-top: 1.25rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .model-stat { display: flex; justify-content: space-between; font-size: 0.78rem; }
+    .model-stat-label { color: var(--charcoal); }
+    .model-stat-val { font-family: var(--font-mono); font-size: 0.7rem; color: var(--forest); }
+
+    /* ─── CATEGORIES TYPOGRAPHIC SECTION ─── */
+    .categories-section { padding: 5rem 2rem; background: var(--cream-card); }
+    .categories-inner { max-width: 1280px; margin: 0 auto; text-align: center; }
+    .categories-eyebrow {
+      font-family: var(--font-mono); font-size: 0.62rem;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--charcoal); margin-bottom: 2.5rem;
+    }
+    .categories-title {
+      font-family: var(--font-display); font-weight: 300;
+      font-size: clamp(3rem, 8vw, 7rem);
+      letter-spacing: -0.035em; line-height: 1;
+    }
+    .categories-title span { display: block; }
+    .categories-title .muted { color: var(--tan); }
+
+    /* ─── FOOTER ─── */
+    footer { background: var(--forest); color: var(--tan); padding: 4.5rem 2rem 3rem; }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    }
+    .footer-logo {
+      font-family: var(--font-display); font-size: 1.3rem;
+      letter-spacing: 0.15em; color: var(--cream-light); margin-bottom: 1rem;
+    }
+    .footer-tagline { font-size: 0.85rem; line-height: 1.7; max-width: 230px; }
+    .footer-col h4 {
+      font-family: var(--font-mono); font-size: 0.62rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--cream-light); margin-bottom: 1.25rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .footer-col ul li a { font-size: 0.875rem; color: var(--tan); transition: color 0.15s; }
+    .footer-col ul li a:hover { color: var(--cream-light); }
+    .footer-bottom {
+      max-width: 1280px; margin: 3rem auto 0;
+      padding-top: 1.5rem; border-top: 1px solid rgba(221,213,190,0.12);
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--font-mono); font-size: 0.68rem;
+      color: rgba(221,213,190,0.45); letter-spacing: 0.04em;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .browse-grid      { grid-template-columns: repeat(2, 1fr); }
+      .models-grid      { grid-template-columns: 1fr; gap: 1px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links        { display: none; }
+      .chip-gallery-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .editorial-grid   { grid-template-columns: 1fr; }
+      .browse-grid      { grid-template-columns: 1fr; }
+      .foundry-inner    { grid-template-columns: 1fr; }
+      .footer-inner     { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .browse-header    { flex-direction: column; gap: 1rem; }
+      .footer-bottom    { flex-direction: column; gap: 0.75rem; text-align: center; }
+      .hero-title       { font-size: clamp(2.75rem, 10vw, 5rem); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ───────────────────────────────────────────── -->
+<header>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-logo">ARCH</div>
+    <ul class="nav-links">
+      <li><a href="#hardware">Hardware</a></li>
+      <li><a href="#explore">Infrastructure</a></li>
+      <li><a href="#models">Models</a></li>
+      <li><a href="#">Lab</a></li>
+    </ul>
+    <div class="nav-icons">
+      <svg viewBox="0 0 24 24" aria-label="Search"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      <svg viewBox="0 0 24 24" aria-label="Account"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <svg viewBox="0 0 24 24" aria-label="Menu"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </div>
+  </nav>
+</header>
+
+<!-- ── HERO ──────────────────────────────────────────── -->
+<section class="hero" aria-labelledby="hero-heading">
+  <img class="hero-img"
+    src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&h=1134&fit=crop&auto=format&q=85"
+    alt="Data center corridor at scale"
+    loading="eager" fetchpriority="high">
+  <div class="hero-overlay"></div>
+  <div class="dithered-grid"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Announcing</p>
+    <h1 class="hero-title" id="hero-heading">The Architecture<br>of Intelligence</h1>
+    <p class="hero-year">2026</p>
+    <div class="hero-actions">
+      <a href="#hardware" class="btn btn-primary">Explore Hardware →</a>
+      <a href="#models" class="btn btn-secondary">Meet the Models</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── INTRO ──────────────────────────────────────────── -->
+<section class="section-intro">
+  <h2>For the Art of Compute</h2>
+  <p>Every inference, every token, every breakthrough decision — forged in silicon, cooled by physics, delivered at planetary scale. We document the machines rewriting what's possible.</p>
+</section>
+
+<!-- ── CHIP GALLERY ───────────────────────────────────── -->
+<section id="hardware" class="chip-gallery" aria-labelledby="chip-section-heading">
+  <div class="chip-gallery-inner">
+
+    <!-- Media stack — Mode opacity crossfade pattern -->
+    <div class="chip-media">
+      <div class="gallery-item active" data-idx="0">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&h=1067&fit=crop&auto=format&q=85"
+          alt="NVIDIA H100 SXM5" loading="lazy"
+          sizes="(min-width:1024px) 50vw, 100vw">
+      </div>
+      <div class="gallery-item hidden" data-idx="1">
+        <img src="https://images.unsplash.com/photo-1640158615573-cd28feb1bf4e?w=1600&h=1067&fit=crop&auto=format&q=85"
+          alt="NVIDIA GB200 NVL72" loading="lazy"
+          sizes="(min-width:1024px) 50vw, 100vw">
+      </div>
+      <div class="gallery-item hidden" data-idx="2">
+        <img src="https://images.unsplash.com/photo-1580894742597-87bc8789db3d?w=1600&h=1067&fit=crop&auto=format&q=85"
+          alt="Google TPU v5e" loading="lazy"
+          sizes="(min-width:1024px) 50vw, 100vw">
+      </div>
+    </div>
+
+    <!-- Info panel -->
+    <div class="chip-info">
+      <div class="chip-swatches">
+        <button class="swatch active" data-chip="0">H100 SXM5</button>
+        <button class="swatch"        data-chip="1">GB200 NVL72</button>
+        <button class="swatch"        data-chip="2">TPU v5e</button>
+      </div>
+      <h2 id="chip-title">H100 SXM5</h2>
+      <p id="chip-desc">NVIDIA's flagship training accelerator. 80GB HBM3 — the workhorse behind every frontier model in production today. Powers the clusters that built GPT-4, Claude, and Gemini.</p>
+      <div class="spec-table">
+        <div class="spec-row"><span class="spec-label">Memory</span>          <span class="spec-val" id="spec-mem">80 GB HBM3</span></div>
+        <div class="spec-row"><span class="spec-label">Memory Bandwidth</span><span class="spec-val" id="spec-bw">3.35 TB/s</span></div>
+        <div class="spec-row"><span class="spec-label">TDP</span>             <span class="spec-val" id="spec-tdp">700 W</span></div>
+        <div class="spec-row"><span class="spec-label">FP8 Performance</span><span class="spec-val" id="spec-fp">3,958 TFLOPS</span></div>
+      </div>
+      <br>
+      <a href="#" class="btn btn-outline">Deep Dive →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── EDITORIAL TIGHT GRID (4px gap — Mode pattern) ──── -->
+<section aria-label="Data center editorial">
+  <div class="editorial-grid">
+    <div class="editorial-grid-item tall">
+      <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1000&h=1400&fit=crop&auto=format&q=85"
+        alt="Server rack close-up" loading="lazy">
+      <div class="editorial-caption">
+        <h3>The Rack</h3>
+        <p>72U · 30kW · 99.999% uptime</p>
+      </div>
+    </div>
+    <div class="editorial-grid-item short">
+      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&h=600&fit=crop&auto=format&q=80"
+        alt="Hot aisle containment" loading="lazy">
+      <div class="editorial-caption">
+        <h3>Hot Aisle Containment</h3>
+        <p>PUE 1.12 · Tier IV certified</p>
+      </div>
+    </div>
+    <div class="editorial-grid-item short">
+      <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&h=600&fit=crop&auto=format&q=80"
+        alt="400G networking fabric" loading="lazy">
+      <div class="editorial-caption">
+        <h3>400G Fabric</h3>
+        <p>InfiniBand NDR · RoCEv2</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AMBIENT / VIDEO SECTION ────────────────────────── -->
+<section class="ambient-section" aria-label="Cooling infrastructure">
+  <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1920&h=1080&fit=crop&auto=format&q=80"
+    alt="Liquid cooling infrastructure" loading="lazy">
+  <div class="ambient-overlay">
+    <h2>Cooling is Design</h2>
+    <p>Direct Liquid · Immersion · Rear-door Heat Exchange</p>
+  </div>
+</section>
+
+<!-- ── 3-COL BROWSE ──────────────────────────────────── -->
+<section id="explore" class="browse-section" aria-labelledby="browse-heading">
+  <div class="browse-header">
+    <h2 id="browse-heading">Explore the Stack</h2>
+    <a href="#" class="btn btn-muted">View All →</a>
+  </div>
+  <div class="browse-grid">
+    <article class="browse-card">
+      <div class="browse-card-img">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=533&fit=crop&auto=format&q=85"
+          alt="GPU Accelerators" loading="lazy">
+      </div>
+      <div class="browse-card-body">
+        <p class="browse-card-eyebrow">Compute</p>
+        <h3 class="browse-card-title">GPU Accelerators</h3>
+        <p class="browse-card-desc">H100, H200, GB200 — the silicon spine of large-scale AI training and inference at every tier of the stack.</p>
+      </div>
+    </article>
+    <article class="browse-card">
+      <div class="browse-card-img">
+        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&h=533&fit=crop&auto=format&q=85"
+          alt="Networking fabric" loading="lazy">
+      </div>
+      <div class="browse-card-body">
+        <p class="browse-card-eyebrow">Networking</p>
+        <h3 class="browse-card-title">Fabric & Switches</h3>
+        <p class="browse-card-desc">400G InfiniBand, Spectrum-X Ethernet, and the topology decisions that define cluster throughput and training efficiency.</p>
+      </div>
+    </article>
+    <article class="browse-card">
+      <div class="browse-card-img">
+        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=533&fit=crop&auto=format&q=85"
+          alt="Checkpoint storage" loading="lazy">
+      </div>
+      <div class="browse-card-body">
+        <p class="browse-card-eyebrow">Storage</p>
+        <h3 class="browse-card-title">Checkpoint Storage</h3>
+        <p class="browse-card-desc">GPFS, Lustre, and object stores tuned for trillion-parameter checkpoint I/O without breaking the training budget.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ── FOUNDRY (dark section) ────────────────────────── -->
+<section class="foundry-section" aria-labelledby="foundry-heading">
+  <div class="foundry-inner">
+    <div class="foundry-text">
+      <span class="amber-tag">Deep Dive</span>
+      <h2 id="foundry-heading">The New Foundry</h2>
+      <p>TSMC N3E. Samsung 2nm. Intel 18A. The fabrication race has never been tighter — and the chips it produces have never mattered more to the future of intelligence. We go inside the fabs.</p>
+      <a href="#" class="btn btn-secondary">Read the Series →</a>
+    </div>
+    <div class="foundry-img">
+      <img src="https://images.unsplash.com/photo-1580894742597-87bc8789db3d?w=1200&h=800&fit=crop&auto=format&q=85"
+        alt="Semiconductor wafer fabrication" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ── MEET THE MODELS ────────────────────────────────── -->
+<section id="models" class="models-section" aria-labelledby="models-heading">
+  <div class="models-header">
+    <h2 id="models-heading">Meet the Models</h2>
+    <p>The frontier, benchmarked and decoded.</p>
+  </div>
+  <div class="models-grid">
+    <div class="model-card">
+      <p class="model-family">Anthropic</p>
+      <h3 class="model-name">Claude 4</h3>
+      <p class="model-desc">Best-in-class reasoning, coding, and long-context tasks. The model behind the tools that builders actually ship — trusted for agentic workflows at production scale.</p>
+      <div class="model-stats">
+        <div class="model-stat"><span class="model-stat-label">Context window</span><span class="model-stat-val">200K tokens</span></div>
+        <div class="model-stat"><span class="model-stat-label">MMLU</span>          <span class="model-stat-val">88.7%</span></div>
+        <div class="model-stat"><span class="model-stat-label">TTFT (median)</span> <span class="model-stat-val">~1.2s</span></div>
+        <div class="model-stat"><span class="model-stat-label">Training chip</span> <span class="model-stat-val">H100 cluster</span></div>
+      </div>
+    </div>
+    <div class="model-card">
+      <p class="model-family">OpenAI</p>
+      <h3 class="model-name">GPT-5</h3>
+      <p class="model-desc">Multimodal reasoning powerhouse. Strongest on structured output, function calling, and real-time voice at global scale. The model that moved the benchmark goalposts.</p>
+      <div class="model-stats">
+        <div class="model-stat"><span class="model-stat-label">Context window</span><span class="model-stat-val">128K tokens</span></div>
+        <div class="model-stat"><span class="model-stat-label">MMLU</span>          <span class="model-stat-val">90.2%</span></div>
+        <div class="model-stat"><span class="model-stat-label">TTFT (median)</span> <span class="model-stat-val">~0.9s</span></div>
+        <div class="model-stat"><span class="model-stat-label">Training chip</span> <span class="model-stat-val">A100 / H100</span></div>
+      </div>
+    </div>
+    <div class="model-card">
+      <p class="model-family">Google DeepMind</p>
+      <h3 class="model-name">Gemini 2.5</h3>
+      <p class="model-desc">Native multimodality from day one. Unmatched on video, audio, and cross-modal reasoning. One million token context window makes it the long-document champion.</p>
+      <div class="model-stats">
+        <div class="model-stat"><span class="model-stat-label">Context window</span><span class="model-stat-val">1M tokens</span></div>
+        <div class="model-stat"><span class="model-stat-label">MMLU</span>          <span class="model-stat-val">90.0%</span></div>
+        <div class="model-stat"><span class="model-stat-label">TTFT (median)</span> <span class="model-stat-val">~1.5s</span></div>
+        <div class="model-stat"><span class="model-stat-label">Training chip</span> <span class="model-stat-val">TPU v5 pod</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CATEGORIES TYPOGRAPHY SECTION ─────────────────── -->
+<section class="categories-section" aria-label="Product categories">
+  <div class="categories-inner">
+    <p class="categories-eyebrow">The complete stack</p>
+    <div class="categories-title">
+      <span>GPUs</span>
+      <span class="muted">Networking</span>
+      <span>Servers</span>
+      <span class="muted">Cooling</span>
+      <span>Models</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">ARCH</div>
+      <p class="footer-tagline">Documenting the infrastructure that intelligence runs on. Built for engineers, operators, and the genuinely curious.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Hardware</h4>
+      <ul>
+        <li><a href="#">GPU Accelerators</a></li>
+        <li><a href="#">AI ASICs</a></li>
+        <li><a href="#">Networking</a></li>
+        <li><a href="#">Storage</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Software</h4>
+      <ul>
+        <li><a href="#">Frontier Models</a></li>
+        <li><a href="#">Training Stacks</a></li>
+        <li><a href="#">Inference Engines</a></li>
+        <li><a href="#">Benchmarks</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Lab</h4>
+      <ul>
+        <li><a href="#">Field Notes</a></li>
+        <li><a href="#">Data Center Tours</a></li>
+        <li><a href="#">Fab Deep Dives</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 ARCH — The Architecture of Intelligence</span>
+    <span>Built on the shoulders of silicon giants</span>
+  </div>
+</footer>
+
+<!-- ── CHIP GALLERY JS (opacity crossfade — Mode pattern) -->
+<script>
+  const chips = [
+    {
+      title: 'H100 SXM5',
+      desc:  "NVIDIA's flagship training accelerator. 80GB HBM3 — the workhorse behind every frontier model in production today. Powers the clusters that built GPT-4, Claude, and Gemini.",
+      mem: '80 GB HBM3', bw: '3.35 TB/s', tdp: '700 W', fp: '3,958 TFLOPS'
+    },
+    {
+      title: 'GB200 NVL72',
+      desc:  'The Blackwell generation. 72 GPUs in a single NVLink domain — designed for the next order of magnitude in training scale. 20× the FP8 throughput of H100.',
+      mem: '192 GB HBM3e', bw: '8.0 TB/s', tdp: '1,200 W', fp: '20,000 TFLOPS'
+    },
+    {
+      title: 'TPU v5e',
+      desc:  "Google's efficiency-optimized TPU. Built for serving — high throughput, the lowest cost-per-token in class. Powers Gemini inference across all of Google's consumer products.",
+      mem: '16 GB HBM', bw: '1.6 TB/s', tdp: '170 W', fp: '918 TFLOPS'
+    }
+  ];
+
+  const swatches     = document.querySelectorAll('.swatch');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+
+  function switchChip(idx) {
+    galleryItems.forEach((item, i) => {
+      item.classList.toggle('active', i === idx);
+      item.classList.toggle('hidden', i !== idx);
+    });
+    swatches.forEach((s, i) => s.classList.toggle('active', i === idx));
+    const c = chips[idx];
+    document.getElementById('chip-title').textContent = c.title;
+    document.getElementById('chip-desc').textContent  = c.desc;
+    document.getElementById('spec-mem').textContent   = c.mem;
+    document.getElementById('spec-bw').textContent    = c.bw;
+    document.getElementById('spec-tdp').textContent   = c.tdp;
+    document.getElementById('spec-fp').textContent    = c.fp;
+  }
+
+  swatches.forEach(s => s.addEventListener('click', () => switchChip(+s.dataset.chip)));
+</script>
+
+</body>
+</html>
