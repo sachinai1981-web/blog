@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sachinai1981-web.github.io/blog/sitemap.xml
+Sitemap: https://sachinai.com/sitemap.xml
