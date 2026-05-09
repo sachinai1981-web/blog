@@ -31,6 +31,50 @@
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--paper);color:var(--ink);font-family:var(--font-sans);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  .s4 a.card{display:flex;flex-direction:column;justify-content:space-between;}
+  .s4 a.card:hover .title{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;}
+
+  /* Compact top nav (in sysbar row alt) */
+  .v5-nav{
+    position:fixed;top:1.85rem;left:0;right:0;z-index:88;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:.75rem 1.5rem;background:rgba(244,243,238,.85);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--hairline);
+    font-family:var(--font-mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  }
+  .v5-nav .brand{font-family:var(--font-display);font-size:.9rem;letter-spacing:-.02em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.5rem;}
+  .v5-nav .brand .dot-r,.v5-nav .brand .dot-o,.v5-nav .brand .dot-g{display:inline-block;width:8px;height:8px;}
+  .v5-nav .brand .dot-r{background:var(--red);}
+  .v5-nav .brand .dot-o{background:var(--orange);}
+  .v5-nav .brand .dot-g{background:var(--green);}
+  .v5-nav .links{display:flex;gap:.5rem;}
+  .v5-nav .links a{padding:.4rem .85rem;border:1px solid transparent;transition:all .2s var(--ease);}
+  .v5-nav .links a:hover{border-color:var(--ink);background:var(--ink);color:var(--paper);}
+  .v5-nav .links a.cta{background:var(--ink);color:var(--paper);}
+  .v5-nav .links a.cta:hover{background:var(--red);}
+  @media (max-width:768px){
+    .v5-nav .links a:not(.cta){display:none;}
+    .v5-nav{padding:.6rem 1rem;}
+  }
+  body{padding-top:0;}
+
+  /* Footer */
+  .v5-footer{background:var(--ink);color:var(--paper);padding:5rem 2rem 3rem;border-top:1px solid var(--ink);}
+  .v5-footer-grid{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(244,243,238,.15);}
+  @media (max-width:768px){.v5-footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}}
+  .v5-footer h4{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,243,238,.55);margin-bottom:1rem;}
+  .v5-footer ul{list-style:none;padding:0;}
+  .v5-footer ul li{margin-bottom:.6rem;}
+  .v5-footer ul li a{font-family:var(--font-sans);font-size:.95rem;color:rgba(244,243,238,.85);transition:color .2s;}
+  .v5-footer ul li a:hover{color:var(--orange);}
+  .v5-footer .foot-brand{font-family:var(--font-display);font-size:1.4rem;letter-spacing:-.02em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1rem;}
+  .v5-footer .foot-tagline{font-family:var(--font-serif);font-size:1rem;line-height:1.55;color:rgba(244,243,238,.7);max-width:42ch;}
+  .v5-footer-bot{max-width:1300px;margin:0 auto;padding-top:1.5rem;display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,243,238,.45);}
+  .v5-footer-bot .dot-r{display:inline-block;width:8px;height:8px;background:var(--red);}
+  .v5-footer-bot .dot-o{display:inline-block;width:8px;height:8px;background:var(--orange);}
+  .v5-footer-bot .dot-g{display:inline-block;width:8px;height:8px;background:var(--green);}
   body::before{content:'';position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%230a0a0a'/%3E%3C/svg%3E");background-size:4px 4px;mix-blend-mode:multiply;}
 
   .sysbar{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;justify-content:space-between;padding:.5rem 1.25rem;background:var(--ink);color:var(--paper);font-family:var(--font-mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;}
@@ -138,6 +182,20 @@
   <span><span class="dot"></span> SACHIN RAI · FIELD NOTES · 2026.W19</span>
   <span>SCROLL <span class="v red" id="progPct">00%</span> · STATUS <span class="v green">LIVE</span></span>
 </div>
+<nav class="v5-nav">
+  <span class="brand">
+    <span class="dot-r"></span><span class="dot-o"></span><span class="dot-g"></span>
+    <span>Sachin Rai</span>
+  </span>
+  <div class="links">
+    <a href="#archive">Writing</a>
+    <a href="/resume.html">Résumé</a>
+    <a href="https://x.com/sachinrai" target="_blank" rel="noopener">X ↗</a>
+    <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a href="#subscribe" class="cta">Subscribe</a>
+  </div>
+</nav>
+
 <div class="rail" id="rail"></div>
 <div class="cursor" id="cursor"></div>
 <div class="dots">
@@ -195,18 +253,77 @@
   </div>
 </section>
 
-<section class="scene s4" data-scene="4">
+<section class="scene s4" data-scene="4" id="archive">
   <div class="grid">
     <div class="grid-eyebrow"><span>↳ THE ARCHIVE</span><span>FIELD NOTES · 24 ENTRIES</span></div>
-    <div class="card a"><span class="num">01 · ESSAY</span><h3 class="title">The unfair advantage of AI-native sellers</h3><span class="meta">12 MIN · MAY 2026</span></div>
-    <div class="card b"><span class="num">02 · TOOL</span><h3 class="title">Subject Line Scorer</h3><span class="meta">LIVE</span></div>
-    <div class="card c"><span class="num">03</span><h3 class="title">ROI calculator</h3><span class="meta">BUILD</span></div>
-    <div class="card d"><span class="num">04</span><h3 class="title">Cold email kit</h3><span class="meta">FREE</span></div>
-    <div class="card e"><span class="num">05 · NOTES</span><h3 class="title">Why ServiceNow keeps losing the AI conversation</h3><span class="meta">8 MIN</span></div>
-    <div class="card f"><span class="num">06 · ESSAY</span><h3 class="title">Compounding systems beat clever tactics</h3><span class="meta">15 MIN</span></div>
-    <div class="card g"><span class="num">07 · BUILD LOG</span><h3 class="title">Single Brain — what runs my desk</h3><span class="meta">ONGOING</span></div>
+    <a class="card a" href="/posts/13-agents-one-saturday.html"><span class="num">009 · ESSAY · AI</span><h3 class="title">Thirteen Agents in One Saturday.</h3><span class="meta">10 MIN · MAY 2026</span></a>
+    <a class="card b" href="/posts/compounding-systems.html"><span class="num">008 · KNOWLEDGE</span><h3 class="title">Most Second Brains Just Rotate.</h3><span class="meta">10 MIN · MAY 2026</span></a>
+    <a class="card c" href="/posts/five-vault-fixes.html"><span class="num">006 · OPS</span><h3 class="title">Vault: 7.5 → 9.5</h3><span class="meta">10 MIN</span></a>
+    <a class="card d" href="/posts/renamed-seven-agents.html"><span class="num">007 · ENG</span><h3 class="title">I Renamed Seven Agents.</h3><span class="meta">10 MIN</span></a>
+    <a class="card e" href="/posts/ai-trends-2026-breakthrough-idea.html"><span class="num">001 · STRATEGY · FEATURED</span><h3 class="title">7 AI trends I'm tracking in 2026.</h3><span class="meta">09 MIN · APR 2026</span></a>
+    <a class="card f" href="/posts/win-rate-trap.html"><span class="num">002 · STRATEGY</span><h3 class="title">Win Rate Lies.</h3><span class="meta">07 MIN · APR 2026</span></a>
+    <a class="card g" href="/posts/ai-sales-stack-2026.html"><span class="num">005 · STRATEGY</span><h3 class="title">The AI sales stack I'd build today.</h3><span class="meta">08 MIN · FEB 2026</span></a>
   </div>
 </section>
+
+<!-- Subscribe -->
+<section id="subscribe" style="background:var(--paper-2);padding:6rem 2rem;border-top:1px solid var(--ink);">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
+    <div>
+      <div style="font-family:var(--font-mono);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:1rem;">↳ FIELD NOTES</div>
+      <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3.6rem);line-height:.95;letter-spacing:-.03em;text-transform:uppercase;margin-bottom:1.25rem;">One issue per <span style="color:var(--red);">week</span>.</h2>
+      <p style="font-family:var(--font-serif);font-size:1.05rem;line-height:1.55;color:var(--ink);max-width:48ch;">Long-form essays on AI infrastructure, evals, enterprise pricing, and the reliability work between a chip and a quota. No daily digest. No reposts.</p>
+    </div>
+    <form onsubmit="event.preventDefault();this.querySelector('button').textContent='SUBSCRIBED ✓';" style="display:flex;flex-direction:column;gap:.75rem;">
+      <div style="display:flex;border:1px solid var(--ink);background:var(--paper);">
+        <input type="email" placeholder="ops@enterprise.ai" required autocomplete="email" style="flex:1;border:0;padding:1rem 1.25rem;background:transparent;font-family:var(--font-mono);font-size:.95rem;outline:none;" />
+        <button type="submit" style="border:0;border-left:1px solid var(--ink);padding:1rem 1.5rem;background:var(--ink);color:var(--paper);font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;">Subscribe →</button>
+      </div>
+      <div style="font-family:var(--font-mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);">2,847 readers · 47% open · No tracking</div>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="v5-footer">
+  <div class="v5-footer-grid">
+    <div>
+      <span class="foot-brand">
+        <span class="dot-r"></span><span class="dot-o"></span><span class="dot-g"></span>
+        <span>Sachin Rai</span>
+      </span>
+      <p class="foot-tagline">Field notes from where AI infrastructure meets enterprise selling. Edited and operated by Sachin Rai. Published from San Francisco.</p>
+    </div>
+    <div>
+      <h4>Read</h4>
+      <ul>
+        <li><a href="#archive">Writing archive</a></li>
+        <li><a href="/posts/13-agents-one-saturday.html">Latest essay</a></li>
+        <li><a href="/posts/ai-trends-2026-breakthrough-idea.html">Featured</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>About</h4>
+      <ul>
+        <li><a href="/resume.html">Résumé</a></li>
+        <li><a href="mailto:sachinai1981@gmail.com">Email</a></li>
+        <li><a href="#subscribe">Subscribe</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://x.com/sachinrai" target="_blank" rel="noopener">X ↗</a></li>
+        <li><a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="v5-footer-bot">
+    <span>© 2026 Sachin Rai · SF · PT</span>
+    <span><span class="dot-r"></span> <span class="dot-o"></span> <span class="dot-g"></span></span>
+    <span>Field Notes · 2026.W19</span>
+  </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
