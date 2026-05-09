@@ -1105,6 +1105,7 @@
      ════════════════════════════════════════════════════════════════ -->
 <section class="hero">
   <canvas id="heroCanvas"></canvas>
+  <div class="hero-fallback-gem" aria-hidden="true"></div>
   <p class="hero-eyebrow">
     Issue 047 <span class="badge">Featured</span> Filed 2026.04.25
   </p>
@@ -1684,11 +1685,45 @@
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    z-index: 0;
+    z-index: 1;
     pointer-events: none;
   }
-  .hero > *:not(#heroCanvas) { position: relative; z-index: 2; }
-  .hero-stage { z-index: 2; }
+  .hero > *:not(#heroCanvas) { position: relative; z-index: 3; }
+  .hero-stage { z-index: 3; }
+  .hero-title { position: relative; z-index: 4; }
+
+  /* When JS is active, fade existing decorative shapes so 3D gem
+     becomes the hero focal element. Graceful fallback when JS off. */
+  .js-ready .hero-circle,
+  .js-ready .hero-square,
+  .js-ready .hero-tri {
+    opacity: 0;
+    transition: opacity 0.6s var(--ease);
+  }
+
+  /* CSS-only fallback gem if WebGL fails — animated gradient ball */
+  .hero-fallback-gem {
+    display: none;
+    position: absolute;
+    top: 50%; right: 8%;
+    transform: translateY(-50%);
+    width: clamp(180px, 22vw, 320px);
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg,
+      var(--red), var(--orange), #FFB627, var(--green), #FF5C8A, var(--paper), var(--red));
+    filter: blur(2px);
+    opacity: 0.85;
+    z-index: 2;
+    animation: gem-spin 18s linear infinite;
+    box-shadow: 0 0 80px rgba(247,127,0,0.4);
+    pointer-events: none;
+  }
+  .v5-no-webgl .hero-fallback-gem { display: block; }
+  @keyframes gem-spin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to   { transform: translateY(-50%) rotate(360deg); }
+  }
 
   /* Scroll progress rail */
   .v5-rail {
@@ -2031,8 +2066,10 @@
       renderer.setSize(w, h, false);
 
       const group = new THREE.Group();
-      const xPos = w > 900 ? 2.4 : 0;
-      group.position.set(xPos, 0, 0);
+      // Position gem prominently — right side on wide screens, centered on mobile
+      const xPos = w > 1100 ? 2.8 : (w > 700 ? 1.8 : 0);
+      const yPos = w > 700 ? 0 : -0.5;
+      group.position.set(xPos, yPos, 0);
       tscene.add(group);
 
       const palette = [
@@ -2040,7 +2077,7 @@
         new THREE.Color(0xFFB627), new THREE.Color(0x2A9D5F),
         new THREE.Color(0xFF5C8A), new THREE.Color(0xF4F3EE),
       ];
-      const gemGeo = new THREE.DodecahedronGeometry(1.4, 0);
+      const gemGeo = new THREE.DodecahedronGeometry(1.7, 0);
       const gemColors = [];
       const posCount = gemGeo.attributes.position.count;
       for (let i = 0; i < posCount; i++) {
@@ -2058,8 +2095,8 @@
       ));
 
       const outer = new THREE.LineSegments(
-        new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.2, 1)),
-        new THREE.LineBasicMaterial({ color: 0xE63946, transparent: true, opacity: 0.5 })
+        new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(2.6, 1)),
+        new THREE.LineBasicMaterial({ color: 0xE63946, transparent: true, opacity: 0.55 })
       );
       group.add(outer);
 
@@ -2124,7 +2161,7 @@
         particles.geometry.attributes.position.needsUpdate = true;
         particles.rotation.y += 0.001;
         group.position.x = xPos + mouse.x * 0.5;
-        group.position.y = -mouse.y * 0.5;
+        group.position.y = yPos - mouse.y * 0.5;
         renderer.render(tscene, camera);
         requestAnimationFrame(tick);
       }
@@ -2144,9 +2181,10 @@
 
       console.log('[v5] Three.js gem initialized');
     } catch (err) {
-      console.warn('[v5] 3D failed, continuing without:', err && err.message);
+      console.warn('[v5] 3D failed, falling back to CSS gem:', err && err.message);
       const c = document.getElementById('heroCanvas');
       if (c) c.style.display = 'none';
+      document.body.classList.add('v5-no-webgl');
     }
 
     /* Refresh ScrollTrigger after fonts load — fixes shifted trigger positions */
