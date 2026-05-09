@@ -1111,10 +1111,6 @@
   </p>
 
   <div class="hero-stage">
-    <div class="hero-circle"></div>
-    <div class="hero-square"></div>
-    <div class="hero-tri"></div>
-
     <h1 class="hero-title">FRONTIER<br/>BUILD<br/>LOG.</h1>
   </div>
 
@@ -1691,15 +1687,6 @@
   .hero > *:not(#heroCanvas) { position: relative; z-index: 3; }
   .hero-stage { z-index: 3; }
   .hero-title { position: relative; z-index: 4; }
-
-  /* When JS is active, fade existing decorative shapes so 3D gem
-     becomes the hero focal element. Graceful fallback when JS off. */
-  .js-ready .hero-circle,
-  .js-ready .hero-square,
-  .js-ready .hero-tri {
-    opacity: 0;
-    transition: opacity 0.6s var(--ease);
-  }
 
   /* CSS-only fallback gem if WebGL fails — animated gradient ball */
   .hero-fallback-gem {
