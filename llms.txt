@@ -12,8 +12,14 @@ Sachin Rai writes about the intersection of AI and enterprise GTM:
 
 ## Posts
 
-- [How I used Claude Code to scrape LinkedIn and land interviews at Anthropic + OpenAI](https://sachinai1981-web.github.io/blog/posts/linkedin-claude-code.html)
-- [The AI tools replacing my sales stack in 2026](https://sachinai1981-web.github.io/blog/posts/ai-sales-stack-2026.html)
+- [Win Rate Lies.](https://sachinai.com/posts/win-rate-trap.html) — A 90% win rate signal in my trading system was bleeding money at −1.04% expectancy per trade. The same Trojan Horse is hiding in every sales pipeline I've managed.
+- [I Renamed Seven AI Agents.](https://sachinai.com/posts/renamed-seven-agents.html) — Brick, Owl, Bull, Falcon, Spider, Arrow, Sage are dead. Scanner, Grader, SwingTrader, DayPut, DayCondor, Outreach, Vault are alive. The rename touched 26 files. The lessons compound.
+- [I built a personal LLM knowledge base in Obsidian. Here's what it actually looks like](https://sachinai.com/posts/llm-knowledge-base-obsidian.html) — Raw data in, compiled wiki out. How I use Claude Code to turn everything I read and watch into a searchable, queryable knowledge base — and why this is the most underrated AI workflow right now.
+- [Five Cheap Fixes Took My Vault From 7.5 To 9.5.](https://sachinai.com/posts/five-vault-fixes.html) — A 90-minute lint pass on a knowledge vault: 19 missing banners, 132 unindexed notes, 24 confidence gaps, 6 open concept gaps, plus a contradiction scan. Score 7.5 → 9.5. Here's the whole pass, the failures, and the pattern.
+- [Most Second Brains Just Rotate.](https://sachinai.com/posts/compounding-systems.html) — I have 88 concept articles, 301 sources, 13 production agents. Most 'second brain' stacks fail because they confuse output with compounding. Three laws decide which yours is.
+- [7 AI trends I'm tracking in 2026 — and the breakthrough nobody's talking about](https://sachinai.com/posts/ai-trends-2026-breakthrough-idea.html) — From compute explosions to org design collapse — what my AI research vault is actually telling me about where this goes next. Plus one non-obvious conclusion.
+- [The AI tools replacing my sales stack in 2026](https://sachinai.com/posts/ai-sales-stack-2026.html) — From cold email scoring to deal review to prospect research — what I've actually replaced with AI tools and what still needs a human.
+- [Thirteen Agents in One Saturday.](https://sachinai.com/posts/13-agents-one-saturday.html) — I spawned 13 parallel Claude Code agents on a Saturday morning. Each shipped one feature for my trading system. One of them overturned the hypothesis from feature #1.
 
 ## Tools Built
 
