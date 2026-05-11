@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Field Notes — Sachin Rai · Ad Creative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #080808;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* ─── Ad frame: 4:5 ratio ─────────────────────────────── */
+.ad {
+  position: relative;
+  width: 100vw;
+  height: 125vw;
+  max-height: 100svh;
+  max-width: 80svh;
+  background: #0A0A0A;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Grain overlay */
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%23f4f3ee'/%3E%3C/svg%3E");
+  background-size: 4px 4px;
+}
+
+/* Top-to-bottom fade so headline text sits on dark bg */
+.top-fade {
+  position: absolute;
+  inset: 0 0 50% 0;
+  background: linear-gradient(to bottom,
+    rgba(10,10,10,0.96) 0%,
+    rgba(10,10,10,0.7)  40%,
+    transparent         100%
+  );
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Bottom-to-top fade so CTA sits on dark bg */
+.bottom-fade {
+  position: absolute;
+  inset: 40% 0 0 0;
+  background: linear-gradient(to top,
+    rgba(10,10,10,0.98) 0%,
+    rgba(10,10,10,0.75) 45%,
+    transparent         100%
+  );
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Red/orange/green top accent bar */
+.top-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #E63946 0%, #F77F00 50%, #2A9D5F 100%);
+  z-index: 40;
+}
+
+/* ─── Orb visual ──────────────────────────────────────── */
+.orb-wrap {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 88vw;
+  height: 88vw;
+  max-width: 88%;
+  z-index: 2;
+}
+
+.orb {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 33% 28%,
+    rgba(255,195,90,0.95)  0%,
+    rgba(230,57,70,0.80)   28%,
+    rgba(110,12,22,0.92)   55%,
+    rgba(10,10,10,1)       100%
+  );
+  box-shadow:
+    0 0  80px rgba(230,57,70,0.50),
+    0 0 160px rgba(247,127,0,0.22),
+    0 0 260px rgba(230,57,70,0.08);
+}
+
+/* Specular highlight */
+.orb::before {
+  content: '';
+  position: absolute;
+  top: 9%;
+  left: 19%;
+  width: 34%;
+  height: 22%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.26) 0%, transparent 100%);
+  transform: rotate(-22deg);
+  filter: blur(5px);
+}
+
+/* Orbiting rings */
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  animation: ring-spin linear infinite;
+}
+.ring-a {
+  inset: -18%;
+  border: 1px solid rgba(230,57,70,0.22);
+  animation-duration: 38s;
+}
+.ring-b {
+  inset: -37%;
+  border: 1px dashed rgba(247,127,0,0.14);
+  animation-duration: 58s;
+  animation-direction: reverse;
+}
+.ring-c {
+  inset: -57%;
+  border: 1px solid rgba(230,57,70,0.07);
+  animation-duration: 90s;
+}
+
+@keyframes ring-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Glowing dots on rings */
+.ring-a::before {
+  content: '';
+  position: absolute;
+  width: clamp(6px,1.6vw,10px);
+  height: clamp(6px,1.6vw,10px);
+  background: #E63946;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #E63946, 0 0 24px rgba(230,57,70,.6);
+  top: calc(50% - 4px);
+  right: -4px;
+}
+.ring-b::before {
+  content: '';
+  position: absolute;
+  width: clamp(5px,1.2vw,8px);
+  height: clamp(5px,1.2vw,8px);
+  background: #F77F00;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #F77F00, 0 0 20px rgba(247,127,0,.6);
+  bottom: -4px;
+  left: calc(28% - 4px);
+}
+.ring-c::before {
+  content: '';
+  position: absolute;
+  width: clamp(4px,1vw,6px);
+  height: clamp(4px,1vw,6px);
+  background: #2A9D5F;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #2A9D5F;
+  top: -3px;
+  left: calc(68% - 3px);
+}
+
+/* Horizontal scan line across orb */
+.scan {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent               0%,
+    rgba(230,57,70,0)        10%,
+    rgba(230,57,70,0.65)     35%,
+    rgba(247,127,0,1)        50%,
+    rgba(230,57,70,0.65)     65%,
+    rgba(230,57,70,0)        90%,
+    transparent              100%
+  );
+  top: 50%;
+  animation: scan 5s ease-in-out infinite alternate;
+  z-index: 3;
+}
+@keyframes scan {
+  from { top: 22%; opacity: 0.3; }
+  to   { top: 78%; opacity: 0.85; }
+}
+
+/* ─── Top: eyebrow + headline ─────────────────────────── */
+.top {
+  position: relative;
+  z-index: 10;
+  padding: 6vw 6vw 0;
+  flex-shrink: 0;
+}
+
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(8px, 2.4vw, 13px);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(244,243,238,0.42);
+  margin-bottom: clamp(10px, 3.5vw, 20px);
+}
+
+.headline {
+  font-family: 'Archivo Black', sans-serif;
+  text-transform: uppercase;
+  line-height: 0.90;
+  letter-spacing: -0.03em;
+}
+
+/* "THE WEEKLY BRIEF FOR" — medium white */
+.hl-pre {
+  display: block;
+  font-size: clamp(13px, 5.5vw, 30px);
+  color: rgba(244,243,238,0.88);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.6vw;
+}
+
+/* "ENTERPRISE" — large white */
+.hl-word {
+  display: block;
+  font-size: clamp(26px, 12.5vw, 68px);
+  color: #F4F3EE;
+}
+
+/* "AI SELLING" — gradient accent */
+.hl-accent {
+  display: block;
+  font-size: clamp(26px, 12.5vw, 68px);
+  background: linear-gradient(115deg, #E63946 0%, #F77F00 55%, #FFB627 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding-bottom: 0.05em;
+}
+
+/* ─── Bottom: brand + free label + CTA ───────────────── */
+.bottom {
+  position: relative;
+  z-index: 10;
+  padding: 0 6vw 6vw;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 3vw, 18px);
+}
+
+.bottom-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.brand-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(7px, 1.9vw, 11px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244,243,238,0.38);
+  line-height: 1.7;
+}
+
+.free-label {
+  text-align: right;
+  font-family: 'Archivo Black', sans-serif;
+  text-transform: uppercase;
+  line-height: 0.9;
+}
+.free-label .free-word {
+  display: block;
+  font-size: clamp(22px, 9.5vw, 52px);
+  color: #F4F3EE;
+  letter-spacing: -0.03em;
+}
+.free-label .free-sub {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(7px, 2vw, 11px);
+  letter-spacing: 0.22em;
+  color: rgba(244,243,238,0.45);
+  margin-top: 2px;
+}
+
+/* Subscribe CTA */
+.subscribe-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #E63946;
+  color: #F4F3EE;
+  padding: clamp(12px,4vw,22px) clamp(14px,5vw,28px);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(10px, 3vw, 17px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.subscribe-btn:hover { background: #c1121f; }
+.subscribe-btn .arrow {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(16px, 5.5vw, 30px);
+  letter-spacing: 0;
+  line-height: 1;
+}
+</style>
+</head>
+<body>
+
+<div class="ad">
+
+  <!-- Overlays & atmosphere -->
+  <div class="grain"></div>
+  <div class="top-fade"></div>
+  <div class="bottom-fade"></div>
+  <div class="top-bar"></div>
+
+  <!-- CSS orb visual -->
+  <div class="orb-wrap">
+    <div class="orb"></div>
+    <div class="ring ring-a"></div>
+    <div class="ring ring-b"></div>
+    <div class="ring ring-c"></div>
+    <div class="scan"></div>
+  </div>
+
+  <!-- Top: eyebrow + headline -->
+  <div class="top">
+    <div class="eyebrow">↳ Sachin Rai &middot; Field Notes &middot; 2026</div>
+    <div class="headline">
+      <span class="hl-pre">The weekly brief for</span>
+      <span class="hl-word">Enterprise</span>
+      <span class="hl-accent">AI Selling.</span>
+    </div>
+  </div>
+
+  <!-- Bottom: brand + free + subscribe -->
+  <div class="bottom">
+    <div class="bottom-meta">
+      <div class="brand-tag">
+        sachinai.com<br/>
+        Enterprise &middot; AI &middot; Sales<br/>
+        Weekly &middot; Field Notes
+      </div>
+      <div class="free-label">
+        <span class="free-word">FREE</span>
+        <span class="free-sub">Newsletter</span>
+      </div>
+    </div>
+    <a class="subscribe-btn" href="https://sachinai.com/#subscribe">
+      Subscribe Now
+      <span class="arrow">&rarr;</span>
+    </a>
+  </div>
+
+</div>
+
+</body>
+</html>
