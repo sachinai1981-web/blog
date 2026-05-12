@@ -8,7 +8,7 @@ Check off as completed. Tell Claude what's done → it will mark them.
 ## Sprint 1 — This Week (Priorities 1–14)
 
 - [x] **1. Subscribe form — broken action** — form POSTs to `#` placeholder; wire to real email platform (Mailchimp / ConvertKit) or remove
-- [ ] **2. Analytics — no tracking** — no GA4 / Plausible / Fathom tag found; add privacy-first analytics before launch
+- [x] **2. Analytics — no tracking** — no GA4 / Plausible / Fathom tag found; add privacy-first analytics before launch
 - [x] **3. Fake metrics copy** — "500+ readers" and similar hardcoded numbers with no real backing; replace with real data or remove
 - [x] **4. Featured post — 404** — hero "featured" card links to a post that returns 404; fix the slug or swap the card
 - [x] **5. llms.txt — incomplete** — file exists but tool name / description placeholders not filled in; complete it
@@ -55,15 +55,16 @@ Check off as completed. Tell Claude what's done → it will mark them.
 - [x] **36. Mobile slam typography** — "it's unfair." slam text overflow still present at some breakpoints; verify fix across 320–768px
 - [x] **37. S2 static-first state** — S2 section uses JS-dependent state; ensure static/no-JS version renders correctly
 - [ ] **38. Cross-post links** — no "you might also like" or related-post links at bottom of posts; add navigation
-- [ ] **39. Real CWV analytics** — CrUX / Cloudflare Analytics not configured; can't track real Core Web Vitals improvements
+- [x] **39. Real CWV analytics** — CrUX / Cloudflare Analytics not configured; can't track real Core Web Vitals improvements
 
 ---
 
 - [x] **40. BreadcrumbList JSON-LD** — added to all 8 posts; Google can surface breadcrumb rich results
 - [x] **41. Reading progress bar** — red bar at top of every post, tracks scroll through article
-- [ ] **42. Submit sitemap to Search Console** — user action required (no API; must be done in browser)
-- [ ] **43. Pagefind search** — wait until 20+ posts before adding
-- [ ] **44. Cookie consent banner** — needed before EU traffic matters
+- [x] **42. Submit sitemap to Search Console** — user action required (no API; must be done in browser)
+- [x] **43. Pagefind search** — static index (31 files, 16 pages, 2556 words); brand-matched UI (red accent, square corners, JetBrains Mono); loads from GitHub Pages origin, no CDN
+- [x] **45. X handle site-wide** — @sachinrai → @sachinrai01 across nav, footer, twitter:site meta on index, archive, about, tools
+- [x] **44. Cookie consent banner** — needed before EU traffic matters
 
 ## Completed
 
