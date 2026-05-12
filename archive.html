@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="Sachin Rai" />
 <meta property="og:locale" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@sachinrai" />
+<meta name="twitter:site" content="@sachinrai01" />
 <meta name="twitter:title" content="Archive — Sachin Rai" />
 <meta name="twitter:description" content="Every essay, field note, and build log published on sachinai.com." />
 <meta name="twitter:image" content="https://sachinai.com/og-image.png" />
@@ -37,7 +37,39 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
 <style>
+  /* ════ PAGEFIND BRAND OVERRIDES ════ */
+  :root {
+    --pagefind-ui-scale: 0.85;
+    --pagefind-ui-primary: #E63946;
+    --pagefind-ui-text: #0A0A0A;
+    --pagefind-ui-background: #F4F3EE;
+    --pagefind-ui-border: #cfccc1;
+    --pagefind-ui-tag: #EAE8E1;
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 0px;
+    --pagefind-ui-image-border-radius: 0px;
+    --pagefind-ui-font: 'JetBrains Mono', monospace;
+  }
+  .pagefind-ui__search-input { letter-spacing: .06em; }
+  .pagefind-ui__search-clear { opacity: .5; }
+  .pagefind-ui__result-title { font-family: 'Archivo Black', sans-serif; font-size: 1rem; letter-spacing: -.02em; text-transform: uppercase; }
+  .pagefind-ui__result-excerpt { font-family: Georgia, serif; font-size: .9rem; line-height: 1.6; }
+
+  /* ════ SEARCH SECTION ════ */
+  .search-section {
+    border-bottom: 1px solid var(--hairline);
+    padding: 2rem 2rem 0;
+    position: relative; z-index: 1;
+  }
+  .search-inner {
+    max-width: 1300px; margin: 0 auto;
+  }
+  .search-label {
+    font-family: var(--font-mono); font-size: .6rem; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--ink-mute); margin-bottom: .75rem;
+  }
   :root {
     --paper:#F4F3EE; --paper-2:#EAE8E1; --ink:#0A0A0A; --ink-mute:#6b6b66; --hairline:#cfccc1;
     --red:#E63946; --orange:#F77F00; --green:#2A9D5F;
@@ -307,9 +339,10 @@
   </a>
   <div class="links">
     <a href="/about.html">About</a>
+    <a href="/archive.html">Archive</a>
     <a href="/tools.html">Tools</a>
     <a href="/resume.html">Résumé</a>
-    <a href="https://x.com/sachinrai" target="_blank" rel="noopener">X ↗</a>
+    <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">X ↗</a>
     <a href="/#subscribe" class="cta">Subscribe</a>
   </div>
 </nav>
@@ -329,6 +362,13 @@
       <span>SAN FRANCISCO</span>
     </div>
   </header>
+
+  <section class="search-section" aria-label="Search posts">
+    <div class="search-inner">
+      <p class="search-label">↳ SEARCH</p>
+      <div id="search"></div>
+    </div>
+  </section>
 
   <div class="filter-rail" role="navigation" aria-label="Filter posts by category">
     <div class="filter-inner">
@@ -520,7 +560,7 @@
     <div>
       <h3>Connect</h3>
       <ul>
-        <li><a href="https://x.com/sachinrai" target="_blank" rel="noopener">X ↗</a></li>
+        <li><a href="https://x.com/sachinrai01" target="_blank" rel="noopener">X ↗</a></li>
         <li><a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
         <li><a href="/rss.xml">RSS Feed</a></li>
         <li><a href="/#subscribe">Subscribe</a></li>
@@ -601,6 +641,12 @@
 })();
 </script>
 
+<script src="/pagefind/pagefind-ui.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded',function(){
+  new PagefindUI({element:'#search',showSubResults:false,showImages:false,resetStyles:false});
+});
+</script>
 <script type="module">
 import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';
 function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}
