@@ -47,17 +47,23 @@ Check off as completed. Tell Claude what's done → it will mark them.
 
 ## Sprint 3 — This Quarter (Priorities 31–39+)
 
-- [ ] **31. Three.js tree-shake** — full Three.js bundle imported; import only used modules to cut JS size
-- [ ] **32. Hero human hook** — hero headline is abstract/generic; rewrite with specific, human, conversational angle
-- [ ] **33. Archive page** — no `/archive` or `/posts` index listing all articles; add one for discoverability
-- [ ] **34. Hero polygon replacement** — Three.js polygon visual is generic; replace with something distinctly Sachin
+- [x] **31. Three.js tree-shake** — full Three.js bundle imported; import only used modules to cut JS size
+- [x] **32. Hero human hook** — hero headline is abstract/generic; rewrite with specific, human, conversational angle
+- [x] **33. Archive page** — no `/archive` or `/posts` index listing all articles; add one for discoverability
+- [x] **34. Hero polygon replacement** — Three.js polygon visual is generic; replace with something distinctly Sachin
 - [ ] **35. Grain texture** — design system calls for grain/atmosphere; not applied consistently across sections
-- [ ] **36. Mobile slam typography** — "it's unfair." slam text overflow still present at some breakpoints; verify fix across 320–768px
-- [ ] **37. S2 static-first state** — S2 section uses JS-dependent state; ensure static/no-JS version renders correctly
+- [x] **36. Mobile slam typography** — "it's unfair." slam text overflow still present at some breakpoints; verify fix across 320–768px
+- [x] **37. S2 static-first state** — S2 section uses JS-dependent state; ensure static/no-JS version renders correctly
 - [ ] **38. Cross-post links** — no "you might also like" or related-post links at bottom of posts; add navigation
 - [ ] **39. Real CWV analytics** — CrUX / Cloudflare Analytics not configured; can't track real Core Web Vitals improvements
 
 ---
+
+- [x] **40. BreadcrumbList JSON-LD** — added to all 8 posts; Google can surface breadcrumb rich results
+- [x] **41. Reading progress bar** — red bar at top of every post, tracks scroll through article
+- [ ] **42. Submit sitemap to Search Console** — user action required (no API; must be done in browser)
+- [ ] **43. Pagefind search** — wait until 20+ posts before adding
+- [ ] **44. Cookie consent banner** — needed before EU traffic matters
 
 ## Completed
 

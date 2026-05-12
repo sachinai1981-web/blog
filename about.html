@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{analytics_storage:'denied',wait_for_update:500});if(localStorage.getItem('sr_consent')==='granted')gtag('consent','update',{analytics_storage:'granted'});</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CVBY6GSVNZ"></script>
 <script>
@@ -123,6 +124,26 @@
 </style>
 </head>
 <body>
+<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0A0A0A;color:#F4F3EE;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;border-top:2px solid #E63946;">
+  <span style="flex:1;opacity:.8;">↳ SACHINAI.COM uses analytics to understand what people read. No ads. Data stays in Google Analytics.</span>
+  <div style="display:flex;gap:.5rem;flex-shrink:0;">
+    <button onclick="srConsent('granted')" style="padding:.4rem 1rem;background:#E63946;color:#F4F3EE;border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
+    <button onclick="srConsent('denied')" style="padding:.4rem 1rem;background:transparent;color:rgba(244,243,238,.55);border:1px solid rgba(244,243,238,.25);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
+  </div>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('sr-consent');
+  if(!b)return;
+  if(!localStorage.getItem('sr_consent'))b.style.display='flex';
+  window.srConsent=function(v){
+    localStorage.setItem('sr_consent',v);
+    if(typeof gtag!=='undefined')gtag('consent','update',{analytics_storage:v});
+    b.style.display='none';
+  };
+})();
+</script>
+
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <div class="sysbar">
@@ -264,5 +285,10 @@
     <span class="copy">© 2026 Sachin Rai · Field notes from San Francisco · <a href="/privacy.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Privacy</a></span>
   </div>
 </footer>
+<script type="module">
+import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';
+function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}
+onCLS(send);onINP(send);onFCP(send);onLCP(send);onTTFB(send);
+</script>
 </body>
 </html>
