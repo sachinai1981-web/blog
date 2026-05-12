@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sachin Rai — Field Notes</title>
+    <link>https://sachinai.com</link>
+    <description>Field notes from where AI infrastructure meets enterprise selling.</description>
+    <language>en-us</language>
+    <copyright>© 2026 Sachin Rai</copyright>
+    <lastBuildDate>Sun, 11 May 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://sachinai.com/rss.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>Thirteen Agents in One Saturday.</title>
+      <link>https://sachinai.com/posts/13-agents-one-saturday.html</link>
+      <guid>https://sachinai.com/posts/13-agents-one-saturday.html</guid>
+      <pubDate>Mon, 05 May 2026 00:00:00 +0000</pubDate>
+      <description>How I built a 13-agent pipeline in a single Saturday. What worked, what broke, and what I'd do differently with AI-native architecture.</description>
+    </item>
+
+    <item>
+      <title>Most Second Brains Just Rotate.</title>
+      <link>https://sachinai.com/posts/compounding-systems.html</link>
+      <guid>https://sachinai.com/posts/compounding-systems.html</guid>
+      <pubDate>Fri, 02 May 2026 00:00:00 +0000</pubDate>
+      <description>Why most personal knowledge systems feel busy but don't compound — and the architectural change that makes them work.</description>
+    </item>
+
+    <item>
+      <title>Vault: 7.5 → 9.5</title>
+      <link>https://sachinai.com/posts/five-vault-fixes.html</link>
+      <guid>https://sachinai.com/posts/five-vault-fixes.html</guid>
+      <pubDate>Fri, 02 May 2026 00:00:00 +0000</pubDate>
+      <description>Five fixes that took my Obsidian vault from functional to genuinely useful. The changes that compound.</description>
+    </item>
+
+    <item>
+      <title>I Renamed Seven Agents.</title>
+      <link>https://sachinai.com/posts/renamed-seven-agents.html</link>
+      <guid>https://sachinai.com/posts/renamed-seven-agents.html</guid>
+      <pubDate>Fri, 02 May 2026 00:00:00 +0000</pubDate>
+      <description>Naming your AI agents matters more than you think. How function-first names changed how I think about my entire system.</description>
+    </item>
+
+    <item>
+      <title>The LLM Knowledge Base I Built in Obsidian</title>
+      <link>https://sachinai.com/posts/llm-knowledge-base-obsidian.html</link>
+      <guid>https://sachinai.com/posts/llm-knowledge-base-obsidian.html</guid>
+      <pubDate>Fri, 02 May 2026 00:00:00 +0000</pubDate>
+      <description>Instead of retrieving from raw documents at query time, build and maintain a persistent wiki. How I built mine and what it cost.</description>
+    </item>
+
+    <item>
+      <title>Win Rate Lies.</title>
+      <link>https://sachinai.com/posts/win-rate-trap.html</link>
+      <guid>https://sachinai.com/posts/win-rate-trap.html</guid>
+      <pubDate>Thu, 17 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Win rate is the most misleading metric in enterprise sales. What to measure instead.</description>
+    </item>
+
+    <item>
+      <title>The AI sales stack I'd build today.</title>
+      <link>https://sachinai.com/posts/ai-sales-stack-2026.html</link>
+      <guid>https://sachinai.com/posts/ai-sales-stack-2026.html</guid>
+      <pubDate>Thu, 20 Feb 2026 00:00:00 +0000</pubDate>
+      <description>The specific tools, order of operations, and integration points I'd use to build an AI-native sales stack in 2026.</description>
+    </item>
+
+    <item>
+      <title>7 AI trends I'm tracking in 2026.</title>
+      <link>https://sachinai.com/posts/ai-trends-2026-breakthrough-idea.html</link>
+      <guid>https://sachinai.com/posts/ai-trends-2026-breakthrough-idea.html</guid>
+      <pubDate>Sat, 12 Apr 2026 00:00:00 +0000</pubDate>
+      <description>The seven AI trends that matter for enterprise and what each one means for how we sell and build.</description>
+    </item>
+
+  </channel>
+</rss>
