@@ -42,13 +42,13 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230A0A0A'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Archivo Black,sans-serif' font-size='14' fill='%23E63946'>SR</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@500;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
     --paper:#F4F3EE; --paper-2:#EAE8E1; --ink:#0A0A0A; --ink-mute:#6b6b66; --hairline:#cfccc1;
     --red:#E63946; --orange:#F77F00; --green:#2A9D5F;
-    --font-display:'Archivo Black',sans-serif; --font-sans:'Inter',system-ui,sans-serif;
-    --font-serif:'Source Serif 4',Georgia,serif; --font-mono:'JetBrains Mono',monospace;
+    --font-display:'Archivo Black',sans-serif; --font-sans:system-ui,-apple-system,sans-serif;
+    --font-serif:Georgia,'Times New Roman',serif; --font-mono:'JetBrains Mono',monospace;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--paper);color:var(--ink);font-family:var(--font-sans);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
@@ -242,10 +242,10 @@
     <span>Sachin Rai</span>
   </span>
   <div class="links">
-    <a href="#archive">Writing</a>
+    <a href="/about.html">About</a>
+    <a href="/tools.html">Tools</a>
     <a href="/resume.html">Résumé</a>
     <a href="https://x.com/sachinrai" target="_blank" rel="noopener">X ↗</a>
-    <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
     <a href="#subscribe" class="cta">Subscribe</a>
   </div>
 </nav>
@@ -362,9 +362,10 @@
     <div>
       <h3>About</h3>
       <ul>
+        <li><a href="/about.html">About Sachin</a></li>
+        <li><a href="/tools.html">Shipped Tools</a></li>
         <li><a href="/resume.html">Résumé</a></li>
-        <li><a href="mailto:sachinai1981@gmail.com">Email</a></li>
-        <li><a href="#subscribe">Subscribe</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
       </ul>
     </div>
     <div>
@@ -372,6 +373,8 @@
       <ul>
         <li><a href="https://x.com/sachinrai" target="_blank" rel="noopener">X ↗</a></li>
         <li><a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+        <li><a href="/rss.xml">RSS Feed</a></li>
+        <li><a href="#subscribe">Subscribe</a></li>
       </ul>
     </div>
   </div>
@@ -382,9 +385,9 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer integrity="sha384-qOkzR5Ke/XkQxuGVJ9hpFEpDlcoLtWwVYhnJf06cLIZa2vaIptSqaubivErzmD5O" crossorigin="anonymous"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

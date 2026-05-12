@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tools — Sachin Rai</title>
+<meta name="description" content="Shipped tools and projects by Sachin Rai — AI agent stacks, trading systems, and web utilities." />
+<link rel="canonical" href="https://sachinai.com/tools.html" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://sachinai.com/tools.html" />
+<meta property="og:title" content="Tools — Sachin Rai" />
+<meta property="og:description" content="Shipped tools: AI trading systems, knowledge pipelines, and web utilities." />
+<meta property="og:image" content="https://picsum.photos/seed/sachin-tools/1200/630" />
+<meta property="og:site_name" content="Sachin Rai" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@sachinrai" />
+<meta name="twitter:title" content="Tools — Sachin Rai" />
+<meta name="twitter:description" content="Shipped tools: AI trading systems, knowledge pipelines, and web utilities." />
+<meta name="twitter:image" content="https://picsum.photos/seed/sachin-tools/1200/630" />
+<link rel="alternate" type="application/rss+xml" title="Sachin Rai" href="/rss.xml" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230A0A0A'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Archivo Black,sans-serif' font-size='14' fill='%23E63946'>SR</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper:#F4F3EE; --paper-2:#EAE8E1; --ink:#0A0A0A; --ink-mute:#6b6b66; --hairline:#cfccc1;
+    --red:#E63946; --orange:#F77F00; --green:#2A9D5F;
+    --font-display:'Archivo Black',sans-serif;
+    --font-sans:system-ui,-apple-system,sans-serif;
+    --font-serif:Georgia,'Times New Roman',serif;
+    --font-mono:'JetBrains Mono',monospace;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--font-sans);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%230a0a0a'/%3E%3C/svg%3E");background-size:4px 4px;mix-blend-mode:multiply;}
+  :focus-visible{outline:2px solid var(--red);outline-offset:3px;}
+  .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;}
+  .skip-link:focus{position:fixed;left:1rem;top:4rem;width:auto;height:auto;overflow:visible;padding:.5rem 1rem;background:var(--ink);color:var(--paper);font-family:var(--font-mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;}
+
+  .sysbar{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;justify-content:space-between;padding:.5rem 1.25rem;background:var(--ink);color:var(--paper);font-family:var(--font-mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;}
+  .sysbar .dot{display:inline-block;width:6px;height:6px;background:var(--green);border-radius:50%;margin-right:.4rem;}
+
+  .v5-nav{position:fixed;top:1.85rem;left:0;right:0;z-index:88;display:flex;justify-content:space-between;align-items:center;padding:.75rem 1.5rem;background:rgba(244,243,238,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline);font-family:var(--font-mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;}
+  .v5-nav .brand{font-family:var(--font-display);font-size:.9rem;letter-spacing:-.02em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.5rem;}
+  .v5-nav .links{display:flex;gap:.5rem;}
+  .v5-nav .links a{padding:.4rem .85rem;border:1px solid transparent;transition:all .2s var(--ease);}
+  .v5-nav .links a:hover{border-color:var(--ink);background:var(--ink);color:var(--paper);}
+  .v5-nav .links a.cta{background:var(--ink);color:var(--paper);}
+  .v5-nav .links a.cta:hover{background:var(--red);}
+  @media(max-width:768px){.v5-nav .links a:not(.cta){display:none;}.v5-nav{padding:.6rem 1rem;}}
+
+  .page-wrap{max-width:1100px;margin:0 auto;padding:10rem 2rem 6rem;}
+  .eyebrow{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:1.25rem;}
+  h1{font-family:var(--font-display);font-size:clamp(2.5rem,7vw,5rem);line-height:.92;letter-spacing:-.04em;text-transform:uppercase;margin-bottom:.75rem;}
+  .page-sub{font-family:var(--font-serif);font-size:1.05rem;line-height:1.6;color:var(--ink-mute);max-width:52ch;margin-bottom:4rem;}
+
+  .section-label{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:1px solid var(--hairline);}
+
+  .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5px;margin-bottom:4rem;}
+  .tool-card{background:var(--paper);border:1px solid var(--ink);padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:background .2s;}
+  .tool-card:hover{background:var(--paper-2);}
+  .tool-card .status{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.25rem;}
+  .tool-card .status .dot{width:6px;height:6px;border-radius:50%;}
+  .tool-card .status .dot.live{background:var(--green);}
+  .tool-card .status .dot.paper{background:var(--orange);}
+  .tool-card .status .dot.wip{background:var(--red);}
+  .tool-card h2{font-family:var(--font-display);font-size:1.2rem;letter-spacing:-.02em;text-transform:uppercase;line-height:1.1;}
+  .tool-card .desc{font-family:var(--font-sans);font-size:.9rem;line-height:1.55;color:#555;flex:1;}
+  .tool-card .stack{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem;}
+  .tool-card .stack span{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid var(--hairline);color:var(--ink-mute);}
+  .tool-card .link{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--red);display:inline-flex;align-items:center;gap:.4rem;margin-top:.75rem;}
+  .tool-card .link:hover{text-decoration:underline;text-underline-offset:4px;}
+
+  .divider{border:0;border-top:1px solid var(--hairline);margin:3rem 0;}
+
+  .v5-footer{background:var(--ink);color:var(--paper);padding:4rem 2rem 2.5rem;}
+  .v5-footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;}
+  .v5-footer .brand{font-family:var(--font-display);font-size:1rem;letter-spacing:-.02em;text-transform:uppercase;}
+  .v5-footer .links{display:flex;gap:1rem;flex-wrap:wrap;}
+  .v5-footer .links a{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(244,243,238,.7);transition:color .2s;}
+  .v5-footer .links a:hover{color:var(--orange);}
+  .v5-footer .copy{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(244,243,238,.4);width:100%;}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<div class="sysbar">
+  <span><span class="dot"></span> SACHIN RAI · FIELD NOTES · 2026</span>
+  <span>TOOLS</span>
+</div>
+
+<nav class="v5-nav">
+  <a href="/" class="brand" style="font-family:var(--font-display);font-size:.9rem;letter-spacing:-.02em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.5rem;">
+    <span style="display:inline-block;width:8px;height:8px;background:var(--red);"></span>
+    <span style="display:inline-block;width:8px;height:8px;background:var(--orange);"></span>
+    <span style="display:inline-block;width:8px;height:8px;background:var(--green);"></span>
+    <span>Sachin Rai</span>
+  </a>
+  <div class="links">
+    <a href="/">Essays</a>
+    <a href="/about.html">About</a>
+    <a href="/tools.html" style="border:1px solid var(--ink);">Tools</a>
+    <a href="/#subscribe" class="cta">Subscribe</a>
+  </div>
+</nav>
+
+<main id="main-content">
+<div class="page-wrap">
+
+  <div class="eyebrow">↳ SHIPPED TOOLS</div>
+  <h1>Things I built<br/>and deployed.</h1>
+  <p class="page-sub">Production systems, web utilities, and experiments. Everything here runs. Some are live links, others are private stack components.</p>
+
+  <div class="section-label">↳ AI AGENT SYSTEMS</div>
+  <div class="tools-grid">
+
+    <div class="tool-card">
+      <div>
+        <div class="status"><span class="dot live"></span> LIVE · ALPACA</div>
+        <h2>AutoQuant</h2>
+      </div>
+      <p class="desc">Multi-agent trading system. Scanner finds signals, Grader scores them with Bayesian calibration, SwingTrader executes 21–60 DTE options. Runs daily on a Mac Mini cron.</p>
+      <div class="stack">
+        <span>Python</span><span>Claude SDK</span><span>Alpaca</span><span>launchd</span>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div>
+        <div class="status"><span class="dot paper"></span> PAPER ONLY</div>
+        <h2>DayPut + DayCondor</h2>
+      </div>
+      <p class="desc">Two 0-DTE SPX paper specialists. DayPut runs ATM put-spreads, DayCondor runs far-OTM iron condors. Building the data layer before committing real capital.</p>
+      <div class="stack">
+        <span>Python</span><span>SPX Options</span><span>Alpaca Paper</span>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div>
+        <div class="status"><span class="dot live"></span> ACTIVE</div>
+        <h2>Single Brain</h2>
+      </div>
+      <p class="desc">Seven-persona knowledge OS: Scanner, Grader, SwingTrader, DayPut, DayCondor, Outreach, Vault. An Obsidian vault compiled weekly by Claude Code into 88+ concept articles. Cross-domain query via /ask-anything.</p>
+      <div class="stack">
+        <span>Claude Code</span><span>Obsidian</span><span>Python</span><span>qmd</span>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div>
+        <div class="status"><span class="dot live"></span> ACTIVE</div>
+        <h2>Sales Outreach Automation</h2>
+      </div>
+      <p class="desc">LangGraph pipeline that researches ITSM prospects, scores Freshservice fit, generates personalised cold emails and SPIN scripts. Multi-agent with human-in-the-loop approval.</p>
+      <div class="stack">
+        <span>LangGraph</span><span>Python</span><span>Claude</span><span>Gmail API</span>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider" />
+  <div class="section-label">↳ WEB UTILITIES (LIVE)</div>
+  <div class="tools-grid">
+
+    <div class="tool-card">
+      <div>
+        <div class="status"><span class="dot live"></span> LIVE</div>
+        <h2>Subject Line Scorer</h2>
+      </div>
+      <p class="desc">Paste a cold email subject line, get a score with specific feedback. Built for enterprise SDRs who want signal on what actually opens. No login, no tracking.</p>
+      <div class="stack">
+        <span>HTML</span><span>Vanilla JS</span><span>GitHub Pages</span>
+      </div>
+      <a class="link" href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank" rel="noopener">Open tool ↗</a>
+    </div>
+
+    <div class="tool-card">
+      <div>
+        <div class="status"><span class="dot live"></span> LIVE</div>
+        <h2>Cold Email Generator</h2>
+      </div>
+      <p class="desc">Opinionated cold email generator for enterprise sales. Generates a SPIN-framed opener from a company name + pain hypothesis. First draft in 15 seconds.</p>
+      <div class="stack">
+        <span>HTML</span><span>Claude API</span><span>GitHub Pages</span>
+      </div>
+      <a class="link" href="https://sachinai1981-web.github.io/cold-email-generator" target="_blank" rel="noopener">Open tool ↗</a>
+    </div>
+
+    <div class="tool-card">
+      <div>
+        <div class="status"><span class="dot live"></span> LIVE</div>
+        <h2>This Blog</h2>
+      </div>
+      <p class="desc">sachinai.com — zero build step, single-file HTML pages, GitHub Pages. No framework, no CMS, no dependencies outside GSAP + Three.js. The sprint audit is documented in the essays.</p>
+      <div class="stack">
+        <span>HTML/CSS</span><span>GSAP</span><span>Three.js</span><span>Formspree</span>
+      </div>
+      <a class="link" href="/">Read the essays →</a>
+    </div>
+
+    <div class="tool-card">
+      <div>
+        <div class="status"><span class="dot wip"></span> BUILDING</div>
+        <h2>Portfolio Monitor</h2>
+      </div>
+      <p class="desc">Runs at 5am daily. Fetches Alpaca positions, scores overnight risk, sends iMessage briefing before market open. No login — just a Mac Mini cron and a Python script.</p>
+      <div class="stack">
+        <span>Python</span><span>Alpaca</span><span>iMessage</span><span>launchd</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</main>
+
+<footer class="v5-footer">
+  <div class="v5-footer-inner">
+    <span class="brand">Sachin Rai</span>
+    <div class="links">
+      <a href="/">Essays</a>
+      <a href="/about.html">About</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/rss.xml">RSS</a>
+      <a href="https://x.com/sachinrai" target="_blank" rel="noopener">X ↗</a>
+      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+    <span class="copy">© 2026 Sachin Rai · Field notes from San Francisco · <a href="/privacy.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Privacy</a></span>
+  </div>
+</footer>
+</body>
+</html>
