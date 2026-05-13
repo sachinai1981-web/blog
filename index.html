@@ -168,7 +168,7 @@
 
   /* ════════ SCENE 3 ════════ */
   .s3{background:var(--ink);color:var(--paper);overflow:hidden;}
-  .s3 .slam-wrap{width:100%;max-width:1200px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2.5rem;position:relative;}
+  .s3 .slam-wrap{width:100%;max-width:1200px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:5rem;position:relative;}
   .s3 .slam-eyebrow{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.3em;color:var(--orange);text-transform:uppercase;}
   .s3 .slam{font-family:var(--font-display);font-size:clamp(4rem,22vw,14rem);line-height:.9;letter-spacing:-.05em;text-transform:lowercase;color:var(--paper);white-space:nowrap;padding-bottom:.25em;}
   .s3 .slam .ltr{display:inline-block;}
@@ -206,7 +206,7 @@
   .js-ready .s1 .star{opacity:0;transform:scale(0);}
   .js-ready .s3 .slam-eyebrow{opacity:0;}
   .js-ready .s3 .slam .ltr{opacity:0;transform:translateY(110%) rotate(8deg);}
-  .js-ready .s3 .slam-foot{opacity:0;}
+  .js-ready .s3 .slam-foot{opacity:0;transform:translateY(40px);}
   .js-ready .s4 .card{opacity:0;transform:translateY(60px) scale(.92);}
   .js-ready .s4 .grid-eyebrow{opacity:0;}
 
@@ -504,7 +504,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .to('.s3 .slam-eyebrow', { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
     .to('.s3 .slam .ltr', { yPercent: 0, rotation: 0, opacity: 1, stagger: { each: 0.04, from: 'start' }, duration: 0.8, ease: 'expo.out' }, 0.2)
     .to('.s3 .slam .punch', { scale: 1.08, duration: 0.4, ease: 'back.out(3)', yoyo: true, repeat: 1, transformOrigin: 'center center' }, 1.0)
-    .to('.s3 .slam-foot', { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 1.2)
+    .fromTo('.s3 .slam-foot', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 1.2)
     .to('.s3 .glitch', { opacity: 1, duration: 0.3, yoyo: true, repeat: 1 }, 0.5);
 
   /* — SCENE 4 — */
