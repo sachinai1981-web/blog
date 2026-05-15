@@ -565,6 +565,33 @@
     pointer-events: none;
   }
 
+  /* ── MOBILE FIXES ── */
+  @media (max-width: 700px) {
+    .hero-stage { overflow: hidden; }
+    .hero-circle { width: min(460px, 95vw); height: min(460px, 95vw); }
+  }
+  @media (max-width: 700px) {
+    .hero-corner { font-size: 0.65rem; }
+  }
+  @media (max-width: 480px) {
+    .hero-3d { width: 200px; height: 140px; right: -4%; bottom: 18%; }
+  }
+  @media (max-width: 480px) {
+    article { padding: 1.5rem 1rem 3rem; }
+  }
+  @media (max-width: 600px) {
+    .feature-list-head { grid-template-columns: 2rem 1fr; }
+    .feature-list-head span:last-child { display: none; }
+    .feature-row { grid-template-columns: 2rem 1fr; }
+    .feature-row .feature-desc { grid-column: 2; font-size: 0.78rem; color: #6b6b66; }
+  }
+  @media (max-width: 380px) {
+    .hero-3d { display: none; }
+  }
+  @media (max-width: 380px) {
+    .hero-corner { display: none; }
+  }
+
   </style>
 
   <script>
@@ -692,7 +719,7 @@
 
       <p>I stared at the list for a few minutes and noticed something. Every task was independent. Separate file. Separate test. Separate commit. There was no reason task four needed task two to exist first. The dependency graph was completely flat. So I asked a different question: what if each task ran in parallel?</p>
 
-      <p><span style="color:#E63946"><strong>Thirteen Claude Code agents.</strong></span> One per feature. Each given a scoped brief: here is the file you're touching, here is what it should do, here is how to verify it. All thirteen launched inside 10 minutes. Total elapsed time from "go" to all agents reporting done: under 90 minutes.</p>
+      <p><span style="color:#E63946"><strong>Thirteen Claude Code agents.</strong></span> One per feature. Each given a scoped brief: here is the file you're touching, here is what it should do, here is how to verify it. All thirteen launched inside 10 minutes. Total elapsed time from “go” to all agents reporting done: under 90 minutes.</p>
 
       <p>The same work done sequentially would have taken 10 to 14 hours. The ratio is roughly <strong>10×</strong>. But the bigger lesson wasn't speed. It was what the parallel architecture revealed that a sequential run never could have.</p>
 
@@ -838,7 +865,7 @@
 
       <h2>Why this changes my ceiling.</h2>
 
-      <p>The takeaway from the 13-agent sprint is not "the trading system got better." The systems did improve — but the more durable finding is what happened to my sense of what fits in a Saturday.</p>
+      <p>The takeaway from the 13-agent sprint is not “the trading system got better.” The systems did improve — but the more durable finding is what happened to my sense of what fits in a Saturday.</p>
 
       <p>Parallel agent sprints are a primitive, the same way a for-loop is a primitive or a batch job is a primitive. Once you've used one and seen the ratio, your intuition about how much work maps to a unit of time gets recalibrated. A Saturday is no longer a 6-hour block. It's a 6-hour block times however many independent tasks you can decompose it into.</p>
 
@@ -858,7 +885,7 @@
 
       <p>The constraint on what you can ship in a day is no longer time. It's how cleanly you can decompose the problem into independent units. That's a skill. It gets better with practice. And once you've done it once, sequential starts to feel like a habit you're carrying for no reason.</p>
 
-      <p><em>"The agent that overturned my own hypothesis was the most expensive one I shipped this quarter. It was also the one that justified all twelve others."</em></p>
+      <p><em>“The agent that overturned my own hypothesis was the most expensive one I shipped this quarter. It was also the one that justified all twelve others.”</em></p>
 
     </div>
 
@@ -928,5 +955,12 @@ import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dis
 function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}
 onCLS(send);onINP(send);onFCP(send);onLCP(send);onTTFB(send);
 </script>
+<style>
+@media (max-width: 480px) {
+  #sr-consent { flex-direction: column !important; align-items: flex-start !important; padding: 0.75rem 1rem !important; gap: 0.75rem !important; }
+  #sr-consent > div:last-child { width: 100% !important; display: flex !important; gap: 0.5rem !important; }
+  #sr-consent > div:last-child button { flex: 1 !important; }
+}
+</style>
 </body>
 </html>
