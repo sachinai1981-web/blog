@@ -13,7 +13,7 @@
 </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sachin Rai — Resume · Sr. Strategic Account Executive · AI & GTM Builder</title>
+  <title>Sachin Rai — Resume · Sr. Strategic Account Executive · AI &amp; GTM Builder</title>
   <meta name="description" content="7× President's Club. $1.3M ACV at 200% quota. 20+ yrs enterprise SaaS — Freshworks, Salesforce, Oracle. Now building AI agents between calls." />
   <meta name="author" content="Sachin Rai" />
   <link rel="canonical" href="https://sachinai.com/resume.html" />
@@ -535,6 +535,29 @@
       .bottom-cell:last-child { border-bottom: 0; }
     }
 
+    /* ── MOBILE FIXES ── */
+    @media (max-width: 600px) {
+      .resume-nav { flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem 1rem; }
+      .resume-nav .nav-links { gap: 0.75rem; flex-wrap: wrap; }
+      .resume-nav .nav-links li a { font-size: 0.6rem; }
+    }
+    @media (max-width: 768px) {
+      .contact-row a, .contact-row span { font-size: 0.75rem; }
+      .contact-row a { padding: 4px 0; display: inline-block; min-height: 44px; line-height: 44px; }
+    }
+    @media (max-width: 768px) {
+      .stat-label { font-size: 0.7rem; }
+    }
+    @media (max-width: 600px) {
+      .resume-footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; padding: 1rem; }
+    }
+    @media (max-width: 480px) {
+      body { padding: 0.5rem; }
+      .section { padding: 1.5rem 1rem; }
+      .resume-header { padding: 1.5rem 1rem; }
+      .resume-nav { padding: 0.75rem 1rem; }
+    }
+
     /* ── PRINT ── */
     @media print {
       body {
@@ -923,5 +946,12 @@ import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dis
 function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}
 onCLS(send);onINP(send);onFCP(send);onLCP(send);onTTFB(send);
 </script>
+<style>
+@media (max-width: 480px) {
+  #sr-consent { flex-direction: column !important; align-items: flex-start !important; padding: 0.75rem 1rem !important; gap: 0.75rem !important; }
+  #sr-consent > div:last-child { width: 100% !important; display: flex !important; gap: 0.5rem !important; }
+  #sr-consent > div:last-child button { flex: 1 !important; }
+}
+</style>
 </body>
 </html>
