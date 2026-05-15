@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Sachin Rai — Where AI Meets Enterprise Selling</title>
+  <meta name="description" content="Field notes from where AI infrastructure meets enterprise selling. Build log, essays, and tools by Sachin Rai." />
+  <meta name="author" content="Sachin Rai" />
+  <link rel="canonical" href="https://sachinai.com/" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sachinai.com/" />
+  <meta property="og:title" content="Sachin Rai — Where AI Meets Enterprise Selling" />
+  <meta property="og:description" content="Field notes from where AI infrastructure meets enterprise selling." />
+  <meta property="og:image" content="https://picsum.photos/seed/sachinai-blog/1200/630" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://picsum.photos/seed/sachinai-blog/1200/630" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230A0A0A'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Archivo Black,sans-serif' font-size='14' fill='%23E63946'>SR</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --paper:    #F4F3EE;
+      --paper-2:  #EAE8E1;
+      --paper-3:  #DDD8C8;
+      --ink:      #0A0A0A;
+      --ink-2:    #1a1a1a;
+      --ink-3:    #2a2a2a;
+      --ink-mute: #6b6b66;
+      --hairline: #cfccc1;
+      --hairline-2: #b8b5a9;
+
+      --red:    #E63946;   /* cadmium */
+      --orange: #F77F00;   /* sodium amber */
+      --green:  #2A9D5F;   /* viridian */
+      --red-glow: rgba(230, 57, 70, 0.4);
+      --orange-glow: rgba(247, 127, 0, 0.4);
+      --green-glow: rgba(42, 157, 95, 0.4);
+
+      --font-display: 'Archivo Black', 'Archivo', system-ui, sans-serif;
+      --font-sans:    'Inter', system-ui, sans-serif;
+      --font-serif:   'Source Serif 4', Georgia, serif;
+      --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+      --ease:         cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-weight: 400;
+      line-height: 1.55;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* Halftone dot grain */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0.06;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%230a0a0a'/%3E%3C/svg%3E");
+      background-size: 4px 4px;
+      mix-blend-mode: multiply;
+    }
+
+    /* ── SYSBAR ── */
+    .sysbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1.25rem;
+      background: var(--ink);
+      color: var(--paper);
+      border-bottom: 1px solid var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .sysbar-cell {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0 0.85rem;
+      border-right: 1px solid rgba(244, 243, 238, 0.15);
+    }
+    .sysbar-cell:last-child { border-right: 0; }
+    .sysbar-cell .k { opacity: 0.55; }
+    .sysbar-cell .v { color: var(--paper); font-weight: 500; }
+    .sysbar-cell .v.red { color: var(--red); }
+    .sysbar-cell .v.orange { color: var(--orange); }
+    .sysbar-cell .v.green { color: var(--green); }
+    .sysbar-cell .dot {
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 1.6s infinite;
+      box-shadow: 0 0 6px var(--green-glow);
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.4); }
+    }
+    body { padding-top: 1.85rem; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 1.85rem; left: 0; right: 0;
+      z-index: 80;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--paper);
+      border-bottom: 2px solid var(--ink);
+    }
+    .brand {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .brand .dot-r {
+      display: inline-block;
+      width: 10px; height: 10px;
+      background: var(--red);
+    }
+    .brand .dot-o {
+      display: inline-block;
+      width: 10px; height: 10px;
+      background: var(--orange);
+    }
+    .brand .dot-g {
+      display: inline-block;
+      width: 10px; height: 10px;
+      background: var(--green);
+    }
+    .nav-links {
+      display: flex;
+      gap: 0;
+      align-items: center;
+    }
+    .nav-links a {
+      padding: 0.5rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border-left: 1px solid var(--ink);
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { background: var(--ink); color: var(--paper); }
+    .nav-links a.cta { background: var(--ink); color: var(--paper); }
+    .nav-links a.cta:hover { background: var(--red); color: var(--paper); }
+
+    body { padding-top: 5.4rem; }
+
+    /* ════════════════════════════════════════════════════════════
+       HERO — Technique 001: giant shape behind type (cycles R/O/G)
+       ════════════════════════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: calc(100dvh - 5.4rem);
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 6rem;
+      overflow: hidden;
+      border-bottom: 2px solid var(--ink);
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 32px; height: 2px; background: var(--red);
+    }
+    .hero-eyebrow .badge {
+      padding: 0.15rem 0.5rem;
+      background: var(--red);
+      color: var(--paper);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+    }
+
+    .hero-stage {
+      position: relative;
+      min-height: 600px;
+      display: grid;
+      place-items: center;
+      padding: 4rem 0;
+    }
+    .hero-circle {
+      position: absolute;
+      width: 540px;
+      height: 540px;
+      max-width: 90vw;
+      max-height: 90vw;
+      border-radius: 50%;
+      background: var(--red);
+      z-index: 1;
+      animation: shape-float 14s ease-in-out infinite;
+      will-change: transform;
+    }
+    .hero-square {
+      position: absolute;
+      width: 460px;
+      height: 460px;
+      max-width: 80vw;
+      max-height: 80vw;
+      background: var(--orange);
+      z-index: 2;
+      transform: translate(-50%, -50%) rotate(-8deg);
+      top: 50%; left: 50%;
+      opacity: 0;
+      animation: cycle-square 12s 4s infinite;
+    }
+    .hero-tri {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 0; height: 0;
+      border-left: 270px solid transparent;
+      border-right: 270px solid transparent;
+      border-bottom: 460px solid var(--green);
+      transform: translate(-50%, -55%);
+      z-index: 3;
+      opacity: 0;
+      animation: cycle-tri 12s 8s infinite;
+    }
+    @keyframes shape-float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -20px) scale(1.04); }
+      66% { transform: translate(-25px, 20px) scale(0.97); }
+    }
+    @keyframes cycle-square {
+      0%, 25%, 100% { opacity: 0; transform: translate(-50%, -50%) rotate(-8deg) scale(0.85); }
+      33%, 58% { opacity: 1; transform: translate(-50%, -50%) rotate(-8deg) scale(1); }
+    }
+    @keyframes cycle-tri {
+      0%, 58%, 100% { opacity: 0; transform: translate(-50%, -55%) scale(0.85); }
+      66%, 91% { opacity: 1; transform: translate(-50%, -55%) scale(1); }
+    }
+
+    .hero-title {
+      position: relative;
+      z-index: 10;
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 11vw, 8.5rem);
+      line-height: 0.85;
+      letter-spacing: -0.045em;
+      text-transform: uppercase;
+      text-align: center;
+      mix-blend-mode: difference;
+      color: var(--paper);
+    }
+
+    .hero-meta {
+      max-width: 1400px;
+      margin: 2rem auto 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 768px) {
+      .hero-meta { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    }
+    .hero-meta-block {
+      padding: 1rem 1.25rem;
+      border-left: 4px solid var(--red);
+    }
+    .hero-meta-block:nth-child(2) { border-left-color: var(--orange); }
+    .hero-meta-block:nth-child(3) { border-left-color: var(--green); }
+    .hero-meta-block:nth-child(4) { border-left-color: var(--ink); }
+    .hero-meta-block .k {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 0.45rem;
+    }
+    .hero-meta-block .v {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    /* CTA row below hero */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-top: 2.5rem;
+      border: 2px solid var(--ink);
+      width: fit-content;
+    }
+    .btn {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.3rem;
+      transition: background 0.2s, color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-right: 2px solid var(--ink);
+    }
+    .btn:last-child { border-right: 0; }
+    .btn-primary { background: var(--red); color: var(--paper); }
+    .btn-primary:hover { background: var(--ink); }
+    .btn-orange { background: var(--orange); color: var(--paper); }
+    .btn-orange:hover { background: var(--ink); }
+    .btn-green { background: var(--green); color: var(--paper); }
+    .btn-green:hover { background: var(--ink); }
+    .btn-ghost { background: var(--paper); color: var(--ink); }
+    .btn-ghost:hover { background: var(--ink); color: var(--paper); }
+
+    /* ════════════════════════════════════════════════════════════
+       MARQUEE
+       ════════════════════════════════════════════════════════════ */
+    .marquee {
+      position: relative;
+      padding: 0.85rem 0;
+      border-bottom: 2px solid var(--ink);
+      overflow: hidden;
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 2.5rem;
+      width: max-content;
+      animation: marquee 50s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee span {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 2.5rem;
+      font-weight: 500;
+    }
+    .marquee span::after {
+      content: '◇';
+      font-size: 0.6rem;
+    }
+    .marquee span:nth-child(3n)::after { color: var(--red); }
+    .marquee span:nth-child(3n+1)::after { color: var(--orange); }
+    .marquee span:nth-child(3n+2)::after { color: var(--green); }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* ════════════════════════════════════════════════════════════
+       FEATURED — Technique 002: 3D shape on top of bold text
+       ════════════════════════════════════════════════════════════ */
+    .featured {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .featured-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .featured-label::before { content: ''; width: 32px; height: 2px; background: var(--green); }
+
+    .featured-stage {
+      position: relative;
+      min-height: 480px;
+      display: grid;
+      place-items: center;
+      padding: 2rem 0;
+    }
+    .featured-text {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 13vw, 12rem);
+      line-height: 0.85;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .featured-text .l1 { display: block; }
+    .featured-text .l2 { display: block; color: var(--orange); }
+
+    .featured-3d {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 240px; height: 240px;
+      transform: translate(-50%, -50%);
+      transform-style: preserve-3d;
+      animation: spin-3d 22s linear infinite;
+      z-index: 2;
+      filter: drop-shadow(18px 28px 24px rgba(10, 10, 10, 0.3));
+    }
+    @keyframes spin-3d {
+      to { transform: translate(-50%, -50%) rotateY(360deg); }
+    }
+    .cube {
+      position: relative;
+      width: 180px; height: 180px;
+      transform-style: preserve-3d;
+      margin: 30px auto;
+      transform: rotateX(20deg) rotateZ(-12deg);
+    }
+    .cube .face {
+      position: absolute;
+      width: 180px; height: 180px;
+      background: var(--green);
+      border: 3px solid var(--ink);
+    }
+    .cube .face::before {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      background-image:
+        linear-gradient(rgba(10, 10, 10, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(10, 10, 10, 0.18) 1px, transparent 1px);
+      background-size: 14px 14px;
+    }
+    .cube .face::after {
+      content: '';
+      position: absolute;
+      width: 12px; height: 12px;
+      top: 16px; left: 16px;
+      background: var(--orange);
+      box-shadow:
+        0 18px 0 var(--red),
+        0 36px 0 var(--orange),
+        18px 0 0 var(--red),
+        36px 0 0 var(--orange);
+    }
+    .cube .top    { transform: rotateX(90deg)  translateZ(90px); background: #f2f0ea; }
+    .cube .bottom { transform: rotateX(-90deg) translateZ(90px); background: #1a1a1a; }
+    .cube .left   { transform: rotateY(-90deg) translateZ(90px); background: var(--green); filter: brightness(0.85); }
+    .cube .right  { transform: rotateY(90deg)  translateZ(90px); background: var(--green); filter: brightness(0.95); }
+    .cube .front  { transform: translateZ(90px); }
+    .cube .back   { transform: rotateY(180deg) translateZ(90px); background: var(--green); filter: brightness(0.7); }
+
+    .featured-meta {
+      max-width: 720px;
+      margin: 1.5rem auto 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+    .featured-meta strong { color: var(--ink); display: block; font-size: 0.85rem; margin-bottom: 0.5rem; }
+
+    .featured-card {
+      max-width: 920px;
+      margin: 3rem auto 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 2rem;
+      border: 2px solid var(--ink);
+      background: var(--paper);
+      transition: background 0.3s, color 0.3s;
+    }
+    @media (min-width: 768px) {
+      .featured-card { grid-template-columns: 80px 1fr 140px; gap: 2rem; padding: 2.5rem; align-items: start; }
+    }
+    .featured-card:hover { background: var(--ink); color: var(--paper); }
+    .featured-card:hover .fc-tags .tag { background: var(--red); color: var(--paper); border-color: var(--red); }
+    .featured-card:hover .fc-meta .read { color: var(--orange); }
+    .featured-card .fc-num {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+    .featured-card .fc-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .featured-card .fc-dek {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      line-height: 1.55;
+      max-width: 60ch;
+      color: inherit;
+      opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+    .fc-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.18rem 0.55rem;
+      border: 1.5px solid currentColor;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .fc-meta {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    @media (min-width: 768px) { .fc-meta { text-align: right; } }
+    .fc-meta .read { color: var(--green); font-weight: 700; transition: color 0.2s; }
+
+    /* ════════════════════════════════════════════════════════════
+       POSTS — Technique 003: shapes between typography
+       ════════════════════════════════════════════════════════════ */
+    .posts {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .posts-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .posts-label::before { content: ''; width: 32px; height: 2px; background: var(--orange); }
+
+    .billboard {
+      background: var(--paper);
+      padding: 2rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border: 2px solid var(--ink);
+      margin-bottom: 3rem;
+    }
+    @media (min-width: 768px) { .billboard { padding: 3rem 2rem; gap: 0.85rem; } }
+    .billboard-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5.5vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+    @media (min-width: 768px) { .billboard-row { gap: 1rem; } }
+    .billboard-block {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.35em 0.55em;
+      color: var(--paper);
+      flex-shrink: 0;
+    }
+    .bb-red { background: var(--red); }
+    .bb-orange { background: var(--orange); }
+    .bb-green { background: var(--green); }
+    .bb-ink { background: var(--ink); }
+
+    /* Post grid — 4 articles, density */
+    .post-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border-top: 1px solid var(--ink);
+    }
+    @media (min-width: 768px) { .post-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .post-card {
+      position: relative;
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid var(--ink);
+      border-right: 1px solid var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: background 0.3s, color 0.3s;
+      overflow: hidden;
+      min-height: 320px;
+    }
+    @media (min-width: 768px) {
+      .post-card:nth-child(2n) { border-right: 0; }
+    }
+    @media (max-width: 767px) {
+      .post-card { border-right: 0; }
+    }
+    .post-card:hover { background: var(--ink); color: var(--paper); }
+    .post-card:hover .post-num { color: var(--red); }
+    .post-card:hover .post-cat { background: var(--orange); color: var(--paper); border-color: var(--orange); }
+    .post-card:hover .post-read-time { color: var(--green); }
+    .post-card:hover .post-arrow { transform: translate(8px, -8px) rotate(-45deg); color: var(--red); }
+
+    .post-card .post-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .post-num {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: var(--ink);
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+    .post-cat {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border: 1.5px solid var(--ink);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .post-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      flex: 1;
+    }
+    .post-arrow {
+      display: inline-block;
+      font-size: 0.85em;
+      color: inherit;
+      transition: transform 0.5s var(--ease-spring), color 0.2s;
+      margin-left: 0.3em;
+    }
+    .post-dek {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: inherit;
+      opacity: 0.78;
+      max-width: 50ch;
+    }
+    .post-foot {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid currentColor;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .post-read-time {
+      color: var(--orange);
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       BUILDS — engineering ledger
+       ════════════════════════════════════════════════════════════ */
+    .builds {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .builds-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .builds-label::before { content: ''; width: 32px; height: 2px; background: var(--green); }
+
+    .builds-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .builds-head h2 .accent-r { color: var(--red); }
+    .builds-head h2 .accent-o { color: var(--orange); }
+    .builds-head h2 .accent-g { color: var(--green); }
+
+    .build-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border-top: 1px solid var(--ink);
+    }
+    @media (min-width: 768px) { .build-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1280px) { .build-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .build-card {
+      position: relative;
+      padding: 1.75rem 1.5rem;
+      border-bottom: 1px solid var(--ink);
+      border-right: 1px solid var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      min-height: 280px;
+      transition: background 0.3s, color 0.3s;
+      overflow: hidden;
+    }
+    @media (min-width: 1280px) { .build-card:last-child { border-right: 0; } }
+    @media (min-width: 768px) and (max-width: 1279px) {
+      .build-card:nth-child(2n) { border-right: 0; }
+    }
+    @media (max-width: 767px) { .build-card { border-right: 0; } }
+
+    .build-card:hover { background: var(--ink); color: var(--paper); }
+    .build-card:hover .build-num { color: var(--red); }
+    .build-card:hover .build-status { background: var(--green); color: var(--paper); border-color: var(--green); }
+
+    .build-num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      font-weight: 600;
+    }
+    .build-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+    .build-desc {
+      font-family: var(--font-serif);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      opacity: 0.78;
+      margin-bottom: auto;
+    }
+    .build-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0.6rem;
+      border: 1.5px solid currentColor;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      align-self: flex-start;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .build-status .dot {
+      width: 6px; height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: pulse 1.6s infinite;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       ABOUT — pull quote thesis
+       ════════════════════════════════════════════════════════════ */
+    .about {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0;
+      border-bottom: 2px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .about-inner {
+      padding: 5rem 1.5rem;
+    }
+    @media (min-width: 1024px) { .about-inner { padding: 7rem 3rem; } }
+
+    .about-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .about-label::before { content: ''; width: 32px; height: 2px; background: var(--orange); }
+
+    .about-billboard {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      max-width: 1100px;
+    }
+    .about-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.85rem;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5.5vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .about-foot {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(244, 243, 238, 0.2);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--paper);
+      opacity: 0.6;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       SUBSCRIBE
+       ════════════════════════════════════════════════════════════ */
+    .subscribe {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+      border-bottom: 2px solid var(--ink);
+    }
+    .sub-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    @media (min-width: 1024px) { .sub-grid { grid-template-columns: 5fr 5fr; gap: 4rem; } }
+
+    .sub-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .sub-text h2 .accent-r { color: var(--red); }
+    .sub-text h2 .accent-o { color: var(--orange); }
+    .sub-text p {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 50ch;
+      color: var(--ink-2);
+    }
+    .sub-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .sub-input-wrap {
+      display: flex;
+      border: 2px solid var(--ink);
+      background: var(--paper);
+    }
+    .sub-input-wrap input {
+      flex: 1;
+      background: transparent;
+      border: 0;
+      padding: 1rem 1.25rem;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .sub-input-wrap input::placeholder {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--ink-mute);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .sub-submit {
+      padding: 0 1.5rem;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 0;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+    .sub-submit:hover { background: var(--red); }
+    .sub-foot {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+    }
+    .sub-foot span { color: var(--ink); }
+
+    /* ════════════════════════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════════════════════════ */
+    footer {
+      padding: 3rem 1.5rem 2rem;
+      background: var(--paper-2);
+    }
+    .footer-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--ink);
+    }
+    @media (min-width: 768px) {
+      .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+    }
+    .foot-brand {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .foot-brand .dot-r,
+    .foot-brand .dot-o,
+    .foot-brand .dot-g { width: 12px; height: 12px; }
+    .foot-brand .dot-r { background: var(--red); }
+    .foot-brand .dot-o { background: var(--orange); }
+    .foot-brand .dot-g { background: var(--green); }
+    .foot-tagline {
+      font-family: var(--font-serif);
+      color: var(--ink-2);
+      max-width: 32ch;
+      line-height: 1.5;
+    }
+    .foot-col h4 {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .foot-col a {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--ink);
+      transition: color 0.3s, transform 0.3s var(--ease-spring);
+      display: inline-block;
+    }
+    .foot-col a:hover { color: var(--red); transform: translateX(3px); }
+    .foot-col li:nth-child(2) a:hover { color: var(--orange); }
+    .foot-col li:nth-child(3) a:hover { color: var(--green); }
+
+    .footer-bot {
+      max-width: 1400px;
+      margin: 1.5rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+    @media (min-width: 768px) {
+      .footer-bot { flex-direction: row; justify-content: space-between; align-items: center; }
+    }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ── Mobile cleanups ── */
+    @media (max-width: 768px) {
+      .nav-links a { padding: 0.5rem 0.7rem; font-size: 0.6rem; }
+      .nav-links a:not(.cta) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── SYSBAR ── -->
+<div class="sysbar">
+  <span class="sysbar-cell"><span class="dot"></span><span class="k">SYS</span><span class="v green">LIVE</span></span>
+  <span class="sysbar-cell"><span class="k">ISSUE</span><span class="v">047 · 2026.W17</span></span>
+  <span class="sysbar-cell"><span class="k">POSTS</span><span class="v">04 / 06</span></span>
+  <span class="sysbar-cell"><span class="k">BUILDS</span><span class="v orange">04</span></span>
+  <span class="sysbar-cell"><span class="k">CITATIONS</span><span class="v">412</span></span>
+  <span class="sysbar-cell"><span class="k">REGION</span><span class="v">SF · PT</span></span>
+  <span class="sysbar-cell"><span class="k">CLEARANCE</span><span class="v red">PUBLIC</span></span>
+</div>
+
+<!-- ── NAV ── -->
+<nav>
+  <span class="brand">
+    <span class="dot-r"></span><span class="dot-o"></span><span class="dot-g"></span>
+    <span>Sachin Rai</span>
+  </span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#thesis">Thesis</a>
+    <a href="https://x.com/sachinrai" target="_blank" rel="noopener">X ↗</a>
+    <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a href="#subscribe" class="cta">Subscribe</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════════════
+     HERO — TECHNIQUE 001
+     ════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <p class="hero-eyebrow">
+    Issue 047 <span class="badge">Featured</span> Filed 2026.04.25
+  </p>
+
+  <div class="hero-stage">
+    <div class="hero-circle"></div>
+    <div class="hero-square"></div>
+    <div class="hero-tri"></div>
+
+    <h1 class="hero-title">FRONTIER<br/>BUILD<br/>LOG.</h1>
+  </div>
+
+  <div class="hero-meta">
+    <div class="hero-meta-block">
+      <div class="k">001 · The thesis</div>
+      <div class="v">Field notes from where AI infrastructure meets the enterprise quota. Build log, essays, and tools.</div>
+    </div>
+    <div class="hero-meta-block">
+      <div class="k">Author</div>
+      <div class="v">Sachin Rai · SF</div>
+    </div>
+    <div class="hero-meta-block">
+      <div class="k">Cycle</div>
+      <div class="v">2026.W17</div>
+    </div>
+    <div class="hero-meta-block">
+      <div class="k">Read time</div>
+      <div class="v">~36 min</div>
+    </div>
+  </div>
+
+  <div class="cta-row">
+    <a href="https://sachinai.com/posts/ai-trends-2026-breakthrough-idea.html" class="btn btn-primary">Read essay →</a>
+    <a href="#posts" class="btn btn-orange">All writing</a>
+    <a href="#builds" class="btn btn-green">Tools shipped</a>
+    <a href="#subscribe" class="btn btn-ghost">Subscribe</a>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>H100 · 80GB · HBM3</span>
+    <span>B200 · Blackwell · 192GB</span>
+    <span>TPU v5p · trillium</span>
+    <span>Trainium 2 · 3nm</span>
+    <span>The 90/10 reliability wall</span>
+    <span>Outcome-based pricing</span>
+    <span>InfiniBand NDR · 400Gb/s</span>
+    <span>NVLink 5 · 1.8 TB/s</span>
+    <span>Eval-first product</span>
+    <span>Karpathy autoresearch loop</span>
+    <span>H100 · 80GB · HBM3</span>
+    <span>B200 · Blackwell · 192GB</span>
+    <span>TPU v5p · trillium</span>
+    <span>Trainium 2 · 3nm</span>
+    <span>The 90/10 reliability wall</span>
+    <span>Outcome-based pricing</span>
+    <span>InfiniBand NDR · 400Gb/s</span>
+    <span>NVLink 5 · 1.8 TB/s</span>
+    <span>Eval-first product</span>
+    <span>Karpathy autoresearch loop</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     FEATURED — TECHNIQUE 002
+     ════════════════════════════════════════════════════════════════ -->
+<section class="featured">
+  <div class="featured-label">002 · Featured · 3D over text</div>
+
+  <div class="featured-stage">
+    <div class="featured-text">
+      <span class="l1">FRONT</span>
+      <span class="l2">IER</span>
+    </div>
+    <div class="featured-3d">
+      <div class="cube">
+        <div class="face front"></div>
+        <div class="face back"></div>
+        <div class="face left"></div>
+        <div class="face right"></div>
+        <div class="face top"></div>
+        <div class="face bottom"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="featured-meta">
+    <strong>The 90/10 Wall — why enterprise AI stops scaling</strong>
+    14 min · Reliability · ITSM · Evals
+  </div>
+
+  <a href="https://sachinai.com/posts/ai-trends-2026-breakthrough-idea.html" class="featured-card">
+    <div class="fc-num">001</div>
+    <div>
+      <h3 class="fc-title">7 AI trends I'm tracking in 2026 — and the breakthrough nobody's talking about</h3>
+      <p class="fc-dek">From compute explosions to org hierarchy collapse — what my research vault is telling me about the next 18 months. Plus one non-obvious conclusion about enterprise software.</p>
+      <div class="fc-tags">
+        <span class="tag">Strategy</span>
+        <span class="tag">AI</span>
+        <span class="tag">Featured</span>
+      </div>
+    </div>
+    <div class="fc-meta">
+      <span>Apr 2026</span>
+      <span>1,847 words</span>
+      <span class="read">09 min →</span>
+    </div>
+  </a>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     POSTS — TECHNIQUE 003
+     ════════════════════════════════════════════════════════════════ -->
+<section class="posts" id="posts">
+  <div class="posts-label">003 · The writing</div>
+
+  <div class="billboard">
+    <div class="billboard-row">
+      <span>WRITE</span>
+      <span class="billboard-block bb-red">THE</span>
+      <span>BEST</span>
+    </div>
+    <div class="billboard-row">
+      <span class="billboard-block bb-green">AI</span>
+      <span>NOTES</span>
+      <span class="billboard-block bb-orange">IN</span>
+    </div>
+    <div class="billboard-row">
+      <span>THE</span>
+      <span class="billboard-block bb-ink" style="color:var(--paper)">GAME</span>
+      <span style="color:var(--orange);">→</span>
+    </div>
+  </div>
+
+  <div class="post-grid">
+    <a href="https://sachinai.com/posts/13-agents-one-saturday.html" class="post-card">
+      <div class="post-top">
+        <span class="post-num">009</span>
+        <span class="post-cat">AI</span>
+      </div>
+      <h3 class="post-title">Thirteen Agents in One Saturday. <span class="post-arrow">↗</span></h3>
+      <p class="post-dek">I spawned 13 parallel Claude Code agents on a Saturday morning. Each shipped one feature for my trading system. Agent 12 overturned the hypothesis from Agent 1.</p>
+      <div class="post-foot">
+        <span>May 2026 · 2,050 words</span>
+        <span class="post-read-time">10 min</span>
+      </div>
+    </a>
+
+    <a href="https://sachinai.com/posts/compounding-systems.html" class="post-card">
+      <div class="post-top">
+        <span class="post-num">008</span>
+        <span class="post-cat">Knowledge</span>
+      </div>
+      <h3 class="post-title">Most Second Brains Just Rotate. <span class="post-arrow">↗</span></h3>
+      <p class="post-dek">88 concept articles, 301 sources, 13 agents. Most "second brain" stacks fail because they confuse output with compounding. Three Laws decide which yours is.</p>
+      <div class="post-foot">
+        <span>May 2026 · 2,059 words</span>
+        <span class="post-read-time">10 min</span>
+      </div>
+    </a>
+
+    <a href="https://sachinai.com/posts/renamed-seven-agents.html" class="post-card">
+      <div class="post-top">
+        <span class="post-num">007</span>
+        <span class="post-cat">Engineering</span>
+      </div>
+      <h3 class="post-title">I Renamed Seven AI Agents. <span class="post-arrow">↗</span></h3>
+      <p class="post-dek">Animal names are debt. Functional names are leverage. The rename took 30 minutes and touched 26 files. Layer 1 vs Layer 2, and why naming is plumbing.</p>
+      <div class="post-foot">
+        <span>May 2026 · 1,926 words</span>
+        <span class="post-read-time">10 min</span>
+      </div>
+    </a>
+
+    <a href="https://sachinai.com/posts/five-vault-fixes.html" class="post-card">
+      <div class="post-top">
+        <span class="post-num">006</span>
+        <span class="post-cat">Operations</span>
+      </div>
+      <h3 class="post-title">Five Cheap Fixes Took My Vault From 7.5 to 9.5. <span class="post-arrow">↗</span></h3>
+      <p class="post-dek">A 90-minute lint pass: 19 missing banners, 132 unindexed notes, 24 confidence gaps, 6 open concept gaps, plus a contradiction scan. Whole pass, full receipts.</p>
+      <div class="post-foot">
+        <span>May 2026 · 2,028 words</span>
+        <span class="post-read-time">10 min</span>
+      </div>
+    </a>
+
+    <a href="https://sachinai.com/posts/win-rate-trap.html" class="post-card">
+      <div class="post-top">
+        <span class="post-num">002</span>
+        <span class="post-cat">Strategy</span>
+      </div>
+      <h3 class="post-title">Win Rate Lies. <span class="post-arrow">↗</span></h3>
+      <p class="post-dek">A 90% winner with a −1.04% expectancy. The Trojan Horse hiding in every sales pipeline — and the five-minute math that surfaces it.</p>
+      <div class="post-foot">
+        <span>Apr 2026 · 1,820 words</span>
+        <span class="post-read-time">07 min</span>
+      </div>
+    </a>
+      <div class="post-top">
+        <span class="post-num">004</span>
+        <span class="post-cat">Workflow</span>
+      </div>
+      <h3 class="post-title">Turning an Obsidian vault into an LLM-queryable knowledge base <span class="post-arrow">↗</span></h3>
+      <p class="post-dek">Compiling a personal wiki so Claude answers from my actual notes — not training data. Karpathy's autoresearch loop, applied.</p>
+      <div class="post-foot">
+        <span>Mar 2026 · 2,210 words</span>
+        <span class="post-read-time">11 min</span>
+      </div>
+    </a>
+
+    <a href="https://sachinai.com/posts/ai-sales-stack-2026.html" class="post-card">
+      <div class="post-top">
+        <span class="post-num">005</span>
+        <span class="post-cat">Strategy</span>
+      </div>
+      <h3 class="post-title">The AI sales stack I'd build if I started today <span class="post-arrow">↗</span></h3>
+      <p class="post-dek">Four tools. Under $200/mo. Replaces what most AEs pay $2,000/mo for. The math, the workflow, the gotchas.</p>
+      <div class="post-foot">
+        <span>Feb 2026 · 1,612 words</span>
+        <span class="post-read-time">08 min</span>
+      </div>
+    </a>
+
+    <a href="#" class="post-card">
+      <div class="post-top">
+        <span class="post-num">006</span>
+        <span class="post-cat">Forthcoming</span>
+      </div>
+      <h3 class="post-title">Why outcome-based pricing wins the next AI cycle <span class="post-arrow">↗</span></h3>
+      <p class="post-dek">ServiceNow's token tax. Sierra's per-resolution model. The pricing posture every AI vendor is converging on — and the one that breaks the seat license.</p>
+      <div class="post-foot">
+        <span>Drafting · May 2026</span>
+        <span class="post-read-time">~10 min</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     BUILDS — engineering ledger
+     ════════════════════════════════════════════════════════════════ -->
+<section class="builds" id="builds">
+  <div class="builds-label">004 · What I'm building</div>
+
+  <div class="builds-head">
+    <h2><span class="accent-r">04</span> tools <span class="accent-o">in</span> active <span class="accent-g">production</span>.</h2>
+  </div>
+
+  <div class="build-grid">
+    <article class="build-card">
+      <div class="build-num">UNIT 01</div>
+      <h3 class="build-name">Signal Forge</h3>
+      <p class="build-desc">AI-powered trading rule evolution. Karpathy's autoresearch pattern applied to options signals — the loop optimizes itself overnight.</p>
+      <span class="build-status"><span class="dot"></span>v6.9 LIVE</span>
+    </article>
+
+    <article class="build-card">
+      <div class="build-num">UNIT 02</div>
+      <h3 class="build-name">Account Brain</h3>
+      <p class="build-desc">Weekly 4-agent pipeline on top accounts. Intel → triggers → angle → message.</p>
+      <span class="build-status"><span class="dot"></span>ACTIVE</span>
+    </article>
+
+    <article class="build-card">
+      <div class="build-num">UNIT 03</div>
+      <h3 class="build-name">NemoClaw OS</h3>
+      <p class="build-desc">Always-on personal AI agent. Slack interface. Memory. Cron. The OS layer for everything else.</p>
+      <span class="build-status"><span class="dot"></span>50% BUILT</span>
+    </article>
+
+    <article class="build-card">
+      <div class="build-num">UNIT 04</div>
+      <h3 class="build-name">Harness</h3>
+      <p class="build-desc">Verification layer for AI agents. Evals as the new moat — the skill nobody teaches.</p>
+      <span class="build-status"><span class="dot"></span>SPRINT</span>
+    </article>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     ABOUT — bio + credentials
+     ════════════════════════════════════════════════════════════════ -->
+<section class="about-bio" id="about">
+  <div class="about-bio-inner">
+    <div class="bio-label">005 · About</div>
+
+    <div class="bio-grid">
+      <div class="bio-portrait">
+        <div class="bio-avatar">SR</div>
+        <div class="bio-corner-r"></div>
+        <div class="bio-corner-o"></div>
+        <div class="bio-corner-g"></div>
+      </div>
+
+      <div class="bio-text">
+        <h2 class="bio-title">Hi, I'm <span class="bio-accent-r">Sachin</span>.</h2>
+        <p class="bio-lead">
+          I write about the <span class="bio-mark-o">infrastructure work</span>
+          between a chip and a quota — and I ship the AI tools enterprise
+          GTM teams actually need.
+        </p>
+        <p class="bio-body">
+          Twenty years in enterprise software sales — Oracle and
+          Salesforce in earlier chapters, most recent stint independent.
+          Now building AI tooling for sellers, evaluators, and operators.
+          Based in San Francisco.
+        </p>
+        <p class="bio-body">
+          This blog is a build log. Every post is a problem I hit, a
+          tool I shipped, or a thesis I'm pressure-testing in the wild.
+          No daily digest. No reposts.
+        </p>
+
+        <div class="bio-creds">
+          <div class="cred-block cred-r">
+            <div class="cred-num">20 YRS</div>
+            <div class="cred-label">Enterprise SaaS sales</div>
+          </div>
+          <div class="cred-block cred-o">
+            <div class="cred-num">04</div>
+            <div class="cred-label">AI tools shipped</div>
+          </div>
+          <div class="cred-block cred-g">
+            <div class="cred-num">SF</div>
+            <div class="cred-label">San Francisco · PT</div>
+          </div>
+        </div>
+
+        <div class="bio-contact">
+          <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener" class="bio-link bio-link-r">LinkedIn ↗</a>
+          <a href="https://x.com/sachinrai" target="_blank" rel="noopener" class="bio-link bio-link-o">X ↗</a>
+          <a href="mailto:sachinai1981@gmail.com" class="bio-link bio-link-g">Email →</a>
+        </div>
+
+        <div class="bio-previously">
+          <div class="prev-label">Previously at</div>
+          <div class="prev-logos">
+            <div class="prev-logo prev-oracle" aria-label="Oracle">
+              <svg viewBox="0 0 200 36" xmlns="http://www.w3.org/2000/svg">
+                <text x="0" y="28" font-family="Arial Black, Helvetica, sans-serif" font-size="32" font-weight="900" letter-spacing="-1" fill="#C74634">ORACLE</text>
+              </svg>
+            </div>
+            <div class="prev-logo prev-salesforce" aria-label="Salesforce">
+              <svg viewBox="0 0 220 56" xmlns="http://www.w3.org/2000/svg">
+                <!-- Salesforce cloud silhouette -->
+                <g transform="translate(0, 6)">
+                  <path d="M 20 8 C 20 4, 24 0, 30 0 C 36 0, 40 4, 41 8 C 44 6, 48 6, 50 9 C 54 7, 60 8, 62 13 C 66 12, 70 14, 70 19 C 70 23, 66 26, 62 26 L 18 26 C 12 26, 8 22, 8 17 C 8 13, 12 9, 16 9 C 17 9, 18 9, 20 8 Z" fill="#00A1E0"/>
+                </g>
+                <text x="78" y="36" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#0A0A0A" letter-spacing="-0.5">salesforce</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-bio {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  @media (min-width: 1024px) { .about-bio { padding: 7rem 3rem; } }
+  .about-bio-inner { max-width: 1300px; margin: 0 auto; }
+
+  .bio-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .bio-label::before { content: ''; width: 32px; height: 2px; background: var(--green); }
+
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (min-width: 1024px) {
+    .bio-grid { grid-template-columns: 320px 1fr; gap: 5rem; align-items: start; }
+  }
+
+  /* Portrait — Bauhaus avatar with R/O/G corner shapes */
+  .bio-portrait {
+    position: relative;
+    aspect-ratio: 1;
+    background: var(--ink);
+    color: var(--paper);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    max-width: 320px;
+  }
+  .bio-avatar {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 14vw, 9rem);
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+    z-index: 2;
+  }
+  .bio-corner-r,
+  .bio-corner-o,
+  .bio-corner-g {
+    position: absolute;
+    z-index: 1;
+  }
+  .bio-corner-r {
+    top: 0; left: 0;
+    width: 60px; height: 60px;
+    background: var(--red);
+  }
+  .bio-corner-o {
+    bottom: 0; right: 0;
+    width: 80px; height: 80px;
+    background: var(--orange);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  }
+  .bio-corner-g {
+    top: 50%; right: -30px;
+    width: 60px; height: 60px;
+    background: var(--green);
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+
+  .bio-text { max-width: 56ch; }
+
+  .bio-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+  .bio-accent-r { color: var(--red); }
+
+  .bio-lead {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+  .bio-mark-o {
+    background: var(--orange);
+    color: var(--paper);
+    padding: 0.05em 0.3em;
+    font-style: normal;
+  }
+
+  .bio-body {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin-bottom: 1rem;
+  }
+
+  .bio-creds {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 2.5rem;
+    border: 2px solid var(--ink);
+  }
+  .cred-block {
+    padding: 1.25rem 1rem;
+    border-right: 2px solid var(--ink);
+    color: var(--paper);
+  }
+  .cred-block:last-child { border-right: 0; }
+  .cred-r { background: var(--red); }
+  .cred-o { background: var(--orange); }
+  .cred-g { background: var(--green); }
+  .cred-num {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+  .cred-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .bio-contact {
+    display: flex;
+    gap: 0;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    border: 2px solid var(--ink);
+    width: fit-content;
+  }
+  .bio-link {
+    padding: 0.85rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border-right: 2px solid var(--ink);
+    transition: background 0.2s, color 0.2s;
+    color: var(--ink);
+  }
+  .bio-link:last-child { border-right: 0; }
+  .bio-link-r:hover { background: var(--red); color: var(--paper); }
+  .bio-link-o:hover { background: var(--orange); color: var(--paper); }
+  .bio-link-g:hover { background: var(--green); color: var(--paper); }
+
+  /* Previously at — company logos block */
+  .bio-previously {
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--hairline);
+  }
+  .prev-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+  .prev-label::before {
+    content: ''; width: 22px; height: 1px; background: var(--ink);
+  }
+  .prev-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  .prev-logo {
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    transition: transform 0.3s var(--ease-spring), opacity 0.3s;
+    opacity: 0.85;
+  }
+  .prev-logo:hover {
+    transform: translateY(-2px);
+    opacity: 1;
+  }
+  .prev-logo svg {
+    height: 100%;
+    width: auto;
+  }
+  .prev-oracle svg { height: 28px; }
+  .prev-salesforce svg { height: 36px; }
+</style>
+
+<!-- ════════════════════════════════════════════════════════════════
+     THESIS — billboard (dark)
+     ════════════════════════════════════════════════════════════════ -->
+<section class="about" id="thesis">
+  <div class="about-inner">
+    <div class="about-label" style="color:var(--orange)">006 · The thesis</div>
+
+    <div class="about-billboard">
+      <div class="about-row">
+        <span>SHIP</span>
+        <span class="billboard-block bb-orange">EVALS</span>
+        <span>FIRST</span>
+      </div>
+      <div class="about-row">
+        <span class="billboard-block bb-green">PRICE</span>
+        <span>ON</span>
+        <span class="billboard-block bb-red">OUTCOMES</span>
+      </div>
+      <div class="about-row">
+        <span>NOT</span>
+        <span class="billboard-block" style="background:var(--paper);color:var(--ink);">SEATS</span>
+      </div>
+    </div>
+
+    <div class="about-foot">
+      — Frontier 047 · Sachin Rai · 2026.04.25
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SUBSCRIBE
+     ════════════════════════════════════════════════════════════════ -->
+<section class="subscribe" id="subscribe">
+  <div class="sub-grid">
+    <div class="sub-text">
+      <h2>Field notes from <span class="accent-r">the</span> <span class="accent-o">GTM</span> <span class="accent-g">layer</span>.</h2>
+      <p>One issue per week. Long-form essays on AI infrastructure, evals, enterprise pricing, and the reliability work between a chip and a quota. No daily digest. No reposts.</p>
+    </div>
+    <form class="sub-form" onsubmit="event.preventDefault(); this.querySelector('.sub-submit').textContent = 'SUBSCRIBED ✓';">
+      <div class="sub-input-wrap">
+        <input type="email" placeholder="ops@enterprise.ai" autocomplete="email" required />
+        <button type="submit" class="sub-submit">Subscribe →</button>
+      </div>
+      <div class="sub-foot">
+        <span>2,847 readers</span>
+        <span>· 47% open</span>
+        <span>· No tracking</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="foot-brand">
+        <span class="dot-r"></span><span class="dot-o"></span><span class="dot-g"></span>
+        <span>Sachin Rai</span>
+      </div>
+      <p class="foot-tagline">Field notes from where AI infrastructure meets enterprise selling. Edited and operated by Sachin Rai. Published from San Francisco.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Read</h4>
+      <ul>
+        <li><a href="#posts">Latest essay</a></li>
+        <li><a href="#posts">Archive</a></li>
+        <li><a href="#about">Topics</a></li>
+        <li><a href="https://sachinai.com/">RSS</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Build</h4>
+      <ul>
+        <li><a href="#builds">Signal Forge</a></li>
+        <li><a href="#builds">Account Brain</a></li>
+        <li><a href="#builds">NemoClaw OS</a></li>
+        <li><a href="#builds">Harness</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+        <li><a href="https://x.com/sachinrai" target="_blank" rel="noopener">X ↗</a></li>
+        <li><a href="mailto:sachinai1981@gmail.com">Email</a></li>
+        <li><a href="#subscribe">Subscribe</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <span>© 2026 · Sachin Rai · All work my own</span>
+    <span>Built · Archivo Black · Source Serif · JetBrains Mono</span>
+    <span>REV 2.6 · UNIT FRONTIER-047 · CYCLE 2026.W17</span>
+  </div>
+</footer>
+
+</body>
+</html>
