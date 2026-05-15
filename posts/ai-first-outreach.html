@@ -59,13 +59,14 @@
   --dark-olive: #323C2A;
   --white:      #FFFFFF;
   --gray-mid:   #A3A3A3;
+  --parchment:  #f5f4f0;
   --font-mono:  'Space Mono', 'Courier New', monospace;
   --font-sans:  'Inter', Arial, sans-serif;
   --ease:       cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html { scroll-behavior: smooth; }
-body { background: var(--near-black); color: var(--white); font-family: var(--font-sans); line-height: 1.85; padding-top: 64px; }
+body { background: var(--parchment); color: #0a0a0a; font-family: var(--font-sans); line-height: 1.85; padding-top: 64px; }
 a { color: inherit; text-decoration: none; }
 * { -webkit-font-smoothing: antialiased; }
 
@@ -87,120 +88,167 @@ a { color: inherit; text-decoration: none; }
   .nav__links li:not(:last-child) { display: none; }
 }
 
-/* ── HERO ── */
-.hero-pipeline {
-  background: var(--black);
-  padding: 80px 48px 0;
-  border-bottom: 1px solid #2a2a2a;
-  overflow: hidden;
+/* ── CINEMATIC HERO ── */
+.cinematic-hero {
+  position: relative; width: 100%; height: 52vh; min-height: 380px;
+  overflow: hidden; background: #000;
 }
-.hero__meta {
+.cinematic-hero__img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  animation: kenBurns 20s ease-in-out infinite alternate; will-change: transform;
+}
+@keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.06); } }
+.cinematic-hero__bar-top,
+.cinematic-hero__bar-bottom {
+  position: absolute; left: 0; right: 0; height: 36px; background: #000; z-index: 2;
+}
+.cinematic-hero__bar-top    { top: 0; }
+.cinematic-hero__bar-bottom { bottom: 0; }
+
+/* ── ARTICLE HEADER ── */
+.article-header { background: var(--parchment); padding: 72px 48px 64px; }
+.article-header__inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+}
+.article-header__date {
   font-family: var(--font-mono); font-size: 11px;
-  color: var(--lime); letter-spacing: .1em; text-transform: uppercase;
-  margin-bottom: 20px; display: flex; gap: 16px; flex-wrap: wrap;
+  color: #888; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 28px;
 }
-.hero__meta span { color: rgba(255,255,255,.4); }
-.hero__title {
-  font-family: var(--font-mono); font-size: clamp(22px, 3.5vw, 42px);
-  font-weight: 700; line-height: 1.15; color: var(--white);
-  max-width: 760px; margin-bottom: 20px;
+.article-header__title {
+  font-family: var(--font-mono); font-size: clamp(28px, 3.5vw, 50px);
+  font-weight: 700; line-height: 1.15; color: #0a0a0a; margin-bottom: 28px;
 }
-.hero__excerpt {
-  font-family: var(--font-sans); font-size: 16px; color: rgba(255,255,255,.55);
-  max-width: 580px; line-height: 1.7; margin-bottom: 48px;
+.article-header__excerpt {
+  font-family: var(--font-sans); font-size: 16px;
+  line-height: 1.75; color: #555; margin-bottom: 40px;
+}
+.article-header__divider { height: 1px; background: #ddd; margin-bottom: 28px; }
+.article-header__share {
+  font-family: var(--font-mono); font-size: 10px;
+  color: #888; letter-spacing: .08em; text-transform: uppercase;
+}
+.article-header__share a {
+  color: #555; text-decoration: underline;
+  text-underline-offset: 3px; transition: color .2s;
+}
+.article-header__share a:hover { color: #0a0a0a; }
+.article-header__feature-img {
+  width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
+  transition: transform .4s ease;
+}
+.article-header__feature-img:hover { transform: scale(1.01); }
+
+/* ── ARTICLE DIVIDER ── */
+.article-rule {
+  max-width: 1200px; margin: 0 auto;
+  width: calc(100% - 96px); height: 1px; background: #ddd;
 }
 
-/* Pipeline diagram */
+/* ── ARTICLE BODY ── */
+.article-body { background: var(--parchment); padding: 56px 48px 100px; }
+.article-body__inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 220px 1fr; gap: 72px; align-items: start;
+}
+
+/* TOC */
+.toc-sidebar { position: sticky; top: 88px; }
+.toc-sidebar__label {
+  font-family: var(--font-mono); font-size: 9px;
+  color: #999; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 20px;
+}
+.toc-sidebar__list { list-style: none; padding: 0; }
+.toc-sidebar__list li a {
+  font-family: var(--font-mono); font-size: 11px;
+  color: #555; line-height: 2.2; display: block; transition: color .2s;
+}
+.toc-sidebar__list li a:hover,
+.toc-sidebar__list li a.active { color: #0a0a0a; }
+
+/* Post body */
+.post-body {
+  font-family: var(--font-sans); font-size: 16px; line-height: 1.9; color: #333;
+}
+.post-body h2 {
+  font-family: var(--font-mono); font-size: 20px; font-weight: 700;
+  color: #0a0a0a; margin: 2.5rem 0 1rem; letter-spacing: -.01em;
+}
+.post-body h3 {
+  font-family: var(--font-mono); font-size: 15px; font-weight: 700;
+  color: #0a0a0a; margin: 2rem 0 .75rem;
+}
+.post-body p { margin-bottom: 1.4rem; }
+.post-body strong { color: #0a0a0a; }
+.post-body a { color: #0a0a0a; text-decoration: underline; text-underline-offset: 3px; }
+.post-body a:hover { opacity: .7; }
+.post-body ul, .post-body ol { padding-left: 1.5rem; margin-bottom: 1.4rem; }
+.post-body li { margin-bottom: .5rem; }
+
+/* Pipeline stages (preserved from original) */
 .pipeline-diagram {
   display: flex; align-items: stretch; overflow-x: auto;
-  padding-bottom: 0; margin: 0 -48px;
-  scrollbar-width: none;
+  margin: 2rem 0; border: 1px solid #ddd; scrollbar-width: none;
 }
 .pipeline-diagram::-webkit-scrollbar { display: none; }
 .pipeline-stage {
-  flex: 1; min-width: 140px; max-width: 220px;
-  background: #0d0d0d;
-  border-top: 1px solid #2a2a2a;
-  border-right: 1px solid #2a2a2a;
-  padding: 24px 20px 28px;
-  position: relative;
-  transition: background .3s;
+  flex: 1; min-width: 120px;
+  background: #fff; border-right: 1px solid #ddd;
+  padding: 20px 16px 24px; position: relative; transition: background .3s;
 }
-.pipeline-stage:first-child { border-left: 1px solid #2a2a2a; }
-.pipeline-stage.active { background: rgba(206,235,19,.06); }
+.pipeline-stage:last-child { border-right: none; }
+.pipeline-stage.active { background: rgba(206,235,19,.1); }
 .pipeline-stage.active .stage-num { color: var(--lime); }
 .stage-num {
   font-family: var(--font-mono); font-size: 28px; font-weight: 700;
-  color: rgba(255,255,255,.15); line-height: 1; margin-bottom: 10px;
-  transition: color .3s;
+  color: rgba(0,0,0,.1); line-height: 1; margin-bottom: 10px; transition: color .3s;
 }
 .stage-name {
   font-family: var(--font-mono); font-size: 12px; font-weight: 700;
-  color: rgba(255,255,255,.8); letter-spacing: .05em;
-  margin-bottom: 8px;
+  color: #0a0a0a; letter-spacing: .05em; margin-bottom: 8px;
 }
 .stage-desc {
-  font-family: var(--font-sans); font-size: 11px;
-  color: rgba(255,255,255,.35); line-height: 1.6;
+  font-family: var(--font-sans); font-size: 11px; color: #777; line-height: 1.6;
 }
-/* Packet dot */
 .pipeline-packet {
   position: absolute; top: -5px; left: -5px;
   width: 10px; height: 10px; border-radius: 50%;
-  background: var(--lime);
-  box-shadow: 0 0 12px rgba(206,235,19,.8);
+  background: var(--lime); box-shadow: 0 0 12px rgba(206,235,19,.8);
   transition: left 0.4s var(--ease), top 0.3s var(--ease);
   pointer-events: none; z-index: 10;
 }
 
-/* ── POST BODY ── */
-.post-body-wrap {
-  max-width: 760px; margin: 0 auto; padding: 64px 48px 80px;
-}
-.post-body { font-family: var(--font-sans); font-size: 16px; line-height: 1.85; color: rgba(255,255,255,.75); }
-.post-body h2 {
-  font-family: var(--font-mono); font-size: 18px; font-weight: 700;
-  color: var(--white); margin: 48px 0 16px; letter-spacing: -.02em;
-}
-.post-body h2::before { content: '// '; color: var(--lime); }
-.post-body p { margin-bottom: 20px; }
-.post-body ul { padding-left: 24px; margin-bottom: 20px; }
-.post-body li { margin-bottom: 8px; }
-.post-body strong { color: var(--white); font-weight: 600; }
-
 /* Before / after comparison */
 .compare-grid {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 0; border: 1px solid #2a2a2a; border-radius: 8px;
-  overflow: hidden; margin: 32px 0;
+  gap: 0; border: 1px solid #ddd; overflow: hidden; margin: 2rem 0;
 }
 .compare-col { padding: 24px 28px; }
-.compare-col--before { background: #111; border-right: 1px solid #2a2a2a; }
-.compare-col--after { background: rgba(206,235,19,.04); }
+.compare-col--before { background: #fff; border-right: 1px solid #ddd; }
+.compare-col--after { background: rgba(206,235,19,.06); }
 .compare-label {
   font-family: var(--font-mono); font-size: 10px; font-weight: 700;
   letter-spacing: .12em; text-transform: uppercase; margin-bottom: 16px;
 }
-.compare-label--before { color: rgba(255,255,255,.3); }
-.compare-label--after { color: var(--lime); }
+.compare-label--before { color: #999; }
+.compare-label--after { color: var(--lime-dark); }
 .compare-item {
   font-family: var(--font-sans); font-size: 13px; line-height: 1.7;
-  color: rgba(255,255,255,.5); padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,.06);
+  color: #777; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,.06);
   display: flex; align-items: flex-start; gap: 8px;
 }
-.compare-col--after .compare-item { color: rgba(255,255,255,.75); }
+.compare-col--after .compare-item { color: #333; }
 .compare-icon { flex-shrink: 0; margin-top: 2px; font-size: 11px; }
-.compare-col--before .compare-icon { color: rgba(255,255,255,.2); }
-.compare-col--after .compare-icon { color: var(--lime); }
+.compare-col--before .compare-icon { color: #bbb; }
+.compare-col--after .compare-icon { color: var(--lime-dark); }
 
-/* ── CALLOUT ── */
+/* Callout */
 .callout {
-  background: rgba(206,235,19,.07);
+  background: rgba(206,235,19,.15);
   border-left: 3px solid var(--lime);
-  padding: 16px 20px; margin: 24px 0; border-radius: 0 4px 4px 0;
+  padding: 16px 20px; margin: 1.5rem 0;
 }
-.callout p { margin: 0; color: rgba(255,255,255,.8); font-size: 15px; }
+.callout p { margin: 0; color: #333; font-size: 15px; }
 
 /* ── REVEAL ── */
 .rv { opacity:0; transform:translateY(24px); transition: opacity .7s cubic-bezier(0.16,1,0.3,1), transform .7s cubic-bezier(0.16,1,0.3,1); }
@@ -215,13 +263,20 @@ a { color: inherit; text-decoration: none; }
 .post-footer .footer__social a { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.25); transition: color .2s; text-decoration: none; }
 .post-footer .footer__social a:hover { color: var(--lime); }
 
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .article-header__inner { grid-template-columns: 1fr; gap: 48px; }
+  .article-body__inner { grid-template-columns: 1fr; }
+  .toc-sidebar { display: none; }
+}
 @media (max-width: 600px) {
-  .hero-pipeline { padding: 40px 20px 0; }
-  .pipeline-diagram { margin: 0 -20px; }
-  .pipeline-stage { min-width: 120px; padding: 16px 14px 20px; }
-  .post-body-wrap { padding: 40px 20px 60px; }
+  .post-nav { padding: 0 20px; }
+  .nav__links li:not(:last-child) { display: none; }
+  .article-header, .article-body { padding: 40px 20px; }
+  .cinematic-hero { height: 40vh; }
+  .article-rule { width: calc(100% - 40px); }
   .compare-grid { grid-template-columns: 1fr; }
-  .compare-col--before { border-right: none; border-bottom: 1px solid #2a2a2a; }
+  .compare-col--before { border-right: none; border-bottom: 1px solid #ddd; }
   .post-footer { padding: 32px 20px; }
 }
 </style>
@@ -238,111 +293,153 @@ a { color: inherit; text-decoration: none; }
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero-pipeline" aria-labelledby="hero-title">
-  <div class="hero__meta">
-    <span>AI + Sales</span>
-    <span>·</span>
-    <span>Apr 12, 2026</span>
-    <span>·</span>
-    <span>8 min read</span>
-  </div>
-  <h1 class="hero__title" id="hero-title">The Case for AI-First Outreach: How I Built My Own SDR in a Weekend</h1>
-  <p class="hero__excerpt">Using LangGraph, Apollo, and Claude to research prospects, score fit, and draft personalised emails — automatically.</p>
-
-  <div class="pipeline-diagram" aria-label="Outreach pipeline stages" role="img">
-    <div class="pipeline-stage" id="stage0">
-      <div class="stage-num">01</div>
-      <div class="stage-name">Prospect</div>
-      <div class="stage-desc">Apollo ICP filter, 50 leads/run</div>
-    </div>
-    <div class="pipeline-stage" id="stage1">
-      <div class="stage-num">02</div>
-      <div class="stage-name">Research</div>
-      <div class="stage-desc">Company context, role, signals</div>
-    </div>
-    <div class="pipeline-stage" id="stage2">
-      <div class="stage-num">03</div>
-      <div class="stage-name">Score</div>
-      <div class="stage-desc">ICP fit 0–10, priority tier</div>
-    </div>
-    <div class="pipeline-stage" id="stage3">
-      <div class="stage-num">04</div>
-      <div class="stage-name">Draft</div>
-      <div class="stage-desc">Personalised email + subject</div>
-    </div>
-    <div class="pipeline-stage" id="stage4">
-      <div class="stage-num">05</div>
-      <div class="stage-name">Review</div>
-      <div class="stage-desc">Human approval queue</div>
-    </div>
-    <div class="pipeline-packet" id="pipelinePacket" aria-hidden="true"></div>
-  </div>
+<!-- CINEMATIC HERO -->
+<section class="cinematic-hero" aria-hidden="true">
+  <img class="cinematic-hero__img"
+       src="https://picsum.photos/seed/email-office-desk/1800/760"
+       alt=""
+       width="1800" height="760"
+       loading="eager" fetchpriority="high" />
+  <div class="cinematic-hero__bar-top"></div>
+  <div class="cinematic-hero__bar-bottom"></div>
 </section>
 
-<!-- BODY -->
-<div class="post-body-wrap">
-  <div class="post-body">
-
-    <p class="rv">I have done manual SDR work. I know what it feels like to spend an hour researching a single prospect — reading their LinkedIn, their company blog, their press releases — and then write a four-line email that either gets ignored or bounced. At scale, this is unsustainable. Most reps do not spend the hour. They send a template with a merge field and a pain point that does not quite fit. The prospect can tell. The reply rate reflects it.</p>
-
-    <p class="rv">I spent a weekend building an alternative. The system is not perfect, but it produces research-backed, personalised outreach at a speed no human SDR team could match, and the reply rates are meaningfully better than template campaigns.</p>
-
-    <h2 class="rv">The Problem with Manual SDR Work</h2>
-
-    <p class="rv">The math is simple and brutal. A good SDR can research and write 15-20 personalised emails per day. An enterprise sales cycle needs a pipeline of 80-100 active prospects to reliably hit quota. At 20 emails per day, building that pipeline from scratch takes 4-5 days of pure outreach work — before you have had a single conversation. And that is a good SDR working efficiently.</p>
-
-    <p class="rv">Most SDR teams respond to this math by sacrificing personalisation. Templates go out. Open rates stay high because subject lines are optimised. Reply rates suffer because the email clearly does not reflect any knowledge of the prospect's actual situation. You get a lot of "not interested" responses from people who might have been interested if you had known what to say.</p>
-
-    <h2 class="rv">The Stack</h2>
-
-    <p class="rv">The system uses three tools in sequence:</p>
-
-    <ul class="rv">
-      <li><strong>Apollo.io</strong> for prospect sourcing. Apollo has company technographic data, intent signals, and contact-level information that you can filter against your ICP. I set up a filter for my target persona — IT decision-makers at mid-market companies using legacy ITSM tools — and pull 50 leads per run.</li>
-      <li><strong>LangGraph</strong> for the pipeline orchestration. LangGraph is a Python framework for building agent workflows where each step can branch, loop, or call other agents. It is the right tool for a multi-step process where each step needs to be independently configurable.</li>
-      <li><strong>Claude claude-haiku-4-5</strong> for the research synthesis and email drafting. Haiku is fast and cheap enough to run against every lead in the batch without the costs compounding into something unsustainable.</li>
-    </ul>
-
-    <h2 class="rv">Before vs. After</h2>
-
-    <div class="compare-grid rv">
-      <div class="compare-col compare-col--before">
-        <div class="compare-label compare-label--before">Before — Manual</div>
-        <div class="compare-item"><span class="compare-icon">→</span><span>60 min research per prospect</span></div>
-        <div class="compare-item"><span class="compare-icon">→</span><span>15–20 emails per day max</span></div>
-        <div class="compare-item"><span class="compare-icon">→</span><span>Inconsistent personalisation quality</span></div>
-        <div class="compare-item"><span class="compare-icon">→</span><span>No scoring — gut feel only</span></div>
-        <div class="compare-item"><span class="compare-icon">→</span><span>4–8% reply rate typical</span></div>
-        <div class="compare-item"><span class="compare-icon">→</span><span>Rep time: 4 hours/day on outreach</span></div>
-      </div>
-      <div class="compare-col compare-col--after">
-        <div class="compare-label compare-label--after">After — AI Pipeline</div>
-        <div class="compare-item"><span class="compare-icon">→</span><span>3 min per prospect (automated)</span></div>
-        <div class="compare-item"><span class="compare-icon">→</span><span>50 emails per batch, unlimited batches</span></div>
-        <div class="compare-item"><span class="compare-icon">→</span><span>Consistent research depth, every email</span></div>
-        <div class="compare-item"><span class="compare-icon">→</span><span>ICP score 0–10, tier A/B/C segmentation</span></div>
-        <div class="compare-item"><span class="compare-icon">→</span><span>14–18% reply rate on Tier A leads</span></div>
-        <div class="compare-item"><span class="compare-icon">→</span><span>Rep time: 30 min/day on review queue</span></div>
-      </div>
+<!-- ARTICLE HEADER -->
+<div class="article-header">
+  <div class="article-header__inner">
+    <div>
+      <p class="article-header__date">Apr 12, 2026 &nbsp;·&nbsp; AI + Sales &nbsp;·&nbsp; 8 min read</p>
+      <h1 class="article-header__title">The Case for AI-First Outreach: How I Built My Own SDR in a Weekend</h1>
+      <p class="article-header__excerpt">Using LangGraph, Apollo, and Claude to research prospects, score fit, and draft personalised emails — automatically.</p>
+      <div class="article-header__divider"></div>
+      <p class="article-header__share">SHARE —
+        <a href="https://twitter.com/intent/tweet?url=https://sachinai.com/posts/ai-first-outreach.html&text=The+Case+for+AI-First+Outreach" target="_blank" rel="noopener noreferrer">Twitter</a>
+        &nbsp;/&nbsp;
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://sachinai.com/posts/ai-first-outreach.html" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </p>
     </div>
-
-    <h2 class="rv">The Scoring Model</h2>
-
-    <p class="rv">The ICP scoring step is the most important part of the pipeline and the part most people skip. The score runs on a 0-10 scale across four dimensions: company fit (size, industry, growth stage), technology fit (are they using tools my solution integrates with or replaces?), role fit (is this person actually a decision-maker?), and timing fit (are there signals — hiring, expansion, recent press — that suggest they are in-market?).</p>
-
-    <p class="rv">Leads that score below 6 go to a cold nurture sequence. Leads that score 6-7 get a templated email with light personalisation. Leads that score 8+ get the full Claude-researched email. This tiering is what drives the reply rate improvement on Tier A — you are not wasting personalisation budget on cold leads who are never going to engage.</p>
-
-    <div class="callout rv">
-      <p>The scoring model is also how you improve the pipeline over time. Every reply — positive or negative — is feedback that updates the model's calibration. After three months, the ICP scores are meaningfully better calibrated than they were at launch.</p>
+    <div>
+      <img class="article-header__feature-img"
+           src="https://picsum.photos/seed/pipeline-diagram/800/450"
+           alt="Pipeline diagram"
+           width="800" height="450"
+           loading="eager" />
     </div>
+  </div>
+</div>
 
-    <h2 class="rv">What Still Needs Humans</h2>
+<!-- RULE -->
+<div class="article-rule"></div>
 
-    <p class="rv">The system is not hands-off. There is a human review queue that every email passes through before sending. Fifteen minutes per batch reviewing 50 emails catches the edge cases — prospects the system scored incorrectly, email drafts where the personalisation feels off, contacts who have already been reached previously. The automation handles the research and drafting; the human handles the judgement calls.</p>
+<!-- ARTICLE BODY -->
+<div class="article-body">
+  <div class="article-body__inner">
 
-    <p class="rv">The pipeline also cannot replicate relationship-based outreach. If you have a warm introduction, a shared connection, or a mutual customer reference, that context matters more than any AI-researched email. The system is for cold outreach at scale. It does not replace the relationship network — it frees up time to build it.</p>
+    <!-- TOC -->
+    <aside class="toc-sidebar" aria-label="Table of contents">
+      <p class="toc-sidebar__label">Table of Contents</p>
+      <ul class="toc-sidebar__list">
+        <li><a href="#the-problem-with-manual-sdr-work">The Problem</a></li>
+        <li><a href="#the-stack">The Stack</a></li>
+        <li><a href="#before-vs-after">Before vs. After</a></li>
+        <li><a href="#the-scoring-model">The Scoring Model</a></li>
+        <li><a href="#what-still-needs-humans">What Still Needs Humans</a></li>
+      </ul>
+    </aside>
 
+    <!-- BODY CONTENT -->
+    <div class="post-body">
+
+      <p class="rv">I have done manual SDR work. I know what it feels like to spend an hour researching a single prospect — reading their LinkedIn, their company blog, their press releases — and then write a four-line email that either gets ignored or bounced. At scale, this is unsustainable. Most reps do not spend the hour. They send a template with a merge field and a pain point that does not quite fit. The prospect can tell. The reply rate reflects it.</p>
+
+      <p class="rv">I spent a weekend building an alternative. The system is not perfect, but it produces research-backed, personalised outreach at a speed no human SDR team could match, and the reply rates are meaningfully better than template campaigns.</p>
+
+      <!-- PIPELINE DIAGRAM -->
+      <div class="pipeline-diagram rv" aria-label="Outreach pipeline stages" role="img">
+        <div class="pipeline-stage" id="stage0">
+          <div class="stage-num">01</div>
+          <div class="stage-name">Prospect</div>
+          <div class="stage-desc">Apollo ICP filter, 50 leads/run</div>
+        </div>
+        <div class="pipeline-stage" id="stage1">
+          <div class="stage-num">02</div>
+          <div class="stage-name">Research</div>
+          <div class="stage-desc">Company context, role, signals</div>
+        </div>
+        <div class="pipeline-stage" id="stage2">
+          <div class="stage-num">03</div>
+          <div class="stage-name">Score</div>
+          <div class="stage-desc">ICP fit 0–10, priority tier</div>
+        </div>
+        <div class="pipeline-stage" id="stage3">
+          <div class="stage-num">04</div>
+          <div class="stage-name">Draft</div>
+          <div class="stage-desc">Personalised email + subject</div>
+        </div>
+        <div class="pipeline-stage" id="stage4">
+          <div class="stage-num">05</div>
+          <div class="stage-name">Review</div>
+          <div class="stage-desc">Human approval queue</div>
+        </div>
+        <div class="pipeline-packet" id="pipelinePacket" aria-hidden="true"></div>
+      </div>
+
+      <h2 class="rv" id="the-problem-with-manual-sdr-work">The Problem with Manual SDR Work</h2>
+
+      <p class="rv">The math is simple and brutal. A good SDR can research and write 15-20 personalised emails per day. An enterprise sales cycle needs a pipeline of 80-100 active prospects to reliably hit quota. At 20 emails per day, building that pipeline from scratch takes 4-5 days of pure outreach work — before you have had a single conversation. And that is a good SDR working efficiently.</p>
+
+      <p class="rv">Most SDR teams respond to this math by sacrificing personalisation. Templates go out. Open rates stay high because subject lines are optimised. Reply rates suffer because the email clearly does not reflect any knowledge of the prospect's actual situation. You get a lot of "not interested" responses from people who might have been interested if you had known what to say.</p>
+
+      <h2 class="rv" id="the-stack">The Stack</h2>
+
+      <p class="rv">The system uses three tools in sequence:</p>
+
+      <ul class="rv">
+        <li><strong>Apollo.io</strong> for prospect sourcing. Apollo has company technographic data, intent signals, and contact-level information that you can filter against your ICP. I set up a filter for my target persona — IT decision-makers at mid-market companies using legacy ITSM tools — and pull 50 leads per run.</li>
+        <li><strong>LangGraph</strong> for the pipeline orchestration. LangGraph is a Python framework for building agent workflows where each step can branch, loop, or call other agents. It is the right tool for a multi-step process where each step needs to be independently configurable.</li>
+        <li><strong>Claude claude-haiku-4-5</strong> for the research synthesis and email drafting. Haiku is fast and cheap enough to run against every lead in the batch without the costs compounding into something unsustainable.</li>
+      </ul>
+
+      <h2 class="rv" id="before-vs-after">Before vs. After</h2>
+
+      <div class="compare-grid rv">
+        <div class="compare-col compare-col--before">
+          <div class="compare-label compare-label--before">Before — Manual</div>
+          <div class="compare-item"><span class="compare-icon">→</span><span>60 min research per prospect</span></div>
+          <div class="compare-item"><span class="compare-icon">→</span><span>15–20 emails per day max</span></div>
+          <div class="compare-item"><span class="compare-icon">→</span><span>Inconsistent personalisation quality</span></div>
+          <div class="compare-item"><span class="compare-icon">→</span><span>No scoring — gut feel only</span></div>
+          <div class="compare-item"><span class="compare-icon">→</span><span>4–8% reply rate typical</span></div>
+          <div class="compare-item"><span class="compare-icon">→</span><span>Rep time: 4 hours/day on outreach</span></div>
+        </div>
+        <div class="compare-col compare-col--after">
+          <div class="compare-label compare-label--after">After — AI Pipeline</div>
+          <div class="compare-item"><span class="compare-icon">→</span><span>3 min per prospect (automated)</span></div>
+          <div class="compare-item"><span class="compare-icon">→</span><span>50 emails per batch, unlimited batches</span></div>
+          <div class="compare-item"><span class="compare-icon">→</span><span>Consistent research depth, every email</span></div>
+          <div class="compare-item"><span class="compare-icon">→</span><span>ICP score 0–10, tier A/B/C segmentation</span></div>
+          <div class="compare-item"><span class="compare-icon">→</span><span>14–18% reply rate on Tier A leads</span></div>
+          <div class="compare-item"><span class="compare-icon">→</span><span>Rep time: 30 min/day on review queue</span></div>
+        </div>
+      </div>
+
+      <h2 class="rv" id="the-scoring-model">The Scoring Model</h2>
+
+      <p class="rv">The ICP scoring step is the most important part of the pipeline and the part most people skip. The score runs on a 0-10 scale across four dimensions: company fit (size, industry, growth stage), technology fit (are they using tools my solution integrates with or replaces?), role fit (is this person actually a decision-maker?), and timing fit (are there signals — hiring, expansion, recent press — that suggest they are in-market?).</p>
+
+      <p class="rv">Leads that score below 6 go to a cold nurture sequence. Leads that score 6-7 get a templated email with light personalisation. Leads that score 8+ get the full Claude-researched email. This tiering is what drives the reply rate improvement on Tier A — you are not wasting personalisation budget on cold leads who are never going to engage.</p>
+
+      <div class="callout rv">
+        <p>The scoring model is also how you improve the pipeline over time. Every reply — positive or negative — is feedback that updates the model's calibration. After three months, the ICP scores are meaningfully better calibrated than they were at launch.</p>
+      </div>
+
+      <h2 class="rv" id="what-still-needs-humans">What Still Needs Humans</h2>
+
+      <p class="rv">The system is not hands-off. There is a human review queue that every email passes through before sending. Fifteen minutes per batch reviewing 50 emails catches the edge cases — prospects the system scored incorrectly, email drafts where the personalisation feels off, contacts who have already been reached previously. The automation handles the research and drafting; the human handles the judgement calls.</p>
+
+      <p class="rv">The pipeline also cannot replicate relationship-based outreach. If you have a warm introduction, a shared connection, or a mutual customer reference, that context matters more than any AI-researched email. The system is for cold outreach at scale. It does not replace the relationship network — it frees up time to build it.</p>
+
+    </div>
   </div>
 </div>
 
@@ -370,19 +467,13 @@ function getStageCenter(stageEl) {
   if (!stageEl || !pipelineEl || !packet) return { left: 0, top: 0 };
   const sr = stageEl.getBoundingClientRect();
   const pr = pipelineEl.getBoundingClientRect();
-  return {
-    left: sr.left - pr.left + sr.width / 2 - 5,
-    top: sr.height * 0.15
-  };
+  return { left: sr.left - pr.left + sr.width / 2 - 5, top: sr.height * 0.15 };
 }
 
 function movePacket(idx) {
   stages.forEach((s, i) => s && s.classList.toggle('active', i === idx));
   const pos = getStageCenter(stages[idx]);
-  if (packet) {
-    packet.style.left = pos.left + 'px';
-    packet.style.top = pos.top + 'px';
-  }
+  if (packet) { packet.style.left = pos.left + 'px'; packet.style.top = pos.top + 'px'; }
 }
 
 function animatePipeline() {
@@ -390,14 +481,10 @@ function animatePipeline() {
   currentStage = (currentStage + 1) % stages.length;
 }
 
-// Start after hero is in view
 const heroObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      setTimeout(() => {
-        movePacket(0);
-        setInterval(animatePipeline, 1200);
-      }, 800);
+      setTimeout(() => { movePacket(0); setInterval(animatePipeline, 1200); }, 800);
       heroObs.unobserve(e.target);
     }
   });
@@ -408,6 +495,20 @@ if (heroEl) heroObs.observe(heroEl);
 // Reveal
 const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// TOC active
+const headings = document.querySelectorAll('.post-body h2[id]');
+const tocLinks = document.querySelectorAll('.toc-sidebar__list a');
+const headingObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      tocLinks.forEach(a => a.classList.remove('active'));
+      const match = document.querySelector('.toc-sidebar__list a[href="#' + entry.target.id + '"]');
+      if (match) match.classList.add('active');
+    }
+  });
+}, { rootMargin: '-10% 0px -80% 0px' });
+headings.forEach(h => headingObs.observe(h));
 </script>
 </body>
 </html>

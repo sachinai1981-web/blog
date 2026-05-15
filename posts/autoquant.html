@@ -59,13 +59,14 @@
   --dark-olive: #323C2A;
   --white:      #FFFFFF;
   --gray-mid:   #A3A3A3;
+  --parchment:  #f5f4f0;
   --font-mono:  'Space Mono', 'Courier New', monospace;
   --font-sans:  'Inter', Arial, sans-serif;
   --ease:       cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html { scroll-behavior: smooth; }
-body { background: var(--near-black); color: var(--white); font-family: var(--font-sans); line-height: 1.85; padding-top: 64px; }
+body { background: var(--parchment); color: #0a0a0a; font-family: var(--font-sans); line-height: 1.85; padding-top: 64px; }
 a { color: inherit; text-decoration: none; }
 * { -webkit-font-smoothing: antialiased; }
 
@@ -87,45 +88,70 @@ a { color: inherit; text-decoration: none; }
   .nav__links li:not(:last-child) { display: none; }
 }
 
-/* ── HERO WITH CHART ── */
-.hero-chart {
-  background: var(--black);
-  padding: 80px 48px 48px;
-  border-bottom: 1px solid #2a2a2a;
-  position: relative; overflow: hidden;
+/* ── CINEMATIC HERO ── */
+.cinematic-hero {
+  position: relative; width: 100%; height: 52vh; min-height: 380px;
+  overflow: hidden; background: #000;
 }
-.chart-canvas-wrap {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  height: 200px; pointer-events: none;
+.cinematic-hero__img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  animation: kenBurns 20s ease-in-out infinite alternate; will-change: transform;
 }
-#chartCanvas { width: 100%; height: 100%; }
-.hero__meta {
-  position: relative; z-index: 2;
+@keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.06); } }
+.cinematic-hero__bar-top,
+.cinematic-hero__bar-bottom {
+  position: absolute; left: 0; right: 0; height: 36px; background: #000; z-index: 2;
+}
+.cinematic-hero__bar-top    { top: 0; }
+.cinematic-hero__bar-bottom { bottom: 0; }
+
+/* ── ARTICLE HEADER ── */
+.article-header { background: var(--parchment); padding: 72px 48px 64px; }
+.article-header__inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+}
+.article-header__date {
   font-family: var(--font-mono); font-size: 11px;
-  color: var(--lime); letter-spacing: .1em; text-transform: uppercase;
-  margin-bottom: 20px; display: flex; gap: 16px; flex-wrap: wrap;
+  color: #888; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 28px;
 }
-.hero__meta span { color: rgba(255,255,255,.4); }
-.hero__title {
-  position: relative; z-index: 2;
-  font-family: var(--font-mono); font-size: clamp(22px, 3.5vw, 42px);
-  font-weight: 700; line-height: 1.15; color: var(--white);
-  max-width: 760px; margin-bottom: 20px;
+.article-header__title {
+  font-family: var(--font-mono); font-size: clamp(28px, 3.5vw, 50px);
+  font-weight: 700; line-height: 1.15; color: #0a0a0a; margin-bottom: 28px;
 }
-.hero__excerpt {
-  position: relative; z-index: 2;
-  font-family: var(--font-sans); font-size: 16px; color: rgba(255,255,255,.55);
-  max-width: 580px; line-height: 1.7; margin-bottom: 200px;
+.article-header__excerpt {
+  font-family: var(--font-sans); font-size: 16px;
+  line-height: 1.75; color: #555; margin-bottom: 40px;
+}
+.article-header__divider { height: 1px; background: #ddd; margin-bottom: 28px; }
+.article-header__share {
+  font-family: var(--font-mono); font-size: 10px;
+  color: #888; letter-spacing: .08em; text-transform: uppercase;
+}
+.article-header__share a {
+  color: #555; text-decoration: underline;
+  text-underline-offset: 3px; transition: color .2s;
+}
+.article-header__share a:hover { color: #0a0a0a; }
+.article-header__feature-img {
+  width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
+  transition: transform .4s ease;
+}
+.article-header__feature-img:hover { transform: scale(1.01); }
+
+/* ── ARTICLE DIVIDER ── */
+.article-rule {
+  max-width: 1200px; margin: 0 auto;
+  width: calc(100% - 96px); height: 1px; background: #ddd;
 }
 
-/* Stats strip */
+/* Stats strip (dark bar, preserved) */
 .stats-strip {
-  display: flex; gap: 0; border-top: 1px solid #2a2a2a; border-bottom: 1px solid #2a2a2a;
-  background: #0f0f0f;
+  display: flex; gap: 0; background: #0a0a0a;
+  border-bottom: 1px solid #222;
 }
 .stat-block {
-  flex: 1; padding: 28px 32px;
-  border-right: 1px solid #2a2a2a; text-align: center;
+  flex: 1; padding: 28px 32px; border-right: 1px solid #222; text-align: center;
 }
 .stat-block:last-child { border-right: none; }
 .stat-num {
@@ -137,63 +163,87 @@ a { color: inherit; text-decoration: none; }
   color: rgba(255,255,255,.3); letter-spacing: .12em; text-transform: uppercase;
 }
 
-/* ── POST BODY ── */
-.post-body-wrap {
-  max-width: 760px; margin: 0 auto; padding: 64px 48px 80px;
+/* ── ARTICLE BODY ── */
+.article-body { background: var(--parchment); padding: 56px 48px 100px; }
+.article-body__inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 220px 1fr; gap: 72px; align-items: start;
 }
-.post-body { font-family: var(--font-sans); font-size: 16px; line-height: 1.85; color: rgba(255,255,255,.75); }
-.post-body h2 {
-  font-family: var(--font-mono); font-size: 18px; font-weight: 700;
-  color: var(--white); margin: 48px 0 16px; letter-spacing: -.02em;
-}
-.post-body h2::before { content: '// '; color: var(--lime); }
-.post-body p { margin-bottom: 20px; }
-.post-body ul { padding-left: 24px; margin-bottom: 20px; }
-.post-body li { margin-bottom: 8px; }
-.post-body strong { color: var(--white); font-weight: 600; }
 
-/* Signal flowchart */
+/* TOC */
+.toc-sidebar { position: sticky; top: 88px; }
+.toc-sidebar__label {
+  font-family: var(--font-mono); font-size: 9px;
+  color: #999; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 20px;
+}
+.toc-sidebar__list { list-style: none; padding: 0; }
+.toc-sidebar__list li a {
+  font-family: var(--font-mono); font-size: 11px;
+  color: #555; line-height: 2.2; display: block; transition: color .2s;
+}
+.toc-sidebar__list li a:hover,
+.toc-sidebar__list li a.active { color: #0a0a0a; }
+
+/* Post body */
+.post-body {
+  font-family: var(--font-sans); font-size: 16px; line-height: 1.9; color: #333;
+}
+.post-body h2 {
+  font-family: var(--font-mono); font-size: 20px; font-weight: 700;
+  color: #0a0a0a; margin: 2.5rem 0 1rem; letter-spacing: -.01em;
+}
+.post-body h3 {
+  font-family: var(--font-mono); font-size: 15px; font-weight: 700;
+  color: #0a0a0a; margin: 2rem 0 .75rem;
+}
+.post-body p { margin-bottom: 1.4rem; }
+.post-body strong { color: #0a0a0a; }
+.post-body a { color: #0a0a0a; text-decoration: underline; text-underline-offset: 3px; }
+.post-body a:hover { opacity: .7; }
+.post-body ul, .post-body ol { padding-left: 1.5rem; margin-bottom: 1.4rem; }
+.post-body li { margin-bottom: .5rem; }
+
+/* Flowchart (preserved, adapted for light bg) */
 .flowchart {
   display: flex; flex-direction: column; align-items: center;
-  gap: 0; margin: 40px 0; padding: 40px 32px;
-  background: #0f0f0f; border: 1px solid #2a2a2a; border-radius: 8px;
+  gap: 0; margin: 2rem 0; padding: 40px 32px;
+  background: #fff; border: 1px solid #ddd;
 }
 .flow-node {
-  background: #1a1a1a; border: 1px solid #333;
-  padding: 14px 24px; border-radius: 6px; text-align: center;
+  background: #f0efe9; border: 1px solid #ddd;
+  padding: 14px 24px; text-align: center;
   font-family: var(--font-mono); font-size: 13px; font-weight: 700;
-  color: var(--white); min-width: 200px;
+  color: #0a0a0a; min-width: 200px;
   opacity: 0; transform: translateY(10px);
   transition: opacity .4s var(--ease), transform .4s var(--ease);
 }
 .flow-node.in { opacity: 1; transform: none; }
 .flow-node--decision {
-  background: rgba(206,235,19,.08); border-color: rgba(206,235,19,.3);
-  color: var(--lime);
+  background: rgba(206,235,19,.15); border-color: rgba(160,183,17,.5);
+  color: #5a6600;
 }
 .flow-arrow {
-  font-family: var(--font-mono); font-size: 18px; color: rgba(255,255,255,.2);
+  font-family: var(--font-mono); font-size: 18px; color: #bbb;
   padding: 6px 0; line-height: 1;
   opacity: 0; transition: opacity .3s var(--ease);
 }
 .flow-arrow.in { opacity: 1; }
 .flow-branch {
-  display: flex; gap: 32px; align-items: flex-start; width: 100%;
-  justify-content: center;
+  display: flex; gap: 32px; align-items: flex-start; width: 100%; justify-content: center;
 }
 .flow-branch-item { display: flex; flex-direction: column; align-items: center; gap: 0; }
 .flow-branch-label {
-  font-family: var(--font-mono); font-size: 9px; color: rgba(255,255,255,.3);
+  font-family: var(--font-mono); font-size: 9px; color: #999;
   letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px;
 }
 
-/* ── CALLOUT ── */
+/* Callout */
 .callout {
-  background: rgba(206,235,19,.07);
+  background: rgba(206,235,19,.15);
   border-left: 3px solid var(--lime);
-  padding: 16px 20px; margin: 24px 0; border-radius: 0 4px 4px 0;
+  padding: 16px 20px; margin: 1.5rem 0;
 }
-.callout p { margin: 0; color: rgba(255,255,255,.8); font-size: 15px; }
+.callout p { margin: 0; color: #333; font-size: 15px; }
 
 /* ── REVEAL ── */
 .rv { opacity:0; transform:translateY(24px); transition: opacity .7s cubic-bezier(0.16,1,0.3,1), transform .7s cubic-bezier(0.16,1,0.3,1); }
@@ -208,14 +258,23 @@ a { color: inherit; text-decoration: none; }
 .post-footer .footer__social a { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.25); transition: color .2s; text-decoration: none; }
 .post-footer .footer__social a:hover { color: var(--lime); }
 
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .article-header__inner { grid-template-columns: 1fr; gap: 48px; }
+  .article-body__inner { grid-template-columns: 1fr; }
+  .toc-sidebar { display: none; }
+}
 @media (max-width: 600px) {
-  .hero-chart { padding: 40px 20px 48px; }
+  .post-nav { padding: 0 20px; }
+  .nav__links li:not(:last-child) { display: none; }
+  .article-header, .article-body { padding: 40px 20px; }
+  .cinematic-hero { height: 40vh; }
+  .article-rule { width: calc(100% - 40px); }
   .stats-strip { flex-direction: column; }
-  .stat-block { border-right: none; border-bottom: 1px solid #2a2a2a; }
+  .stat-block { border-right: none; border-bottom: 1px solid #222; }
   .stat-block:last-child { border-bottom: none; }
-  .post-body-wrap { padding: 40px 20px 60px; }
-  .post-footer { padding: 32px 20px; }
   .flow-branch { flex-direction: column; align-items: center; }
+  .post-footer { padding: 32px 20px; }
 }
 </style>
 </head>
@@ -231,21 +290,43 @@ a { color: inherit; text-decoration: none; }
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero-chart" aria-labelledby="hero-title">
-  <div class="hero__meta">
-    <span>Markets + Trading</span>
-    <span>·</span>
-    <span>Apr 5, 2026</span>
-    <span>·</span>
-    <span>9 min read</span>
-  </div>
-  <h1 class="hero__title" id="hero-title">AutoQuant: What I Learned After 6 Months of Bayesian Signal Grading</h1>
-  <p class="hero__excerpt">Building a scanner that grades its own trades, re-weights conviction over time, and auto-journals every autopsy.</p>
-  <div class="chart-canvas-wrap" aria-hidden="true">
-    <canvas id="chartCanvas"></canvas>
-  </div>
+<!-- CINEMATIC HERO -->
+<section class="cinematic-hero" aria-hidden="true">
+  <img class="cinematic-hero__img"
+       src="https://picsum.photos/seed/stock-charts-dark/1800/760"
+       alt=""
+       width="1800" height="760"
+       loading="eager" fetchpriority="high" />
+  <div class="cinematic-hero__bar-top"></div>
+  <div class="cinematic-hero__bar-bottom"></div>
 </section>
+
+<!-- ARTICLE HEADER -->
+<div class="article-header">
+  <div class="article-header__inner">
+    <div>
+      <p class="article-header__date">Apr 5, 2026 &nbsp;·&nbsp; Markets + Trading &nbsp;·&nbsp; 9 min read</p>
+      <h1 class="article-header__title">AutoQuant: What I Learned After 6 Months of Bayesian Signal Grading</h1>
+      <p class="article-header__excerpt">Building a scanner that grades its own trades, re-weights conviction over time, and auto-journals every autopsy.</p>
+      <div class="article-header__divider"></div>
+      <p class="article-header__share">SHARE —
+        <a href="https://twitter.com/intent/tweet?url=https://sachinai.com/posts/autoquant.html&text=AutoQuant%3A+6+Months+of+Bayesian+Signal+Grading" target="_blank" rel="noopener noreferrer">Twitter</a>
+        &nbsp;/&nbsp;
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://sachinai.com/posts/autoquant.html" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </p>
+    </div>
+    <div>
+      <img class="article-header__feature-img"
+           src="https://picsum.photos/seed/trading-floor/800/450"
+           alt="Trading floor"
+           width="800" height="450"
+           loading="eager" />
+    </div>
+  </div>
+</div>
+
+<!-- RULE -->
+<div class="article-rule"></div>
 
 <!-- STATS STRIP -->
 <div class="stats-strip" aria-label="AutoQuant statistics">
@@ -263,84 +344,101 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 
-<!-- BODY -->
-<div class="post-body-wrap">
-  <div class="post-body">
+<!-- ARTICLE BODY -->
+<div class="article-body">
+  <div class="article-body__inner">
 
-    <p class="rv">Most trading systems are static. You define a set of rules — RSI below 30 means oversold, buy here — and the system applies those rules identically on day one and day one hundred. The problem is that markets are not static. A signal that worked reliably in trending conditions becomes noise in range-bound markets. A momentum setup that worked all year falls apart when macro volatility spikes. Static rules go stale.</p>
+    <!-- TOC -->
+    <aside class="toc-sidebar" aria-label="Table of contents">
+      <p class="toc-sidebar__label">Table of Contents</p>
+      <ul class="toc-sidebar__list">
+        <li><a href="#what-bayesian-signal-grading-is">What Bayesian Grading Is</a></li>
+        <li><a href="#how-the-scanner-works">How the Scanner Works</a></li>
+        <li><a href="#the-signal-grading-flow">Signal Grading Flow</a></li>
+        <li><a href="#what-6-months-of-data-taught-me">6 Months of Data</a></li>
+        <li><a href="#auto-journaling-every-autopsy">Auto-Journaling</a></li>
+        <li><a href="#what-breaks">What Breaks</a></li>
+      </ul>
+    </aside>
 
-    <p class="rv">AutoQuant was built on a different premise: what if the system learned from every trade and updated its own signal weights accordingly? That is Bayesian signal grading in one sentence. Here is what six months of running it has taught me.</p>
+    <!-- BODY CONTENT -->
+    <div class="post-body">
 
-    <h2 class="rv">What Bayesian Signal Grading Is</h2>
+      <p class="rv">Most trading systems are static. You define a set of rules — RSI below 30 means oversold, buy here — and the system applies those rules identically on day one and day one hundred. The problem is that markets are not static. A signal that worked reliably in trending conditions becomes noise in range-bound markets. A momentum setup that worked all year falls apart when macro volatility spikes. Static rules go stale.</p>
 
-    <p class="rv">Bayesian inference is a method for updating your beliefs based on new evidence. In trading, you start with a prior belief about a signal — say, "RSI divergence on the daily chart leads to a reversal 58% of the time." Every time the system takes a trade based on that signal, it records the outcome and updates the prior. Over time, the signal's weight in the scoring model reflects its actual track record rather than its theoretical merit.</p>
+      <p class="rv">AutoQuant was built on a different premise: what if the system learned from every trade and updated its own signal weights accordingly? That is Bayesian signal grading in one sentence. Here is what six months of running it has taught me.</p>
 
-    <p class="rv">The critical insight is that signal performance is conditional. RSI divergence might have a 58% hit rate in low-volatility conditions and a 31% hit rate in high-VIX environments. A naive system treats these as the same signal. AutoQuant conditions each signal's weight on the market regime it is operating in. This means the same set of rules produces very different behavior depending on whether we are in a trending, volatile, or ranging environment.</p>
+      <h2 class="rv" id="what-bayesian-signal-grading-is">What Bayesian Signal Grading Is</h2>
 
-    <h2 class="rv">How the Scanner Works</h2>
+      <p class="rv">Bayesian inference is a method for updating your beliefs based on new evidence. In trading, you start with a prior belief about a signal — say, "RSI divergence on the daily chart leads to a reversal 58% of the time." Every time the system takes a trade based on that signal, it records the outcome and updates the prior. Over time, the signal's weight in the scoring model reflects its actual track record rather than its theoretical merit.</p>
 
-    <p class="rv">The scanner runs twice daily — at 9:15am ET (after pre-market settles) and at 2:30pm ET (before the close volatility window). Each run scans a watchlist of 80 names across six signal categories:</p>
+      <p class="rv">The critical insight is that signal performance is conditional. RSI divergence might have a 58% hit rate in low-volatility conditions and a 31% hit rate in high-VIX environments. A naive system treats these as the same signal. AutoQuant conditions each signal's weight on the market regime it is operating in. This means the same set of rules produces very different behavior depending on whether we are in a trending, volatile, or ranging environment.</p>
 
-    <ul class="rv">
-      <li><strong>Momentum signals</strong> — relative strength vs. SPY, VWAP relationship, volume confirmation</li>
-      <li><strong>Mean-reversion signals</strong> — Bollinger Band extremes, RSI divergence, gap fill setups</li>
-      <li><strong>Structure signals</strong> — key level tests, prior day high/low, weekly pivots</li>
-      <li><strong>Options flow signals</strong> — unusual call/put sweeps above $50K notional</li>
-      <li><strong>Macro regime signals</strong> — VIX level, sector rotation patterns, dollar strength</li>
-      <li><strong>Earnings catalyst signals</strong> — upcoming earnings, analyst revision clusters</li>
-    </ul>
+      <h2 class="rv" id="how-the-scanner-works">How the Scanner Works</h2>
 
-    <p class="rv">Each signal fires or does not fire for each name on the watchlist. When enough signals align in the same direction — based on their current Bayesian weights — the scanner elevates the name to the trade queue with a composite conviction score.</p>
+      <p class="rv">The scanner runs twice daily — at 9:15am ET (after pre-market settles) and at 2:30pm ET (before the close volatility window). Each run scans a watchlist of 80 names across six signal categories:</p>
 
-    <h2 class="rv">The Signal Grading Flow</h2>
+      <ul class="rv">
+        <li><strong>Momentum signals</strong> — relative strength vs. SPY, VWAP relationship, volume confirmation</li>
+        <li><strong>Mean-reversion signals</strong> — Bollinger Band extremes, RSI divergence, gap fill setups</li>
+        <li><strong>Structure signals</strong> — key level tests, prior day high/low, weekly pivots</li>
+        <li><strong>Options flow signals</strong> — unusual call/put sweeps above $50K notional</li>
+        <li><strong>Macro regime signals</strong> — VIX level, sector rotation patterns, dollar strength</li>
+        <li><strong>Earnings catalyst signals</strong> — upcoming earnings, analyst revision clusters</li>
+      </ul>
 
-    <div class="flowchart rv" id="flowchart" aria-label="Signal grading decision flow">
-      <div class="flow-node in">Signal Fires (e.g. RSI Divergence)</div>
-      <div class="flow-arrow in">↓</div>
-      <div class="flow-node in">Bayesian Prior Lookup<br><span style="font-size:10px;color:rgba(255,255,255,.4)">P(win | signal, regime)</span></div>
-      <div class="flow-arrow in">↓</div>
-      <div class="flow-node flow-node--decision in">Posterior Score ≥ Threshold?</div>
-      <div class="flow-arrow in">↓</div>
-      <div class="flow-branch">
-        <div class="flow-branch-item">
-          <div class="flow-branch-label">YES</div>
-          <div class="flow-node in" style="background:rgba(206,235,19,.1);border-color:rgba(206,235,19,.4);min-width:140px">Trade Queue</div>
-          <div class="flow-arrow in">↓</div>
-          <div class="flow-node in" style="min-width:140px">Autopsy + Update Prior</div>
-        </div>
-        <div class="flow-branch-item">
-          <div class="flow-branch-label">NO</div>
-          <div class="flow-node in" style="min-width:140px">Skip + Log</div>
-          <div class="flow-arrow in">↓</div>
-          <div class="flow-node in" style="min-width:140px">Update Prior (no-trade outcome)</div>
+      <p class="rv">Each signal fires or does not fire for each name on the watchlist. When enough signals align in the same direction — based on their current Bayesian weights — the scanner elevates the name to the trade queue with a composite conviction score.</p>
+
+      <h2 class="rv" id="the-signal-grading-flow">The Signal Grading Flow</h2>
+
+      <div class="flowchart rv" id="flowchart" aria-label="Signal grading decision flow">
+        <div class="flow-node">Signal Fires (e.g. RSI Divergence)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node">Bayesian Prior Lookup<br><span style="font-size:10px;color:#777">P(win | signal, regime)</span></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node flow-node--decision">Posterior Score ≥ Threshold?</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-branch">
+          <div class="flow-branch-item">
+            <div class="flow-branch-label">YES</div>
+            <div class="flow-node" style="min-width:140px">Trade Queue</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node" style="min-width:140px">Autopsy + Update Prior</div>
+          </div>
+          <div class="flow-branch-item">
+            <div class="flow-branch-label">NO</div>
+            <div class="flow-node" style="min-width:140px">Skip + Log</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node" style="min-width:140px">Update Prior (no-trade outcome)</div>
+          </div>
         </div>
       </div>
+
+      <h2 class="rv" id="what-6-months-of-data-taught-me">What 6 Months of Data Taught Me</h2>
+
+      <p class="rv">The most important thing the data showed me is not which signals work — it is which signals are real versus which feel real. There is a large category of signals that look compelling in a sample of 10-20 trades and statistically wash out across 100+. The Bayesian grader is ruthless about this. Signals that are noise will trend toward 50% win rates over time, and the system will de-weight them automatically.</p>
+
+      <p class="rv">The three signals with the highest posterior weights after six months are options flow (63% win rate, 800+ samples), key level tests with volume confirmation (61%, 400+ samples), and earnings momentum carried into the following week (58%, 180 samples). The three signals with the lowest weights are RSI alone without volume (49%, effectively noise), Bollinger Band touches without RSI confirmation (51%), and gap fills without options confirmation (50%).</p>
+
+      <div class="callout rv">
+        <p>The biggest insight: most of the signals I came in with strong intuitions about were noise. Most of the signals the data validated were ones I was less excited about because they were less "narratively satisfying." The grader does not care about your narrative.</p>
+      </div>
+
+      <h2 class="rv" id="auto-journaling-every-autopsy">Auto-Journaling Every Autopsy</h2>
+
+      <p class="rv">Every trade that exits — win or lose — triggers an automatic autopsy. The autopsy script pulls the trade details from Alpaca, constructs a structured log entry with entry price, exit price, hold time, signals that fired, market regime at entry, and outcome, and then prepends it to a running journal file.</p>
+
+      <p class="rv">The journal is not meant to be read manually. It is the training data for the Bayesian updater. But I do read it — weekly, as part of my Sunday review — and it is the most valuable learning document I have. Three months of autopsy data contains patterns that I could not have consciously observed across that many trades. The system surfaces what repetitive human attention would miss.</p>
+
+      <h2 class="rv" id="what-breaks">What Breaks</h2>
+
+      <p class="rv">The system has two known failure modes. First, regime changes that happen faster than the posterior can update. If the market goes from low-volatility trend to high-volatility chop in two sessions, the system is still trading the previous regime's weights for the first few days. This is unavoidable in any adaptive system — you need sample data to update, and sample data takes time to accumulate. The fix is a hard regime-change override that reduces position sizes by 50% whenever VIX moves more than 20% in two consecutive days.</p>
+
+      <p class="rv">The second failure mode is correlation clustering — when multiple signals fire simultaneously but are actually measuring the same underlying condition. Three momentum signals confirming a setup feels like 3x conviction. But if they are all downstream of the same VWAP relationship, it is actually 1x conviction with three labels. The system now de-correlates the signal vector before scoring, which reduced false high-conviction reads significantly.</p>
+
+      <p class="rv">The current win rate across all trades is 57%, up from 46% in the first month when I was running static rules. That improvement is the Bayesian grader at work. It is not dramatic. But compounded across hundreds of trades, a 57% win rate with a favorable risk-reward ratio is a profitable system. That is the goal.</p>
+
     </div>
-
-    <h2 class="rv">What 6 Months of Data Taught Me</h2>
-
-    <p class="rv">The most important thing the data showed me is not which signals work — it is which signals are real versus which feel real. There is a large category of signals that look compelling in a sample of 10-20 trades and statistically wash out across 100+. The Bayesian grader is ruthless about this. Signals that are noise will trend toward 50% win rates over time, and the system will de-weight them automatically.</p>
-
-    <p class="rv">The three signals with the highest posterior weights after six months are options flow (63% win rate, 800+ samples), key level tests with volume confirmation (61%, 400+ samples), and earnings momentum carried into the following week (58%, 180 samples). The three signals with the lowest weights are RSI alone without volume (49%, effectively noise), Bollinger Band touches without RSI confirmation (51%), and gap fills without options confirmation (50%).</p>
-
-    <div class="callout rv">
-      <p>The biggest insight: most of the signals I came in with strong intuitions about were noise. Most of the signals the data validated were ones I was less excited about because they were less "narratively satisfying." The grader does not care about your narrative.</p>
-    </div>
-
-    <h2 class="rv">Auto-Journaling Every Autopsy</h2>
-
-    <p class="rv">Every trade that exits — win or lose — triggers an automatic autopsy. The autopsy script pulls the trade details from Alpaca, constructs a structured log entry with entry price, exit price, hold time, signals that fired, market regime at entry, and outcome, and then prepends it to a running journal file.</p>
-
-    <p class="rv">The journal is not meant to be read manually. It is the training data for the Bayesian updater. But I do read it — weekly, as part of my Sunday review — and it is the most valuable learning document I have. Three months of autopsy data contains patterns that I could not have consciously observed across that many trades. The system surfaces what repetitive human attention would miss.</p>
-
-    <h2 class="rv">What Breaks</h2>
-
-    <p class="rv">The system has two known failure modes. First, regime changes that happen faster than the posterior can update. If the market goes from low-volatility trend to high-volatility chop in two sessions, the system is still trading the previous regime's weights for the first few days. This is unavoidable in any adaptive system — you need sample data to update, and sample data takes time to accumulate. The fix is a hard regime-change override that reduces position sizes by 50% whenever VIX moves more than 20% in two consecutive days.</p>
-
-    <p class="rv">The second failure mode is correlation clustering — when multiple signals fire simultaneously but are actually measuring the same underlying condition. Three momentum signals confirming a setup feels like 3x conviction. But if they are all downstream of the same VWAP relationship, it is actually 1x conviction with three labels. The system now de-correlates the signal vector before scoring, which reduced false high-conviction reads significantly.</p>
-
-    <p class="rv">The current win rate across all trades is 57%, up from 46% in the first month when I was running static rules. That improvement is the Bayesian grader at work. It is not dramatic. But compounded across hundreds of trades, a 57% win rate with a favorable risk-reward ratio is a profitable system. That is the goal.</p>
-
   </div>
 </div>
 
@@ -358,97 +456,6 @@ a { color: inherit; text-decoration: none; }
 </footer>
 
 <script>
-// Price chart animation — draws left to right with random walk
-const canvas = document.getElementById('chartCanvas');
-const ctx = canvas ? canvas.getContext('2d') : null;
-let chartDrawn = false;
-
-function generatePricePath(w, h) {
-  const points = [];
-  let y = h * 0.6;
-  const steps = Math.floor(w / 3);
-  for (let i = 0; i <= steps; i++) {
-    const x = (i / steps) * w;
-    y += (Math.random() - 0.48) * (h * 0.06);
-    y = Math.max(h * 0.1, Math.min(h * 0.85, y));
-    points.push({ x, y });
-  }
-  return points;
-}
-
-function drawChart() {
-  if (!canvas || !ctx) return;
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-  const w = canvas.width, h = canvas.height;
-  const points = generatePricePath(w, h);
-  const totalPoints = points.length;
-  let drawn = 0;
-
-  // Entry/exit markers (random subset)
-  const markers = [];
-  for (let i = 5; i < totalPoints - 5; i += Math.floor(8 + Math.random() * 12)) {
-    markers.push({ idx: i, type: Math.random() > 0.5 ? 'entry' : 'exit' });
-  }
-
-  function frame() {
-    if (drawn > totalPoints) return;
-    ctx.clearRect(0, 0, w, h);
-
-    // Draw line so far
-    ctx.beginPath();
-    ctx.strokeStyle = '#CEEB13';
-    ctx.lineWidth = 1.5;
-    ctx.shadowColor = 'rgba(206,235,19,0.4)';
-    ctx.shadowBlur = 4;
-    for (let i = 0; i <= Math.min(drawn, totalPoints - 1); i++) {
-      if (i === 0) ctx.moveTo(points[i].x, points[i].y);
-      else ctx.lineTo(points[i].x, points[i].y);
-    }
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-
-    // Draw markers for drawn points
-    markers.forEach(m => {
-      if (m.idx <= drawn) {
-        const p = points[m.idx];
-        ctx.beginPath();
-        ctx.strokeStyle = m.type === 'entry' ? 'rgba(206,235,19,0.7)' : 'rgba(255,100,100,0.7)';
-        ctx.lineWidth = 1;
-        ctx.setLineDash([3, 3]);
-        ctx.moveTo(p.x, 0);
-        ctx.lineTo(p.x, h);
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
-        ctx.fillStyle = m.type === 'entry' ? '#CEEB13' : '#ff6464';
-        ctx.fill();
-      }
-    });
-
-    drawn += 2;
-    if (drawn <= totalPoints + 2) requestAnimationFrame(frame);
-  }
-
-  requestAnimationFrame(frame);
-  chartDrawn = true;
-}
-
-// Start chart when hero is visible
-const chartObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting && !chartDrawn) {
-      setTimeout(drawChart, 400);
-      chartObs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.3 });
-const heroEl = document.querySelector('.hero-chart');
-if (heroEl) chartObs.observe(heroEl);
-window.addEventListener('resize', () => { if (chartDrawn) drawChart(); });
-
 // Counter-up
 function animateCounter(el) {
   const target = parseInt(el.dataset.target, 10);
@@ -498,6 +505,20 @@ if (flowEl) {
 // Reveal
 const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// TOC active
+const headings = document.querySelectorAll('.post-body h2[id]');
+const tocLinks = document.querySelectorAll('.toc-sidebar__list a');
+const headingObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      tocLinks.forEach(a => a.classList.remove('active'));
+      const match = document.querySelector('.toc-sidebar__list a[href="#' + entry.target.id + '"]');
+      if (match) match.classList.add('active');
+    }
+  });
+}, { rootMargin: '-10% 0px -80% 0px' });
+headings.forEach(h => headingObs.observe(h));
 </script>
 </body>
 </html>

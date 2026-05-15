@@ -59,13 +59,14 @@
   --dark-olive: #323C2A;
   --white:      #FFFFFF;
   --gray-mid:   #A3A3A3;
+  --parchment:  #f5f4f0;
   --font-mono:  'Space Mono', 'Courier New', monospace;
   --font-sans:  'Inter', Arial, sans-serif;
   --ease:       cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html { scroll-behavior: smooth; }
-body { background: var(--near-black); color: var(--white); font-family: var(--font-sans); line-height: 1.85; padding-top: 64px; }
+body { background: var(--parchment); color: #0a0a0a; font-family: var(--font-sans); line-height: 1.85; padding-top: 64px; }
 a { color: inherit; text-decoration: none; }
 * { -webkit-font-smoothing: antialiased; }
 
@@ -87,68 +88,110 @@ a { color: inherit; text-decoration: none; }
   .nav__links li:not(:last-child) { display: none; }
 }
 
-/* ── HERO ── */
-.hero-seven {
-  background: var(--black);
-  min-height: 480px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 80px 48px 64px;
-  position: relative; overflow: hidden;
+/* ── CINEMATIC HERO ── */
+.cinematic-hero {
+  position: relative; width: 100%; height: 52vh; min-height: 380px;
+  overflow: hidden; background: #000;
 }
-.hero-seven__number {
-  font-family: var(--font-mono); font-weight: 700;
-  font-size: clamp(120px, 22vw, 220px);
-  color: var(--lime); line-height: 1;
-  opacity: 0; transform: scale(0.6);
-  animation: stampIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+.cinematic-hero__img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  animation: kenBurns 20s ease-in-out infinite alternate;
+  will-change: transform;
 }
-@keyframes stampIn {
-  to { opacity: 1; transform: scale(1); }
+@keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.06); } }
+.cinematic-hero__bar-top,
+.cinematic-hero__bar-bottom {
+  position: absolute; left: 0; right: 0; height: 36px; background: #000; z-index: 2;
 }
-.hero-seven__title {
-  font-family: var(--font-mono); font-size: clamp(18px, 2.8vw, 32px);
-  font-weight: 700; color: var(--white); line-height: 1.2;
-  max-width: 680px; margin-top: 16px;
-  opacity: 0; transform: translateY(20px);
-  animation: fadeUp 0.6s var(--ease) 0.8s forwards;
+.cinematic-hero__bar-top    { top: 0; }
+.cinematic-hero__bar-bottom { bottom: 0; }
+
+/* ── ARTICLE HEADER ── */
+.article-header { background: var(--parchment); padding: 72px 48px 64px; }
+.article-header__inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
 }
-.hero-seven__meta {
+.article-header__date {
   font-family: var(--font-mono); font-size: 11px;
-  color: rgba(255,255,255,.4); letter-spacing: .08em;
-  margin-top: 20px; display: flex; gap: 16px; align-items: center;
-  opacity: 0; animation: fadeUp 0.5s var(--ease) 1.1s forwards;
+  color: #888; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 28px;
 }
-@keyframes fadeUp { to { opacity: 1; transform: none; } }
+.article-header__title {
+  font-family: var(--font-mono); font-size: clamp(28px, 3.5vw, 50px);
+  font-weight: 700; line-height: 1.15; color: #0a0a0a; margin-bottom: 28px;
+}
+.article-header__excerpt {
+  font-family: var(--font-sans); font-size: 16px;
+  line-height: 1.75; color: #555; margin-bottom: 40px;
+}
+.article-header__divider { height: 1px; background: #ddd; margin-bottom: 28px; }
+.article-header__share {
+  font-family: var(--font-mono); font-size: 10px;
+  color: #888; letter-spacing: .08em; text-transform: uppercase;
+}
+.article-header__share a {
+  color: #555; text-decoration: underline;
+  text-underline-offset: 3px; transition: color .2s;
+}
+.article-header__share a:hover { color: #0a0a0a; }
+.article-header__feature-img {
+  width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
+  transition: transform .4s ease;
+}
+.article-header__feature-img:hover { transform: scale(1.01); }
 
-/* ── STAT STRIP ── */
-.stat-strip {
-  background: var(--lime); padding: 32px 48px;
-  display: flex; justify-content: center; gap: 80px; flex-wrap: wrap;
-}
-.stat-item { text-align: center; }
-.stat-num {
-  font-family: var(--font-mono); font-size: 36px; font-weight: 700;
-  color: var(--black); line-height: 1;
-}
-.stat-label {
-  font-family: var(--font-mono); font-size: 10px; font-weight: 700;
-  color: rgba(0,0,0,.5); letter-spacing: .1em; text-transform: uppercase;
-  margin-top: 6px;
+/* ── ARTICLE DIVIDER ── */
+.article-rule {
+  max-width: 1200px; margin: 0 auto;
+  width: calc(100% - 96px); height: 1px; background: #ddd;
 }
 
-/* ── POST BODY ── */
-.post-body-wrap {
-  max-width: 760px; margin: 0 auto; padding: 64px 48px 80px;
+/* ── ARTICLE BODY ── */
+.article-body { background: var(--parchment); padding: 56px 48px 100px; }
+.article-body__inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 220px 1fr; gap: 72px; align-items: start;
 }
-.post-body { font-family: var(--font-sans); font-size: 16px; line-height: 1.85; color: rgba(255,255,255,.75); }
-.post-body p { margin-bottom: 20px; }
-.post-body strong { color: var(--white); font-weight: 600; }
-.post-body a { color: var(--lime); text-decoration: underline; text-underline-offset: 3px; }
 
-/* ── NUMBERED ITEMS ── */
-.item-section {
-  margin: 64px 0; padding: 0;
+/* TOC */
+.toc-sidebar { position: sticky; top: 88px; }
+.toc-sidebar__label {
+  font-family: var(--font-mono); font-size: 9px;
+  color: #999; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 20px;
 }
+.toc-sidebar__list { list-style: none; padding: 0; }
+.toc-sidebar__list li a {
+  font-family: var(--font-mono); font-size: 11px;
+  color: #555; line-height: 2.2; display: block; transition: color .2s;
+}
+.toc-sidebar__list li a:hover,
+.toc-sidebar__list li a.active { color: #0a0a0a; }
+
+/* Post body */
+.post-body {
+  font-family: var(--font-sans); font-size: 16px; line-height: 1.9; color: #333;
+}
+.post-body h2 {
+  font-family: var(--font-mono); font-size: 20px; font-weight: 700;
+  color: #0a0a0a; margin: 2.5rem 0 1rem; letter-spacing: -.01em;
+}
+.post-body h3 {
+  font-family: var(--font-mono); font-size: 15px; font-weight: 700;
+  color: #0a0a0a; margin: 2rem 0 .75rem;
+}
+.post-body p { margin-bottom: 1.4rem; }
+.post-body strong { color: #0a0a0a; }
+.post-body a { color: #0a0a0a; text-decoration: underline; text-underline-offset: 3px; }
+.post-body a:hover { opacity: .7; }
+.post-body ul, .post-body ol { padding-left: 1.5rem; margin-bottom: 1.4rem; }
+.post-body li { margin-bottom: .5rem; }
+.post-body code {
+  font-family: var(--font-mono); font-size: 13px;
+  background: #e8e7e2; padding: 2px 6px; color: #333;
+}
+
+/* Numbered items */
+.item-section { margin: 64px 0; padding: 0; }
 .item-number {
   font-family: var(--font-mono); font-size: 100px; font-weight: 700;
   color: var(--lime); line-height: 1;
@@ -159,31 +202,43 @@ a { color: inherit; text-decoration: none; }
 .item-number.in { opacity: 1; transform: scale(1); }
 .item-heading {
   font-family: var(--font-mono); font-size: 20px; font-weight: 700;
-  color: var(--white); margin-top: 12px; margin-bottom: 16px;
-  line-height: 1.3;
+  color: #0a0a0a; margin-top: 12px; margin-bottom: 16px; line-height: 1.3;
 }
 .item-body {
-  font-family: var(--font-sans); font-size: 16px; line-height: 1.85;
-  color: rgba(255,255,255,.7);
+  font-family: var(--font-sans); font-size: 16px; line-height: 1.85; color: #444;
   opacity: 0; transform: translateY(16px);
   transition: opacity .6s var(--ease) .1s, transform .6s var(--ease) .1s;
 }
 .item-body.in { opacity: 1; transform: none; }
-.item-divider {
-  height: 1px; background: rgba(255,255,255,.07); margin: 64px 0;
+.item-divider { height: 1px; background: #ddd; margin: 64px 0; }
+
+/* Callout */
+.callout {
+  background: rgba(206,235,19,.15);
+  border-left: 3px solid var(--lime);
+  padding: 16px 20px; margin: 1.5rem 0;
+}
+.callout p { margin: 0; color: #333; font-size: 15px; }
+
+/* Stat strip — keeps for body reference display */
+.stat-strip {
+  background: #0a0a0a; padding: 32px 48px;
+  display: flex; justify-content: center; gap: 80px; flex-wrap: wrap;
+  margin-bottom: 0;
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-family: var(--font-mono); font-size: 36px; font-weight: 700;
+  color: var(--lime); line-height: 1;
+}
+.stat-label {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+  color: rgba(255,255,255,.4); letter-spacing: .1em; text-transform: uppercase; margin-top: 6px;
 }
 
 /* ── REVEAL ── */
 .rv { opacity:0; transform:translateY(24px); transition: opacity .7s cubic-bezier(0.16,1,0.3,1), transform .7s cubic-bezier(0.16,1,0.3,1); }
 .rv.in { opacity:1; transform:none; }
-
-/* ── CALLOUT ── */
-.callout {
-  background: rgba(206,235,19,.07);
-  border-left: 3px solid var(--lime);
-  padding: 16px 20px; margin: 24px 0; border-radius: 0 4px 4px 0;
-}
-.callout p { margin: 0; color: rgba(255,255,255,.8); font-size: 15px; }
 
 /* ── FOOTER ── */
 .post-footer { background: var(--near-black); padding: 40px 48px; border-top: 1px solid rgba(255,255,255,.05); }
@@ -194,10 +249,19 @@ a { color: inherit; text-decoration: none; }
 .post-footer .footer__social a { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.25); transition: color .2s; text-decoration: none; }
 .post-footer .footer__social a:hover { color: var(--lime); }
 
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .article-header__inner { grid-template-columns: 1fr; gap: 48px; }
+  .article-body__inner { grid-template-columns: 1fr; }
+  .toc-sidebar { display: none; }
+}
 @media (max-width: 600px) {
-  .hero-seven { padding: 48px 20px 48px; }
+  .post-nav { padding: 0 20px; }
+  .nav__links li:not(:last-child) { display: none; }
+  .article-header, .article-body { padding: 40px 20px; }
+  .cinematic-hero { height: 40vh; }
+  .article-rule { width: calc(100% - 40px); }
   .stat-strip { padding: 24px 20px; gap: 40px; }
-  .post-body-wrap { padding: 40px 20px 60px; }
   .item-number { font-size: 72px; }
   .post-footer { padding: 32px 20px; }
 }
@@ -215,18 +279,43 @@ a { color: inherit; text-decoration: none; }
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero-seven" aria-labelledby="hero-title">
-  <div class="hero-seven__number" aria-hidden="true">7</div>
-  <h1 class="hero-seven__title" id="hero-title">Things Every Club Winner Knows That Average Reps Don't</h1>
-  <div class="hero-seven__meta">
-    <span>Sales Intelligence</span>
-    <span>·</span>
-    <span>May 3, 2026</span>
-    <span>·</span>
-    <span>7 min read</span>
-  </div>
+<!-- CINEMATIC HERO -->
+<section class="cinematic-hero" aria-hidden="true">
+  <img class="cinematic-hero__img"
+       src="https://picsum.photos/seed/conference-stage/1800/760"
+       alt=""
+       width="1800" height="760"
+       loading="eager" fetchpriority="high" />
+  <div class="cinematic-hero__bar-top"></div>
+  <div class="cinematic-hero__bar-bottom"></div>
 </section>
+
+<!-- ARTICLE HEADER -->
+<div class="article-header">
+  <div class="article-header__inner">
+    <div>
+      <p class="article-header__date">May 3, 2026 &nbsp;·&nbsp; Sales Intelligence &nbsp;·&nbsp; 7 min read</p>
+      <h1 class="article-header__title">7 Things Every Club Winner Knows That Average Reps Don't</h1>
+      <p class="article-header__excerpt">After 7 President's Club wins, here are the patterns I see in every top performer. None of them are tactics.</p>
+      <div class="article-header__divider"></div>
+      <p class="article-header__share">SHARE —
+        <a href="https://twitter.com/intent/tweet?url=https://sachinai.com/posts/club-winner.html&text=7+Things+Every+Club+Winner+Knows" target="_blank" rel="noopener noreferrer">Twitter</a>
+        &nbsp;/&nbsp;
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://sachinai.com/posts/club-winner.html" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </p>
+    </div>
+    <div>
+      <img class="article-header__feature-img"
+           src="https://picsum.photos/seed/sales-handshake/800/450"
+           alt="Sales handshake"
+           width="800" height="450"
+           loading="eager" />
+    </div>
+  </div>
+</div>
+
+<!-- RULE -->
+<div class="article-rule"></div>
 
 <!-- STAT STRIP -->
 <div class="stat-strip" aria-label="Track record stats">
@@ -244,85 +333,101 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 
-<!-- BODY -->
-<div class="post-body-wrap">
-  <div class="post-body">
+<!-- ARTICLE BODY -->
+<div class="article-body">
+  <div class="article-body__inner">
 
-    <p class="rv">I have been in enterprise software sales for over a decade. I have won President's Club seven times at different companies, across different products, different territories, and very different market conditions. And in that time I have watched hundreds of reps — talented, smart, driven people — fall short year after year.</p>
+    <!-- TOC -->
+    <aside class="toc-sidebar" aria-label="Table of contents">
+      <p class="toc-sidebar__label">Table of Contents</p>
+      <ul class="toc-sidebar__list">
+        <li><a href="#qualify-harder">1. Qualify Harder</a></li>
+        <li><a href="#sell-the-next-meeting">2. Sell the Next Meeting</a></li>
+        <li><a href="#know-your-numbers">3. Know Your Numbers</a></li>
+        <li><a href="#use-silence">4. Use Silence</a></li>
+        <li><a href="#know-when-to-walk">5. Know When to Walk</a></li>
+        <li><a href="#build-champions">6. Build Champions</a></li>
+        <li><a href="#debrief-every-deal">7. Debrief Every Deal</a></li>
+      </ul>
+    </aside>
 
-    <p class="rv">The gap between a consistent Club winner and a consistent average rep is rarely about tactics. It is not the call script, the objection handling framework, or the discovery question bank. Those things matter, but they are table stakes. What separates the top 10% is a set of deeply ingrained mental habits that most reps never consciously develop.</p>
+    <!-- BODY CONTENT -->
+    <div class="post-body">
 
-    <p class="rv">Here are the seven I come back to, over and over, when I think about what actually separates winners from the rest.</p>
+      <p class="rv">I have been in enterprise software sales for over a decade. I have won President's Club seven times at different companies, across different products, different territories, and very different market conditions. And in that time I have watched hundreds of reps — talented, smart, driven people — fall short year after year.</p>
 
-  </div>
+      <p class="rv">The gap between a consistent Club winner and a consistent average rep is rarely about tactics. It is not the call script, the objection handling framework, or the discovery question bank. Those things matter, but they are table stakes. What separates the top 10% is a set of deeply ingrained mental habits that most reps never consciously develop.</p>
 
-  <!-- ITEM 1 -->
-  <div class="item-section">
-    <div class="item-number" data-item="1">1</div>
-    <h2 class="item-heading">They qualify harder than they prospect.</h2>
-    <p class="item-body">Average reps treat qualification as a checkbox — something you do in the first call to confirm the prospect has budget and authority. Club winners treat qualification as a continuous process that runs throughout the entire deal. They are always asking themselves: does this still meet our bar? They would rather kill a deal at week two than drag it through a six-month cycle only to lose at legal. The result is a cleaner, faster pipeline with higher close rates. Their pipeline is smaller than their peers' and closes at twice the rate.</p>
-  </div>
+      <p class="rv">Here are the seven I come back to, over and over, when I think about what actually separates winners from the rest.</p>
 
-  <div class="item-divider"></div>
+      <!-- ITEM 1 -->
+      <div class="item-section">
+        <div class="item-number" data-item="1" id="qualify-harder">1</div>
+        <h2 class="item-heading">They qualify harder than they prospect.</h2>
+        <p class="item-body">Average reps treat qualification as a checkbox — something you do in the first call to confirm the prospect has budget and authority. Club winners treat qualification as a continuous process that runs throughout the entire deal. They are always asking themselves: does this still meet our bar? They would rather kill a deal at week two than drag it through a six-month cycle only to lose at legal. The result is a cleaner, faster pipeline with higher close rates. Their pipeline is smaller than their peers' and closes at twice the rate.</p>
+      </div>
 
-  <!-- ITEM 2 -->
-  <div class="item-section">
-    <div class="item-number" data-item="2">2</div>
-    <h2 class="item-heading">They sell the next meeting, not the product.</h2>
-    <p class="item-body">Every interaction has one job: create enough value that the other person wants to continue. Club winners are obsessed with the micro-close — not the final signature, but the next calendar event. They end every call with a clear next step that both parties have agreed to and care about. When the prospect is uncertain, they do not push harder on the product. They ask a better question. The deal momentum they build through consistent micro-closes is what carries them to the finish line while their peers stall out waiting for prospects to "get back to them."</p>
-  </div>
+      <div class="item-divider"></div>
 
-  <div class="item-divider"></div>
+      <!-- ITEM 2 -->
+      <div class="item-section">
+        <div class="item-number" data-item="2" id="sell-the-next-meeting">2</div>
+        <h2 class="item-heading">They sell the next meeting, not the product.</h2>
+        <p class="item-body">Every interaction has one job: create enough value that the other person wants to continue. Club winners are obsessed with the micro-close — not the final signature, but the next calendar event. They end every call with a clear next step that both parties have agreed to and care about. When the prospect is uncertain, they do not push harder on the product. They ask a better question. The deal momentum they build through consistent micro-closes is what carries them to the finish line while their peers stall out waiting for prospects to "get back to them."</p>
+      </div>
 
-  <!-- ITEM 3 -->
-  <div class="item-section">
-    <div class="item-number" data-item="3">3</div>
-    <h2 class="item-heading">They know their numbers cold.</h2>
-    <p class="item-body">Ask a Club winner their close rate by deal size, their average sales cycle by segment, their win rate against specific competitors, and they will tell you without hesitation. They use this data to make better decisions every day — which deals to prioritise, which to sandbag, when to push for a commit versus when to slow down. Average reps treat metrics as something their manager reviews on Mondays. Club winners treat them as the instrument panel they use to fly.</p>
-  </div>
+      <div class="item-divider"></div>
 
-  <div class="item-divider"></div>
+      <!-- ITEM 3 -->
+      <div class="item-section">
+        <div class="item-number" data-item="3" id="know-your-numbers">3</div>
+        <h2 class="item-heading">They know their numbers cold.</h2>
+        <p class="item-body">Ask a Club winner their close rate by deal size, their average sales cycle by segment, their win rate against specific competitors, and they will tell you without hesitation. They use this data to make better decisions every day — which deals to prioritise, which to sandbag, when to push for a commit versus when to slow down. Average reps treat metrics as something their manager reviews on Mondays. Club winners treat them as the instrument panel they use to fly.</p>
+      </div>
 
-  <!-- ITEM 4 -->
-  <div class="item-section">
-    <div class="item-number" data-item="4">4</div>
-    <h2 class="item-heading">They use silence as a tool.</h2>
-    <p class="item-body">This one is uncomfortable enough that most reps never develop it. After asking a tough question — on budget, on timeline, on the real decision maker — Club winners wait. They do not fill the silence with reassurance or pivot to something easier. They let the question sit. That pause is where the truth lives. The prospect who says "well, we do have budget, but..." after a ten-second silence has just given you the real answer. The rep who breaks that silence gets a performance, not information.</p>
-  </div>
+      <div class="item-divider"></div>
 
-  <div class="item-divider"></div>
+      <!-- ITEM 4 -->
+      <div class="item-section">
+        <div class="item-number" data-item="4" id="use-silence">4</div>
+        <h2 class="item-heading">They use silence as a tool.</h2>
+        <p class="item-body">This one is uncomfortable enough that most reps never develop it. After asking a tough question — on budget, on timeline, on the real decision maker — Club winners wait. They do not fill the silence with reassurance or pivot to something easier. They let the question sit. That pause is where the truth lives. The prospect who says "well, we do have budget, but..." after a ten-second silence has just given you the real answer. The rep who breaks that silence gets a performance, not information.</p>
+      </div>
 
-  <!-- ITEM 5 -->
-  <div class="item-section">
-    <div class="item-number" data-item="5">5</div>
-    <h2 class="item-heading">They know when to walk.</h2>
-    <p class="item-body">The willingness to disqualify a deal — even a big one — is one of the most counterintuitive and powerful skills in enterprise sales. Club winners understand that time spent on the wrong deal is time not spent on the right one. They have a clear internal model of what a good deal looks like, and when a prospect does not fit, they say so clearly and move on. This is not arrogance. It is respect — for the prospect's time and for their own. And it has a strange effect: prospects who hear "I am not sure we are the right fit for you" often come back harder than ever.</p>
-  </div>
+      <div class="item-divider"></div>
 
-  <div class="item-divider"></div>
+      <!-- ITEM 5 -->
+      <div class="item-section">
+        <div class="item-number" data-item="5" id="know-when-to-walk">5</div>
+        <h2 class="item-heading">They know when to walk.</h2>
+        <p class="item-body">The willingness to disqualify a deal — even a big one — is one of the most counterintuitive and powerful skills in enterprise sales. Club winners understand that time spent on the wrong deal is time not spent on the right one. They have a clear internal model of what a good deal looks like, and when a prospect does not fit, they say so clearly and move on. This is not arrogance. It is respect — for the prospect's time and for their own. And it has a strange effect: prospects who hear "I am not sure we are the right fit for you" often come back harder than ever.</p>
+      </div>
 
-  <!-- ITEM 6 -->
-  <div class="item-section">
-    <div class="item-number" data-item="6">6</div>
-    <h2 class="item-heading">They build internal champions before proposals.</h2>
-    <p class="item-body">Most reps work hard to build one strong relationship in an account. Club winners build three or four, deliberately, across different functions. By the time they submit a proposal, there is already an internal coalition that wants them to win. The evaluation is not adversarial — it is collaborative, because the champion has already sold it internally. When an average rep loses a deal "to politics," they lost it because they did not do this work early enough. Club winners do not lose to politics because they are part of the political fabric of the account.</p>
-  </div>
+      <div class="item-divider"></div>
 
-  <div class="item-divider"></div>
+      <!-- ITEM 6 -->
+      <div class="item-section">
+        <div class="item-number" data-item="6" id="build-champions">6</div>
+        <h2 class="item-heading">They build internal champions before proposals.</h2>
+        <p class="item-body">Most reps work hard to build one strong relationship in an account. Club winners build three or four, deliberately, across different functions. By the time they submit a proposal, there is already an internal coalition that wants them to win. The evaluation is not adversarial — it is collaborative, because the champion has already sold it internally. When an average rep loses a deal "to politics," they lost it because they did not do this work early enough. Club winners do not lose to politics because they are part of the political fabric of the account.</p>
+      </div>
 
-  <!-- ITEM 7 -->
-  <div class="item-section">
-    <div class="item-number" data-item="7">7</div>
-    <h2 class="item-heading">They debrief every deal — lost ones harder.</h2>
-    <p class="item-body">After every deal closes — win or lose — Club winners do a structured autopsy. What signals did they see that they ignored? Where did the deal stall and why? What would they do differently on day one? They write it down. They look for patterns. A lost deal is not a sunk cost — it is tuition, and they intend to get full value out of it. After seven years of running this discipline, I can usually tell within the first two weeks of a new deal whether it has the characteristics of my historical wins or losses. That pattern recognition only exists because I did the debriefs.</p>
-  </div>
+      <div class="item-divider"></div>
 
-  <div class="post-body">
-    <div class="callout rv">
-      <p>None of these are tactics you can learn in a one-hour enablement session. They are habits that compound over years. The best time to start was your first week in sales. The second best time is today.</p>
+      <!-- ITEM 7 -->
+      <div class="item-section">
+        <div class="item-number" data-item="7" id="debrief-every-deal">7</div>
+        <h2 class="item-heading">They debrief every deal — lost ones harder.</h2>
+        <p class="item-body">After every deal closes — win or lose — Club winners do a structured autopsy. What signals did they see that they ignored? Where did the deal stall and why? What would they do differently on day one? They write it down. They look for patterns. A lost deal is not a sunk cost — it is tuition, and they intend to get full value out of it. After seven years of running this discipline, I can usually tell within the first two weeks of a new deal whether it has the characteristics of my historical wins or losses. That pattern recognition only exists because I did the debriefs.</p>
+      </div>
+
+      <div class="callout rv">
+        <p>None of these are tactics you can learn in a one-hour enablement session. They are habits that compound over years. The best time to start was your first week in sales. The second best time is today.</p>
+      </div>
+
+      <p class="rv">If I had to pick one to start with, it would be number seven. Not because it is the most powerful — number one probably is — but because it creates the feedback loop that develops everything else. When you debrief honestly, you find all the other habits you are missing. The debrief is where the other six get installed.</p>
+
     </div>
-
-    <p class="rv">If I had to pick one to start with, it would be number seven. Not because it is the most powerful — number one probably is — but because it creates the feedback loop that develops everything else. When you debrief honestly, you find all the other habits you are missing. The debrief is where the other six get installed.</p>
   </div>
 </div>
 
@@ -358,7 +463,6 @@ function animateCounter(el) {
   requestAnimationFrame(tick);
 }
 
-// Stat strip trigger
 const statObs = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -386,6 +490,20 @@ document.querySelectorAll('.item-number').forEach(el => itemObs.observe(el));
 // Reveal
 const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// TOC active
+const headings = document.querySelectorAll('.post-body h2[id], .item-number[id]');
+const tocLinks = document.querySelectorAll('.toc-sidebar__list a');
+const headingObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      tocLinks.forEach(a => a.classList.remove('active'));
+      const match = document.querySelector('.toc-sidebar__list a[href="#' + entry.target.id + '"]');
+      if (match) match.classList.add('active');
+    }
+  });
+}, { rootMargin: '-10% 0px -80% 0px' });
+headings.forEach(h => headingObs.observe(h));
 </script>
 </body>
 </html>

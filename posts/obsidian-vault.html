@@ -59,13 +59,14 @@
   --dark-olive: #323C2A;
   --white:      #FFFFFF;
   --gray-mid:   #A3A3A3;
+  --parchment:  #f5f4f0;
   --font-mono:  'Space Mono', 'Courier New', monospace;
   --font-sans:  'Inter', Arial, sans-serif;
   --ease:       cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html { scroll-behavior: smooth; }
-body { background: var(--near-black); color: var(--white); font-family: var(--font-sans); line-height: 1.85; padding-top: 64px; }
+body { background: var(--parchment); color: #0a0a0a; font-family: var(--font-sans); line-height: 1.85; padding-top: 64px; }
 a { color: inherit; text-decoration: none; }
 * { -webkit-font-smoothing: antialiased; }
 
@@ -87,102 +88,129 @@ a { color: inherit; text-decoration: none; }
   .nav__links li:not(:last-child) { display: none; }
 }
 
-/* ── GRAPH HERO ── */
-.hero-graph {
-  background: var(--black);
-  position: relative; overflow: hidden;
-  padding: 80px 48px 64px;
+/* ── CINEMATIC HERO ── */
+.cinematic-hero {
+  position: relative; width: 100%; height: 52vh; min-height: 380px;
+  overflow: hidden; background: #000;
 }
-.graph-canvas-wrap {
-  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none;
+.cinematic-hero__img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  animation: kenBurns 20s ease-in-out infinite alternate; will-change: transform;
 }
-#graphCanvas { width: 100%; height: 100%; }
-.hero-graph__content {
-  position: relative; z-index: 2;
-  max-width: 700px;
+@keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.06); } }
+.cinematic-hero__bar-top,
+.cinematic-hero__bar-bottom {
+  position: absolute; left: 0; right: 0; height: 36px; background: #000; z-index: 2;
 }
-.hero__meta {
+.cinematic-hero__bar-top    { top: 0; }
+.cinematic-hero__bar-bottom { bottom: 0; }
+
+/* ── ARTICLE HEADER ── */
+.article-header { background: var(--parchment); padding: 72px 48px 64px; }
+.article-header__inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+}
+.article-header__date {
   font-family: var(--font-mono); font-size: 11px;
-  color: var(--lime); letter-spacing: .1em; text-transform: uppercase;
-  margin-bottom: 20px; display: flex; gap: 16px; flex-wrap: wrap;
+  color: #888; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 28px;
 }
-.hero__meta span { color: rgba(255,255,255,.4); }
-.hero__title {
-  font-family: var(--font-mono); font-size: clamp(22px, 3.5vw, 42px);
-  font-weight: 700; line-height: 1.15; color: var(--white);
-  margin-bottom: 20px;
+.article-header__title {
+  font-family: var(--font-mono); font-size: clamp(28px, 3.5vw, 50px);
+  font-weight: 700; line-height: 1.15; color: #0a0a0a; margin-bottom: 28px;
 }
-.hero__excerpt {
-  font-family: var(--font-sans); font-size: 16px; color: rgba(255,255,255,.55);
-  max-width: 580px; line-height: 1.7; margin-bottom: 32px;
+.article-header__excerpt {
+  font-family: var(--font-sans); font-size: 16px;
+  line-height: 1.75; color: #555; margin-bottom: 40px;
 }
+.article-header__divider { height: 1px; background: #ddd; margin-bottom: 28px; }
+.article-header__share {
+  font-family: var(--font-mono); font-size: 10px;
+  color: #888; letter-spacing: .08em; text-transform: uppercase;
+}
+.article-header__share a {
+  color: #555; text-decoration: underline;
+  text-underline-offset: 3px; transition: color .2s;
+}
+.article-header__share a:hover { color: #0a0a0a; }
+.article-header__feature-img {
+  width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
+  transition: transform .4s ease;
+}
+.article-header__feature-img:hover { transform: scale(1.01); }
+
+/* ── ARTICLE DIVIDER ── */
+.article-rule {
+  max-width: 1200px; margin: 0 auto;
+  width: calc(100% - 96px); height: 1px; background: #ddd;
+}
+
+/* ── ARTICLE BODY ── */
+.article-body { background: var(--parchment); padding: 56px 48px 100px; }
+.article-body__inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 220px 1fr; gap: 72px; align-items: start;
+}
+
+/* TOC */
+.toc-sidebar { position: sticky; top: 88px; }
+.toc-sidebar__label {
+  font-family: var(--font-mono); font-size: 9px;
+  color: #999; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 20px;
+}
+.toc-sidebar__list { list-style: none; padding: 0; }
+.toc-sidebar__list li a {
+  font-family: var(--font-mono); font-size: 11px;
+  color: #555; line-height: 2.2; display: block; transition: color .2s;
+}
+.toc-sidebar__list li a:hover,
+.toc-sidebar__list li a.active { color: #0a0a0a; }
+
+/* Post body */
+.post-body {
+  font-family: var(--font-sans); font-size: 16px; line-height: 1.9; color: #333;
+}
+.post-body h2 {
+  font-family: var(--font-mono); font-size: 20px; font-weight: 700;
+  color: #0a0a0a; margin: 2.5rem 0 1rem; letter-spacing: -.01em;
+}
+.post-body h3 {
+  font-family: var(--font-mono); font-size: 15px; font-weight: 700;
+  color: #0a0a0a; margin: 2rem 0 .75rem;
+}
+.post-body p { margin-bottom: 1.4rem; }
+.post-body strong { color: #0a0a0a; }
+.post-body a { color: #0a0a0a; text-decoration: underline; text-underline-offset: 3px; }
+.post-body a:hover { opacity: .7; }
+.post-body ul, .post-body ol { padding-left: 1.5rem; margin-bottom: 1.4rem; }
+.post-body li { margin-bottom: .5rem; }
+.post-body em { color: #555; }
+
+/* Callout */
+.callout {
+  background: rgba(206,235,19,.15);
+  border-left: 3px solid var(--lime);
+  padding: 16px 20px; margin: 1.5rem 0;
+}
+.callout p { margin: 0; color: #333; font-size: 15px; }
+
+/* Node count badge */
 .node-count {
   display: inline-flex; align-items: center; gap: 12px;
-  background: rgba(206,235,19,.1); border: 1px solid rgba(206,235,19,.25);
-  padding: 10px 18px; border-radius: 4px;
+  background: #0a0a0a; border: 1px solid #333;
+  padding: 10px 18px; margin-bottom: 40px;
 }
 .node-count__num {
-  font-family: var(--font-mono); font-size: 22px; font-weight: 700;
-  color: var(--lime);
+  font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--lime);
 }
 .node-count__label {
   font-family: var(--font-mono); font-size: 10px;
   color: rgba(255,255,255,.5); letter-spacing: .08em; text-transform: uppercase;
 }
 
-/* ── TWO COLUMN LAYOUT ── */
-.two-col-section {
-  display: grid; grid-template-columns: 280px 1fr;
-  gap: 0; border-top: 1px solid #2a2a2a;
-}
-.folder-tree-col {
-  background: #0f0f0f;
-  border-right: 1px solid #2a2a2a;
-  padding: 48px 32px; position: sticky; top: 64px;
-  height: calc(100vh - 64px); overflow-y: auto;
-}
-.folder-tree-col h3 {
-  font-family: var(--font-mono); font-size: 10px;
-  color: var(--lime); letter-spacing: .12em; text-transform: uppercase;
-  margin-bottom: 20px;
-}
-.folder-tree {
-  font-family: var(--font-mono); font-size: 11px;
-  color: rgba(255,255,255,.5); line-height: 2;
-}
-.folder-tree .folder { color: rgba(255,255,255,.8); }
-.folder-tree .active { color: var(--lime); }
-.folder-tree .count {
-  color: rgba(206,235,19,.4); font-size: 9px; margin-left: 4px;
-}
-.article-col {
-  padding: 64px 56px 80px;
-}
-
-/* ── POST BODY ── */
-.post-body { font-family: var(--font-sans); font-size: 16px; line-height: 1.85; color: rgba(255,255,255,.75); }
-.post-body h2 {
-  font-family: var(--font-mono); font-size: 18px; font-weight: 700;
-  color: var(--white); margin: 48px 0 16px; letter-spacing: -.02em;
-}
-.post-body h2::before { content: '// '; color: var(--lime); }
-.post-body p { margin-bottom: 20px; }
-.post-body ul { padding-left: 24px; margin-bottom: 20px; }
-.post-body li { margin-bottom: 8px; }
-.post-body strong { color: var(--white); font-weight: 600; }
-
 /* ── REVEAL ── */
 .rv { opacity:0; transform:translateY(24px); transition: opacity .7s cubic-bezier(0.16,1,0.3,1), transform .7s cubic-bezier(0.16,1,0.3,1); }
 .rv.in { opacity:1; transform:none; }
-
-/* Callout */
-.callout {
-  background: rgba(206,235,19,.07);
-  border-left: 3px solid var(--lime);
-  padding: 16px 20px; margin: 24px 0; border-radius: 0 4px 4px 0;
-}
-.callout p { margin: 0; color: rgba(255,255,255,.8); font-size: 15px; }
 
 /* ── FOOTER ── */
 .post-footer { background: var(--near-black); padding: 40px 48px; border-top: 1px solid rgba(255,255,255,.05); }
@@ -193,11 +221,18 @@ a { color: inherit; text-decoration: none; }
 .post-footer .footer__social a { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.25); transition: color .2s; text-decoration: none; }
 .post-footer .footer__social a:hover { color: var(--lime); }
 
-@media (max-width: 768px) {
-  .two-col-section { grid-template-columns: 1fr; }
-  .folder-tree-col { position: static; height: auto; padding: 32px 20px; border-right: none; border-bottom: 1px solid #2a2a2a; }
-  .article-col { padding: 40px 20px 60px; }
-  .hero-graph { padding: 48px 20px 48px; }
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .article-header__inner { grid-template-columns: 1fr; gap: 48px; }
+  .article-body__inner { grid-template-columns: 1fr; }
+  .toc-sidebar { display: none; }
+}
+@media (max-width: 600px) {
+  .post-nav { padding: 0 20px; }
+  .nav__links li:not(:last-child) { display: none; }
+  .article-header, .article-body { padding: 40px 20px; }
+  .cinematic-hero { height: 40vh; }
+  .article-rule { width: calc(100% - 40px); }
   .post-footer { padding: 32px 20px; }
 }
 </style>
@@ -214,68 +249,73 @@ a { color: inherit; text-decoration: none; }
   </ul>
 </nav>
 
-<!-- HERO with graph animation -->
-<section class="hero-graph" aria-labelledby="hero-title">
-  <div class="graph-canvas-wrap" aria-hidden="true">
-    <canvas id="graphCanvas"></canvas>
-  </div>
-  <div class="hero-graph__content">
-    <div class="hero__meta">
-      <span>Knowledge Systems</span>
-      <span>·</span>
-      <span>Apr 19, 2026</span>
-      <span>·</span>
-      <span>9 min read</span>
-    </div>
-    <h1 class="hero__title" id="hero-title">Why My Obsidian Vault Is the Most Valuable Thing I Own</h1>
-    <p class="hero__excerpt">500+ notes. 3 years of weekly compile runs. How turning raw captures into structured intelligence actually compounds.</p>
-    <div class="node-count">
-      <span class="node-count__num" id="nodeCountDisplay">0</span>
-      <span class="node-count__label">Notes in vault</span>
-    </div>
-  </div>
+<!-- CINEMATIC HERO -->
+<section class="cinematic-hero" aria-hidden="true">
+  <img class="cinematic-hero__img"
+       src="https://picsum.photos/seed/library-books/1800/760"
+       alt=""
+       width="1800" height="760"
+       loading="eager" fetchpriority="high" />
+  <div class="cinematic-hero__bar-top"></div>
+  <div class="cinematic-hero__bar-bottom"></div>
 </section>
 
-<!-- TWO COLUMN -->
-<div class="two-col-section">
-  <aside class="folder-tree-col" aria-label="Vault folder structure">
-    <h3>Vault Structure</h3>
-    <div class="folder-tree">
-      <div><span class="folder">00-Daily/</span> <span class="count">847</span></div>
-      <div>&nbsp;&nbsp;├ 2026-05-14.md</div>
-      <div>&nbsp;&nbsp;├ 2026-05-13.md</div>
-      <div>&nbsp;&nbsp;└ ...</div>
-      <div><span class="folder">01-Projects/</span> <span class="count">62</span></div>
-      <div>&nbsp;&nbsp;├ _index.md</div>
-      <div>&nbsp;&nbsp;├ AutoQuant.md</div>
-      <div>&nbsp;&nbsp;└ ...</div>
-      <div><span class="folder active">02-Concepts/</span> <span class="count">128</span></div>
-      <div>&nbsp;&nbsp;├ <span class="active">Ideas Bank.md</span></div>
-      <div>&nbsp;&nbsp;├ Agent-Personas.md</div>
-      <div>&nbsp;&nbsp;└ ...</div>
-      <div><span class="folder">03-Reviews/</span> <span class="count">94</span></div>
-      <div>&nbsp;&nbsp;├ weekly/</div>
-      <div>&nbsp;&nbsp;└ monthly/</div>
-      <div><span class="folder">04-Resources/</span> <span class="count">211</span></div>
-      <div>&nbsp;&nbsp;├ interviews/</div>
-      <div>&nbsp;&nbsp;├ articles/</div>
-      <div>&nbsp;&nbsp;└ books/</div>
-      <div><span class="folder">05-Pitches/</span> <span class="count">38</span></div>
-      <div>&nbsp;&nbsp;└ active/</div>
-      <div><span class="folder">06-Templates/</span> <span class="count">22</span></div>
-      <div><span class="folder">07-Compiled/</span> <span class="count">47</span></div>
-      <div>&nbsp;&nbsp;└ <span class="active">wiki-exports/</span></div>
+<!-- ARTICLE HEADER -->
+<div class="article-header">
+  <div class="article-header__inner">
+    <div>
+      <p class="article-header__date">Apr 19, 2026 &nbsp;·&nbsp; Knowledge Systems &nbsp;·&nbsp; 9 min read</p>
+      <h1 class="article-header__title">Why My Obsidian Vault Is the Most Valuable Thing I Own</h1>
+      <p class="article-header__excerpt">500+ notes. 3 years of weekly compile runs. How turning raw captures into structured intelligence actually compounds.</p>
+      <div class="article-header__divider"></div>
+      <p class="article-header__share">SHARE —
+        <a href="https://twitter.com/intent/tweet?url=https://sachinai.com/posts/obsidian-vault.html&text=Why+My+Obsidian+Vault+Is+the+Most+Valuable+Thing+I+Own" target="_blank" rel="noopener noreferrer">Twitter</a>
+        &nbsp;/&nbsp;
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://sachinai.com/posts/obsidian-vault.html" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </p>
     </div>
-  </aside>
+    <div>
+      <img class="article-header__feature-img"
+           src="https://picsum.photos/seed/notes-notebook/800/450"
+           alt="Notes and notebook"
+           width="800" height="450"
+           loading="eager" />
+    </div>
+  </div>
+</div>
 
-  <div class="article-col">
+<!-- RULE -->
+<div class="article-rule"></div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+  <div class="article-body__inner">
+
+    <!-- TOC -->
+    <aside class="toc-sidebar" aria-label="Table of contents">
+      <p class="toc-sidebar__label">Table of Contents</p>
+      <ul class="toc-sidebar__list">
+        <li><a href="#the-three-layer-stack">The Three-Layer Stack</a></li>
+        <li><a href="#what-the-compile-wiki-pipeline-does">The Compile-Wiki Pipeline</a></li>
+        <li><a href="#why-the-vault-compounds">Why the Vault Compounds</a></li>
+        <li><a href="#three-times-the-vault-paid-off">Three Times It Paid Off</a></li>
+        <li><a href="#the-weekly-rhythm">The Weekly Rhythm</a></li>
+      </ul>
+    </aside>
+
+    <!-- BODY CONTENT -->
     <div class="post-body">
+
+      <div class="node-count rv">
+        <span class="node-count__num" id="nodeCountDisplay">0</span>
+        <span class="node-count__label">Notes in vault</span>
+      </div>
 
       <p class="rv">If my apartment burned down and I had to choose one thing to grab — laptop, passport, hard drives — I would grab the laptop. Not for the laptop itself but for the Obsidian vault it syncs to iCloud. That vault represents three years of structured thinking, and I cannot replace it from scratch.</p>
 
       <p class="rv">This is not a post about Obsidian the app. It is a post about what happens when you run a consistent knowledge system over a long enough time horizon that it starts to behave like compound interest.</p>
 
-      <h2 class="rv">The Three-Layer Stack</h2>
+      <h2 class="rv" id="the-three-layer-stack">The Three-Layer Stack</h2>
 
       <p class="rv">Most people who try Obsidian fail because they treat it like a filing system — a smarter Google Drive. A filing system is for retrieval. A knowledge system is for synthesis. The difference is everything.</p>
 
@@ -287,7 +327,7 @@ a { color: inherit; text-decoration: none; }
         <li><strong>Schema layer (07-Compiled)</strong> — once a month, a Claude-powered pipeline reads the wiki layer, finds clusters of related notes, and produces compiled intelligence documents. These are the things I actually use in conversation and decision-making.</li>
       </ul>
 
-      <h2 class="rv">What the Compile-Wiki Pipeline Does</h2>
+      <h2 class="rv" id="what-the-compile-wiki-pipeline-does">What the Compile-Wiki Pipeline Does</h2>
 
       <p class="rv">The weekly compile is the engine of the whole system. Every Monday morning, a script runs that does three things: it reads the last seven days of daily notes, identifies threads and themes that appear multiple times, and produces a structured synthesis note with links back to the sources.</p>
 
@@ -297,7 +337,7 @@ a { color: inherit; text-decoration: none; }
         <p>The compile step is what turns a diary into intelligence. Without it, you have a very organised archive. With it, you have a system that actively generates new insights by connecting old ones.</p>
       </div>
 
-      <h2 class="rv">Why the Vault Compounds</h2>
+      <h2 class="rv" id="why-the-vault-compounds">Why the Vault Compounds</h2>
 
       <p class="rv">A vault from three months ago is useful. A vault from three years ago is irreplaceable. The reason is network effects within your own thinking.</p>
 
@@ -305,7 +345,7 @@ a { color: inherit; text-decoration: none; }
 
       <p class="rv">I have measured this concretely. Three years ago, a typical concept note had 2-3 links to other notes. Today, a typical concept note has 8-12 links. The density of the network has increased by 4x, which means every new node is 4x more connected to existing knowledge.</p>
 
-      <h2 class="rv">Three Times the Vault Paid Off</h2>
+      <h2 class="rv" id="three-times-the-vault-paid-off">Three Times the Vault Paid Off</h2>
 
       <p class="rv"><strong>The thesis connection.</strong> In February 2026, I was developing a view on AI-first sales automation. During a compile run, the system surfaced a connection between a note I had written about LangGraph in September 2025 and a sales workflow note from January 2025 — nine months apart. The connection was the automation gap in enterprise SDR workflows. That connection became the thesis behind my outreach automation project.</p>
 
@@ -313,7 +353,7 @@ a { color: inherit; text-decoration: none; }
 
       <p class="rv"><strong>The cross-note pattern.</strong> Running the compile pipeline over a set of 12 notes about market volatility and trading psychology, Claude identified that I had been circling the same insight — "your worst trades happen when your decision speed is faster than your analysis speed" — from 12 different angles without ever stating it directly. The compile step made the pattern explicit. That became one of the core rules in my trading system.</p>
 
-      <h2 class="rv">The Weekly Rhythm</h2>
+      <h2 class="rv" id="the-weekly-rhythm">The Weekly Rhythm</h2>
 
       <p class="rv">The system only works if you run it consistently. My routine: Monday morning compile run (automated), weekend vault lint (manual review of orphaned notes, broken links, stale concept notes that need updating). The Monday compile takes 20 minutes of my attention. The weekend lint takes about an hour. Three hours a week to maintain a system that actively improves my thinking every day.</p>
 
@@ -337,77 +377,6 @@ a { color: inherit; text-decoration: none; }
 </footer>
 
 <script>
-// Graph animation
-const canvas = document.getElementById('graphCanvas');
-const ctx = canvas ? canvas.getContext('2d') : null;
-let nodes = [], animFrame;
-
-function resize() {
-  if (!canvas) return;
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-}
-
-function initNodes(count) {
-  nodes = [];
-  for (let i = 0; i < count; i++) {
-    nodes.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      r: Math.random() < 0.15 ? 5 : Math.random() < 0.35 ? 3 : 2,
-      opacity: 0.3 + Math.random() * 0.5
-    });
-  }
-}
-
-function drawGraph() {
-  if (!ctx || !canvas) return;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Draw edges
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i + 1; j < nodes.length; j++) {
-      const dx = nodes[i].x - nodes[j].x;
-      const dy = nodes[i].y - nodes[j].y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      if (dist < 120) {
-        const alpha = (1 - dist / 120) * 0.15;
-        ctx.strokeStyle = `rgba(206,235,19,${alpha})`;
-        ctx.lineWidth = 0.8;
-        ctx.beginPath();
-        ctx.moveTo(nodes[i].x, nodes[i].y);
-        ctx.lineTo(nodes[j].x, nodes[j].y);
-        ctx.stroke();
-      }
-    }
-  }
-
-  // Draw nodes
-  nodes.forEach(n => {
-    ctx.beginPath();
-    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(206,235,19,${n.opacity})`;
-    ctx.fill();
-
-    // Update
-    n.x += n.vx;
-    n.y += n.vy;
-    if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
-    if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
-  });
-
-  animFrame = requestAnimationFrame(drawGraph);
-}
-
-if (canvas) {
-  resize();
-  window.addEventListener('resize', () => { resize(); initNodes(55); });
-  initNodes(55);
-  drawGraph();
-}
-
 // Node count animation
 const countEl = document.getElementById('nodeCountDisplay');
 if (countEl) {
@@ -430,6 +399,20 @@ if (countEl) {
 // Reveal
 const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// TOC active
+const headings = document.querySelectorAll('.post-body h2[id]');
+const tocLinks = document.querySelectorAll('.toc-sidebar__list a');
+const headingObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      tocLinks.forEach(a => a.classList.remove('active'));
+      const match = document.querySelector('.toc-sidebar__list a[href="#' + entry.target.id + '"]');
+      if (match) match.classList.add('active');
+    }
+  });
+}, { rootMargin: '-10% 0px -80% 0px' });
+headings.forEach(h => headingObs.observe(h));
 </script>
 </body>
 </html>
