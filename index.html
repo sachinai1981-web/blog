@@ -79,7 +79,7 @@
       background: transparent; border-bottom: 1px solid transparent;
       transition: background .3s, border-color .3s;
     }
-    .nav.scrolled { background: var(--near-black); border-color: #2a2a2a; }
+    .nav.scrolled { background: rgba(24,23,23,0.97); border-color: #2a2a2a; }
     .nav__brand {
       font-family: var(--font-mono); font-size: 13px;
       color: var(--white); letter-spacing: .08em; text-transform: uppercase;
@@ -98,32 +98,55 @@
     }
     .nav__cta:hover { background: var(--lime); color: var(--black) !important; }
 
-    /* ── HERO ──────────────────────────────────────── */
+    /* ── HERO — SPLIT-PANEL CINEMATIC ──────────────── */
     .hero {
-      position: relative; min-height: 100vh;
-      background: var(--black); display: flex; align-items: center; overflow: hidden;
+      position: relative; height: 100vh; min-height: 600px;
+      overflow: hidden; display: flex; align-items: flex-end;
     }
-    #heroCanvas {
-      position: absolute; top: 0; right: 0;
-      width: 58%; height: 100%; opacity: .9;
+    .hero__bg {
+      position: absolute; inset: 0;
+      background-image: url('https://picsum.photos/seed/aerial-city/1800/900');
+      background-size: cover; background-position: center;
+      transform-origin: center;
+      animation: kenBurns 18s ease-in-out infinite alternate;
+    }
+    @keyframes kenBurns {
+      0%   { transform: scale(1.0) translate(0, 0); }
+      100% { transform: scale(1.08) translate(-1%, 1%); }
+    }
+    /* dark overlay for legibility */
+    .hero__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.72) 0%,
+        rgba(0,0,0,0.48) 50%,
+        rgba(0,0,0,0.2) 100%
+      );
+    }
+    /* vertical bisect line */
+    .hero__bisect {
+      position: absolute; top: 0; bottom: 0; left: 50%;
+      width: 1px; background: rgba(255,255,255,0.18);
+      z-index: 2;
     }
     .hero__content {
-      position: relative; z-index: 2;
-      padding: 130px 48px 80px; max-width: 660px;
+      position: relative; z-index: 3;
+      padding: 0 48px 80px; max-width: 720px;
     }
     .hero__eyebrow {
       font-family: var(--font-mono); font-size: 10px;
-      color: var(--lime); letter-spacing: .18em; text-transform: uppercase;
-      margin-bottom: 36px;
+      color: var(--lime); letter-spacing: .2em; text-transform: uppercase;
+      margin-bottom: 32px; opacity: 0.85;
     }
     .hero__h1 {
-      font-family: var(--font-mono); font-size: clamp(38px, 5vw, 70px);
+      font-family: var(--font-mono); font-size: clamp(38px, 5vw, 72px);
       font-weight: 400; line-height: 1.05; color: var(--white);
     }
     .hero__typed-row {
-      display: flex; align-items: baseline; gap: 0;
-      font-family: var(--font-mono); font-size: clamp(38px, 5vw, 70px);
-      font-weight: 400; line-height: 1.05; margin-top: 0;
+      display: flex; align-items: baseline;
+      font-family: var(--font-mono); font-size: clamp(38px, 5vw, 72px);
+      font-weight: 400; line-height: 1.05;
     }
     #typedText { color: var(--lime); }
     .hero__cursor {
@@ -132,34 +155,18 @@
       animation: blink 1s step-end infinite;
     }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-    .hero__sub {
-      font-family: var(--font-mono); font-size: 12px; line-height: 1.85;
-      color: rgba(255,255,255,.6); margin-top: 44px; max-width: 400px;
-    }
-    .hero__actions { display: flex; gap: 16px; margin-top: 52px; flex-wrap: wrap; }
-    .btn {
-      font-family: var(--font-mono); font-size: 11px; letter-spacing: .05em;
-      padding: 14px 28px; border: none; cursor: pointer; display: inline-block;
-      transition: background .2s, color .2s; text-decoration: none;
-    }
-    .btn--lime  { background: var(--lime); color: var(--black); }
-    .btn--lime:hover { background: var(--lime-dark); }
-    .btn--ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,.25); }
-    .btn--ghost:hover { border-color: var(--lime); color: var(--lime); }
     .hero__scroll-hint {
-      position: absolute; bottom: 40px; left: 48px;
+      position: absolute; bottom: 40px; left: 48px; z-index: 3;
       font-family: var(--font-mono); font-size: 10px;
-      color: rgba(255,255,255,.25); letter-spacing: .15em; text-transform: uppercase;
+      color: rgba(255,255,255,.35); letter-spacing: .15em; text-transform: uppercase;
       display: flex; align-items: center; gap: 12px;
     }
     .hero__scroll-hint::before {
-      content:''; display:block; width:32px; height:1px; background:rgba(255,255,255,.2);
+      content:''; display:block; width:32px; height:1px; background:rgba(255,255,255,.25);
     }
 
     /* ── FEATURED ──────────────────────────────────── */
-    .featured {
-      background: var(--lime); padding: 88px 48px;
-    }
+    .featured { background: var(--lime); padding: 88px 48px; }
     .featured__inner { max-width: 1200px; margin: 0 auto; }
     .section-label {
       font-family: var(--font-mono); font-size: 10px;
@@ -220,27 +227,125 @@
     .card__arrow { color: var(--lime); font-size: 15px; transition: transform .2s; }
     .card:hover .card__arrow { transform: translateX(5px); }
 
-    /* ── STATS ─────────────────────────────────────── */
-    .stats { background: var(--lime); }
-    .stats-grid {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(4,1fr);
-      border-left: 1px solid rgba(0,0,0,.1);
+    /* ── FOOTPRINT STAT CARDS (Pattern 2) ──────────── */
+    .footprint {
+      background: var(--black);
+      padding: 100px 48px;
     }
-    .stat {
-      padding: 64px 40px;
-      border-right: 1px solid rgba(0,0,0,.1);
-      border-bottom: 1px solid rgba(0,0,0,.1);
-    }
-    .stat__num {
-      font-family: var(--font-mono); font-size: clamp(36px,3.5vw,56px);
-      font-weight: 400; line-height: 1; color: var(--black);
-    }
-    .stat__label {
+    .footprint__inner { max-width: 1200px; margin: 0 auto; }
+    .footprint__label {
       font-family: var(--font-mono); font-size: 10px;
-      color: var(--dark-olive); margin-top: 14px;
-      letter-spacing: .1em; text-transform: uppercase;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--lime); margin-bottom: 20px;
     }
+    .footprint__heading {
+      font-family: var(--font-mono); font-size: clamp(28px, 3vw, 44px);
+      font-weight: 400; color: var(--white); margin-bottom: 56px; line-height: 1.1;
+    }
+    .footprint__cards {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .fp-card {
+      position: relative; height: 360px; overflow: hidden;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .fp-card:last-child { border-right: none; }
+    .fp-card__bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform 0.6s var(--ease);
+    }
+    .fp-card:hover .fp-card__bg { transform: scale(1.04); }
+    .fp-card__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 100%);
+    }
+    .fp-card--solid { background: var(--dark-olive); }
+    .fp-card--solid .fp-card__overlay { display: none; }
+    .fp-card__body {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      padding: 28px 32px;
+    }
+    .fp-card__tag {
+      font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--lime); margin-bottom: auto;
+    }
+    .fp-card__num {
+      font-family: var(--font-mono);
+      font-size: clamp(72px, 8vw, 112px);
+      font-weight: 700;
+      line-height: 0.9;
+      margin-top: auto;
+      margin-bottom: 12px;
+    }
+    .fp-card--dark .fp-card__num  { color: var(--lime); }
+    .fp-card--light .fp-card__num { color: #000; }
+    .fp-card--olive .fp-card__num { color: var(--lime); }
+    .fp-card__sub {
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+    .fp-card--light .fp-card__sub { color: rgba(0,0,0,0.55); }
+
+    /* ── CINEMATIC FULL-BLEED (Pattern 3) ──────────── */
+    .cinematic {
+      position: relative; height: 60vh; overflow: hidden;
+    }
+    .cinematic__img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      will-change: transform;
+    }
+    .cinematic__bar {
+      position: absolute; left: 0; right: 0; height: 40px;
+      background: var(--black); z-index: 2;
+    }
+    .cinematic__bar--top { top: 0; }
+    .cinematic__bar--bot { bottom: 0; }
+
+    /* ── RADIAL CTA CANVAS (Pattern 4) ─────────────── */
+    .cta-radial {
+      position: relative; overflow: hidden;
+      background: var(--lime);
+      padding: 120px 48px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #ctaCanvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    .cta-radial__content {
+      position: relative; z-index: 2;
+      text-align: center; max-width: 700px;
+    }
+    .cta-radial__label {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: rgba(0,0,0,0.45); margin-bottom: 20px;
+    }
+    .cta-radial__heading {
+      font-family: var(--font-mono);
+      font-size: clamp(28px, 4vw, 54px);
+      font-weight: 700; line-height: 1.1;
+      color: var(--black); margin-bottom: 48px;
+    }
+    .btn {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: .05em;
+      padding: 14px 28px; border: none; cursor: pointer; display: inline-block;
+      transition: background .2s, color .2s; text-decoration: none;
+    }
+    .btn--black  { background: var(--black); color: var(--white); }
+    .btn--black:hover { background: var(--near-black); }
+    .btn--lime   { background: var(--lime); color: var(--black); }
+    .btn--lime:hover { background: var(--lime-dark); }
+    .btn--ghost  { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,.25); }
+    .btn--ghost:hover { border-color: var(--lime); color: var(--lime); }
 
     /* ── ABOUT ─────────────────────────────────────── */
     .about { background: var(--near-black); padding: 120px 48px; }
@@ -281,42 +386,14 @@
     }
     .cat-item:hover { background: rgba(206,235,19,.04); }
     .cat-item__icon { font-size: 22px; margin-bottom: 20px; }
-    .cat-item__name {
-      font-family: var(--font-mono); font-size: 14px; color: var(--white); margin-bottom: 10px;
-    }
-    .cat-item__count {
-      font-family: var(--font-mono); font-size: 10px; color: var(--lime); letter-spacing: .1em;
-    }
-
-    /* ── NEWSLETTER ────────────────────────────────── */
-    .newsletter { background: var(--lime); padding: 112px 48px; }
-    .newsletter__inner { max-width: 640px; margin: 0 auto; text-align: center; }
-    .newsletter .section-label { color: var(--dark-olive); margin-bottom: 20px; }
-    .newsletter__heading {
-      font-family: var(--font-mono); font-size: clamp(28px,3.5vw,50px);
-      font-weight: 400; line-height: 1.1; color: var(--black); margin-bottom: 52px;
-    }
-    .newsletter__form { display: flex; max-width: 460px; margin: 0 auto; }
-    .newsletter__input {
-      flex:1; font-family: var(--font-mono); font-size: 12px;
-      padding: 16px 20px; background: var(--black); color: var(--white);
-      border: none; outline: none;
-    }
-    .newsletter__input::placeholder { color: rgba(255,255,255,.35); }
-    .newsletter__submit {
-      font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em;
-      padding: 16px 24px; background: var(--near-black); color: var(--lime);
-      border: none; cursor: pointer; white-space: nowrap; transition: background .2s;
-    }
-    .newsletter__submit:hover { background: #000; }
+    .cat-item__name { font-family: var(--font-mono); font-size: 14px; color: var(--white); margin-bottom: 10px; }
+    .cat-item__count { font-family: var(--font-mono); font-size: 10px; color: var(--lime); letter-spacing: .1em; }
 
     /* ── FOOTER ────────────────────────────────────── */
     .footer { background: var(--near-black); padding: 72px 48px 40px; border-top: 1px solid rgba(255,255,255,.05); }
     .footer__inner { max-width: 1200px; margin: 0 auto; }
     .footer__top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 64px; }
-    .footer__brand {
-      font-family: var(--font-mono); font-size: 16px; color: var(--white);
-    }
+    .footer__brand { font-family: var(--font-mono); font-size: 16px; color: var(--white); }
     .footer__brand span { color: var(--lime); }
     .footer__cols { display: flex; gap: 56px; }
     .footer__col-title {
@@ -345,20 +422,25 @@
     /* ── RESPONSIVE ────────────────────────────────── */
     @media(max-width:960px) {
       .posts-grid { grid-template-columns: 1fr 1fr; }
-      .stats-grid  { grid-template-columns: 1fr 1fr; }
+      .footprint__cards { grid-template-columns: 1fr; }
+      .fp-card { height: 300px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .fp-card:last-child { border-bottom: none; }
       .cats-grid   { grid-template-columns: 1fr 1fr; }
       .about__inner { grid-template-columns: 1fr; gap: 48px; }
-      #heroCanvas { width:100%; opacity:.18; }
     }
     @media(max-width:600px) {
       .nav { padding: 0 20px; }
       .nav__links { display:none; }
-      .hero__content { padding: 110px 20px 60px; }
+      .hero__content { padding: 0 20px 80px; }
+      .hero__bisect { display: none; }
       .posts-grid { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footprint { padding: 72px 20px; }
+      .footprint__cards { grid-template-columns: 1fr; }
+      .cinematic { height: 40vh; }
       .cats-grid  { grid-template-columns: 1fr 1fr; }
       .footer__top { flex-direction: column; gap: 40px; }
       .footer__cols { flex-wrap: wrap; gap: 32px; }
+      .featured, .posts, .about { padding-left: 20px; padding-right: 20px; }
     }
   </style>
 </head>
@@ -366,36 +448,33 @@
 
 <!-- NAV -->
 <nav class="nav" id="mainNav">
-  <a class="nav__brand" href="#">Sachin Rai</a>
+  <a class="nav__brand" href="/">Sachin Rai</a>
   <ul class="nav__links">
     <li><a href="#posts">Writing</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#categories">Topics</a></li>
     <li><a href="resume.html">Resume</a></li>
-    <li><a href="#newsletter" class="nav__cta">Subscribe</a></li>
+    <li><a href="#cta-section" class="nav__cta">Subscribe</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero" id="hero">
-  <canvas id="heroCanvas"></canvas>
+<!-- HERO — Split-panel cinematic (Pattern 1) -->
+<section class="hero" id="hero" aria-labelledby="hero-heading">
+  <div class="hero__bg" role="img" aria-label="Aerial city view"></div>
+  <div class="hero__overlay"></div>
+  <div class="hero__bisect" aria-hidden="true"></div>
   <div class="hero__content">
     <p class="hero__eyebrow">AI · Sales · Markets · Building in Public</p>
-    <h1 class="hero__h1">Notes on building<br>things that</h1>
-    <div class="hero__typed-row">
-      <span id="typedText"></span><span class="hero__cursor"></span>
-    </div>
-    <p class="hero__sub">I'm Sachin Rai — enterprise sales at Freshworks, building AI trading systems, outreach pipelines, and a second brain. This is where I think out loud.</p>
-    <div class="hero__actions">
-      <a href="#posts" class="btn btn--lime">Read the blog</a>
-      <a href="#about" class="btn btn--ghost">About me</a>
+    <h1 class="hero__h1" id="hero-heading">Notes on building<br>things that</h1>
+    <div class="hero__typed-row" aria-live="polite">
+      <span id="typedText"></span><span class="hero__cursor" aria-hidden="true"></span>
     </div>
   </div>
-  <div class="hero__scroll-hint">Scroll</div>
+  <div class="hero__scroll-hint" aria-hidden="true">Scroll</div>
 </section>
 
 <!-- FEATURED -->
-<section class="featured">
+<section class="featured" aria-label="Latest post">
   <div class="featured__inner">
     <p class="section-label rv">Latest Post</p>
     <h2 class="featured__heading rv">How I built a trading system that thinks — and what it taught me about making decisions under real uncertainty.</h2>
@@ -404,17 +483,17 @@
       <span>·</span>
       <span>AI + Markets</span>
       <span>·</span>
-      <a href="#">Read full post →</a>
+      <a href="posts/">Read full post →</a>
     </div>
   </div>
 </section>
 
 <!-- POSTS -->
-<section class="posts" id="posts">
+<section class="posts" id="posts" aria-labelledby="posts-heading">
   <div class="posts__inner">
     <div class="section-header rv">
-      <span class="section-label">Recent Writing</span>
-      <a href="#" class="section-header__link">All posts →</a>
+      <span class="section-label" id="posts-heading">Recent Writing</span>
+      <a href="archive.html" class="section-header__link">All posts →</a>
     </div>
     <div class="posts-grid">
 
@@ -424,7 +503,7 @@
         <p class="card__excerpt">Connecting Alpaca, Claude, and launchd to build a fully autonomous pre-market briefing agent that wakes up before I do.</p>
         <div class="card__footer">
           <span class="card__date">May 10, 2026</span>
-          <span class="card__arrow">→</span>
+          <span class="card__arrow" aria-hidden="true">→</span>
         </div>
       </article>
 
@@ -434,7 +513,7 @@
         <p class="card__excerpt">After 7 President's Club wins, here are the patterns I see in every top performer. None of them are tactics.</p>
         <div class="card__footer">
           <span class="card__date">May 3, 2026</span>
-          <span class="card__arrow">→</span>
+          <span class="card__arrow" aria-hidden="true">→</span>
         </div>
       </article>
 
@@ -444,7 +523,7 @@
         <p class="card__excerpt">What happened when I stopped planning features and started just building them. The feedback loop is completely different now.</p>
         <div class="card__footer">
           <span class="card__date">Apr 28, 2026</span>
-          <span class="card__arrow">→</span>
+          <span class="card__arrow" aria-hidden="true">→</span>
         </div>
       </article>
 
@@ -454,7 +533,7 @@
         <p class="card__excerpt">500+ notes. 3 years of weekly compile runs. How turning raw captures into structured intelligence actually compounds.</p>
         <div class="card__footer">
           <span class="card__date">Apr 19, 2026</span>
-          <span class="card__arrow">→</span>
+          <span class="card__arrow" aria-hidden="true">→</span>
         </div>
       </article>
 
@@ -464,7 +543,7 @@
         <p class="card__excerpt">Using LangGraph, Apollo, and Claude to research prospects, score fit, and draft personalised emails — automatically.</p>
         <div class="card__footer">
           <span class="card__date">Apr 12, 2026</span>
-          <span class="card__arrow">→</span>
+          <span class="card__arrow" aria-hidden="true">→</span>
         </div>
       </article>
 
@@ -474,7 +553,7 @@
         <p class="card__excerpt">Building a scanner that grades its own trades, re-weights conviction over time, and auto-journals every autopsy.</p>
         <div class="card__footer">
           <span class="card__date">Apr 5, 2026</span>
-          <span class="card__arrow">→</span>
+          <span class="card__arrow" aria-hidden="true">→</span>
         </div>
       </article>
 
@@ -482,20 +561,67 @@
   </div>
 </section>
 
-<!-- STATS -->
-<section class="stats">
-  <div class="stats-grid">
-    <div class="stat rv"><div class="stat__num">7×</div><div class="stat__label">President's Club wins</div></div>
-    <div class="stat rv"><div class="stat__num">200%</div><div class="stat__label">Of quota — #1 rep globally</div></div>
-    <div class="stat rv"><div class="stat__num">6</div><div class="stat__label">AI agents running daily</div></div>
-    <div class="stat rv"><div class="stat__num">500+</div><div class="stat__label">Obsidian notes compiled</div></div>
+<!-- FOOTPRINT STAT CARDS (Pattern 2) -->
+<section class="footprint" aria-labelledby="footprint-heading">
+  <div class="footprint__inner">
+    <p class="footprint__label rv">Track Record</p>
+    <h2 class="footprint__heading rv" id="footprint-heading">My track record</h2>
+    <div class="footprint__cards">
+
+      <!-- Card 1: dark photo + lime number -->
+      <div class="fp-card fp-card--dark rv">
+        <div class="fp-card__bg" style="background-image:url('https://picsum.photos/seed/dark-gravel/600/600');"></div>
+        <div class="fp-card__overlay"></div>
+        <div class="fp-card__body">
+          <span class="fp-card__tag">Wins</span>
+          <div class="fp-card__num" data-target="7" data-suffix="×">0×</div>
+          <span class="fp-card__sub">President's Club</span>
+        </div>
+      </div>
+
+      <!-- Card 2: photo + black number -->
+      <div class="fp-card fp-card--light rv">
+        <div class="fp-card__bg" style="background-image:url('https://picsum.photos/seed/power-lines/600/600');"></div>
+        <div class="fp-card__overlay" style="background:linear-gradient(160deg,rgba(255,255,255,0.45) 0%,rgba(255,255,255,0.15) 100%);"></div>
+        <div class="fp-card__body">
+          <span class="fp-card__tag" style="color:#323C2A;">Quota</span>
+          <div class="fp-card__num" data-target="200" data-suffix="%">0%</div>
+          <span class="fp-card__sub">Year 2 Freshworks</span>
+        </div>
+      </div>
+
+      <!-- Card 3: solid dark-olive + lime number -->
+      <div class="fp-card fp-card--olive fp-card--solid rv">
+        <div class="fp-card__body">
+          <span class="fp-card__tag">Experience</span>
+          <div class="fp-card__num" data-target="20" data-suffix="+">0+</div>
+          <span class="fp-card__sub">Years Enterprise SaaS</span>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
+<!-- CINEMATIC FULL-BLEED (Pattern 3) -->
+<div class="cinematic" aria-hidden="true">
+  <div class="cinematic__bar cinematic__bar--top"></div>
+  <img
+    class="cinematic__img"
+    id="cinematicImg"
+    src="https://picsum.photos/seed/city-aerial/1800/760"
+    alt="City aerial view"
+    loading="lazy"
+    width="1800"
+    height="760"
+  />
+  <div class="cinematic__bar cinematic__bar--bot"></div>
+</div>
+
 <!-- ABOUT -->
-<section class="about" id="about">
+<section class="about" id="about" aria-labelledby="about-heading">
   <div class="about__inner">
-    <h2 class="about__heading rv">
+    <h2 class="about__heading rv" id="about-heading">
       I build things at the<br>intersection of <em>AI,</em><br><em>sales,</em> and <em>markets.</em>
     </h2>
     <div>
@@ -517,45 +643,51 @@
 </section>
 
 <!-- CATEGORIES -->
-<section class="cats" id="categories">
+<section class="cats" id="categories" aria-labelledby="cats-heading">
   <div class="cats-grid">
     <div class="cat-item rv">
-      <div class="cat-item__icon">⚡</div>
+      <div class="cat-item__icon" aria-hidden="true">⚡</div>
       <div class="cat-item__name">AI + Automation</div>
       <div class="cat-item__count">12 Posts</div>
     </div>
     <div class="cat-item rv">
-      <div class="cat-item__icon">📈</div>
+      <div class="cat-item__icon" aria-hidden="true">📈</div>
       <div class="cat-item__name">Sales Intelligence</div>
       <div class="cat-item__count">8 Posts</div>
     </div>
     <div class="cat-item rv">
-      <div class="cat-item__icon">📊</div>
+      <div class="cat-item__icon" aria-hidden="true">📊</div>
       <div class="cat-item__name">Markets + Trading</div>
       <div class="cat-item__count">9 Posts</div>
     </div>
     <div class="cat-item rv">
-      <div class="cat-item__icon">🧠</div>
+      <div class="cat-item__icon" aria-hidden="true">🧠</div>
       <div class="cat-item__name">Knowledge Systems</div>
       <div class="cat-item__count">6 Posts</div>
     </div>
   </div>
 </section>
 
-<!-- NEWSLETTER -->
-<section class="newsletter" id="newsletter">
-  <div class="newsletter__inner">
-    <p class="section-label rv">Weekly dispatch</p>
-    <h2 class="newsletter__heading rv">Get the signal.<br>Not the noise.</h2>
-    <form class="newsletter__form rv" onsubmit="return false;">
-      <input class="newsletter__input" type="email" placeholder="your@email.com" />
-      <button class="newsletter__submit">Subscribe →</button>
+<!-- RADIAL CTA CANVAS (Pattern 4) -->
+<section class="cta-radial" id="cta-section" aria-labelledby="cta-heading">
+  <canvas id="ctaCanvas" aria-hidden="true"></canvas>
+  <div class="cta-radial__content rv">
+    <p class="cta-radial__label">Weekly dispatch</p>
+    <h2 class="cta-radial__heading" id="cta-heading">Are you ready to read<br>something real?</h2>
+    <form onsubmit="return false;" style="display:flex;gap:0;max-width:400px;margin:0 auto 0;">
+      <input
+        type="email"
+        placeholder="your@email.com"
+        aria-label="Email address"
+        style="flex:1;font-family:var(--font-mono);font-size:12px;padding:16px 20px;background:#000;color:#fff;border:none;outline:none;"
+      />
+      <button class="btn btn--black" type="submit">Subscribe →</button>
     </form>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="footer">
+<footer class="footer" aria-label="Site footer">
   <div class="footer__inner">
     <div class="footer__top">
       <div class="footer__brand">SACHIN <span>RAI</span></div>
@@ -563,26 +695,26 @@
         <div>
           <p class="footer__col-title">Writing</p>
           <ul class="footer__col-links">
-            <li><a href="#">AI + Automation</a></li>
-            <li><a href="#">Sales Intelligence</a></li>
-            <li><a href="#">Markets + Trading</a></li>
-            <li><a href="#">Knowledge Systems</a></li>
+            <li><a href="archive.html">AI + Automation</a></li>
+            <li><a href="archive.html">Sales Intelligence</a></li>
+            <li><a href="archive.html">Markets + Trading</a></li>
+            <li><a href="archive.html">Knowledge Systems</a></li>
           </ul>
         </div>
         <div>
           <p class="footer__col-title">Projects</p>
           <ul class="footer__col-links">
-            <li><a href="#">AutoQuant</a></li>
-            <li><a href="#">SwingTrader</a></li>
-            <li><a href="#">Outreach AI</a></li>
-            <li><a href="#">Portfolio Monitor</a></li>
+            <li><a href="posts/">AutoQuant</a></li>
+            <li><a href="posts/">SwingTrader</a></li>
+            <li><a href="posts/">Outreach AI</a></li>
+            <li><a href="posts/">Portfolio Monitor</a></li>
           </ul>
         </div>
         <div>
           <p class="footer__col-title">Connect</p>
           <ul class="footer__col-links">
-            <li><a href="https://www.linkedin.com/in/sachinr1" target="_blank" rel="noopener">LinkedIn</a></li>
-            <li><a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/sachinr1" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener noreferrer">GitHub</a></li>
             <li><a href="mailto:sachinai1981@gmail.com">Email</a></li>
             <li><a href="resume.html">Resume</a></li>
           </ul>
@@ -592,9 +724,9 @@
     <div class="footer__bottom">
       <p class="footer__copy">© 2026 Sachin Rai. Built with Claude Code.</p>
       <div class="footer__social">
-        <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">Twitter</a>
-        <a href="https://www.linkedin.com/in/sachinr1" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://x.com/sachinrai01" target="_blank" rel="noopener noreferrer">Twitter</a>
+        <a href="https://www.linkedin.com/in/sachinr1" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </div>
   </div>
@@ -603,7 +735,9 @@
 <script>
 /* ── NAV SCROLL ─────────────────────────────── */
 const nav = document.getElementById('mainNav');
-addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40));
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
 
 /* ── TYPEWRITER ─────────────────────────────── */
 const words = ['actually work.', 'compound over time.', 'earn their keep.', 'change the game.'];
@@ -617,70 +751,121 @@ const el = document.getElementById('typedText');
   setTimeout(type, del ? 50 : 85);
 })();
 
-/* ── PARAMETRIC CANVAS ANIMATION ────────────── */
-const canvas = document.getElementById('heroCanvas');
-const ctx    = canvas.getContext('2d');
-let W, H, cx, cy, t = 0;
-
-function resize() {
-  W = canvas.offsetWidth; H = canvas.offsetHeight;
-  canvas.width = W * devicePixelRatio; canvas.height = H * devicePixelRatio;
-  ctx.scale(devicePixelRatio, devicePixelRatio);
-  cx = W / 2; cy = H / 2;
-}
-resize(); addEventListener('resize', resize);
-
-const N = 16;
-const DOTS = [{ tp: 0.14 }, { tp: 0.61 }];
-
-function curve(phase, alpha) {
-  const R = Math.min(W, H) * 0.31;
-  const A = R * 0.24;
-  ctx.beginPath();
-  for (let i = 0; i <= 420; i++) {
-    const θ = (i / 420) * Math.PI * 2;
-    const r = R + A * Math.sin(3 * θ + t * 0.28 + phase);
-    const x = cx + r * Math.cos(θ + t * 0.065 + phase * 0.14);
-    const y = cy + r * Math.sin(θ + t * 0.065 + phase * 0.14) * 0.96;
-    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+/* ── COUNTER-UP ON STAT NUMBERS (Pattern 2) ─── */
+function animateCounter(el) {
+  const target  = parseInt(el.dataset.target, 10);
+  const suffix  = el.dataset.suffix || '';
+  const duration = 1800;
+  const start    = performance.now();
+  function tick(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // ease-out quad
+    const eased = 1 - (1 - progress) * (1 - progress);
+    const current = Math.round(eased * target);
+    el.textContent = current + suffix;
+    if (progress < 1) requestAnimationFrame(tick);
   }
-  ctx.closePath();
-  ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
-  ctx.lineWidth = 0.55;
-  ctx.stroke();
+  requestAnimationFrame(tick);
 }
 
-function dotPos(tp, phase) {
-  const R = Math.min(W, H) * 0.31;
-  const A = R * 0.24;
-  const θ = tp * Math.PI * 2;
-  const r = R + A * Math.sin(3 * θ + t * 0.28 + phase);
-  return {
-    x: cx + r * Math.cos(θ + t * 0.065 + phase * 0.14),
-    y: cy + r * Math.sin(θ + t * 0.065 + phase * 0.14) * 0.96
-  };
-}
-
-(function frame() {
-  ctx.clearRect(0, 0, W, H);
-
-  for (let i = 0; i < N; i++) {
-    const phase = (i / N) * Math.PI * 0.55 - Math.PI * 0.27;
-    const alpha = 0.04 + (i / N) * 0.065;
-    curve(phase, alpha);
-  }
-
-  const outerPhase = ((N - 1) / N) * Math.PI * 0.55 - Math.PI * 0.27;
-  DOTS.forEach(d => {
-    const p = dotPos(d.tp, outerPhase);
-    ctx.beginPath(); ctx.arc(p.x, p.y, 7, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(206,235,19,0.18)'; ctx.fill();
-    ctx.beginPath(); ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
-    ctx.fillStyle = '#CEEB13'; ctx.fill();
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObs.unobserve(entry.target);
+    }
   });
+}, { threshold: 0.3 });
 
-  t += 0.011;
-  requestAnimationFrame(frame);
+document.querySelectorAll('.fp-card__num[data-target]').forEach(el => {
+  counterObs.observe(el);
+});
+
+/* ── PARALLAX ON CINEMATIC IMAGE (Pattern 3) ── */
+const cinematicImg = document.getElementById('cinematicImg');
+let cinematicTicking = false;
+window.addEventListener('scroll', () => {
+  if (!cinematicTicking) {
+    requestAnimationFrame(() => {
+      if (cinematicImg) {
+        const rect = cinematicImg.closest('.cinematic').getBoundingClientRect();
+        const viewH = window.innerHeight;
+        if (rect.bottom > 0 && rect.top < viewH) {
+          const progress = (viewH - rect.top) / (viewH + rect.height);
+          const translateY = (progress - 0.5) * 60;
+          cinematicImg.style.transform = `translateY(${translateY}px)`;
+        }
+      }
+      cinematicTicking = false;
+    });
+    cinematicTicking = true;
+  }
+});
+
+/* ── RADIAL TICK CANVAS (Pattern 4) ────────── */
+(function initCtaCanvas() {
+  const canvas = document.getElementById('ctaCanvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H, t = 0;
+
+  function resize() {
+    W = canvas.offsetWidth;
+    H = canvas.offsetHeight;
+    canvas.width  = W * window.devicePixelRatio;
+    canvas.height = H * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // corners: [cx, cy, startAngle, endAngle]
+  function getCorners() {
+    return [
+      { x: 0, y: 0, a0: 0,           a1: Math.PI / 2 },        // top-left
+      { x: W, y: 0, a0: Math.PI / 2, a1: Math.PI },             // top-right
+      { x: 0, y: H, a0: -Math.PI/2,  a1: 0 },                   // bottom-left
+      { x: W, y: H, a0: Math.PI,     a1: 3 * Math.PI / 2 }      // bottom-right
+    ];
+  }
+
+  const RINGS    = 8;
+  const RING_GAP = 60;
+  const TICKS_PER_RING = 10;
+  const TICK_LEN = 10;
+
+  function drawCorner(corner, rotation) {
+    const { x, y, a0, a1 } = corner;
+    for (let r = 0; r < RINGS; r++) {
+      const radius = (r + 1) * RING_GAP;
+      const sweepLen = a1 - a0;
+      for (let i = 0; i < TICKS_PER_RING; i++) {
+        const frac = i / TICKS_PER_RING;
+        const angle = a0 + frac * sweepLen + rotation;
+        const cos = Math.cos(angle);
+        const sin = Math.sin(angle);
+        const x0 = x + cos * radius;
+        const y0 = y + sin * radius;
+        const x1 = x + cos * (radius + TICK_LEN);
+        const y1 = y + sin * (radius + TICK_LEN);
+        ctx.beginPath();
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(x1, y1);
+        ctx.strokeStyle = 'rgba(0,0,0,0.45)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+    }
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    const corners = getCorners();
+    corners.forEach(corner => drawCorner(corner, t));
+    t += 0.003;
+    requestAnimationFrame(frame);
+  }
+  frame();
 })();
 
 /* ── SCROLL REVEAL ──────────────────────────── */
