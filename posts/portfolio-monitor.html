@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{analytics_storage:'denied',wait_for_update:500});if(localStorage.getItem('sr_consent')==='granted')gtag('consent','update',{analytics_storage:'granted'});</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CVBY6GSVNZ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CVBY6GSVNZ');</script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How I Built a Portfolio Monitor That Fires Every Morning at 5am — Sachin Rai</title>
+<meta name="description" content="Connecting Alpaca, Claude, and launchd to build a fully autonomous pre-market briefing agent that wakes up before I do." />
+<link rel="canonical" href="https://sachinai.com/posts/portfolio-monitor.html" />
+<meta name="robots" content="index, follow" />
+
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sachinai.com/posts/portfolio-monitor.html" />
+<meta property="og:title" content="How I Built a Portfolio Monitor That Fires Every Morning at 5am" />
+<meta property="og:description" content="Connecting Alpaca, Claude, and launchd to build a fully autonomous pre-market briefing agent that wakes up before I do." />
+<meta property="og:image" content="https://picsum.photos/seed/portfolio-monitor/1200/630" />
+<meta property="og:site_name" content="Sachin Rai" />
+<meta property="article:published_time" content="2026-05-10" />
+<meta property="article:author" content="Sachin Rai" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="How I Built a Portfolio Monitor That Fires Every Morning at 5am" />
+<meta name="twitter:description" content="Connecting Alpaca, Claude, and launchd to build a fully autonomous pre-market briefing agent that wakes up before I do." />
+<meta name="twitter:image" content="https://picsum.photos/seed/portfolio-monitor/1200/630" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How I Built a Portfolio Monitor That Fires Every Morning at 5am",
+  "url": "https://sachinai.com/posts/portfolio-monitor.html",
+  "datePublished": "2026-05-10",
+  "dateModified": "2026-05-10",
+  "author": { "@type": "Person", "name": "Sachin Rai", "url": "https://sachinai.com/" },
+  "publisher": { "@type": "Person", "name": "Sachin Rai", "url": "https://sachinai.com/" },
+  "description": "Connecting Alpaca, Claude, and launchd to build a fully autonomous pre-market briefing agent that wakes up before I do.",
+  "image": "https://picsum.photos/seed/portfolio-monitor/1200/630",
+  "keywords": ["portfolio monitor", "Alpaca API", "Claude AI", "launchd", "trading automation", "pre-market briefing"],
+  "articleSection": "AI + Automation"
+}
+</script>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23CEEB13'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='14' font-weight='700' fill='%23000000'>SR</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --lime:       #CEEB13;
+  --lime-dark:  #A0B711;
+  --black:      #000000;
+  --near-black: #181717;
+  --dark-olive: #323C2A;
+  --white:      #FFFFFF;
+  --gray-mid:   #A3A3A3;
+  --font-mono:  'Space Mono', 'Courier New', monospace;
+  --font-sans:  'Inter', Arial, sans-serif;
+  --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--near-black); color: var(--white); font-family: var(--font-sans); line-height: 1.85; padding-top: 64px; }
+a { color: inherit; text-decoration: none; }
+* { -webkit-font-smoothing: antialiased; }
+
+/* ── NAV ── */
+.post-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 48px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(24,23,23,0.97); border-bottom: 1px solid #2a2a2a;
+}
+.nav__brand { font-family: var(--font-mono); font-size: 13px; color: var(--white); letter-spacing: .08em; text-transform: uppercase; }
+.nav__links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav__links a { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,.6); letter-spacing: .05em; transition: color .2s; }
+.nav__links a:hover { color: var(--lime); }
+.nav__back { color: var(--lime) !important; }
+@media (max-width: 600px) {
+  .post-nav { padding: 0 20px; }
+  .nav__links { gap: 16px; }
+  .nav__links li:not(:last-child) { display: none; }
+}
+
+/* ── HERO TERMINAL ── */
+.hero-terminal {
+  background: var(--black);
+  padding: 80px 48px 60px;
+  border-bottom: 1px solid #2a2a2a;
+  position: relative;
+  overflow: hidden;
+}
+.hero-terminal::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(206,235,19,0.03) 31px, rgba(206,235,19,0.03) 32px);
+  pointer-events: none;
+}
+.hero__meta {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--lime); letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 24px; display: flex; gap: 24px; align-items: center;
+}
+.hero__meta span { color: rgba(255,255,255,.4); }
+.hero__title {
+  font-family: var(--font-mono); font-size: clamp(22px, 3.5vw, 42px);
+  font-weight: 700; line-height: 1.15; color: var(--white);
+  max-width: 800px; margin-bottom: 24px;
+}
+.hero__excerpt {
+  font-family: var(--font-sans); font-size: 16px; line-height: 1.7;
+  color: rgba(255,255,255,.55); max-width: 600px; margin-bottom: 48px;
+}
+
+/* Terminal window */
+.terminal-window {
+  max-width: 640px;
+  background: #0a0a0a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  box-shadow: 0 24px 64px rgba(0,0,0,.6);
+}
+.terminal-bar {
+  background: #1a1a1a;
+  padding: 10px 16px;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid #2a2a2a;
+}
+.terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+.terminal-dot--red { background: #ff5f57; }
+.terminal-dot--yellow { background: #febc2e; }
+.terminal-dot--green { background: #28c840; }
+.terminal-label { font-size: 10px; color: rgba(255,255,255,.3); margin-left: 8px; letter-spacing: .05em; }
+.terminal-body { padding: 20px 24px; min-height: 260px; }
+.terminal-line {
+  font-size: 12px; line-height: 1.9;
+  color: #4ade80; margin: 0;
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+.terminal-line.show { opacity: 1; }
+.terminal-line .dim { color: rgba(74,222,128,.4); }
+.terminal-line .bright { color: var(--lime); font-weight: 700; }
+.terminal-line .warn { color: #fbbf24; }
+.terminal-cursor { display: inline-block; width: 7px; height: 13px; background: var(--lime); vertical-align: middle; animation: blink 1s step-end infinite; margin-left: 2px; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ── POST BODY ── */
+.post-body-wrap {
+  max-width: 760px; margin: 0 auto; padding: 64px 48px 80px;
+}
+.post-body { font-family: var(--font-sans); font-size: 16px; line-height: 1.85; color: rgba(255,255,255,.75); }
+.post-body h2 {
+  font-family: var(--font-mono); font-size: 20px; font-weight: 700;
+  color: var(--white); margin: 56px 0 20px; letter-spacing: -.02em;
+}
+.post-body h2::before { content: '// '; color: var(--lime); }
+.post-body p { margin-bottom: 20px; }
+.post-body ul { padding-left: 24px; margin-bottom: 20px; }
+.post-body li { margin-bottom: 8px; }
+.post-body strong { color: var(--white); font-weight: 600; }
+.post-body a { color: var(--lime); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Code blocks */
+.code-block {
+  background: #0a0a0a;
+  border: 1px solid #2a2a2a;
+  border-left: 3px solid var(--lime);
+  border-radius: 4px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  overflow-x: auto;
+}
+.code-block pre {
+  font-family: var(--font-mono); font-size: 12px;
+  color: #4ade80; line-height: 1.8; margin: 0; white-space: pre;
+}
+.code-block .comment { color: rgba(74,222,128,.4); }
+.code-block .key { color: var(--lime); }
+.code-block .val { color: #60a5fa; }
+
+/* System diagram */
+.sys-diagram {
+  display: flex; align-items: center; gap: 0; flex-wrap: wrap;
+  margin: 40px 0; padding: 32px; background: #0f0f0f;
+  border: 1px solid #2a2a2a; border-radius: 8px;
+}
+.sys-box {
+  background: #1a1a1a; border: 1px solid #333;
+  padding: 16px 20px; border-radius: 6px; text-align: center;
+  font-family: var(--font-mono); flex: 1; min-width: 120px;
+  opacity: 0; transform: translateX(-12px);
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
+}
+.sys-box.in { opacity: 1; transform: none; }
+.sys-box__label { font-size: 9px; color: var(--lime); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+.sys-box__name { font-size: 13px; color: var(--white); font-weight: 700; }
+.sys-arrow {
+  font-family: var(--font-mono); font-size: 20px; color: var(--lime);
+  padding: 0 12px; opacity: 0; transition: opacity .4s var(--ease);
+}
+.sys-arrow.in { opacity: 1; }
+
+/* Callout */
+.callout {
+  background: rgba(206,235,19,.07);
+  border-left: 3px solid var(--lime);
+  padding: 16px 20px; margin: 24px 0; border-radius: 0 4px 4px 0;
+}
+.callout p { margin: 0; color: rgba(255,255,255,.8); font-size: 15px; }
+
+/* ── REVEAL ── */
+.rv { opacity:0; transform:translateY(24px); transition: opacity .7s cubic-bezier(0.16,1,0.3,1), transform .7s cubic-bezier(0.16,1,0.3,1); }
+.rv.in { opacity:1; transform:none; }
+
+/* ── FOOTER ── */
+.post-footer { background: var(--near-black); padding: 40px 48px; border-top: 1px solid rgba(255,255,255,.05); }
+.post-footer .footer__inner { max-width: 1200px; margin: 0 auto; }
+.post-footer .footer__bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.post-footer .footer__copy { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.25); }
+.post-footer .footer__social { display: flex; gap: 24px; }
+.post-footer .footer__social a { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.25); transition: color .2s; text-decoration: none; }
+.post-footer .footer__social a:hover { color: var(--lime); }
+
+@media (max-width: 600px) {
+  .hero-terminal { padding: 40px 20px 40px; }
+  .post-body-wrap { padding: 40px 20px 60px; }
+  .sys-diagram { flex-direction: column; gap: 12px; }
+  .sys-arrow { transform: rotate(90deg); padding: 4px 0; }
+  .post-footer { padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="post-nav" id="mainNav">
+  <a class="nav__brand" href="../">Sachin Rai</a>
+  <ul class="nav__links">
+    <li><a href="../#posts">Writing</a></li>
+    <li><a href="../#about">About</a></li>
+    <li><a href="../resume.html">Resume</a></li>
+    <li><a href="../" class="nav__back">← All posts</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero-terminal">
+  <div class="hero__meta">
+    <span>AI + Automation</span>
+    <span>·</span>
+    <span>May 10, 2026</span>
+    <span>·</span>
+    <span>8 min read</span>
+  </div>
+  <h1 class="hero__title">How I Built a Portfolio Monitor That Fires Every Morning at 5am</h1>
+  <p class="hero__excerpt">Connecting Alpaca, Claude, and launchd to build a fully autonomous pre-market briefing agent that wakes up before I do.</p>
+
+  <div class="terminal-window" aria-label="Terminal output showing portfolio monitor logs">
+    <div class="terminal-bar">
+      <div class="terminal-dot terminal-dot--red"></div>
+      <div class="terminal-dot terminal-dot--yellow"></div>
+      <div class="terminal-dot terminal-dot--green"></div>
+      <span class="terminal-label">portfolio-monitor.py — 05:00:01 PT</span>
+    </div>
+    <div class="terminal-body" id="termBody">
+      <p class="terminal-line"><span class="dim">[05:00:01]</span> <span class="bright">BOOT</span> portfolio-monitor v2.4.1</p>
+      <p class="terminal-line"><span class="dim">[05:00:02]</span> Connecting to Alpaca Markets API...</p>
+      <p class="terminal-line"><span class="dim">[05:00:03]</span> <span class="bright">OK</span> Auth confirmed — paper account</p>
+      <p class="terminal-line"><span class="dim">[05:00:04]</span> Fetching pre-market quotes (9 positions)...</p>
+      <p class="terminal-line"><span class="dim">[05:00:05]</span> <span class="bright">DATA</span> NVDA +1.4% · AMZN -0.3% · MSFT +0.8%</p>
+      <p class="terminal-line"><span class="dim">[05:00:06]</span> Scanning options flow — unusual activity...</p>
+      <p class="terminal-line"><span class="dim">[05:00:07]</span> <span class="warn">ALERT</span> TSLA large call sweep $280 exp 05/17</p>
+      <p class="terminal-line"><span class="dim">[05:00:08]</span> Sending context to Claude haiku-4-5...</p>
+      <p class="terminal-line"><span class="dim">[05:00:11]</span> <span class="bright">OK</span> Briefing generated (487 tokens)</p>
+      <p class="terminal-line"><span class="dim">[05:00:12]</span> Dispatching iMessage to +1-415-XXX-XXXX...</p>
+      <p class="terminal-line"><span class="dim">[05:00:12]</span> <span class="bright">DONE</span> Pre-market brief delivered. <span class="dim">Next: 05:00 tomorrow.</span><span class="terminal-cursor"></span></p>
+    </div>
+  </div>
+</section>
+
+<!-- BODY -->
+<div class="post-body-wrap">
+  <div class="post-body">
+
+    <p class="rv">Every serious trader I know has some version of the same problem: market opens at 6:30am PT, but the real action starts before that. Pre-market movers, overnight news, earnings revisions, options flow — by the time you sit down with coffee, the setup has already changed. I wanted a briefing on my phone before I was fully awake. So I built one.</p>
+
+    <p class="rv">The system runs every weekday at 5am PT via macOS launchd. It pulls pre-market data from the Alpaca API, feeds it to Claude claude-haiku-4-5, and iMessages me a structured briefing covering my open positions, the day's key levels, and any unusual options flow. It has been running for three months. Here is how I built it and what I learned.</p>
+
+    <h2 class="rv">The Architecture</h2>
+
+    <p class="rv">The stack is deliberately simple. Three components, each doing one thing well:</p>
+
+    <div class="sys-diagram rv" id="sysDiagram" aria-label="System architecture diagram">
+      <div class="sys-box" id="sysBox1">
+        <div class="sys-box__label">Data Layer</div>
+        <div class="sys-box__name">Alpaca API</div>
+      </div>
+      <div class="sys-arrow" id="sysArrow1">→</div>
+      <div class="sys-box" id="sysBox2">
+        <div class="sys-box__label">Intelligence</div>
+        <div class="sys-box__name">Claude Haiku</div>
+      </div>
+      <div class="sys-arrow" id="sysArrow2">→</div>
+      <div class="sys-box" id="sysBox3">
+        <div class="sys-box__label">Scheduler</div>
+        <div class="sys-box__name">launchd plist</div>
+      </div>
+    </div>
+
+    <p class="rv"><strong>Alpaca</strong> gives you market data and portfolio state through a clean REST API. The free tier covers everything I need: account positions, current quotes, and a basic options flow endpoint. I use the paper trading account for this, not live — the briefing is read-only, so there is no risk of accidental orders.</p>
+
+    <p class="rv"><strong>Claude claude-haiku-4-5</strong> is the analysis layer. I send it a JSON payload of my positions, their pre-market changes, key levels I have set in a config file, and any options sweep activity above a dollar threshold. It outputs a structured briefing in plain language. Haiku is fast and cheap — each morning run costs roughly $0.003 in API tokens. That is pennies per month.</p>
+
+    <p class="rv"><strong>launchd</strong> is macOS's built-in job scheduler, similar to cron but more reliable for desktop machines. A plist file tells it when to run my Python script. The critical detail is that launchd fires even if you were asleep — unlike cron, it does not miss jobs if the system is in a low-power state.</p>
+
+    <h2 class="rv">The Plist Setup</h2>
+
+    <p class="rv">This is the piece most tutorials skip. Getting launchd right took me two debugging sessions.</p>
+
+    <div class="code-block rv">
+<pre><span class="comment">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="comment">&lt;!DOCTYPE plist PUBLIC ...&gt;</span>
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+  &lt;key&gt;<span class="key">Label</span>&lt;/key&gt;
+  &lt;string&gt;<span class="val">com.sachin.portfolio-monitor</span>&lt;/string&gt;
+
+  &lt;key&gt;<span class="key">ProgramArguments</span>&lt;/key&gt;
+  &lt;array&gt;
+    &lt;string&gt;<span class="val">/usr/local/bin/python3.12</span>&lt;/string&gt;
+    &lt;string&gt;<span class="val">/Users/sachinrai/portfolio-monitor.py</span>&lt;/string&gt;
+  &lt;/array&gt;
+
+  &lt;key&gt;<span class="key">StartCalendarInterval</span>&lt;/key&gt;
+  &lt;dict&gt;
+    &lt;key&gt;<span class="key">Hour</span>&lt;/key&gt;&lt;integer&gt;<span class="val">5</span>&lt;/integer&gt;
+    &lt;key&gt;<span class="key">Minute</span>&lt;/key&gt;&lt;integer&gt;<span class="val">0</span>&lt;/integer&gt;
+  &lt;/dict&gt;
+
+  &lt;key&gt;<span class="key">StandardOutPath</span>&lt;/key&gt;
+  &lt;string&gt;<span class="val">/tmp/portfolio-monitor.log</span>&lt;/string&gt;
+
+  &lt;key&gt;<span class="key">StandardErrorPath</span>&lt;/key&gt;
+  &lt;string&gt;<span class="val">/tmp/portfolio-monitor-err.log</span>&lt;/string&gt;
+
+  &lt;key&gt;<span class="key">EnvironmentVariables</span>&lt;/key&gt;
+  &lt;dict&gt;
+    &lt;key&gt;<span class="key">ALPACA_API_KEY</span>&lt;/key&gt;
+    &lt;string&gt;<span class="val">LOADED_FROM_KEYCHAIN_AT_RUNTIME</span>&lt;/string&gt;
+  &lt;/dict&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;</pre>
+    </div>
+
+    <p class="rv">The key lesson: never store API keys in the plist file. I load them from macOS Keychain at runtime using the <code>security find-generic-password</code> CLI command inside the Python script itself. The plist stays clean and safe to version-control.</p>
+
+    <h2 class="rv">What the Briefing Contains</h2>
+
+    <p class="rv">I spent three weeks iterating on the Claude prompt until the output was genuinely useful — not just data I could read myself, but actual analysis. The final briefing has four sections:</p>
+
+    <ul class="rv">
+      <li><strong>Position delta summary</strong> — each open position with its pre-market change, P&amp;L, and whether it crossed a key level overnight.</li>
+      <li><strong>Top movers scan</strong> — the three biggest pre-market moves in my watchlist with a one-line reason (earnings, news, sector rotation).</li>
+      <li><strong>Options flow alerts</strong> — any unusual sweeps above $50K notional in names I track. This is the section I read first.</li>
+      <li><strong>One-line market tone</strong> — Claude's read on whether the pre-market setup is risk-on, risk-off, or neutral, and why.</li>
+    </ul>
+
+    <div class="callout rv">
+      <p>The market tone line is the most useful thing in the briefing. On mornings where I would have sat down and immediately traded, seeing "risk-off — VIX up 8%, NQ futures -0.9%, dollar strengthening" has stopped me from forcing setups that were not there.</p>
+    </div>
+
+    <h2 class="rv">What Breaks</h2>
+
+    <p class="rv">Three months of daily runs taught me exactly where this system is fragile.</p>
+
+    <p class="rv"><strong>Sleep mode</strong> is the first killer. macOS will not fire a launchd job if the machine is asleep and "Power Nap" is disabled in System Settings. I learned this the hard way on a morning when I had put the Mac Mini to sleep to conserve power. Now I have a script that checks whether the monitor fired by 5:15am and sends me a watchdog alert if it did not.</p>
+
+    <p class="rv"><strong>API rate limits</strong> are the second issue. Alpaca's free tier has a burst limit, and if you fire multiple requests in the same second — which a naive sequential script will do — you hit a 429. I added a 1-second sleep between each data fetch call. Ugly but it works.</p>
+
+    <p class="rv"><strong>Pre-market data gaps</strong> are the third problem. Alpaca's pre-market quotes are only available from 4am ET. If the plist fires at 5am PT (which is 8am ET — well within pre-market hours), you are fine. But the first time I ran this on a holiday, Alpaca returned empty quotes for everything. Claude dutifully reported "no significant pre-market movement" because there was no data, not because markets were calm. I added a data quality check that verifies at least five positions have valid quotes before passing to Claude.</p>
+
+    <h2 class="rv">Results After 3 Months</h2>
+
+    <p class="rv">The briefing has fired 61 out of 63 trading days (one failure was the sleep mode issue, one was an API outage). The average delivery time is 12 seconds after the scheduled fire time.</p>
+
+    <p class="rv">More importantly: it has changed how I start my trading day. I no longer open ThinkorSwim half-awake and start clicking. I have a context-loaded mental map of the day before I touch the platform. On at least four occasions, the options flow alert flagged something I would have missed that turned into a significant intraday move.</p>
+
+    <p class="rv">The total build time was one weekend. The total ongoing cost is under $2/month in API tokens. The return on investment, measured in fewer impulsive morning trades alone, has been well worth it.</p>
+
+    <p class="rv">If you want to build something similar, the full code is not public yet — I am cleaning it up. But the architecture is straightforward enough that you could replicate it from this post. The hardest part is not the code. It is writing a Claude prompt that produces briefings you actually trust.</p>
+
+  </div>
+</div>
+
+<footer class="post-footer">
+  <div class="footer__inner">
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2026 Sachin Rai. Built with Claude Code.</p>
+      <div class="footer__social">
+        <a href="https://x.com/sachinrai01" target="_blank" rel="noopener noreferrer">Twitter</a>
+        <a href="https://www.linkedin.com/in/sachinr1" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Terminal animation
+const lines = document.querySelectorAll('.terminal-line');
+let i = 0;
+function printLine() {
+  if (i < lines.length) {
+    lines[i].classList.add('show');
+    i++;
+    setTimeout(printLine, 280 + Math.random() * 200);
+  }
+}
+setTimeout(printLine, 600);
+
+// Reveal on scroll
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// System diagram sequential reveal
+const diagObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      setTimeout(() => { document.getElementById('sysBox1').classList.add('in'); }, 100);
+      setTimeout(() => { document.getElementById('sysArrow1').classList.add('in'); }, 300);
+      setTimeout(() => { document.getElementById('sysBox2').classList.add('in'); }, 500);
+      setTimeout(() => { document.getElementById('sysArrow2').classList.add('in'); }, 700);
+      setTimeout(() => { document.getElementById('sysBox3').classList.add('in'); }, 900);
+      diagObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+const diag = document.getElementById('sysDiagram');
+if (diag) diagObs.observe(diag);
+</script>
+</body>
+</html>

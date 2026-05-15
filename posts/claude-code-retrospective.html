@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{analytics_storage:'denied',wait_for_update:500});if(localStorage.getItem('sr_consent')==='granted')gtag('consent','update',{analytics_storage:'granted'});</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CVBY6GSVNZ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CVBY6GSVNZ');</script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Claude Code Changed How I Build — A 30-Day Retrospective — Sachin Rai</title>
+<meta name="description" content="What happened when I stopped planning features and started just building them. The feedback loop is completely different now." />
+<link rel="canonical" href="https://sachinai.com/posts/claude-code-retrospective.html" />
+<meta name="robots" content="index, follow" />
+
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sachinai.com/posts/claude-code-retrospective.html" />
+<meta property="og:title" content="Claude Code Changed How I Build — A 30-Day Retrospective" />
+<meta property="og:description" content="What happened when I stopped planning features and started just building them. The feedback loop is completely different now." />
+<meta property="og:image" content="https://picsum.photos/seed/claude-code-retro/1200/630" />
+<meta property="og:site_name" content="Sachin Rai" />
+<meta property="article:published_time" content="2026-04-28" />
+<meta property="article:author" content="Sachin Rai" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Claude Code Changed How I Build — A 30-Day Retrospective" />
+<meta name="twitter:description" content="What happened when I stopped planning features and started just building them." />
+<meta name="twitter:image" content="https://picsum.photos/seed/claude-code-retro/1200/630" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Claude Code Changed How I Build — A 30-Day Retrospective",
+  "url": "https://sachinai.com/posts/claude-code-retrospective.html",
+  "datePublished": "2026-04-28",
+  "dateModified": "2026-04-28",
+  "author": { "@type": "Person", "name": "Sachin Rai", "url": "https://sachinai.com/" },
+  "publisher": { "@type": "Person", "name": "Sachin Rai", "url": "https://sachinai.com/" },
+  "description": "What happened when I stopped planning features and started just building them. The feedback loop is completely different now.",
+  "image": "https://picsum.photos/seed/claude-code-retro/1200/630",
+  "keywords": ["Claude Code", "AI coding", "building in public", "agent orchestration", "developer tools"],
+  "articleSection": "Building in Public"
+}
+</script>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23CEEB13'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='14' font-weight='700' fill='%23000000'>SR</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --lime:       #CEEB13;
+  --lime-dark:  #A0B711;
+  --black:      #000000;
+  --near-black: #181717;
+  --dark-olive: #323C2A;
+  --white:      #FFFFFF;
+  --gray-mid:   #A3A3A3;
+  --font-mono:  'Space Mono', 'Courier New', monospace;
+  --font-sans:  'Inter', Arial, sans-serif;
+  --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--near-black); color: var(--white); font-family: var(--font-sans); line-height: 1.85; padding-top: 64px; }
+a { color: inherit; text-decoration: none; }
+* { -webkit-font-smoothing: antialiased; }
+
+/* ── NAV ── */
+.post-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 48px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(24,23,23,0.97); border-bottom: 1px solid #2a2a2a;
+}
+.nav__brand { font-family: var(--font-mono); font-size: 13px; color: var(--white); letter-spacing: .08em; text-transform: uppercase; }
+.nav__links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav__links a { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,.6); letter-spacing: .05em; transition: color .2s; }
+.nav__links a:hover { color: var(--lime); }
+.nav__back { color: var(--lime) !important; }
+@media (max-width: 600px) {
+  .post-nav { padding: 0 20px; }
+  .nav__links { gap: 16px; }
+  .nav__links li:not(:last-child) { display: none; }
+}
+
+/* ── HERO SPLIT ── */
+.hero-split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 400px;
+}
+.hero-split__left {
+  background: var(--lime);
+  display: flex; align-items: center; justify-content: center;
+  padding: 64px 48px;
+}
+.hero-split__num {
+  font-family: var(--font-mono); font-size: clamp(100px, 16vw, 180px);
+  font-weight: 700; color: var(--black); line-height: 1;
+  opacity: 0; transform: scale(0.7) rotate(-5deg);
+  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+}
+@keyframes popIn {
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+.hero-split__right {
+  background: var(--near-black);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 64px 48px; border-left: 1px solid #2a2a2a;
+}
+.hero__meta {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--lime); letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 20px; display: flex; gap: 16px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.5s var(--ease) 0.6s forwards;
+}
+.hero__meta span { color: rgba(255,255,255,.3); }
+.hero__title {
+  font-family: var(--font-mono); font-size: clamp(18px, 2.2vw, 28px);
+  font-weight: 700; color: var(--white); line-height: 1.2;
+  margin-bottom: 16px;
+  opacity: 0; animation: fadeUp 0.6s var(--ease) 0.8s forwards;
+}
+.hero__excerpt {
+  font-family: var(--font-sans); font-size: 15px; color: rgba(255,255,255,.5);
+  line-height: 1.7;
+  opacity: 0; animation: fadeUp 0.6s var(--ease) 1s forwards;
+}
+@keyframes fadeUp { to { opacity: 1; transform: none; } }
+
+/* ── INTRO BODY ── */
+.post-body-wrap {
+  max-width: 760px; margin: 0 auto; padding: 64px 48px 80px;
+}
+.post-body { font-family: var(--font-sans); font-size: 16px; line-height: 1.85; color: rgba(255,255,255,.75); }
+.post-body p { margin-bottom: 20px; }
+.post-body strong { color: var(--white); font-weight: 600; }
+.post-body a { color: var(--lime); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── TIMELINE ── */
+.timeline-section {
+  max-width: 900px; margin: 0 auto; padding: 0 48px 80px;
+  position: relative;
+}
+.timeline-track {
+  position: absolute; left: calc(48px + 20px); top: 0; bottom: 0; width: 2px;
+  background: rgba(255,255,255,.07);
+}
+.timeline-track-fill {
+  position: absolute; top: 0; left: 0; right: 0;
+  background: var(--lime);
+  height: 0%;
+  transition: height 0.05s linear;
+}
+.timeline-entry {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 32px;
+  margin-bottom: 56px;
+  position: relative;
+  z-index: 1;
+}
+.timeline-marker {
+  display: flex; flex-direction: column; align-items: center;
+  padding-top: 4px;
+}
+.timeline-dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: #333; border: 2px solid #555;
+  transition: background .3s, border-color .3s, transform .3s;
+  flex-shrink: 0;
+}
+.timeline-entry.in .timeline-dot {
+  background: var(--lime); border-color: var(--lime);
+  transform: scale(1.3);
+}
+.timeline-card {
+  background: #1f1f1f; border: 1px solid #2a2a2a;
+  border-radius: 8px; padding: 24px 28px;
+  opacity: 0; transform: translateX(20px);
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
+}
+.timeline-entry.in .timeline-card { opacity: 1; transform: none; }
+.timeline-day {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  color: var(--lime); letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.timeline-title {
+  font-family: var(--font-mono); font-size: 16px; font-weight: 700;
+  color: var(--white); margin-bottom: 12px; line-height: 1.3;
+}
+.timeline-body {
+  font-family: var(--font-sans); font-size: 15px;
+  color: rgba(255,255,255,.65); line-height: 1.8;
+}
+
+/* ── CALLOUT ── */
+.callout {
+  background: rgba(206,235,19,.07);
+  border-left: 3px solid var(--lime);
+  padding: 16px 20px; margin: 24px 0; border-radius: 0 4px 4px 0;
+}
+.callout p { margin: 0; color: rgba(255,255,255,.8); font-size: 15px; }
+
+/* ── REVEAL ── */
+.rv { opacity:0; transform:translateY(24px); transition: opacity .7s cubic-bezier(0.16,1,0.3,1), transform .7s cubic-bezier(0.16,1,0.3,1); }
+.rv.in { opacity:1; transform:none; }
+
+/* ── FOOTER ── */
+.post-footer { background: var(--near-black); padding: 40px 48px; border-top: 1px solid rgba(255,255,255,.05); }
+.post-footer .footer__inner { max-width: 1200px; margin: 0 auto; }
+.post-footer .footer__bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.post-footer .footer__copy { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.25); }
+.post-footer .footer__social { display: flex; gap: 24px; }
+.post-footer .footer__social a { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.25); transition: color .2s; text-decoration: none; }
+.post-footer .footer__social a:hover { color: var(--lime); }
+
+@media (max-width: 600px) {
+  .hero-split { grid-template-columns: 1fr; }
+  .hero-split__left { padding: 40px 20px; min-height: 180px; }
+  .hero-split__right { padding: 40px 20px; border-left: none; border-top: 1px solid #2a2a2a; }
+  .timeline-section { padding: 0 20px 60px; }
+  .timeline-track { left: calc(20px + 20px); }
+  .post-body-wrap { padding: 40px 20px 60px; }
+  .post-footer { padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="post-nav" id="mainNav">
+  <a class="nav__brand" href="../">Sachin Rai</a>
+  <ul class="nav__links">
+    <li><a href="../#posts">Writing</a></li>
+    <li><a href="../#about">About</a></li>
+    <li><a href="../resume.html">Resume</a></li>
+    <li><a href="../" class="nav__back">← All posts</a></li>
+  </ul>
+</nav>
+
+<!-- HERO SPLIT -->
+<section class="hero-split" aria-labelledby="hero-title">
+  <div class="hero-split__left" aria-hidden="true">
+    <div class="hero-split__num">30</div>
+  </div>
+  <div class="hero-split__right">
+    <div class="hero__meta">
+      <span>Building in Public</span>
+      <span>·</span>
+      <span>Apr 28, 2026</span>
+    </div>
+    <h1 class="hero__title" id="hero-title">Claude Code Changed How I Build — A 30-Day Retrospective</h1>
+    <p class="hero__excerpt">What happened when I stopped planning features and started just building them. The feedback loop is completely different now.</p>
+  </div>
+</section>
+
+<!-- INTRO -->
+<div class="post-body-wrap">
+  <div class="post-body">
+    <p class="rv">I have been a non-technical founder type for most of my career. I can read code, I can spec a system, I can debug with patience — but I am not a developer. For years I had a mental backlog of tools I wanted to build that never got past the planning stage because the implementation cost was too high. Claude Code changed that completely.</p>
+
+    <p class="rv">This post is a month-by-day account of what actually changed. Not the tools I built — those are covered elsewhere — but the mental model shift. The way I think about building is now fundamentally different, and I want to document it while it is still fresh.</p>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline-section">
+  <div class="timeline-track">
+    <div class="timeline-track-fill" id="timelineFill"></div>
+  </div>
+
+  <div class="timeline-entry" data-day="1">
+    <div class="timeline-marker"><div class="timeline-dot"></div></div>
+    <div class="timeline-card">
+      <div class="timeline-day">Day 1</div>
+      <div class="timeline-title">Built my first real tool in an afternoon.</div>
+      <p class="timeline-body">I had a spec for a cold email subject line scorer sitting in Notion for two months. In an afternoon, I had a working Python script that scored subject lines against engagement principles and gave structured feedback. I ran it on 40 subject lines I had written over the previous quarter and discovered three patterns I had not noticed. The tool was rough. It did not matter. It existed, and it was useful.</p>
+    </div>
+  </div>
+
+  <div class="timeline-entry" data-day="7">
+    <div class="timeline-marker"><div class="timeline-dot"></div></div>
+    <div class="timeline-card">
+      <div class="timeline-day">Day 7</div>
+      <div class="timeline-title">Learned to delegate entire features, not just functions.</div>
+      <p class="timeline-body">The first week I was using Claude Code like an autocomplete — write a function, ask it to improve the function, iterate. By week two I started treating it differently: describe the feature completely, let it architect and implement the whole thing, then review the result. The shift from line-by-line collaboration to feature-level delegation is the most important mental change. It is the difference between a screwdriver and a power drill.</p>
+    </div>
+  </div>
+
+  <div class="timeline-entry" data-day="14">
+    <div class="timeline-marker"><div class="timeline-dot"></div></div>
+    <div class="timeline-card">
+      <div class="timeline-day">Day 14</div>
+      <div class="timeline-title">Shipped three complete projects in one week.</div>
+      <p class="timeline-body">Week two was when the velocity felt real. I shipped a Notion MCP server, a portfolio data pipeline, and a lead research automation in seven days. None were perfect — they were all V1s — but they all worked and they all solved real problems I had been living with. The week before Claude Code, building those three things would have taken months. The bottleneck was never ideas. It was always implementation bandwidth.</p>
+    </div>
+  </div>
+
+  <div class="timeline-entry" data-day="21">
+    <div class="timeline-marker"><div class="timeline-dot"></div></div>
+    <div class="timeline-card">
+      <div class="timeline-day">Day 21</div>
+      <div class="timeline-title">Discovered multi-agent orchestration — everything changed again.</div>
+      <p class="timeline-body">Three weeks in, I started reading about multi-agent pipelines: not one Claude session doing everything, but multiple specialised agents with different roles handing off to each other. A planner agent that breaks down a problem. An executor agent that implements. A reviewer agent that critiques. I built my first pipeline — a research + analysis + formatting chain — and the quality of output was qualitatively different from any single-agent conversation I had had. This was the unlock.</p>
+    </div>
+  </div>
+
+  <div class="timeline-entry" data-day="30">
+    <div class="timeline-marker"><div class="timeline-dot"></div></div>
+    <div class="timeline-card">
+      <div class="timeline-day">Day 30</div>
+      <div class="timeline-title">Portfolio of 12 working tools. A different way of thinking.</div>
+      <p class="timeline-body">At the end of month one I had twelve tools that were running in some form. A morning briefing agent, a vault intelligence pipeline, a lead research system, a portfolio monitor, a subject line scorer, a cold email generator, a deal review assistant, and several smaller utilities. More importantly, my relationship to the backlog had changed completely. Where before I would add an idea to Notion and revisit it in three months, I now add an idea to Notion and start building it the same day. The backlog is no longer a graveyard.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONCLUSION -->
+<div class="post-body-wrap" style="padding-top: 0;">
+  <div class="post-body">
+    <h2 class="rv" style="font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--white); margin: 0 0 20px; letter-spacing: -.02em;">What actually shifted</h2>
+
+    <p class="rv">The change is not about speed, though it is faster. The change is about the relationship between an idea and its existence in the world. Before, an idea required either significant personal investment to implement or the right conversation with the right engineer. Now, an idea can exist as a working prototype within hours. That changes what ideas you pursue. It changes how ambitious your specs are. It changes how you think about what is possible for a single person to build.</p>
+
+    <div class="callout rv">
+      <p>The hardest part of the transition is not learning the tool. It is updating your mental model of what you are capable of building alone. Most people are limited not by skill but by the assumption that certain things require a team. That assumption is now largely wrong.</p>
+    </div>
+
+    <p class="rv">I do not think Claude Code replaces engineers for serious production systems. Complex infrastructure, high-stakes security requirements, high-performance requirements — all of those still need people who think about systems deeply. But for the 80% of ideas that live in the gap between "this could be useful" and "I have budget and team to build this properly," the barrier is essentially gone.</p>
+
+    <p class="rv">That is not a small thing. That is a fundamental change in what one person can do.</p>
+  </div>
+</div>
+
+<footer class="post-footer">
+  <div class="footer__inner">
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2026 Sachin Rai. Built with Claude Code.</p>
+      <div class="footer__social">
+        <a href="https://x.com/sachinrai01" target="_blank" rel="noopener noreferrer">Twitter</a>
+        <a href="https://www.linkedin.com/in/sachinr1" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Timeline scroll animation
+const entries = document.querySelectorAll('.timeline-entry');
+const fill = document.getElementById('timelineFill');
+const track = document.querySelector('.timeline-track');
+
+const timelineObs = new IntersectionObserver(entries_list => {
+  entries_list.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+    }
+  });
+}, { threshold: 0.3 });
+
+entries.forEach(e => timelineObs.observe(e));
+
+// Timeline fill on scroll
+function updateTimelineFill() {
+  if (!track) return;
+  const trackRect = track.getBoundingClientRect();
+  const windowH = window.innerHeight;
+  const progress = Math.max(0, Math.min(1, (windowH - trackRect.top) / (trackRect.height + windowH * 0.5)));
+  if (fill) fill.style.height = (progress * 100) + '%';
+}
+window.addEventListener('scroll', updateTimelineFill, { passive: true });
+updateTimelineFill();
+
+// Reveal
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

@@ -12,6 +12,12 @@ Sachin Rai writes about the intersection of AI and enterprise GTM:
 
 ## Posts
 
+- [How I Built a Portfolio Monitor That Fires Every Morning at 5am](https://sachinai.com/posts/portfolio-monitor.html) — Connecting Alpaca, Claude, and launchd to build a fully autonomous pre-market briefing agent that wakes up before I do.
+- [Why My Obsidian Vault Is the Most Valuable Thing I Own](https://sachinai.com/posts/obsidian-vault.html) — 500+ notes. 3 years of weekly compile runs. How turning raw captures into structured intelligence actually compounds.
+- [7 Things Every Club Winner Knows That Average Reps Don't](https://sachinai.com/posts/club-winner.html) — After 7 President's Club wins, here are the patterns I see in every top performer. None of them are tactics.
+- [Claude Code Changed How I Build — A 30-Day Retrospective](https://sachinai.com/posts/claude-code-retrospective.html) — What happened when I stopped planning features and started just building them. The feedback loop is completely different now.
+- [AutoQuant: What I Learned After 6 Months of Bayesian Signal Grading](https://sachinai.com/posts/autoquant.html) — Building a scanner that grades its own trades, re-weights conviction over time, and auto-journals every autopsy.
+- [The Case for AI-First Outreach: How I Built My Own SDR in a Weekend](https://sachinai.com/posts/ai-first-outreach.html) — Using LangGraph, Apollo, and Claude to research prospects, score fit, and draft personalised emails — automatically.
 - [Win Rate Lies.](https://sachinai.com/posts/win-rate-trap.html) — A 90% win rate signal in my trading system was bleeding money at −1.04% expectancy per trade. The same Trojan Horse is hiding in every sales pipeline I've managed.
 - [I Renamed Seven AI Agents.](https://sachinai.com/posts/renamed-seven-agents.html) — Brick, Owl, Bull, Falcon, Spider, Arrow, Sage are dead. Scanner, Grader, SwingTrader, DayPut, DayCondor, Outreach, Vault are alive. The rename touched 26 files. The lessons compound.
 - [I built a personal LLM knowledge base in Obsidian. Here's what it actually looks like](https://sachinai.com/posts/llm-knowledge-base-obsidian.html) — Raw data in, compiled wiki out. How I use Claude Code to turn everything I read and watch into a searchable, queryable knowledge base — and why this is the most underrated AI workflow right now.

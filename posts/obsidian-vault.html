@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{analytics_storage:'denied',wait_for_update:500});if(localStorage.getItem('sr_consent')==='granted')gtag('consent','update',{analytics_storage:'granted'});</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CVBY6GSVNZ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CVBY6GSVNZ');</script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Why My Obsidian Vault Is the Most Valuable Thing I Own — Sachin Rai</title>
+<meta name="description" content="500+ notes. 3 years of weekly compile runs. How turning raw captures into structured intelligence actually compounds." />
+<link rel="canonical" href="https://sachinai.com/posts/obsidian-vault.html" />
+<meta name="robots" content="index, follow" />
+
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sachinai.com/posts/obsidian-vault.html" />
+<meta property="og:title" content="Why My Obsidian Vault Is the Most Valuable Thing I Own" />
+<meta property="og:description" content="500+ notes. 3 years of weekly compile runs. How turning raw captures into structured intelligence actually compounds." />
+<meta property="og:image" content="https://picsum.photos/seed/obsidian-knowledge/1200/630" />
+<meta property="og:site_name" content="Sachin Rai" />
+<meta property="article:published_time" content="2026-04-19" />
+<meta property="article:author" content="Sachin Rai" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Why My Obsidian Vault Is the Most Valuable Thing I Own" />
+<meta name="twitter:description" content="500+ notes. 3 years of weekly compile runs. How turning raw captures into structured intelligence actually compounds." />
+<meta name="twitter:image" content="https://picsum.photos/seed/obsidian-knowledge/1200/630" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Why My Obsidian Vault Is the Most Valuable Thing I Own",
+  "url": "https://sachinai.com/posts/obsidian-vault.html",
+  "datePublished": "2026-04-19",
+  "dateModified": "2026-04-19",
+  "author": { "@type": "Person", "name": "Sachin Rai", "url": "https://sachinai.com/" },
+  "publisher": { "@type": "Person", "name": "Sachin Rai", "url": "https://sachinai.com/" },
+  "description": "500+ notes. 3 years of weekly compile runs. How turning raw captures into structured intelligence actually compounds.",
+  "image": "https://picsum.photos/seed/obsidian-knowledge/1200/630",
+  "keywords": ["Obsidian", "personal knowledge management", "PKM", "second brain", "knowledge systems"],
+  "articleSection": "Knowledge Systems"
+}
+</script>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23CEEB13'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='14' font-weight='700' fill='%23000000'>SR</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --lime:       #CEEB13;
+  --lime-dark:  #A0B711;
+  --black:      #000000;
+  --near-black: #181717;
+  --dark-olive: #323C2A;
+  --white:      #FFFFFF;
+  --gray-mid:   #A3A3A3;
+  --font-mono:  'Space Mono', 'Courier New', monospace;
+  --font-sans:  'Inter', Arial, sans-serif;
+  --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--near-black); color: var(--white); font-family: var(--font-sans); line-height: 1.85; padding-top: 64px; }
+a { color: inherit; text-decoration: none; }
+* { -webkit-font-smoothing: antialiased; }
+
+/* ── NAV ── */
+.post-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 48px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(24,23,23,0.97); border-bottom: 1px solid #2a2a2a;
+}
+.nav__brand { font-family: var(--font-mono); font-size: 13px; color: var(--white); letter-spacing: .08em; text-transform: uppercase; }
+.nav__links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav__links a { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,.6); letter-spacing: .05em; transition: color .2s; }
+.nav__links a:hover { color: var(--lime); }
+.nav__back { color: var(--lime) !important; }
+@media (max-width: 600px) {
+  .post-nav { padding: 0 20px; }
+  .nav__links { gap: 16px; }
+  .nav__links li:not(:last-child) { display: none; }
+}
+
+/* ── GRAPH HERO ── */
+.hero-graph {
+  background: var(--black);
+  position: relative; overflow: hidden;
+  padding: 80px 48px 64px;
+}
+.graph-canvas-wrap {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+}
+#graphCanvas { width: 100%; height: 100%; }
+.hero-graph__content {
+  position: relative; z-index: 2;
+  max-width: 700px;
+}
+.hero__meta {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--lime); letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 20px; display: flex; gap: 16px; flex-wrap: wrap;
+}
+.hero__meta span { color: rgba(255,255,255,.4); }
+.hero__title {
+  font-family: var(--font-mono); font-size: clamp(22px, 3.5vw, 42px);
+  font-weight: 700; line-height: 1.15; color: var(--white);
+  margin-bottom: 20px;
+}
+.hero__excerpt {
+  font-family: var(--font-sans); font-size: 16px; color: rgba(255,255,255,.55);
+  max-width: 580px; line-height: 1.7; margin-bottom: 32px;
+}
+.node-count {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: rgba(206,235,19,.1); border: 1px solid rgba(206,235,19,.25);
+  padding: 10px 18px; border-radius: 4px;
+}
+.node-count__num {
+  font-family: var(--font-mono); font-size: 22px; font-weight: 700;
+  color: var(--lime);
+}
+.node-count__label {
+  font-family: var(--font-mono); font-size: 10px;
+  color: rgba(255,255,255,.5); letter-spacing: .08em; text-transform: uppercase;
+}
+
+/* ── TWO COLUMN LAYOUT ── */
+.two-col-section {
+  display: grid; grid-template-columns: 280px 1fr;
+  gap: 0; border-top: 1px solid #2a2a2a;
+}
+.folder-tree-col {
+  background: #0f0f0f;
+  border-right: 1px solid #2a2a2a;
+  padding: 48px 32px; position: sticky; top: 64px;
+  height: calc(100vh - 64px); overflow-y: auto;
+}
+.folder-tree-col h3 {
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--lime); letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.folder-tree {
+  font-family: var(--font-mono); font-size: 11px;
+  color: rgba(255,255,255,.5); line-height: 2;
+}
+.folder-tree .folder { color: rgba(255,255,255,.8); }
+.folder-tree .active { color: var(--lime); }
+.folder-tree .count {
+  color: rgba(206,235,19,.4); font-size: 9px; margin-left: 4px;
+}
+.article-col {
+  padding: 64px 56px 80px;
+}
+
+/* ── POST BODY ── */
+.post-body { font-family: var(--font-sans); font-size: 16px; line-height: 1.85; color: rgba(255,255,255,.75); }
+.post-body h2 {
+  font-family: var(--font-mono); font-size: 18px; font-weight: 700;
+  color: var(--white); margin: 48px 0 16px; letter-spacing: -.02em;
+}
+.post-body h2::before { content: '// '; color: var(--lime); }
+.post-body p { margin-bottom: 20px; }
+.post-body ul { padding-left: 24px; margin-bottom: 20px; }
+.post-body li { margin-bottom: 8px; }
+.post-body strong { color: var(--white); font-weight: 600; }
+
+/* ── REVEAL ── */
+.rv { opacity:0; transform:translateY(24px); transition: opacity .7s cubic-bezier(0.16,1,0.3,1), transform .7s cubic-bezier(0.16,1,0.3,1); }
+.rv.in { opacity:1; transform:none; }
+
+/* Callout */
+.callout {
+  background: rgba(206,235,19,.07);
+  border-left: 3px solid var(--lime);
+  padding: 16px 20px; margin: 24px 0; border-radius: 0 4px 4px 0;
+}
+.callout p { margin: 0; color: rgba(255,255,255,.8); font-size: 15px; }
+
+/* ── FOOTER ── */
+.post-footer { background: var(--near-black); padding: 40px 48px; border-top: 1px solid rgba(255,255,255,.05); }
+.post-footer .footer__inner { max-width: 1200px; margin: 0 auto; }
+.post-footer .footer__bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.post-footer .footer__copy { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.25); }
+.post-footer .footer__social { display: flex; gap: 24px; }
+.post-footer .footer__social a { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.25); transition: color .2s; text-decoration: none; }
+.post-footer .footer__social a:hover { color: var(--lime); }
+
+@media (max-width: 768px) {
+  .two-col-section { grid-template-columns: 1fr; }
+  .folder-tree-col { position: static; height: auto; padding: 32px 20px; border-right: none; border-bottom: 1px solid #2a2a2a; }
+  .article-col { padding: 40px 20px 60px; }
+  .hero-graph { padding: 48px 20px 48px; }
+  .post-footer { padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="post-nav" id="mainNav">
+  <a class="nav__brand" href="../">Sachin Rai</a>
+  <ul class="nav__links">
+    <li><a href="../#posts">Writing</a></li>
+    <li><a href="../#about">About</a></li>
+    <li><a href="../resume.html">Resume</a></li>
+    <li><a href="../" class="nav__back">← All posts</a></li>
+  </ul>
+</nav>
+
+<!-- HERO with graph animation -->
+<section class="hero-graph" aria-labelledby="hero-title">
+  <div class="graph-canvas-wrap" aria-hidden="true">
+    <canvas id="graphCanvas"></canvas>
+  </div>
+  <div class="hero-graph__content">
+    <div class="hero__meta">
+      <span>Knowledge Systems</span>
+      <span>·</span>
+      <span>Apr 19, 2026</span>
+      <span>·</span>
+      <span>9 min read</span>
+    </div>
+    <h1 class="hero__title" id="hero-title">Why My Obsidian Vault Is the Most Valuable Thing I Own</h1>
+    <p class="hero__excerpt">500+ notes. 3 years of weekly compile runs. How turning raw captures into structured intelligence actually compounds.</p>
+    <div class="node-count">
+      <span class="node-count__num" id="nodeCountDisplay">0</span>
+      <span class="node-count__label">Notes in vault</span>
+    </div>
+  </div>
+</section>
+
+<!-- TWO COLUMN -->
+<div class="two-col-section">
+  <aside class="folder-tree-col" aria-label="Vault folder structure">
+    <h3>Vault Structure</h3>
+    <div class="folder-tree">
+      <div><span class="folder">00-Daily/</span> <span class="count">847</span></div>
+      <div>&nbsp;&nbsp;├ 2026-05-14.md</div>
+      <div>&nbsp;&nbsp;├ 2026-05-13.md</div>
+      <div>&nbsp;&nbsp;└ ...</div>
+      <div><span class="folder">01-Projects/</span> <span class="count">62</span></div>
+      <div>&nbsp;&nbsp;├ _index.md</div>
+      <div>&nbsp;&nbsp;├ AutoQuant.md</div>
+      <div>&nbsp;&nbsp;└ ...</div>
+      <div><span class="folder active">02-Concepts/</span> <span class="count">128</span></div>
+      <div>&nbsp;&nbsp;├ <span class="active">Ideas Bank.md</span></div>
+      <div>&nbsp;&nbsp;├ Agent-Personas.md</div>
+      <div>&nbsp;&nbsp;└ ...</div>
+      <div><span class="folder">03-Reviews/</span> <span class="count">94</span></div>
+      <div>&nbsp;&nbsp;├ weekly/</div>
+      <div>&nbsp;&nbsp;└ monthly/</div>
+      <div><span class="folder">04-Resources/</span> <span class="count">211</span></div>
+      <div>&nbsp;&nbsp;├ interviews/</div>
+      <div>&nbsp;&nbsp;├ articles/</div>
+      <div>&nbsp;&nbsp;└ books/</div>
+      <div><span class="folder">05-Pitches/</span> <span class="count">38</span></div>
+      <div>&nbsp;&nbsp;└ active/</div>
+      <div><span class="folder">06-Templates/</span> <span class="count">22</span></div>
+      <div><span class="folder">07-Compiled/</span> <span class="count">47</span></div>
+      <div>&nbsp;&nbsp;└ <span class="active">wiki-exports/</span></div>
+    </div>
+  </aside>
+
+  <div class="article-col">
+    <div class="post-body">
+
+      <p class="rv">If my apartment burned down and I had to choose one thing to grab — laptop, passport, hard drives — I would grab the laptop. Not for the laptop itself but for the Obsidian vault it syncs to iCloud. That vault represents three years of structured thinking, and I cannot replace it from scratch.</p>
+
+      <p class="rv">This is not a post about Obsidian the app. It is a post about what happens when you run a consistent knowledge system over a long enough time horizon that it starts to behave like compound interest.</p>
+
+      <h2 class="rv">The Three-Layer Stack</h2>
+
+      <p class="rv">Most people who try Obsidian fail because they treat it like a filing system — a smarter Google Drive. A filing system is for retrieval. A knowledge system is for synthesis. The difference is everything.</p>
+
+      <p class="rv">My vault runs on three layers:</p>
+
+      <ul class="rv">
+        <li><strong>Inbox layer (Daily Notes)</strong> — every observation, idea, quote, and link lands in the daily note first. No filtering, no structure. Raw capture. This layer has nearly 850 daily notes going back to 2023.</li>
+        <li><strong>Wiki layer (02-Concepts, 04-Resources)</strong> — the good stuff from daily notes gets synthesised into evergreen concept notes and resource summaries. A concept note on "qualification in enterprise sales" might draw on 30 different daily note entries across 18 months.</li>
+        <li><strong>Schema layer (07-Compiled)</strong> — once a month, a Claude-powered pipeline reads the wiki layer, finds clusters of related notes, and produces compiled intelligence documents. These are the things I actually use in conversation and decision-making.</li>
+      </ul>
+
+      <h2 class="rv">What the Compile-Wiki Pipeline Does</h2>
+
+      <p class="rv">The weekly compile is the engine of the whole system. Every Monday morning, a script runs that does three things: it reads the last seven days of daily notes, identifies threads and themes that appear multiple times, and produces a structured synthesis note with links back to the sources.</p>
+
+      <p class="rv">This is not summarisation — any LLM can do that. The compile step is specifically looking for <em>connections</em>. When the same idea appears in a sales call note, a book summary, and a podcast transcript from three different weeks, the compile step surfaces that connection and asks: what is the underlying pattern here? That pattern becomes a concept note, which becomes a permanent part of the wiki.</p>
+
+      <div class="callout rv">
+        <p>The compile step is what turns a diary into intelligence. Without it, you have a very organised archive. With it, you have a system that actively generates new insights by connecting old ones.</p>
+      </div>
+
+      <h2 class="rv">Why the Vault Compounds</h2>
+
+      <p class="rv">A vault from three months ago is useful. A vault from three years ago is irreplaceable. The reason is network effects within your own thinking.</p>
+
+      <p class="rv">When I write a new concept note today, it links to 12 existing notes. Those links are not decorative — they are the context that makes the new note meaningful. The new note inherits the intelligence of everything it links to. Over time, every new piece of content has more context available, which means every synthesis is richer, which means every decision I make is better-informed.</p>
+
+      <p class="rv">I have measured this concretely. Three years ago, a typical concept note had 2-3 links to other notes. Today, a typical concept note has 8-12 links. The density of the network has increased by 4x, which means every new node is 4x more connected to existing knowledge.</p>
+
+      <h2 class="rv">Three Times the Vault Paid Off</h2>
+
+      <p class="rv"><strong>The thesis connection.</strong> In February 2026, I was developing a view on AI-first sales automation. During a compile run, the system surfaced a connection between a note I had written about LangGraph in September 2025 and a sales workflow note from January 2025 — nine months apart. The connection was the automation gap in enterprise SDR workflows. That connection became the thesis behind my outreach automation project.</p>
+
+      <p class="rv"><strong>The recalled sales framework.</strong> Eight months after reading an article on challenger sale methodology variants, I was in a difficult discovery call. Afterward, I searched my vault for "reframe" and found a detailed note I had no memory of writing, with a specific framework for reframing a prospect's problem statement. I used it on the next call. The deal progressed.</p>
+
+      <p class="rv"><strong>The cross-note pattern.</strong> Running the compile pipeline over a set of 12 notes about market volatility and trading psychology, Claude identified that I had been circling the same insight — "your worst trades happen when your decision speed is faster than your analysis speed" — from 12 different angles without ever stating it directly. The compile step made the pattern explicit. That became one of the core rules in my trading system.</p>
+
+      <h2 class="rv">The Weekly Rhythm</h2>
+
+      <p class="rv">The system only works if you run it consistently. My routine: Monday morning compile run (automated), weekend vault lint (manual review of orphaned notes, broken links, stale concept notes that need updating). The Monday compile takes 20 minutes of my attention. The weekend lint takes about an hour. Three hours a week to maintain a system that actively improves my thinking every day.</p>
+
+      <p class="rv">The vault is not a productivity tool. It is cognitive infrastructure. And like all infrastructure, its value is invisible until it is gone.</p>
+
+    </div>
+  </div>
+</div>
+
+<footer class="post-footer">
+  <div class="footer__inner">
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2026 Sachin Rai. Built with Claude Code.</p>
+      <div class="footer__social">
+        <a href="https://x.com/sachinrai01" target="_blank" rel="noopener noreferrer">Twitter</a>
+        <a href="https://www.linkedin.com/in/sachinr1" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Graph animation
+const canvas = document.getElementById('graphCanvas');
+const ctx = canvas ? canvas.getContext('2d') : null;
+let nodes = [], animFrame;
+
+function resize() {
+  if (!canvas) return;
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+
+function initNodes(count) {
+  nodes = [];
+  for (let i = 0; i < count; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      r: Math.random() < 0.15 ? 5 : Math.random() < 0.35 ? 3 : 2,
+      opacity: 0.3 + Math.random() * 0.5
+    });
+  }
+}
+
+function drawGraph() {
+  if (!ctx || !canvas) return;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw edges
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x;
+      const dy = nodes[i].y - nodes[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 120) {
+        const alpha = (1 - dist / 120) * 0.15;
+        ctx.strokeStyle = `rgba(206,235,19,${alpha})`;
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Draw nodes
+  nodes.forEach(n => {
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(206,235,19,${n.opacity})`;
+    ctx.fill();
+
+    // Update
+    n.x += n.vx;
+    n.y += n.vy;
+    if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+    if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+  });
+
+  animFrame = requestAnimationFrame(drawGraph);
+}
+
+if (canvas) {
+  resize();
+  window.addEventListener('resize', () => { resize(); initNodes(55); });
+  initNodes(55);
+  drawGraph();
+}
+
+// Node count animation
+const countEl = document.getElementById('nodeCountDisplay');
+if (countEl) {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        let cur = 0; const target = 542;
+        const t = setInterval(() => {
+          cur = Math.min(cur + Math.ceil(target / 60), target);
+          e.target.textContent = cur + '+';
+          if (cur >= target) clearInterval(t);
+        }, 20);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  obs.observe(countEl);
+}
+
+// Reveal
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

@@ -226,6 +226,8 @@
     .card__date { font-family: var(--font-mono); font-size: 9px; color: rgba(255,255,255,.25); letter-spacing:.04em; }
     .card__arrow { color: var(--lime); font-size: 15px; transition: transform .2s; }
     .card:hover .card__arrow { transform: translateX(5px); }
+    .card-link { display: contents; }
+    .card-link .card { cursor: pointer; }
 
     /* ── FOOTPRINT STAT CARDS (Pattern 2) ──────────── */
     .footprint {
@@ -483,7 +485,7 @@
       <span>·</span>
       <span>AI + Markets</span>
       <span>·</span>
-      <a href="posts/">Read full post →</a>
+      <a href="posts/portfolio-monitor.html">Read full post →</a>
     </div>
   </div>
 </section>
@@ -497,6 +499,7 @@
     </div>
     <div class="posts-grid">
 
+      <a href="posts/portfolio-monitor.html" class="card-link">
       <article class="card rv">
         <span class="card__cat">AI + Automation</span>
         <h3 class="card__title">How I Built a Portfolio Monitor That Fires Every Morning at 5am</h3>
@@ -506,7 +509,9 @@
           <span class="card__arrow" aria-hidden="true">→</span>
         </div>
       </article>
+      </a>
 
+      <a href="posts/club-winner.html" class="card-link">
       <article class="card rv">
         <span class="card__cat">Sales Intelligence</span>
         <h3 class="card__title">7 Things Every Club Winner Knows That Average Reps Don't</h3>
@@ -516,7 +521,9 @@
           <span class="card__arrow" aria-hidden="true">→</span>
         </div>
       </article>
+      </a>
 
+      <a href="posts/claude-code-retrospective.html" class="card-link">
       <article class="card rv">
         <span class="card__cat">Building in Public</span>
         <h3 class="card__title">Claude Code Changed How I Build — A 30-Day Retrospective</h3>
@@ -526,7 +533,9 @@
           <span class="card__arrow" aria-hidden="true">→</span>
         </div>
       </article>
+      </a>
 
+      <a href="posts/obsidian-vault.html" class="card-link">
       <article class="card rv">
         <span class="card__cat">Knowledge Systems</span>
         <h3 class="card__title">Why My Obsidian Vault Is the Most Valuable Thing I Own</h3>
@@ -536,7 +545,9 @@
           <span class="card__arrow" aria-hidden="true">→</span>
         </div>
       </article>
+      </a>
 
+      <a href="posts/ai-first-outreach.html" class="card-link">
       <article class="card rv">
         <span class="card__cat">AI + Sales</span>
         <h3 class="card__title">The Case for AI-First Outreach: How I Built My Own SDR in a Weekend</h3>
@@ -546,7 +557,9 @@
           <span class="card__arrow" aria-hidden="true">→</span>
         </div>
       </article>
+      </a>
 
+      <a href="posts/autoquant.html" class="card-link">
       <article class="card rv">
         <span class="card__cat">Markets + Trading</span>
         <h3 class="card__title">AutoQuant: What I Learned After 6 Months of Bayesian Signal Grading</h3>
@@ -556,6 +569,7 @@
           <span class="card__arrow" aria-hidden="true">→</span>
         </div>
       </article>
+      </a>
 
     </div>
   </div>
