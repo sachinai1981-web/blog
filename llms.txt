@@ -12,6 +12,7 @@ Sachin Rai writes about the intersection of AI and enterprise GTM:
 
 ## Posts
 
+- [NVIDIA's AI Compute Stack: A Field Guide for Enterprise Sellers](https://sachinai.com/posts/nvidia-data-center-guide.html) — From H100 to Blackwell — the complete hierarchy of NVIDIA's data center hardware, explained for enterprise sellers who need to understand the infrastructure layer.
 - [How I Built a Portfolio Monitor That Fires Every Morning at 5am](https://sachinai.com/posts/portfolio-monitor.html) — Connecting Alpaca, Claude, and launchd to build a fully autonomous pre-market briefing agent that wakes up before I do.
 - [Why My Obsidian Vault Is the Most Valuable Thing I Own](https://sachinai.com/posts/obsidian-vault.html) — 500+ notes. 3 years of weekly compile runs. How turning raw captures into structured intelligence actually compounds.
 - [7 Things Every Club Winner Knows That Average Reps Don't](https://sachinai.com/posts/club-winner.html) — After 7 President's Club wins, here are the patterns I see in every top performer. None of them are tactics.
