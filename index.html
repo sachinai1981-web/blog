@@ -33,8 +33,448 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/css/grove.css" />
+<style>
+/* ── Homepage-specific layout ─────────────────────────────── */
+
+/* Split hero */
+.split-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+  min-height: 640px;
+}
+
+.split-hero__left {
+  background: #161b1f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 64px 80px 64px;
+  position: relative;
+}
+
+.split-hero__right {
+  position: relative;
+  overflow: hidden;
+}
+
+.split-hero__right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 8s ease;
+}
+
+.split-hero__right:hover img {
+  transform: scale(1.03);
+}
+
+.split-hero__eyebrow {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 32px;
+}
+
+.split-hero__title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(3rem, 4.5vw, 6.5rem);
+  font-weight: 300;
+  line-height: 0.92;
+  color: #ffffff;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+}
+
+.split-hero__title em {
+  font-style: italic;
+  color: rgba(255,255,255,0.72);
+}
+
+.split-hero__body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.68);
+  margin-bottom: 48px;
+  max-width: 400px;
+}
+
+.split-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.split-hero__count {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+}
+
+.split-hero__image-label {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  z-index: 2;
+}
+
+/* Bento grid */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(66,66,66,0.18);
+}
+
+.bento-cell {
+  background: #ffffff;
+  overflow: hidden;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.bento-cell--dark {
+  background: #161b1f;
+}
+
+/* Lead post — full width, internal 55/45 split */
+.bento-cell--lead {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  min-height: 480px;
+}
+
+.bento-cell--lead .bento-img {
+  height: 100%;
+  min-height: 480px;
+}
+
+.bento-cell--lead .bento-body {
+  padding: 56px 56px 56px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 1px solid rgba(66,66,66,0.18);
+}
+
+/* Standard cells */
+.bento-cell--std {
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-cell--wide {
+  grid-column: span 2;
+}
+
+.bento-cell--tall {
+  min-height: 420px;
+}
+
+/* Image inside a bento cell */
+.bento-img {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.bento-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.55s ease;
+}
+
+.bento-cell:hover .bento-img img {
+  transform: scale(1.04);
+}
+
+/* Body text inside a standard cell */
+.bento-body {
+  padding: 28px 28px 32px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.bento-body::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #f69368;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.bento-cell:hover .bento-body::after {
+  transform: scaleX(1);
+}
+
+.bento-tag {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9aa8b1;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.bento-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.22;
+  color: #161b1f;
+  margin-bottom: 12px;
+  flex: 1;
+}
+
+.bento-cell--lead .bento-title {
+  font-size: clamp(1.8rem, 2.8vw, 3rem);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.bento-excerpt {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: #666666;
+  margin-bottom: 24px;
+}
+
+.bento-meta {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #bcbec0;
+  margin-top: auto;
+}
+
+.bento-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #161b1f;
+  margin-top: 24px;
+  transition: gap 0.25s ease;
+}
+
+.bento-cell:hover .bento-arrow {
+  gap: 14px;
+}
+
+/* Subscribe panel */
+.bento-subscribe {
+  background: #161b1f;
+  padding: 28px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bento-subscribe__eyebrow {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 16px;
+}
+
+.bento-subscribe__title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1.15;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.bento-subscribe__body {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.52);
+  margin-bottom: 28px;
+}
+
+.bento-subscribe__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bento-subscribe__input {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #ffffff;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.bento-subscribe__input::placeholder { color: rgba(255,255,255,0.3); }
+.bento-subscribe__input:focus { border-color: rgba(255,255,255,0.4); }
+
+.bento-subscribe__btn {
+  background: #f69368;
+  border: none;
+  color: #ffffff;
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 11px 20px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.25s;
+}
+
+.bento-subscribe__btn:hover { background: #e4844c; }
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+
+/* Section divider label */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 28px 0;
+  border-top: 1px solid #424242;
+  border-bottom: 1px solid #424242;
+  margin-bottom: 1px;
+}
+
+.section-label__text {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #9aa8b1;
+}
+
+.section-label__line {
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .split-hero {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .split-hero__left {
+    padding: 120px 28px 56px;
+    min-height: 70vh;
+  }
+
+  .split-hero__right {
+    height: 50vw;
+    min-height: 260px;
+  }
+
+  .bento {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bento-cell--lead {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .bento-cell--lead .bento-img {
+    height: 260px;
+    min-height: unset;
+  }
+
+  .bento-cell--lead .bento-body {
+    border-left: none;
+    border-top: 1px solid rgba(66,66,66,0.18);
+    padding: 28px;
+  }
+}
+
+@media (max-width: 560px) {
+  .bento {
+    grid-template-columns: 1fr;
+  }
+
+  .bento-cell--wide {
+    grid-column: span 1;
+  }
+
+  .split-hero__title {
+    font-size: 3rem;
+  }
+}
+</style>
 </head>
-<body class="hero-page">
+<body>
 
 <div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#161b1f;color:#ffffff;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'Barlow',sans-serif;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid rgba(255,255,255,0.15);">
   <span style="flex:1;opacity:.7;">sachinai.com uses Google Analytics to understand readership. No ads. No fingerprinting.</span>
@@ -73,109 +513,150 @@
 
 <main id="main">
 
-  <!-- HERO -->
-  <section class="hero">
-    <img class="hero__image" src="/nvidia-images/DGX_SuperPOD__superpod-bm-m460-d.jpg" alt="" loading="eager" fetchpriority="high" />
-    <div class="hero__overlay"></div>
-    <div class="hero__content hero__content--right">
-      <p class="hero__label">Field Notes</p>
-      <h1 class="hero__title">Build Log.</h1>
-      <p class="hero__body">AI, trading systems, and enterprise sales — written from the building side.</p>
-      <a href="/archive.html" class="v2-button v2-button--white">Read All</a>
-    </div>
-  </section>
-
-  <!-- CTA SECTION -->
-  <section class="section section--white section--center">
-    <div class="container">
-      <h2 class="section__title">Think Out Loud.</h2>
-      <p class="section__subtitle">One essay per week. No newsletter cadence. No content strategy. Just what I'm actually building, breaking, and learning at the intersection of AI, markets, and sales.</p>
-      <a href="/archive.html" class="v2-button">Browse Archive</a>
-    </div>
-  </section>
-
-  <!-- POST GRID -->
-  <section class="section section--gray" id="posts">
-    <div class="container">
-      <div class="post-grid">
-
-        <a href="/posts/nvidia-data-center-guide.html" class="post-tile post-tile--wide">
-          <img class="post-tile__image" src="/nvidia-images/DGX_SuperPOD__superpod-bm-m460-d.jpg" alt="" loading="lazy" />
-          <div class="post-tile__body">
-            <p class="post-tile__tag">AI Infrastructure · Sales Intelligence</p>
-            <h2 class="post-tile__title">The Complete NVIDIA Data Center Product Guide for 2026</h2>
-            <p class="post-tile__excerpt">Every GPU, NVLink switch, and networking SKU in NVIDIA's data center stack — with the sales intelligence to know which customer buys which product and why.</p>
-            <p class="post-tile__meta">May 15, 2026</p>
-          </div>
-        </a>
-
-        <a href="/posts/portfolio-monitor.html" class="post-tile">
-          <img class="post-tile__image" src="/nvidia-images/DGX_H100__h200-banner-xl-offset-desktop.jpg" alt="" loading="lazy" />
-          <div class="post-tile__body">
-            <p class="post-tile__tag">AI · Automation</p>
-            <h2 class="post-tile__title">I Built a 5am Portfolio Monitor That Texts Me Before the Market Opens</h2>
-            <p class="post-tile__meta">May 10, 2026</p>
-          </div>
-        </a>
-
-        <a href="/posts/club-winner.html" class="post-tile">
-          <img class="post-tile__image" src="/nvidia-images/DGX_SuperPOD__superpod-bm-m460-d.jpg" alt="" loading="lazy" />
-          <div class="post-tile__body">
-            <p class="post-tile__tag">Sales Intelligence</p>
-            <h2 class="post-tile__title">Seven Things I Did Differently to Win 7× Club</h2>
-            <p class="post-tile__meta">May 3, 2026</p>
-          </div>
-        </a>
-
-        <a href="/posts/claude-code-retrospective.html" class="post-tile">
-          <img class="post-tile__image" src="/nvidia-images/DGX_H100__h200-banner-xl-offset-desktop.jpg" alt="" loading="lazy" />
-          <div class="post-tile__body">
-            <p class="post-tile__tag">Building in Public</p>
-            <h2 class="post-tile__title">30 Days of Claude Code: A Retrospective</h2>
-            <p class="post-tile__meta">Apr 28, 2026</p>
-          </div>
-        </a>
-
-        <a href="/posts/obsidian-vault.html" class="post-tile">
-          <img class="post-tile__image" src="/nvidia-images/DGX_SuperPOD__superpod-bm-m460-d.jpg" alt="" loading="lazy" />
-          <div class="post-tile__body">
-            <p class="post-tile__tag">Knowledge Systems</p>
-            <h2 class="post-tile__title">How My Obsidian Vault Became an AI-Queryable Second Brain</h2>
-            <p class="post-tile__meta">Apr 19, 2026</p>
-          </div>
-        </a>
-
-        <a href="/posts/ai-first-outreach.html" class="post-tile">
-          <img class="post-tile__image" src="/nvidia-images/L40S__generative-ai-fg-cc-i1of5-d.jpg" alt="" loading="lazy" />
-          <div class="post-tile__body">
-            <p class="post-tile__tag">AI · Sales</p>
-            <h2 class="post-tile__title">Building an AI-First Outreach Pipeline from Scratch</h2>
-            <p class="post-tile__meta">Apr 12, 2026</p>
-          </div>
-        </a>
-
-        <a href="/posts/autoquant.html" class="post-tile">
-          <img class="post-tile__image" src="/nvidia-images/DGX_H100__h200-banner-xl-offset-desktop.jpg" alt="" loading="lazy" />
-          <div class="post-tile__body">
-            <p class="post-tile__tag">Markets · Trading</p>
-            <h2 class="post-tile__title">AutoQuant: A Bayesian Signal Grader for Options Trading</h2>
-            <p class="post-tile__meta">Apr 5, 2026</p>
-          </div>
-        </a>
-
+  <!-- SPLIT HERO -->
+  <section class="split-hero">
+    <div class="split-hero__left">
+      <p class="split-hero__eyebrow">Field Notes · San Francisco · 2026</p>
+      <h1 class="split-hero__title">Building at the<br/><em>edge of inference.</em></h1>
+      <p class="split-hero__body">AI infrastructure, trading systems, and enterprise sales — written from the building side, not the bleachers.</p>
+      <div class="split-hero__actions">
+        <a href="/archive.html" class="v2-button v2-button--white">Browse Essays</a>
+        <span class="split-hero__count">15 essays published</span>
       </div>
     </div>
+    <div class="split-hero__right">
+      <img src="/nvidia-images/GTC26__jensen-karpathy-dgx-station.jpg"
+           alt="Jensen Huang and Andrej Karpathy at GTC 2026"
+           loading="eager" fetchpriority="high" />
+      <span class="split-hero__image-label">GTC 2026 · Jensen Huang + Andrej Karpathy</span>
+    </div>
   </section>
 
-  <!-- GROVE SEAL DIVIDER -->
-  <div class="grove-seal" aria-hidden="true"></div>
+  <!-- BENTO GRID -->
+  <div class="bento" id="posts">
 
-  <!-- CTA BLOCK -->
-  <section class="cta-block">
-    <div class="container">
-      <h2 class="cta-block__title">Writing Inspires.</h2>
-      <p class="cta-block__body">Twenty years of enterprise sales, three years of building AI systems. The essays are where the two collide.</p>
-      <a href="/about.html" class="v2-button">About Sachin</a>
+    <!-- LEAD: NVIDIA Data Center Guide — full width -->
+    <a href="/posts/nvidia-data-center-guide.html" class="bento-cell bento-cell--lead reveal">
+      <div class="bento-img">
+        <img src="/nvidia-images/Blackwell_Arch__nvidia-blackwell-architecture-bm-m460-d.jpg"
+             alt="NVIDIA Blackwell Architecture" loading="lazy" />
+      </div>
+      <div class="bento-body">
+        <div>
+          <span class="bento-tag">AI Infrastructure · Sales Intelligence</span>
+          <h2 class="bento-title">The Complete NVIDIA Data Center Product Guide for 2026</h2>
+          <p class="bento-excerpt">Every GPU, NVLink switch, and networking SKU in NVIDIA's data center stack — with the sales intelligence to know which customer buys which product and why.</p>
+        </div>
+        <div>
+          <p class="bento-meta">May 15, 2026</p>
+          <span class="bento-arrow">Read essay →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Row 2: 4 × standard cells -->
+    <a href="/posts/autoquant.html" class="bento-cell bento-cell--std reveal reveal-delay-1">
+      <div class="bento-img">
+        <img src="/nvidia-images/H200__h200-kv-bb580_440-d.jpg"
+             alt="NVIDIA H200" loading="lazy" />
+      </div>
+      <div class="bento-body">
+        <span class="bento-tag">Markets · Trading</span>
+        <h2 class="bento-title">AutoQuant: A Bayesian Signal Grader for Options Trading</h2>
+        <p class="bento-meta">Apr 5, 2026</p>
+      </div>
+    </a>
+
+    <a href="/posts/portfolio-monitor.html" class="bento-cell bento-cell--std reveal reveal-delay-2">
+      <div class="bento-img">
+        <img src="/nvidia-images/Hopper_Arch__hopper-arch-transformer-2c50-d.jpg"
+             alt="Hopper transformer engine" loading="lazy" />
+      </div>
+      <div class="bento-body">
+        <span class="bento-tag">AI · Automation</span>
+        <h2 class="bento-title">I Built a 5am Portfolio Monitor That Texts Me Before the Market Opens</h2>
+        <p class="bento-meta">May 10, 2026</p>
+      </div>
+    </a>
+
+    <a href="/posts/claude-code-retrospective.html" class="bento-cell bento-cell--std reveal reveal-delay-3">
+      <div class="bento-img">
+        <img src="/nvidia-images/L40S__llm-training-inference-fg-cc-i2of4-d.jpg"
+             alt="LLM training and inference" loading="lazy" />
+      </div>
+      <div class="bento-body">
+        <span class="bento-tag">Building in Public</span>
+        <h2 class="bento-title">30 Days of Claude Code: A Retrospective</h2>
+        <p class="bento-meta">Apr 28, 2026</p>
+      </div>
+    </a>
+
+    <a href="/posts/club-winner.html" class="bento-cell bento-cell--std reveal reveal-delay-4">
+      <div class="bento-img">
+        <img src="/nvidia-images/L40S__generative-ai-fg-cc-i1of5-d.jpg"
+             alt="Generative AI" loading="lazy" />
+      </div>
+      <div class="bento-body">
+        <span class="bento-tag">Sales Intelligence</span>
+        <h2 class="bento-title">Seven Things I Did Differently to Win 7× Club</h2>
+        <p class="bento-meta">May 3, 2026</p>
+      </div>
+    </a>
+
+    <!-- Row 3: wide + standard + subscribe dark panel -->
+    <a href="/posts/obsidian-vault.html" class="bento-cell bento-cell--std bento-cell--wide reveal reveal-delay-1">
+      <div class="bento-img" style="height:300px;">
+        <img src="/nvidia-images/DGX_SuperPOD__superpod-bm-m460-d.jpg"
+             alt="NVIDIA DGX SuperPOD" loading="lazy" />
+      </div>
+      <div class="bento-body">
+        <span class="bento-tag">Knowledge Systems</span>
+        <h2 class="bento-title">How My Obsidian Vault Became an AI-Queryable Second Brain</h2>
+        <p class="bento-meta">Apr 19, 2026</p>
+      </div>
+    </a>
+
+    <a href="/posts/ai-first-outreach.html" class="bento-cell bento-cell--std reveal reveal-delay-2">
+      <div class="bento-img">
+        <img src="/nvidia-images/Networking_Eth__spectrum-4-bb460_420-d.jpg"
+             alt="NVIDIA Spectrum-4 networking" loading="lazy" />
+      </div>
+      <div class="bento-body">
+        <span class="bento-tag">AI · Sales</span>
+        <h2 class="bento-title">Building an AI-First Outreach Pipeline from Scratch</h2>
+        <p class="bento-meta">Apr 12, 2026</p>
+      </div>
+    </a>
+
+    <!-- Subscribe dark panel -->
+    <div class="bento-cell bento-cell--std bento-cell--dark reveal reveal-delay-3">
+      <div class="bento-subscribe">
+        <p class="bento-subscribe__eyebrow">Field Notes</p>
+        <h3 class="bento-subscribe__title">One essay per week.</h3>
+        <p class="bento-subscribe__body">AI infrastructure, trading systems, and what actually ships — no content strategy, just what I'm building.</p>
+        <form class="bento-subscribe__form" action="https://formspree.io/f/xwvwlybd" method="POST">
+          <input class="bento-subscribe__input" type="email" name="email" placeholder="your@email.com" required />
+          <button class="bento-subscribe__btn" type="submit">Subscribe →</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RECENT POSTS STRIP (keynote crowd image + archive link) -->
+  <section style="display:grid;grid-template-columns:1fr 1fr;min-height:380px;">
+    <div style="overflow:hidden;position:relative;">
+      <img src="/nvidia-images/GTC26__keynote-crowd.jpg"
+           alt="GTC 2026 keynote"
+           loading="lazy"
+           style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;" />
+      <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(22,27,31,0.0) 60%, rgba(22,27,31,0.7));"></div>
+    </div>
+    <div style="background:#161b1f;display:flex;flex-direction:column;justify-content:center;padding:64px 56px;">
+      <p style="font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-bottom:20px;">Archive</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3vw,3.5rem);font-weight:300;line-height:1.05;color:#ffffff;margin-bottom:20px;">15 essays.<br/><em style="color:rgba(255,255,255,0.62);">All still relevant.</em></h2>
+      <p style="font-family:'Barlow',sans-serif;font-size:14px;font-weight:300;line-height:1.7;color:rgba(255,255,255,0.55);margin-bottom:40px;max-width:340px;">Every essay stays live. The archive is where the compounding happens — old posts age into context.</p>
+      <a href="/archive.html" class="v2-button v2-button--white" style="align-self:flex-start;">Browse Archive</a>
     </div>
   </section>
 
@@ -213,6 +694,22 @@
 </footer>
 
 <script src="/css/grove.js"></script>
+<script>
+/* Scroll-reveal via IntersectionObserver */
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!els.length) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
 <script type="module">
 import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';
 function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}
