@@ -1445,3 +1445,72 @@ body.hero-page { padding-top: 0; } /* hero pages — nav overlays hero */
   .compare-col--before { border-right: none; border-bottom: 1px solid rgba(66,66,66,0.15); }
   .article-timeline__entry { grid-template-columns: 28px 1fr; gap: 16px; }
 }
+
+/* ── POST STORY HERO ─────────────────────────── */
+.psh-scroll { height: 300vh; position: relative; }
+.psh-sticky {
+  position: sticky; top: 0; height: 100vh;
+  overflow: hidden; display: flex;
+  align-items: center; justify-content: center;
+}
+.psh-photo {
+  position: absolute; inset: 0;
+  width: 100%; height: 110%; top: -5%;
+  object-fit: cover; object-position: center;
+  will-change: opacity, transform;
+}
+.psh-p1 { opacity: 1; }
+.psh-p2 { opacity: 0; }
+.psh-p3 { opacity: 0; }
+.psh-veil {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75) 0%,
+    rgba(0,0,0,0.35) 40%,
+    rgba(0,0,0,0.15) 100%
+  );
+}
+.psh-text {
+  position: relative; z-index: 2;
+  text-align: center; color: #fff;
+  padding: 0 48px; max-width: 900px;
+}
+.psh-category {
+  display: block;
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  margin-bottom: 28px;
+}
+.psh-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(38px, 5.5vw, 82px);
+  font-weight: 300; line-height: 1.0;
+  letter-spacing: -0.02em; color: #fff;
+  margin-bottom: 28px;
+}
+.psh-meta {
+  display: block;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.45);
+}
+.psh-hint {
+  position: absolute; bottom: 40px; left: 50%; z-index: 3;
+  transform: translateX(-50%);
+  font-family: 'Barlow', sans-serif;
+  font-size: 9px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.psh-hint::before {
+  content: '';
+  width: 1px; height: 48px;
+  background: rgba(255,255,255,0.25);
+  animation: psh-line 1.8s ease-in-out infinite;
+}
+@keyframes psh-line {
+  0%,100% { opacity: 0.2; transform: scaleY(0.4) translateY(-8px); }
+  50% { opacity: 0.8; transform: scaleY(1) translateY(0); }
+}

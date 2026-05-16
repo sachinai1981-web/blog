@@ -117,22 +117,21 @@
 <main id="main">
 
   <!-- ARTICLE HEADER -->
-  <header class="article-header">
-    <div class="article-header__inner">
-      <div class="article-header__text">
-        <p class="article-header__category">AI + Engineering</p>
-        <h1 class="article-header__title">Thirteen Agents in One Saturday.</h1>
-        <p class="article-header__excerpt">I spawned 13 parallel Claude Code agents on a Saturday morning. Each shipped one feature for my trading system. One of them overturned the hypothesis from feature #1.</p>
-        <p class="article-header__date">May 2, 2026 · 9 min read</p>
-      </div>
-      <div class="article-header__image">
-        <img src="/nvidia-images/Blackwell_Arch__nvidia-blackwell-architecture-bm-m460-d.jpg"
-             alt="Multi-agent systems"
-             width="800" height="450"
-             loading="eager" fetchpriority="high" />
-      </div>
+
+<div class="psh-scroll" data-psh>
+  <div class="psh-sticky">
+    <img class="psh-photo psh-p1" src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1800&q=90&auto=format&fit=crop" alt="" loading="eager" fetchpriority="high">
+    <img class="psh-photo psh-p2" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+    <img class="psh-photo psh-p3" src="https://images.unsplash.com/photo-1509228468518-180dd4864904?w=1800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+    <div class="psh-veil"></div>
+    <div class="psh-text">
+      <span class="psh-category">AI + Engineering</span>
+      <h1 class="psh-title">Thirteen Agents in One Saturday.</h1>
+      <span class="psh-meta">May 2, 2026 · 9 min read</span>
     </div>
-  </header>
+    <div class="psh-hint">Scroll</div>
+  </div>
+</div>
 
   <!-- STATS STRIP -->
   <div class="stats-strip">
@@ -410,5 +409,8 @@ import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dis
 function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}
 onCLS(send);onINP(send);onFCP(send);onLCP(send);onTTFB(send);
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="/js/post-story.js"></script>
 </body>
 </html>

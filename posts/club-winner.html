@@ -90,22 +90,20 @@
 
 <main id="main">
 
-  <header class="article-header">
-    <div class="article-header__inner">
-      <div class="article-header__text">
-        <p class="article-header__category">Sales Intelligence</p>
-        <h1 class="article-header__title">7 Things Every Club Winner Knows That Average Reps Don't</h1>
-        <p class="article-header__excerpt">After 7 President's Club wins, here are the patterns I see in every top performer. None of them are tactics.</p>
-        <p class="article-header__date">May 3, 2026 &nbsp;·&nbsp; 7 min read</p>
-      </div>
-      <div class="article-header__image">
-        <img src="/nvidia-images/Hopper_Arch__hopper-arch-transformer-2c50-d.jpg"
-             alt="Conference stage"
-             width="800" height="450"
-             loading="eager" fetchpriority="high" />
-      </div>
+<div class="psh-scroll" data-psh>
+  <div class="psh-sticky">
+    <img class="psh-photo psh-p1" src="https://images.unsplash.com/photo-1518085250887-2f903c200fee?w=1800&q=90&auto=format&fit=crop" alt="" loading="eager" fetchpriority="high">
+    <img class="psh-photo psh-p2" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+    <img class="psh-photo psh-p3" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+    <div class="psh-veil"></div>
+    <div class="psh-text">
+      <span class="psh-category">Sales Intelligence</span>
+      <h1 class="psh-title">7 Things Every Club Winner Knows That Average Reps Don't</h1>
+      <span class="psh-meta">May 3, 2026 · 7 min read</span>
     </div>
-  </header>
+    <div class="psh-hint">Scroll</div>
+  </div>
+</div>
 
   <div class="stats-strip">
     <div class="stats-strip__inner">
@@ -282,5 +280,8 @@ import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dis
 function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}
 onCLS(send);onINP(send);onFCP(send);onLCP(send);onTTFB(send);
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="/js/post-story.js"></script>
 </body>
 </html>

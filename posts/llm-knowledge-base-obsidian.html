@@ -120,29 +120,21 @@
 </nav>
 
 <!-- Article Header -->
-<header class="article-header">
-  <div class="article-header__inner">
-    <div class="article-header__text">
-      <div class="article-header__tags">
-        <span class="article-tag">AI Tools</span>
-        <span class="article-tag">PKM</span>
-        <span class="article-tag">Workflow</span>
-      </div>
-      <h1 class="article-header__title">I Built a Personal LLM Knowledge Base in Obsidian. Here's What It Actually Looks Like.</h1>
-      <p class="article-header__deck">Raw data in, compiled wiki out. How I use Claude Code to turn everything I read and watch into a searchable, queryable knowledge base — and why this is the most underrated AI workflow right now.</p>
-      <div class="article-header__meta">
-        <span>Sachin Rai</span>
-        <span class="article-header__meta-sep">·</span>
-        <span>April 2026</span>
-        <span class="article-header__meta-sep">·</span>
-        <span>8 min read</span>
-      </div>
+
+<div class="psh-scroll" data-psh>
+  <div class="psh-sticky">
+    <img class="psh-photo psh-p1" src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1800&q=90&auto=format&fit=crop" alt="" loading="eager" fetchpriority="high">
+    <img class="psh-photo psh-p2" src="https://images.unsplash.com/photo-1616400619175-5beda3a17896?w=1800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+    <img class="psh-photo psh-p3" src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+    <div class="psh-veil"></div>
+    <div class="psh-text">
+      <span class="psh-category">AI Tools</span>
+      <h1 class="psh-title">I Built a Personal LLM Knowledge Base in Obsidian. Here's What It Actually Looks Like.</h1>
+      <span class="psh-meta">Apr 4, 2026 · 8 min read</span>
     </div>
-    <div class="article-header__image">
-      <img src="/nvidia-images/Newsroom_Multimedia__ai-deeplearning.png" alt="Personal LLM knowledge base in Obsidian" width="800" height="600" loading="eager" />
-    </div>
+    <div class="psh-hint">Scroll</div>
   </div>
-</header>
+</div>
 
 <!-- Stats Strip -->
 <div class="stats-strip">
@@ -462,5 +454,8 @@ import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dis
 function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}
 onCLS(send);onINP(send);onFCP(send);onLCP(send);onTTFB(send);
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="/js/post-story.js"></script>
 </body>
 </html>

@@ -95,28 +95,20 @@
 
 <main id="main">
 
-  <header class="article-header">
-    <div class="article-header__inner">
-      <div class="article-header__text">
-        <p class="article-header__category">Building in Public</p>
-        <h1 class="article-header__title">Claude Code Changed How I Build — A 30-Day Retrospective</h1>
-        <p class="article-header__excerpt">What happened when I stopped planning features and started just building them. The feedback loop is completely different now.</p>
-        <p class="article-header__date">Apr 28, 2026 &nbsp;·&nbsp; 7 min read</p>
-        <div class="article-header__share">
-          <span class="article-header__share-label">Share —</span>
-          <a href="https://twitter.com/intent/tweet?url=https://sachinai.com/posts/claude-code-retrospective.html&text=Claude+Code+Changed+How+I+Build" target="_blank" rel="noopener noreferrer">Twitter</a>
-          <span class="article-header__share-sep">/</span>
-          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://sachinai.com/posts/claude-code-retrospective.html" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        </div>
-      </div>
-      <div class="article-header__image">
-        <img src="/nvidia-images/DGX_A100__dgx-platform-bm-m460-d.jpg"
-             alt="Laptop workspace"
-             width="800" height="450"
-             loading="eager" fetchpriority="high" />
-      </div>
+<div class="psh-scroll" data-psh>
+  <div class="psh-sticky">
+    <img class="psh-photo psh-p1" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1800&q=90&auto=format&fit=crop" alt="" loading="eager" fetchpriority="high">
+    <img class="psh-photo psh-p2" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+    <img class="psh-photo psh-p3" src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+    <div class="psh-veil"></div>
+    <div class="psh-text">
+      <span class="psh-category">Building in Public</span>
+      <h1 class="psh-title">Claude Code Changed How I Build — A 30-Day Retrospective</h1>
+      <span class="psh-meta">Apr 28, 2026 · 7 min read</span>
     </div>
-  </header>
+    <div class="psh-hint">Scroll</div>
+  </div>
+</div>
 
   <div class="article-body">
     <div class="article-body__inner">
@@ -297,5 +289,8 @@ import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dis
 function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}
 onCLS(send);onINP(send);onFCP(send);onLCP(send);onTTFB(send);
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="/js/post-story.js"></script>
 </body>
 </html>
