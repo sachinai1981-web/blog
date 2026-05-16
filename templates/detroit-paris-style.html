@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Detroit Paris Style — Template</title>
+
+<!--
+  DETROIT.PARIS STYLE TEMPLATE
+  Reverse-engineered from: https://www.detroit.paris/
+  Aesthetic: Dark luxury creative agency — black ground, all-caps grotesque,
+             dense portfolio grid, zero border-radius, ultra-minimal nav.
+  Closest Google Fonts approximation:
+    Display/Nav → Space Grotesk (proxies Neue Haas Grotesk / GT America)
+    Body        → Space Grotesk Light
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ── DESIGN TOKENS ───────────────────────────────────────────── */
+:root {
+  --bg:           #0a0a0a;
+  --bg-card:      #111111;
+  --bg-hover:     #1a1a1a;
+  --text:         #ffffff;
+  --text-muted:   #555555;
+  --text-dim:     #333333;
+  --border:       rgba(255,255,255,0.08);
+  --accent:       #ffffff;
+
+  --font:         'Space Grotesk', helvetica, sans-serif;
+
+  --gap:          1px;            /* hairline grid gaps */
+  --gutter:       48px;
+  --gutter-sm:    20px;
+  --max-w:        1600px;
+  --nav-h:        64px;
+
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── RESET ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; width: 100%; }
+
+/* ── SELECTION ───────────────────────────────────────────────── */
+::selection { background: #ffffff; color: #0a0a0a; }
+
+/* ── NAV ─────────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gutter);
+  border-bottom: 1px solid var(--border);
+  mix-blend-mode: normal;
+}
+
+/* Frosted on scroll — toggled via JS */
+.nav.scrolled {
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav__logo {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.nav__links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav__link {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.nav__link:hover { color: var(--text); }
+
+.nav__right {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.nav__social {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.nav__social:hover { color: var(--text); }
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero {
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 var(--gutter) 64px;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Optional: hero background image */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.35;
+  z-index: 0;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-w);
+  width: 100%;
+}
+
+.hero__label {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  display: block;
+}
+
+.hero__title {
+  font-size: clamp(4rem, 8vw, 10rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 0.9;
+  color: var(--text);
+  margin-bottom: 40px;
+  max-width: 900px;
+}
+
+.hero__sub {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.hero__descriptor {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 340px;
+  letter-spacing: 0.02em;
+}
+
+.hero__scroll {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* ── SECTION LABEL ───────────────────────────────────────────── */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px var(--gutter);
+  border-bottom: 1px solid var(--border);
+}
+
+.section-header__label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.section-header__count {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.section-header__link {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.section-header__link:hover { color: var(--text); }
+
+/* ── PORTFOLIO GRID ───────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+  background: var(--border);
+}
+
+.grid--3col { grid-template-columns: repeat(3, 1fr); }
+.grid--2col { grid-template-columns: repeat(2, 1fr); }
+
+.grid-item {
+  background: var(--bg);
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+}
+
+.grid-item--wide { grid-column: span 2; aspect-ratio: 16/9; }
+.grid-item--tall { grid-row: span 2; aspect-ratio: unset; }
+
+.grid-item__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.7s var(--ease-out), opacity 0.4s;
+  opacity: 0.85;
+}
+
+.grid-item:hover .grid-item__img {
+  transform: scale(1.04);
+  opacity: 1;
+}
+
+.grid-item__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  transition: background 0.35s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+}
+
+.grid-item:hover .grid-item__overlay {
+  background: rgba(0,0,0,0.45);
+}
+
+.grid-item__title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffffff;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s, transform 0.3s var(--ease-out);
+}
+
+.grid-item__tag {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.6);
+  margin-top: 4px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s 0.05s, transform 0.3s 0.05s var(--ease-out);
+}
+
+.grid-item:hover .grid-item__title,
+.grid-item:hover .grid-item__tag {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── TALENTS / PROFILE GRID ──────────────────────────────────── */
+.talent-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--gap);
+  background: var(--border);
+}
+
+.talent-item {
+  background: var(--bg);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  position: relative;
+  cursor: pointer;
+}
+
+.talent-item__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.6s var(--ease-out);
+  filter: grayscale(20%);
+}
+
+.talent-item:hover .talent-item__img {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+.talent-item__name {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 20px 16px 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.talent-item:hover .talent-item__name { opacity: 1; }
+
+/* ── MARQUEE ─────────────────────────────────────────────────── */
+.marquee-wrap {
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 80px;
+  animation: marquee 24s linear infinite;
+  width: max-content;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track:hover { animation-play-state: paused; }
+
+.marquee-item {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.marquee-item--accent {
+  color: var(--text);
+}
+
+/* ── STATEMENT SECTION ───────────────────────────────────────── */
+.statement {
+  padding: 120px var(--gutter);
+  border-bottom: 1px solid var(--border);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.statement__number {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  margin-bottom: 48px;
+  display: block;
+}
+
+.statement__text {
+  font-size: clamp(2rem, 4vw, 5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  max-width: 900px;
+}
+
+.statement__text strong {
+  font-weight: 700;
+}
+
+/* ── SERVICES LIST ───────────────────────────────────────────── */
+.services {
+  border-bottom: 1px solid var(--border);
+}
+
+.service-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px var(--gutter);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.25s;
+  cursor: pointer;
+}
+
+.service-row:last-child { border-bottom: none; }
+
+.service-row:hover { background: var(--bg-hover); }
+
+.service-row__name {
+  font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.service-row__meta {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.service-row__tag {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.service-row__arrow {
+  font-size: 18px;
+  color: var(--text-muted);
+  transition: transform 0.25s, color 0.25s;
+}
+
+.service-row:hover .service-row__arrow {
+  transform: translateX(6px);
+  color: var(--text);
+}
+
+/* ── CTA BLOCK ───────────────────────────────────────────────── */
+.cta-block {
+  padding: 120px var(--gutter);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 60px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cta-block__title {
+  font-size: clamp(3rem, 6vw, 8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 0.9;
+  flex: 1;
+}
+
+.cta-block__right {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+.cta-block__body {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-width: 280px;
+  text-align: right;
+}
+
+/* ── BUTTONS ─────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.25s, color 0.25s;
+}
+
+.btn--white {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+
+.btn--white:hover {
+  background: #e0e0e0;
+}
+
+.btn--outline {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.btn--outline:hover {
+  border-color: rgba(255,255,255,0.6);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-muted);
+  padding: 0;
+  letter-spacing: 0.14em;
+}
+
+.btn--ghost:hover { color: var(--text); }
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+.footer {
+  padding: 48px var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  border-top: 1px solid var(--border);
+}
+
+.footer__logo {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.footer__links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.footer__link {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.footer__link:hover { color: var(--text); }
+
+.footer__copy {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+/* ── UTILITY ─────────────────────────────────────────────────── */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+  .talent-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 900px) {
+  :root { --gutter: var(--gutter-sm); }
+  .nav__links { display: none; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .grid--3col { grid-template-columns: repeat(2, 1fr); }
+  .talent-grid { grid-template-columns: repeat(3, 1fr); }
+  .cta-block { flex-direction: column; align-items: flex-start; }
+  .cta-block__body { text-align: left; }
+  .cta-block__right { align-items: flex-start; }
+  .footer { flex-direction: column; align-items: flex-start; gap: 24px; }
+}
+
+@media (max-width: 560px) {
+  .grid { grid-template-columns: 1fr; }
+  .grid-item--wide { grid-column: span 1; }
+  .talent-grid { grid-template-columns: repeat(2, 1fr); }
+  .statement__text { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────────────────────── -->
+<nav class="nav" id="nav">
+  <a href="/" class="nav__logo">Studio Name</a>
+
+  <ul class="nav__links">
+    <li><a href="#talents" class="nav__link">Talents</a></li>
+    <li><a href="#projects" class="nav__link">Projects</a></li>
+    <li><a href="#services" class="nav__link">Services</a></li>
+    <li><a href="#contact" class="nav__link">Contact</a></li>
+  </ul>
+
+  <div class="nav__right">
+    <a href="#" class="nav__social">Instagram ↗</a>
+    <a href="#" class="nav__social">LinkedIn ↗</a>
+  </div>
+</nav>
+
+<!-- ── HERO ───────────────────────────────────────────────────── -->
+<section class="hero">
+  <!-- Optional: <img class="hero__bg" src="your-image.jpg" alt="" /> -->
+  <div class="hero__content">
+    <span class="hero__label">AI Production House · Paris</span>
+    <h1 class="hero__title">Crafting<br/>Culture.</h1>
+    <div class="hero__sub">
+      <p class="hero__descriptor">
+        We produce film, print, 3D, and CGI for luxury brands — powered by AI and human craft.
+      </p>
+      <span class="hero__scroll">Scroll</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ─────────────────────────────────────────────────── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <!-- Duplicate items for seamless loop -->
+    <span class="marquee-item">Film</span>
+    <span class="marquee-item marquee-item--accent">·</span>
+    <span class="marquee-item">Print</span>
+    <span class="marquee-item marquee-item--accent">·</span>
+    <span class="marquee-item">3D</span>
+    <span class="marquee-item marquee-item--accent">·</span>
+    <span class="marquee-item">CGI</span>
+    <span class="marquee-item marquee-item--accent">·</span>
+    <span class="marquee-item">AI Production</span>
+    <span class="marquee-item marquee-item--accent">·</span>
+    <span class="marquee-item">Luxury</span>
+    <span class="marquee-item marquee-item--accent">·</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="marquee-item">Film</span>
+    <span class="marquee-item marquee-item--accent">·</span>
+    <span class="marquee-item">Print</span>
+    <span class="marquee-item marquee-item--accent">·</span>
+    <span class="marquee-item">3D</span>
+    <span class="marquee-item marquee-item--accent">·</span>
+    <span class="marquee-item">CGI</span>
+    <span class="marquee-item marquee-item--accent">·</span>
+    <span class="marquee-item">AI Production</span>
+    <span class="marquee-item marquee-item--accent">·</span>
+    <span class="marquee-item">Luxury</span>
+    <span class="marquee-item marquee-item--accent">·</span>
+  </div>
+</div>
+
+<!-- ── TALENTS ─────────────────────────────────────────────────── -->
+<div id="talents">
+  <div class="section-header">
+    <span class="section-header__label">Talents</span>
+    <a href="#" class="section-header__link">View all →</a>
+  </div>
+
+  <div class="talent-grid">
+    <!-- Replace src with real portrait photos -->
+    <a href="#" class="talent-item">
+      <img class="talent-item__img" src="https://picsum.photos/seed/talent-1/400/533" alt="" loading="lazy" />
+      <span class="talent-item__name">Name One</span>
+    </a>
+    <a href="#" class="talent-item">
+      <img class="talent-item__img" src="https://picsum.photos/seed/talent-2/400/533" alt="" loading="lazy" />
+      <span class="talent-item__name">Name Two</span>
+    </a>
+    <a href="#" class="talent-item">
+      <img class="talent-item__img" src="https://picsum.photos/seed/talent-3/400/533" alt="" loading="lazy" />
+      <span class="talent-item__name">Name Three</span>
+    </a>
+    <a href="#" class="talent-item">
+      <img class="talent-item__img" src="https://picsum.photos/seed/talent-4/400/533" alt="" loading="lazy" />
+      <span class="talent-item__name">Name Four</span>
+    </a>
+    <a href="#" class="talent-item">
+      <img class="talent-item__img" src="https://picsum.photos/seed/talent-5/400/533" alt="" loading="lazy" />
+      <span class="talent-item__name">Name Five</span>
+    </a>
+  </div>
+</div>
+
+<!-- ── STATEMENT ───────────────────────────────────────────────── -->
+<div class="statement">
+  <span class="statement__number">01</span>
+  <p class="statement__text">
+    We sit at the intersection of <strong>human craft</strong> and machine intelligence — producing the images that define what luxury means next.
+  </p>
+</div>
+
+<!-- ── PROJECTS ────────────────────────────────────────────────── -->
+<div id="projects">
+  <div class="section-header">
+    <span class="section-header__label">Projects</span>
+    <span class="section-header__count">16 works</span>
+    <a href="#" class="section-header__link">View all →</a>
+  </div>
+
+  <div class="grid">
+    <a href="#" class="grid-item grid-item--wide">
+      <img class="grid-item__img" src="https://picsum.photos/seed/proj-1/800/450" alt="" loading="lazy" />
+      <div class="grid-item__overlay">
+        <span class="grid-item__title">Project Name</span>
+        <span class="grid-item__tag">Film · 2025</span>
+      </div>
+    </a>
+
+    <a href="#" class="grid-item">
+      <img class="grid-item__img" src="https://picsum.photos/seed/proj-2/400/533" alt="" loading="lazy" />
+      <div class="grid-item__overlay">
+        <span class="grid-item__title">Project Name</span>
+        <span class="grid-item__tag">3D · 2025</span>
+      </div>
+    </a>
+
+    <a href="#" class="grid-item">
+      <img class="grid-item__img" src="https://picsum.photos/seed/proj-3/400/533" alt="" loading="lazy" />
+      <div class="grid-item__overlay">
+        <span class="grid-item__title">Project Name</span>
+        <span class="grid-item__tag">CGI · 2025</span>
+      </div>
+    </a>
+
+    <a href="#" class="grid-item">
+      <img class="grid-item__img" src="https://picsum.photos/seed/proj-4/400/533" alt="" loading="lazy" />
+      <div class="grid-item__overlay">
+        <span class="grid-item__title">Project Name</span>
+        <span class="grid-item__tag">Print · 2025</span>
+      </div>
+    </a>
+
+    <a href="#" class="grid-item">
+      <img class="grid-item__img" src="https://picsum.photos/seed/proj-5/400/533" alt="" loading="lazy" />
+      <div class="grid-item__overlay">
+        <span class="grid-item__title">Project Name</span>
+        <span class="grid-item__tag">Film · 2025</span>
+      </div>
+    </a>
+
+    <a href="#" class="grid-item grid-item--wide">
+      <img class="grid-item__img" src="https://picsum.photos/seed/proj-6/800/450" alt="" loading="lazy" />
+      <div class="grid-item__overlay">
+        <span class="grid-item__title">Project Name</span>
+        <span class="grid-item__tag">AI · 2025</span>
+      </div>
+    </a>
+
+    <a href="#" class="grid-item">
+      <img class="grid-item__img" src="https://picsum.photos/seed/proj-7/400/533" alt="" loading="lazy" />
+      <div class="grid-item__overlay">
+        <span class="grid-item__title">Project Name</span>
+        <span class="grid-item__tag">3D · 2025</span>
+      </div>
+    </a>
+
+    <a href="#" class="grid-item">
+      <img class="grid-item__img" src="https://picsum.photos/seed/proj-8/400/533" alt="" loading="lazy" />
+      <div class="grid-item__overlay">
+        <span class="grid-item__title">Project Name</span>
+        <span class="grid-item__tag">CGI · 2025</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ── SERVICES ────────────────────────────────────────────────── -->
+<div id="services">
+  <div class="section-header">
+    <span class="section-header__label">Services</span>
+  </div>
+
+  <div class="services">
+    <div class="service-row">
+      <span class="service-row__name">Film & Video</span>
+      <div class="service-row__meta">
+        <span class="service-row__tag">Production</span>
+        <span class="service-row__arrow">→</span>
+      </div>
+    </div>
+    <div class="service-row">
+      <span class="service-row__name">3D & CGI</span>
+      <div class="service-row__meta">
+        <span class="service-row__tag">Visual</span>
+        <span class="service-row__arrow">→</span>
+      </div>
+    </div>
+    <div class="service-row">
+      <span class="service-row__name">AI Production</span>
+      <div class="service-row__meta">
+        <span class="service-row__tag">Technology</span>
+        <span class="service-row__arrow">→</span>
+      </div>
+    </div>
+    <div class="service-row">
+      <span class="service-row__name">Print & Campaign</span>
+      <div class="service-row__meta">
+        <span class="service-row__tag">Creative</span>
+        <span class="service-row__arrow">→</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CTA ─────────────────────────────────────────────────────── -->
+<section class="cta-block" id="contact">
+  <h2 class="cta-block__title">Let's work<br/>together.</h2>
+  <div class="cta-block__right">
+    <p class="cta-block__body">We collaborate with brands ready to push the boundary between art and technology.</p>
+    <a href="mailto:hello@studio.com" class="btn btn--white">Get in touch →</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────────────────────── -->
+<footer class="footer">
+  <span class="footer__logo">Studio Name</span>
+  <ul class="footer__links">
+    <li><a href="#" class="footer__link">Talents</a></li>
+    <li><a href="#" class="footer__link">Projects</a></li>
+    <li><a href="#" class="footer__link">Services</a></li>
+    <li><a href="#" class="footer__link">Instagram</a></li>
+    <li><a href="#" class="footer__link">LinkedIn</a></li>
+  </ul>
+  <span class="footer__copy">© 2026 Studio Name. All rights reserved.</span>
+</footer>
+
+<script>
+/* Nav frosted-glass on scroll */
+(function(){
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+})();
+</script>
+
+</body>
+</html>
