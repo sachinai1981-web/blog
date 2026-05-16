@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sachin Rai — AI Systems, Trading, Enterprise Sales</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --bg:          #f5f0e8;
+      --bg-dark:     #141414;
+      --text:        #111111;
+      --text-muted:  #999999;
+      --text-light:  #ffffff;
+      --text-dim:    rgba(255,255,255,0.45);
+      --border:      rgba(0,0,0,0.09);
+      --border-dark: rgba(255,255,255,0.08);
+      --font-serif:  'Fraunces', Georgia, 'Times New Roman', serif;
+      --font-sans:   'DM Sans', system-ui, -apple-system, sans-serif;
+      --pad-x:       clamp(1.5rem, 5vw, 5rem);
+      --max-w:       1240px;
+    }
+
+    /* ─── RESET ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─────────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem var(--pad-x);
+      transition: background 0.3s;
+    }
+
+    .nav.scrolled {
+      background: rgba(245, 240, 232, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav__logo {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 0.8125rem;
+      font-weight: 400;
+      color: var(--text);
+      opacity: 0.55;
+      transition: opacity 0.2s;
+    }
+
+    .nav__links a:hover,
+    .nav__links a.active { opacity: 1; }
+
+    /* ─── HERO ────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      padding-top: 5rem;
+      position: relative;
+    }
+
+    .hero__head {
+      padding: 3.5rem var(--pad-x) 0;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero__headline {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 5.2vw, 5rem);
+      font-weight: 400;
+      line-height: 1.07;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      max-width: 15ch;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s 0.15s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    .hero__foot {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: end;
+      padding: 3rem var(--pad-x) 4rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero__author {
+      opacity: 0;
+      animation: fadeUp 0.8s 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    .hero__name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .hero__role {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    .hero__media {
+      position: relative;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.35s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    .hero__img {
+      width: 100%;
+      height: 42vh;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+
+    /* ─── AWARDS BADGE ──────────────────────────────────────── */
+    .badge {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      background: var(--text);
+      color: var(--text-light);
+      padding: 1rem 0.6rem;
+      font-size: 0.625rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: default;
+    }
+
+    .badge__top {
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      display: block;
+      margin-bottom: 0.5rem;
+      writing-mode: vertical-rl;
+    }
+
+    /* ─── DARK SHOWCASE ────────────────────────────────────── */
+    .showcase {
+      background: var(--bg-dark);
+      overflow: hidden;
+    }
+
+    .showcase__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 340px;
+    }
+
+    .showcase__cell {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .showcase__cell--tall {
+      grid-row: span 1;
+    }
+
+    .showcase__cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.75;
+      transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    .showcase__cell:hover img {
+      opacity: 0.95;
+      transform: scale(1.04);
+    }
+
+    .showcase__cell-label {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.25rem;
+      font-size: 0.6875rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.06em;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+
+    /* ─── 3-COL SECTION ──────────────────────────────────── */
+    .s3 {
+      padding: 7rem var(--pad-x);
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 2fr 2fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: start;
+    }
+
+    .s3 + .s3 {
+      padding-top: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .s-label {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: none;
+      padding-top: 0.5rem;
+    }
+
+    .s-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 2.8vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      color: var(--text);
+    }
+
+    .s-body {
+      font-size: 0.9375rem;
+      line-height: 1.75;
+      color: #555;
+      font-weight: 300;
+      padding-top: 0.5rem;
+    }
+
+    /* ─── EXPERTISE SECTION ──────────────────────────────── */
+    .expertise {
+      border-top: 1px solid var(--border);
+      padding: 6rem var(--pad-x);
+    }
+
+    .expertise__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 2fr 2fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: start;
+    }
+
+    .expertise__statement {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+      font-weight: 400;
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+    }
+
+    .expertise__image-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .expertise__img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      filter: grayscale(0.15);
+      transition: filter 0.4s;
+    }
+
+    .expertise__img:hover { filter: grayscale(0); }
+
+    .expertise__caption {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── SERVICES / SKILLS LIST ─────────────────────────── */
+    .skills-list {
+      border-top: 1px solid var(--border);
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-x) 6rem;
+    }
+
+    .skills-list__header {
+      display: grid;
+      grid-template-columns: 1.2fr 2fr 2fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      padding: 3rem 0 2rem;
+    }
+
+    .skills-list__row {
+      display: grid;
+      grid-template-columns: 1.2fr 2fr 2fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border);
+      align-items: baseline;
+      transition: background 0.2s;
+    }
+
+    .skills-list__row:hover {
+      background: rgba(0,0,0,0.02);
+    }
+
+    .skills-list__num {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .skills-list__name {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: 400;
+    }
+
+    .skills-list__tags {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* ─── WRITING / JOURNAL ──────────────────────────────── */
+    .journal {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      padding: 6rem var(--pad-x);
+    }
+
+    .journal__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .journal__topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid var(--border-dark);
+      padding-bottom: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .journal__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      font-weight: 400;
+    }
+
+    .journal__see-all {
+      font-size: 0.8rem;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+
+    .journal__see-all:hover { opacity: 1; }
+
+    .journal__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .journal__card {
+      cursor: pointer;
+    }
+
+    .journal__card-img-wrap {
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+
+    .journal__card-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      opacity: 0.7;
+      transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    .journal__card:hover .journal__card-img {
+      opacity: 1;
+      transform: scale(1.04);
+    }
+
+    .journal__card-tag {
+      font-size: 0.6875rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .journal__card-title {
+      font-family: var(--font-serif);
+      font-size: 1.0625rem;
+      font-weight: 400;
+      line-height: 1.35;
+    }
+
+    /* ─── CTA STRIP ──────────────────────────────────────── */
+    .cta-strip {
+      background: var(--bg-dark);
+      border-top: 1px solid var(--border-dark);
+      padding: 4rem var(--pad-x);
+    }
+
+    .cta-strip__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .cta-strip__text {
+      font-family: var(--font-serif);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 400;
+      color: var(--text-light);
+      max-width: 30ch;
+      line-height: 1.25;
+    }
+
+    .cta-strip__link {
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--text-light);
+      padding: 0.85rem 2rem;
+      font-size: 0.8125rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .cta-strip__link:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    .footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 3.5rem var(--pad-x);
+    }
+
+    .footer__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .footer__brand {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+    }
+
+    .footer__sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+      font-weight: 300;
+    }
+
+    .footer__nav {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .footer__nav a {
+      font-size: 0.8rem;
+      opacity: 0.45;
+      transition: opacity 0.2s;
+    }
+
+    .footer__nav a:hover { opacity: 1; }
+
+    .footer__right {
+      text-align: right;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* ─── ANIMATIONS ─────────────────────────────────────── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─────────────────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <span class="nav__logo">SR.</span>
+    <ul class="nav__links">
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="#">Journal</a></li>
+      <li><a href="#">Info</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── BADGE ────────────────────────────────────────────── -->
+  <div class="badge" title="AI Builder — San Francisco">
+    <span class="badge__top">AI.</span>
+    Builder
+  </div>
+
+  <!-- ─── HERO ──────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero__head">
+      <h1 class="hero__headline">
+        Building AI systems that turn data into compounding edge.
+      </h1>
+    </div>
+    <div class="hero__foot">
+      <div class="hero__author">
+        <p class="hero__name">Sachin Rai</p>
+        <p class="hero__role">AI Builder &nbsp;·&nbsp; Options Trader &nbsp;·&nbsp; Enterprise Sales, Freshworks</p>
+      </div>
+      <div class="hero__media">
+        <img
+          class="hero__img"
+          src="nvidia-images/L40S__nvidia-ovx-l40s-fg-cc-i5of5-d.jpg"
+          alt="NVIDIA L40S OVX server"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DARK SHOWCASE ─────────────────────────────────────── -->
+  <section class="showcase">
+    <div class="showcase__grid">
+      <div class="showcase__cell">
+        <img
+          src="nvidia-images/Blackwell_Arch__nvidia-blackwell-architecture-bm-m460-d.jpg"
+          alt="Blackwell Architecture"
+        />
+        <span class="showcase__cell-label">Blackwell Architecture</span>
+      </div>
+      <div class="showcase__cell">
+        <img
+          src="nvidia-images/GB200__grace-blackwell-superchip-d.jpg"
+          alt="GB200 Grace Blackwell Superchip"
+        />
+        <span class="showcase__cell-label">Grace Blackwell</span>
+      </div>
+      <div class="showcase__cell">
+        <img
+          src="nvidia-images/Cosmos__humanoid-robot-kitchen-d.jpg"
+          alt="Cosmos humanoid robot"
+        />
+        <span class="showcase__cell-label">Cosmos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── APPROACH ──────────────────────────────────────────── -->
+  <div class="s3 reveal">
+    <p class="s-label">Approach</p>
+    <h2 class="s-heading reveal reveal-d1">Scalable, autonomous, and built to compound.</h2>
+    <p class="s-body reveal reveal-d2">
+      I work at the intersection of quantitative trading, AI systems, and enterprise software.
+      Everything I build runs without me — multi-agent pipelines, signal scanners, and decision
+      engines that get smarter with each trade and each deal.
+    </p>
+  </div>
+
+  <!-- ─── AI SYSTEMS ────────────────────────────────────────── -->
+  <section class="expertise">
+    <div class="expertise__inner">
+      <p class="s-label">AI Systems</p>
+      <p class="expertise__statement reveal reveal-d1">
+        Defining the signal layer that brings data, models, risk, and execution into alignment.
+      </p>
+      <div class="expertise__image-col reveal reveal-d2">
+        <img
+          class="expertise__img"
+          src="nvidia-images/Vera__gpu-rack-open-d.png"
+          alt="NVIDIA Vera GPU rack"
+        />
+        <span class="expertise__caption">Vera — GPU rack architecture</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WHAT I BUILD LIST ─────────────────────────────────── -->
+  <div class="skills-list">
+    <div class="skills-list__header">
+      <p class="s-label">What I build</p>
+      <p class="s-label">System</p>
+      <p class="s-label">Stack</p>
+    </div>
+
+    <div class="skills-list__row reveal">
+      <span class="skills-list__num">01</span>
+      <span class="skills-list__name">AutoQuant — Signal Scanner</span>
+      <span class="skills-list__tags">Claude Sonnet · Python · Alpaca · Options</span>
+    </div>
+    <div class="skills-list__row reveal reveal-d1">
+      <span class="skills-list__num">02</span>
+      <span class="skills-list__name">SwingTrader — Autonomous Execution</span>
+      <span class="skills-list__tags">Multi-agent · launchd · 21–60 DTE · iMessage alerts</span>
+    </div>
+    <div class="skills-list__row reveal reveal-d2">
+      <span class="skills-list__num">03</span>
+      <span class="skills-list__name">Obsidian Personal Wiki</span>
+      <span class="skills-list__tags">Claude Code · compile-wiki · qmd · Obsidian</span>
+    </div>
+    <div class="skills-list__row reveal reveal-d1">
+      <span class="skills-list__num">04</span>
+      <span class="skills-list__name">Portfolio Monitor</span>
+      <span class="skills-list__tags">Python · Alpaca · 5am daily · Email digest</span>
+    </div>
+    <div class="skills-list__row reveal reveal-d2">
+      <span class="skills-list__num">05</span>
+      <span class="skills-list__name">Agent Business — Outreach Pipeline</span>
+      <span class="skills-list__tags">LangGraph · Apollo · AI employees · $5K/mo</span>
+    </div>
+  </div>
+
+  <!-- ─── JOURNAL ───────────────────────────────────────────── -->
+  <section class="journal">
+    <div class="journal__inner">
+      <div class="journal__topbar">
+        <h2 class="journal__title">Recent writing</h2>
+        <a href="#" class="journal__see-all">View all &rarr;</a>
+      </div>
+      <div class="journal__grid">
+        <article class="journal__card reveal">
+          <div class="journal__card-img-wrap">
+            <img
+              class="journal__card-img"
+              src="https://picsum.photos/seed/autoquant-pipeline/800/600"
+              alt="AutoQuant pipeline"
+            />
+          </div>
+          <p class="journal__card-tag">AI Systems</p>
+          <h3 class="journal__card-title">From prompts to pipelines: building the AutoQuant signal stack</h3>
+        </article>
+        <article class="journal__card reveal reveal-d1">
+          <div class="journal__card-img-wrap">
+            <img
+              class="journal__card-img"
+              src="https://picsum.photos/seed/options-21dte/800/600"
+              alt="Options trading"
+            />
+          </div>
+          <p class="journal__card-tag">Trading</p>
+          <h3 class="journal__card-title">Why I trade 21–60 DTE and how the agent decides position size</h3>
+        </article>
+        <article class="journal__card reveal reveal-d2">
+          <div class="journal__card-img-wrap">
+            <img
+              class="journal__card-img"
+              src="https://picsum.photos/seed/claude-code-build/800/600"
+              alt="Claude Code"
+            />
+          </div>
+          <p class="journal__card-tag">Claude Code</p>
+          <h3 class="journal__card-title">Claude Code changed how I think about building software</h3>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA STRIP ─────────────────────────────────────────── -->
+  <div class="cta-strip">
+    <div class="cta-strip__inner">
+      <p class="cta-strip__text">
+        Let's talk about AI systems, enterprise deals, or autonomous trading.
+      </p>
+      <a href="mailto:sachinai1981@gmail.com" class="cta-strip__link">
+        Get in touch &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div>
+        <p class="footer__brand">Sachin Rai</p>
+        <p class="footer__sub">AI Builder &nbsp;·&nbsp; San Francisco</p>
+      </div>
+      <nav class="footer__nav">
+        <a href="#">Home</a>
+        <a href="#">Journal</a>
+        <a href="#">Info</a>
+      </nav>
+      <p class="footer__right">
+        &copy;2026. All rights reserved.<br>
+        sachinai1981@gmail.com
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    /* Nav scroll state */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    /* Scroll reveal */
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>
