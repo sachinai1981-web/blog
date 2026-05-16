@@ -8,19 +8,36 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-CVBY6GSVNZ');
 </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>I built a personal LLM knowledge base in Obsidian. Here's what it actually looks like — Sachin Rai</title>
+  <title>I built a personal LLM knowledge base in Obsidian. Here's what it actually looks like. — Sachin Rai</title>
   <meta name="description" content="Raw data in, compiled wiki out. How I use Claude Code to turn everything I read and watch into a searchable, queryable knowledge base — and why this is the most underrated AI workflow right now." />
   <meta name="author" content="Sachin Rai" />
   <meta name="robots" content="index, follow" />
   <meta name="keywords" content="LLM knowledge base, Obsidian AI workflow, personal knowledge management AI, Claude Code Obsidian, AI wiki builder, PKM AI, compile wiki, AI knowledge management 2026" />
   <link rel="canonical" href="https://sachinai.com/posts/llm-knowledge-base-obsidian.html" />
 
-  <!-- Structured Data -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://sachinai.com/posts/llm-knowledge-base-obsidian.html" />
+  <meta property="og:title" content="I built a personal LLM knowledge base in Obsidian. Here's what it actually looks like." />
+  <meta property="og:description" content="Raw data in, compiled wiki out. How I use Claude Code to turn everything I read and watch into a searchable, queryable knowledge base." />
+  <meta property="og:image" content="https://picsum.photos/seed/llm-obsidian-kb/1200/630" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Sachin Rai" />
+  <meta property="article:published_time" content="2026-04-04" />
+  <meta property="article:author" content="Sachin Rai" />
+  <meta property="article:tag" content="AI Tools" />
+  <meta property="article:tag" content="Obsidian" />
+  <meta property="article:tag" content="PKM" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="I built a personal LLM knowledge base in Obsidian. Here's what it actually looks like." />
+  <meta name="twitter:description" content="Raw data in, compiled wiki out. The underrated AI workflow nobody is talking about." />
+  <meta name="twitter:image" content="https://picsum.photos/seed/llm-obsidian-kb/1200/630" />
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -43,576 +60,9 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://sachinai.com/posts/llm-knowledge-base-obsidian.html"
-    },
-    "isPartOf": {
-      "@type": "Blog",
-      "@id": "https://sachinai.com/",
-      "name": "Sachin Rai — Where AI Meets Enterprise Selling"
     }
   }
   </script>
-
-  <!-- GA4 — replace G-XXXXXXXXXX with your Measurement ID -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script> -->
-
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://sachinai.com/posts/llm-knowledge-base-obsidian.html" />
-  <meta property="og:title" content="I built a personal LLM knowledge base in Obsidian. Here's what it actually looks like." />
-  <meta property="og:description" content="Raw data in, compiled wiki out. How I use Claude Code to turn everything I read and watch into a searchable, queryable knowledge base." />
-  <meta property="og:image" content="https://picsum.photos/seed/llm-obsidian-kb/1200/630" />
-  <meta property="og:site_name" content="Sachin Rai" />
-  <meta property="article:published_time" content="2026-04-04" />
-  <meta property="article:author" content="Sachin Rai" />
-  <meta property="article:tag" content="AI Tools" />
-  <meta property="article:tag" content="Obsidian" />
-  <meta property="article:tag" content="PKM" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="I built a personal LLM knowledge base in Obsidian. Here's what it actually looks like." />
-  <meta name="twitter:description" content="Raw data in, compiled wiki out. The underrated AI workflow nobody is talking about." />
-  <meta name="twitter:image" content="https://picsum.photos/seed/llm-obsidian-kb/1200/630" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet" />
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:           #faf9f6;
-      --bg-2:         #f3f1ea;
-      --surface:      #eceae1;
-      --border:       #dedad0;
-      --border-light: #eae8de;
-      --ink:          #1c1a16;
-      --ink-2:        #6a6455;
-      --ink-3:        #a09488;
-      --amber:        #c96b1a;
-      --amber-light:  #fdf3e7;
-      --amber-border: #f0c898;
-      --navy:         #0f1221;
-      --navy-2:       #1a2038;
-      --blue:         #1d4ed8;
-      --blue-light:   #dbeafe;
-      --blue-border:  #bfdbfe;
-      --green:        #15803d;
-      --green-light:  #dcfce7;
-      --green-border: #bbf7d0;
-      --purple:       #7c3aed;
-      --purple-light: #ede9fe;
-      --purple-border:#c4b5fd;
-    }
-
-    body {
-      font-family: 'DM Sans', system-ui, sans-serif;
-      background: var(--bg); color: var(--ink); line-height: 1.6;
-    }
-
-    /* ── NAV ─────────────────────────── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(250,249,246,0.92);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border); padding: 0 2rem;
-    }
-    .nav-inner {
-      max-width: 800px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between; height: 58px;
-    }
-    .nav-logo {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.05rem; font-weight: 700;
-      color: var(--ink); text-decoration: none; letter-spacing: -0.02em;
-    }
-    .nav-logo span { color: var(--amber); }
-    .nav-back {
-      font-size: 0.8rem; font-weight: 500; color: var(--ink-2);
-      text-decoration: none; display: flex; align-items: center; gap: 0.3rem;
-      transition: color 0.15s;
-    }
-    .nav-back:hover { color: var(--ink); }
-
-    /* ── HERO IMAGE ──────────────────── */
-    .post-hero {
-      width: 100%; max-width: 800px; margin: 0 auto;
-      padding: 2.5rem 2rem 0;
-    }
-    .post-hero-img {
-      width: 100%; height: 340px; object-fit: cover;
-      border-radius: 16px; display: block;
-    }
-
-    /* ── ARTICLE ─────────────────────── */
-    article { max-width: 680px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
-
-    .post-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    .tag {
-      font-size: 0.67rem; font-weight: 600; padding: 0.18rem 0.55rem;
-      border-radius: 100px; letter-spacing: 0.03em;
-    }
-    .tag-ai     { background: var(--blue-light);   color: var(--blue); }
-    .tag-tool   { background: var(--amber-light);  color: var(--amber); }
-    .tag-pkm    { background: var(--purple-light); color: var(--purple); }
-
-    h1 {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: clamp(1.85rem, 4.5vw, 2.7rem);
-      font-weight: 700; line-height: 1.12;
-      color: var(--ink); letter-spacing: -0.025em; margin-bottom: 1.25rem;
-    }
-
-    .post-meta {
-      display: flex; align-items: center; gap: 1rem;
-      font-size: 0.78rem; color: var(--ink-3);
-      padding-bottom: 2rem; border-bottom: 1px solid var(--border-light);
-      margin-bottom: 2.5rem; flex-wrap: wrap;
-    }
-    .author-chip { display: flex; align-items: center; gap: 0.45rem; }
-    .author-avatar {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--navy), var(--navy-2));
-      display: flex; align-items: center; justify-content: center;
-      color: white; font-size: 0.65rem; font-weight: 600;
-    }
-
-    /* body */
-    .post-body { font-size: 1.05rem; line-height: 1.82; color: var(--ink-2); }
-    .post-body h2 {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.5rem; font-weight: 700;
-      color: var(--ink); margin: 2.75rem 0 1rem; letter-spacing: -0.02em;
-    }
-    .post-body h3 {
-      font-size: 1.05rem; font-weight: 600;
-      color: var(--ink); margin: 1.75rem 0 0.6rem;
-    }
-    .post-body p { margin-bottom: 1.3rem; }
-    .post-body ul, .post-body ol { padding-left: 1.5rem; margin-bottom: 1.3rem; }
-    .post-body li { margin-bottom: 0.5rem; }
-    .post-body strong { color: var(--ink); font-weight: 600; }
-    .post-body em { font-style: italic; }
-
-    /* section image */
-    .section-img {
-      width: 100%; height: 220px; object-fit: cover;
-      border-radius: 12px; margin: 2.5rem 0;
-    }
-
-    /* callout */
-    .callout {
-      background: var(--amber-light); border-left: 3px solid var(--amber);
-      border-radius: 0 10px 10px 0; padding: 1.25rem 1.5rem;
-      margin: 2rem 0; font-size: 0.95rem;
-    }
-    .callout p { margin: 0; color: var(--ink-2); }
-    .callout.blue {
-      background: var(--blue-light);
-      border-left-color: var(--blue);
-    }
-    .callout.blue p { color: #1e3a8a; }
-    .callout.purple {
-      background: var(--purple-light);
-      border-left-color: var(--purple);
-    }
-    .callout.purple p { color: #4c1d95; }
-
-    /* pipeline step card */
-    .step-card {
-      background: var(--bg-2); border: 1px solid var(--border);
-      border-radius: 14px; padding: 1.5rem 1.6rem; margin: 1.25rem 0;
-      display: grid; grid-template-columns: 2.75rem 1fr; gap: 1rem; align-items: start;
-    }
-    .step-num {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.6rem; font-weight: 700; line-height: 1;
-      color: var(--amber); padding-top: 0.15rem;
-    }
-    .step-label {
-      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.3rem;
-    }
-    .step-title {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.05rem; font-weight: 700; color: var(--ink);
-      margin-bottom: 0.45rem; letter-spacing: -0.01em; line-height: 1.3;
-    }
-    .step-body { font-size: 0.875rem; color: var(--ink-2); line-height: 1.7; margin: 0; }
-
-    /* code block */
-    .code-block {
-      background: var(--navy); border-radius: 12px;
-      padding: 1.25rem 1.5rem; margin: 1.5rem 0; overflow-x: auto;
-    }
-    .code-block code {
-      font-family: 'Menlo', 'Monaco', 'Cascadia Code', monospace;
-      font-size: 0.82rem; color: rgba(255,255,255,0.82); line-height: 1.7;
-      white-space: pre;
-    }
-    .code-comment { color: rgba(255,255,255,0.35); }
-    .code-path { color: #f0c898; }
-    .code-arrow { color: var(--amber); }
-
-    /* highlight block */
-    .highlight {
-      background: var(--navy);
-      border-radius: 16px; padding: 2.5rem 2rem;
-      margin: 3rem 0;
-    }
-    .highlight-eyebrow {
-      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--amber-border);
-      margin-bottom: 0.75rem; display: block;
-    }
-    .highlight h2 {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.55rem; font-weight: 700; letter-spacing: -0.025em;
-      color: #fff; margin: 0 0 1rem; line-height: 1.25;
-    }
-    .highlight p {
-      font-size: 0.925rem; color: rgba(255,255,255,0.68);
-      line-height: 1.8; margin-bottom: 1rem;
-    }
-    .highlight p:last-child { margin-bottom: 0; }
-    .highlight strong { color: rgba(255,255,255,0.92); }
-
-    /* quote */
-    blockquote {
-      border-left: 3px solid var(--amber);
-      padding: 0.5rem 1.5rem; margin: 2rem 0;
-      font-style: italic; color: var(--ink-3); font-size: 1rem;
-    }
-
-    /* stat row */
-    .stat-row {
-      display: flex; gap: 1.5rem; flex-wrap: wrap;
-      background: var(--surface); border-radius: 12px;
-      padding: 1.25rem 1.5rem; margin: 2rem 0;
-    }
-    .stat-item { display: flex; flex-direction: column; gap: 0.15rem; }
-    .stat-num {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.65rem; font-weight: 700; letter-spacing: -0.04em;
-      color: var(--amber); line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--ink-3);
-    }
-
-    /* subscribe */
-    .sub-card {
-      background: var(--navy); border-radius: 16px; padding: 2.5rem;
-      margin: 3.5rem 0 0; text-align: center;
-    }
-    .sub-card-eyebrow {
-      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--amber); margin-bottom: 0.5rem;
-    }
-    .sub-card h3 {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em;
-      color: #fff; margin-bottom: 0.5rem;
-    }
-    .sub-card p { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 1.5rem; }
-    .sub-form { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
-    .sub-input {
-      font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-      color: #fff; border-radius: 100px; padding: 0.7rem 1.25rem; outline: none;
-      width: 240px; transition: border-color 0.2s;
-    }
-    .sub-input::placeholder { color: rgba(255,255,255,0.3); }
-    .sub-input:focus { border-color: var(--amber); }
-    .sub-btn {
-      font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 700;
-      background: var(--amber); color: #fff; border: none;
-      padding: 0.7rem 1.5rem; border-radius: 100px; cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .sub-btn:hover { opacity: 0.85; }
-
-    /* post nav */
-    .post-nav { border-top: 1px solid var(--border-light); padding-top: 2rem; margin-top: 3rem; }
-    .back-link {
-      font-size: 0.875rem; color: var(--ink-3); text-decoration: none;
-      display: inline-flex; align-items: center; gap: 0.4rem; transition: color 0.15s;
-    }
-    .back-link:hover { color: var(--ink); }
-
-    /* footer */
-    footer { border-top: 1px solid var(--border); padding: 2rem; }
-    .footer-inner {
-      max-width: 800px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-    }
-    footer p { font-size: 0.77rem; color: var(--ink-3); }
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a {
-      font-size: 0.77rem; color: var(--ink-3); text-decoration: none; transition: color 0.15s;
-    }
-    .footer-links a:hover { color: var(--ink); }
-
-    @media (max-width: 640px) {
-      .step-card { grid-template-columns: 1fr; gap: 0.5rem; }
-      .step-num { font-size: 1.1rem; }
-      .stat-row { gap: 1rem; }
-    }
-  
-  /* ── Reading progress bar ── */
-  .read-progress {
-    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
-    background: #E63946; z-index: 200;
-    box-shadow: 0 0 8px rgba(230,57,70,0.6);
-    transition: width 0.1s linear;
-    pointer-events: none;
-  }
-
-  </style>
-
-  <script>
-  function handleSub(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('.sub-btn');
-    const input = e.target.querySelector('.sub-input');
-    btn.textContent = 'Sending…'; btn.disabled = true;
-    fetch('https://formspree.io/f/xwvwlybd', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: input.value, source: 'llm-knowledge-base post' })
-    })
-    .then(r => r.json())
-    .then(data => {
-      if (data.ok) {
-        btn.textContent = 'You\'re in ✓'; btn.style.background = '#16a34a'; btn.disabled = false;
-        input.value = '';
-        setTimeout(() => { btn.textContent = 'Notify me →'; btn.style.background = ''; }, 4000);
-      } else { btn.textContent = 'Try again'; btn.style.background = '#dc2626'; btn.disabled = false; }
-    })
-    .catch(() => { btn.textContent = 'Try again'; btn.style.background = '#dc2626'; btn.disabled = false; });
-  }
-  </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
-<style id="design-genius-override">
-  :root {
-    --paper:    #F4F3EE !important;
-    --paper-2:  #EAE8E1 !important;
-    --ink:      #0A0A0A !important;
-    --ink-2:    #1a1a1a !important;
-    --ink-mute: #6b6b66 !important;
-    --hairline: #cfccc1 !important;
-    --red:    #E63946;
-    --orange: #F77F00;
-    --green:  #2A9D5F;
-    --amber:  #F77F00 !important;
-    --forest: #0A0A0A !important;
-    --forest-btn: #E63946 !important;
-    --forest-hover: #1a1a1a !important;
-    --cream: #F4F3EE !important;
-    --cream-light: #F4F3EE !important;
-    --cream-card: #EAE8E1 !important;
-    --tan: #DDD8C8 !important;
-    --d-font: 'Archivo Black', system-ui, sans-serif;
-    --s-font: 'Source Serif 4', Georgia, serif;
-    --m-font: 'JetBrains Mono', ui-monospace, monospace;
-    --font-d: 'Archivo Black', system-ui, sans-serif;
-    --font-s: 'Source Serif 4', Georgia, serif;
-    --font-m: 'JetBrains Mono', ui-monospace, monospace;
-  }
-  body {
-    background: #F4F3EE !important;
-    color: #0A0A0A !important;
-    font-family: 'Inter', system-ui, sans-serif !important;
-  }
-  body::before {
-    content: ''; position: fixed; inset: 0; z-index: 50;
-    pointer-events: none; opacity: 0.06;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%230a0a0a'/%3E%3C/svg%3E");
-    background-size: 4px 4px; mix-blend-mode: multiply;
-  }
-  body::after{content:'';position:fixed;inset:0;z-index:99;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px 200px;mix-blend-mode:overlay;}
-  /* Nav transformation */
-  nav {
-    background: #F4F3EE !important;
-    border-bottom: 2px solid #0A0A0A !important;
-    padding: 1rem 1.5rem !important;
-  }
-  .nav-inner {
-    max-width: 1400px !important;
-    margin: 0 auto !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-  }
-  .nav-logo {
-    font-family: 'Archivo Black', system-ui, sans-serif !important;
-    font-size: 0.95rem !important;
-    letter-spacing: -0.02em !important;
-    text-transform: uppercase !important;
-    color: #0A0A0A !important;
-    position: relative !important;
-    padding-left: 2.6rem !important;
-  }
-  .nav-logo::before {
-    content: ''; position: absolute; left: 0; top: 50%;
-    transform: translateY(-50%);
-    width: 10px; height: 10px;
-    background: #E63946;
-    box-shadow: 14px 0 0 #F77F00, 28px 0 0 #2A9D5F;
-  }
-  .nav-logo span { color: #E63946 !important; }
-  .nav-back, .back-link {
-    font-family: 'JetBrains Mono', ui-monospace, monospace !important;
-    font-size: 0.7rem !important;
-    letter-spacing: 0.16em !important;
-    text-transform: uppercase !important;
-    color: #0A0A0A !important;
-    padding: 0.5rem 1rem !important;
-    border: 2px solid #0A0A0A !important;
-    background: #F4F3EE !important;
-    transition: background 0.2s, color 0.2s !important;
-  }
-  .nav-back:hover, .back-link:hover {
-    background: #E63946 !important;
-    color: #F4F3EE !important;
-    border-color: #E63946 !important;
-  }
-  /* Headings — Archivo Black bauhaus */
-  h1, h2, .post-title, .article-title, [class*="title"] {
-    font-family: 'Archivo Black', system-ui, sans-serif !important;
-    color: #0A0A0A !important;
-    letter-spacing: -0.025em !important;
-    line-height: 1 !important;
-  }
-  h3, h4 {
-    font-family: 'Archivo Black', system-ui, sans-serif !important;
-    color: #0A0A0A !important;
-    letter-spacing: -0.02em !important;
-    text-transform: uppercase;
-  }
-  /* Body prose — Source Serif for readability */
-  article p, .post-content p, .article-body p, main p {
-    font-family: 'Source Serif 4', Georgia, serif !important;
-    font-size: 1.075rem !important;
-    line-height: 1.65 !important;
-    color: #1a1a1a !important;
-  }
-  article a, .post-content a, main a {
-    color: #E63946 !important;
-    text-decoration: underline !important;
-    text-decoration-thickness: 1.5px !important;
-    text-underline-offset: 3px !important;
-    transition: color 0.2s;
-  }
-  article a:hover, .post-content a:hover, main a:hover { color: #F77F00 !important; }
-  /* Tags / pill / chip — repaint */
-  .tag, [class*="chip"], [class*="badge"], .post-tag {
-    font-family: 'JetBrains Mono', ui-monospace, monospace !important;
-    font-size: 0.55rem !important;
-    letter-spacing: 0.18em !important;
-    text-transform: uppercase !important;
-    padding: 0.25rem 0.55rem !important;
-    border: 1.5px solid #0A0A0A !important;
-    color: #0A0A0A !important;
-    background: transparent !important;
-    border-radius: 0 !important;
-  }
-  .tag:nth-child(3n+1), [class*="tag-feat"] { background: #E63946 !important; color: #F4F3EE !important; border-color: #E63946 !important; }
-  .tag:nth-child(3n+2), [class*="tag-ai"] { background: #F77F00 !important; color: #F4F3EE !important; border-color: #F77F00 !important; }
-  .tag:nth-child(3n), [class*="tag-tool"] { background: #2A9D5F !important; color: #F4F3EE !important; border-color: #2A9D5F !important; }
-  /* Buttons */
-  button, .btn, [class*="cta"], .submit-btn {
-    border-radius: 0 !important;
-    font-family: 'Archivo Black', system-ui, sans-serif !important;
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase !important;
-  }
-  /* Footer */
-  footer {
-    background: #EAE8E1 !important;
-    color: #0A0A0A !important;
-    border-top: 2px solid #0A0A0A !important;
-  }
-  footer a { color: #0A0A0A !important; }
-  footer a:hover { color: #E63946 !important; }
-  /* Block quotes */
-  blockquote {
-    border-left: 4px solid #E63946 !important;
-    background: #EAE8E1 !important;
-    color: #0A0A0A !important;
-    font-family: 'Source Serif 4', Georgia, serif !important;
-    font-style: italic !important;
-    padding: 1.25rem 1.5rem !important;
-  }
-  /* Code blocks */
-  pre, code {
-    font-family: 'JetBrains Mono', ui-monospace, monospace !important;
-    background: #0A0A0A !important;
-    color: #F4F3EE !important;
-    border-radius: 0 !important;
-  }
-  pre { border: 2px solid #0A0A0A !important; padding: 1.25rem !important; }
-  code { padding: 0.15em 0.4em !important; }
-  /* Images / cover */
-  .cover-image, .article-cover, .lazy-wrap {
-    border: 2px solid #0A0A0A !important;
-    border-radius: 0 !important;
-  }
-  /* Author / share / footer-meta cards — flatten + repaint */
-  .author-card, .share-section, .related-posts, .post-footer {
-    background: #F4F3EE !important;
-    border: 2px solid #0A0A0A !important;
-    border-radius: 0 !important;
-  }
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  }
-
-  /* ── DARK SECTION CONTRAST FIX ──
-     The blanket `article p { color: #1a1a1a }` rule above kills text inside
-     navy-background blocks (.highlight, .code-block, .sub-card). Force light text. */
-  .highlight, .code-block, .sub-card {
-    background: #0f1221 !important;
-    border: 2px solid #0A0A0A !important;
-    border-radius: 0 !important;
-  }
-  .highlight .highlight-eyebrow,
-  .sub-card .sub-card-eyebrow {
-    color: #F77F00 !important;
-    font-family: 'JetBrains Mono', ui-monospace, monospace !important;
-  }
-  .highlight h2,
-  .highlight h3,
-  .sub-card h3 {
-    color: #F4F3EE !important;
-    font-family: 'Archivo Black', system-ui, sans-serif !important;
-  }
-  article .highlight p,
-  article .sub-card p,
-  .highlight p,
-  .sub-card p {
-    color: rgba(244, 243, 238, 0.85) !important;
-  }
-  .highlight strong,
-  .sub-card strong {
-    color: #F4F3EE !important;
-    font-weight: 700 !important;
-  }
-  .highlight a,
-  .sub-card a {
-    color: #F77F00 !important;
-  }
-  .code-block code,
-  .code-block pre {
-    color: rgba(244, 243, 238, 0.92) !important;
-    background: transparent !important;
-    border: 0 !important;
-  }
-</style>
-
 
   <script type="application/ld+json">
   {
@@ -625,13 +75,20 @@
     ]
   }
   </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23161b1f'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='13' fill='%23ffffff'>SR</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/grove.css" />
 </head>
-<body>
-<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0A0A0A;color:#F4F3EE;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;border-top:2px solid #E63946;">
-  <span style="flex:1;opacity:.8;">↳ SACHINAI.COM uses analytics to understand what people read. No ads. Data stays in Google Analytics.</span>
+<body style="padding-top:60px;">
+
+<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--grove-ink);color:var(--grove-paper);padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:var(--grove-font-sans);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;border-top:1px solid var(--grove-rule);">
+  <span style="flex:1;opacity:.7;">Analytics help understand what people read. No ads. Data stays in Google Analytics.</span>
   <div style="display:flex;gap:.5rem;flex-shrink:0;">
-    <button onclick="srConsent('granted')" style="padding:.4rem 1rem;background:#E63946;color:#F4F3EE;border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
-    <button onclick="srConsent('denied')" style="padding:.4rem 1rem;background:transparent;color:rgba(244,243,238,.55);border:1px solid rgba(244,243,238,.25);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
+    <button onclick="srConsent('granted')" style="padding:.4rem 1rem;background:var(--grove-paper);color:var(--grove-ink);border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
+    <button onclick="srConsent('denied')" style="padding:.4rem 1rem;background:transparent;color:rgba(244,241,232,.5);border:1px solid rgba(244,241,232,.2);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
   </div>
 </div>
 <script>
@@ -647,129 +104,165 @@
 })();
 </script>
 
-<div class="read-progress" id="readProgress"></div>
-
-
-  <nav>
-    <div class="nav-inner">
-      <a class="nav-logo" href="https://sachinai.com/">Sachin<span>.</span></a>
-      <a href="https://sachinai.com/" class="nav-back">← All posts</a>
+<nav class="navbar navbar--dark" id="navbar">
+  <div class="navbar-inner">
+    <div class="navbar-left">
+      <a href="/" class="navbar__link">Writing</a>
+      <a href="/tools.html" class="navbar__link">Tools</a>
     </div>
-  </nav>
-
-  <div class="post-hero">
-    <img
-      class="post-hero-img"
-      src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1400&h=680&fit=crop&auto=format&q=80"
-      alt="Open books and library representing a personal knowledge base"
-      loading="eager"
-    />
+    <div class="navbar-center">
+      <a href="/" class="navbar__logo-link">◆ SACHIN RAI</a>
+    </div>
+    <div class="navbar-right">
+      <a href="/about.html" class="navbar__link">About</a>
+    </div>
   </div>
+</nav>
 
-  <article>
-
-    <div class="post-tags">
-      <span class="tag tag-ai">AI Tools</span>
-      <span class="tag tag-pkm">PKM</span>
-      <span class="tag tag-tool">Workflow</span>
-    </div>
-
-    <h1>I built a personal LLM knowledge base in Obsidian. Here's what it actually looks like.</h1>
-
-    <div class="post-meta">
-      <div class="author-chip">
-        <div class="author-avatar">SR</div>
-        <span>Sachin Rai</span>
+<!-- Article Header -->
+<header class="article-header">
+  <div class="article-header__inner">
+    <div class="article-header__text">
+      <div class="article-header__tags">
+        <span class="article-tag">AI Tools</span>
+        <span class="article-tag">PKM</span>
+        <span class="article-tag">Workflow</span>
       </div>
-      <span>April 2026</span>
-      <span>8 min read</span>
+      <h1 class="article-header__title">I Built a Personal LLM Knowledge Base in Obsidian. Here's What It Actually Looks Like.</h1>
+      <p class="article-header__deck">Raw data in, compiled wiki out. How I use Claude Code to turn everything I read and watch into a searchable, queryable knowledge base — and why this is the most underrated AI workflow right now.</p>
+      <div class="article-header__meta">
+        <span>Sachin Rai</span>
+        <span class="article-header__meta-sep">·</span>
+        <span>April 2026</span>
+        <span class="article-header__meta-sep">·</span>
+        <span>8 min read</span>
+      </div>
     </div>
+    <div class="article-header__image">
+      <img src="https://picsum.photos/seed/library-books/800/600" alt="Personal LLM knowledge base in Obsidian" width="800" height="600" loading="eager" />
+    </div>
+  </div>
+</header>
 
-    <div class="post-body">
+<!-- Stats Strip -->
+<div class="stats-strip">
+  <div class="stats-strip__inner">
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="270" data-prefix="~">0</span>
+      <span class="stats-strip__label">Notes in Vault</span>
+    </div>
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="400" data-suffix="K+">0</span>
+      <span class="stats-strip__label">Words Compiled</span>
+    </div>
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="0">0</span>
+      <span class="stats-strip__label">Notes Written Manually</span>
+    </div>
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="3">0</span>
+      <span class="stats-strip__label">Lenses Per File</span>
+    </div>
+  </div>
+</div>
+
+<!-- Article Body -->
+<div class="article-body">
+  <div class="article-body__inner">
+
+    <aside class="article-toc">
+      <div class="article-toc__label">Contents</div>
+      <nav>
+        <a class="article-toc__link" href="#pipeline">The pipeline</a>
+        <a class="article-toc__link" href="#ide">Why Obsidian</a>
+        <a class="article-toc__link" href="#scale">At scale</a>
+        <a class="article-toc__link" href="#extra">The extra tool</a>
+        <a class="article-toc__link" href="#start">How to start</a>
+      </nav>
+    </aside>
+
+    <div class="article-content">
 
       <p>Here's something I've noticed: most people using AI are spending their tokens on code. I've shifted mine — a large fraction of my AI throughput now goes into manipulating <em>knowledge</em>, not code. Stored as markdown and images, maintained by an LLM, viewable in Obsidian.</p>
 
-      <p>This is the most underrated AI workflow I've found. And after running it for several months, I can tell you exactly what it looks like in practice and why I think someone is going to build an incredible product out of this pattern.</p>
+      <p>This is the most underrated AI workflow I've found. And after running it for several months, I can tell you exactly what it looks like in practice — and why I think someone is going to build an incredible product out of this pattern.</p>
 
+      <!-- Callout -->
       <div class="callout">
         <p><strong>The short version:</strong> raw data from any source gets collected, then compiled by an LLM into a <code>.md</code> wiki, then operated on by various CLI commands for Q&A and enrichment — all viewable in Obsidian. You rarely write or edit the wiki manually. That's the LLM's job.</p>
       </div>
 
-      <img
-        class="section-img"
-        src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=800&h=400&fit=crop&auto=format&q=80"
-        alt="Writing desk with notebook representing knowledge capture"
-        loading="lazy"
-      />
+      <img src="https://picsum.photos/seed/library-books/1400/320" alt="Knowledge capture and library" loading="lazy" width="1400" height="320" style="width:100%;height:auto;display:block;margin:2rem 0;" />
 
-      <h2>The pipeline, layer by layer</h2>
+      <h2 id="pipeline">The pipeline, layer by layer.</h2>
 
-      <div class="step-card">
-        <div class="step-num">01</div>
-        <div>
-          <div class="step-label">Ingest</div>
-          <div class="step-title">Index everything into <code>raw/</code></div>
-          <p class="step-body">Articles, papers, repos, datasets, YouTube transcripts, images — anything I want to think about ends up in a <code>raw/</code> directory. I use the Obsidian Web Clipper extension to convert web articles into <code>.md</code> files. For YouTube, a hotkey downloads the transcript and related images locally so the LLM can reference them without fetching URLs in real time. The ingest step is intentionally frictionless — if it's too hard to add something, it won't get added.</p>
+      <!-- Step Cards (numbered, flat grove style) -->
+      <div style="display:grid;gap:1.5rem;margin:1.5rem 0;">
+
+        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--grove-rule);padding:1.5rem;">
+          <div style="font-family:var(--grove-font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--grove-ink);padding-top:.1rem;">01</div>
+          <div>
+            <div style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grove-muted);margin-bottom:.4rem;">Ingest</div>
+            <div style="font-family:var(--grove-font-display);font-size:1.15rem;font-weight:300;color:var(--grove-ink);margin-bottom:.6rem;line-height:1.3;">Index everything into <code>raw/</code></div>
+            <p style="font-size:.9rem;color:var(--grove-ink);line-height:1.7;margin:0;">Articles, papers, repos, datasets, YouTube transcripts, images — anything I want to think about ends up in a <code>raw/</code> directory. I use the Obsidian Web Clipper extension to convert web articles into <code>.md</code> files. For YouTube, a hotkey downloads the transcript and related images locally so the LLM can reference them without fetching URLs in real time. The ingest step is intentionally frictionless — if it's too hard to add something, it won't get added.</p>
+          </div>
         </div>
-      </div>
 
-      <div class="step-card">
-        <div class="step-num">02</div>
-        <div>
-          <div class="step-label">Compile</div>
-          <div class="step-title">LLM turns raw files into a structured wiki</div>
-          <p class="step-body">This is where it gets interesting. I run a <code>/compile-wiki</code> command that reads everything in <code>raw/</code> and does three things automatically on every file: a <strong>ghost analysis</strong> (what wasn't said — the implied idea, the contrarian read), a <strong>venture analysis</strong> (what business opportunity hides in this gap), and an <strong>idea pass</strong> (personal, actionable things I could do this week based on this content). The LLM then writes structured concept articles in <code>02-Concepts/</code> with backlinks, section images, and moves the raw files to <code>04-Resources/</code>. I almost never touch the wiki directly.</p>
+        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--grove-rule);padding:1.5rem;">
+          <div style="font-family:var(--grove-font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--grove-ink);padding-top:.1rem;">02</div>
+          <div>
+            <div style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grove-muted);margin-bottom:.4rem;">Compile</div>
+            <div style="font-family:var(--grove-font-display);font-size:1.15rem;font-weight:300;color:var(--grove-ink);margin-bottom:.6rem;line-height:1.3;">LLM turns raw files into a structured wiki</div>
+            <p style="font-size:.9rem;color:var(--grove-ink);line-height:1.7;margin:0;">This is where it gets interesting. I run a <code>/compile-wiki</code> command that reads everything in <code>raw/</code> and does three things automatically on every file: a <strong>ghost analysis</strong> (what wasn't said — the implied idea, the contrarian read), a <strong>venture analysis</strong> (what business opportunity hides in this gap), and an <strong>idea pass</strong> (personal, actionable things I could do this week based on this content). The LLM then writes structured concept articles in <code>02-Concepts/</code> with backlinks, section images, and moves the raw files to <code>04-Resources/</code>. I almost never touch the wiki directly.</p>
+          </div>
         </div>
-      </div>
 
-      <div class="step-card">
-        <div class="step-num">03</div>
-        <div>
-          <div class="step-label">Index</div>
-          <div class="step-title">Auto-maintained index files make Q&A fast</div>
-          <p class="step-body">I thought I'd need RAG (retrieval-augmented generation) once the vault got large enough. I don't — at least not yet. The LLM auto-maintains a <code>VAULT-INDEX.md</code> file and brief summaries for every document. When I ask a question, it reads the index first, identifies the relevant notes, reads those, and synthesizes an answer. At roughly <strong>100 articles and 400K words</strong>, this works well without any vector embeddings or similarity search. The index is the trick.</p>
+        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--grove-rule);padding:1.5rem;">
+          <div style="font-family:var(--grove-font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--grove-ink);padding-top:.1rem;">03</div>
+          <div>
+            <div style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grove-muted);margin-bottom:.4rem;">Index</div>
+            <div style="font-family:var(--grove-font-display);font-size:1.15rem;font-weight:300;color:var(--grove-ink);margin-bottom:.6rem;line-height:1.3;">Auto-maintained index files make Q&amp;A fast</div>
+            <p style="font-size:.9rem;color:var(--grove-ink);line-height:1.7;margin:0;">I thought I'd need RAG (retrieval-augmented generation) once the vault got large enough. I don't — at least not yet. The LLM auto-maintains a <code>VAULT-INDEX.md</code> file and brief summaries for every document. When I ask a question, it reads the index first, identifies the relevant notes, reads those, and synthesizes an answer. At roughly <strong>100 articles and 400K words</strong>, this works well without any vector embeddings or similarity search. The index is the trick.</p>
+          </div>
         </div>
-      </div>
 
-      <div class="step-card">
-        <div class="step-num">04</div>
-        <div>
-          <div class="step-label">Query</div>
-          <div class="step-title">Ask anything against the vault</div>
-          <p class="step-body">Once the vault is large enough, you can ask complex questions and get answers that are grounded in <em>your</em> specific reading history — not generic web results. "What do I know about multi-agent orchestration?" "What connections exist between Jensen Huang's compute thesis and Andy McAfee's geek org framework?" "What are the venture opportunities hiding in everything I've read about AI policy enforcement?" The LLM goes off, researches the answers against your vault, and returns with citations. You can then file the answer back as a new concept article, which enriches the vault for future queries.</p>
+        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--grove-rule);padding:1.5rem;">
+          <div style="font-family:var(--grove-font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--grove-ink);padding-top:.1rem;">04</div>
+          <div>
+            <div style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grove-muted);margin-bottom:.4rem;">Query</div>
+            <div style="font-family:var(--grove-font-display);font-size:1.15rem;font-weight:300;color:var(--grove-ink);margin-bottom:.6rem;line-height:1.3;">Ask anything against the vault</div>
+            <p style="font-size:.9rem;color:var(--grove-ink);line-height:1.7;margin:0;">Once the vault is large enough, you can ask complex questions and get answers that are grounded in <em>your</em> specific reading history — not generic web results. "What do I know about multi-agent orchestration?" "What connections exist between Jensen Huang's compute thesis and Andy McAfee's geek org framework?" "What are the venture opportunities hiding in everything I've read about AI policy enforcement?" The LLM goes off, researches the answers against your vault, and returns with citations. You can then file the answer back as a new concept article, which enriches the vault for future queries.</p>
+          </div>
         </div>
-      </div>
 
-      <img
-        class="section-img"
-        src="https://images.unsplash.com/photo-1558655146-364adaf1fcc9?w=800&h=380&fit=crop&auto=format&q=80"
-        alt="Data network visualization representing knowledge connections"
-        loading="lazy"
-      />
-
-      <div class="step-card">
-        <div class="step-num">05</div>
-        <div>
-          <div class="step-label">Output</div>
-          <div class="step-title">Render answers as visual artifacts</div>
-          <p class="step-body">Instead of getting answers back in plain terminal text, I have the LLM render outputs as viewable artifacts — markdown files, Marp slideshows, or images — all of which I view again in Obsidian. The outputs often get filed back into the wiki to enhance it for future queries. Every exploration and question compounds. The vault grows smarter each time you use it.</p>
+        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--grove-rule);padding:1.5rem;">
+          <div style="font-family:var(--grove-font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--grove-ink);padding-top:.1rem;">05</div>
+          <div>
+            <div style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grove-muted);margin-bottom:.4rem;">Output</div>
+            <div style="font-family:var(--grove-font-display);font-size:1.15rem;font-weight:300;color:var(--grove-ink);margin-bottom:.6rem;line-height:1.3;">Render answers as visual artifacts</div>
+            <p style="font-size:.9rem;color:var(--grove-ink);line-height:1.7;margin:0;">Instead of getting answers back in plain terminal text, I have the LLM render outputs as viewable artifacts — markdown files, Marp slideshows, or images — all of which I view again in Obsidian. The outputs often get filed back into the wiki to enhance it for future queries. Every exploration and question compounds. The vault grows smarter each time you use it.</p>
+          </div>
         </div>
-      </div>
 
-      <div class="step-card">
-        <div class="step-num">06</div>
-        <div>
-          <div class="step-label">Lint</div>
-          <div class="step-title">Health checks keep the wiki clean</div>
-          <p class="step-body">Periodically I run LLM "health checks" over the vault to find inconsistent data, impute missing data via web search, and surface interesting connections for new article candidates. The LLM is quite good at suggesting further questions to explore — it will often flag a gap: "You have extensive notes on AI agents but nothing on agent security. Here are the three questions worth answering." That feedback loop keeps the vault coherent instead of just large.</p>
+        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--grove-rule);padding:1.5rem;">
+          <div style="font-family:var(--grove-font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--grove-ink);padding-top:.1rem;">06</div>
+          <div>
+            <div style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grove-muted);margin-bottom:.4rem;">Lint</div>
+            <div style="font-family:var(--grove-font-display);font-size:1.15rem;font-weight:300;color:var(--grove-ink);margin-bottom:.6rem;line-height:1.3;">Health checks keep the wiki clean</div>
+            <p style="font-size:.9rem;color:var(--grove-ink);line-height:1.7;margin:0;">Periodically I run LLM "health checks" over the vault to find inconsistent data, impute missing data via web search, and surface interesting connections for new article candidates. The LLM is quite good at suggesting further questions to explore — it will often flag a gap: "You have extensive notes on AI agents but nothing on agent security. Here are the three questions worth answering." That feedback loop keeps the vault coherent instead of just large.</p>
+          </div>
         </div>
-      </div>
 
-      <div class="callout purple">
+      </div><!-- /step cards -->
+
+      <!-- Purple callout -->
+      <div class="callout" style="border-left-color:var(--grove-ink);background:var(--grove-paper-alt);">
         <p><strong>The compounding effect:</strong> This is why the pattern is so powerful. Every query adds to the vault. Every lint pass improves it. Every new raw file gets synthesized against everything that already exists. A vault at 100 articles is exponentially more useful than the same vault at 10 articles — because the LLM is connecting nodes across the whole graph, not just summarizing individual files.</p>
       </div>
 
-      <h2>The IDE: why Obsidian specifically</h2>
+      <h2 id="ide">The IDE: why Obsidian specifically.</h2>
+
+      <img src="https://picsum.photos/seed/knowledge-network/1400/320" alt="Knowledge network and connections" loading="lazy" width="1400" height="320" style="width:100%;height:auto;display:block;margin:2rem 0;" />
 
       <p>I use Obsidian as the visual frontend for all of this. A few things make it the right choice for this workflow:</p>
 
@@ -780,67 +273,67 @@
         <li><strong>You rarely touch it</strong> — this is the important part. The LLM writes and maintains all of the wiki data. I read it. Occasionally I add a raw file. That's the correct division of labor.</li>
       </ul>
 
-      <img
-        class="section-img"
-        src="https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=800&h=380&fit=crop&auto=format&q=80"
-        alt="Digital tools and workflow"
-        loading="lazy"
-      />
-
-      <h2>What the vault looks like at scale</h2>
+      <h2 id="scale">What the vault looks like at scale.</h2>
 
       <p>My current vault on AI research has roughly 270 notes, organized into a structure the LLM maintains:</p>
 
-      <div class="code-block"><code><span class="code-comment"># vault structure (LLM-maintained)</span>
-<span class="code-path">00-Daily/</span>          <span class="code-comment"># daily notes — inbox for raw ideas</span>
-<span class="code-path">00-Inbox/raw/</span>      <span class="code-comment"># drop zone for new source material</span>
-<span class="code-path">02-Concepts/</span>       <span class="code-comment"># compiled wiki articles (LLM writes these)</span>
-<span class="code-path">03-People/</span>         <span class="code-comment"># person profiles with frameworks</span>
-<span class="code-path">04-Resources/</span>      <span class="code-comment"># processed source notes</span>
-<span class="code-path">VAULT-INDEX.md</span>    <span class="code-comment"># master index — always read first</span></code></div>
+      <!-- Code block (dark navy) -->
+      <div style="background:var(--grove-ink);padding:1.5rem 1.75rem;margin:1.5rem 0;overflow-x:auto;">
+        <code style="font-family:var(--grove-font-mono);font-size:.82rem;color:rgba(244,241,232,.82);line-height:1.8;white-space:pre;display:block;"><span style="color:rgba(244,241,232,.4);"># vault structure (LLM-maintained)</span>
+<span style="color:#e8d5b0;">00-Daily/</span>          <span style="color:rgba(244,241,232,.4);"># daily notes — inbox for raw ideas</span>
+<span style="color:#e8d5b0;">00-Inbox/raw/</span>      <span style="color:rgba(244,241,232,.4);"># drop zone for new source material</span>
+<span style="color:#e8d5b0;">02-Concepts/</span>       <span style="color:rgba(244,241,232,.4);"># compiled wiki articles (LLM writes these)</span>
+<span style="color:#e8d5b0;">03-People/</span>         <span style="color:rgba(244,241,232,.4);"># person profiles with frameworks</span>
+<span style="color:#e8d5b0;">04-Resources/</span>      <span style="color:rgba(244,241,232,.4);"># processed source notes</span>
+<span style="color:#e8d5b0;">VAULT-INDEX.md</span>    <span style="color:rgba(244,241,232,.4);"># master index — always read first</span></code>
+      </div>
 
       <p>The <code>02-Concepts/</code> directory is where the value lives. Each article has: a banner image, a core thesis, ghost notes (what wasn't said), venture opportunities (what business this implies), personal ideas (what I could do this week), and backlinks to related concepts. The LLM wrote all of it. I just asked questions and dropped raw files.</p>
 
-      <blockquote>
+      <blockquote style="border-left:3px solid var(--grove-ink);padding:.75rem 1.5rem;margin:2rem 0;font-family:var(--grove-font-display);font-size:1.2rem;font-weight:300;color:var(--grove-ink);font-style:italic;line-height:1.4;">
         "I thought I had to reach for fancy RAG, but the LLM has been pretty good about auto-maintaining index files and brief summaries of all the documents."
       </blockquote>
 
       <p>The insight here is underappreciated: at small-to-medium scale (call it under 500K words), a well-maintained index beats a vector database for this workflow. The LLM's context window is large enough to hold the summaries, identify the relevant articles, and read them in full. Latency is the tradeoff — but for asynchronous knowledge work, it's irrelevant.</p>
 
-      <h2>The extra tool I vibe-coded</h2>
+      <h2 id="extra">The extra tool I vibe-coded.</h2>
+
+      <img src="https://picsum.photos/seed/digital-workflow/1400/320" alt="Digital tools and workflow" loading="lazy" width="1400" height="320" style="width:100%;height:auto;display:block;margin:2rem 0;" />
 
       <p>As the vault grows, you naturally want to extend it with custom tools. I built a small naive search engine over the vault — available both as a web UI and as a CLI tool I can hand to the LLM for larger queries. The LLM uses it when a question spans too many notes to identify manually from the index.</p>
 
       <p>This is where things get genuinely powerful: the LLM can now self-direct its own research against the vault. It uses the search tool to find relevant notes, reads them, synthesizes, and returns an answer — all without me specifying which notes to look at.</p>
 
-      <div class="highlight">
-        <span class="highlight-eyebrow">The product hiding in this pattern</span>
-        <h2>This is a raw set of scripts. Someone will build a real product from it.</h2>
-        <p>The workflow I've described is a collection of Claude Code commands, Obsidian, and a few shell scripts. It works well — but it's fragile, personal, and requires a certain tolerance for manual setup. The product version would be seamless: web clipper → automatic compile → visual vault UI → instant Q&A → rendered outputs — all as a single coherent product instead of a duct-taped pipeline.</p>
-        <p>The companies closest to this — Notion AI, Obsidian Sync, Mem.ai, Roam Research — are all attacking it from the wrong angle. They're building better note-taking apps with AI bolted on. <strong>The right frame is inverted: it's an AI knowledge engine with a note-taking interface bolted on.</strong> The LLM is the primary worker. The human is the curator.</p>
-        <p>The further exploration that interests me most: synthetic data generation and fine-tuning, so the LLM eventually "knows" your vault in its weights — not just through context windows. That's when the leverage compounds into something genuinely new.</p>
+      <!-- Highlight / dark block -->
+      <div style="background:var(--grove-ink);padding:2.5rem 2rem;margin:3rem 0;">
+        <div style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,241,232,.5);margin-bottom:.75rem;">The product hiding in this pattern</div>
+        <h2 style="font-family:var(--grove-font-display);font-size:1.6rem;font-weight:300;color:var(--grove-paper);margin:0 0 1rem;line-height:1.25;letter-spacing:.01em;">This is a raw set of scripts. Someone will build a real product from it.</h2>
+        <p style="font-size:.925rem;color:rgba(244,241,232,.68);line-height:1.8;margin-bottom:1rem;">The workflow I've described is a collection of Claude Code commands, Obsidian, and a few shell scripts. It works well — but it's fragile, personal, and requires a certain tolerance for manual setup. The product version would be seamless: web clipper → automatic compile → visual vault UI → instant Q&A → rendered outputs — all as a single coherent product instead of a duct-taped pipeline.</p>
+        <p style="font-size:.925rem;color:rgba(244,241,232,.68);line-height:1.8;margin-bottom:1rem;">The companies closest to this — Notion AI, Obsidian Sync, Mem.ai, Roam Research — are all attacking it from the wrong angle. They're building better note-taking apps with AI bolted on. <strong style="color:rgba(244,241,232,.92);">The right frame is inverted: it's an AI knowledge engine with a note-taking interface bolted on.</strong> The LLM is the primary worker. The human is the curator.</p>
+        <p style="font-size:.925rem;color:rgba(244,241,232,.68);line-height:1.8;margin:0;">The further exploration that interests me most: synthetic data generation and fine-tuning, so the LLM eventually "knows" your vault in its weights — not just through context windows. That's when the leverage compounds into something genuinely new.</p>
       </div>
 
-      <div class="stat-row">
-        <div class="stat-item">
-          <span class="stat-num">~270</span>
-          <span class="stat-label">Notes in my current vault</span>
+      <!-- Stat row -->
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;border:1px solid var(--grove-rule);padding:1.5rem;margin:2rem 0;">
+        <div style="display:flex;flex-direction:column;gap:.2rem;">
+          <span style="font-family:var(--grove-font-display);font-size:2rem;font-weight:300;color:var(--grove-ink);line-height:1;">~270</span>
+          <span style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grove-muted);">Notes in my current vault</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-num">400K+</span>
-          <span class="stat-label">Words compiled by LLM</span>
+        <div style="display:flex;flex-direction:column;gap:.2rem;">
+          <span style="font-family:var(--grove-font-display);font-size:2rem;font-weight:300;color:var(--grove-ink);line-height:1;">400K+</span>
+          <span style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grove-muted);">Words compiled by LLM</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-num">0</span>
-          <span class="stat-label">Notes written manually</span>
+        <div style="display:flex;flex-direction:column;gap:.2rem;">
+          <span style="font-family:var(--grove-font-display);font-size:2rem;font-weight:300;color:var(--grove-ink);line-height:1;">0</span>
+          <span style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grove-muted);">Notes written manually</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-num">3</span>
-          <span class="stat-label">Lenses on every file</span>
+        <div style="display:flex;flex-direction:column;gap:.2rem;">
+          <span style="font-family:var(--grove-font-display);font-size:2rem;font-weight:300;color:var(--grove-ink);line-height:1;">3</span>
+          <span style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grove-muted);">Lenses on every file</span>
         </div>
       </div>
 
-      <h2>How to start</h2>
+      <h2 id="start">How to start.</h2>
 
       <p>If you want to build something like this, the minimum viable version has three pieces:</p>
 
@@ -852,72 +345,110 @@
 
       <p>Start with 10 pieces of content you already want to think about. Run the compile step. Ask three questions you couldn't have answered without the synthesis. You'll immediately see whether this pattern is useful for your specific use case — and if it is, you'll know exactly how to extend it.</p>
 
-      <div class="callout blue">
+      <!-- Blue callout -->
+      <div class="callout">
         <p><strong>The key insight:</strong> you're not building a better note-taking system. You're building an AI that knows what you know — and can surface connections, gaps, and opportunities you'd never find manually. The notes are a side effect. The intelligence is the product.</p>
       </div>
 
-      <div class="sub-card">
-        <div class="sub-card-eyebrow">Stay in the loop</div>
-        <h3>I write when I find something worth writing about.</h3>
-        <p>AI tools, enterprise GTM, and the occasional non-obvious synthesis. No filler.</p>
-        <form class="sub-form" onsubmit="handleSub(event)">
-          <input class="sub-input" type="email" placeholder="your@email.com" required />
-          <button class="sub-btn" type="submit">Notify me →</button>
-        </form>
-      </div>
+      <div class="grove-seal" aria-hidden="true">◆</div>
 
-      <!-- Read next -->
-      <div style="border-top:1px solid var(--border-light);padding-top:2rem;margin-top:2rem;">
-        <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:1.25rem;">Read next</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-          <a href="ai-trends-2026-breakthrough-idea.html" style="display:flex;gap:0.85rem;align-items:flex-start;text-decoration:none;background:var(--bg-2);border:1px solid var(--border);border-radius:12px;padding:1rem;transition:border-color 0.15s,box-shadow 0.15s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.08)';this.style.borderColor='transparent'" onmouseout="this.style.boxShadow='none';this.style.borderColor='var(--border)'">
-            <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=120&h=120&fit=crop&auto=format&q=75" alt="" style="width:60px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0;" loading="lazy" />
-            <div>
-              <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.3rem;">AI Strategy</p>
-              <p style="font-family:'Fraunces',Georgia,serif;font-size:0.88rem;font-weight:700;color:var(--ink);line-height:1.3;letter-spacing:-0.01em;">7 AI trends I'm tracking in 2026 — and the breakthrough nobody's talking about</p>
+      <!-- Related Posts -->
+      <div class="related-posts">
+        <div class="related-posts__label">Read next</div>
+        <div class="related-posts__grid">
+          <a class="related-post-card" href="ai-trends-2026-breakthrough-idea.html">
+            <img src="https://picsum.photos/seed/ai-trends-future/400/240" alt="" width="400" height="240" loading="lazy" />
+            <div class="related-post-card__body">
+              <span class="related-post-card__tag">AI Strategy</span>
+              <div class="related-post-card__title">7 AI Trends I'm Tracking in 2026 — and the Breakthrough Nobody's Talking About</div>
             </div>
           </a>
-          <a href="ai-sales-stack-2026.html" style="display:flex;gap:0.85rem;align-items:flex-start;text-decoration:none;background:var(--bg-2);border:1px solid var(--border);border-radius:12px;padding:1rem;transition:border-color 0.15s,box-shadow 0.15s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.08)';this.style.borderColor='transparent'" onmouseout="this.style.boxShadow='none';this.style.borderColor='var(--border)'">
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=120&h=120&fit=crop&auto=format&q=75" alt="" style="width:60px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0;" loading="lazy" />
-            <div>
-              <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:0.3rem;">Tools</p>
-              <p style="font-family:'Fraunces',Georgia,serif;font-size:0.88rem;font-weight:700;color:var(--ink);line-height:1.3;letter-spacing:-0.01em;">The AI tools replacing my sales stack in 2026</p>
+          <a class="related-post-card" href="ai-sales-stack-2026.html">
+            <img src="https://picsum.photos/seed/ai-sales-tools/400/240" alt="" width="400" height="240" loading="lazy" />
+            <div class="related-post-card__body">
+              <span class="related-post-card__tag">Tools</span>
+              <div class="related-post-card__title">The AI Tools Replacing My Sales Stack in 2026</div>
             </div>
           </a>
         </div>
       </div>
 
-      <div class="post-nav">
-        <a href="https://sachinai.com/" class="back-link">← Back to all posts</a>
-      </div>
+    </div><!-- /.article-content -->
+  </div><!-- /.article-body__inner -->
+</div><!-- /.article-body -->
 
+<!-- Footer -->
+<footer class="v2-footer">
+  <div class="v2-footer__inner">
+    <div class="v2-footer__top">
+      <div class="v2-footer__brand">Sachin Rai</div>
+      <button class="v2-footer__go-up" onclick="window.scrollTo({top:0,behavior:'smooth'})">GO UP ↑</button>
     </div>
-  </article>
-
-  <footer>
-    <div class="footer-inner">
-      <p>© 2026 Sachin Rai</p>
-      <div class="footer-links">
-        <a href="https://sachinai.com/">Blog</a>
-        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank">LinkedIn</a>
+    <div class="v2-footer__newsletter">
+      <div class="v2-footer__newsletter-label">Get new essays by email</div>
+      <form class="v2-footer__form" onsubmit="handleFooterSub(event)">
+        <input type="email" class="v2-footer__input" name="email" placeholder="you@company.com" required />
+        <button type="submit" class="v2-footer__submit">Subscribe</button>
+      </form>
+    </div>
+    <div class="v2-footer__bottom">
+      <span>© 2026 Sachin Rai</span>
+      <div class="v2-footer__links">
+        <a href="/privacy.html" class="v2-footer__link">Privacy</a>
+        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener" class="v2-footer__link">LinkedIn</a>
+        <a href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank" rel="noopener" class="v2-footer__link">Subject Scorer</a>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
+<script src="../css/grove.js"></script>
 <script>
-  /* Reading progress */
-  (function() {
-    const bar = document.getElementById('readProgress');
-    const art = document.querySelector('article') || document.body;
-    function update() {
-      const top = art.getBoundingClientRect().top;
-      const h = art.offsetHeight - window.innerHeight;
-      const pct = h > 0 ? Math.min(100, Math.max(0, (-top / h) * 100)) : 100;
-      bar.style.width = pct + '%';
-    }
-    window.addEventListener('scroll', update, {passive:true});
-    update();
-  })();
+function handleFooterSub(e){
+  e.preventDefault();
+  var form=e.target;
+  var input=form.querySelector('input[type="email"]');
+  var btn=form.querySelector('button[type="submit"]');
+  btn.textContent='Sending…';btn.disabled=true;
+  fetch('https://formspree.io/f/xwvwlybd',{
+    method:'POST',
+    headers:{'Accept':'application/json','Content-Type':'application/json'},
+    body:JSON.stringify({email:input.value,source:'llm-knowledge-base-obsidian'})
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(data.ok){btn.textContent='Subscribed ✓';input.value='';}
+    else{btn.textContent='Try again';btn.disabled=false;}
+  })
+  .catch(function(){btn.textContent='Try again';btn.disabled=false;});
+}
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('[data-target]');
+  if(!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target;
+      var target = parseInt(el.dataset.target, 10);
+      var prefix = el.dataset.prefix || '';
+      var suffix = el.dataset.suffix || '';
+      var duration = 1400;
+      var start = performance.now();
+      function tick(now){
+        var t = Math.min((now - start)/duration, 1);
+        var ease = 1 - Math.pow(1-t, 3);
+        el.textContent = prefix + Math.round(ease * target) + suffix;
+        if(t < 1) requestAnimationFrame(tick);
+        else el.textContent = prefix + target + suffix;
+      }
+      requestAnimationFrame(tick);
+      obs.unobserve(el);
+    });
+  }, {threshold: 0.5});
+  els.forEach(function(el){ obs.observe(el); });
+})();
 </script>
 <script type="module">
 import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';

@@ -16,7 +16,6 @@
 <link rel="canonical" href="https://sachinai.com/posts/nvidia-data-center-guide.html" />
 <meta name="robots" content="index, follow" />
 <meta name="keywords" content="NVIDIA H100, NVIDIA Blackwell, GB200, data center GPU, AI infrastructure, enterprise AI, GPU compute, DGX SuperPOD, HGX platform, AI sales" />
-
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://sachinai.com/posts/nvidia-data-center-guide.html" />
 <meta property="og:title" content="NVIDIA's AI Compute Stack: A Field Guide for Enterprise Sellers" />
@@ -29,12 +28,10 @@
 <meta property="article:author" content="Sachin Rai" />
 <meta property="article:tag" content="AI Infrastructure" />
 <meta property="article:tag" content="Sales Intelligence" />
-
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="NVIDIA's AI Compute Stack: A Field Guide for Enterprise Sellers" />
 <meta name="twitter:description" content="From H100 to Blackwell — the complete hierarchy of NVIDIA's data center hardware, explained for enterprise sellers who need to understand the infrastructure layer." />
 <meta name="twitter:image" content="https://www.nvidia.com/content/dam/en-zz/Solutions/data-center/gb200-superchip/gb200-nvl72-bm-lg580-offset-d.jpg" />
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,655 +54,383 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://sachinai.com/posts/nvidia-data-center-guide.html"
-  },
-  "isPartOf": {
-    "@type": "Blog",
-    "@id": "https://sachinai.com/",
-    "name": "Sachin Rai — Where AI Meets Enterprise Selling"
   }
 }
 </script>
-
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23161b1f'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='13' fill='%23ffffff'>SR</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet" />
-
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg:           #faf9f6;
-    --bg-2:         #f3f1ea;
-    --surface:      #eceae1;
-    --border:       #dedad0;
-    --border-light: #eae8de;
-    --ink:          #1c1a16;
-    --ink-2:        #6a6455;
-    --ink-3:        #a09488;
-    --amber:        #c96b1a;
-    --amber-light:  #fdf3e7;
-    --amber-border: #f0c898;
-    --navy:         #0f1221;
-    --navy-2:       #1a2038;
-    --lime:         #65a30d;
-    --lime-light:   #ecfccb;
-  }
-
-  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-
-  body {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    line-height: 1.6;
-  }
-
-  /* ── READING PROGRESS ── */
-  .read-progress {
-    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
-    background: var(--amber); z-index: 200;
-    transition: width 0.1s linear;
-    pointer-events: none;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(250,249,246,0.92);
-    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-  }
-  .nav-inner {
-    max-width: 800px; margin: 0 auto;
-    display: flex; align-items: center; justify-content: space-between; height: 58px;
-  }
-  .nav-logo {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 1.05rem; font-weight: 700;
-    color: var(--ink); text-decoration: none; letter-spacing: -0.02em;
-  }
-  .nav-logo span { color: var(--amber); }
-  .nav-back {
-    font-size: 0.8rem; font-weight: 500; color: var(--ink-2);
-    text-decoration: none; display: flex; align-items: center; gap: 0.3rem;
-    transition: color 0.15s;
-  }
-  .nav-back:hover { color: var(--ink); }
-
-  /* ── HERO IMAGE ── */
-  .post-hero {
-    width: 100vw;
-    height: 480px;
-    position: relative;
-    overflow: hidden;
-    margin-left: calc(50% - 50vw);
-  }
-  .post-hero img {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center 30%;
-    display: block;
-  }
-  .post-hero::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.08) 60%, transparent 100%);
-  }
-
-  /* ── ARTICLE ── */
-  article {
-    max-width: 680px; margin: 0 auto; padding: 3.5rem 2rem 5rem;
-  }
-
-  /* ── TAGS ── */
-  .post-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-  .tag {
-    font-size: 0.67rem; font-weight: 600; padding: 0.18rem 0.55rem;
-    border-radius: 100px; letter-spacing: 0.03em; text-transform: uppercase;
-  }
-  .tag-infra { background: #e0e7ff; color: #3730a3; }
-  .tag-sales { background: #dcfce7; color: #15803d; }
-
-  /* ── HEADINGS ── */
-  h1 {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: clamp(1.8rem, 4.5vw, 2.6rem);
-    font-weight: 700; line-height: 1.15;
-    color: var(--ink); letter-spacing: -0.025em; margin-bottom: 1.25rem;
-  }
-
-  /* ── POST META ── */
-  .post-meta {
-    display: flex; align-items: center; gap: 1rem;
-    font-size: 0.78rem; color: var(--ink-3);
-    padding-bottom: 2rem; border-bottom: 1px solid var(--border-light);
-    margin-bottom: 2.5rem; flex-wrap: wrap;
-  }
-  .author-chip { display: flex; align-items: center; gap: 0.45rem; }
-  .author-avatar {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--navy), var(--navy-2));
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-size: 0.65rem; font-weight: 600; flex-shrink: 0;
-  }
-  .meta-sep { color: var(--border); }
-
-  /* ── BODY ── */
-  .post-body { font-size: 1.05rem; line-height: 1.82; color: var(--ink-2); }
-  .post-body h2 {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 1.5rem; font-weight: 700;
-    color: var(--ink); margin: 2.75rem 0 1rem; letter-spacing: -0.02em;
-  }
-  .post-body p { margin-bottom: 1.3rem; }
-  .post-body ul { padding-left: 1.5rem; margin-bottom: 1.3rem; }
-  .post-body li { margin-bottom: 0.6rem; }
-  .post-body strong { color: var(--ink); font-weight: 600; }
-
-  /* ── CALLOUT ── */
-  .callout {
-    background: var(--amber-light);
-    border-left: 3px solid var(--amber);
-    border-radius: 0 10px 10px 0;
-    padding: 1.25rem 1.5rem;
-    margin: 2rem 0;
-    font-size: 0.95rem;
-  }
-  .callout p { margin: 0; color: var(--ink-2); line-height: 1.7; }
-  .callout strong { color: var(--ink); }
-
-  /* ── FULL-WIDTH BREAKOUT IMAGE ── */
-  .breakout-img {
-    margin: 2.5rem -2rem;
-    width: calc(100% + 4rem);
-    max-height: 420px;
-    object-fit: cover;
-    object-position: center 40%;
-    border-radius: 4px;
-    display: block;
-    position: relative;
-  }
-  .breakout-wrap {
-    margin: 2.5rem -2rem;
-    width: calc(100% + 4rem);
-    position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-    max-height: 380px;
-  }
-  .breakout-wrap img {
-    width: 100%; height: 380px;
-    object-fit: cover; object-position: center 35%;
-    display: block;
-  }
-  .breakout-wrap::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.25) 0%, transparent 60%);
-  }
-
-  /* ── PRODUCT CARDS ── */
-  .product-card {
-    display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 1.25rem;
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem;
-    margin: 1rem 0;
-    align-items: start;
-  }
-  .product-card-img {
-    width: 140px; height: 100px;
-    object-fit: cover; border-radius: 8px;
-    display: block; flex-shrink: 0;
-  }
-  .product-card-body { min-width: 0; }
-  .product-card-label {
-    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.3rem;
-  }
-  .product-card-name {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 1.05rem; font-weight: 700; color: var(--ink);
-    letter-spacing: -0.015em; margin-bottom: 0.6rem;
-  }
-  .product-specs {
-    border-collapse: collapse; width: 100%;
-    font-size: 0.8rem; margin-bottom: 0.75rem;
-  }
-  .product-specs td {
-    padding: 0.22rem 0;
-    vertical-align: top;
-    line-height: 1.5;
-  }
-  .product-specs td:first-child {
-    color: var(--ink-3); font-weight: 500;
-    width: 110px; padding-right: 0.75rem;
-    white-space: nowrap;
-  }
-  .product-specs td:last-child { color: var(--ink-2); }
-  .product-insight {
-    font-size: 0.8rem; color: var(--amber);
-    font-weight: 500; line-height: 1.55;
-    padding-top: 0.4rem;
-    border-top: 1px solid var(--border-light);
-    margin-top: 0.4rem;
-  }
-
-  /* ── SECTION IMAGE ── */
-  .section-img {
-    width: 100%; max-height: 280px;
-    object-fit: cover; border-radius: 8px;
-    margin: 2rem 0; display: block;
-  }
-
-  /* ── FLOAT IMAGE ── */
-  .float-right {
-    float: right;
-    margin: 0.25rem 0 1.5rem 1.75rem;
-    width: 240px;
-    border-radius: 8px;
-    object-fit: cover;
-  }
-  .clearfix::after { content: ''; display: table; clear: both; }
-
-  /* ── HIERARCHY CARD ── */
-  .hierarchy-card {
-    background: var(--navy);
-    border-radius: 12px;
-    padding: 1.5rem 1.75rem;
-    margin: 1.5rem 0;
-    overflow: hidden;
-  }
-  .hierarchy-card-title {
-    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--amber); margin-bottom: 1.25rem;
-  }
-  .hierarchy-tier {
-    display: flex; align-items: center; gap: 1rem;
-    padding: 0.65rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  .hierarchy-tier:last-child { border-bottom: none; }
-  .tier-bar {
-    width: 4px; border-radius: 2px; flex-shrink: 0;
-    align-self: stretch; min-height: 2.5rem;
-  }
-  .tier-1 .tier-bar { background: rgba(101,163,13,0.4); }
-  .tier-2 .tier-bar { background: rgba(101,163,13,0.6); }
-  .tier-3 .tier-bar { background: rgba(101,163,13,0.75); }
-  .tier-4 .tier-bar { background: rgba(101,163,13,0.9); }
-  .tier-5 .tier-bar { background: #65a30d; }
-  .tier-body { flex: 1; min-width: 0; }
-  .tier-name {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 0.95rem; font-weight: 600;
-    color: #fff; letter-spacing: -0.01em; margin-bottom: 0.2rem;
-  }
-  .tier-desc {
-    font-size: 0.75rem; color: rgba(255,255,255,0.45); line-height: 1.45;
-  }
-  .tier-badge {
-    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em;
-    text-transform: uppercase; flex-shrink: 0;
-    padding: 0.2rem 0.6rem; border-radius: 100px;
-    background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.4);
-  }
-  .tier-5 .tier-badge { background: rgba(101,163,13,0.2); color: #86efac; }
-
-  /* ── BOTTOM NAV ── */
-  .post-nav {
-    border-top: 1px solid var(--border-light);
-    padding-top: 2.5rem; margin-top: 3.5rem;
-  }
-  .back-link {
-    font-size: 0.875rem; color: var(--ink-3); text-decoration: none;
-    display: inline-flex; align-items: center; gap: 0.4rem; transition: color 0.15s;
-    margin-bottom: 2rem; display: block;
-  }
-  .back-link:hover { color: var(--ink); }
-  .related-posts-label {
-    font-size: 0.67rem; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--ink-3); margin-bottom: 1rem;
-  }
-  .related-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
-  }
-  .related-card {
-    background: var(--bg-2); border: 1px solid var(--border);
-    border-radius: 10px; padding: 1.1rem 1.25rem;
-    text-decoration: none; display: block;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .related-card:hover { border-color: var(--amber); background: var(--amber-light); }
-  .related-card-tag {
-    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.4rem;
-  }
-  .related-card-title {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 0.95rem; font-weight: 700; color: var(--ink);
-    letter-spacing: -0.015em; line-height: 1.3;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border); padding: 2rem;
-    margin-top: 2rem;
-  }
-  .footer-inner {
-    max-width: 800px; margin: 0 auto;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 1rem;
-  }
-  footer p { font-size: 0.77rem; color: var(--ink-3); }
-  .footer-links { display: flex; gap: 1.5rem; }
-  .footer-links a {
-    font-size: 0.77rem; color: var(--ink-3); text-decoration: none; transition: color 0.15s;
-  }
-  .footer-links a:hover { color: var(--ink); }
-
-  @media (max-width: 600px) {
-    .product-card { grid-template-columns: 1fr; }
-    .product-card-img { width: 100%; height: 160px; }
-    .related-grid { grid-template-columns: 1fr; }
-    .float-right { float: none; width: 100%; margin: 1.5rem 0; }
-    .breakout-wrap { margin: 2rem -2rem; width: calc(100% + 4rem); }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/grove.css" />
 </head>
 <body>
 
-<div class="read-progress" id="readProgress"></div>
+<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#161b1f;color:#ffffff;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'Barlow',sans-serif;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid rgba(255,255,255,0.15);">
+  <span style="flex:1;opacity:.7;">sachinai.com uses Google Analytics to understand readership. No ads. No fingerprinting.</span>
+  <div style="display:flex;gap:.5rem;flex-shrink:0;">
+    <button onclick="srConsent('granted')" style="padding:.4rem 1.1rem;background:#ffffff;color:#161b1f;border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
+    <button onclick="srConsent('denied')" style="padding:.4rem 1.1rem;background:transparent;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.2);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
+  </div>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('sr-consent');
+  if(!b)return;
+  if(!localStorage.getItem('sr_consent'))b.style.display='flex';
+  window.srConsent=function(v){
+    localStorage.setItem('sr_consent',v);
+    if(typeof gtag!=='undefined')gtag('consent','update',{analytics_storage:v});
+    b.style.display='none';
+  };
+})();
+</script>
 
-<nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="/">Sachin <span>Rai</span></a>
-    <a class="nav-back" href="/">&#8592; All posts</a>
+<nav class="navbar navbar--dark" id="navbar">
+  <div class="navbar-inner">
+    <div class="navbar-left">
+      <a href="/" class="navbar__link">Writing</a>
+      <a href="/tools.html" class="navbar__link">Tools</a>
+    </div>
+    <div class="navbar-center">
+      <a href="/" class="navbar__logo-link">◆ SACHIN RAI</a>
+    </div>
+    <div class="navbar-right">
+      <a href="/about.html" class="navbar__link">About</a>
+    </div>
   </div>
 </nav>
 
-<!-- HERO IMAGE -->
-<div class="post-hero">
-  <img
-    src="https://www.nvidia.com/content/dam/en-zz/Solutions/data-center/gb200-superchip/gb200-nvl72-bm-lg580-offset-d.jpg"
-    alt="NVIDIA GB200 NVL72 rack system"
-    fetchpriority="high"
-  />
-</div>
+<main id="main">
 
-<article>
+  <header class="article-header">
+    <div class="article-header__inner">
+      <div class="article-header__text">
+        <div class="article-header__tags">
+          <span class="article-tag">AI Infrastructure</span>
+          <span class="article-tag">Sales Intelligence</span>
+        </div>
+        <h1 class="article-header__title">NVIDIA's AI Compute Stack: A Field Guide for Enterprise Sellers</h1>
+        <p class="article-header__deck">From H100 to Blackwell — the complete hierarchy of NVIDIA's data center hardware, explained for enterprise sellers who need to understand the infrastructure layer.</p>
+        <div class="article-header__meta">
+          <span>Sachin Rai</span>
+          <span class="article-header__meta-sep">·</span>
+          <span>May 15, 2026</span>
+          <span class="article-header__meta-sep">·</span>
+          <span>8 min read</span>
+        </div>
+      </div>
+      <div class="article-header__image">
+        <img src="https://www.nvidia.com/content/dam/en-zz/Solutions/data-center/gb200-superchip/gb200-nvl72-bm-lg580-offset-d.jpg" alt="NVIDIA GB200 NVL72 rack system" width="800" height="600" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </header>
 
-  <!-- POST HEADER -->
-  <div class="post-tags">
-    <span class="tag tag-infra">AI Infrastructure</span>
-    <span class="tag tag-sales">Sales Intelligence</span>
+  <div class="stats-strip">
+    <div class="stats-strip__inner">
+      <div class="stats-strip__item">
+        <span class="stats-strip__number" data-target="3">0</span>
+        <span class="stats-strip__label">GPU Generations</span>
+      </div>
+      <div class="stats-strip__item">
+        <span class="stats-strip__number" data-target="5">0</span>
+        <span class="stats-strip__label">System Tiers</span>
+      </div>
+      <div class="stats-strip__item">
+        <span class="stats-strip__number" data-target="30">0</span>
+        <span class="stats-strip__label">× Inference Gain (GB200)</span>
+      </div>
+      <div class="stats-strip__item">
+        <span class="stats-strip__number" data-target="4">0</span>
+        <span class="stats-strip__label">Seller Signals</span>
+      </div>
+    </div>
   </div>
 
-  <h1>NVIDIA's AI Compute Stack: A Field Guide for Enterprise Sellers</h1>
+  <div class="article-body">
+    <div class="article-body__inner">
 
-  <div class="post-meta">
-    <div class="author-chip">
-      <div class="author-avatar">SR</div>
-      <span>Sachin Rai</span>
+      <aside class="article-toc">
+        <div class="article-toc__label">Contents</div>
+        <nav>
+          <a class="article-toc__link" href="#family-tree">GPU Family Tree</a>
+          <a class="article-toc__link" href="#blackwell">The Blackwell Era</a>
+          <a class="article-toc__link" href="#system-stack">The System Stack</a>
+          <a class="article-toc__link" href="#networking">Networking Layer</a>
+          <a class="article-toc__link" href="#seller-signals">Seller Signals</a>
+          <a class="article-toc__link" href="#why-matters">Why This Matters</a>
+        </nav>
+      </aside>
+
+      <div class="article-content">
+
+        <p>Every CIO conversation I've had this year eventually gets to the same place: GPU infrastructure. Not theoretically — concretely. Boards are approving eight-figure compute budgets. Procurement teams are evaluating NVIDIA rack configurations. Finance is running depreciation models on hardware that didn't exist two years ago. And if you're selling enterprise software into IT budgets right now, that infrastructure layer is the context in which every deal you're working lives.</p>
+
+        <p>The problem is that most enterprise sellers don't know the difference between an H100 and a GB200. They can't place DGX in relation to HGX. They've heard "Blackwell" as a buzzword but couldn't explain what it actually changed. That's a gap — not because you need to be an ML engineer, but because understanding the hardware tier tells you exactly where a company is in its AI journey and what they're about to need next.</p>
+
+        <p>This is that map.</p>
+
+        <div class="callout">
+          <p>This is not a spec sheet. It's a map of where AI compute money is going — and why every enterprise seller should care which tier their customers are on.</p>
+        </div>
+
+        <h2 id="family-tree">The GPU Family Tree.</h2>
+
+        <p>NVIDIA's data center GPU lineup has three active generations you'll encounter in enterprise accounts: Ampere (A100), Hopper (H100/H200), and Blackwell (B100/B200/GB200). Each generation roughly doubles or triples the performance of the last for AI workloads. Here's what you actually need to know about each.</p>
+
+        <div style="display:grid;gap:1.5rem;margin:1.5rem 0;">
+
+          <div style="display:grid;grid-template-columns:140px 1fr;gap:1.25rem;border:1px solid var(--color-border);padding:1.25rem;align-items:start;">
+            <img src="https://www.nvidia.com/content/dam/en-zz/Solutions/gtcs22/data-center/h100/hopper-h100-kv-bb460_420-d.jpg" alt="NVIDIA H100 GPU" loading="lazy" width="140" height="100" style="width:140px;height:100px;object-fit:cover;display:block;" />
+            <div>
+              <div style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:.3rem;">Hopper Generation</div>
+              <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:300;color:var(--color-text);margin-bottom:.6rem;line-height:1.3;">H100 — The Current Baseline</div>
+              <table style="border-collapse:collapse;width:100%;font-size:.8rem;margin-bottom:.75rem;">
+                <tr><td style="padding:.2rem 0;color:var(--color-text-muted);width:110px;padding-right:.75rem;white-space:nowrap;vertical-align:top;">Memory</td><td style="padding:.2rem 0;color:var(--color-text);">80 GB HBM3</td></tr>
+                <tr><td style="padding:.2rem 0;color:var(--color-text-muted);padding-right:.75rem;vertical-align:top;">Bandwidth</td><td style="padding:.2rem 0;color:var(--color-text);">3.35 TB/s</td></tr>
+                <tr><td style="padding:.2rem 0;color:var(--color-text-muted);padding-right:.75rem;vertical-align:top;">Key use</td><td style="padding:.2rem 0;color:var(--color-text);">LLM training, fine-tuning, inference at scale</td></tr>
+                <tr><td style="padding:.2rem 0;color:var(--color-text-muted);padding-right:.75rem;vertical-align:top;">Interconnect</td><td style="padding:.2rem 0;color:var(--color-text);">NVLink 4.0 (900 GB/s)</td></tr>
+              </table>
+              <div style="font-size:.8rem;color:var(--color-text-muted);font-style:italic;padding-top:.4rem;border-top:1px solid var(--color-border);">Seller signal: An account running H100 clusters is past the pilot stage. They have a production AI workload and an infrastructure team managing it — look for software layer expansion opportunities.</div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:140px 1fr;gap:1.25rem;border:1px solid var(--color-border);padding:1.25rem;align-items:start;">
+            <img src="https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/h200/h200-kv-bb580_440-d.jpg" alt="NVIDIA H200 GPU" loading="lazy" width="140" height="100" style="width:140px;height:100px;object-fit:cover;display:block;" />
+            <div>
+              <div style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:.3rem;">Hopper Generation — Refresh</div>
+              <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:300;color:var(--color-text);margin-bottom:.6rem;line-height:1.3;">H200 — More Memory, Same Chip</div>
+              <table style="border-collapse:collapse;width:100%;font-size:.8rem;margin-bottom:.75rem;">
+                <tr><td style="padding:.2rem 0;color:var(--color-text-muted);width:110px;padding-right:.75rem;white-space:nowrap;vertical-align:top;">Memory</td><td style="padding:.2rem 0;color:var(--color-text);">141 GB HBM3e</td></tr>
+                <tr><td style="padding:.2rem 0;color:var(--color-text-muted);padding-right:.75rem;vertical-align:top;">Bandwidth</td><td style="padding:.2rem 0;color:var(--color-text);">4.8 TB/s</td></tr>
+                <tr><td style="padding:.2rem 0;color:var(--color-text-muted);padding-right:.75rem;vertical-align:top;">Key use</td><td style="padding:.2rem 0;color:var(--color-text);">Larger model inference, memory-bound workloads</td></tr>
+                <tr><td style="padding:.2rem 0;color:var(--color-text-muted);padding-right:.75rem;vertical-align:top;">Position</td><td style="padding:.2rem 0;color:var(--color-text);">H100 upgrade path before Blackwell availability</td></tr>
+              </table>
+              <div style="font-size:.8rem;color:var(--color-text-muted);font-style:italic;padding-top:.4rem;border-top:1px solid var(--color-border);">Seller signal: H200 buyers are running 70B+ parameter models in production. Their AI team is sophisticated enough to care about memory bandwidth, not just raw FLOPS.</div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:140px 1fr;gap:1.25rem;border:1px solid var(--color-border);padding:1.25rem;align-items:start;">
+            <img src="https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/l40s/nvidia-l40s-hero-banner-bb580_440-d.jpg" alt="NVIDIA L40S GPU" loading="lazy" width="140" height="100" style="width:140px;height:100px;object-fit:cover;display:block;" />
+            <div>
+              <div style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:.3rem;">Ada Lovelace Architecture</div>
+              <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:300;color:var(--color-text);margin-bottom:.6rem;line-height:1.3;">L40S — The Inference Workhorse</div>
+              <table style="border-collapse:collapse;width:100%;font-size:.8rem;margin-bottom:.75rem;">
+                <tr><td style="padding:.2rem 0;color:var(--color-text-muted);width:110px;padding-right:.75rem;white-space:nowrap;vertical-align:top;">Memory</td><td style="padding:.2rem 0;color:var(--color-text);">48 GB GDDR6</td></tr>
+                <tr><td style="padding:.2rem 0;color:var(--color-text-muted);padding-right:.75rem;vertical-align:top;">Bandwidth</td><td style="padding:.2rem 0;color:var(--color-text);">864 GB/s</td></tr>
+                <tr><td style="padding:.2rem 0;color:var(--color-text-muted);padding-right:.75rem;vertical-align:top;">Key use</td><td style="padding:.2rem 0;color:var(--color-text);">Enterprise inference, multimodal AI, video AI</td></tr>
+                <tr><td style="padding:.2rem 0;color:var(--color-text-muted);padding-right:.75rem;vertical-align:top;">Form factor</td><td style="padding:.2rem 0;color:var(--color-text);">Standard PCIe — no NVLink required</td></tr>
+              </table>
+              <div style="font-size:.8rem;color:var(--color-text-muted);font-style:italic;padding-top:.4rem;border-top:1px solid var(--color-border);">Seller signal: L40S deployments often indicate a company inferencing at scale without building a full training cluster. They may be buying cloud training but bringing inference on-prem for latency or cost reasons.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <figure style="margin:2.5rem 0;">
+          <img src="https://www.nvidia.com/content/dam/en-zz/Solutions/data-center/gb300-nvl72/gb300-nvl72-bm-lg580-offset-d.jpg" alt="NVIDIA GB300 NVL72 rack system" loading="lazy" width="1200" height="380" style="width:100%;height:auto;object-fit:cover;display:block;max-height:380px;object-position:center 35%;" />
+        </figure>
+
+        <h2 id="blackwell">The Blackwell Era.</h2>
+
+        <p>The GB200 and GB300 NVL72 represent something meaningfully different from a GPU upgrade cycle. These aren't single cards you slot into a server — they're rack-scale systems. The NVL72 designation means 72 GPUs connected via NVLink in a single integrated chassis. The compute, networking, and power delivery are co-designed as one unit. You don't buy a GB200 NVL72 GPU; you buy a GB200 NVL72 rack.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 240px;gap:1.5rem;align-items:start;margin:1.5rem 0;">
+          <div>
+            <p>The headline number NVIDIA uses is a 30x inference throughput improvement over the H100 for large language model workloads. That number requires unpacking — it's achieved through a combination of faster per-GPU performance, NVLink Switch chips that eliminate inter-node bottlenecks, and the GB200 Superchip architecture that pairs two Blackwell GPUs with a Grace CPU on a single package. The CPU-GPU bandwidth goes from PCIe speeds to 900 GB/s.</p>
+            <p>What this means practically: a company that needed 100 H100s to serve a frontier model at acceptable latency may need fewer than 10 GB200 NVL72 rack units to do the same job. At NVIDIA's pricing and the economics of GPU depreciation, the math can actually work in favor of the newer hardware for inference-heavy shops. That's why enterprise accounts with serious AI ambition are making GB200/GB300 decisions now, even at significantly higher capital cost.</p>
+            <p>The GB300 NVL72 follows the same architecture with further memory and bandwidth improvements — 192 GB HBM3e per GPU, plus higher interconnect bandwidth. It's the current top of the stack for accounts ordering today.</p>
+          </div>
+          <img src="https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/HGX/nvidia-hgx-platform-bm-md460-offset-left-d.jpg" alt="NVIDIA HGX Platform" loading="lazy" width="240" height="180" style="width:240px;object-fit:cover;display:block;" />
+        </div>
+
+        <h2 id="system-stack">The System Stack.</h2>
+
+        <p>Once you understand the GPU tier, the next question is the system form factor. NVIDIA sells compute at every level of the stack — from a single-socket desktop to a multi-rack supercomputer. Knowing where an account sits tells you a lot about their AI maturity and what they're likely to need from software vendors.</p>
+
+        <div style="background:var(--color-bg-dark-nav);padding:1.5rem 1.75rem;margin:1.5rem 0;">
+          <div style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,241,232,.5);margin-bottom:1.25rem;">NVIDIA Compute Hierarchy — Ascending Scale</div>
+
+          <div style="display:flex;align-items:center;gap:1rem;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,.06);">
+            <div style="width:4px;align-self:stretch;min-height:2.5rem;background:rgba(101,163,13,.4);flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="font-family:var(--font-display);font-size:1rem;font-weight:300;color:#fff;margin-bottom:.2rem;">DGX Spark</div>
+              <div style="font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.45;">Desktop AI workstation. 128 GB unified memory. Targets researchers and small teams doing local fine-tuning and prototyping.</div>
+            </div>
+            <div style="font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;flex-shrink:0;padding:.2rem .6rem;background:rgba(255,255,255,.07);color:rgba(255,255,255,.4);">Workstation</div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:1rem;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,.06);">
+            <div style="width:4px;align-self:stretch;min-height:2.5rem;background:rgba(101,163,13,.6);flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="font-family:var(--font-display);font-size:1rem;font-weight:300;color:#fff;margin-bottom:.2rem;">DGX Station</div>
+              <div style="font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.45;">Tower server, 4 GPUs. The entry-level team-scale AI system — sits next to a desk, no data center required.</div>
+            </div>
+            <div style="font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;flex-shrink:0;padding:.2rem .6rem;background:rgba(255,255,255,.07);color:rgba(255,255,255,.4);">Team</div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:1rem;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,.06);">
+            <div style="width:4px;align-self:stretch;min-height:2.5rem;background:rgba(101,163,13,.75);flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="font-family:var(--font-display);font-size:1rem;font-weight:300;color:#fff;margin-bottom:.2rem;">DGX H100 / B100</div>
+              <div style="font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.45;">8-GPU rack server. The standard enterprise AI training node. The atomic unit of most enterprise AI clusters.</div>
+            </div>
+            <div style="font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;flex-shrink:0;padding:.2rem .6rem;background:rgba(255,255,255,.07);color:rgba(255,255,255,.4);">Server</div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:1rem;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,.06);">
+            <div style="width:4px;align-self:stretch;min-height:2.5rem;background:rgba(101,163,13,.9);flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="font-family:var(--font-display);font-size:1rem;font-weight:300;color:#fff;margin-bottom:.2rem;">HGX Platform</div>
+              <div style="font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.45;">OEM-built server using NVIDIA HGX baseboards. Same GPU performance as DGX but deployed by Dell, HPE, Supermicro — more procurement flexibility.</div>
+            </div>
+            <div style="font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;flex-shrink:0;padding:.2rem .6rem;background:rgba(255,255,255,.07);color:rgba(255,255,255,.4);">Cluster</div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:1rem;padding:.65rem 0;">
+            <div style="width:4px;align-self:stretch;min-height:2.5rem;background:#65a30d;flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div style="font-family:var(--font-display);font-size:1rem;font-weight:300;color:#fff;margin-bottom:.2rem;">DGX SuperPOD</div>
+              <div style="font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.45;">Validated multi-rack AI supercomputer. 32–256+ DGX nodes with InfiniBand fabric, storage, and network fully designed and certified by NVIDIA.</div>
+            </div>
+            <div style="font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;flex-shrink:0;padding:.2rem .6rem;background:rgba(101,163,13,.2);color:#86efac;">Superpod</div>
+          </div>
+
+        </div>
+
+        <p>The key distinction between DGX and HGX is procurement path, not performance. A DGX server is a NVIDIA-branded, NVIDIA-shipped system. An HGX server uses the same GPU baseboard but is assembled and sold by an OEM. Enterprise IT organizations that already have a Dell or HPE relationship often land on HGX for that reason alone — same compute, different box on the invoice.</p>
+
+        <figure style="margin:2.5rem 0;">
+          <img src="https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/products/dgx-platform-bm-m460-d.jpg" alt="NVIDIA DGX Platform" loading="lazy" width="800" height="240" style="width:100%;height:auto;max-height:240px;object-fit:cover;object-position:center;display:block;" />
+        </figure>
+
+        <p>DGX SuperPOD is a different category entirely. It's a complete validated reference architecture for AI supercomputing — NVIDIA designs the rack layout, certifies the networking, validates the storage configuration, and provides software support for the full stack. Buying a SuperPOD is less like buying hardware and more like buying an AI infrastructure program. The accounts that go this route are committing to a multi-year AI infrastructure buildout, not a one-time purchase.</p>
+
+        <h2 id="networking">The Networking Layer.</h2>
+
+        <div style="display:grid;grid-template-columns:1fr 200px;gap:1.5rem;align-items:start;margin:1.5rem 0;">
+          <div>
+            <p>At the scale of modern AI clusters, the GPU interconnect fabric is as important as the GPUs themselves. NVIDIA controls this layer too, through two product families: Quantum InfiniBand and Spectrum-X Ethernet. Both target the same problem — when you have hundreds or thousands of GPUs working together on a single training run, any bottleneck in how they communicate with each other caps your effective compute utilization.</p>
+            <p>Quantum InfiniBand has been the traditional choice for tightly coupled HPC and AI training workloads. It provides extremely low latency and is purpose-built for the all-to-all communication patterns that large model training requires. The current generation, Quantum-2 InfiniBand, supports 400 Gb/s per port — fast enough that model parallelism across hundreds of nodes becomes practical rather than prohibitive.</p>
+          </div>
+          <img src="https://www.nvidia.com/content/dam/en-zz/Solutions/gtcs22/networking/ethernet-switches/spectrum-4-bb460_420-d.jpg" alt="NVIDIA Spectrum-4 Ethernet Switch" loading="lazy" width="200" height="160" style="width:200px;object-fit:cover;display:block;" />
+        </div>
+
+        <p>Spectrum-X is newer and designed specifically for AI workloads over Ethernet. The pitch is that Ethernet is the networking standard the rest of enterprise IT already runs on — routing, security, operations tooling — and Spectrum-X delivers InfiniBand-class performance without requiring a separate network fabric. For enterprise accounts that want to integrate AI compute with their existing networking infrastructure rather than run a parallel InfiniBand island, this is the path NVIDIA offers.</p>
+
+        <p>The Spectrum-4 switch at the core of the platform supports 400 Gb/s Ethernet ports with an aggregate switching capacity of 51.2 Tb/s. At that throughput, a 512-GPU cluster can communicate with effectively zero network-imposed bottlenecks during training. That matters because the single most common cause of GPU utilization falling below 60% in early enterprise clusters is network underprovisioning — the GPUs are waiting for weights and gradients more than they're computing.</p>
+
+        <h2 id="seller-signals">What This Means If You're Selling Into AI Budgets.</h2>
+
+        <p>Here's the practical extraction for enterprise sellers. You don't need to know the FLOPS rating of every GPU. You need to be able to read the signals that the hardware tier gives you about where an account is, what they've committed to, and where they're going.</p>
+
+        <ul>
+          <li><strong>GPU allocation is a budget signal, not just a tech decision.</strong> When a CIO approves a 64-node H100 cluster, they've already won an internal fight for AI infrastructure funding. That same account now has a team to justify the investment. They need software — workflow orchestration, observability, data pipelines, integration with the SaaS tools the rest of the company uses. That's your entry point. The hardware budget unlocked the software conversation.</li>
+          <li><strong>Accounts buying SuperPODs are in multi-year buildouts.</strong> A DGX SuperPOD commitment isn't a one-time hardware purchase — it's a declaration that AI is a core business function. These accounts are building dedicated ML engineering teams, governance frameworks, and internal tooling. The full software and services spending that follows a SuperPOD decision often dwarfs the hardware cost over a three-year horizon. If a prospect mentions SuperPOD evaluation, you are talking to an account in the middle of their AI infrastructure decade.</li>
+          <li><strong>The GPU generation tells you where they are in the journey.</strong> An account running A100s is managing a workload that was built 2–3 years ago. They're likely in maintenance mode on that infrastructure, possibly looking at whether to migrate to Hopper or wait for Blackwell. An account actively evaluating GB200 is planning 2–3 years out — they're in design and architecture mode, which means all the software decisions around that cluster are open. An account on H100 in production is in the scale-and-optimize phase. Each tier suggests a different conversation and a different set of adjacent needs.</li>
+          <li><strong>The DGX ecosystem creates vendor dependency — and adjacency.</strong> When a company standardizes on DGX SuperPOD with NVIDIA AI Enterprise software, they've bought into an ecosystem that connects through certified integrations to specific platforms. Enterprise platforms that have that certification get preferential access to accounts standardizing on DGX. For any enterprise SaaS with an AI integration story, understanding whether your platform is part of the NVIDIA partner ecosystem — or could be — is a legitimate strategic question.</li>
+        </ul>
+
+        <div class="callout">
+          <p><strong>If your champion mentions "moving to Blackwell,"</strong> their AI buildout just went enterprise-scale. That's not an IT upgrade conversation — it's a transformation program. The software decisions around that cluster are being made right now. Be in the room.</p>
+        </div>
+
+        <h2 id="why-matters">Why This Makes You a Better Seller, Not Just a Better Engineer.</h2>
+
+        <p>I've spent time learning NVIDIA's stack not because I'm trying to become a data center architect, but because I've watched deals stall when sellers can't speak to the infrastructure context the CIO is living in. When your champion says their team is "evaluating Blackwell for the next cluster refresh" and you know what that means — the timeline, the budget cycle, the complexity of that decision, the software gaps it creates — you can have a materially different conversation than the seller who nods and changes the subject.</p>
+
+        <p>Enterprise AI is still in the infrastructure investment phase. The GPU layer is where the serious budget is moving first. The software and services layer follows. Sellers who understand the hardware map are better positioned to time that follow-on conversation correctly — not too early, when the infrastructure isn't in place, and not too late, when the decisions have already been made. The field guide is the advantage.</p>
+
+        <div class="grove-seal" aria-hidden="true"></div>
+
+        <div class="related-posts">
+          <p class="related-posts__label">Read next</p>
+          <div class="related-posts__grid">
+            <a class="related-post-card" href="/posts/autoquant.html">
+              <img src="https://picsum.photos/seed/trading-systems/400/240" alt="" width="400" height="240" loading="lazy" />
+              <div class="related-post-card__body">
+                <p class="related-post-card__category">Trading Systems</p>
+                <p class="related-post-card__title">AutoQuant: Bayesian Signal Grading</p>
+              </div>
+            </a>
+            <a class="related-post-card" href="/posts/ai-sales-stack-2026.html">
+              <img src="https://picsum.photos/seed/ai-sales-tools/400/240" alt="" width="400" height="240" loading="lazy" />
+              <div class="related-post-card__body">
+                <p class="related-post-card__category">Sales Tools</p>
+                <p class="related-post-card__title">The AI Tools Replacing My Sales Stack in 2026</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
     </div>
-    <span class="meta-sep">·</span>
-    <span>May 15, 2026</span>
-    <span class="meta-sep">·</span>
-    <span>8 min read</span>
   </div>
 
-  <!-- BODY -->
-  <div class="post-body">
+</main>
 
-    <p>Every CIO conversation I've had this year eventually gets to the same place: GPU infrastructure. Not theoretically — concretely. Boards are approving eight-figure compute budgets. Procurement teams are evaluating NVIDIA rack configurations. Finance is running depreciation models on hardware that didn't exist two years ago. And if you're selling enterprise software into IT budgets right now, that infrastructure layer is the context in which every deal you're working lives.</p>
-
-    <p>The problem is that most enterprise sellers don't know the difference between an H100 and a GB200. They can't place DGX in relation to HGX. They've heard "Blackwell" as a buzzword but couldn't explain what it actually changed. That's a gap — not because you need to be an ML engineer, but because understanding the hardware tier tells you exactly where a company is in its AI journey and what they're about to need next.</p>
-
-    <p>This is that map.</p>
-
-    <div class="callout">
-      <p>This is not a spec sheet. It's a map of where AI compute money is going — and why every enterprise seller should care which tier their customers are on.</p>
+<footer class="v2-footer">
+  <button class="v2-footer__scroll-up" onclick="window.scrollTo({top:0,behavior:'smooth'});" aria-label="Scroll to top">↑<br/>GO UP</button>
+  <div class="v2-footer__inner">
+    <nav class="v2-footer__nav" aria-label="Footer navigation">
+      <a href="/" class="footer__link">Essays</a>
+      <a href="/about.html" class="footer__link">About</a>
+      <a href="/archive.html" class="footer__link">Archive</a>
+      <a href="/tools.html" class="footer__link">Tools</a>
+      <a href="/resume.html" class="footer__link">Resume</a>
+      <a href="/rss.xml" class="footer__link">RSS</a>
+    </nav>
+    <div class="v2-footer__newsletter">
+      <div class="v2-footer__newsletter-title">Field Notes</div>
+      <p class="v2-footer__newsletter-text">One essay per week. AI infrastructure, trading systems, and what actually ships.</p>
+      <form class="v2-footer__email-form" action="https://formspree.io/f/xwvwlybd" method="POST">
+        <input class="v2-footer__email-input" type="email" name="email" placeholder="your@email.com" required />
+        <button class="v2-footer__email-submit" type="submit">Subscribe →</button>
+      </form>
     </div>
-
-    <!-- THE GPU FAMILY TREE -->
-    <h2>The GPU Family Tree</h2>
-
-    <p>NVIDIA's data center GPU lineup has three active generations you'll encounter in enterprise accounts: Ampere (A100), Hopper (H100/H200), and Blackwell (B100/B200/GB200). Each generation roughly doubles or triples the performance of the last for AI workloads. Here's what you actually need to know about each.</p>
-
-    <div class="product-card">
-      <img
-        class="product-card-img"
-        src="https://www.nvidia.com/content/dam/en-zz/Solutions/gtcs22/data-center/h100/hopper-h100-kv-bb460_420-d.jpg"
-        alt="NVIDIA H100 GPU"
-        loading="lazy"
-      />
-      <div class="product-card-body">
-        <div class="product-card-label">Hopper Generation</div>
-        <div class="product-card-name">H100 — The Current Baseline</div>
-        <table class="product-specs">
-          <tr><td>Memory</td><td>80 GB HBM3</td></tr>
-          <tr><td>Bandwidth</td><td>3.35 TB/s</td></tr>
-          <tr><td>Key use</td><td>LLM training, fine-tuning, inference at scale</td></tr>
-          <tr><td>Interconnect</td><td>NVLink 4.0 (900 GB/s)</td></tr>
-        </table>
-        <div class="product-insight">Seller signal: An account running H100 clusters is past the pilot stage. They have a production AI workload and an infrastructure team managing it — look for software layer expansion opportunities.</div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img
-        class="product-card-img"
-        src="https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/h200/h200-kv-bb580_440-d.jpg"
-        alt="NVIDIA H200 GPU"
-        loading="lazy"
-      />
-      <div class="product-card-body">
-        <div class="product-card-label">Hopper Generation — Refresh</div>
-        <div class="product-card-name">H200 — More Memory, Same Chip</div>
-        <table class="product-specs">
-          <tr><td>Memory</td><td>141 GB HBM3e</td></tr>
-          <tr><td>Bandwidth</td><td>4.8 TB/s</td></tr>
-          <tr><td>Key use</td><td>Larger model inference, memory-bound workloads</td></tr>
-          <tr><td>Position</td><td>H100 upgrade path before Blackwell availability</td></tr>
-        </table>
-        <div class="product-insight">Seller signal: H200 buyers are running 70B+ parameter models in production. Their AI team is sophisticated enough to care about memory bandwidth, not just raw FLOPS.</div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img
-        class="product-card-img"
-        src="https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/l40s/nvidia-l40s-hero-banner-bb580_440-d.jpg"
-        alt="NVIDIA L40S GPU"
-        loading="lazy"
-      />
-      <div class="product-card-body">
-        <div class="product-card-label">Ada Lovelace Architecture</div>
-        <div class="product-card-name">L40S — The Inference Workhorse</div>
-        <table class="product-specs">
-          <tr><td>Memory</td><td>48 GB GDDR6</td></tr>
-          <tr><td>Bandwidth</td><td>864 GB/s</td></tr>
-          <tr><td>Key use</td><td>Enterprise inference, multimodal AI, video AI</td></tr>
-          <tr><td>Form factor</td><td>Standard PCIe — no NVLink required</td></tr>
-        </table>
-        <div class="product-insight">Seller signal: L40S deployments often indicate a company inferencing at scale without building a full training cluster. They may be buying cloud training but bringing inference on-prem for latency or cost reasons.</div>
-      </div>
-    </div>
-
-    <!-- BREAKOUT — GB300 RACK -->
-    <div class="breakout-wrap">
-      <img
-        src="https://www.nvidia.com/content/dam/en-zz/Solutions/data-center/gb300-nvl72/gb300-nvl72-bm-lg580-offset-d.jpg"
-        alt="NVIDIA GB300 NVL72 rack system"
-        loading="lazy"
-      />
-    </div>
-
-    <!-- THE BLACKWELL ERA -->
-    <h2>The Blackwell Era</h2>
-
-    <p>The GB200 and GB300 NVL72 represent something meaningfully different from a GPU upgrade cycle. These aren't single cards you slot into a server — they're rack-scale systems. The NVL72 designation means 72 GPUs connected via NVLink in a single integrated chassis. The compute, networking, and power delivery are co-designed as one unit. You don't buy a GB200 NVL72 GPU; you buy a GB200 NVL72 rack.</p>
-
-    <img
-      class="float-right"
-      src="https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/HGX/nvidia-hgx-platform-bm-md460-offset-left-d.jpg"
-      alt="NVIDIA HGX Platform"
-      loading="lazy"
-    />
-
-    <div class="clearfix">
-      <p>The headline number NVIDIA uses is a 30x inference throughput improvement over the H100 for large language model workloads. That number requires unpacking — it's achieved through a combination of faster per-GPU performance, NVLink Switch chips that eliminate inter-node bottlenecks, and the GB200 Superchip architecture that pairs two Blackwell GPUs with a Grace CPU on a single package. The CPU-GPU bandwidth goes from PCIe speeds to 900 GB/s.</p>
-
-      <p>What this means practically: a company that needed 100 H100s to serve a frontier model at acceptable latency may need fewer than 10 GB200 NVL72 rack units to do the same job. At NVIDIA's pricing and the economics of GPU depreciation, the math can actually work in favor of the newer hardware for inference-heavy shops. That's why enterprise accounts with serious AI ambition are making GB200/GB300 decisions now, even at significantly higher capital cost.</p>
-
-      <p>The GB300 NVL72 follows the same architecture with further memory and bandwidth improvements — 192 GB HBM3e per GPU versus 192 GB in the GB200, plus higher interconnect bandwidth. It's the current top of the stack for accounts ordering today.</p>
-    </div>
-
-    <!-- THE SYSTEM STACK -->
-    <h2>The System Stack</h2>
-
-    <p>Once you understand the GPU tier, the next question is the system form factor. NVIDIA sells compute at every level of the stack — from a single-socket desktop to a multi-rack supercomputer. Knowing where an account sits tells you a lot about their AI maturity and what they're likely to need from software vendors.</p>
-
-    <div class="hierarchy-card">
-      <div class="hierarchy-card-title">NVIDIA Compute Hierarchy — Ascending Scale</div>
-      <div class="hierarchy-tier tier-1">
-        <div class="tier-bar"></div>
-        <div class="tier-body">
-          <div class="tier-name">DGX Spark</div>
-          <div class="tier-desc">Desktop AI workstation. 128 GB unified memory. Targets researchers and small teams doing local fine-tuning and prototyping.</div>
-        </div>
-        <div class="tier-badge">Workstation</div>
-      </div>
-      <div class="hierarchy-tier tier-2">
-        <div class="tier-bar"></div>
-        <div class="tier-body">
-          <div class="tier-name">DGX Station</div>
-          <div class="tier-desc">Tower server, 4 GPUs. The entry-level team-scale AI system — sits next to a desk, no data center required.</div>
-        </div>
-        <div class="tier-badge">Team</div>
-      </div>
-      <div class="hierarchy-tier tier-3">
-        <div class="tier-bar"></div>
-        <div class="tier-body">
-          <div class="tier-name">DGX H100 / B100</div>
-          <div class="tier-desc">8-GPU rack server. The standard enterprise AI training node. The atomic unit of most enterprise AI clusters.</div>
-        </div>
-        <div class="tier-badge">Server</div>
-      </div>
-      <div class="hierarchy-tier tier-4">
-        <div class="tier-bar"></div>
-        <div class="tier-body">
-          <div class="tier-name">HGX Platform</div>
-          <div class="tier-desc">OEM-built server using NVIDIA HGX baseboards. Same GPU performance as DGX but deployed by Dell, HPE, Supermicro — more procurement flexibility.</div>
-        </div>
-        <div class="tier-badge">Cluster</div>
-      </div>
-      <div class="hierarchy-tier tier-5">
-        <div class="tier-bar"></div>
-        <div class="tier-body">
-          <div class="tier-name">DGX SuperPOD</div>
-          <div class="tier-desc">Validated multi-rack AI supercomputer. 32–256+ DGX nodes with InfiniBand fabric, storage, and network fully designed and certified by NVIDIA.</div>
-        </div>
-        <div class="tier-badge">Superpod</div>
-      </div>
-    </div>
-
-    <p>The key distinction between DGX and HGX is procurement path, not performance. A DGX server is a NVIDIA-branded, NVIDIA-shipped system. An HGX server uses the same GPU baseboard but is assembled and sold by an OEM. Enterprise IT organizations that already have a Dell or HPE relationship often land on HGX for that reason alone — same compute, different box on the invoice.</p>
-
-    <img
-      class="section-img"
-      src="https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/products/dgx-platform-bm-m460-d.jpg"
-      alt="NVIDIA DGX Platform"
-      loading="lazy"
-    />
-
-    <p>DGX SuperPOD is a different category entirely. It's a complete validated reference architecture for AI supercomputing — NVIDIA designs the rack layout, certifies the networking, validates the storage configuration, and provides software support for the full stack. Buying a SuperPOD is less like buying hardware and more like buying an AI infrastructure program. The accounts that go this route are committing to a multi-year AI infrastructure buildout, not a one-time purchase.</p>
-
-    <!-- THE NETWORKING LAYER -->
-    <h2>The Networking Layer</h2>
-
-    <img
-      class="float-right"
-      src="https://www.nvidia.com/content/dam/en-zz/Solutions/gtcs22/networking/ethernet-switches/spectrum-4-bb460_420-d.jpg"
-      alt="NVIDIA Spectrum-4 Ethernet Switch"
-      loading="lazy"
-    />
-
-    <div class="clearfix">
-      <p>At the scale of modern AI clusters, the GPU interconnect fabric is as important as the GPUs themselves. NVIDIA controls this layer too, through two product families: Quantum InfiniBand and Spectrum-X Ethernet. Both target the same problem — when you have hundreds or thousands of GPUs working together on a single training run, any bottleneck in how they communicate with each other caps your effective compute utilization.</p>
-
-      <p>Quantum InfiniBand has been the traditional choice for tightly coupled HPC and AI training workloads. It provides extremely low latency and is purpose-built for the all-to-all communication patterns that large model training requires. The current generation, Quantum-2 InfiniBand, supports 400 Gb/s per port — fast enough that model parallelism across hundreds of nodes becomes practical rather than prohibitive.</p>
-
-      <p>Spectrum-X is newer and designed specifically for AI workloads over Ethernet. The pitch is that Ethernet is the networking standard the rest of enterprise IT already runs on — routing, security, operations tooling — and Spectrum-X delivers InfiniBand-class performance without requiring a separate network fabric. For enterprise accounts that want to integrate AI compute with their existing networking infrastructure rather than run a parallel InfiniBand island, this is the path NVIDIA offers.</p>
-
-      <p>The Spectrum-4 switch at the core of the platform supports 400 Gb/s Ethernet ports with an aggregate switching capacity of 51.2 Tb/s. At that throughput, a 512-GPU cluster can communicate with effectively zero network-imposed bottlenecks during training. That matters because the single most common cause of GPU utilization falling below 60% in early enterprise clusters is network underprovisioning — the GPUs are waiting for weights and gradients more than they're computing.</p>
-    </div>
-
-    <!-- WHAT THIS MEANS IF YOU'RE SELLING INTO AI BUDGETS -->
-    <h2>What This Means If You're Selling Into AI Budgets</h2>
-
-    <p>Here's the practical extraction for enterprise sellers. You don't need to know the FLOPS rating of every GPU. You need to be able to read the signals that the hardware tier gives you about where an account is, what they've committed to, and where they're going.</p>
-
-    <ul>
-      <li><strong>GPU allocation is a budget signal, not just a tech decision.</strong> When a CIO approves a 64-node H100 cluster, they've already won an internal fight for AI infrastructure funding. That same account now has a team to justify the investment. They need software — workflow orchestration, observability, data pipelines, integration with the SaaS tools the rest of the company uses. That's your entry point. The hardware budget unlocked the software conversation.</li>
-      <li><strong>Accounts buying SuperPODs are in multi-year buildouts.</strong> A DGX SuperPOD commitment isn't a one-time hardware purchase — it's a declaration that AI is a core business function. These accounts are building dedicated ML engineering teams, governance frameworks, and internal tooling. The full software and services spending that follows a SuperPOD decision often dwarfs the hardware cost over a three-year horizon. If a prospect mentions SuperPOD evaluation, you are talking to an account in the middle of their AI infrastructure decade.</li>
-      <li><strong>The GPU generation tells you where they are in the journey.</strong> An account running A100s is managing a workload that was built 2–3 years ago. They're likely in maintenance mode on that infrastructure, possibly looking at whether to migrate to Hopper or wait for Blackwell. An account actively evaluating GB200 is planning 2–3 years out — they're in design and architecture mode, which means all the software decisions around that cluster are open. An account on H100 in production is in the scale-and-optimize phase. Each tier suggests a different conversation and a different set of adjacent needs.</li>
-      <li><strong>The DGX ecosystem creates vendor dependency — and adjacency.</strong> When a company standardizes on DGX SuperPOD with NVIDIA AI Enterprise software, they've bought into an ecosystem that connects through certified integrations to specific platforms. NVIDIA maintains a partner ecosystem of ISVs whose software is validated on DGX infrastructure. Enterprise platforms that have that certification get preferential access to accounts standardizing on DGX. For Freshworks or any enterprise SaaS with an AI integration story, understanding whether your platform is part of the NVIDIA partner ecosystem — or could be — is a legitimate strategic question. Accounts that have committed to NVIDIA's full stack want their software vendors inside that ecosystem.</li>
-    </ul>
-
-    <div class="callout">
-      <p><strong>If your champion mentions "moving to Blackwell,"</strong> their AI buildout just went enterprise-scale. That's not an IT upgrade conversation — it's a transformation program. The software decisions around that cluster are being made right now. Be in the room.</p>
-    </div>
-
-    <!-- CLOSING -->
-    <h2>Why This Makes You a Better Seller, Not Just a Better Engineer</h2>
-
-    <p>I've spent time learning NVIDIA's stack not because I'm trying to become a data center architect, but because I've watched deals stall when sellers can't speak to the infrastructure context the CIO is living in. When your champion says their team is "evaluating Blackwell for the next cluster refresh" and you know what that means — the timeline, the budget cycle, the complexity of that decision, the software gaps it creates — you can have a materially different conversation than the seller who nods and changes the subject.</p>
-
-    <p>Enterprise AI is still in the infrastructure investment phase. The GPU layer is where the serious budget is moving first. The software and services layer follows. Sellers who understand the hardware map are better positioned to time that follow-on conversation correctly — not too early, when the infrastructure isn't in place, and not too late, when the decisions have already been made. The field guide is the advantage.</p>
-
   </div>
-
-  <!-- BOTTOM NAV -->
-  <nav class="post-nav">
-    <a class="back-link" href="/">&#8592; Back to all posts</a>
-    <div class="related-posts-label">More from the blog</div>
-    <div class="related-grid">
-      <a class="related-card" href="autoquant.html">
-        <div class="related-card-tag">Trading Systems</div>
-        <div class="related-card-title">AutoQuant: Bayesian Signal Grading</div>
-      </a>
-      <a class="related-card" href="ai-sales-stack-2026.html">
-        <div class="related-card-tag">Sales Tools</div>
-        <div class="related-card-title">The AI tools replacing my sales stack</div>
-      </a>
-    </div>
-  </nav>
-
-</article>
-
-<footer>
-  <div class="footer-inner">
-    <p>&copy; 2026 Sachin Rai</p>
-    <div class="footer-links">
-      <a href="/">Home</a>
-      <a href="/about.html">About</a>
-      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn</a>
+  <div class="v2-footer__bottom">
+    <span>© 2026 Sachin Rai · Field Notes from San Francisco</span>
+    <div class="v2-footer__social">
+      <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">X ↗</a>
+      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="/privacy.html">Privacy</a>
     </div>
   </div>
 </footer>
 
+<script src="../css/grove.js"></script>
 <script>
-  const bar = document.getElementById('readProgress');
-  window.addEventListener('scroll', () => {
-    const scrollTop = document.documentElement.scrollTop;
-    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    bar.style.width = (scrollTop / docHeight * 100) + '%';
-  }, { passive: true });
+(function(){
+  var els = document.querySelectorAll('[data-target]');
+  if(!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target;
+      var target = parseInt(el.dataset.target, 10);
+      var prefix = el.dataset.prefix || '';
+      var suffix = el.dataset.suffix || '';
+      var duration = 1400;
+      var start = performance.now();
+      function tick(now){
+        var t = Math.min((now - start)/duration, 1);
+        var ease = 1 - Math.pow(1-t, 3);
+        el.textContent = prefix + Math.round(ease * target) + suffix;
+        if(t < 1) requestAnimationFrame(tick);
+        else el.textContent = prefix + target + suffix;
+      }
+      requestAnimationFrame(tick);
+      obs.unobserve(el);
+    });
+  }, {threshold: 0.5});
+  els.forEach(function(el){ obs.observe(el); });
+})();
 </script>
-
+<script type="module">
+import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';
+function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}
+onCLS(send);onINP(send);onFCP(send);onLCP(send);onTTFB(send);
+</script>
 </body>
 </html>

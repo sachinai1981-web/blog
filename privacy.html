@@ -8,7 +8,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-CVBY6GSVNZ');
 </script>
 <meta charset="UTF-8" />
@@ -17,50 +16,126 @@
 <meta name="description" content="Privacy policy for sachinai.com. No tracking. No cookies. Formspree handles email subscriptions." />
 <link rel="canonical" href="https://sachinai.com/privacy.html" />
 <meta name="robots" content="noindex" />
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230A0A0A'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Archivo Black,sans-serif' font-size='14' fill='%23E63946'>SR</text></svg>" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23161b1f'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='13' fill='%23ffffff'>SR</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/grove.css" />
 <style>
-  :root {
-    --paper:#F4F3EE; --paper-2:#EAE8E1; --ink:#0A0A0A; --ink-mute:#6b6b66; --hairline:#cfccc1;
-    --red:#E63946; --orange:#F77F00; --green:#2A9D5F;
-    --font-display:'Archivo Black',sans-serif;
-    --font-sans:system-ui,-apple-system,sans-serif;
-    --font-serif:Georgia,'Times New Roman',serif;
-    --font-mono:'JetBrains Mono',monospace;
+  .privacy-nav-bar {
+    background: var(--color-bg-dark-nav);
+    padding: 0.55rem 3.125rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
   }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body{background:var(--paper);color:var(--ink);font-family:var(--font-sans);-webkit-font-smoothing:antialiased;}
-  a{color:inherit;text-decoration:underline;text-underline-offset:4px;}
-  a:hover{color:var(--red);}
-  body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%230a0a0a'/%3E%3C/svg%3E");background-size:4px 4px;mix-blend-mode:multiply;}
-  body::after{content:'';position:fixed;inset:0;z-index:99;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px 200px;mix-blend-mode:overlay;}
-  :focus-visible{outline:2px solid var(--red);outline-offset:3px;}
-
-  .sysbar{background:var(--ink);color:var(--paper);padding:.5rem 1.25rem;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;display:flex;justify-content:space-between;}
-
-  .page-wrap{max-width:640px;margin:0 auto;padding:5rem 2rem 6rem;position:relative;z-index:1;}
-  .eyebrow{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:1rem;}
-  h1{font-family:var(--font-display);font-size:clamp(2rem,6vw,3.5rem);line-height:.92;letter-spacing:-.04em;text-transform:uppercase;margin-bottom:.5rem;}
-  .updated{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:3rem;}
-
-  h2{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);margin:2.5rem 0 .75rem;padding-top:2.5rem;border-top:1px solid var(--hairline);}
-  h2:first-of-type{border-top:0;padding-top:0;}
-  p{font-family:var(--font-serif);font-size:1rem;line-height:1.65;color:var(--ink);margin-bottom:1rem;}
-  ul{padding-left:1.25rem;margin-bottom:1rem;}
-  ul li{font-family:var(--font-serif);font-size:1rem;line-height:1.65;color:var(--ink);margin-bottom:.4rem;}
-
-  .back{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;display:inline-block;margin-top:3rem;padding:.6rem 1rem;border:1px solid var(--ink);color:var(--ink);text-decoration:none;transition:all .2s;}
-  .back:hover{background:var(--ink);color:var(--paper);}
+  .privacy-nav-bar a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .privacy-nav-bar a:hover { color: #fff; }
+  .privacy-page-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+  .privacy-eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .privacy-h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .privacy-updated {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 3rem;
+    display: block;
+  }
+  .privacy-h2 {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin: 2.5rem 0 0.75rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  .privacy-h2:first-of-type { border-top: 0; padding-top: 0; }
+  .privacy-page-wrap p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.75;
+    letter-spacing: 0.5px;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+  }
+  .privacy-page-wrap ul {
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .privacy-page-wrap ul li {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.75;
+    letter-spacing: 0.5px;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+  }
+  .privacy-page-wrap a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    color: var(--color-text);
+  }
+  .privacy-page-wrap a:hover { color: var(--color-text-secondary); }
+  .privacy-back {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-top: 3rem;
+    padding: 0.7rem 1.25rem;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    text-decoration: none !important;
+    transition: background 0.2s, color 0.2s;
+  }
+  .privacy-back:hover { background: var(--color-text); color: #fff !important; }
 </style>
 </head>
 <body>
-<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0A0A0A;color:#F4F3EE;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;border-top:2px solid #E63946;">
-  <span style="flex:1;opacity:.8;">↳ SACHINAI.COM uses analytics to understand what people read. No ads. Data stays in Google Analytics.</span>
+<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#161b1f;color:#f4f1e8;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'Barlow',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;border-top:1px solid rgba(255,255,255,.15);">
+  <span style="flex:1;opacity:.8;">sachinai.com uses analytics to understand what people read. No ads. Data stays in Google Analytics.</span>
   <div style="display:flex;gap:.5rem;flex-shrink:0;">
-    <button onclick="srConsent('granted')" style="padding:.4rem 1rem;background:#E63946;color:#F4F3EE;border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
-    <button onclick="srConsent('denied')" style="padding:.4rem 1rem;background:transparent;color:rgba(244,243,238,.55);border:1px solid rgba(244,243,238,.25);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
+    <button onclick="srConsent('granted')" style="padding:.4rem 1rem;background:#000;color:#fff;border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
+    <button onclick="srConsent('denied')" style="padding:.4rem 1rem;background:transparent;color:rgba(244,241,232,.55);border:1px solid rgba(244,241,232,.25);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
   </div>
 </div>
 <script>
@@ -76,33 +151,32 @@
 })();
 </script>
 
-
-<div class="sysbar">
-  <span>SACHIN RAI · SACHINAI.COM</span>
-  <span>PRIVACY POLICY</span>
+<div class="privacy-nav-bar">
+  <a href="/">Sachin Rai</a>
+  <span>Privacy Policy</span>
 </div>
 
 <main>
-<div class="page-wrap">
+<div class="privacy-page-wrap">
 
-  <div class="eyebrow">↳ LEGAL</div>
-  <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: 2026-05-11</p>
+  <span class="privacy-eyebrow">Legal</span>
+  <h1 class="privacy-h1">Privacy Policy</h1>
+  <span class="privacy-updated">Last updated: 2026-05-11</span>
 
-  <h2>The short version</h2>
+  <div class="privacy-h2">The short version</div>
   <p>This site does not use cookies. It does not run analytics (yet). It does not sell or share your data. If you subscribe, your email goes to Formspree and eventually to whatever email platform is used. That's the entire data footprint.</p>
 
-  <h2>What data is collected</h2>
+  <div class="privacy-h2">What data is collected</div>
   <ul>
     <li><strong>Email address</strong> — only if you subscribe via the subscribe form. Submitted via Formspree (formspree.io). Stored by Formspree per their privacy policy.</li>
     <li><strong>Server logs</strong> — GitHub Pages logs standard HTTP request metadata (IP address, timestamp, path, user agent). This is infrastructure-level, not tracking. GitHub's privacy policy applies.</li>
   </ul>
   <p>No cookies are set. No fingerprinting occurs. No third-party pixels or trackers are loaded.</p>
 
-  <h2>Analytics</h2>
+  <div class="privacy-h2">Analytics</div>
   <p>No analytics are currently active on this site. If Google Analytics (GA4) is added in the future, this policy will be updated and a cookie consent banner will be displayed before any tracking begins.</p>
 
-  <h2>Third-party services</h2>
+  <div class="privacy-h2">Third-party services</div>
   <ul>
     <li><strong>Formspree</strong> (formspree.io) — handles email form submissions. See <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener">Formspree's privacy policy</a>.</li>
     <li><strong>jsDelivr CDN</strong> (cdn.jsdelivr.net) — serves GSAP and Three.js scripts. jsDelivr's privacy policy applies to CDN requests.</li>
@@ -110,16 +184,17 @@
     <li><strong>GitHub Pages</strong> — hosts this site. GitHub's privacy policy applies.</li>
   </ul>
 
-  <h2>Your rights</h2>
+  <div class="privacy-h2">Your rights</div>
   <p>If you subscribed and want your email removed, reply to any newsletter email with "unsubscribe" in the subject. I'll remove it manually within 48 hours. You can also email directly from the contact info below.</p>
 
-  <h2>Contact</h2>
+  <div class="privacy-h2">Contact</div>
   <p>Questions about this policy: <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">@sachinrai01 on X</a> or via <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn</a>.</p>
 
-  <a href="/" class="back">← Back to Field Notes</a>
+  <a href="/" class="privacy-back">← Back to Field Notes</a>
 
 </div>
 </main>
+
 <script type="module">
 import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';
 function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}

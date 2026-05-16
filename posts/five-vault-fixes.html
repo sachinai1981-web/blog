@@ -8,7 +8,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-CVBY6GSVNZ');
 </script>
   <meta charset="UTF-8" />
@@ -57,571 +56,6 @@
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --paper:    #F4F3EE;
-      --paper-2:  #EAE8E1;
-      --ink:      #0A0A0A;
-      --ink-2:    #1a1a1a;
-      --ink-mute: #6b6b66;
-      --hairline: #cfccc1;
-      --red:      #E63946;
-      --orange:   #F77F00;
-      --green:    #2A9D5F;
-      --blue:     #1d4ed8;
-      --blue-l:   #3b82f6;
-    }
-
-    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    body {
-      background: #F4F3EE;
-      color: #0A0A0A;
-      font-family: 'Inter', system-ui, sans-serif;
-      line-height: 1.6;
-    }
-    body::before {
-      content: ''; position: fixed; inset: 0; z-index: 50;
-      pointer-events: none; opacity: 0.06;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%230a0a0a'/%3E%3C/svg%3E");
-      background-size: 4px 4px; mix-blend-mode: multiply;
-    }
-  body::after{content:'';position:fixed;inset:0;z-index:99;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px 200px;mix-blend-mode:overlay;}
-
-    /* ── NAV ── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: #F4F3EE;
-      border-bottom: 2px solid #0A0A0A;
-      padding: 1rem 1.5rem;
-    }
-    .nav-inner {
-      max-width: 1400px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .nav-logo {
-      font-family: 'Archivo Black', system-ui, sans-serif;
-      font-size: 0.95rem;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-      color: #0A0A0A;
-      position: relative;
-      padding-left: 2.6rem;
-      text-decoration: none;
-    }
-    .nav-logo::before {
-      content: ''; position: absolute; left: 0; top: 50%;
-      transform: translateY(-50%);
-      width: 10px; height: 10px;
-      background: #1d4ed8;
-      box-shadow: 14px 0 0 #F77F00, 28px 0 0 #2A9D5F;
-    }
-    .nav-logo span { color: #1d4ed8; }
-    .nav-back {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #0A0A0A;
-      padding: 0.5rem 1rem;
-      border: 2px solid #0A0A0A;
-      background: #F4F3EE;
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s;
-    }
-    .nav-back:hover {
-      background: #1d4ed8;
-      color: #F4F3EE;
-      border-color: #1d4ed8;
-    }
-
-    /* ── ARTICLE ── */
-    article { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; }
-
-    .post-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    .tag {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.55rem;
-      border: 1.5px solid #0A0A0A;
-      color: #0A0A0A;
-    }
-    .tag.r { background: #E63946; color: #F4F3EE; border-color: #E63946; }
-    .tag.o { background: #F77F00; color: #F4F3EE; border-color: #F77F00; }
-
-    /* ── HERO STAGE — ink monochrome circle + chip blend + corner labels ── */
-    .hero-stage {
-      position: relative;
-      margin: 1rem -2rem 3rem;
-      padding: 4.5rem 1.5rem 4rem;
-      overflow: visible;
-      isolation: isolate;
-      background: #F4F3EE;
-    }
-    .hero-corner {
-      position: absolute; z-index: 4;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #0A0A0A;
-      line-height: 1.5;
-    }
-    .hero-corner.tl { top: 1.2rem; left: 1.5rem; }
-    .hero-corner.tr { top: 1.2rem; right: 1.5rem; text-align: right; }
-    .hero-corner.bl { bottom: 1.2rem; left: 1.5rem; }
-    .hero-corner.br { bottom: 1.2rem; right: 1.5rem; text-align: right; }
-    .hero-corner strong { font-weight: 900; display: block; }
-
-    .hero-circle {
-      position: absolute; z-index: 0;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -48%);
-      width: 640px; height: 640px;
-      max-width: 90vw; max-height: 90vw;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #1a1a1a 0%, #0A0A0A 55%, #000000 100%);
-      box-shadow:
-        0 40px 90px -25px rgba(0, 0, 0, 0.50),
-        inset -50px -50px 120px rgba(0, 0, 0, 0.45);
-      pointer-events: none;
-    }
-
-    .hero-title {
-      position: relative; z-index: 2;
-      text-align: left;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 1.5rem 0;
-    }
-    .hero-title .line {
-      font-family: 'Archivo Black', system-ui, sans-serif;
-      font-size: clamp(4rem, 13vw, 8.5rem);
-      line-height: 0.88;
-      letter-spacing: -0.045em;
-      color: #F4F3EE;
-      display: block;
-      text-shadow: 0 3px 0 rgba(10,10,10,0.12);
-    }
-    .hero-title .line.score {
-      color: #F77F00;
-      text-align: right;
-      margin-top: -0.15em;
-    }
-
-    .hero-blocks {
-      position: relative; z-index: 2;
-      display: flex; gap: 0.5rem;
-      margin: 0.5rem 0;
-      justify-content: center;
-    }
-    .hero-blocks .blk {
-      height: 14px; border-radius: 2px;
-      border: 2px solid #0A0A0A;
-    }
-    .hero-blocks .blk.r { width: 56px; background: #E63946; }
-    .hero-blocks .blk.o { width: 36px; background: #F77F00; }
-    .hero-blocks .blk.g { width: 28px; background: #2A9D5F; }
-    .hero-blocks .blk.k { width: 76px; background: #0A0A0A; }
-
-    .hero-3d {
-      position: absolute; z-index: 3;
-      width: 640px; height: 440px;
-      right: -7%; bottom: 14%;
-      transform: rotate(-5deg) scale(1.02);
-      pointer-events: none;
-      mix-blend-mode: screen;
-      opacity: 0.95;
-      filter:
-        contrast(1.28) saturate(1.25) brightness(1.05)
-        drop-shadow(0 35px 60px rgba(0,0,0,0.55))
-        drop-shadow(0 12px 18px rgba(0,0,0,0.45));
-      border-radius: 6px;
-      overflow: hidden;
-      animation: hero-float 6s ease-in-out infinite;
-    }
-    .hero-3d img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    @keyframes hero-float {
-      0%, 100% { transform: rotate(-5deg) scale(1.02) translateY(0); }
-      50%      { transform: rotate(-5deg) scale(1.02) translateY(-8px); }
-    }
-    .section-3d-img.invert {
-      filter: invert(1) hue-rotate(180deg) contrast(1.05) brightness(1.05);
-      box-shadow: 12px 12px 0 #0A0A0A, 0 0 60px rgba(0, 0, 0, 0.15);
-    }
-
-    .hero-eyebrow {
-      position: relative; z-index: 2;
-      text-align: center;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: #F4F3EE;
-      background: #0A0A0A;
-      border: 2px solid #0A0A0A;
-      padding: 0.65rem 1.2rem;
-      margin: 1.5rem auto 0;
-      max-width: fit-content;
-    }
-    .hero-eyebrow .num { color: #F77F00; }
-
-    @media (max-width: 700px) {
-      .hero-stage { margin: 0.5rem -1rem 2rem; padding: 3.5rem 1rem 3rem; }
-      .hero-circle { width: 460px; height: 460px; transform: translate(-50%, -45%); }
-      .hero-3d { width: 320px; height: 220px; right: -8%; bottom: 22%; }
-      .hero-corner { font-size: 0.52rem; }
-      .hero-corner.tr, .hero-corner.br { display: none; }
-    }
-
-    /* ── POST META ── */
-    .post-meta {
-      display: flex; align-items: center; gap: 1rem;
-      font-size: 0.78rem; color: #6b6b66;
-      padding-bottom: 2rem; border-bottom: 1px solid #cfccc1;
-      margin-bottom: 2.5rem; flex-wrap: wrap;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      letter-spacing: 0.04em;
-    }
-    .author-chip { display: flex; align-items: center; gap: 0.45rem; }
-    .author-avatar {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: linear-gradient(135deg, #1a1a1a, #3d3d3d);
-      display: flex; align-items: center; justify-content: center;
-      color: white; font-size: 0.65rem; font-weight: 600;
-      font-family: 'Archivo Black', sans-serif;
-    }
-
-    /* ── BODY ── */
-    .post-body { font-size: 1.075rem; line-height: 1.65; color: #1a1a1a; }
-    .post-body p {
-      font-family: 'Source Serif 4', Georgia, serif;
-      margin-bottom: 1.3rem;
-    }
-    .post-body h2 {
-      font-family: 'Archivo Black', system-ui, sans-serif;
-      font-size: 1.75rem;
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      color: #0A0A0A;
-      margin: 3rem 0 1.25rem;
-      text-transform: uppercase;
-    }
-    .post-body strong { color: #0A0A0A; font-weight: 700; }
-    .post-body ol, .post-body ul { padding-left: 1.5rem; margin-bottom: 1.3rem; font-family: 'Source Serif 4', Georgia, serif; }
-    .post-body li { margin-bottom: 0.6rem; }
-    .post-body a { color: #1d4ed8; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
-    .post-body a:hover { color: #F77F00; }
-
-    .post-body code {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.85em;
-      background: #0A0A0A;
-      color: #F4F3EE;
-      padding: 0.15em 0.45em;
-    }
-
-    .callout {
-      background: #EAE8E1;
-      border-left: 4px solid #E63946;
-      padding: 1.25rem 1.5rem;
-      margin: 2rem 0;
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: #0A0A0A;
-    }
-    .callout p { margin: 0; }
-    .callout strong { font-style: normal; }
-
-    /* Pull quote with R/O/G triple-color top border */
-    .pull-quote {
-      background: #F4F3EE;
-      border-top: 5px solid transparent;
-      border-image: linear-gradient(90deg, #E63946 33%, #F77F00 33% 66%, #2A9D5F 66%) 1;
-      padding: 1.6rem 1.75rem 1.4rem;
-      margin: 2.5rem 0;
-      border-left: none;
-      border-right: none;
-      border-bottom: 1px solid #cfccc1;
-    }
-    .pull-quote p {
-      font-family: 'Archivo Black', system-ui, sans-serif;
-      font-size: 1.2rem;
-      line-height: 1.25;
-      letter-spacing: -0.015em;
-      color: #0A0A0A;
-      margin: 0;
-      font-style: normal;
-    }
-    .pull-quote cite {
-      display: block;
-      margin-top: 0.8rem;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #6b6b66;
-      font-style: normal;
-    }
-
-    /* Before/after table */
-    .audit-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0 2rem;
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 0.92rem;
-    }
-    .audit-table thead tr {
-      background: #0A0A0A;
-      color: #F4F3EE;
-    }
-    .audit-table thead th {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 0.65rem 1rem;
-      text-align: left;
-      font-weight: 600;
-    }
-    .audit-table tbody tr { border-bottom: 1px solid #cfccc1; }
-    .audit-table tbody tr:last-child { border-bottom: 2px solid #0A0A0A; }
-    .audit-table tbody td {
-      padding: 0.6rem 1rem;
-      color: #1a1a1a;
-    }
-    .audit-table tbody td:first-child { font-weight: 500; }
-    .audit-table .before { color: #b91c1c; font-family: 'Archivo Black', sans-serif; font-size: 0.9rem; }
-    .audit-table .after  { color: #2A9D5F; font-family: 'Archivo Black', sans-serif; font-size: 0.9rem; }
-
-    .stat-card {
-      background: #F4F3EE;
-      border: 2px solid #0A0A0A;
-      padding: 1.4rem 1.6rem;
-      margin: 1.75rem 0;
-      box-shadow: 8px 8px 0 #0A0A0A;
-    }
-    .stat-card .stat-eyebrow {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #6b6b66;
-      margin-bottom: 0.85rem;
-    }
-    .stat-row {
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 0.5rem; padding: 0.55rem 0;
-      border-bottom: 1px dashed #cfccc1;
-      font-size: 0.92rem;
-      font-family: 'Source Serif 4', Georgia, serif;
-    }
-    .stat-row:last-child { border-bottom: 0; }
-    .stat-row .label { color: #1a1a1a; }
-    .stat-row .val {
-      font-family: 'Archivo Black', system-ui, sans-serif;
-      color: #0A0A0A;
-    }
-    .stat-row .val.bad  { color: #b91c1c; }
-    .stat-row .val.good { color: #2A9D5F; }
-
-    .formula {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      background: #0A0A0A;
-      color: #F4F3EE;
-      border: 2px solid #0A0A0A;
-      padding: 1.2rem 1.4rem;
-      font-size: 0.88rem;
-      line-height: 1.7;
-      white-space: pre-wrap;
-      margin: 1.5rem 0;
-    }
-
-    /* ── SECTION 3D IMAGES ── */
-    .section-3d {
-      margin: 3rem -1rem 2rem;
-      padding: 1rem;
-    }
-    .section-3d-img {
-      width: 100%; height: 280px;
-      object-fit: cover;
-      border: 2px solid #0A0A0A;
-      box-shadow: 12px 12px 0 #0A0A0A;
-      display: block;
-    }
-    .section-3d-cap {
-      margin-top: 0.85rem;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #6b6b66;
-    }
-
-    /* Inline color accent spans */
-    .accent-r { color: #E63946; font-weight: 700; }
-    .accent-o { color: #F77F00; font-weight: 700; }
-    .accent-g { color: #2A9D5F; font-weight: 700; }
-
-    /* ── SUBSCRIBE ── */
-    .sub-card {
-      background: #0A0A0A;
-      border: 2px solid #0A0A0A;
-      padding: 2.5rem;
-      margin: 3.5rem 0 0;
-      text-align: center;
-    }
-    .sub-eyebrow {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #F77F00;
-      margin-bottom: 0.5rem;
-    }
-    .sub-card h3 {
-      font-family: 'Archivo Black', system-ui, sans-serif;
-      font-size: 1.4rem;
-      line-height: 1.1;
-      color: #F4F3EE;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-    }
-    .sub-card p { font-size: 0.9rem; color: rgba(244,243,238,0.55); margin-bottom: 1.5rem; font-family: 'Source Serif 4', serif; }
-    .sub-form { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
-    .sub-input {
-      font-family: 'Inter', sans-serif; font-size: 0.85rem;
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-      color: #fff; padding: 0.7rem 1.1rem; outline: none; width: 240px;
-    }
-    .sub-input::placeholder { color: rgba(255,255,255,0.3); }
-    .sub-input:focus { border-color: #F77F00; }
-    .sub-btn {
-      font-family: 'Archivo Black', sans-serif; font-size: 0.78rem;
-      letter-spacing: 0.05em; text-transform: uppercase;
-      background: #F77F00; color: #0A0A0A; border: none;
-      padding: 0.7rem 1.5rem; cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .sub-btn:hover { opacity: 0.85; }
-
-    /* ── READ NEXT ── */
-    .read-next { border-top: 1px solid #cfccc1; padding-top: 2rem; margin-top: 3rem; }
-    .read-next-eyebrow {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.62rem; font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: #6b6b66;
-      margin-bottom: 1.25rem;
-    }
-    .rn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .rn-card {
-      display: flex; gap: 0.85rem; align-items: flex-start;
-      text-decoration: none;
-      background: #F4F3EE;
-      border: 2px solid #0A0A0A;
-      padding: 1rem;
-      transition: background 0.18s;
-    }
-    .rn-card:hover { background: #EAE8E1; }
-    .rn-card img { width: 60px; height: 60px; object-fit: cover; flex-shrink: 0; border: 1.5px solid #0A0A0A; }
-    .rn-tag {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.55rem; font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: #6b6b66;
-      margin-bottom: 0.3rem;
-    }
-    .rn-title {
-      font-family: 'Archivo Black', system-ui, sans-serif;
-      font-size: 0.88rem; line-height: 1.2;
-      color: #0A0A0A; letter-spacing: -0.01em;
-      text-transform: uppercase;
-    }
-    @media (max-width: 700px) { .rn-grid { grid-template-columns: 1fr; } }
-
-    .post-nav { border-top: 1px solid #cfccc1; padding-top: 2rem; margin-top: 3rem; }
-    .back-link {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: #0A0A0A;
-      padding: 0.5rem 1rem;
-      border: 2px solid #0A0A0A;
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s;
-    }
-    .back-link:hover { background: #1d4ed8; color: #F4F3EE; border-color: #1d4ed8; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #EAE8E1;
-      border-top: 2px solid #0A0A0A;
-      padding: 2rem;
-    }
-    .footer-inner {
-      max-width: 800px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.05em;
-      color: #0A0A0A;
-    }
-    footer a { color: #0A0A0A; text-decoration: none; }
-    footer a:hover { color: #E63946; }
-    .footer-links { display: flex; gap: 1.5rem; }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-    }
-  
-  /* ── Reading progress bar ── */
-  .read-progress {
-    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
-    background: #E63946; z-index: 200;
-    box-shadow: 0 0 8px rgba(230,57,70,0.6);
-    transition: width 0.1s linear;
-    pointer-events: none;
-  }
-
-  </style>
-
-  <script>
-    function handleSub(e) {
-      e.preventDefault();
-      const form = e.target;
-      const input = form.querySelector('.sub-input');
-      const btn = form.querySelector('.sub-btn');
-      btn.textContent = 'Sending…'; btn.disabled = true;
-      fetch('https://formspree.io/f/xwvwlybd', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: input.value, source: 'five-fixes post' })
-      })
-      .then(r => r.json())
-      .then(data => {
-        if (data.ok) {
-          btn.textContent = "You're in ✓"; btn.style.background = '#2A9D5F'; btn.style.color = '#F4F3EE'; btn.disabled = false;
-          input.value = '';
-          setTimeout(() => { btn.textContent = 'Notify me →'; btn.style.background = ''; btn.style.color = ''; }, 4000);
-        } else { btn.textContent = 'Try again'; btn.style.background = '#E63946'; btn.disabled = false; }
-      })
-      .catch(() => { btn.textContent = 'Try again'; btn.style.background = '#E63946'; btn.disabled = false; });
-    }
-  </script>
-
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -633,13 +67,20 @@
     ]
   }
   </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23161b1f'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='13' fill='%23ffffff'>SR</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/grove.css" />
 </head>
-<body>
-<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0A0A0A;color:#F4F3EE;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;border-top:2px solid #E63946;">
-  <span style="flex:1;opacity:.8;">↳ SACHINAI.COM uses analytics to understand what people read. No ads. Data stays in Google Analytics.</span>
+<body style="padding-top:60px;">
+
+<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--grove-ink);color:var(--grove-paper);padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:var(--grove-font-sans);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;border-top:1px solid var(--grove-rule);">
+  <span style="flex:1;opacity:.7;">Analytics help understand what people read. No ads. Data stays in Google Analytics.</span>
   <div style="display:flex;gap:.5rem;flex-shrink:0;">
-    <button onclick="srConsent('granted')" style="padding:.4rem 1rem;background:#E63946;color:#F4F3EE;border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
-    <button onclick="srConsent('denied')" style="padding:.4rem 1rem;background:transparent;color:rgba(244,243,238,.55);border:1px solid rgba(244,243,238,.25);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
+    <button onclick="srConsent('granted')" style="padding:.4rem 1rem;background:var(--grove-paper);color:var(--grove-ink);border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
+    <button onclick="srConsent('denied')" style="padding:.4rem 1rem;background:transparent;color:rgba(244,241,232,.5);border:1px solid rgba(244,241,232,.2);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
   </div>
 </div>
 <script>
@@ -655,76 +96,88 @@
 })();
 </script>
 
-<div class="read-progress" id="readProgress"></div>
-
-
-  <nav>
-    <div class="nav-inner">
-      <a class="nav-logo" href="https://sachinai.com/">Sachin<span>.</span></a>
-      <a href="https://sachinai.com/" class="nav-back">← All posts</a>
+<nav class="navbar navbar--dark" id="navbar">
+  <div class="navbar-inner">
+    <div class="navbar-left">
+      <a href="/" class="navbar__link">Writing</a>
+      <a href="/tools.html" class="navbar__link">Tools</a>
     </div>
-  </nav>
-
-  <article>
-
-    <div class="post-tags">
-      <span class="tag r">Knowledge</span>
-      <span class="tag o">Operations</span>
+    <div class="navbar-center">
+      <a href="/" class="navbar__logo-link">◆ SACHIN RAI</a>
     </div>
-
-    <div class="hero-stage">
-      <div class="hero-circle" aria-hidden="true"></div>
-
-      <div class="hero-corner tl">
-        <strong>Vault Lint Pass</strong>
-        Vol.09 // 2026
-      </div>
-      <div class="hero-corner tr">
-        <strong>Issue 05.02</strong>
-        Knowledge × Operations
-      </div>
-
-      <h1 class="hero-title">
-        <span class="line">Five Fixes.</span>
-        <span class="hero-blocks" aria-hidden="true">
-          <span class="blk r"></span>
-          <span class="blk o"></span>
-          <span class="blk g"></span>
-          <span class="blk k"></span>
-        </span>
-        <span class="line score">9.5/10.</span>
-      </h1>
-
-      <div class="hero-3d" aria-hidden="true">
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&h=900&fit=crop&auto=format&q=90" alt="" loading="eager"/>
-      </div>
-
-      <p class="hero-eyebrow"><span class="num">19</span> Banners · <span class="num">132</span> Unindexed · <span class="num">90</span> Minutes · One Pattern</p>
-
-      <div class="hero-corner bl">
-        <strong>SR // 05.02</strong>
-        9 min read
-      </div>
-      <div class="hero-corner br">
-        <strong>Field Notes</strong>
-        from the knowledge layer
-      </div>
+    <div class="navbar-right">
+      <a href="/about.html" class="navbar__link">About</a>
     </div>
+  </div>
+</nav>
 
-    <div class="post-meta">
-      <div class="author-chip">
-        <div class="author-avatar">SR</div>
+<!-- Article Header -->
+<header class="article-header">
+  <div class="article-header__inner">
+    <div class="article-header__text">
+      <div class="article-header__tags">
+        <span class="article-tag">Knowledge</span>
+        <span class="article-tag">Operations</span>
+      </div>
+      <h1 class="article-header__title">Five Cheap Fixes Took My Vault From 7.5 To 9.5.</h1>
+      <p class="article-header__deck">A 90-minute lint pass: 19 missing banners, 132 unindexed notes, 24 confidence gaps. Score 7.5 → 9.5. Here's the whole pass, the failures, and the pattern.</p>
+      <div class="article-header__meta">
         <span>Sachin Rai</span>
+        <span class="article-header__meta-sep">·</span>
+        <span>May 2026</span>
+        <span class="article-header__meta-sep">·</span>
+        <span>9 min read</span>
       </div>
-      <span>·</span>
-      <span>May 2026</span>
-      <span>·</span>
-      <span>9 min read</span>
     </div>
+    <div class="article-header__image">
+      <img src="https://picsum.photos/seed/vault-audit/800/600" alt="Knowledge vault audit" width="800" height="600" loading="eager" />
+    </div>
+  </div>
+</header>
 
-    <div class="post-body">
+<!-- Stats Strip -->
+<div class="stats-strip">
+  <div class="stats-strip__inner">
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="19">0</span>
+      <span class="stats-strip__label">Banners Fixed</span>
+    </div>
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="132">0</span>
+      <span class="stats-strip__label">Notes Unindexed</span>
+    </div>
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="90">0</span>
+      <span class="stats-strip__label">Minutes Total</span>
+    </div>
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="5">0</span>
+      <span class="stats-strip__label">Fixes Applied</span>
+    </div>
+  </div>
+</div>
 
-      <h2>The audit you don't want to run.</h2>
+<!-- Article Body -->
+<div class="article-body">
+  <div class="article-body__inner">
+
+    <aside class="article-toc">
+      <div class="article-toc__label">Contents</div>
+      <nav>
+        <a class="article-toc__link" href="#audit">The audit you don't want</a>
+        <a class="article-toc__link" href="#checks">What the lint checks</a>
+        <a class="article-toc__link" href="#fix1">Fix 1 — Banners</a>
+        <a class="article-toc__link" href="#fix2">Fix 2 — Confidence</a>
+        <a class="article-toc__link" href="#fix3">Fix 3 — Retrieval</a>
+        <a class="article-toc__link" href="#fix4">Fix 4 — Concept gaps</a>
+        <a class="article-toc__link" href="#fix5">Fix 5 — Contradictions</a>
+        <a class="article-toc__link" href="#pattern">The pattern</a>
+      </nav>
+    </aside>
+
+    <div class="article-content">
+
+      <h2 id="audit">The audit you don't want to run.</h2>
 
       <p>Most people running an Obsidian vault — or Roam, or Logseq, or any linked note system — have a quiet suspicion that it has rotted. That a meaningful fraction of what they've built is broken, orphaned, or invisible to the tooling they rely on. They don't run the audit because <strong>the audit will tell them</strong>. So the suspicion stays a suspicion. The rot compounds. The vault that should be the most maintained is the one running closest to the LLM — and every gap in the vault is a gap in the answer the LLM can give you.</p>
 
@@ -732,67 +185,70 @@
 
       <p>This post is the full receipt. Every check. Every fix. Every file touched. And the one pattern that fell out when it was done.</p>
 
-      <h2>What the lint actually checks.</h2>
+      <h2 id="checks">What the lint actually checks.</h2>
 
       <p>Before walking through the fixes, it's worth knowing exactly what the lint is measuring. Most "vault hygiene" posts cover banners and orphaned notes and call it done. The interesting checks — contradiction detection, forgetting curves, retrieval coverage — are where the actual rot lives. Here's the full nine, with the before/after numbers:</p>
 
-      <table class="audit-table">
-        <thead>
-          <tr>
-            <th>Metric</th>
-            <th>Before</th>
-            <th>After</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Banners present</td>
-            <td class="before">95.4%</td>
-            <td class="after">97.0%</td>
-          </tr>
-          <tr>
-            <td>Index coverage</td>
-            <td class="before">56%</td>
-            <td class="after">100%</td>
-          </tr>
-          <tr>
-            <td>Concept gaps</td>
-            <td class="before">2 open</td>
-            <td class="after">0 open</td>
-          </tr>
-          <tr>
-            <td>Confidence missing</td>
-            <td class="before">24 articles</td>
-            <td class="after">4 (admin only)</td>
-          </tr>
-          <tr>
-            <td>Forgetting curves</td>
-            <td class="before">0 flagged</td>
-            <td class="after">0 flagged</td>
-          </tr>
-          <tr>
-            <td>Score</td>
-            <td class="before">7.5 / 10</td>
-            <td class="after">9.5 / 10</td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- Audit Table -->
+      <div style="overflow-x:auto;margin:2rem 0;">
+        <table style="width:100%;border-collapse:collapse;font-family:var(--grove-font-sans);font-size:0.85rem;">
+          <thead>
+            <tr style="background:var(--grove-ink);color:var(--grove-paper);">
+              <th style="padding:.7rem 1rem;text-align:left;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.7rem;">Metric</th>
+              <th style="padding:.7rem 1rem;text-align:left;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.7rem;">Before</th>
+              <th style="padding:.7rem 1rem;text-align:left;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.7rem;">After</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--grove-rule);">
+              <td style="padding:.6rem 1rem;color:var(--grove-ink);">Banners present</td>
+              <td style="padding:.6rem 1rem;font-weight:700;color:#b91c1c;">95.4%</td>
+              <td style="padding:.6rem 1rem;font-weight:700;color:#2A9D5F;">97.0%</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--grove-rule);">
+              <td style="padding:.6rem 1rem;color:var(--grove-ink);">Index coverage</td>
+              <td style="padding:.6rem 1rem;font-weight:700;color:#b91c1c;">56%</td>
+              <td style="padding:.6rem 1rem;font-weight:700;color:#2A9D5F;">100%</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--grove-rule);">
+              <td style="padding:.6rem 1rem;color:var(--grove-ink);">Concept gaps</td>
+              <td style="padding:.6rem 1rem;font-weight:700;color:#b91c1c;">2 open</td>
+              <td style="padding:.6rem 1rem;font-weight:700;color:#2A9D5F;">0 open</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--grove-rule);">
+              <td style="padding:.6rem 1rem;color:var(--grove-ink);">Confidence missing</td>
+              <td style="padding:.6rem 1rem;font-weight:700;color:#b91c1c;">24 articles</td>
+              <td style="padding:.6rem 1rem;font-weight:700;color:#2A9D5F;">4 (admin only)</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--grove-rule);">
+              <td style="padding:.6rem 1rem;color:var(--grove-ink);">Forgetting curves</td>
+              <td style="padding:.6rem 1rem;font-weight:700;color:#2A9D5F;">0 flagged</td>
+              <td style="padding:.6rem 1rem;font-weight:700;color:#2A9D5F;">0 flagged</td>
+            </tr>
+            <tr style="border-bottom:2px solid var(--grove-ink);">
+              <td style="padding:.6rem 1rem;font-weight:700;color:var(--grove-ink);">Score</td>
+              <td style="padding:.6rem 1rem;font-weight:700;color:#b91c1c;">7.5 / 10</td>
+              <td style="padding:.6rem 1rem;font-weight:700;color:#2A9D5F;">9.5 / 10</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <p>And here are the nine checks in full:</p>
 
       <ol>
-        <li><strong>Missing banners.</strong> Checks frontmatter for the <code>banner:</code> field on every concept article. Notes without one look half-written regardless of content quality. <span class="accent-r">19 flagged</span> in this pass.</li>
-        <li><strong>Orphaned notes.</strong> Notes with zero backlinks — they exist in the vault but nothing points to them. <span class="accent-o">13 flagged</span>, of which 12 were intentional (admin and index files). One genuine orphan found.</li>
+        <li><strong>Missing banners.</strong> Checks frontmatter for the <code>banner:</code> field on every concept article. Notes without one look half-written regardless of content quality. <strong style="color:#b91c1c;">19 flagged</strong> in this pass.</li>
+        <li><strong>Orphaned notes.</strong> Notes with zero backlinks — they exist in the vault but nothing points to them. <strong style="color:#e67e22;">13 flagged</strong>, of which 12 were intentional (admin and index files). One genuine orphan found.</li>
         <li><strong>Concept gaps.</strong> Topics with three or more source notes but no concept article synthesizing them. The lint flags these as unwritten syntheses. Two still open at audit time — both got written.</li>
         <li><strong>Raw inbox age.</strong> Files sitting in the raw intake folder older than seven days without being compiled. Zero flagged — inbox was clean.</li>
-        <li><strong>VAULT-INDEX coverage.</strong> The navigation index lists every note the LLM can retrieve during a query. 132 notes were on disk but unlisted. <span class="accent-r">Biggest gap: 56% coverage.</span></li>
+        <li><strong>VAULT-INDEX coverage.</strong> The navigation index lists every note the LLM can retrieve during a query. 132 notes were on disk but unlisted. <strong style="color:#b91c1c;">Biggest gap: 56% coverage.</strong></li>
         <li><strong>Contradictions across concept articles.</strong> A semantic scan comparing claims across the trading-related articles. Two tensions found. Zero hard contradictions.</li>
         <li><strong>Stale claims.</strong> Deferred in this pass — too expensive to run without a targeted scope. Marked for next quarterly audit.</li>
         <li><strong>Forgetting curves.</strong> Notes with low confidence and no recent confirmation flag as candidates for re-confirmation. Zero flagged — all high-risk notes had been confirmed within the last two months.</li>
-        <li><strong>Confidence distribution.</strong> Checks for the v2 frontmatter fields (<code>confidence</code>, <code>sources_count</code>, <code>last_confirmed</code>, <code>memory_tier</code>) that the forgetting curve check reads. <span class="accent-o">24 articles missing</span> at least one field.</li>
+        <li><strong>Confidence distribution.</strong> Checks for the v2 frontmatter fields (<code>confidence</code>, <code>sources_count</code>, <code>last_confirmed</code>, <code>memory_tier</code>) that the forgetting curve check reads. <strong style="color:#e67e22;">24 articles missing</strong> at least one field.</li>
       </ol>
 
-      <h2>Fix #1 — Banners (cosmetic, but invisible without).</h2>
+      <h2 id="fix1">Fix #1 — Banners (cosmetic, but invisible without).</h2>
 
       <p>The cheapest fix. Approximately three minutes of scripting. Banner frontmatter — a hero image at the top of every note — is what makes Obsidian's reading mode feel like a magazine rather than a text dump. Notes without banners feel half-finished even when the content is strong. <strong>The visual cue is a quality signal.</strong> The rule: every concept article gets a <code>picsum.photos</code> banner with a two-keyword seed, chosen to reflect the topic.</p>
 
@@ -800,65 +256,92 @@
 
       <p>The lesson from this one: <strong>when a hygiene rule has clear inclusions and exclusions, a script is faster than a thread of "is this one a banner case?" decisions.</strong> The triage cost — reading each note, deciding, acting — exceeds the fix cost by a factor of ten. Don't manually triage what a regex can filter in milliseconds.</p>
 
-      <div class="pull-quote">
-        <p>"The vault you don't audit is the vault you don't trust. The vault you do audit becomes the only one you do."</p>
-        <cite>— Pattern that fell out at the end of this pass</cite>
+      <!-- Pull Quote with tricolor top border -->
+      <div style="border-top:4px solid;border-image:linear-gradient(90deg,#b91c1c 33%,#e67e22 33% 66%,#2A9D5F 66%) 1;border-left:none;border-right:none;border-bottom:1px solid var(--grove-rule);padding:1.6rem 0 1.4rem;margin:2.5rem 0;">
+        <p style="font-family:var(--grove-font-display);font-size:1.5rem;font-weight:300;line-height:1.3;color:var(--grove-ink);margin:0;font-style:italic;">"The vault you don't audit is the vault you don't trust. The vault you do audit becomes the only one you do."</p>
+        <cite style="display:block;margin-top:.8rem;font-family:var(--grove-font-sans);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grove-muted);font-style:normal;">— Pattern that fell out at the end of this pass</cite>
       </div>
 
-      <h2>Fix #2 — Confidence backfill (versioning your claims).</h2>
+      <h2 id="fix2">Fix #2 — Confidence backfill (versioning your claims).</h2>
 
       <p>The audit found 24 concept articles missing the v2 confidence fields: <code>confidence</code>, <code>sources_count</code>, <code>last_confirmed</code>, and <code>memory_tier</code>. These four fields are what the forgetting curve check reads. <strong>Without them, the lint can't run decay analysis on those notes.</strong> They're invisible to the temporal health check — and therefore invisible to any LLM query that weights notes by recency and confidence.</p>
 
-      <p>Fix: another script. Default fields were backfilled across all flagged articles (confidence 0.7, sources_count 1, last_confirmed set to audit date, memory_tier semantic). Load-bearing notes — the ones that underpin the entire query architecture — got higher confidence overrides applied manually: <span class="accent-g">Single Brain Pattern at 0.9</span>, Persona Roster at 0.95, Cross-domain Synthesis at 0.85. Twenty files updated. Four admin files skipped.</p>
+      <p>Fix: another script. Default fields were backfilled across all flagged articles (confidence 0.7, sources_count 1, last_confirmed set to audit date, memory_tier semantic). Load-bearing notes — the ones that underpin the entire query architecture — got higher confidence overrides applied manually: <strong style="color:#2A9D5F;">Single Brain Pattern at 0.9</strong>, Persona Roster at 0.95, Cross-domain Synthesis at 0.85. Twenty files updated. Four admin files skipped.</p>
 
       <p>The lesson: <strong>frontmatter is your file's metadata layer. If your tooling can't query it, your tooling can't audit it.</strong> Backfill the fields that any future pass will need to read. The cost of missing a field is invisible until you try to run the check — and then the entire category silently fails.</p>
 
-      <h2>Fix #3 — Retrieval coverage (the biggest gap).</h2>
+      <!-- Stat card for vault state -->
+      <div style="border:1px solid var(--grove-rule);padding:1.5rem 1.75rem;margin:2rem 0;background:var(--grove-paper);">
+        <div style="font-family:var(--grove-font-sans);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grove-muted);margin-bottom:1rem;">Vault state after confidence backfill</div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:.5rem;padding:.5rem 0;border-bottom:1px solid var(--grove-rule);font-size:.9rem;">
+          <span style="color:var(--grove-ink);">Single Brain Pattern confidence</span>
+          <span style="font-weight:700;color:#2A9D5F;font-family:var(--grove-font-sans);">0.90</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:.5rem;padding:.5rem 0;border-bottom:1px solid var(--grove-rule);font-size:.9rem;">
+          <span style="color:var(--grove-ink);">Persona Roster confidence</span>
+          <span style="font-weight:700;color:#2A9D5F;font-family:var(--grove-font-sans);">0.95</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:.5rem;padding:.5rem 0;border-bottom:1px solid var(--grove-rule);font-size:.9rem;">
+          <span style="color:var(--grove-ink);">Cross-domain Synthesis confidence</span>
+          <span style="font-weight:700;color:#2A9D5F;font-family:var(--grove-font-sans);">0.85</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:.5rem;padding:.5rem 0;font-size:.9rem;">
+          <span style="color:var(--grove-ink);">Admin files skipped</span>
+          <span style="font-weight:700;color:var(--grove-muted);font-family:var(--grove-font-sans);">4</span>
+        </div>
+      </div>
+
+      <h2 id="fix3">Fix #3 — Retrieval coverage (the biggest gap).</h2>
 
       <p>This was the headline finding of the audit. The vault had 301 resource notes on disk. Only 169 were referenced in the navigation index — the file the LLM reads first when answering a query. That's 56% coverage. <strong>44% of the vault was invisible</strong> to any agent querying through the navigation layer.</p>
 
-      <p>The reason this matters so much: the LLM querying pattern used in this vault — the one Karpathy describes as an LLM-queryable wiki — reads the index file first, then pulls only the notes that the index indicates are relevant. If a note isn't in the index, the LLM doesn't know to pull it. <span class="accent-r">It might as well not exist</span> for query-time purposes. 132 notes were effectively off the map.</p>
+      <p>The reason this matters so much: the LLM querying pattern used in this vault — the one Karpathy describes as an LLM-queryable wiki — reads the index file first, then pulls only the notes that the index indicates are relevant. If a note isn't in the index, the LLM doesn't know to pull it. <strong style="color:#b91c1c;">It might as well not exist</strong> for query-time purposes. 132 notes were effectively off the map.</p>
 
       <p>The fix: a Python pass grouped the 132 unlisted files by subfolder and appended a "RECENTLY ADDED" section to the navigation index, organized by subfolder with one-line descriptions for each note. Coverage moved from 56% to 100% in a single script run. The unlisted files broke down roughly as: 33 in news clips, 20 in version-archives, 12 in autoquant-v6 signal notes, 7 in interview series transcripts, and the remainder scattered across concept subtopics that had grown faster than the index was updated.</p>
 
       <p>The lesson: <strong>retrieval is the ceiling on compounding.</strong> A vault with 1,000 articles and broken indexing is worth less than 100 articles in a perfect index — because the LLM can only compound what it can reach. Every unlisted note is latent value that never surfaces. This fix alone accounts for the largest jump in score of any single change made in this pass.</p>
 
-      <figure class="section-3d">
-        <img class="section-3d-img invert" src="https://images.unsplash.com/photo-1542621334-a254cf47733d?w=1400&h=560&fit=crop&auto=format&q=85" alt="Clean paperwork and documents in an organized workspace." loading="lazy" />
-        <figcaption class="section-3d-cap">// 132 notes off the map — the index is the retrieval ceiling</figcaption>
+      <figure style="margin:2.5rem 0;">
+        <img src="https://picsum.photos/seed/workspace-documents/1400/280" alt="Organized workspace and documents" loading="lazy" width="1400" height="280" style="width:100%;height:auto;display:block;filter:invert(1) hue-rotate(180deg) contrast(1.05) brightness(1.05);" />
+        <figcaption style="margin-top:.75rem;font-family:var(--grove-font-sans);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grove-muted);">// 132 notes off the map — the index is the retrieval ceiling</figcaption>
       </figure>
 
-      <h2>Fix #4 — Closing concept gaps (the slow one).</h2>
+      <h2 id="fix4">Fix #4 — Closing concept gaps (the slow one).</h2>
 
       <p>Six concept gaps had been listed in the navigation index since April. Four had quietly closed themselves — other compile passes had filled them, and the index entry had never been updated to reflect that. <strong>Two remained genuinely open: Compounding Systems and ESM.</strong> Both had abundant source material — three-plus source notes each, collected over months — but nobody had sat down and written the synthesis.</p>
 
-      <p>The fix: write both. Approximately thirty minutes per concept article. The pattern for each was the same: synthesize across the source notes, structure by H2 sections (What it is / Three Laws / Anti-patterns / Ghost notes / Venture opportunities), add banner and section images, cross-link to adjacent concept articles. Both got written. <span class="accent-g">All six prior concept gaps now resolved.</span> Navigation index updated to mark them done.</p>
+      <p>The fix: write both. Approximately thirty minutes per concept article. The pattern for each was the same: synthesize across the source notes, structure by H2 sections (What it is / Three Laws / Anti-patterns / Ghost notes / Venture opportunities), add banner and section images, cross-link to adjacent concept articles. Both got written. <strong style="color:#2A9D5F;">All six prior concept gaps now resolved.</strong> Navigation index updated to mark them done.</p>
 
       <p>The lesson: <strong>gaps don't close themselves. They close when you decide to write them.</strong> A note unwritten is the most expensive note in the vault — every query that should hit it either goes elsewhere or returns nothing. The source notes that should feed it are already paying storage costs, reading costs, and maintenance costs. They compound nothing until the synthesis exists.</p>
 
       <p>There's no script for this one. The work is the work.</p>
 
-      <h2>Fix #5 — Contradiction scan (the one that rewards re-reading).</h2>
+      <!-- Callout -->
+      <div class="callout">
+        <p>The two concept articles written in this pass — Compounding Systems and ESM — were each underpinned by 3–5 source files that had been sitting in the vault for months. The delay cost was real: every query that touched adjacent topics returned worse answers than it should have. The fix cost was thirty minutes each. The ROI on those thirty minutes compounds indefinitely.</p>
+      </div>
+
+      <h2 id="fix5">Fix #5 — Contradiction scan (the one that rewards re-reading).</h2>
 
       <p>The most ambitious of the five. A semantic scan across the trading-related concept articles — five of them — looking for claims that conflict with each other. The goal wasn't to find errors. It was to find the spots where two articles disagreed because the author learned something between writing them, and hadn't gone back to mark the first one as updated.</p>
 
       <p><strong>Two tensions surfaced. Zero hard contradictions.</strong> Both were resolvable with a one-line clarifier:</p>
 
-      <p><span class="accent-r">Tension 1:</span> One article said "the bear-high signal moved from MARGINAL to REAL_EDGE." Another said "the bear-high signal is losing money." Both claims were true — but they were describing different timeframes. One was forward-looking (the signal had improved recently). The other was describing lifetime payoff across the full history. Fix: a single inline clarifier on the first article noting the timeframe distinction, with a backlink to the lifetime-stats article.</p>
+      <p><strong style="color:#b91c1c;">Tension 1:</strong> One article said "the bear-high signal moved from MARGINAL to REAL_EDGE." Another said "the bear-high signal is losing money." Both claims were true — but they were describing different timeframes. One was forward-looking (the signal had improved recently). The other was describing lifetime payoff across the full history. Fix: a single inline clarifier on the first article noting the timeframe distinction, with a backlink to the lifetime-stats article.</p>
 
-      <p><span class="accent-o">Tension 2:</span> One article cited a 90% historical win rate as the basis for boosting a new signal. The same vault had documented — in the Win Rate Lies article — that high win rates can mask losing expectancy. Fix: a <code>&gt; [!warning]</code> callout on the new-signal article noting the Trojan Horse risk explicitly, with a backlink to the lifetime-payoff article so any reader (human or LLM) could follow the chain.</p>
+      <p><strong style="color:#e67e22;">Tension 2:</strong> One article cited a 90% historical win rate as the basis for boosting a new signal. The same vault had documented — in the Win Rate Lies article — that high win rates can mask losing expectancy. Fix: a <code>&gt; [!warning]</code> callout on the new-signal article noting the Trojan Horse risk explicitly, with a backlink to the lifetime-payoff article so any reader (human or LLM) could follow the chain.</p>
 
       <p>The lesson: <strong>the contradiction scan is not just for finding errors. It's for finding the spots where two articles disagree because the author learned something between them.</strong> Those tensions are the most valuable annotations a vault can have — they show the learning arc, not just the current position. A vault with annotated tensions is more honest and more useful than a vault where every article pretends to be timeless.</p>
 
-      <h2>The pattern that fell out.</h2>
+      <h2 id="pattern">The pattern that fell out.</h2>
 
       <p>Five fixes. Ninety minutes. Score from 7.5 to 9.5. The pattern is clean enough to be a rule:</p>
 
-      <p><span class="accent-r">Cheap fixes are scriptable.</span> Banners, confidence backfill, index coverage — none of these require judgment. They require a decision about the rule, and then a script that applies it. Don't think about them. Decide once. Script once. Run forever.</p>
+      <p><strong style="color:#b91c1c;">Cheap fixes are scriptable.</strong> Banners, confidence backfill, index coverage — none of these require judgment. They require a decision about the rule, and then a script that applies it. Don't think about them. Decide once. Script once. Run forever.</p>
 
-      <p><span class="accent-o">Coverage fixes need decisions.</span> The index gap required categorizing 132 files and writing one-line descriptions for each. That's not a script problem — it's a judgment problem. But the judgment is fast once you commit to doing it. The work took twenty minutes. The indecision had been costing compounding value for months.</p>
+      <p><strong style="color:#e67e22;">Coverage fixes need decisions.</strong> The index gap required categorizing 132 files and writing one-line descriptions for each. That's not a script problem — it's a judgment problem. But the judgment is fast once you commit to doing it. The work took twenty minutes. The indecision had been costing compounding value for months.</p>
 
-      <p><span class="accent-g">Contradiction scans need patience.</span> You have to read carefully, hold two articles in your head at once, and decide whether the disagreement is an error or a learning artifact. It can't be rushed. The reward isn't a bug fix — it's a richer, more honest document that will serve future queries better.</p>
+      <p><strong style="color:#2A9D5F;">Contradiction scans need patience.</strong> You have to read carefully, hold two articles in your head at once, and decide whether the disagreement is an error or a learning artifact. It can't be rushed. The reward isn't a bug fix — it's a richer, more honest document that will serve future queries better.</p>
 
       <p>And the meta-rule, the one that applies before any of this: <strong>the audit you don't want to run is the audit you most need to run.</strong> The vault that's closest to your LLM agents — the one doing the most work, the one you rely on most — is the one most worth fixing.</p>
 
@@ -866,69 +349,105 @@
 
       <p>Run the check. The vault you audit becomes the only one you trust.</p>
 
-    </div>
+      <div class="grove-seal" aria-hidden="true">◆</div>
 
-    <div class="sub-card">
-      <div class="sub-eyebrow">Next post</div>
-      <h3>MOST BRAINS JUST ROTATE.</h3>
-      <p>Three Laws decide whether a knowledge stack compounds or rotates. The 88-article vault, the retrieval ceiling, and the patience problem most knowledge workers ignore.</p>
-      <form class="sub-form" onsubmit="handleSub(event)">
-        <input type="email" class="sub-input" name="email" placeholder="you@company.com" required />
-        <input type="hidden" name="source" value="five-fixes post" />
-        <button type="submit" class="sub-btn">Notify me →</button>
+      <!-- Related Posts -->
+      <div class="related-posts">
+        <div class="related-posts__label">Read next</div>
+        <div class="related-posts__grid">
+          <a class="related-post-card" href="compounding-systems.html">
+            <img src="https://picsum.photos/seed/compounding-knowledge/400/240" alt="" width="400" height="240" loading="lazy" />
+            <div class="related-post-card__body">
+              <span class="related-post-card__tag">Knowledge</span>
+              <div class="related-post-card__title">Most Second Brains Just Rotate. (Three Laws of Compounding)</div>
+            </div>
+          </a>
+          <a class="related-post-card" href="llm-knowledge-base-obsidian.html">
+            <img src="https://picsum.photos/seed/obsidian-llm/400/240" alt="" width="400" height="240" loading="lazy" />
+            <div class="related-post-card__body">
+              <span class="related-post-card__tag">Knowledge</span>
+              <div class="related-post-card__title">Turning an Obsidian Vault into an LLM-Queryable Knowledge Base</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /.article-content -->
+  </div><!-- /.article-body__inner -->
+</div><!-- /.article-body -->
+
+<!-- Footer -->
+<footer class="v2-footer">
+  <div class="v2-footer__inner">
+    <div class="v2-footer__top">
+      <div class="v2-footer__brand">Sachin Rai</div>
+      <button class="v2-footer__go-up" onclick="window.scrollTo({top:0,behavior:'smooth'})">GO UP ↑</button>
+    </div>
+    <div class="v2-footer__newsletter">
+      <div class="v2-footer__newsletter-label">Get new essays by email</div>
+      <form class="v2-footer__form" onsubmit="handleFooterSub(event)">
+        <input type="email" class="v2-footer__input" name="email" placeholder="you@company.com" required />
+        <button type="submit" class="v2-footer__submit">Subscribe</button>
       </form>
     </div>
-
-    <div class="read-next">
-      <p class="read-next-eyebrow">Read next</p>
-      <div class="rn-grid">
-        <a class="rn-card" href="compounding-systems.html">
-          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=120&h=120&fit=crop&auto=format&q=75" alt="" loading="lazy" />
-          <div>
-            <p class="rn-tag">Knowledge</p>
-            <p class="rn-title">Most Second Brains Just Rotate. (Three Laws of compounding)</p>
-          </div>
-        </a>
-        <a class="rn-card" href="llm-knowledge-base-obsidian.html">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=120&h=120&fit=crop&auto=format&q=75" alt="" loading="lazy" />
-          <div>
-            <p class="rn-tag">Knowledge</p>
-            <p class="rn-title">Turning an Obsidian vault into an LLM-queryable knowledge base</p>
-          </div>
-        </a>
+    <div class="v2-footer__bottom">
+      <span>© 2026 Sachin Rai</span>
+      <div class="v2-footer__links">
+        <a href="/privacy.html" class="v2-footer__link">Privacy</a>
+        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener" class="v2-footer__link">LinkedIn</a>
+        <a href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank" rel="noopener" class="v2-footer__link">Subject Scorer</a>
       </div>
     </div>
+  </div>
+</footer>
 
-    <div class="post-nav">
-      <a href="https://sachinai.com/" class="back-link">← Back to all posts</a>
-    </div>
-
-  </article>
-
-  <footer>
-    <div class="footer-inner">
-      <p>© 2026 Sachin Rai · AI + Enterprise Sales</p>
-      <div class="footer-links">
-        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank">LinkedIn</a>
-        <a href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank">Subject Scorer</a>
-      </div>
-    </div>
-  </footer>
-
+<script src="../css/grove.js"></script>
 <script>
-  /* Reading progress */
-  (function() {
-    const bar = document.getElementById('readProgress');
-    const art = document.querySelector('article') || document.body;
-    function update() {
-      const top = art.getBoundingClientRect().top;
-      const h = art.offsetHeight - window.innerHeight;
-      const pct = h > 0 ? Math.min(100, Math.max(0, (-top / h) * 100)) : 100;
-      bar.style.width = pct + '%';
-    }
-    window.addEventListener('scroll', update, {passive:true});
-    update();
-  })();
+function handleFooterSub(e){
+  e.preventDefault();
+  var form=e.target;
+  var input=form.querySelector('input[type="email"]');
+  var btn=form.querySelector('button[type="submit"]');
+  btn.textContent='Sending…';btn.disabled=true;
+  fetch('https://formspree.io/f/xwvwlybd',{
+    method:'POST',
+    headers:{'Accept':'application/json','Content-Type':'application/json'},
+    body:JSON.stringify({email:input.value,source:'five-vault-fixes'})
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(data.ok){btn.textContent='Subscribed ✓';input.value='';}
+    else{btn.textContent='Try again';btn.disabled=false;}
+  })
+  .catch(function(){btn.textContent='Try again';btn.disabled=false;});
+}
+</script>
+<script>
+(function(){
+  var els = document.querySelectorAll('[data-target]');
+  if(!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target;
+      var target = parseInt(el.dataset.target, 10);
+      var prefix = el.dataset.prefix || '';
+      var suffix = el.dataset.suffix || '';
+      var duration = 1400;
+      var start = performance.now();
+      function tick(now){
+        var t = Math.min((now - start)/duration, 1);
+        var ease = 1 - Math.pow(1-t, 3);
+        el.textContent = prefix + Math.round(ease * target) + suffix;
+        if(t < 1) requestAnimationFrame(tick);
+        else el.textContent = prefix + target + suffix;
+      }
+      requestAnimationFrame(tick);
+      obs.unobserve(el);
+    });
+  }, {threshold: 0.5});
+  els.forEach(function(el){ obs.observe(el); });
+})();
 </script>
 <script type="module">
 import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';

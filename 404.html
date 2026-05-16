@@ -8,47 +8,87 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-CVBY6GSVNZ');
 </script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>404 — Page Not Found · Sachin Rai</title>
 <meta name="robots" content="noindex" />
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230A0A0A'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Archivo Black,sans-serif' font-size='14' fill='%23E63946'>SR</text></svg>" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23161b1f'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='13' fill='%23ffffff'>SR</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/grove.css" />
 <style>
-  :root {
-    --paper:#F4F3EE; --ink:#0A0A0A; --red:#E63946; --orange:#F77F00; --green:#2A9D5F;
-    --font-display:'Archivo Black',sans-serif;
-    --font-serif:'Source Serif 4',Georgia,serif;
-    --font-mono:'JetBrains Mono',monospace;
+  body { min-height: 100dvh; display: grid; place-items: center; padding: 2rem; }
+  .not-found-box {
+    max-width: 560px;
+    width: 100%;
+    border: 1px solid var(--color-border);
+    padding: 3rem 2.5rem;
   }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body{background:var(--paper);color:var(--ink);font-family:var(--font-serif);min-height:100dvh;display:grid;place-items:center;padding:2rem;}
-  body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%230a0a0a'/%3E%3C/svg%3E");background-size:4px 4px;mix-blend-mode:multiply;}
-  body::after{content:'';position:fixed;inset:0;z-index:99;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px 200px;mix-blend-mode:overlay;}
-  .container{position:relative;z-index:1;max-width:640px;width:100%;border:1px solid var(--ink);padding:3rem 2.5rem;}
-  .eyebrow{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--red);margin-bottom:1.5rem;}
-  h1{font-family:var(--font-display);font-size:clamp(4rem,12vw,8rem);line-height:.9;letter-spacing:-.04em;text-transform:uppercase;margin-bottom:1.5rem;}
-  h1 span{color:var(--red);}
-  p{font-size:1.05rem;line-height:1.6;color:#444;max-width:42ch;margin-bottom:2rem;}
-  .links{display:flex;gap:1rem;flex-wrap:wrap;}
-  a.btn{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;padding:.75rem 1.25rem;border:1px solid var(--ink);color:var(--ink);text-decoration:none;transition:all .2s;}
-  a.btn:hover{background:var(--ink);color:var(--paper);}
-  a.btn.primary{background:var(--ink);color:var(--paper);}
-  a.btn.primary:hover{background:var(--red);border-color:var(--red);}
-  .status{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#888;margin-top:2rem;padding-top:1.5rem;border-top:1px solid #ddd;}
+  .not-found-eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+  .not-found-title {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 18vw, 9rem);
+    font-weight: 300;
+    line-height: 0.9;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+  }
+  .not-found-body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+    max-width: 38ch;
+  }
+  .not-found-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .not-found-links a {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.25rem;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .not-found-links a:hover { background: var(--color-text); color: #fff; }
+  .not-found-links a.primary { background: var(--color-text); color: #fff; }
+  .not-found-links a.primary:hover { opacity: 0.8; }
+  .not-found-status {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
 </style>
 </head>
 <body>
-<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0A0A0A;color:#F4F3EE;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;border-top:2px solid #E63946;">
-  <span style="flex:1;opacity:.8;">↳ SACHINAI.COM uses analytics to understand what people read. No ads. Data stays in Google Analytics.</span>
+<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#161b1f;color:#f4f1e8;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'Barlow',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;border-top:1px solid rgba(255,255,255,.15);">
+  <span style="flex:1;opacity:.8;">sachinai.com uses analytics to understand what people read. No ads. Data stays in Google Analytics.</span>
   <div style="display:flex;gap:.5rem;flex-shrink:0;">
-    <button onclick="srConsent('granted')" style="padding:.4rem 1rem;background:#E63946;color:#F4F3EE;border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
-    <button onclick="srConsent('denied')" style="padding:.4rem 1rem;background:transparent;color:rgba(244,243,238,.55);border:1px solid rgba(244,243,238,.25);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
+    <button onclick="srConsent('granted')" style="padding:.4rem 1rem;background:#000;color:#fff;border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
+    <button onclick="srConsent('denied')" style="padding:.4rem 1rem;background:transparent;color:rgba(244,241,232,.55);border:1px solid rgba(244,241,232,.25);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
   </div>
 </div>
 <script>
@@ -64,17 +104,20 @@
 })();
 </script>
 
-<main class="container">
-  <div class="eyebrow">↳ ERROR · 404 · PAGE NOT FOUND</div>
-  <h1><span>4</span>0<span>4</span></h1>
-  <p>This page doesn't exist or has moved. Check the URL — or head back to the field notes.</p>
-  <div class="links">
-    <a href="/" class="btn primary">← Back Home</a>
-    <a href="/posts/13-agents-one-saturday.html" class="btn">Latest Post</a>
-    <a href="/#subscribe" class="btn">Subscribe</a>
+<main>
+  <div class="not-found-box">
+    <span class="not-found-eyebrow">Error · 404 · Page Not Found</span>
+    <div class="not-found-title">404</div>
+    <p class="not-found-body">This page doesn't exist or has moved. Check the URL — or head back to the field notes.</p>
+    <div class="not-found-links">
+      <a href="/" class="primary">← Back Home</a>
+      <a href="/posts/13-agents-one-saturday.html">Latest Post</a>
+      <a href="/#subscribe">Subscribe</a>
+    </div>
+    <div class="not-found-status">sachinai.com · <span id="ts"></span></div>
   </div>
-  <div class="status">sachinai.com · <span id="ts"></span></div>
 </main>
+
 <script>document.getElementById('ts').textContent = new Date().toISOString().slice(0,10);</script>
 <script type="module">
 import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';

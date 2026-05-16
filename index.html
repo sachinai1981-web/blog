@@ -10,903 +10,213 @@
   gtag('js', new Date());
   gtag('config', 'G-CVBY6GSVNZ');
 </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <title>Sachin Rai — Where AI Meets Enterprise Selling</title>
-  <meta name="description" content="Field notes from where AI infrastructure meets enterprise selling. Build log, essays, and tools by Sachin Rai." />
-  <meta name="author" content="Sachin Rai" />
-  <link rel="canonical" href="https://sachinai.com/" />
-  <meta name="robots" content="index, follow" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sachinai.com/" />
-  <meta property="og:title" content="Sachin Rai — Where AI Meets Enterprise Selling" />
-  <meta property="og:description" content="Field notes from where AI infrastructure meets enterprise selling." />
-  <meta property="og:image" content="https://sachinai.com/og-image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:site_name" content="Sachin Rai" />
-  <meta property="og:locale" content="en_US" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@sachinrai01" />
-  <meta name="twitter:title" content="Sachin Rai — Where AI Meets Enterprise Selling" />
-  <meta name="twitter:description" content="Field notes from where AI infrastructure meets enterprise selling. Build log, essays, and tools by Sachin Rai." />
-  <meta name="twitter:image" content="https://sachinai.com/og-image.png" />
-  <link rel="alternate" type="application/rss+xml" title="Sachin Rai" href="/rss.xml" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Sachin Rai",
-    "url": "https://sachinai.com",
-    "sameAs": [
-      "https://x.com/sachinrai01",
-      "https://www.linkedin.com/in/sachinr1/"
-    ],
-    "jobTitle": "Enterprise Sales Professional",
-    "description": "Field notes from where AI infrastructure meets enterprise selling.",
-    "knowsAbout": ["AI", "Enterprise Sales", "Large Language Models", "SaaS"]
-  }
-  </script>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23CEEB13'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='14' font-weight='700' fill='%23000000'>SR</text></svg>" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --lime:       #CEEB13;
-      --lime-dark:  #A0B711;
-      --black:      #000000;
-      --near-black: #181717;
-      --dark-olive: #323C2A;
-      --white:      #FFFFFF;
-      --gray-mid:   #A3A3A3;
-      --font-mono:  'Space Mono', 'Courier New', monospace;
-      --font-sans:  'Inter', Arial, sans-serif;
-      --ease:       cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
-    body { font-family: var(--font-sans); background: var(--white); color: var(--black); overflow-x: hidden; }
-    a { color: inherit; text-decoration: none; }
-
-    /* ── NAV ───────────────────────────────────────── */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 0 48px; height: 64px;
-      display: flex; align-items: center; justify-content: space-between;
-      background: transparent; border-bottom: 1px solid transparent;
-      transition: background .3s, border-color .3s;
-    }
-    .nav.scrolled { background: rgba(24,23,23,0.97); border-color: #2a2a2a; }
-    .nav__brand {
-      font-family: var(--font-mono); font-size: 13px;
-      color: var(--white); letter-spacing: .08em; text-transform: uppercase;
-    }
-    .nav__links { display: flex; align-items: center; gap: 36px; list-style: none; }
-    .nav__links a {
-      font-family: var(--font-mono); font-size: 11px;
-      color: rgba(255,255,255,.75); letter-spacing: .05em;
-      transition: color .2s;
-    }
-    .nav__links a:hover { color: var(--lime); }
-    .nav__cta {
-      color: var(--lime) !important;
-      border: 1px solid var(--lime); padding: 7px 16px;
-      transition: background .2s, color .2s !important;
-    }
-    .nav__cta:hover { background: var(--lime); color: var(--black) !important; }
-
-    /* ── HERO — SPLIT-PANEL CINEMATIC ──────────────── */
-    .hero {
-      position: relative; height: 100vh; min-height: 600px;
-      overflow: hidden; display: flex; align-items: flex-end;
-    }
-    .hero__bg {
-      position: absolute; inset: 0;
-      background-image: url('https://picsum.photos/seed/aerial-city/1800/900');
-      background-size: cover; background-position: center;
-      transform-origin: center;
-      animation: kenBurns 18s ease-in-out infinite alternate;
-    }
-    @keyframes kenBurns {
-      0%   { transform: scale(1.0) translate(0, 0); }
-      100% { transform: scale(1.08) translate(-1%, 1%); }
-    }
-    /* dark overlay for legibility */
-    .hero__overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        to right,
-        rgba(0,0,0,0.72) 0%,
-        rgba(0,0,0,0.48) 50%,
-        rgba(0,0,0,0.2) 100%
-      );
-    }
-    /* vertical bisect line */
-    .hero__bisect {
-      position: absolute; top: 0; bottom: 0; left: 50%;
-      width: 1px; background: rgba(255,255,255,0.18);
-      z-index: 2;
-    }
-    .hero__content {
-      position: relative; z-index: 3;
-      padding: 0 48px 80px; max-width: 720px;
-    }
-    .hero__eyebrow {
-      font-family: var(--font-mono); font-size: 10px;
-      color: var(--lime); letter-spacing: .2em; text-transform: uppercase;
-      margin-bottom: 32px; opacity: 0.85;
-    }
-    .hero__h1 {
-      font-family: var(--font-mono); font-size: clamp(38px, 5vw, 72px);
-      font-weight: 400; line-height: 1.05; color: var(--white);
-    }
-    .hero__typed-row {
-      display: flex; align-items: baseline;
-      font-family: var(--font-mono); font-size: clamp(38px, 5vw, 72px);
-      font-weight: 400; line-height: 1.05;
-    }
-    #typedText { color: var(--lime); }
-    .hero__cursor {
-      display: inline-block; width: 3px; height: .82em;
-      background: var(--lime); margin-left: 3px; vertical-align: middle;
-      animation: blink 1s step-end infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-    .hero__scroll-hint {
-      position: absolute; bottom: 40px; left: 48px; z-index: 3;
-      font-family: var(--font-mono); font-size: 10px;
-      color: rgba(255,255,255,.35); letter-spacing: .15em; text-transform: uppercase;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .hero__scroll-hint::before {
-      content:''; display:block; width:32px; height:1px; background:rgba(255,255,255,.25);
-    }
-
-    /* ── FEATURED ──────────────────────────────────── */
-    .featured { background: var(--lime); padding: 88px 48px; }
-    .featured__inner { max-width: 1200px; margin: 0 auto; }
-    .section-label {
-      font-family: var(--font-mono); font-size: 10px;
-      letter-spacing: .2em; text-transform: uppercase; margin-bottom: 28px;
-    }
-    .featured .section-label { color: var(--dark-olive); }
-    .featured__heading {
-      font-family: var(--font-mono); font-size: clamp(26px, 3.2vw, 50px);
-      font-weight: 400; line-height: 1.12; color: var(--black); max-width: 860px;
-    }
-    .featured__meta {
-      font-family: var(--font-mono); font-size: 11px;
-      color: var(--dark-olive); margin-top: 36px;
-      display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
-    }
-    .featured__meta a { text-decoration: underline; text-underline-offset: 3px; color: var(--black); }
-
-    /* ── POSTS ─────────────────────────────────────── */
-    .posts { background: var(--black); padding: 88px 48px; }
-    .posts__inner { max-width: 1200px; margin: 0 auto; }
-    .section-header {
-      display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px;
-    }
-    .posts .section-label { color: var(--lime); }
-    .section-header__link {
-      font-family: var(--font-mono); font-size: 11px; color: var(--lime); letter-spacing: .08em;
-    }
-    .posts-grid {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      border: 1px solid rgba(255,255,255,.07);
-    }
-    .card {
-      background: var(--black); padding: 40px 32px;
-      border-right: 1px solid rgba(255,255,255,.07);
-      border-bottom: 1px solid rgba(255,255,255,.07);
-      display: flex; flex-direction: column; gap: 14px;
-      transition: background .2s; cursor: pointer;
-    }
-    .card:hover { background: #0d0d0d; }
-    .card__cat {
-      font-family: var(--font-mono); font-size: 9px;
-      letter-spacing: .18em; text-transform: uppercase; color: var(--lime);
-    }
-    .card__title {
-      font-family: var(--font-mono); font-size: 16px;
-      font-weight: 400; line-height: 1.45; color: var(--white); flex:1;
-    }
-    .card__excerpt {
-      font-family: var(--font-sans); font-size: 12px; line-height: 1.75;
-      color: rgba(255,255,255,.45);
-    }
-    .card__footer {
-      display: flex; justify-content: space-between; align-items: center;
-      padding-top: 16px; border-top: 1px solid rgba(255,255,255,.08);
-      margin-top: auto;
-    }
-    .card__date { font-family: var(--font-mono); font-size: 9px; color: rgba(255,255,255,.25); letter-spacing:.04em; }
-    .card__arrow { color: var(--lime); font-size: 15px; transition: transform .2s; }
-    .card:hover .card__arrow { transform: translateX(5px); }
-    .card-link { display: contents; }
-    .card-link .card { cursor: pointer; }
-
-    /* ── FOOTPRINT STAT CARDS (Pattern 2) ──────────── */
-    .footprint {
-      background: var(--black);
-      padding: 100px 48px;
-    }
-    .footprint__inner { max-width: 1200px; margin: 0 auto; }
-    .footprint__label {
-      font-family: var(--font-mono); font-size: 10px;
-      letter-spacing: .2em; text-transform: uppercase;
-      color: var(--lime); margin-bottom: 20px;
-    }
-    .footprint__heading {
-      font-family: var(--font-mono); font-size: clamp(28px, 3vw, 44px);
-      font-weight: 400; color: var(--white); margin-bottom: 56px; line-height: 1.1;
-    }
-    .footprint__cards {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .fp-card {
-      position: relative; height: 360px; overflow: hidden;
-      border-right: 1px solid rgba(255,255,255,0.08);
-    }
-    .fp-card:last-child { border-right: none; }
-    .fp-card__bg {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      transition: transform 0.6s var(--ease);
-    }
-    .fp-card:hover .fp-card__bg { transform: scale(1.04); }
-    .fp-card__overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(160deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 100%);
-    }
-    .fp-card--solid { background: var(--dark-olive); }
-    .fp-card--solid .fp-card__overlay { display: none; }
-    .fp-card__body {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      padding: 28px 32px;
-    }
-    .fp-card__tag {
-      font-family: var(--font-mono); font-size: 9px;
-      letter-spacing: .22em; text-transform: uppercase;
-      color: var(--lime); margin-bottom: auto;
-    }
-    .fp-card__num {
-      font-family: var(--font-mono);
-      font-size: clamp(72px, 8vw, 112px);
-      font-weight: 700;
-      line-height: 0.9;
-      margin-top: auto;
-      margin-bottom: 12px;
-    }
-    .fp-card--dark .fp-card__num  { color: var(--lime); }
-    .fp-card--light .fp-card__num { color: #000; }
-    .fp-card--olive .fp-card__num { color: var(--lime); }
-    .fp-card__sub {
-      font-family: var(--font-mono); font-size: 11px;
-      letter-spacing: .06em; text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-    }
-    .fp-card--light .fp-card__sub { color: rgba(0,0,0,0.55); }
-
-    /* ── CINEMATIC FULL-BLEED (Pattern 3) ──────────── */
-    .cinematic {
-      position: relative; height: 60vh; overflow: hidden;
-    }
-    .cinematic__img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
-      will-change: transform;
-    }
-    .cinematic__bar {
-      position: absolute; left: 0; right: 0; height: 40px;
-      background: var(--black); z-index: 2;
-    }
-    .cinematic__bar--top { top: 0; }
-    .cinematic__bar--bot { bottom: 0; }
-
-    /* ── RADIAL CTA CANVAS (Pattern 4) ─────────────── */
-    .cta-radial {
-      position: relative; overflow: hidden;
-      background: var(--lime);
-      padding: 120px 48px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    #ctaCanvas {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-    }
-    .cta-radial__content {
-      position: relative; z-index: 2;
-      text-align: center; max-width: 700px;
-    }
-    .cta-radial__label {
-      font-family: var(--font-mono); font-size: 10px;
-      letter-spacing: .22em; text-transform: uppercase;
-      color: rgba(0,0,0,0.45); margin-bottom: 20px;
-    }
-    .cta-radial__heading {
-      font-family: var(--font-mono);
-      font-size: clamp(28px, 4vw, 54px);
-      font-weight: 700; line-height: 1.1;
-      color: var(--black); margin-bottom: 48px;
-    }
-    .btn {
-      font-family: var(--font-mono); font-size: 11px; letter-spacing: .05em;
-      padding: 14px 28px; border: none; cursor: pointer; display: inline-block;
-      transition: background .2s, color .2s; text-decoration: none;
-    }
-    .btn--black  { background: var(--black); color: var(--white); }
-    .btn--black:hover { background: var(--near-black); }
-    .btn--lime   { background: var(--lime); color: var(--black); }
-    .btn--lime:hover { background: var(--lime-dark); }
-    .btn--ghost  { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,.25); }
-    .btn--ghost:hover { border-color: var(--lime); color: var(--lime); }
-
-    /* ── ABOUT ─────────────────────────────────────── */
-    .about { background: var(--near-black); padding: 120px 48px; }
-    .about__inner {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 88px; align-items: center;
-    }
-    .about__heading {
-      font-family: var(--font-mono); font-size: clamp(26px,3vw,44px);
-      font-weight: 400; line-height: 1.18; color: var(--white);
-    }
-    .about__heading em { font-style: normal; color: var(--lime); }
-    .about__body {
-      font-family: var(--font-sans); font-size: 14px; line-height: 1.85;
-      color: rgba(255,255,255,.55);
-    }
-    .about__body p + p { margin-top: 20px; }
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 36px; }
-    .tag {
-      font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em;
-      text-transform: uppercase; padding: 6px 12px;
-      border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.4);
-    }
-    .tag--on { border-color: var(--lime); color: var(--lime); }
-
-    /* ── CATEGORIES ────────────────────────────────── */
-    .cats { background: var(--black); }
-    .cats-grid {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(4,1fr);
-      border-left: 1px solid rgba(255,255,255,.07);
-    }
-    .cat-item {
-      padding: 56px 40px;
-      border-right: 1px solid rgba(255,255,255,.07);
-      border-bottom: 1px solid rgba(255,255,255,.07);
-      cursor: pointer; transition: background .2s;
-    }
-    .cat-item:hover { background: rgba(206,235,19,.04); }
-    .cat-item__icon { font-size: 22px; margin-bottom: 20px; }
-    .cat-item__name { font-family: var(--font-mono); font-size: 14px; color: var(--white); margin-bottom: 10px; }
-    .cat-item__count { font-family: var(--font-mono); font-size: 10px; color: var(--lime); letter-spacing: .1em; }
-
-    /* ── FOOTER ────────────────────────────────────── */
-    .footer { background: var(--near-black); padding: 72px 48px 40px; border-top: 1px solid rgba(255,255,255,.05); }
-    .footer__inner { max-width: 1200px; margin: 0 auto; }
-    .footer__top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 64px; }
-    .footer__brand { font-family: var(--font-mono); font-size: 16px; color: var(--white); }
-    .footer__brand span { color: var(--lime); }
-    .footer__cols { display: flex; gap: 56px; }
-    .footer__col-title {
-      font-family: var(--font-mono); font-size: 9px; letter-spacing: .2em;
-      text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 20px;
-    }
-    .footer__col-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .footer__col-links a {
-      font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,.5);
-      transition: color .2s;
-    }
-    .footer__col-links a:hover { color: var(--lime); }
-    .footer__bottom {
-      display: flex; justify-content: space-between; align-items: center;
-      padding-top: 28px; border-top: 1px solid rgba(255,255,255,.05);
-    }
-    .footer__copy { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.25); }
-    .footer__social { display: flex; gap: 24px; }
-    .footer__social a { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.25); transition: color .2s; }
-    .footer__social a:hover { color: var(--lime); }
-
-    /* ── REVEAL ────────────────────────────────────── */
-    .rv { opacity:0; transform:translateY(20px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
-    .rv.in { opacity:1; transform:none; }
-
-    /* ── RESPONSIVE ────────────────────────────────── */
-    @media(max-width:960px) {
-      .posts-grid { grid-template-columns: 1fr 1fr; }
-      .footprint__cards { grid-template-columns: 1fr; }
-      .fp-card { height: 300px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
-      .fp-card:last-child { border-bottom: none; }
-      .cats-grid   { grid-template-columns: 1fr 1fr; }
-      .about__inner { grid-template-columns: 1fr; gap: 48px; }
-    }
-    @media(max-width:600px) {
-      .nav { padding: 0 20px; }
-      .nav__links { display:none; }
-      .hero__content { padding: 0 20px 80px; }
-      .hero__bisect { display: none; }
-      .posts-grid { grid-template-columns: 1fr; }
-      .footprint { padding: 72px 20px; }
-      .footprint__cards { grid-template-columns: 1fr; }
-      .cinematic { height: 40vh; }
-      .cats-grid  { grid-template-columns: 1fr 1fr; }
-      .footer__top { flex-direction: column; gap: 40px; }
-      .footer__cols { flex-wrap: wrap; gap: 32px; }
-      .featured, .posts, .about { padding-left: 20px; padding-right: 20px; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sachin Rai — Field Notes</title>
+<meta name="description" content="Field notes from the intersection of AI, enterprise sales, and trading systems. Written by Sachin Rai in San Francisco." />
+<link rel="canonical" href="https://sachinai.com/" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://sachinai.com/" />
+<meta property="og:title" content="Sachin Rai — Field Notes" />
+<meta property="og:description" content="Field notes from the intersection of AI, enterprise sales, and trading systems." />
+<meta property="og:image" content="https://sachinai.com/og-image.png" />
+<meta property="og:site_name" content="Sachin Rai" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@sachinrai01" />
+<meta name="twitter:title" content="Sachin Rai — Field Notes" />
+<meta name="twitter:description" content="Field notes from the intersection of AI, enterprise sales, and trading systems." />
+<meta name="twitter:image" content="https://sachinai.com/og-image.png" />
+<link rel="alternate" type="application/rss+xml" title="Sachin Rai" href="/rss.xml" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23161b1f'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='13' fill='%23ffffff'>SR</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/grove.css" />
 </head>
-<body>
+<body class="hero-page">
 
-<!-- NAV -->
-<nav class="nav" id="mainNav">
-  <a class="nav__brand" href="/">Sachin Rai</a>
-  <ul class="nav__links">
-    <li><a href="#posts">Writing</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#categories">Topics</a></li>
-    <li><a href="resume.html">Resume</a></li>
-    <li><a href="#cta-section" class="nav__cta">Subscribe</a></li>
-  </ul>
+<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#161b1f;color:#ffffff;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'Barlow',sans-serif;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid rgba(255,255,255,0.15);">
+  <span style="flex:1;opacity:.7;">sachinai.com uses Google Analytics to understand readership. No ads. No fingerprinting.</span>
+  <div style="display:flex;gap:.5rem;flex-shrink:0;">
+    <button onclick="srConsent('granted')" style="padding:.4rem 1.1rem;background:#ffffff;color:#161b1f;border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
+    <button onclick="srConsent('denied')" style="padding:.4rem 1.1rem;background:transparent;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.2);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
+  </div>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('sr-consent');
+  if(!b)return;
+  if(!localStorage.getItem('sr_consent'))b.style.display='flex';
+  window.srConsent=function(v){
+    localStorage.setItem('sr_consent',v);
+    if(typeof gtag!=='undefined')gtag('consent','update',{analytics_storage:v});
+    b.style.display='none';
+  };
+})();
+</script>
+
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <div class="navbar-left">
+      <a href="/" class="navbar__link">Writing</a>
+      <a href="/tools.html" class="navbar__link">Tools</a>
+    </div>
+    <div class="navbar-center">
+      <a href="/" class="navbar__logo-link">◆ SACHIN RAI</a>
+    </div>
+    <div class="navbar-right">
+      <a href="/about.html" class="navbar__link">About</a>
+    </div>
+  </div>
 </nav>
 
-<!-- HERO — Split-panel cinematic (Pattern 1) -->
-<section class="hero" id="hero" aria-labelledby="hero-heading">
-  <div class="hero__bg" role="img" aria-label="Aerial city view"></div>
-  <div class="hero__overlay"></div>
-  <div class="hero__bisect" aria-hidden="true"></div>
-  <div class="hero__content">
-    <p class="hero__eyebrow">AI · Sales · Markets · Building in Public</p>
-    <h1 class="hero__h1" id="hero-heading">Notes on building<br>things that</h1>
-    <div class="hero__typed-row" aria-live="polite">
-      <span id="typedText"></span><span class="hero__cursor" aria-hidden="true"></span>
-    </div>
-  </div>
-  <div class="hero__scroll-hint" aria-hidden="true">Scroll</div>
-</section>
+<main id="main">
 
-<!-- FEATURED -->
-<section class="featured" aria-label="Latest post">
-  <div class="featured__inner">
-    <p class="section-label rv">Latest Post</p>
-    <h2 class="featured__heading rv">NVIDIA's AI Compute Stack: A Field Guide for Enterprise Sellers — from H100 to Blackwell, explained for anyone selling into AI budgets.</h2>
-    <div class="featured__meta rv">
-      <span>May 15, 2026</span>
-      <span>·</span>
-      <span>AI Infrastructure</span>
-      <span>·</span>
-      <a href="posts/nvidia-data-center-guide.html">Read full post →</a>
+  <!-- HERO -->
+  <section class="hero">
+    <img class="hero__image" src="https://picsum.photos/seed/desk-workspace/1600/900" alt="" loading="eager" fetchpriority="high" />
+    <div class="hero__overlay"></div>
+    <div class="hero__content hero__content--right">
+      <p class="hero__label">Field Notes</p>
+      <h1 class="hero__title">Build Log.</h1>
+      <p class="hero__body">AI, trading systems, and enterprise sales — written from the building side.</p>
+      <a href="/archive.html" class="v2-button v2-button--white">Read All</a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- POSTS -->
-<section class="posts" id="posts" aria-labelledby="posts-heading">
-  <div class="posts__inner">
-    <div class="section-header rv">
-      <span class="section-label" id="posts-heading">Recent Writing</span>
-      <a href="archive.html" class="section-header__link">All posts →</a>
+  <!-- CTA SECTION -->
+  <section class="section section--white section--center">
+    <div class="container">
+      <h2 class="section__title">Think Out Loud.</h2>
+      <p class="section__subtitle">One essay per week. No newsletter cadence. No content strategy. Just what I'm actually building, breaking, and learning at the intersection of AI, markets, and sales.</p>
+      <a href="/archive.html" class="v2-button">Browse Archive</a>
     </div>
-    <div class="posts-grid">
+  </section>
 
-      <a href="posts/nvidia-data-center-guide.html" class="card-link">
-      <article class="card rv" style="background:linear-gradient(135deg,#0a0a0a 0%,#111 100%); position:relative; overflow:hidden;">
-        <div style="position:absolute;inset:0;background-image:url('https://www.nvidia.com/content/dam/en-zz/Solutions/data-center/gb200-superchip/gb200-nvl72-bm-lg580-offset-d.jpg');background-size:cover;background-position:center right;opacity:0.18;"></div>
-        <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:14px;flex:1;">
-          <span class="card__cat" style="color:#76b900;">AI Infrastructure</span>
-          <h3 class="card__title">NVIDIA's AI Compute Stack: A Field Guide for Enterprise Sellers</h3>
-          <p class="card__excerpt">From H100 to Blackwell — the full hardware hierarchy explained for anyone selling into AI budgets in 2026.</p>
-          <div class="card__footer">
-            <span class="card__date">May 15, 2026</span>
-            <span class="card__arrow" aria-hidden="true">→</span>
+  <!-- POST GRID -->
+  <section class="section section--gray" id="posts">
+    <div class="container">
+      <div class="post-grid">
+
+        <a href="/posts/nvidia-data-center-guide.html" class="post-tile post-tile--wide">
+          <img class="post-tile__image" src="https://picsum.photos/seed/nvidia-datacenter/900/500" alt="" loading="lazy" />
+          <div class="post-tile__body">
+            <p class="post-tile__tag">AI Infrastructure · Sales Intelligence</p>
+            <h2 class="post-tile__title">The Complete NVIDIA Data Center Product Guide for 2026</h2>
+            <p class="post-tile__excerpt">Every GPU, NVLink switch, and networking SKU in NVIDIA's data center stack — with the sales intelligence to know which customer buys which product and why.</p>
+            <p class="post-tile__meta">May 15, 2026</p>
           </div>
-        </div>
-      </article>
-      </a>
+        </a>
 
-      <a href="posts/portfolio-monitor.html" class="card-link">
-      <article class="card rv">
-        <span class="card__cat">AI + Automation</span>
-        <h3 class="card__title">How I Built a Portfolio Monitor That Fires Every Morning at 5am</h3>
-        <p class="card__excerpt">Connecting Alpaca, Claude, and launchd to build a fully autonomous pre-market briefing agent that wakes up before I do.</p>
-        <div class="card__footer">
-          <span class="card__date">May 10, 2026</span>
-          <span class="card__arrow" aria-hidden="true">→</span>
-        </div>
-      </article>
-      </a>
+        <a href="/posts/portfolio-monitor.html" class="post-tile">
+          <img class="post-tile__image" src="https://picsum.photos/seed/trading-desk/600/400" alt="" loading="lazy" />
+          <div class="post-tile__body">
+            <p class="post-tile__tag">AI · Automation</p>
+            <h2 class="post-tile__title">I Built a 5am Portfolio Monitor That Texts Me Before the Market Opens</h2>
+            <p class="post-tile__meta">May 10, 2026</p>
+          </div>
+        </a>
 
-      <a href="posts/club-winner.html" class="card-link">
-      <article class="card rv">
-        <span class="card__cat">Sales Intelligence</span>
-        <h3 class="card__title">7 Things Every Club Winner Knows That Average Reps Don't</h3>
-        <p class="card__excerpt">After 7 President's Club wins, here are the patterns I see in every top performer. None of them are tactics.</p>
-        <div class="card__footer">
-          <span class="card__date">May 3, 2026</span>
-          <span class="card__arrow" aria-hidden="true">→</span>
-        </div>
-      </article>
-      </a>
+        <a href="/posts/club-winner.html" class="post-tile">
+          <img class="post-tile__image" src="https://picsum.photos/seed/conference-stage/600/400" alt="" loading="lazy" />
+          <div class="post-tile__body">
+            <p class="post-tile__tag">Sales Intelligence</p>
+            <h2 class="post-tile__title">Seven Things I Did Differently to Win 7× Club</h2>
+            <p class="post-tile__meta">May 3, 2026</p>
+          </div>
+        </a>
 
-      <a href="posts/claude-code-retrospective.html" class="card-link">
-      <article class="card rv">
-        <span class="card__cat">Building in Public</span>
-        <h3 class="card__title">Claude Code Changed How I Build — A 30-Day Retrospective</h3>
-        <p class="card__excerpt">What happened when I stopped planning features and started just building them. The feedback loop is completely different now.</p>
-        <div class="card__footer">
-          <span class="card__date">Apr 28, 2026</span>
-          <span class="card__arrow" aria-hidden="true">→</span>
-        </div>
-      </article>
-      </a>
+        <a href="/posts/claude-code-retrospective.html" class="post-tile">
+          <img class="post-tile__image" src="https://picsum.photos/seed/laptop-workspace/600/400" alt="" loading="lazy" />
+          <div class="post-tile__body">
+            <p class="post-tile__tag">Building in Public</p>
+            <h2 class="post-tile__title">30 Days of Claude Code: A Retrospective</h2>
+            <p class="post-tile__meta">Apr 28, 2026</p>
+          </div>
+        </a>
 
-      <a href="posts/obsidian-vault.html" class="card-link">
-      <article class="card rv">
-        <span class="card__cat">Knowledge Systems</span>
-        <h3 class="card__title">Why My Obsidian Vault Is the Most Valuable Thing I Own</h3>
-        <p class="card__excerpt">500+ notes. 3 years of weekly compile runs. How turning raw captures into structured intelligence actually compounds.</p>
-        <div class="card__footer">
-          <span class="card__date">Apr 19, 2026</span>
-          <span class="card__arrow" aria-hidden="true">→</span>
-        </div>
-      </article>
-      </a>
+        <a href="/posts/obsidian-vault.html" class="post-tile">
+          <img class="post-tile__image" src="https://picsum.photos/seed/library-books/600/400" alt="" loading="lazy" />
+          <div class="post-tile__body">
+            <p class="post-tile__tag">Knowledge Systems</p>
+            <h2 class="post-tile__title">How My Obsidian Vault Became an AI-Queryable Second Brain</h2>
+            <p class="post-tile__meta">Apr 19, 2026</p>
+          </div>
+        </a>
 
-      <a href="posts/ai-first-outreach.html" class="card-link">
-      <article class="card rv">
-        <span class="card__cat">AI + Sales</span>
-        <h3 class="card__title">The Case for AI-First Outreach: How I Built My Own SDR in a Weekend</h3>
-        <p class="card__excerpt">Using LangGraph, Apollo, and Claude to research prospects, score fit, and draft personalised emails — automatically.</p>
-        <div class="card__footer">
-          <span class="card__date">Apr 12, 2026</span>
-          <span class="card__arrow" aria-hidden="true">→</span>
-        </div>
-      </article>
-      </a>
+        <a href="/posts/ai-first-outreach.html" class="post-tile">
+          <img class="post-tile__image" src="https://picsum.photos/seed/email-office/600/400" alt="" loading="lazy" />
+          <div class="post-tile__body">
+            <p class="post-tile__tag">AI · Sales</p>
+            <h2 class="post-tile__title">Building an AI-First Outreach Pipeline from Scratch</h2>
+            <p class="post-tile__meta">Apr 12, 2026</p>
+          </div>
+        </a>
 
-      <a href="posts/autoquant.html" class="card-link">
-      <article class="card rv">
-        <span class="card__cat">Markets + Trading</span>
-        <h3 class="card__title">AutoQuant: What I Learned After 6 Months of Bayesian Signal Grading</h3>
-        <p class="card__excerpt">Building a scanner that grades its own trades, re-weights conviction over time, and auto-journals every autopsy.</p>
-        <div class="card__footer">
-          <span class="card__date">Apr 5, 2026</span>
-          <span class="card__arrow" aria-hidden="true">→</span>
-        </div>
-      </article>
-      </a>
+        <a href="/posts/autoquant.html" class="post-tile">
+          <img class="post-tile__image" src="https://picsum.photos/seed/markets-trading/600/400" alt="" loading="lazy" />
+          <div class="post-tile__body">
+            <p class="post-tile__tag">Markets · Trading</p>
+            <h2 class="post-tile__title">AutoQuant: A Bayesian Signal Grader for Options Trading</h2>
+            <p class="post-tile__meta">Apr 5, 2026</p>
+          </div>
+        </a>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- GROVE SEAL DIVIDER -->
+  <div class="grove-seal" aria-hidden="true"></div>
+
+  <!-- CTA BLOCK -->
+  <section class="cta-block">
+    <div class="container">
+      <h2 class="cta-block__title">Writing Inspires.</h2>
+      <p class="cta-block__body">Twenty years of enterprise sales, three years of building AI systems. The essays are where the two collide.</p>
+      <a href="/about.html" class="v2-button">About Sachin</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="v2-footer">
+  <button class="v2-footer__scroll-up" onclick="window.scrollTo({top:0,behavior:'smooth'});" aria-label="Scroll to top">↑<br/>GO UP</button>
+  <div class="v2-footer__inner">
+    <nav class="v2-footer__nav" aria-label="Footer navigation">
+      <a href="/" class="footer__link">Essays</a>
+      <a href="/about.html" class="footer__link">About</a>
+      <a href="/archive.html" class="footer__link">Archive</a>
+      <a href="/tools.html" class="footer__link">Tools</a>
+      <a href="/resume.html" class="footer__link">Resume</a>
+      <a href="/rss.xml" class="footer__link">RSS</a>
+    </nav>
+    <div class="v2-footer__newsletter">
+      <div class="v2-footer__newsletter-title">Field Notes</div>
+      <p class="v2-footer__newsletter-text">One essay per week. AI infrastructure, trading systems, and what actually ships.</p>
+      <form class="v2-footer__email-form" action="https://formspree.io/f/xwvwlybd" method="POST">
+        <input class="v2-footer__email-input" type="email" name="email" placeholder="your@email.com" required />
+        <button class="v2-footer__email-submit" type="submit">Subscribe →</button>
+      </form>
     </div>
   </div>
-</section>
-
-<!-- FOOTPRINT STAT CARDS (Pattern 2) -->
-<section class="footprint" aria-labelledby="footprint-heading">
-  <div class="footprint__inner">
-    <p class="footprint__label rv">Track Record</p>
-    <h2 class="footprint__heading rv" id="footprint-heading">My track record</h2>
-    <div class="footprint__cards">
-
-      <!-- Card 1: dark photo + lime number -->
-      <div class="fp-card fp-card--dark rv">
-        <div class="fp-card__bg" style="background-image:url('https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/HGX/nvidia-hgx-platform-bm-md460-offset-left-d.jpg');background-position:center right;"></div>
-        <div class="fp-card__overlay"></div>
-        <div class="fp-card__body">
-          <span class="fp-card__tag">Wins</span>
-          <div class="fp-card__num" data-target="7" data-suffix="×">0×</div>
-          <span class="fp-card__sub">President's Club</span>
-        </div>
-      </div>
-
-      <!-- Card 2: photo + black number -->
-      <div class="fp-card fp-card--light rv">
-        <div class="fp-card__bg" style="background-image:url('https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/h200/h200-kv-bb580_440-d.jpg');background-position:center;"></div>
-        <div class="fp-card__overlay" style="background:linear-gradient(160deg,rgba(255,255,255,0.45) 0%,rgba(255,255,255,0.15) 100%);"></div>
-        <div class="fp-card__body">
-          <span class="fp-card__tag" style="color:#323C2A;">Quota</span>
-          <div class="fp-card__num" data-target="200" data-suffix="%">0%</div>
-          <span class="fp-card__sub">Year 2 Freshworks</span>
-        </div>
-      </div>
-
-      <!-- Card 3: solid dark-olive + lime number -->
-      <div class="fp-card fp-card--olive fp-card--solid rv">
-        <div class="fp-card__body">
-          <span class="fp-card__tag">Experience</span>
-          <div class="fp-card__num" data-target="20" data-suffix="+">0+</div>
-          <span class="fp-card__sub">Years Enterprise SaaS</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CINEMATIC FULL-BLEED (Pattern 3) -->
-<div class="cinematic" aria-hidden="true">
-  <div class="cinematic__bar cinematic__bar--top"></div>
-  <img
-    class="cinematic__img"
-    id="cinematicImg"
-    src="https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/products/dgx-platform-bm-m460-d.jpg"
-    alt="NVIDIA DGX AI Infrastructure Platform"
-    loading="lazy"
-    width="1800"
-    height="760"
-  />
-  <div class="cinematic__bar cinematic__bar--bot"></div>
-</div>
-
-<!-- ABOUT -->
-<section class="about" id="about" aria-labelledby="about-heading">
-  <div class="about__inner">
-    <h2 class="about__heading rv" id="about-heading">
-      I build things at the<br>intersection of <em>AI,</em><br><em>sales,</em> and <em>markets.</em>
-    </h2>
-    <div>
-      <div class="about__body rv">
-        <p>By day I close enterprise software deals at Freshworks. By night I build trading systems, AI outreach pipelines, and knowledge frameworks that compound over time.</p>
-        <p>This blog is where I think in public — about what works, what breaks, and what I'm building next. No fluff. Just signal.</p>
-      </div>
-      <div class="tags rv">
-        <span class="tag tag--on">AI Tools</span>
-        <span class="tag tag--on">Sales Systems</span>
-        <span class="tag tag--on">Options Trading</span>
-        <span class="tag">Obsidian PKM</span>
-        <span class="tag">Claude Code</span>
-        <span class="tag">LangGraph</span>
-        <span class="tag">Building in Public</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CATEGORIES -->
-<section class="cats" id="categories" aria-labelledby="cats-heading">
-  <div class="cats-grid">
-    <div class="cat-item rv">
-      <div class="cat-item__icon" aria-hidden="true">⚡</div>
-      <div class="cat-item__name">AI + Automation</div>
-      <div class="cat-item__count">12 Posts</div>
-    </div>
-    <div class="cat-item rv">
-      <div class="cat-item__icon" aria-hidden="true">📈</div>
-      <div class="cat-item__name">Sales Intelligence</div>
-      <div class="cat-item__count">8 Posts</div>
-    </div>
-    <div class="cat-item rv">
-      <div class="cat-item__icon" aria-hidden="true">📊</div>
-      <div class="cat-item__name">Markets + Trading</div>
-      <div class="cat-item__count">9 Posts</div>
-    </div>
-    <div class="cat-item rv">
-      <div class="cat-item__icon" aria-hidden="true">🧠</div>
-      <div class="cat-item__name">Knowledge Systems</div>
-      <div class="cat-item__count">6 Posts</div>
-    </div>
-  </div>
-</section>
-
-<!-- RADIAL CTA CANVAS (Pattern 4) -->
-<section class="cta-radial" id="cta-section" aria-labelledby="cta-heading">
-  <canvas id="ctaCanvas" aria-hidden="true"></canvas>
-  <div class="cta-radial__content rv">
-    <p class="cta-radial__label">Weekly dispatch</p>
-    <h2 class="cta-radial__heading" id="cta-heading">Are you ready to read<br>something real?</h2>
-    <form onsubmit="return false;" style="display:flex;gap:0;max-width:400px;margin:0 auto 0;">
-      <input
-        type="email"
-        placeholder="your@email.com"
-        aria-label="Email address"
-        style="flex:1;font-family:var(--font-mono);font-size:12px;padding:16px 20px;background:#000;color:#fff;border:none;outline:none;"
-      />
-      <button class="btn btn--black" type="submit">Subscribe →</button>
-    </form>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer" aria-label="Site footer">
-  <div class="footer__inner">
-    <div class="footer__top">
-      <div class="footer__brand">SACHIN <span>RAI</span></div>
-      <div class="footer__cols">
-        <div>
-          <p class="footer__col-title">Writing</p>
-          <ul class="footer__col-links">
-            <li><a href="archive.html">AI + Automation</a></li>
-            <li><a href="archive.html">Sales Intelligence</a></li>
-            <li><a href="archive.html">Markets + Trading</a></li>
-            <li><a href="archive.html">Knowledge Systems</a></li>
-          </ul>
-        </div>
-        <div>
-          <p class="footer__col-title">Projects</p>
-          <ul class="footer__col-links">
-            <li><a href="posts/">AutoQuant</a></li>
-            <li><a href="posts/">SwingTrader</a></li>
-            <li><a href="posts/">Outreach AI</a></li>
-            <li><a href="posts/">Portfolio Monitor</a></li>
-          </ul>
-        </div>
-        <div>
-          <p class="footer__col-title">Connect</p>
-          <ul class="footer__col-links">
-            <li><a href="https://www.linkedin.com/in/sachinr1" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            <li><a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><a href="mailto:sachinai1981@gmail.com">Email</a></li>
-            <li><a href="resume.html">Resume</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer__bottom">
-      <p class="footer__copy">© 2026 Sachin Rai. Built with Claude Code.</p>
-      <div class="footer__social">
-        <a href="https://x.com/sachinrai01" target="_blank" rel="noopener noreferrer">Twitter</a>
-        <a href="https://www.linkedin.com/in/sachinr1" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </div>
+  <div class="v2-footer__bottom">
+    <span>© 2026 Sachin Rai · Field Notes from San Francisco</span>
+    <div class="v2-footer__social">
+      <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">X ↗</a>
+      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="/privacy.html">Privacy</a>
     </div>
   </div>
 </footer>
 
-<script>
-/* ── NAV SCROLL ─────────────────────────────── */
-const nav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-});
-
-/* ── TYPEWRITER ─────────────────────────────── */
-const words = ['actually work.', 'compound over time.', 'earn their keep.', 'change the game.'];
-let wi = 0, ci = 0, del = false;
-const el = document.getElementById('typedText');
-(function type() {
-  const w = words[wi];
-  el.textContent = del ? w.slice(0, --ci) : w.slice(0, ++ci);
-  if (!del && ci === w.length)  { del = true;  return setTimeout(type, 2400); }
-  if  (del && ci === 0)         { del = false; wi = (wi + 1) % words.length; }
-  setTimeout(type, del ? 50 : 85);
-})();
-
-/* ── COUNTER-UP ON STAT NUMBERS (Pattern 2) ─── */
-function animateCounter(el) {
-  const target  = parseInt(el.dataset.target, 10);
-  const suffix  = el.dataset.suffix || '';
-  const duration = 1800;
-  const start    = performance.now();
-  function tick(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    // ease-out quad
-    const eased = 1 - (1 - progress) * (1 - progress);
-    const current = Math.round(eased * target);
-    el.textContent = current + suffix;
-    if (progress < 1) requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-}
-
-const counterObs = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      animateCounter(entry.target);
-      counterObs.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.3 });
-
-document.querySelectorAll('.fp-card__num[data-target]').forEach(el => {
-  counterObs.observe(el);
-});
-
-/* ── PARALLAX ON CINEMATIC IMAGE (Pattern 3) ── */
-const cinematicImg = document.getElementById('cinematicImg');
-let cinematicTicking = false;
-window.addEventListener('scroll', () => {
-  if (!cinematicTicking) {
-    requestAnimationFrame(() => {
-      if (cinematicImg) {
-        const rect = cinematicImg.closest('.cinematic').getBoundingClientRect();
-        const viewH = window.innerHeight;
-        if (rect.bottom > 0 && rect.top < viewH) {
-          const progress = (viewH - rect.top) / (viewH + rect.height);
-          const translateY = (progress - 0.5) * 60;
-          cinematicImg.style.transform = `translateY(${translateY}px)`;
-        }
-      }
-      cinematicTicking = false;
-    });
-    cinematicTicking = true;
-  }
-});
-
-/* ── RADIAL TICK CANVAS (Pattern 4) ────────── */
-(function initCtaCanvas() {
-  const canvas = document.getElementById('ctaCanvas');
-  const ctx    = canvas.getContext('2d');
-  let W, H, t = 0;
-
-  function resize() {
-    W = canvas.offsetWidth;
-    H = canvas.offsetHeight;
-    canvas.width  = W * window.devicePixelRatio;
-    canvas.height = H * window.devicePixelRatio;
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // corners: [cx, cy, startAngle, endAngle]
-  function getCorners() {
-    return [
-      { x: 0, y: 0, a0: 0,           a1: Math.PI / 2 },        // top-left
-      { x: W, y: 0, a0: Math.PI / 2, a1: Math.PI },             // top-right
-      { x: 0, y: H, a0: -Math.PI/2,  a1: 0 },                   // bottom-left
-      { x: W, y: H, a0: Math.PI,     a1: 3 * Math.PI / 2 }      // bottom-right
-    ];
-  }
-
-  const RINGS    = 8;
-  const RING_GAP = 60;
-  const TICKS_PER_RING = 10;
-  const TICK_LEN = 10;
-
-  function drawCorner(corner, rotation) {
-    const { x, y, a0, a1 } = corner;
-    for (let r = 0; r < RINGS; r++) {
-      const radius = (r + 1) * RING_GAP;
-      const sweepLen = a1 - a0;
-      for (let i = 0; i < TICKS_PER_RING; i++) {
-        const frac = i / TICKS_PER_RING;
-        const angle = a0 + frac * sweepLen + rotation;
-        const cos = Math.cos(angle);
-        const sin = Math.sin(angle);
-        const x0 = x + cos * radius;
-        const y0 = y + sin * radius;
-        const x1 = x + cos * (radius + TICK_LEN);
-        const y1 = y + sin * (radius + TICK_LEN);
-        ctx.beginPath();
-        ctx.moveTo(x0, y0);
-        ctx.lineTo(x1, y1);
-        ctx.strokeStyle = 'rgba(0,0,0,0.45)';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      }
-    }
-  }
-
-  function frame() {
-    ctx.clearRect(0, 0, W, H);
-    const corners = getCorners();
-    corners.forEach(corner => drawCorner(corner, t));
-    t += 0.003;
-    requestAnimationFrame(frame);
-  }
-  frame();
-})();
-
-/* ── SCROLL REVEAL ──────────────────────────── */
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('in'), i * 55);
-      io.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.08 });
-document.querySelectorAll('.rv').forEach(el => io.observe(el));
+<script src="/css/grove.js"></script>
+<script type="module">
+import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';
+function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}
+onCLS(send);onINP(send);onFCP(send);onLCP(send);onTTFB(send);
 </script>
 </body>
 </html>

@@ -8,7 +8,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-CVBY6GSVNZ');
 </script>
   <meta charset="UTF-8" />
@@ -57,504 +56,6 @@
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --paper:    #F4F3EE;
-      --paper-2:  #EAE8E1;
-      --ink:      #0A0A0A;
-      --ink-2:    #1a1a1a;
-      --ink-mute: #6b6b66;
-      --hairline: #cfccc1;
-      --red:      #E63946;
-      --orange:   #F77F00;
-      --green:    #2A9D5F;
-      --blue:     #1d4ed8;
-      --blue-l:   #3b82f6;
-    }
-
-    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    body {
-      background: #F4F3EE;
-      color: #0A0A0A;
-      font-family: 'Inter', system-ui, sans-serif;
-      line-height: 1.6;
-    }
-    body::before {
-      content: ''; position: fixed; inset: 0; z-index: 50;
-      pointer-events: none; opacity: 0.06;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%230a0a0a'/%3E%3C/svg%3E");
-      background-size: 4px 4px; mix-blend-mode: multiply;
-    }
-  body::after{content:'';position:fixed;inset:0;z-index:99;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px 200px;mix-blend-mode:overlay;}
-
-    /* ── NAV ── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: #F4F3EE;
-      border-bottom: 2px solid #0A0A0A;
-      padding: 1rem 1.5rem;
-    }
-    .nav-inner {
-      max-width: 1400px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .nav-logo {
-      font-family: 'Archivo Black', system-ui, sans-serif;
-      font-size: 0.95rem;
-      letter-spacing: -0.02em;
-      text-transform: uppercase;
-      color: #0A0A0A;
-      position: relative;
-      padding-left: 2.6rem;
-      text-decoration: none;
-    }
-    .nav-logo::before {
-      content: ''; position: absolute; left: 0; top: 50%;
-      transform: translateY(-50%);
-      width: 10px; height: 10px;
-      background: #1d4ed8;
-      box-shadow: 14px 0 0 #F77F00, 28px 0 0 #2A9D5F;
-    }
-    .nav-logo span { color: #1d4ed8; }
-    .nav-back {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #0A0A0A;
-      padding: 0.5rem 1rem;
-      border: 2px solid #0A0A0A;
-      background: #F4F3EE;
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s;
-    }
-    .nav-back:hover {
-      background: #1d4ed8;
-      color: #F4F3EE;
-      border-color: #1d4ed8;
-    }
-
-    /* ── ARTICLE ── */
-    article { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; }
-
-    .post-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    .tag {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.55rem;
-      border: 1.5px solid #0A0A0A;
-      color: #0A0A0A;
-    }
-    .tag.r { background: #E63946; color: #F4F3EE; border-color: #E63946; }
-    .tag.o { background: #F77F00; color: #F4F3EE; border-color: #F77F00; }
-
-    /* ── HERO STAGE — blue circle + chip blend + corner labels ── */
-    .hero-stage {
-      position: relative;
-      margin: 1rem -2rem 3rem;
-      padding: 4.5rem 1.5rem 4rem;
-      overflow: visible;
-      isolation: isolate;
-      background: #F4F3EE;
-    }
-    .hero-corner {
-      position: absolute; z-index: 4;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #0A0A0A;
-      line-height: 1.5;
-    }
-    .hero-corner.tl { top: 1.2rem; left: 1.5rem; }
-    .hero-corner.tr { top: 1.2rem; right: 1.5rem; text-align: right; }
-    .hero-corner.bl { bottom: 1.2rem; left: 1.5rem; }
-    .hero-corner.br { bottom: 1.2rem; right: 1.5rem; text-align: right; }
-    .hero-corner strong { font-weight: 900; display: block; }
-
-    .hero-circle {
-      position: absolute; z-index: 0;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -48%);
-      width: 640px; height: 640px;
-      max-width: 90vw; max-height: 90vw;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #3b82f6 0%, #1d4ed8 55%, #1e3a8a 100%);
-      box-shadow:
-        0 40px 90px -25px rgba(29, 78, 216, 0.45),
-        inset -50px -50px 120px rgba(15, 23, 80, 0.35);
-      pointer-events: none;
-    }
-
-    .hero-title {
-      position: relative; z-index: 2;
-      text-align: left;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 1.5rem 0;
-    }
-    .hero-title .line {
-      font-family: 'Archivo Black', system-ui, sans-serif;
-      font-size: clamp(4rem, 13vw, 8.5rem);
-      line-height: 0.88;
-      letter-spacing: -0.045em;
-      color: #F4F3EE;
-      display: block;
-      text-shadow: 0 3px 0 rgba(10,10,10,0.12);
-    }
-    .hero-title .line.lies {
-      color: #F77F00;
-      text-align: right;
-      margin-top: -0.15em;
-    }
-
-    .hero-blocks {
-      position: relative; z-index: 2;
-      display: flex; gap: 0.5rem;
-      margin: 0.5rem 0;
-      justify-content: center;
-    }
-    .hero-blocks .blk {
-      height: 14px; border-radius: 2px;
-      border: 2px solid #0A0A0A;
-    }
-    .hero-blocks .blk.r { width: 56px; background: #E63946; }
-    .hero-blocks .blk.o { width: 36px; background: #F77F00; }
-    .hero-blocks .blk.g { width: 28px; background: #2A9D5F; }
-    .hero-blocks .blk.k { width: 76px; background: #0A0A0A; }
-
-    .hero-3d {
-      position: absolute; z-index: 3;
-      width: 640px; height: 440px;
-      right: -7%; bottom: 14%;
-      transform: rotate(-5deg) scale(1.02);
-      pointer-events: none;
-      mix-blend-mode: screen;
-      opacity: 0.95;
-      filter:
-        contrast(1.28) saturate(1.25) brightness(1.05)
-        drop-shadow(0 35px 60px rgba(29,78,216,0.55))
-        drop-shadow(0 12px 18px rgba(0,0,0,0.45));
-      border-radius: 6px;
-      overflow: hidden;
-      animation: hero-float 6s ease-in-out infinite;
-    }
-    .hero-3d img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    @keyframes hero-float {
-      0%, 100% { transform: rotate(-5deg) scale(1.02) translateY(0); }
-      50%      { transform: rotate(-5deg) scale(1.02) translateY(-8px); }
-    }
-    .section-3d-img.invert {
-      filter: invert(1) hue-rotate(180deg) contrast(1.05) brightness(1.05);
-      box-shadow: 12px 12px 0 #1d4ed8, 0 0 60px rgba(29, 78, 216, 0.15);
-    }
-
-    .hero-eyebrow {
-      position: relative; z-index: 2;
-      text-align: center;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: #F4F3EE;
-      background: #0A0A0A;
-      border: 2px solid #0A0A0A;
-      padding: 0.65rem 1.2rem;
-      margin: 1.5rem auto 0;
-      max-width: fit-content;
-    }
-    .hero-eyebrow .num { color: #F77F00; }
-
-    @media (max-width: 700px) {
-      .hero-stage { margin: 0.5rem -1rem 2rem; padding: 3.5rem 1rem 3rem; }
-      .hero-circle { width: 460px; height: 460px; transform: translate(-50%, -45%); }
-      .hero-3d { width: 320px; height: 220px; right: -8%; bottom: 22%; }
-      .hero-corner { font-size: 0.52rem; }
-      .hero-corner.tr, .hero-corner.br { display: none; }
-    }
-
-    /* ── POST META ── */
-    .post-meta {
-      display: flex; align-items: center; gap: 1rem;
-      font-size: 0.78rem; color: #6b6b66;
-      padding-bottom: 2rem; border-bottom: 1px solid #cfccc1;
-      margin-bottom: 2.5rem; flex-wrap: wrap;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      letter-spacing: 0.04em;
-    }
-    .author-chip { display: flex; align-items: center; gap: 0.45rem; }
-    .author-avatar {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: linear-gradient(135deg, #1d4ed8, #3b82f6);
-      display: flex; align-items: center; justify-content: center;
-      color: white; font-size: 0.65rem; font-weight: 600;
-      font-family: 'Archivo Black', sans-serif;
-    }
-
-    /* ── BODY ── */
-    .post-body { font-size: 1.075rem; line-height: 1.65; color: #1a1a1a; }
-    .post-body p {
-      font-family: 'Source Serif 4', Georgia, serif;
-      margin-bottom: 1.3rem;
-    }
-    .post-body h2 {
-      font-family: 'Archivo Black', system-ui, sans-serif;
-      font-size: 1.75rem;
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      color: #0A0A0A;
-      margin: 3rem 0 1.25rem;
-      text-transform: uppercase;
-    }
-    .post-body strong { color: #0A0A0A; font-weight: 700; }
-    .post-body ol, .post-body ul { padding-left: 1.5rem; margin-bottom: 1.3rem; font-family: 'Source Serif 4', Georgia, serif; }
-    .post-body li { margin-bottom: 0.6rem; }
-    .post-body a { color: #1d4ed8; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
-    .post-body a:hover { color: #F77F00; }
-
-    .post-body code {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.85em;
-      background: #0A0A0A;
-      color: #F4F3EE;
-      padding: 0.15em 0.45em;
-    }
-
-    .callout {
-      background: #EAE8E1;
-      border-left: 4px solid #E63946;
-      padding: 1.25rem 1.5rem;
-      margin: 2rem 0;
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: #0A0A0A;
-    }
-    .callout p { margin: 0; }
-    .callout strong { font-style: normal; }
-
-    .stat-card {
-      background: #F4F3EE;
-      border: 2px solid #0A0A0A;
-      padding: 1.4rem 1.6rem;
-      margin: 1.75rem 0;
-      box-shadow: 8px 8px 0 #1d4ed8;
-    }
-    .stat-card .stat-eyebrow {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #6b6b66;
-      margin-bottom: 0.85rem;
-    }
-    .stat-row {
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 0.5rem; padding: 0.55rem 0;
-      border-bottom: 1px dashed #cfccc1;
-      font-size: 0.92rem;
-      font-family: 'Source Serif 4', Georgia, serif;
-    }
-    .stat-row:last-child { border-bottom: 0; }
-    .stat-row .label { color: #1a1a1a; }
-    .stat-row .val {
-      font-family: 'Archivo Black', system-ui, sans-serif;
-      color: #0A0A0A;
-    }
-    .stat-row .val.bad  { color: #b91c1c; }
-    .stat-row .val.good { color: #1d4ed8; }
-
-    .formula {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      background: #0A0A0A;
-      color: #F4F3EE;
-      border: 2px solid #0A0A0A;
-      padding: 1.2rem 1.4rem;
-      font-size: 0.88rem;
-      line-height: 1.7;
-      white-space: pre-wrap;
-      margin: 1.5rem 0;
-    }
-
-    /* ── SECTION 3D IMAGES ── */
-    .section-3d {
-      margin: 3rem -1rem 2rem;
-      padding: 1rem;
-    }
-    .section-3d-img {
-      width: 100%; height: 280px;
-      object-fit: cover;
-      border: 2px solid #0A0A0A;
-      box-shadow: 12px 12px 0 #1d4ed8;
-      display: block;
-    }
-    .section-3d-cap {
-      margin-top: 0.85rem;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.66rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #6b6b66;
-    }
-
-    /* ── SUBSCRIBE ── */
-    .sub-card {
-      background: #0A0A0A;
-      border: 2px solid #0A0A0A;
-      padding: 2.5rem;
-      margin: 3.5rem 0 0;
-      text-align: center;
-    }
-    .sub-eyebrow {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #F77F00;
-      margin-bottom: 0.5rem;
-    }
-    .sub-card h3 {
-      font-family: 'Archivo Black', system-ui, sans-serif;
-      font-size: 1.4rem;
-      line-height: 1.1;
-      color: #F4F3EE;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-    }
-    .sub-card p { font-size: 0.9rem; color: rgba(244,243,238,0.55); margin-bottom: 1.5rem; font-family: 'Source Serif 4', serif; }
-    .sub-form { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
-    .sub-input {
-      font-family: 'Inter', sans-serif; font-size: 0.85rem;
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-      color: #fff; padding: 0.7rem 1.1rem; outline: none; width: 240px;
-    }
-    .sub-input::placeholder { color: rgba(255,255,255,0.3); }
-    .sub-input:focus { border-color: #F77F00; }
-    .sub-btn {
-      font-family: 'Archivo Black', sans-serif; font-size: 0.78rem;
-      letter-spacing: 0.05em; text-transform: uppercase;
-      background: #F77F00; color: #0A0A0A; border: none;
-      padding: 0.7rem 1.5rem; cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .sub-btn:hover { opacity: 0.85; }
-
-    /* ── READ NEXT ── */
-    .read-next { border-top: 1px solid #cfccc1; padding-top: 2rem; margin-top: 3rem; }
-    .read-next-eyebrow {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.62rem; font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: #6b6b66;
-      margin-bottom: 1.25rem;
-    }
-    .rn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .rn-card {
-      display: flex; gap: 0.85rem; align-items: flex-start;
-      text-decoration: none;
-      background: #F4F3EE;
-      border: 2px solid #0A0A0A;
-      padding: 1rem;
-      transition: background 0.18s;
-    }
-    .rn-card:hover { background: #EAE8E1; }
-    .rn-card img { width: 60px; height: 60px; object-fit: cover; flex-shrink: 0; border: 1.5px solid #0A0A0A; }
-    .rn-tag {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.55rem; font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: #6b6b66;
-      margin-bottom: 0.3rem;
-    }
-    .rn-title {
-      font-family: 'Archivo Black', system-ui, sans-serif;
-      font-size: 0.88rem; line-height: 1.2;
-      color: #0A0A0A; letter-spacing: -0.01em;
-      text-transform: uppercase;
-    }
-    @media (max-width: 700px) { .rn-grid { grid-template-columns: 1fr; } }
-
-    .post-nav { border-top: 1px solid #cfccc1; padding-top: 2rem; margin-top: 3rem; }
-    .back-link {
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: #0A0A0A;
-      padding: 0.5rem 1rem;
-      border: 2px solid #0A0A0A;
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s;
-    }
-    .back-link:hover { background: #1d4ed8; color: #F4F3EE; border-color: #1d4ed8; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #EAE8E1;
-      border-top: 2px solid #0A0A0A;
-      padding: 2rem;
-    }
-    .footer-inner {
-      max-width: 800px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.05em;
-      color: #0A0A0A;
-    }
-    footer a { color: #0A0A0A; text-decoration: none; }
-    footer a:hover { color: #E63946; }
-    .footer-links { display: flex; gap: 1.5rem; }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-    }
-  
-  /* ── Reading progress bar ── */
-  .read-progress {
-    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
-    background: #E63946; z-index: 200;
-    box-shadow: 0 0 8px rgba(230,57,70,0.6);
-    transition: width 0.1s linear;
-    pointer-events: none;
-  }
-
-  </style>
-
-  <script>
-    function handleSub(e) {
-      e.preventDefault();
-      const form = e.target;
-      const input = form.querySelector('.sub-input');
-      const btn = form.querySelector('.sub-btn');
-      btn.textContent = 'Sending…'; btn.disabled = true;
-      fetch('https://formspree.io/f/xwvwlybd', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: input.value, source: 'win-rate-trap post' })
-      })
-      .then(r => r.json())
-      .then(data => {
-        if (data.ok) {
-          btn.textContent = "You're in ✓"; btn.style.background = '#2A9D5F'; btn.style.color = '#F4F3EE'; btn.disabled = false;
-          input.value = '';
-          setTimeout(() => { btn.textContent = 'Notify me →'; btn.style.background = ''; btn.style.color = ''; }, 4000);
-        } else { btn.textContent = 'Try again'; btn.style.background = '#E63946'; btn.disabled = false; }
-      })
-      .catch(() => { btn.textContent = 'Try again'; btn.style.background = '#E63946'; btn.disabled = false; });
-    }
-  </script>
-
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -566,13 +67,20 @@
     ]
   }
   </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23161b1f'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='13' fill='%23ffffff'>SR</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/grove.css" />
 </head>
 <body>
-<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0A0A0A;color:#F4F3EE;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;border-top:2px solid #E63946;">
-  <span style="flex:1;opacity:.8;">↳ SACHINAI.COM uses analytics to understand what people read. No ads. Data stays in Google Analytics.</span>
+
+<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#161b1f;color:#f5f0e8;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'Barlow',sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;border-top:2px solid #f69368;">
+  <span style="flex:1;opacity:.8;">SACHINAI.COM uses analytics to understand what people read. No ads. Data stays in Google Analytics.</span>
   <div style="display:flex;gap:.5rem;flex-shrink:0;">
-    <button onclick="srConsent('granted')" style="padding:.4rem 1rem;background:#E63946;color:#F4F3EE;border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
-    <button onclick="srConsent('denied')" style="padding:.4rem 1rem;background:transparent;color:rgba(244,243,238,.55);border:1px solid rgba(244,243,238,.25);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
+    <button onclick="srConsent('granted')" style="padding:.4rem 1rem;background:#f69368;color:#161b1f;border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
+    <button onclick="srConsent('denied')" style="padding:.4rem 1rem;background:transparent;color:rgba(245,240,232,.55);border:1px solid rgba(245,240,232,.25);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
   </div>
 </div>
 <script>
@@ -588,74 +96,87 @@
 })();
 </script>
 
-<div class="read-progress" id="readProgress"></div>
-
-
-  <nav>
-    <div class="nav-inner">
-      <a class="nav-logo" href="https://sachinai.com/">Sachin<span>.</span></a>
-      <a href="https://sachinai.com/" class="nav-back">← All posts</a>
+<nav class="navbar navbar--dark" id="navbar">
+  <div class="navbar-inner">
+    <div class="navbar-left">
+      <a href="/" class="navbar__link">Writing</a>
+      <a href="/tools.html" class="navbar__link">Tools</a>
     </div>
-  </nav>
-
-  <article>
-
-    <div class="post-tags">
-      <span class="tag r">Sales</span>
-      <span class="tag o">Strategy</span>
+    <div class="navbar-center">
+      <a href="/" class="navbar__logo-link">◆ SACHIN RAI</a>
     </div>
+    <div class="navbar-right">
+      <a href="/about.html" class="navbar__link">About</a>
+    </div>
+  </div>
+</nav>
 
-    <div class="hero-stage">
-      <div class="hero-circle" aria-hidden="true"></div>
-
-      <div class="hero-corner tl">
-        <strong>Win Rate Trap</strong>
-        Vol.05 // 2026
+<!-- Article Header -->
+<header class="article-header">
+  <div class="article-header__inner">
+    <div class="article-header__text">
+      <div class="article-header__meta">
+        <span class="article-header__category">Sales &amp; Strategy</span>
+        <span class="article-header__divider">·</span>
+        <span>April 26, 2026</span>
+        <span class="article-header__divider">·</span>
+        <span>7 min read</span>
       </div>
-      <div class="hero-corner tr">
-        <strong>Issue 04.26</strong>
-        Sales × Strategy
-      </div>
-
-      <h1 class="hero-title">
-        <span class="line">Win Rate</span>
-        <span class="hero-blocks" aria-hidden="true">
-          <span class="blk r"></span>
-          <span class="blk o"></span>
-          <span class="blk g"></span>
-          <span class="blk k"></span>
-        </span>
-        <span class="line lies">Lies.</span>
-      </h1>
-
-      <div class="hero-3d" aria-hidden="true">
-        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=1400&h=900&fit=crop&auto=format&q=90" alt="" loading="eager"/>
-      </div>
-
-      <p class="hero-eyebrow">90% Win Rate · <span class="num">−1.04%</span> Expectancy · One Trojan Horse</p>
-
-      <div class="hero-corner bl">
-        <strong>SR // 04.26</strong>
-        7 min read
-      </div>
-      <div class="hero-corner br">
-        <strong>Field Notes</strong>
-        from the GTM layer
+      <h1 class="article-header__title">Win Rate Lies.</h1>
+      <p class="article-header__excerpt">A 90% win rate signal in my trading system was bleeding money at −1.04% expectancy per trade. The same Trojan Horse is hiding in every sales pipeline I've managed.</p>
+      <div class="article-header__share">
+        <a href="https://twitter.com/intent/tweet?url=https://sachinai.com/posts/win-rate-trap.html&text=Win+Rate+Lies." target="_blank" rel="noopener" class="v2-button v2-button--outline">Share</a>
       </div>
     </div>
-
-    <div class="post-meta">
-      <div class="author-chip">
-        <div class="author-avatar">SR</div>
-        <span>Sachin Rai</span>
-      </div>
-      <span>·</span>
-      <span>April 2026</span>
-      <span>·</span>
-      <span>7 min read</span>
+    <div class="article-header__image">
+      <img src="https://picsum.photos/seed/win-rate-sales/800/450" alt="Win rate trap visualised" loading="eager" />
     </div>
+  </div>
+</header>
 
-    <div class="post-body">
+<!-- Stats Strip -->
+<div class="stats-strip">
+  <div class="stats-strip__inner">
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="90" data-suffix="%">0%</span>
+      <span class="stats-strip__label">Win Rate</span>
+    </div>
+    <div class="stats-strip__item">
+      <span class="stats-strip__number">−1.04%</span>
+      <span class="stats-strip__label">Expectancy</span>
+    </div>
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="3">0</span>
+      <span class="stats-strip__label">Trojan Horses</span>
+    </div>
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="5" data-suffix=" min">0 min</span>
+      <span class="stats-strip__label">Audit Time</span>
+    </div>
+  </div>
+</div>
+
+<!-- Article Body -->
+<div class="article-body">
+  <div class="article-body__inner">
+
+    <!-- TOC -->
+    <aside class="article-toc">
+      <p class="article-toc__label">Contents</p>
+      <ul class="article-toc__list">
+        <li><a href="#section-confidence">Win Rate Is a Confidence Indicator</a></li>
+        <li><a href="#section-trojans">Three Trojan Horses</a></li>
+        <li><a href="#section-sdr">1. The High-Velocity SDR</a></li>
+        <li><a href="#section-margin">2. The Product That Bleeds Margin</a></li>
+        <li><a href="#section-discount">3. The Champion Deal at 70% Off</a></li>
+        <li><a href="#section-audit">The Five-Minute Payoff Audit</a></li>
+        <li><a href="#section-changed">What Changed in My System</a></li>
+        <li><a href="#section-takeaway">The Honest Takeaway</a></li>
+      </ul>
+    </aside>
+
+    <!-- Content -->
+    <div class="article-content">
 
       <p>Saturday morning, my trading system flagged a fake winner.</p>
 
@@ -665,25 +186,43 @@
 
       <p>Here's what the second pass saw that the first one missed.</p>
 
-      <div class="stat-card">
-        <div class="stat-eyebrow">scanner_bull_high — full history</div>
-        <div class="stat-row"><span class="label">Win rate</span><span class="val good">90.0%</span></div>
-        <div class="stat-row"><span class="label">Average win</span><span class="val">+5.53%</span></div>
-        <div class="stat-row"><span class="label">Average loss</span><span class="val bad">−7.30%</span></div>
-        <div class="stat-row"><span class="label">Payoff ratio (avg win ÷ avg loss)</span><span class="val bad">0.76×</span></div>
-        <div class="stat-row"><span class="label"><strong>Expectancy per trade</strong></span><span class="val bad">−1.04%</span></div>
+      <!-- Stat card -->
+      <div style="border:1px solid var(--color-border);padding:1.5rem 2rem;margin:2rem 0;background:var(--color-bg-secondary);">
+        <p style="font-family:var(--font-body);font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:1rem;">scanner_bull_high — full history</p>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:0.5rem;">
+          <div style="display:contents;">
+            <span style="font-family:var(--font-body);font-size:0.95rem;color:var(--color-text);padding:0.5rem 0;border-bottom:1px dashed var(--color-border);">Win rate</span>
+            <span style="font-family:var(--font-body);font-size:0.95rem;font-weight:700;color:#2a7a4e;padding:0.5rem 0;border-bottom:1px dashed var(--color-border);text-align:right;">90.0%</span>
+          </div>
+          <div style="display:contents;">
+            <span style="font-family:var(--font-body);font-size:0.95rem;color:var(--color-text);padding:0.5rem 0;border-bottom:1px dashed var(--color-border);">Average win</span>
+            <span style="font-family:var(--font-body);font-size:0.95rem;font-weight:700;color:var(--color-text);padding:0.5rem 0;border-bottom:1px dashed var(--color-border);text-align:right;">+5.53%</span>
+          </div>
+          <div style="display:contents;">
+            <span style="font-family:var(--font-body);font-size:0.95rem;color:var(--color-text);padding:0.5rem 0;border-bottom:1px dashed var(--color-border);">Average loss</span>
+            <span style="font-family:var(--font-body);font-size:0.95rem;font-weight:700;color:#b84040;padding:0.5rem 0;border-bottom:1px dashed var(--color-border);text-align:right;">−7.30%</span>
+          </div>
+          <div style="display:contents;">
+            <span style="font-family:var(--font-body);font-size:0.95rem;color:var(--color-text);padding:0.5rem 0;border-bottom:1px dashed var(--color-border);">Payoff ratio (avg win ÷ avg loss)</span>
+            <span style="font-family:var(--font-body);font-size:0.95rem;font-weight:700;color:#b84040;padding:0.5rem 0;border-bottom:1px dashed var(--color-border);text-align:right;">0.76×</span>
+          </div>
+          <div style="display:contents;">
+            <span style="font-family:var(--font-body);font-size:0.95rem;font-weight:700;color:var(--color-text);padding:0.5rem 0;">Expectancy per trade</span>
+            <span style="font-family:var(--font-body);font-size:0.95rem;font-weight:700;color:#b84040;padding:0.5rem 0;text-align:right;">−1.04%</span>
+          </div>
+        </div>
       </div>
 
       <p>Ninety percent of the time, this signal made me a small amount of money. Ten percent of the time, it took back more than it gave. Across the full history, every single trade carried a <strong>negative expected value of just over one percent</strong>. The wins were a friendly handshake. The losses were a punch in the face. Every dollar I ran through it was bleeding.</p>
 
       <p>If I had stopped at the win rate, I would have boosted that signal and lost more money faster. The same trap is hiding in every sales pipeline I've ever managed.</p>
 
-      <figure class="section-3d">
-        <img class="section-3d-img" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&h=560&fit=crop&auto=format&q=85" alt="Server racks lit blue inside a data center aisle." loading="lazy" />
-        <figcaption class="section-3d-cap">// the calibrator runs nightly on a paper-trading book — same shape as your pipeline review</figcaption>
+      <figure style="margin:2.5rem 0;">
+        <img src="https://picsum.photos/seed/server-racks/1400/560" alt="Server racks lit inside a data center aisle" loading="lazy" style="width:100%;height:280px;object-fit:cover;display:block;" />
+        <figcaption style="font-family:var(--font-body);font-size:0.7rem;font-weight:300;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-text-muted);margin-top:0.75rem;">// the calibrator runs nightly on a paper-trading book — same shape as your pipeline review</figcaption>
       </figure>
 
-      <h2>Win rate is a confidence indicator, not a profit indicator.</h2>
+      <h2 id="section-confidence">Win rate is a confidence indicator, not a profit indicator.</h2>
 
       <p>Most sales orgs I've worked with track three numbers obsessively: pipeline coverage, average sales cycle, and win rate. Win rate is the one that gets the most leadership attention, because it's the easiest to compare across reps, segments, and quarters. <em>Lisa is at 28% closed-won, James is at 41% — what's James doing differently?</em></p>
 
@@ -691,7 +230,8 @@
 
       <p>This is the equation every RevOps lead should stare at on Monday morning, and almost none do:</p>
 
-      <div class="formula">Sales Expectancy
+      <!-- Formula block -->
+      <div style="font-family:var(--font-body);background:var(--color-bg-dark-nav);color:var(--color-bg);padding:1.4rem 1.6rem;font-size:0.88rem;line-height:1.8;white-space:pre-wrap;margin:1.5rem 0;font-weight:300;letter-spacing:0.02em;">Sales Expectancy
 = (Win rate × Average won deal value)
 − ((1 − Win rate) × Average opportunity cost of a lost deal)</div>
 
@@ -699,23 +239,23 @@
 
       <p>Run the math on your own pipeline and watch which reps quietly flip from heroes to bottom-decile.</p>
 
-      <h2>Three Trojan Horses I've seen in real sales orgs.</h2>
+      <h2 id="section-trojans">Three Trojan Horses I've seen in real sales orgs.</h2>
 
       <p>Once you know what to look for, the same pattern shows up everywhere. Here are three that I've personally watched eat into ARR while looking great on a dashboard.</p>
 
-      <h2>1. The high-velocity SDR with a leaky funnel.</h2>
+      <h2 id="section-sdr">1. The high-velocity SDR with a leaky funnel.</h2>
 
       <p>An SDR books meetings at twice the team's average rate. Calendar full, MQL→meeting conversion looks elite, manager celebrates her in the all-hands. Six months later you look at the cohort: of every ten meetings she booked, one closed. The team average is one in four.</p>
 
       <p>She isn't booking meetings. She's booking interruptions to AE time. The cost of every dead meeting is roughly an hour of AE prep, an hour on the call, thirty minutes of internal write-up, and a CRM hygiene tax. At 200 meetings a quarter, that's 500+ hours of AE capacity going to deals that don't close — and crowding out the deals that would have. <strong>High win rate on a bad metric (booked meetings) is a Trojan Horse for the metric that pays the bills (closed-won pipeline).</strong></p>
 
-      <h2>2. The product line that closes well — and bleeds margin.</h2>
+      <h2 id="section-margin">2. The product line that closes well — and bleeds margin.</h2>
 
       <p>One product in your portfolio has a 62% close rate. The marketing team funds it heavily because it converts. The leadership team praises it because the velocity is short. Then someone runs gross margin by SKU and the product is the lowest-margin thing the company sells, by a wide margin. Every dollar booked is a dollar the rest of the company has to subsidise.</p>
 
       <p>This is the textbook Trojan Horse: the wins look frequent and clean, but the unit economics are upside down. The fix isn't to kill the product. The fix is to stop treating closed-won as the terminal metric and start tracking <strong>contribution margin per closed deal</strong> alongside it. Once you do, the comp plan tells the truth.</p>
 
-      <h2>3. The "champion" deal that closes — at 70% off list.</h2>
+      <h2 id="section-discount">3. The "champion" deal that closes — at 70% off list.</h2>
 
       <p>Senior reps know how to sense a stalled deal and rescue it with a discount cliff at quarter end. The deal closes. The rep hits quota. The CRM logs a win. But the price-per-seat baseline you set with that customer becomes the anchor for every renewal, every expansion, and every benchmark a future buyer hears about through their procurement network. You traded one quarter's number for three years of compressed ACV.</p>
 
@@ -725,12 +265,12 @@
         <p><strong>The pattern:</strong> Whenever a metric measures frequency without measuring magnitude — booked meetings without close rate, closed deals without margin, wins without discount discipline — there's a Trojan Horse hiding inside it. The signal you're optimising on is not the signal that's paying the bills.</p>
       </div>
 
-      <figure class="section-3d">
-        <img class="section-3d-img" src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=1400&h=560&fit=crop&auto=format&q=85" alt="Wide motherboard with components and traces in detail." loading="lazy" />
-        <figcaption class="section-3d-cap">// every metric has a substrate. when frequency hides magnitude, the substrate is bleeding.</figcaption>
+      <figure style="margin:2.5rem 0;">
+        <img src="https://picsum.photos/seed/circuit-board/1400/560" alt="Circuit board traces in detail" loading="lazy" style="width:100%;height:280px;object-fit:cover;display:block;" />
+        <figcaption style="font-family:var(--font-body);font-size:0.7rem;font-weight:300;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-text-muted);margin-top:0.75rem;">// every metric has a substrate. when frequency hides magnitude, the substrate is bleeding.</figcaption>
       </figure>
 
-      <h2>The five-minute payoff audit any RevOps lead can run on Monday.</h2>
+      <h2 id="section-audit">The five-minute payoff audit any RevOps lead can run on Monday.</h2>
 
       <p>You don't need a new tool to find this. You don't need a Snowflake migration. You need fifteen minutes with last quarter's pipeline export and a calculator. Here's the exact sequence I'd run if I dropped into a new RevOps seat.</p>
 
@@ -744,18 +284,18 @@
 
       <p>I have never run this audit on a real pipeline and not found at least one Trojan Horse. Often three. Almost always with a high-performing rep, a popular product, or a strategically loved segment sitting on top of it.</p>
 
-      <figure class="section-3d">
-        <img class="section-3d-img invert" src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1400&h=560&fit=crop&auto=format&q=85" alt="3D-render chip architecture, inverted to a light/white tone." loading="lazy" />
-        <figcaption class="section-3d-cap">// scale changes nothing if the per-trade economics are negative — same for per-deal.</figcaption>
+      <figure style="margin:2.5rem 0;">
+        <img src="https://picsum.photos/seed/chip-architecture/1400/560" alt="Chip architecture layout" loading="lazy" style="width:100%;height:280px;object-fit:cover;display:block;filter:invert(1) hue-rotate(180deg) contrast(1.05) brightness(1.05);" />
+        <figcaption style="font-family:var(--font-body);font-size:0.7rem;font-weight:300;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-text-muted);margin-top:0.75rem;">// scale changes nothing if the per-trade economics are negative — same for per-deal.</figcaption>
       </figure>
 
-      <h2>What changed in my system.</h2>
+      <h2 id="section-changed">What changed in my system.</h2>
 
       <p>The fix on the trading side took eight lines of code. The calibrator now computes payoff ratio and expectancy on every signal, not just hit rate. Anything with a payoff below 1.0× and negative expectancy has its weight forced back to neutral, even if its win rate is 90%. The override has a name (TROJAN HORSE), a reason field, and a log line every time it fires. The point isn't to never trade those signals — it's to never <em>over</em>-trade them on the strength of a number that flatters them.</p>
 
       <p>The same fix works in revenue operations. You don't need to fire the SDR, kill the product, or stop discounting deals. You need to make sure your dashboard and your comp plan stop quietly rewarding the version of the metric that loses you money.</p>
 
-      <h2>The honest takeaway.</h2>
+      <h2 id="section-takeaway">The honest takeaway.</h2>
 
       <p>Most pipeline reviews ask the wrong question. <em>What's our win rate?</em> is a question about confidence. <em>What's our expectancy per opportunity?</em> is a question about whether the work is worth doing.</p>
 
@@ -763,68 +303,85 @@
 
       <p>I'd rather find them on a Saturday morning, in a paper-trading log, than on a Monday board call.</p>
 
-    </div>
+      <div class="grove-seal" aria-hidden="true">◆</div>
 
-    <div class="sub-card">
-      <div class="sub-eyebrow">Next post</div>
-      <h3>The 5-Persona AI Brain.</h3>
-      <p>Brick scans. Owl grades. Bull executes. Arrow sells. Sage remembers. Architecture + the query layer that ties them together.</p>
-      <form class="sub-form" onsubmit="handleSub(event)">
-        <input type="email" class="sub-input" name="email" placeholder="you@company.com" required />
-        <button type="submit" class="sub-btn">Notify me →</button>
+      <!-- Related Posts -->
+      <div class="related-posts">
+        <p class="related-posts__label">Read next</p>
+        <div class="related-posts__grid">
+          <a class="related-post-card" href="ai-sales-stack-2026.html">
+            <img src="https://picsum.photos/seed/ai-sales-tools/400/300" alt="" loading="lazy" />
+            <div class="related-post-card__body">
+              <p class="related-post-card__category">AI Tools</p>
+              <p class="related-post-card__title">The AI tools replacing my sales stack in 2026</p>
+            </div>
+          </a>
+          <a class="related-post-card" href="llm-knowledge-base-obsidian.html">
+            <img src="https://picsum.photos/seed/obsidian-llm/400/300" alt="" loading="lazy" />
+            <div class="related-post-card__body">
+              <p class="related-post-card__category">Knowledge</p>
+              <p class="related-post-card__title">Turning an Obsidian vault into an LLM-queryable knowledge base</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /.article-content -->
+  </div><!-- /.article-body__inner -->
+</div><!-- /.article-body -->
+
+<!-- Footer -->
+<footer class="v2-footer">
+  <div class="v2-footer__inner">
+    <button class="v2-footer__go-up" id="goUp" aria-label="Back to top">Go Up ↑</button>
+    <div class="v2-footer__newsletter">
+      <p class="v2-footer__newsletter-label">Stay in the loop</p>
+      <form class="v2-footer__form" id="footerForm">
+        <input type="email" class="v2-footer__input" name="email" placeholder="you@company.com" required />
+        <button type="submit" class="v2-footer__submit">Subscribe</button>
       </form>
     </div>
-
-    <div class="read-next">
-      <p class="read-next-eyebrow">Read next</p>
-      <div class="rn-grid">
-        <a class="rn-card" href="ai-sales-stack-2026.html">
-          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=120&h=120&fit=crop&auto=format&q=75" alt="" loading="lazy" />
-          <div>
-            <p class="rn-tag">AI Tools</p>
-            <p class="rn-title">The AI tools replacing my sales stack in 2026</p>
-          </div>
-        </a>
-        <a class="rn-card" href="llm-knowledge-base-obsidian.html">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=120&h=120&fit=crop&auto=format&q=75" alt="" loading="lazy" />
-          <div>
-            <p class="rn-tag">Knowledge</p>
-            <p class="rn-title">Turning an Obsidian vault into an LLM-queryable knowledge base</p>
-          </div>
-        </a>
-      </div>
+    <nav class="v2-footer__nav">
+      <a href="/" class="v2-footer__link">Essays</a>
+      <a href="/about.html" class="v2-footer__link">About</a>
+      <a href="/archive.html" class="v2-footer__link">Archive</a>
+      <a href="/tools.html" class="v2-footer__link">Tools</a>
+    </nav>
+    <div class="v2-footer__social">
+      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener" class="v2-footer__link">LinkedIn</a>
+      <a href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank" rel="noopener" class="v2-footer__link">Subject Scorer</a>
     </div>
+    <p class="v2-footer__copy">© 2026 Sachin Rai · AI + Enterprise Sales</p>
+  </div>
+</footer>
 
-    <div class="post-nav">
-      <a href="https://sachinai.com/" class="back-link">← Back to all posts</a>
-    </div>
-
-  </article>
-
-  <footer>
-    <div class="footer-inner">
-      <p>© 2026 Sachin Rai · AI + Enterprise Sales</p>
-      <div class="footer-links">
-        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank">LinkedIn</a>
-        <a href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank">Subject Scorer</a>
-      </div>
-    </div>
-  </footer>
-
+<script src="../css/grove.js"></script>
 <script>
-  /* Reading progress */
-  (function() {
-    const bar = document.getElementById('readProgress');
-    const art = document.querySelector('article') || document.body;
-    function update() {
-      const top = art.getBoundingClientRect().top;
-      const h = art.offsetHeight - window.innerHeight;
-      const pct = h > 0 ? Math.min(100, Math.max(0, (-top / h) * 100)) : 100;
-      bar.style.width = pct + '%';
-    }
-    window.addEventListener('scroll', update, {passive:true});
-    update();
-  })();
+(function(){
+  var els = document.querySelectorAll('[data-target]');
+  if(!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target;
+      var target = parseInt(el.dataset.target, 10);
+      var prefix = el.dataset.prefix || '';
+      var suffix = el.dataset.suffix || '';
+      var duration = 1400;
+      var start = performance.now();
+      function tick(now){
+        var t = Math.min((now - start)/duration, 1);
+        var ease = 1 - Math.pow(1-t, 3);
+        el.textContent = prefix + Math.round(ease * target) + suffix;
+        if(t < 1) requestAnimationFrame(tick);
+        else el.textContent = prefix + target + suffix;
+      }
+      requestAnimationFrame(tick);
+      obs.unobserve(el);
+    });
+  }, {threshold: 0.5});
+  els.forEach(function(el){ obs.observe(el); });
+})();
 </script>
 <script type="module">
 import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';
