@@ -36,102 +36,192 @@
 <style>
 /* ── Homepage-specific layout ─────────────────────────────── */
 
-/* Split hero */
-.split-hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* Cinematic full-bleed hero */
+.cin-hero {
+  position: relative;
   height: 100vh;
   min-height: 640px;
-}
-
-.split-hero__left {
   background: #161b1f;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 80px 64px 80px 64px;
-  position: relative;
-}
-
-.split-hero__right {
-  position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
-.split-hero__right img {
+/* Hardware photo — absolutely placed, right-anchored */
+.cin-hero__bg {
+  position: absolute;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 62%;
+  height: 95%;
+  object-fit: contain;
+  object-position: center center;
+  opacity: 0;
+  animation: heroFadeIn 1.2s 0.3s ease forwards;
+}
+
+@keyframes heroFadeIn {
+  to { opacity: 1; }
+}
+
+/* Left-to-right gradient: dark (opaque) → transparent → nothing */
+.cin-hero__veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    #161b1f 0%,
+    #161b1f 30%,
+    rgba(22,27,31,0.9) 46%,
+    rgba(22,27,31,0.3) 65%,
+    transparent 80%
+  );
+  z-index: 1;
+}
+
+.cin-hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 80px;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 55% center;
+}
+
+.cin-hero__eyebrow {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 28px;
   display: block;
-  transition: transform 8s ease;
 }
 
-.split-hero__right:hover img {
-  transform: scale(1.03);
+.cin-hero__title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(4rem, 6.5vw, 8.5rem);
+  font-weight: 300;
+  line-height: 0.9;
+  color: #ffffff;
+  margin-bottom: 36px;
+  letter-spacing: -0.015em;
+  max-width: 680px;
 }
 
-.split-hero__eyebrow {
+.cin-hero__title em {
+  font-style: italic;
+  color: rgba(255,255,255,0.58);
+}
+
+.cin-hero__rule {
+  width: 48px;
+  height: 1px;
+  background: #f69368;
+  margin-bottom: 28px;
+}
+
+.cin-hero__body {
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 52px;
+  max-width: 380px;
+  letter-spacing: 0.02em;
+}
+
+.cin-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.cin-hero__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  color: #161b1f;
   font-family: 'Barlow', sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
-  margin-bottom: 32px;
+  padding: 14px 28px;
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s;
 }
 
-.split-hero__title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(3rem, 4.5vw, 6.5rem);
-  font-weight: 300;
-  line-height: 0.92;
+.cin-hero__btn:hover {
+  background: #f69368;
   color: #ffffff;
-  margin-bottom: 32px;
-  letter-spacing: -0.01em;
 }
 
-.split-hero__title em {
-  font-style: italic;
-  color: rgba(255,255,255,0.72);
+.cin-hero__btn--ghost {
+  background: transparent;
+  color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 13px 28px;
 }
 
-.split-hero__body {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 1.6;
-  color: rgba(255,255,255,0.68);
-  margin-bottom: 48px;
-  max-width: 400px;
+.cin-hero__btn--ghost:hover {
+  background: transparent;
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.5);
 }
 
-.split-hero__actions {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
-.split-hero__count {
-  font-family: 'Barlow', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.38);
-}
-
-.split-hero__image-label {
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
+.cin-hero__count {
   font-family: 'Barlow', sans-serif;
   font-size: 10px;
-  font-weight: 300;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.28);
+}
+
+.cin-hero__caption {
+  position: absolute;
+  bottom: 28px;
+  right: 32px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
   z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .cin-hero__bg {
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% center;
+    opacity: 0;
+    animation: heroFadeIn 1.2s 0.3s ease forwards;
+  }
+  .cin-hero__veil {
+    background: linear-gradient(
+      to right,
+      #161b1f 0%,
+      rgba(22,27,31,0.96) 45%,
+      rgba(22,27,31,0.6) 75%,
+      rgba(22,27,31,0.3) 100%
+    );
+  }
+  .cin-hero__content { padding: 0 28px; }
+  .cin-hero__title { font-size: clamp(3rem, 10vw, 5rem); }
+}
+
+@media (max-width: 560px) {
+  .cin-hero__title { font-size: 3.2rem; }
+  .cin-hero__actions { flex-direction: column; align-items: flex-start; gap: 16px; }
 }
 
 /* Bento grid */
@@ -421,26 +511,9 @@
   background: #e0e0e0;
 }
 
-/* Mobile */
+/* Bento mobile */
 @media (max-width: 900px) {
-  .split-hero {
-    grid-template-columns: 1fr;
-    height: auto;
-  }
-
-  .split-hero__left {
-    padding: 120px 28px 56px;
-    min-height: 70vh;
-  }
-
-  .split-hero__right {
-    height: 50vw;
-    min-height: 260px;
-  }
-
-  .bento {
-    grid-template-columns: 1fr 1fr;
-  }
+  .bento { grid-template-columns: 1fr 1fr; }
 
   .bento-cell--lead {
     grid-template-columns: 1fr;
@@ -460,17 +533,8 @@
 }
 
 @media (max-width: 560px) {
-  .bento {
-    grid-template-columns: 1fr;
-  }
-
-  .bento-cell--wide {
-    grid-column: span 1;
-  }
-
-  .split-hero__title {
-    font-size: 3rem;
-  }
+  .bento { grid-template-columns: 1fr; }
+  .bento-cell--wide { grid-column: span 1; }
 }
 </style>
 </head>
@@ -513,23 +577,26 @@
 
 <main id="main">
 
-  <!-- SPLIT HERO -->
-  <section class="split-hero">
-    <div class="split-hero__left">
-      <p class="split-hero__eyebrow">Field Notes · San Francisco · 2026</p>
-      <h1 class="split-hero__title">Building at the<br/><em>edge of inference.</em></h1>
-      <p class="split-hero__body">AI infrastructure, trading systems, and enterprise sales — written from the building side, not the bleachers.</p>
-      <div class="split-hero__actions">
-        <a href="/archive.html" class="v2-button v2-button--white">Browse Essays</a>
-        <span class="split-hero__count">15 essays published</span>
+  <!-- CINEMATIC HERO -->
+  <section class="cin-hero" aria-label="Hero">
+    <img class="cin-hero__bg"
+         src="/nvidia-images/L40S__nvidia-ovx-l40s-fg-cc-i5of5-d.jpg"
+         alt=""
+         aria-hidden="true"
+         loading="eager"
+         fetchpriority="high" />
+    <div class="cin-hero__veil"></div>
+    <div class="cin-hero__content">
+      <span class="cin-hero__eyebrow">Field Notes · San Francisco · 2026</span>
+      <h1 class="cin-hero__title">Building at the<br/><em>edge of inference.</em></h1>
+      <div class="cin-hero__rule"></div>
+      <p class="cin-hero__body">AI infrastructure, trading systems, and enterprise sales — written from the building side, not the bleachers.</p>
+      <div class="cin-hero__actions">
+        <a href="/archive.html" class="cin-hero__btn">Browse Essays →</a>
+        <a href="/archive.html" class="cin-hero__btn cin-hero__btn--ghost">All 15 essays</a>
       </div>
     </div>
-    <div class="split-hero__right">
-      <img src="/nvidia-images/L40S__nvidia-ovx-l40s-fg-cc-i5of5-d.jpg"
-           alt="NVIDIA L40S OVX server floating on black — the machine that runs inference"
-           loading="eager" fetchpriority="high" />
-      <span class="split-hero__image-label">NVIDIA L40S OVX · 2026</span>
-    </div>
+    <span class="cin-hero__caption">NVIDIA L40S OVX · 2025</span>
   </section>
 
   <!-- BENTO GRID -->
