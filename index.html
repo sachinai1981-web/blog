@@ -355,7 +355,7 @@ img { display: block; max-width: 100%; }
   gap: 40px;
 }
 
-.post-card { overflow: hidden; }
+.post-card { overflow: hidden; display: block; text-decoration: none; color: inherit; cursor: pointer; }
 
 .post-card-img-wrap {
   height: 280px;
@@ -554,8 +554,8 @@ img { display: block; max-width: 100%; }
 <nav class="nav" id="nav">
   <a href="/" class="nav-logo">Sachin Rai</a>
   <div class="nav-links">
-    <a href="/posts" class="nav-link">Writing</a>
-    <a href="/about"  class="nav-link">About</a>
+    <a href="/archive.html" class="nav-link">Writing</a>
+    <a href="/about.html"  class="nav-link">About</a>
     <a href="#subscribe" class="nav-cta">Subscribe</a>
   </div>
 </nav>
@@ -575,7 +575,7 @@ img { display: block; max-width: 100%; }
       no fluff, no hot takes.
     </p>
 
-    <a href="/posts" class="hero-cta">Read the field notes</a>
+    <a href="/archive.html" class="hero-cta">Read the field notes</a>
 
     <span class="hero-scroll">Scroll to read</span>
   </div>
@@ -664,7 +664,7 @@ img { display: block; max-width: 100%; }
   <div class="posts-grid">
 
     <!-- Post 1: AI Trading system -->
-    <article class="post-card">
+    <a class="post-card" href="/posts/autoquant.html">
       <div class="post-card-img-wrap">
         <img class="post-card-img"
           src="https://images.unsplash.com/photo-1645226880663-81561dcab0ae?w=800&q=85&auto=format&fit=crop"
@@ -675,10 +675,10 @@ img { display: block; max-width: 100%; }
         <h3 class="post-card-title">How I built a trading agent that thinks before it acts</h3>
         <span class="post-card-meta">8 min read</span>
       </div>
-    </article>
+    </a>
 
     <!-- Post 2: Engineering / harness architecture -->
-    <article class="post-card">
+    <a class="post-card" href="/posts/claude-code-retrospective.html">
       <div class="post-card-img-wrap">
         <img class="post-card-img"
           src="https://images.unsplash.com/photo-1584169417032-d34e8d805e8b?w=800&q=85&auto=format&fit=crop"
@@ -689,10 +689,10 @@ img { display: block; max-width: 100%; }
         <h3 class="post-card-title">The harness is the strategy, not the model</h3>
         <span class="post-card-meta">6 min read</span>
       </div>
-    </article>
+    </a>
 
     <!-- Post 3: Sales outreach / cold email -->
-    <article class="post-card">
+    <a class="post-card" href="/posts/ai-first-outreach.html">
       <div class="post-card-img-wrap">
         <img class="post-card-img"
           src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85&auto=format&fit=crop"
@@ -703,7 +703,7 @@ img { display: block; max-width: 100%; }
         <h3 class="post-card-title">What 300 cold emails taught me about machine outreach</h3>
         <span class="post-card-meta">5 min read</span>
       </div>
-    </article>
+    </a>
 
   </div>
 </section>
