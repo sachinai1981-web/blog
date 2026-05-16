@@ -117,59 +117,48 @@
 <main id="main">
 
   <!-- ARTICLE HEADER -->
-  <section class="article-header">
-    <div class="container">
-      <div class="article-header__inner">
-        <div class="article-header__text">
-          <p class="article-header__meta">May 2, 2026 &nbsp;·&nbsp; AI + Engineering &nbsp;·&nbsp; 9 min read</p>
-          <h1 class="article-header__title">Thirteen Agents in One Saturday.</h1>
-          <p class="article-header__excerpt">I spawned 13 parallel Claude Code agents on a Saturday morning. Each shipped one feature for my trading system. One of them overturned the hypothesis from feature #1.</p>
-          <div class="article-header__share">
-            <span class="article-header__share-label">Share —</span>
-            <a href="https://twitter.com/intent/tweet?url=https://sachinai.com/posts/13-agents-one-saturday.html&text=Thirteen+Agents+in+One+Saturday" target="_blank" rel="noopener noreferrer">Twitter</a>
-            <span class="article-header__share-sep">/</span>
-            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://sachinai.com/posts/13-agents-one-saturday.html" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          </div>
-        </div>
-        <div class="article-header__image-wrap">
-          <img class="article-header__image"
-               src="https://picsum.photos/seed/agents-code/800/450"
-               alt="Multi-agent systems"
-               width="800" height="450"
-               loading="eager" />
-        </div>
+  <header class="article-header">
+    <div class="article-header__inner">
+      <div class="article-header__text">
+        <p class="article-header__category">AI + Engineering</p>
+        <h1 class="article-header__title">Thirteen Agents in One Saturday.</h1>
+        <p class="article-header__excerpt">I spawned 13 parallel Claude Code agents on a Saturday morning. Each shipped one feature for my trading system. One of them overturned the hypothesis from feature #1.</p>
+        <p class="article-header__date">May 2, 2026 · 9 min read</p>
+      </div>
+      <div class="article-header__image">
+        <img src="https://images.unsplash.com/photo-1674027444485-cec3da58eef4?w=800&h=450&auto=format&fit=crop&q=80"
+             alt="Multi-agent systems"
+             width="800" height="450"
+             loading="eager" fetchpriority="high" />
       </div>
     </div>
-  </section>
+  </header>
 
   <!-- STATS STRIP -->
   <div class="stats-strip">
-    <div class="container">
-      <div class="stats-strip__inner">
-        <div class="stats-strip__item">
-          <span class="stats-strip__num" data-target="13">0</span>
-          <span class="stats-strip__label">Agents in Parallel</span>
-        </div>
-        <div class="stats-strip__item">
-          <span class="stats-strip__num" data-target="90">0</span>
-          <span class="stats-strip__label">Minutes to Completion</span>
-        </div>
-        <div class="stats-strip__item">
-          <span class="stats-strip__num" data-target="10" data-suffix="×">0×</span>
-          <span class="stats-strip__label">Sequential Time Ratio</span>
-        </div>
-        <div class="stats-strip__item">
-          <span class="stats-strip__num" data-target="1">0</span>
-          <span class="stats-strip__label">Thesis Overturned</span>
-        </div>
+    <div class="stats-strip__inner">
+      <div class="stats-strip__item">
+        <div class="stats-strip__number" data-target="13">0</div>
+        <div class="stats-strip__label">Agents in Parallel</div>
+      </div>
+      <div class="stats-strip__item">
+        <div class="stats-strip__number" data-target="90">0</div>
+        <div class="stats-strip__label">Minutes to Completion</div>
+      </div>
+      <div class="stats-strip__item">
+        <div class="stats-strip__number" data-target="10" data-suffix="×">0×</div>
+        <div class="stats-strip__label">Sequential Time Ratio</div>
+      </div>
+      <div class="stats-strip__item">
+        <div class="stats-strip__number" data-target="1">0</div>
+        <div class="stats-strip__label">Thesis Overturned</div>
       </div>
     </div>
   </div>
 
   <!-- ARTICLE BODY -->
-  <section class="article-body">
-    <div class="container">
-      <div class="article-body__inner">
+  <div class="article-body">
+    <div class="article-body__inner">
 
         <aside class="article-toc">
           <p class="article-toc__label">Contents</p>
@@ -275,7 +264,7 @@
           <p>This connects directly to the last post on win rate: the dashboard you celebrate is not necessarily the dashboard the market is scoring you on. Run both. The gap between them is where the honest answer lives.</p>
 
           <figure style="margin:3rem 0;">
-            <img src="https://picsum.photos/seed/gpu-cluster/800/300"
+            <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=800&h=300&auto=format&fit=crop&q=80"
                  alt="GPU cluster — computing infrastructure."
                  style="width:100%;height:300px;object-fit:cover;display:block;border:1px solid var(--color-border);"
                  loading="lazy" />
@@ -318,87 +307,71 @@
 
           <p><em>"The agent that overturned my own hypothesis was the most expensive one I shipped this quarter. It was also the one that justified all twelve others."</em></p>
 
+          <div class="grove-seal" aria-hidden="true"></div>
+
+          <!-- RELATED POSTS -->
+          <div class="related-posts">
+            <p class="related-posts__label">Read next</p>
+            <div class="related-posts__grid">
+              <a class="related-post-card" href="/posts/win-rate-trap.html">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&auto=format&fit=crop&q=80" alt="" loading="lazy" width="600" height="400" />
+                <div class="related-post-card__body">
+                  <p class="related-post-card__category">Sales + Strategy</p>
+                  <p class="related-post-card__title">Win Rate Lies.</p>
+                </div>
+              </a>
+              <a class="related-post-card" href="/posts/autoquant.html">
+                <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&h=400&auto=format&fit=crop&q=80" alt="" loading="lazy" width="600" height="400" />
+                <div class="related-post-card__body">
+                  <p class="related-post-card__category">Markets · Trading</p>
+                  <p class="related-post-card__title">AutoQuant: A Bayesian Signal Grader for Options Trading</p>
+                </div>
+              </a>
+              <a class="related-post-card" href="/posts/claude-code-retrospective.html">
+                <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&h=400&auto=format&fit=crop&q=80" alt="" loading="lazy" width="600" height="400" />
+                <div class="related-post-card__body">
+                  <p class="related-post-card__category">Building in Public</p>
+                  <p class="related-post-card__title">30 Days of Claude Code: A Retrospective</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- DIVIDER -->
-  <div class="grove-seal">
-    <span class="grove-seal__diamond">◆</span>
   </div>
-
-  <!-- RELATED POSTS -->
-  <section class="related-posts">
-    <div class="container">
-      <h2 class="related-posts__title">Related Essays</h2>
-      <div class="related-posts__grid">
-        <article class="related-post-card">
-          <a href="/posts/win-rate-trap.html" class="related-post-card__image-link">
-            <img class="related-post-card__image" src="https://picsum.photos/seed/win-rate-sales/600/400" alt="" loading="lazy" />
-          </a>
-          <div class="related-post-card__body">
-            <p class="related-post-card__category">Sales + Strategy</p>
-            <h3 class="related-post-card__title"><a href="/posts/win-rate-trap.html">Win Rate Lies.</a></h3>
-            <p class="related-post-card__meta">Apr 26, 2026</p>
-          </div>
-        </article>
-        <article class="related-post-card">
-          <a href="/posts/autoquant.html" class="related-post-card__image-link">
-            <img class="related-post-card__image" src="https://picsum.photos/seed/markets-trading/600/400" alt="" loading="lazy" />
-          </a>
-          <div class="related-post-card__body">
-            <p class="related-post-card__category">Markets · Trading</p>
-            <h3 class="related-post-card__title"><a href="/posts/autoquant.html">AutoQuant: A Bayesian Signal Grader for Options Trading</a></h3>
-            <p class="related-post-card__meta">Apr 5, 2026</p>
-          </div>
-        </article>
-        <article class="related-post-card">
-          <a href="/posts/claude-code-retrospective.html" class="related-post-card__image-link">
-            <img class="related-post-card__image" src="https://picsum.photos/seed/laptop-workspace/600/400" alt="" loading="lazy" />
-          </a>
-          <div class="related-post-card__body">
-            <p class="related-post-card__category">Building in Public</p>
-            <h3 class="related-post-card__title"><a href="/posts/claude-code-retrospective.html">30 Days of Claude Code: A Retrospective</a></h3>
-            <p class="related-post-card__meta">Apr 28, 2026</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
 
 </main>
 
 <!-- FOOTER -->
 <footer class="v2-footer">
-  <div class="container">
-    <div class="v2-footer__top">
-      <button class="v2-footer__go-up" id="go-up" aria-label="Scroll to top">GO UP ↑</button>
+  <button class="v2-footer__scroll-up" onclick="window.scrollTo({top:0,behavior:'smooth'});" aria-label="Scroll to top">↑<br/>GO UP</button>
+  <div class="v2-footer__inner">
+    <nav class="v2-footer__nav" aria-label="Footer navigation">
+      <a href="/" class="footer__link">Essays</a>
+      <a href="/about.html" class="footer__link">About</a>
+      <a href="/archive.html" class="footer__link">Archive</a>
+      <a href="/tools.html" class="footer__link">Tools</a>
+      <a href="/resume.html" class="footer__link">Resume</a>
+      <a href="/rss.xml" class="footer__link">RSS</a>
+    </nav>
+    <div class="v2-footer__newsletter">
+      <div class="v2-footer__newsletter-title">Field Notes</div>
+      <p class="v2-footer__newsletter-text">One essay per week. AI infrastructure, trading systems, and what actually ships.</p>
+      <form class="v2-footer__email-form" action="https://formspree.io/f/xwvwlybd" method="POST">
+        <input class="v2-footer__email-input" type="email" name="email" placeholder="your@email.com" required />
+        <button class="v2-footer__email-submit" type="submit">Subscribe →</button>
+      </form>
     </div>
-    <div class="v2-footer__mid">
-      <div class="v2-footer__newsletter">
-        <p class="v2-footer__newsletter-label">Field Notes — weekly</p>
-        <form class="v2-footer__email-form" action="https://formspree.io/f/xwvwlybd" method="POST">
-          <input type="email" name="email" class="v2-footer__email-input" placeholder="your@email.com" required />
-          <button type="submit" class="v2-footer__email-submit">Subscribe</button>
-        </form>
-      </div>
-      <nav class="v2-footer__nav">
-        <a href="/" class="v2-footer__nav-link">Essays</a>
-        <a href="/about.html" class="v2-footer__nav-link">About</a>
-        <a href="/archive.html" class="v2-footer__nav-link">Archive</a>
-        <a href="/tools.html" class="v2-footer__nav-link">Tools</a>
-        <a href="/resume.html" class="v2-footer__nav-link">Resume</a>
-        <a href="/rss.xml" class="v2-footer__nav-link">RSS</a>
-      </nav>
-      <div class="v2-footer__social">
-        <a href="https://x.com/sachinrai01" target="_blank" rel="noopener" class="v2-footer__social-link">X (Twitter)</a>
-        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener" class="v2-footer__social-link">LinkedIn</a>
-        <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener" class="v2-footer__social-link">GitHub</a>
-      </div>
-    </div>
-    <div class="v2-footer__bottom">
-      <p class="v2-footer__copy">© 2026 Sachin Rai · Field Notes from San Francisco · <a href="/privacy.html">Privacy</a></p>
+  </div>
+  <div class="v2-footer__bottom">
+    <span>© 2026 Sachin Rai · Field Notes from San Francisco</span>
+    <div class="v2-footer__social">
+      <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">X ↗</a>
+      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="/privacy.html">Privacy</a>
     </div>
   </div>
 </footer>

@@ -21,7 +21,7 @@
 <meta property="og:url" content="https://sachinai.com/posts/ai-first-outreach.html" />
 <meta property="og:title" content="The Case for AI-First Outreach: How I Built My Own SDR in a Weekend" />
 <meta property="og:description" content="Using LangGraph, Apollo, and Claude to research prospects, score fit, and draft personalised emails — automatically." />
-<meta property="og:image" content="https://picsum.photos/seed/ai-outreach-sdr/1200/630" />
+<meta property="og:image" content="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&h=630&auto=format&fit=crop&q=80" />
 <meta property="og:site_name" content="Sachin Rai" />
 <meta property="article:published_time" content="2026-04-12" />
 <meta property="article:author" content="Sachin Rai" />
@@ -30,7 +30,7 @@
 <meta name="twitter:site" content="@sachinrai01" />
 <meta name="twitter:title" content="The Case for AI-First Outreach: How I Built My Own SDR in a Weekend" />
 <meta name="twitter:description" content="Using LangGraph, Apollo, and Claude to research prospects, score fit, and draft personalised emails — automatically." />
-<meta name="twitter:image" content="https://picsum.photos/seed/ai-outreach-sdr/1200/630" />
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&h=630&auto=format&fit=crop&q=80" />
 
 <script type="application/ld+json">
 {
@@ -43,7 +43,7 @@
   "author": { "@type": "Person", "name": "Sachin Rai", "url": "https://sachinai.com/" },
   "publisher": { "@type": "Person", "name": "Sachin Rai", "url": "https://sachinai.com/" },
   "description": "Using LangGraph, Apollo, and Claude to research prospects, score fit, and draft personalised emails — automatically.",
-  "image": "https://picsum.photos/seed/ai-outreach-sdr/1200/630",
+  "image": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&h=630&auto=format&fit=crop&q=80",
   "keywords": ["AI SDR", "LangGraph", "Apollo", "Claude", "sales automation", "outreach personalisation"],
   "articleSection": "AI + Sales"
 }
@@ -97,59 +97,48 @@
 <main id="main">
 
   <!-- ARTICLE HEADER -->
-  <section class="article-header">
-    <div class="container">
-      <div class="article-header__inner">
-        <div class="article-header__text">
-          <p class="article-header__meta">Apr 12, 2026 &nbsp;·&nbsp; AI + Sales &nbsp;·&nbsp; 8 min read</p>
-          <h1 class="article-header__title">The Case for AI-First Outreach: How I Built My Own SDR in a Weekend</h1>
-          <p class="article-header__excerpt">Using LangGraph, Apollo, and Claude to research prospects, score fit, and draft personalised emails — automatically.</p>
-          <div class="article-header__share">
-            <span class="article-header__share-label">Share —</span>
-            <a href="https://twitter.com/intent/tweet?url=https://sachinai.com/posts/ai-first-outreach.html&text=The+Case+for+AI-First+Outreach" target="_blank" rel="noopener noreferrer">Twitter</a>
-            <span class="article-header__share-sep">/</span>
-            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://sachinai.com/posts/ai-first-outreach.html" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          </div>
-        </div>
-        <div class="article-header__image-wrap">
-          <img class="article-header__image"
-               src="https://picsum.photos/seed/pipeline-diagram/800/450"
-               alt="Pipeline diagram"
-               width="800" height="450"
-               loading="eager" />
-        </div>
+  <header class="article-header">
+    <div class="article-header__inner">
+      <div class="article-header__text">
+        <p class="article-header__category">AI + Sales</p>
+        <h1 class="article-header__title">The Case for AI-First Outreach: How I Built My Own SDR in a Weekend</h1>
+        <p class="article-header__excerpt">Using LangGraph, Apollo, and Claude to research prospects, score fit, and draft personalised emails — automatically.</p>
+        <p class="article-header__date">Apr 12, 2026 · 8 min read</p>
+      </div>
+      <div class="article-header__image">
+        <img src="https://images.unsplash.com/photo-1592659762303-90081d34b277?w=800&h=450&auto=format&fit=crop&q=80"
+             alt="Pipeline diagram"
+             width="800" height="450"
+             loading="eager" fetchpriority="high" />
       </div>
     </div>
-  </section>
+  </header>
 
   <!-- STATS STRIP -->
   <div class="stats-strip">
-    <div class="container">
-      <div class="stats-strip__inner">
-        <div class="stats-strip__item">
-          <span class="stats-strip__num" data-target="50">0</span>
-          <span class="stats-strip__label">Leads per batch</span>
-        </div>
-        <div class="stats-strip__item">
-          <span class="stats-strip__num" data-target="3">0</span>
-          <span class="stats-strip__label">Min per prospect (automated)</span>
-        </div>
-        <div class="stats-strip__item">
-          <span class="stats-strip__num" data-target="18" data-suffix="%">0%</span>
-          <span class="stats-strip__label">Reply Rate — Tier A</span>
-        </div>
-        <div class="stats-strip__item">
-          <span class="stats-strip__num" data-target="30">0</span>
-          <span class="stats-strip__label">Min / day human review time</span>
-        </div>
+    <div class="stats-strip__inner">
+      <div class="stats-strip__item">
+        <div class="stats-strip__number" data-target="50">0</div>
+        <div class="stats-strip__label">Leads per batch</div>
+      </div>
+      <div class="stats-strip__item">
+        <div class="stats-strip__number" data-target="3">0</div>
+        <div class="stats-strip__label">Min per prospect (automated)</div>
+      </div>
+      <div class="stats-strip__item">
+        <div class="stats-strip__number" data-target="18" data-suffix="%">0%</div>
+        <div class="stats-strip__label">Reply Rate — Tier A</div>
+      </div>
+      <div class="stats-strip__item">
+        <div class="stats-strip__number" data-target="30">0</div>
+        <div class="stats-strip__label">Min / day human review time</div>
       </div>
     </div>
   </div>
 
   <!-- ARTICLE BODY -->
-  <section class="article-body">
-    <div class="container">
-      <div class="article-body__inner">
+  <div class="article-body">
+    <div class="article-body__inner">
 
         <aside class="article-toc">
           <p class="article-toc__label">Contents</p>
@@ -253,87 +242,71 @@
 
           <p>The pipeline also cannot replicate relationship-based outreach. If you have a warm introduction, a shared connection, or a mutual customer reference, that context matters more than any AI-researched email. The system is for cold outreach at scale. It does not replace the relationship network — it frees up time to build it.</p>
 
+          <div class="grove-seal" aria-hidden="true"></div>
+
+          <!-- RELATED POSTS -->
+          <div class="related-posts">
+            <p class="related-posts__label">Read next</p>
+            <div class="related-posts__grid">
+              <a class="related-post-card" href="/posts/club-winner.html">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&auto=format&fit=crop&q=80" alt="" loading="lazy" width="600" height="400" />
+                <div class="related-post-card__body">
+                  <p class="related-post-card__category">Sales Intelligence</p>
+                  <p class="related-post-card__title">Seven Things I Did Differently to Win 7× Club</p>
+                </div>
+              </a>
+              <a class="related-post-card" href="/posts/claude-code-retrospective.html">
+                <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&h=400&auto=format&fit=crop&q=80" alt="" loading="lazy" width="600" height="400" />
+                <div class="related-post-card__body">
+                  <p class="related-post-card__category">Building in Public</p>
+                  <p class="related-post-card__title">30 Days of Claude Code: A Retrospective</p>
+                </div>
+              </a>
+              <a class="related-post-card" href="/posts/obsidian-vault.html">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&auto=format&fit=crop&q=80" alt="" loading="lazy" width="600" height="400" />
+                <div class="related-post-card__body">
+                  <p class="related-post-card__category">Knowledge Systems</p>
+                  <p class="related-post-card__title">How My Obsidian Vault Became an AI-Queryable Second Brain</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- DIVIDER -->
-  <div class="grove-seal">
-    <span class="grove-seal__diamond">◆</span>
   </div>
-
-  <!-- RELATED POSTS -->
-  <section class="related-posts">
-    <div class="container">
-      <h2 class="related-posts__title">Related Essays</h2>
-      <div class="related-posts__grid">
-        <article class="related-post-card">
-          <a href="/posts/club-winner.html" class="related-post-card__image-link">
-            <img class="related-post-card__image" src="https://picsum.photos/seed/conference-stage/600/400" alt="" loading="lazy" />
-          </a>
-          <div class="related-post-card__body">
-            <p class="related-post-card__category">Sales Intelligence</p>
-            <h3 class="related-post-card__title"><a href="/posts/club-winner.html">Seven Things I Did Differently to Win 7× Club</a></h3>
-            <p class="related-post-card__meta">May 3, 2026</p>
-          </div>
-        </article>
-        <article class="related-post-card">
-          <a href="/posts/claude-code-retrospective.html" class="related-post-card__image-link">
-            <img class="related-post-card__image" src="https://picsum.photos/seed/laptop-workspace/600/400" alt="" loading="lazy" />
-          </a>
-          <div class="related-post-card__body">
-            <p class="related-post-card__category">Building in Public</p>
-            <h3 class="related-post-card__title"><a href="/posts/claude-code-retrospective.html">30 Days of Claude Code: A Retrospective</a></h3>
-            <p class="related-post-card__meta">Apr 28, 2026</p>
-          </div>
-        </article>
-        <article class="related-post-card">
-          <a href="/posts/obsidian-vault.html" class="related-post-card__image-link">
-            <img class="related-post-card__image" src="https://picsum.photos/seed/library-books/600/400" alt="" loading="lazy" />
-          </a>
-          <div class="related-post-card__body">
-            <p class="related-post-card__category">Knowledge Systems</p>
-            <h3 class="related-post-card__title"><a href="/posts/obsidian-vault.html">How My Obsidian Vault Became an AI-Queryable Second Brain</a></h3>
-            <p class="related-post-card__meta">Apr 19, 2026</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
 
 </main>
 
 <!-- FOOTER -->
 <footer class="v2-footer">
-  <div class="container">
-    <div class="v2-footer__top">
-      <button class="v2-footer__go-up" id="go-up" aria-label="Scroll to top">GO UP ↑</button>
+  <button class="v2-footer__scroll-up" onclick="window.scrollTo({top:0,behavior:'smooth'});" aria-label="Scroll to top">↑<br/>GO UP</button>
+  <div class="v2-footer__inner">
+    <nav class="v2-footer__nav" aria-label="Footer navigation">
+      <a href="/" class="footer__link">Essays</a>
+      <a href="/about.html" class="footer__link">About</a>
+      <a href="/archive.html" class="footer__link">Archive</a>
+      <a href="/tools.html" class="footer__link">Tools</a>
+      <a href="/resume.html" class="footer__link">Resume</a>
+      <a href="/rss.xml" class="footer__link">RSS</a>
+    </nav>
+    <div class="v2-footer__newsletter">
+      <div class="v2-footer__newsletter-title">Field Notes</div>
+      <p class="v2-footer__newsletter-text">One essay per week. AI infrastructure, trading systems, and what actually ships.</p>
+      <form class="v2-footer__email-form" action="https://formspree.io/f/xwvwlybd" method="POST">
+        <input class="v2-footer__email-input" type="email" name="email" placeholder="your@email.com" required />
+        <button class="v2-footer__email-submit" type="submit">Subscribe →</button>
+      </form>
     </div>
-    <div class="v2-footer__mid">
-      <div class="v2-footer__newsletter">
-        <p class="v2-footer__newsletter-label">Field Notes — weekly</p>
-        <form class="v2-footer__email-form" action="https://formspree.io/f/xwvwlybd" method="POST">
-          <input type="email" name="email" class="v2-footer__email-input" placeholder="your@email.com" required />
-          <button type="submit" class="v2-footer__email-submit">Subscribe</button>
-        </form>
-      </div>
-      <nav class="v2-footer__nav">
-        <a href="/" class="v2-footer__nav-link">Essays</a>
-        <a href="/about.html" class="v2-footer__nav-link">About</a>
-        <a href="/archive.html" class="v2-footer__nav-link">Archive</a>
-        <a href="/tools.html" class="v2-footer__nav-link">Tools</a>
-        <a href="/resume.html" class="v2-footer__nav-link">Resume</a>
-        <a href="/rss.xml" class="v2-footer__nav-link">RSS</a>
-      </nav>
-      <div class="v2-footer__social">
-        <a href="https://x.com/sachinrai01" target="_blank" rel="noopener" class="v2-footer__social-link">X (Twitter)</a>
-        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener" class="v2-footer__social-link">LinkedIn</a>
-        <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener" class="v2-footer__social-link">GitHub</a>
-      </div>
-    </div>
-    <div class="v2-footer__bottom">
-      <p class="v2-footer__copy">© 2026 Sachin Rai · Field Notes from San Francisco · <a href="/privacy.html">Privacy</a></p>
+  </div>
+  <div class="v2-footer__bottom">
+    <span>© 2026 Sachin Rai · Field Notes from San Francisco</span>
+    <div class="v2-footer__social">
+      <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">X ↗</a>
+      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="/privacy.html">Privacy</a>
     </div>
   </div>
 </footer>

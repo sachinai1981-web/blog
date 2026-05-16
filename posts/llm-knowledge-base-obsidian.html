@@ -23,7 +23,7 @@
   <meta property="og:url" content="https://sachinai.com/posts/llm-knowledge-base-obsidian.html" />
   <meta property="og:title" content="I built a personal LLM knowledge base in Obsidian. Here's what it actually looks like." />
   <meta property="og:description" content="Raw data in, compiled wiki out. How I use Claude Code to turn everything I read and watch into a searchable, queryable knowledge base." />
-  <meta property="og:image" content="https://picsum.photos/seed/llm-obsidian-kb/1200/630" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&h=630&auto=format&fit=crop&q=80" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Sachin Rai" />
@@ -36,7 +36,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="I built a personal LLM knowledge base in Obsidian. Here's what it actually looks like." />
   <meta name="twitter:description" content="Raw data in, compiled wiki out. The underrated AI workflow nobody is talking about." />
-  <meta name="twitter:image" content="https://picsum.photos/seed/llm-obsidian-kb/1200/630" />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&h=630&auto=format&fit=crop&q=80" />
 
   <script type="application/ld+json">
   {
@@ -54,7 +54,7 @@
     },
     "publisher": { "@type": "Person", "name": "Sachin Rai", "url": "https://sachinai.com/" },
     "description": "Raw data in, compiled wiki out. How I use Claude Code to turn everything I read and watch into a searchable, queryable knowledge base — and why this is the most underrated AI workflow right now.",
-    "image": "https://picsum.photos/seed/llm-obsidian-kb/1200/630",
+    "image": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&h=630&auto=format&fit=crop&q=80",
     "keywords": ["LLM knowledge base", "Obsidian AI", "personal knowledge management", "Claude Code", "PKM AI", "compile wiki", "AI workflow", "Obsidian wiki"],
     "articleSection": "AI Tools",
     "mainEntityOfPage": {
@@ -82,12 +82,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/grove.css" />
 </head>
-<body style="padding-top:60px;">
+<body>
 
-<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--grove-ink);color:var(--grove-paper);padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:var(--grove-font-sans);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;border-top:1px solid var(--grove-rule);">
+<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--color-text);color:var(--color-bg);padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:var(--font-body);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;border-top:1px solid var(--color-border);">
   <span style="flex:1;opacity:.7;">Analytics help understand what people read. No ads. Data stays in Google Analytics.</span>
   <div style="display:flex;gap:.5rem;flex-shrink:0;">
-    <button onclick="srConsent('granted')" style="padding:.4rem 1rem;background:var(--grove-paper);color:var(--grove-ink);border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
+    <button onclick="srConsent('granted')" style="padding:.4rem 1rem;background:var(--color-bg);color:var(--color-text);border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
     <button onclick="srConsent('denied')" style="padding:.4rem 1rem;background:transparent;color:rgba(244,241,232,.5);border:1px solid rgba(244,241,232,.2);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
   </div>
 </div>
@@ -139,7 +139,7 @@
       </div>
     </div>
     <div class="article-header__image">
-      <img src="https://picsum.photos/seed/library-books/800/600" alt="Personal LLM knowledge base in Obsidian" width="800" height="600" loading="eager" />
+      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&auto=format&fit=crop&q=80" alt="Personal LLM knowledge base in Obsidian" width="800" height="600" loading="eager" />
     </div>
   </div>
 </header>
@@ -192,77 +192,77 @@
         <p><strong>The short version:</strong> raw data from any source gets collected, then compiled by an LLM into a <code>.md</code> wiki, then operated on by various CLI commands for Q&A and enrichment — all viewable in Obsidian. You rarely write or edit the wiki manually. That's the LLM's job.</p>
       </div>
 
-      <img src="https://picsum.photos/seed/library-books/1400/320" alt="Knowledge capture and library" loading="lazy" width="1400" height="320" style="width:100%;height:auto;display:block;margin:2rem 0;" />
+      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&h=320&auto=format&fit=crop&q=80" alt="Knowledge capture and library" loading="lazy" width="1400" height="320" style="width:100%;height:auto;display:block;margin:2rem 0;" />
 
       <h2 id="pipeline">The pipeline, layer by layer.</h2>
 
       <!-- Step Cards (numbered, flat grove style) -->
       <div style="display:grid;gap:1.5rem;margin:1.5rem 0;">
 
-        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--grove-rule);padding:1.5rem;">
-          <div style="font-family:var(--grove-font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--grove-ink);padding-top:.1rem;">01</div>
+        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--color-border);padding:1.5rem;">
+          <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--color-text);padding-top:.1rem;">01</div>
           <div>
-            <div style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grove-muted);margin-bottom:.4rem;">Ingest</div>
-            <div style="font-family:var(--grove-font-display);font-size:1.15rem;font-weight:300;color:var(--grove-ink);margin-bottom:.6rem;line-height:1.3;">Index everything into <code>raw/</code></div>
-            <p style="font-size:.9rem;color:var(--grove-ink);line-height:1.7;margin:0;">Articles, papers, repos, datasets, YouTube transcripts, images — anything I want to think about ends up in a <code>raw/</code> directory. I use the Obsidian Web Clipper extension to convert web articles into <code>.md</code> files. For YouTube, a hotkey downloads the transcript and related images locally so the LLM can reference them without fetching URLs in real time. The ingest step is intentionally frictionless — if it's too hard to add something, it won't get added.</p>
+            <div style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:.4rem;">Ingest</div>
+            <div style="font-family:var(--font-display);font-size:1.15rem;font-weight:300;color:var(--color-text);margin-bottom:.6rem;line-height:1.3;">Index everything into <code>raw/</code></div>
+            <p style="font-size:.9rem;color:var(--color-text);line-height:1.7;margin:0;">Articles, papers, repos, datasets, YouTube transcripts, images — anything I want to think about ends up in a <code>raw/</code> directory. I use the Obsidian Web Clipper extension to convert web articles into <code>.md</code> files. For YouTube, a hotkey downloads the transcript and related images locally so the LLM can reference them without fetching URLs in real time. The ingest step is intentionally frictionless — if it's too hard to add something, it won't get added.</p>
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--grove-rule);padding:1.5rem;">
-          <div style="font-family:var(--grove-font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--grove-ink);padding-top:.1rem;">02</div>
+        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--color-border);padding:1.5rem;">
+          <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--color-text);padding-top:.1rem;">02</div>
           <div>
-            <div style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grove-muted);margin-bottom:.4rem;">Compile</div>
-            <div style="font-family:var(--grove-font-display);font-size:1.15rem;font-weight:300;color:var(--grove-ink);margin-bottom:.6rem;line-height:1.3;">LLM turns raw files into a structured wiki</div>
-            <p style="font-size:.9rem;color:var(--grove-ink);line-height:1.7;margin:0;">This is where it gets interesting. I run a <code>/compile-wiki</code> command that reads everything in <code>raw/</code> and does three things automatically on every file: a <strong>ghost analysis</strong> (what wasn't said — the implied idea, the contrarian read), a <strong>venture analysis</strong> (what business opportunity hides in this gap), and an <strong>idea pass</strong> (personal, actionable things I could do this week based on this content). The LLM then writes structured concept articles in <code>02-Concepts/</code> with backlinks, section images, and moves the raw files to <code>04-Resources/</code>. I almost never touch the wiki directly.</p>
+            <div style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:.4rem;">Compile</div>
+            <div style="font-family:var(--font-display);font-size:1.15rem;font-weight:300;color:var(--color-text);margin-bottom:.6rem;line-height:1.3;">LLM turns raw files into a structured wiki</div>
+            <p style="font-size:.9rem;color:var(--color-text);line-height:1.7;margin:0;">This is where it gets interesting. I run a <code>/compile-wiki</code> command that reads everything in <code>raw/</code> and does three things automatically on every file: a <strong>ghost analysis</strong> (what wasn't said — the implied idea, the contrarian read), a <strong>venture analysis</strong> (what business opportunity hides in this gap), and an <strong>idea pass</strong> (personal, actionable things I could do this week based on this content). The LLM then writes structured concept articles in <code>02-Concepts/</code> with backlinks, section images, and moves the raw files to <code>04-Resources/</code>. I almost never touch the wiki directly.</p>
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--grove-rule);padding:1.5rem;">
-          <div style="font-family:var(--grove-font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--grove-ink);padding-top:.1rem;">03</div>
+        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--color-border);padding:1.5rem;">
+          <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--color-text);padding-top:.1rem;">03</div>
           <div>
-            <div style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grove-muted);margin-bottom:.4rem;">Index</div>
-            <div style="font-family:var(--grove-font-display);font-size:1.15rem;font-weight:300;color:var(--grove-ink);margin-bottom:.6rem;line-height:1.3;">Auto-maintained index files make Q&amp;A fast</div>
-            <p style="font-size:.9rem;color:var(--grove-ink);line-height:1.7;margin:0;">I thought I'd need RAG (retrieval-augmented generation) once the vault got large enough. I don't — at least not yet. The LLM auto-maintains a <code>VAULT-INDEX.md</code> file and brief summaries for every document. When I ask a question, it reads the index first, identifies the relevant notes, reads those, and synthesizes an answer. At roughly <strong>100 articles and 400K words</strong>, this works well without any vector embeddings or similarity search. The index is the trick.</p>
+            <div style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:.4rem;">Index</div>
+            <div style="font-family:var(--font-display);font-size:1.15rem;font-weight:300;color:var(--color-text);margin-bottom:.6rem;line-height:1.3;">Auto-maintained index files make Q&amp;A fast</div>
+            <p style="font-size:.9rem;color:var(--color-text);line-height:1.7;margin:0;">I thought I'd need RAG (retrieval-augmented generation) once the vault got large enough. I don't — at least not yet. The LLM auto-maintains a <code>VAULT-INDEX.md</code> file and brief summaries for every document. When I ask a question, it reads the index first, identifies the relevant notes, reads those, and synthesizes an answer. At roughly <strong>100 articles and 400K words</strong>, this works well without any vector embeddings or similarity search. The index is the trick.</p>
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--grove-rule);padding:1.5rem;">
-          <div style="font-family:var(--grove-font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--grove-ink);padding-top:.1rem;">04</div>
+        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--color-border);padding:1.5rem;">
+          <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--color-text);padding-top:.1rem;">04</div>
           <div>
-            <div style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grove-muted);margin-bottom:.4rem;">Query</div>
-            <div style="font-family:var(--grove-font-display);font-size:1.15rem;font-weight:300;color:var(--grove-ink);margin-bottom:.6rem;line-height:1.3;">Ask anything against the vault</div>
-            <p style="font-size:.9rem;color:var(--grove-ink);line-height:1.7;margin:0;">Once the vault is large enough, you can ask complex questions and get answers that are grounded in <em>your</em> specific reading history — not generic web results. "What do I know about multi-agent orchestration?" "What connections exist between Jensen Huang's compute thesis and Andy McAfee's geek org framework?" "What are the venture opportunities hiding in everything I've read about AI policy enforcement?" The LLM goes off, researches the answers against your vault, and returns with citations. You can then file the answer back as a new concept article, which enriches the vault for future queries.</p>
+            <div style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:.4rem;">Query</div>
+            <div style="font-family:var(--font-display);font-size:1.15rem;font-weight:300;color:var(--color-text);margin-bottom:.6rem;line-height:1.3;">Ask anything against the vault</div>
+            <p style="font-size:.9rem;color:var(--color-text);line-height:1.7;margin:0;">Once the vault is large enough, you can ask complex questions and get answers that are grounded in <em>your</em> specific reading history — not generic web results. "What do I know about multi-agent orchestration?" "What connections exist between Jensen Huang's compute thesis and Andy McAfee's geek org framework?" "What are the venture opportunities hiding in everything I've read about AI policy enforcement?" The LLM goes off, researches the answers against your vault, and returns with citations. You can then file the answer back as a new concept article, which enriches the vault for future queries.</p>
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--grove-rule);padding:1.5rem;">
-          <div style="font-family:var(--grove-font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--grove-ink);padding-top:.1rem;">05</div>
+        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--color-border);padding:1.5rem;">
+          <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--color-text);padding-top:.1rem;">05</div>
           <div>
-            <div style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grove-muted);margin-bottom:.4rem;">Output</div>
-            <div style="font-family:var(--grove-font-display);font-size:1.15rem;font-weight:300;color:var(--grove-ink);margin-bottom:.6rem;line-height:1.3;">Render answers as visual artifacts</div>
-            <p style="font-size:.9rem;color:var(--grove-ink);line-height:1.7;margin:0;">Instead of getting answers back in plain terminal text, I have the LLM render outputs as viewable artifacts — markdown files, Marp slideshows, or images — all of which I view again in Obsidian. The outputs often get filed back into the wiki to enhance it for future queries. Every exploration and question compounds. The vault grows smarter each time you use it.</p>
+            <div style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:.4rem;">Output</div>
+            <div style="font-family:var(--font-display);font-size:1.15rem;font-weight:300;color:var(--color-text);margin-bottom:.6rem;line-height:1.3;">Render answers as visual artifacts</div>
+            <p style="font-size:.9rem;color:var(--color-text);line-height:1.7;margin:0;">Instead of getting answers back in plain terminal text, I have the LLM render outputs as viewable artifacts — markdown files, Marp slideshows, or images — all of which I view again in Obsidian. The outputs often get filed back into the wiki to enhance it for future queries. Every exploration and question compounds. The vault grows smarter each time you use it.</p>
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--grove-rule);padding:1.5rem;">
-          <div style="font-family:var(--grove-font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--grove-ink);padding-top:.1rem;">06</div>
+        <div style="display:grid;grid-template-columns:3rem 1fr;gap:1.25rem;align-items:start;border:1px solid var(--color-border);padding:1.5rem;">
+          <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:300;line-height:1;color:var(--color-text);padding-top:.1rem;">06</div>
           <div>
-            <div style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grove-muted);margin-bottom:.4rem;">Lint</div>
-            <div style="font-family:var(--grove-font-display);font-size:1.15rem;font-weight:300;color:var(--grove-ink);margin-bottom:.6rem;line-height:1.3;">Health checks keep the wiki clean</div>
-            <p style="font-size:.9rem;color:var(--grove-ink);line-height:1.7;margin:0;">Periodically I run LLM "health checks" over the vault to find inconsistent data, impute missing data via web search, and surface interesting connections for new article candidates. The LLM is quite good at suggesting further questions to explore — it will often flag a gap: "You have extensive notes on AI agents but nothing on agent security. Here are the three questions worth answering." That feedback loop keeps the vault coherent instead of just large.</p>
+            <div style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:.4rem;">Lint</div>
+            <div style="font-family:var(--font-display);font-size:1.15rem;font-weight:300;color:var(--color-text);margin-bottom:.6rem;line-height:1.3;">Health checks keep the wiki clean</div>
+            <p style="font-size:.9rem;color:var(--color-text);line-height:1.7;margin:0;">Periodically I run LLM "health checks" over the vault to find inconsistent data, impute missing data via web search, and surface interesting connections for new article candidates. The LLM is quite good at suggesting further questions to explore — it will often flag a gap: "You have extensive notes on AI agents but nothing on agent security. Here are the three questions worth answering." That feedback loop keeps the vault coherent instead of just large.</p>
           </div>
         </div>
 
       </div><!-- /step cards -->
 
       <!-- Purple callout -->
-      <div class="callout" style="border-left-color:var(--grove-ink);background:var(--grove-paper-alt);">
+      <div class="callout" style="border-left-color:var(--color-text);background:var(--color-bg-secondary);">
         <p><strong>The compounding effect:</strong> This is why the pattern is so powerful. Every query adds to the vault. Every lint pass improves it. Every new raw file gets synthesized against everything that already exists. A vault at 100 articles is exponentially more useful than the same vault at 10 articles — because the LLM is connecting nodes across the whole graph, not just summarizing individual files.</p>
       </div>
 
       <h2 id="ide">The IDE: why Obsidian specifically.</h2>
 
-      <img src="https://picsum.photos/seed/knowledge-network/1400/320" alt="Knowledge network and connections" loading="lazy" width="1400" height="320" style="width:100%;height:auto;display:block;margin:2rem 0;" />
+      <img src="https://images.unsplash.com/photo-1674027444485-cec3da58eef4?w=1400&h=320&auto=format&fit=crop&q=80" alt="Knowledge network and connections" loading="lazy" width="1400" height="320" style="width:100%;height:auto;display:block;margin:2rem 0;" />
 
       <p>I use Obsidian as the visual frontend for all of this. A few things make it the right choice for this workflow:</p>
 
@@ -278,8 +278,8 @@
       <p>My current vault on AI research has roughly 270 notes, organized into a structure the LLM maintains:</p>
 
       <!-- Code block (dark navy) -->
-      <div style="background:var(--grove-ink);padding:1.5rem 1.75rem;margin:1.5rem 0;overflow-x:auto;">
-        <code style="font-family:var(--grove-font-mono);font-size:.82rem;color:rgba(244,241,232,.82);line-height:1.8;white-space:pre;display:block;"><span style="color:rgba(244,241,232,.4);"># vault structure (LLM-maintained)</span>
+      <div style="background:var(--color-text);padding:1.5rem 1.75rem;margin:1.5rem 0;overflow-x:auto;">
+        <code style="font-family:var(--font-body);font-size:.82rem;color:rgba(244,241,232,.82);line-height:1.8;white-space:pre;display:block;"><span style="color:rgba(244,241,232,.4);"># vault structure (LLM-maintained)</span>
 <span style="color:#e8d5b0;">00-Daily/</span>          <span style="color:rgba(244,241,232,.4);"># daily notes — inbox for raw ideas</span>
 <span style="color:#e8d5b0;">00-Inbox/raw/</span>      <span style="color:rgba(244,241,232,.4);"># drop zone for new source material</span>
 <span style="color:#e8d5b0;">02-Concepts/</span>       <span style="color:rgba(244,241,232,.4);"># compiled wiki articles (LLM writes these)</span>
@@ -290,7 +290,7 @@
 
       <p>The <code>02-Concepts/</code> directory is where the value lives. Each article has: a banner image, a core thesis, ghost notes (what wasn't said), venture opportunities (what business this implies), personal ideas (what I could do this week), and backlinks to related concepts. The LLM wrote all of it. I just asked questions and dropped raw files.</p>
 
-      <blockquote style="border-left:3px solid var(--grove-ink);padding:.75rem 1.5rem;margin:2rem 0;font-family:var(--grove-font-display);font-size:1.2rem;font-weight:300;color:var(--grove-ink);font-style:italic;line-height:1.4;">
+      <blockquote style="border-left:3px solid var(--color-text);padding:.75rem 1.5rem;margin:2rem 0;font-family:var(--font-display);font-size:1.2rem;font-weight:300;color:var(--color-text);font-style:italic;line-height:1.4;">
         "I thought I had to reach for fancy RAG, but the LLM has been pretty good about auto-maintaining index files and brief summaries of all the documents."
       </blockquote>
 
@@ -298,38 +298,38 @@
 
       <h2 id="extra">The extra tool I vibe-coded.</h2>
 
-      <img src="https://picsum.photos/seed/digital-workflow/1400/320" alt="Digital tools and workflow" loading="lazy" width="1400" height="320" style="width:100%;height:auto;display:block;margin:2rem 0;" />
+      <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1400&h=320&auto=format&fit=crop&q=80" alt="Digital tools and workflow" loading="lazy" width="1400" height="320" style="width:100%;height:auto;display:block;margin:2rem 0;" />
 
       <p>As the vault grows, you naturally want to extend it with custom tools. I built a small naive search engine over the vault — available both as a web UI and as a CLI tool I can hand to the LLM for larger queries. The LLM uses it when a question spans too many notes to identify manually from the index.</p>
 
       <p>This is where things get genuinely powerful: the LLM can now self-direct its own research against the vault. It uses the search tool to find relevant notes, reads them, synthesizes, and returns an answer — all without me specifying which notes to look at.</p>
 
       <!-- Highlight / dark block -->
-      <div style="background:var(--grove-ink);padding:2.5rem 2rem;margin:3rem 0;">
-        <div style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,241,232,.5);margin-bottom:.75rem;">The product hiding in this pattern</div>
-        <h2 style="font-family:var(--grove-font-display);font-size:1.6rem;font-weight:300;color:var(--grove-paper);margin:0 0 1rem;line-height:1.25;letter-spacing:.01em;">This is a raw set of scripts. Someone will build a real product from it.</h2>
+      <div style="background:var(--color-text);padding:2.5rem 2rem;margin:3rem 0;">
+        <div style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,241,232,.5);margin-bottom:.75rem;">The product hiding in this pattern</div>
+        <h2 style="font-family:var(--font-display);font-size:1.6rem;font-weight:300;color:var(--color-bg);margin:0 0 1rem;line-height:1.25;letter-spacing:.01em;">This is a raw set of scripts. Someone will build a real product from it.</h2>
         <p style="font-size:.925rem;color:rgba(244,241,232,.68);line-height:1.8;margin-bottom:1rem;">The workflow I've described is a collection of Claude Code commands, Obsidian, and a few shell scripts. It works well — but it's fragile, personal, and requires a certain tolerance for manual setup. The product version would be seamless: web clipper → automatic compile → visual vault UI → instant Q&A → rendered outputs — all as a single coherent product instead of a duct-taped pipeline.</p>
         <p style="font-size:.925rem;color:rgba(244,241,232,.68);line-height:1.8;margin-bottom:1rem;">The companies closest to this — Notion AI, Obsidian Sync, Mem.ai, Roam Research — are all attacking it from the wrong angle. They're building better note-taking apps with AI bolted on. <strong style="color:rgba(244,241,232,.92);">The right frame is inverted: it's an AI knowledge engine with a note-taking interface bolted on.</strong> The LLM is the primary worker. The human is the curator.</p>
         <p style="font-size:.925rem;color:rgba(244,241,232,.68);line-height:1.8;margin:0;">The further exploration that interests me most: synthetic data generation and fine-tuning, so the LLM eventually "knows" your vault in its weights — not just through context windows. That's when the leverage compounds into something genuinely new.</p>
       </div>
 
       <!-- Stat row -->
-      <div style="display:flex;gap:2rem;flex-wrap:wrap;border:1px solid var(--grove-rule);padding:1.5rem;margin:2rem 0;">
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;border:1px solid var(--color-border);padding:1.5rem;margin:2rem 0;">
         <div style="display:flex;flex-direction:column;gap:.2rem;">
-          <span style="font-family:var(--grove-font-display);font-size:2rem;font-weight:300;color:var(--grove-ink);line-height:1;">~270</span>
-          <span style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grove-muted);">Notes in my current vault</span>
+          <span style="font-family:var(--font-display);font-size:2rem;font-weight:300;color:var(--color-text);line-height:1;">~270</span>
+          <span style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--color-text-muted);">Notes in my current vault</span>
         </div>
         <div style="display:flex;flex-direction:column;gap:.2rem;">
-          <span style="font-family:var(--grove-font-display);font-size:2rem;font-weight:300;color:var(--grove-ink);line-height:1;">400K+</span>
-          <span style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grove-muted);">Words compiled by LLM</span>
+          <span style="font-family:var(--font-display);font-size:2rem;font-weight:300;color:var(--color-text);line-height:1;">400K+</span>
+          <span style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--color-text-muted);">Words compiled by LLM</span>
         </div>
         <div style="display:flex;flex-direction:column;gap:.2rem;">
-          <span style="font-family:var(--grove-font-display);font-size:2rem;font-weight:300;color:var(--grove-ink);line-height:1;">0</span>
-          <span style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grove-muted);">Notes written manually</span>
+          <span style="font-family:var(--font-display);font-size:2rem;font-weight:300;color:var(--color-text);line-height:1;">0</span>
+          <span style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--color-text-muted);">Notes written manually</span>
         </div>
         <div style="display:flex;flex-direction:column;gap:.2rem;">
-          <span style="font-family:var(--grove-font-display);font-size:2rem;font-weight:300;color:var(--grove-ink);line-height:1;">3</span>
-          <span style="font-family:var(--grove-font-sans);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grove-muted);">Lenses on every file</span>
+          <span style="font-family:var(--font-display);font-size:2rem;font-weight:300;color:var(--color-text);line-height:1;">3</span>
+          <span style="font-family:var(--font-body);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--color-text-muted);">Lenses on every file</span>
         </div>
       </div>
 
@@ -350,21 +350,21 @@
         <p><strong>The key insight:</strong> you're not building a better note-taking system. You're building an AI that knows what you know — and can surface connections, gaps, and opportunities you'd never find manually. The notes are a side effect. The intelligence is the product.</p>
       </div>
 
-      <div class="grove-seal" aria-hidden="true">◆</div>
+      <div class="grove-seal" aria-hidden="true"></div>
 
       <!-- Related Posts -->
       <div class="related-posts">
         <div class="related-posts__label">Read next</div>
         <div class="related-posts__grid">
           <a class="related-post-card" href="ai-trends-2026-breakthrough-idea.html">
-            <img src="https://picsum.photos/seed/ai-trends-future/400/240" alt="" width="400" height="240" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1674027444485-cec3da58eef4?w=400&h=240&auto=format&fit=crop&q=80" alt="" width="400" height="240" loading="lazy" />
             <div class="related-post-card__body">
               <span class="related-post-card__tag">AI Strategy</span>
               <div class="related-post-card__title">7 AI Trends I'm Tracking in 2026 — and the Breakthrough Nobody's Talking About</div>
             </div>
           </a>
           <a class="related-post-card" href="ai-sales-stack-2026.html">
-            <img src="https://picsum.photos/seed/ai-sales-tools/400/240" alt="" width="400" height="240" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=400&h=240&auto=format&fit=crop&q=80" alt="" width="400" height="240" loading="lazy" />
             <div class="related-post-card__body">
               <span class="related-post-card__tag">Tools</span>
               <div class="related-post-card__title">The AI Tools Replacing My Sales Stack in 2026</div>
@@ -379,25 +379,32 @@
 
 <!-- Footer -->
 <footer class="v2-footer">
+  <button class="v2-footer__scroll-up" onclick="window.scrollTo({top:0,behavior:'smooth'});" aria-label="Scroll to top">↑<br/>GO UP</button>
   <div class="v2-footer__inner">
-    <div class="v2-footer__top">
-      <div class="v2-footer__brand">Sachin Rai</div>
-      <button class="v2-footer__go-up" onclick="window.scrollTo({top:0,behavior:'smooth'})">GO UP ↑</button>
-    </div>
+    <nav class="v2-footer__nav" aria-label="Footer navigation">
+      <a href="/" class="footer__link">Essays</a>
+      <a href="/about.html" class="footer__link">About</a>
+      <a href="/archive.html" class="footer__link">Archive</a>
+      <a href="/tools.html" class="footer__link">Tools</a>
+      <a href="/resume.html" class="footer__link">Resume</a>
+      <a href="/rss.xml" class="footer__link">RSS</a>
+    </nav>
     <div class="v2-footer__newsletter">
-      <div class="v2-footer__newsletter-label">Get new essays by email</div>
-      <form class="v2-footer__form" onsubmit="handleFooterSub(event)">
-        <input type="email" class="v2-footer__input" name="email" placeholder="you@company.com" required />
-        <button type="submit" class="v2-footer__submit">Subscribe</button>
+      <div class="v2-footer__newsletter-title">Field Notes</div>
+      <p class="v2-footer__newsletter-text">One essay per week. AI infrastructure, trading systems, and what actually ships.</p>
+      <form class="v2-footer__email-form" action="https://formspree.io/f/xwvwlybd" method="POST">
+        <input class="v2-footer__email-input" type="email" name="email" placeholder="your@email.com" required />
+        <button class="v2-footer__email-submit" type="submit">Subscribe →</button>
       </form>
     </div>
-    <div class="v2-footer__bottom">
-      <span>© 2026 Sachin Rai</span>
-      <div class="v2-footer__links">
-        <a href="/privacy.html" class="v2-footer__link">Privacy</a>
-        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener" class="v2-footer__link">LinkedIn</a>
-        <a href="https://sachinai1981-web.github.io/subject-line-scorer" target="_blank" rel="noopener" class="v2-footer__link">Subject Scorer</a>
-      </div>
+  </div>
+  <div class="v2-footer__bottom">
+    <span>© 2026 Sachin Rai · Field Notes from San Francisco</span>
+    <div class="v2-footer__social">
+      <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">X ↗</a>
+      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="/privacy.html">Privacy</a>
     </div>
   </div>
 </footer>
