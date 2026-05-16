@@ -1,786 +1,956 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{analytics_storage:'denied',wait_for_update:500});if(localStorage.getItem('sr_consent')==='granted')gtag('consent','update',{analytics_storage:'granted'});</script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CVBY6GSVNZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-CVBY6GSVNZ');
-</script>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sachin Rai — Field Notes</title>
-<meta name="description" content="Field notes from the intersection of AI, enterprise sales, and trading systems. Written by Sachin Rai in San Francisco." />
-<link rel="canonical" href="https://sachinai.com/" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://sachinai.com/" />
-<meta property="og:title" content="Sachin Rai — Field Notes" />
-<meta property="og:description" content="Field notes from the intersection of AI, enterprise sales, and trading systems." />
-<meta property="og:image" content="https://sachinai.com/og-image.png" />
-<meta property="og:site_name" content="Sachin Rai" />
-<meta property="og:locale" content="en_US" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@sachinrai01" />
-<meta name="twitter:title" content="Sachin Rai — Field Notes" />
-<meta name="twitter:description" content="Field notes from the intersection of AI, enterprise sales, and trading systems." />
-<meta name="twitter:image" content="https://sachinai.com/og-image.png" />
-<link rel="alternate" type="application/rss+xml" title="Sachin Rai" href="/rss.xml" />
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23161b1f'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='13' fill='%23ffffff'>SR</text></svg>" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/grove.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-/* ── Homepage-specific layout ─────────────────────────────── */
 
-/* Cinematic full-bleed hero */
-.cin-hero {
-  position: relative;
-  height: 100vh;
-  min-height: 640px;
-  background: #161b1f;
-  overflow: hidden;
+/* ── Reset ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: auto; }
+
+:root {
+  --cream:  #f4f1eb;
+  --ink:    #171614;
+  --muted:  rgba(23,22,20,0.42);
+  --gold:   #b8a882;
+  --dark:   #0d0d0b;
+  --serif:  'Cormorant Garamond', Georgia, serif;
+  --mono:   'JetBrains Mono', 'Courier New', monospace;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--serif);
+  overflow-x: hidden;
+  cursor: default;
+}
+
+img { display: block; max-width: 100%; }
+
+/* ── NAV ───────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  padding: 28px 56px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-/* Hardware photo — absolutely placed, right-anchored */
-.cin-hero__bg {
-  position: absolute;
-  right: -2%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 62%;
-  height: 95%;
-  object-fit: contain;
-  object-position: center center;
-  opacity: 0;
-  animation: heroFadeIn 1.2s 0.3s ease forwards;
-}
-
-@keyframes heroFadeIn {
-  to { opacity: 1; }
-}
-
-/* Left-to-right gradient: dark (opaque) → transparent → nothing */
-.cin-hero__veil {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    #161b1f 0%,
-    #161b1f 30%,
-    rgba(22,27,31,0.9) 46%,
-    rgba(22,27,31,0.3) 65%,
-    transparent 80%
-  );
-  z-index: 1;
-}
-
-.cin-hero__content {
-  position: relative;
-  z-index: 2;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 80px;
-  width: 100%;
-}
-
-.cin-hero__eyebrow {
-  font-family: 'Barlow', sans-serif;
+.nav-logo {
+  font-family: var(--mono);
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-  margin-bottom: 28px;
-  display: block;
+  color: var(--ink);
+  text-decoration: none;
 }
 
-.cin-hero__title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(4rem, 6.5vw, 8.5rem);
-  font-weight: 300;
-  line-height: 0.9;
-  color: #ffffff;
-  margin-bottom: 36px;
-  letter-spacing: -0.015em;
-  max-width: 680px;
-}
+.nav-links { display: flex; gap: 36px; align-items: center; }
 
-.cin-hero__title em {
-  font-style: italic;
-  color: rgba(255,255,255,0.58);
-}
-
-.cin-hero__rule {
-  width: 48px;
-  height: 1px;
-  background: #f69368;
-  margin-bottom: 28px;
-}
-
-.cin-hero__body {
-  font-family: 'Barlow', sans-serif;
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 1.75;
-  color: rgba(255,255,255,0.55);
-  margin-bottom: 52px;
-  max-width: 380px;
-  letter-spacing: 0.02em;
-}
-
-.cin-hero__actions {
-  display: flex;
-  align-items: center;
-  gap: 36px;
-}
-
-.cin-hero__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #ffffff;
-  color: #161b1f;
-  font-family: 'Barlow', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
+.nav-link {
+  font-family: var(--mono);
+  font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 14px 28px;
+  color: var(--ink);
   text-decoration: none;
-  transition: background 0.25s, color 0.25s;
+  opacity: 0.5;
 }
+.nav-link:hover { opacity: 1; }
 
-.cin-hero__btn:hover {
-  background: #f69368;
-  color: #ffffff;
-}
-
-.cin-hero__btn--ghost {
-  background: transparent;
-  color: rgba(255,255,255,0.5);
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 13px 28px;
-}
-
-.cin-hero__btn--ghost:hover {
-  background: transparent;
-  color: rgba(255,255,255,0.9);
-  border-color: rgba(255,255,255,0.5);
-}
-
-.cin-hero__count {
-  font-family: 'Barlow', sans-serif;
+.nav-cta {
+  font-family: var(--mono);
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.28);
-}
-
-.cin-hero__caption {
-  position: absolute;
-  bottom: 28px;
-  right: 32px;
-  font-family: 'Barlow', sans-serif;
-  font-size: 9px;
-  font-weight: 300;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
-  z-index: 2;
-}
-
-@media (max-width: 900px) {
-  .cin-hero__bg {
-    right: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 70% center;
-    opacity: 0;
-    animation: heroFadeIn 1.2s 0.3s ease forwards;
-  }
-  .cin-hero__veil {
-    background: linear-gradient(
-      to right,
-      #161b1f 0%,
-      rgba(22,27,31,0.96) 45%,
-      rgba(22,27,31,0.6) 75%,
-      rgba(22,27,31,0.3) 100%
-    );
-  }
-  .cin-hero__content { padding: 0 28px; }
-  .cin-hero__title { font-size: clamp(3rem, 10vw, 5rem); }
-}
-
-@media (max-width: 560px) {
-  .cin-hero__title { font-size: 3.2rem; }
-  .cin-hero__actions { flex-direction: column; align-items: flex-start; gap: 16px; }
-}
-
-/* Bento grid */
-.bento {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: rgba(66,66,66,0.18);
-}
-
-.bento-cell {
-  background: #ffffff;
-  overflow: hidden;
-  position: relative;
-  display: block;
+  color: var(--cream);
+  background: var(--ink);
+  padding: 9px 18px;
   text-decoration: none;
-  color: inherit;
 }
+.nav-cta:hover { opacity: 0.85; }
 
-.bento-cell--dark {
-  background: #161b1f;
-}
-
-/* Lead post — full width, internal 55/45 split */
-.bento-cell--lead {
-  grid-column: 1 / -1;
+/* ── HERO — editorial split, cream left / photo right ── */
+.hero {
+  min-height: 100vh;
   display: grid;
-  grid-template-columns: 55fr 45fr;
-  min-height: 480px;
-}
-
-.bento-cell--lead .bento-img {
-  height: 100%;
-  min-height: 480px;
-}
-
-.bento-cell--lead .bento-body {
-  padding: 56px 56px 56px 56px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-left: 1px solid rgba(66,66,66,0.18);
-}
-
-/* Standard cells */
-.bento-cell--std {
-  min-height: 340px;
-  display: flex;
-  flex-direction: column;
-}
-
-.bento-cell--wide {
-  grid-column: span 2;
-}
-
-.bento-cell--tall {
-  min-height: 420px;
-}
-
-/* Image inside a bento cell */
-.bento-img {
-  width: 100%;
-  height: 240px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.bento-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  transition: transform 0.55s ease;
-}
-
-.bento-cell:hover .bento-img img {
-  transform: scale(1.04);
-}
-
-/* Body text inside a standard cell */
-.bento-body {
-  padding: 28px 28px 32px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  grid-template-columns: 52% 48%;
+  background: var(--cream);
   position: relative;
+  overflow: hidden;
 }
 
-.bento-body::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: #f69368;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-}
-
-.bento-cell:hover .bento-body::after {
-  transform: scaleX(1);
-}
-
-.bento-tag {
-  font-family: 'Barlow', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #9aa8b1;
-  margin-bottom: 12px;
-  display: block;
-}
-
-.bento-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 22px;
-  font-weight: 300;
-  line-height: 1.22;
-  color: #161b1f;
-  margin-bottom: 12px;
-  flex: 1;
-}
-
-.bento-cell--lead .bento-title {
-  font-size: clamp(1.8rem, 2.8vw, 3rem);
-  line-height: 1.1;
-  margin-bottom: 20px;
-}
-
-.bento-excerpt {
-  font-family: 'Barlow', sans-serif;
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 1.65;
-  color: #666666;
-  margin-bottom: 24px;
-}
-
-.bento-meta {
-  font-family: 'Barlow', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #bcbec0;
-  margin-top: auto;
-}
-
-.bento-arrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'Barlow', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #161b1f;
-  margin-top: 24px;
-  transition: gap 0.25s ease;
-}
-
-.bento-cell:hover .bento-arrow {
-  gap: 14px;
-}
-
-/* Subscribe panel */
-.bento-subscribe {
-  background: #161b1f;
-  padding: 28px 28px 32px;
+.hero-left {
+  padding: 140px 64px 100px 56px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
-.bento-subscribe__eyebrow {
-  font-family: 'Barlow', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
+.hero-left::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 20%; height: 60%;
+  width: 1px;
+  background: rgba(23,22,20,0.1);
+}
+
+.hero-kicker {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-  margin-bottom: 16px;
+  color: var(--gold);
+  margin-bottom: 52px;
+  opacity: 0;
 }
 
-.bento-subscribe__title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 28px;
+.hero-headline {
+  font-family: var(--serif);
+  font-size: clamp(52px, 6.5vw, 96px);
   font-weight: 300;
-  line-height: 1.15;
-  color: #ffffff;
-  margin-bottom: 12px;
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 44px;
 }
 
-.bento-subscribe__body {
-  font-family: 'Barlow', sans-serif;
-  font-size: 13px;
+.hero-headline .char { display: inline-block; }
+
+.hero-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(15px, 1.3vw, 19px);
   font-weight: 300;
-  line-height: 1.6;
-  color: rgba(255,255,255,0.52);
-  margin-bottom: 28px;
+  line-height: 1.72;
+  color: var(--muted);
+  max-width: 360px;
+  margin-bottom: 52px;
+  opacity: 0;
 }
 
-.bento-subscribe__form {
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  opacity: 0;
+  width: fit-content;
+}
+.hero-cta::after { content: '→'; font-family: serif; font-size: 16px; }
+.hero-cta:hover text-decoration: underline;
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px; left: 56px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0;
+}
+.hero-scroll::before {
+  content: '';
+  width: 36px; height: 1px;
+  background: currentColor;
+}
+
+.hero-right {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 110%;
+  top: -5%;
+  object-fit: cover;
+  object-position: center 30%;
+  will-change: transform;
+}
+
+.hero-issue {
+  position: absolute;
+  bottom: 40px; right: 20px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244,241,235,0.28);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* ── STORY — oryzo.ai scroll-story pattern ─── */
+/* 400vh scroll container; inner panel stays sticky (pinned) */
+.story-scroll { height: 400vh; position: relative; }
+
+.story-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Full-bleed photos — 3 images crossfade on scroll */
+.story-photos {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.story-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 110%;
+  top: -5%;
+  object-fit: cover;
+  object-position: center;
+  will-change: opacity, transform;
+}
+
+.sp-1 { opacity: 1; }
+.sp-2 { opacity: 0; }
+.sp-3 { opacity: 0; }
+
+/* Gradient veil — bottom-heavy so copy sits legibly */
+.story-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(13,13,11,0.88) 0%,
+    rgba(13,13,11,0.30) 45%,
+    rgba(13,13,11,0.10) 100%
+  );
+}
+
+/* Chapter copy — bottom-left editorial placement */
+.story-chapter {
+  position: absolute;
+  bottom: 13%;
+  left: 56px;
+  right: 320px;
+  z-index: 10;
+  color: var(--cream);
+  opacity: 0;
+  pointer-events: none;
+}
+.story-chapter--1 { opacity: 1; }
+
+.ch-num {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 24px;
+}
+
+.ch-headline {
+  font-family: var(--serif);
+  font-size: clamp(42px, 5.5vw, 80px);
+  font-weight: 300;
+  line-height: 1.01;
+  letter-spacing: -0.02em;
+  margin-bottom: 22px;
+}
+.ch-headline em { font-style: italic; }
+
+.ch-body {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 300;
+  line-height: 1.72;
+  color: rgba(244,241,235,0.58);
+  max-width: 440px;
+}
+
+/* Story progress — three vertical pills, bottom-right */
+.story-progress {
+  position: absolute;
+  bottom: 13%;
+  right: 56px;
+  z-index: 12;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.bento-subscribe__input {
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #ffffff;
-  font-family: 'Barlow', sans-serif;
-  font-size: 13px;
+.s-pill {
+  width: 2px;
+  height: 28px;
+  background: rgba(244,241,235,0.18);
+  border-radius: 1px;
+  position: relative;
+  overflow: hidden;
+}
+.s-pill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.35s ease;
+}
+.s-pill.active::after { transform: scaleY(1); }
+
+/* ── POSTS — cream editorial grid ─────────── */
+.posts {
+  padding: 160px 56px 140px;
+  background: var(--cream);
+}
+
+.posts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 20px;
+  margin-bottom: 64px;
+  border-bottom: 1px solid rgba(23,22,20,0.1);
+}
+
+.posts-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.posts-count {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.post-card { overflow: hidden; }
+
+.post-card-img-wrap {
+  height: 280px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: #e8e4dc;
+}
+
+.post-card-img {
+  width: 100%; height: 110%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 800ms cubic-bezier(0.16,1,0.3,1);
+  transform: scale(1.05);
+}
+.post-card:hover .post-card-img { transform: scale(1.0); }
+
+.post-card-kicker {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.post-card-title {
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.8vw, 24px);
   font-weight: 300;
-  letter-spacing: 0.04em;
-  padding: 10px 14px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.post-card-meta {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── STATEMENT — dark bg, cream word-scrub ─── */
+.statement {
+  padding: 180px 56px;
+  background: var(--dark);
+  position: relative;
+}
+
+.statement-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 52px;
+  display: block;
+}
+
+.statement-text {
+  font-family: var(--serif);
+  font-size: clamp(30px, 4.2vw, 66px);
+  font-weight: 300;
+  line-height: 1.24;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+}
+
+.statement-text .w {
+  display: inline-block;
+  margin-right: 0.2em;
+  opacity: 0.09;
+}
+.statement-text em { font-style: italic; }
+
+/* ── SUBSCRIBE ──────────────────────────────── */
+.subscribe {
+  padding: 100px 56px;
+  background: var(--cream);
+  border-top: 1px solid rgba(23,22,20,0.08);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.subscribe-headline {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.subscribe-form { display: flex; }
+
+.subscribe-input {
+  flex: 1;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid rgba(23,22,20,0.25);
+  border-right: none;
+  padding: 14px 18px;
   outline: none;
   transition: border-color 0.2s;
 }
+.subscribe-input::placeholder { color: var(--muted); }
+.subscribe-input:focus { border-color: var(--ink); }
 
-.bento-subscribe__input::placeholder { color: rgba(255,255,255,0.3); }
-.bento-subscribe__input:focus { border-color: rgba(255,255,255,0.4); }
-
-.bento-subscribe__btn {
-  background: #f69368;
-  border: none;
-  color: #ffffff;
-  font-family: 'Barlow', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  padding: 11px 20px;
-  cursor: pointer;
-  text-align: left;
-  transition: background 0.25s;
-}
-
-.bento-subscribe__btn:hover { background: #e4844c; }
-
-/* Reveal animation */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.65s ease, transform 0.65s ease;
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.reveal-delay-1 { transition-delay: 0.08s; }
-.reveal-delay-2 { transition-delay: 0.16s; }
-.reveal-delay-3 { transition-delay: 0.24s; }
-.reveal-delay-4 { transition-delay: 0.32s; }
-
-/* Section divider label */
-.section-label {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 28px 0;
-  border-top: 1px solid #424242;
-  border-bottom: 1px solid #424242;
-  margin-bottom: 1px;
-}
-
-.section-label__text {
-  font-family: 'Barlow', sans-serif;
+.subscribe-btn {
+  font-family: var(--mono);
   font-size: 10px;
-  font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #9aa8b1;
+  color: var(--cream);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 14px 24px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.subscribe-btn:hover { opacity: 0.8; }
+
+/* ── FOOTER ─────────────────────────────────── */
+.footer {
+  padding: 72px 56px 44px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+  background: var(--dark);
+  border-top: 1px solid rgba(244,241,235,0.06);
 }
 
-.section-label__line {
-  flex: 1;
-  height: 1px;
-  background: #e0e0e0;
+.footer-brand {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 10px;
 }
 
-/* Bento mobile */
-@media (max-width: 900px) {
-  .bento { grid-template-columns: 1fr 1fr; }
-
-  .bento-cell--lead {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-
-  .bento-cell--lead .bento-img {
-    height: 260px;
-    min-height: unset;
-  }
-
-  .bento-cell--lead .bento-body {
-    border-left: none;
-    border-top: 1px solid rgba(66,66,66,0.18);
-    padding: 28px;
-  }
+.footer-tagline {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244,241,235,0.28);
 }
 
-@media (max-width: 560px) {
-  .bento { grid-template-columns: 1fr; }
-  .bento-cell--wide { grid-column: span 1; }
+.footer-col-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
 }
+
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+.footer-links a {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(244,241,235,0.4);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-links a:hover { color: var(--cream); }
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  padding-top: 36px;
+  border-top: 1px solid rgba(244,241,235,0.05);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(244,241,235,0.16);
+}
+
 </style>
 </head>
 <body>
 
-<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#161b1f;color:#ffffff;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'Barlow',sans-serif;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid rgba(255,255,255,0.15);">
-  <span style="flex:1;opacity:.7;">sachinai.com uses Google Analytics to understand readership. No ads. No fingerprinting.</span>
-  <div style="display:flex;gap:.5rem;flex-shrink:0;">
-    <button onclick="srConsent('granted')" style="padding:.4rem 1.1rem;background:#ffffff;color:#161b1f;border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
-    <button onclick="srConsent('denied')" style="padding:.4rem 1.1rem;background:transparent;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.2);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
-  </div>
-</div>
-<script>
-(function(){
-  var b=document.getElementById('sr-consent');
-  if(!b)return;
-  if(!localStorage.getItem('sr_consent'))b.style.display='flex';
-  window.srConsent=function(v){
-    localStorage.setItem('sr_consent',v);
-    if(typeof gtag!=='undefined')gtag('consent','update',{analytics_storage:v});
-    b.style.display='none';
-  };
-})();
-</script>
-
-<nav class="navbar" id="navbar">
-  <div class="navbar-inner">
-    <div class="navbar-left">
-      <a href="/" class="navbar__link">Writing</a>
-      <a href="/tools.html" class="navbar__link">Tools</a>
-    </div>
-    <div class="navbar-center">
-      <a href="/" class="navbar__logo-link">◆ SACHIN RAI</a>
-    </div>
-    <div class="navbar-right">
-      <a href="/about.html" class="navbar__link">About</a>
-    </div>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo">Sachin Rai</a>
+  <div class="nav-links">
+    <a href="/posts" class="nav-link">Writing</a>
+    <a href="/about"  class="nav-link">About</a>
+    <a href="#subscribe" class="nav-cta">Subscribe</a>
   </div>
 </nav>
 
-<main id="main">
+<!-- ═══ HERO — cream left · photo right ═══ -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <p class="hero-kicker">Field Notes · San Francisco · 2026</p>
 
-  <!-- CINEMATIC HERO -->
-  <section class="cin-hero" aria-label="Hero">
-    <img class="cin-hero__bg"
-         src="/nvidia-images/L40S__nvidia-ovx-l40s-fg-cc-i5of5-d.jpg"
-         alt=""
-         aria-hidden="true"
-         loading="eager"
-         fetchpriority="high" />
-    <div class="cin-hero__veil"></div>
-    <div class="cin-hero__content">
-      <span class="cin-hero__eyebrow">Field Notes · San Francisco · 2026</span>
-      <h1 class="cin-hero__title">Building at the<br/><em>edge of inference.</em></h1>
-      <div class="cin-hero__rule"></div>
-      <p class="cin-hero__body">AI infrastructure, trading systems, and enterprise sales — written from the building side, not the bleachers.</p>
-      <div class="cin-hero__actions">
-        <a href="/archive.html" class="cin-hero__btn">Browse Essays →</a>
-        <a href="/archive.html" class="cin-hero__btn cin-hero__btn--ghost">All 15 essays</a>
-      </div>
+    <h1 class="hero-headline">
+      The machines<br>are learning.<br>So am I.
+    </h1>
+
+    <p class="hero-sub">
+      Writing at the intersection of AI, enterprise sales,
+      and trading systems. Field notes from the actual work —
+      no fluff, no hot takes.
+    </p>
+
+    <a href="/posts" class="hero-cta">Read the field notes</a>
+
+    <span class="hero-scroll">Scroll to read</span>
+  </div>
+
+  <div class="hero-right">
+    <img
+      class="hero-photo"
+      src="https://images.unsplash.com/photo-1529310399831-ed472b81d589?w=1800&q=90&auto=format&fit=crop"
+      alt="The idea" loading="eager" fetchpriority="high"
+    >
+    <p class="hero-issue">Est. 2026 · SF</p>
+  </div>
+</section>
+
+<!-- ═══ STORY SCROLL — oryzo.ai 3-chapter pinned story ═══ -->
+<!-- 400vh container; .story-sticky stays pinned while scroll plays chapters -->
+<div class="story-scroll" id="story">
+  <div class="story-sticky">
+
+    <!-- 3 full-bleed photos crossfade on scroll -->
+    <div class="story-photos">
+      <!-- Ch 1: data center / infrastructure -->
+      <img class="story-photo sp-1"
+        src="https://images.unsplash.com/photo-1682559736721-c2e77ff4c650?w=1800&q=85&auto=format&fit=crop"
+        alt="Data center cables" loading="lazy">
+      <!-- Ch 2: market data / trading -->
+      <img class="story-photo sp-2"
+        src="https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=1800&q=85&auto=format&fit=crop"
+        alt="Trading chart" loading="lazy">
+      <!-- Ch 3: code / engineering -->
+      <img class="story-photo sp-3"
+        src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1800&q=85&auto=format&fit=crop"
+        alt="Code and engineering" loading="lazy">
     </div>
-    <span class="cin-hero__caption">NVIDIA L40S OVX · 2025</span>
-  </section>
 
-  <!-- BENTO GRID -->
-  <div class="bento" id="posts">
+    <div class="story-veil"></div>
 
-    <!-- LEAD: NVIDIA Data Center Guide — full width -->
-    <a href="/posts/nvidia-data-center-guide.html" class="bento-cell bento-cell--lead reveal">
-      <div class="bento-img">
-        <img src="/nvidia-images/Blackwell_Arch__nvidia-blackwell-architecture-bm-m460-d.jpg"
-             alt="NVIDIA Blackwell Architecture" loading="lazy" />
-      </div>
-      <div class="bento-body">
-        <div>
-          <span class="bento-tag">AI Infrastructure · Sales Intelligence</span>
-          <h2 class="bento-title">The Complete NVIDIA Data Center Product Guide for 2026</h2>
-          <p class="bento-excerpt">Every GPU, NVLink switch, and networking SKU in NVIDIA's data center stack — with the sales intelligence to know which customer buys which product and why.</p>
-        </div>
-        <div>
-          <p class="bento-meta">May 15, 2026</p>
-          <span class="bento-arrow">Read essay →</span>
-        </div>
-      </div>
-    </a>
+    <!-- Chapter 1: Infrastructure -->
+    <div class="story-chapter story-chapter--1">
+      <span class="ch-num">01 — Infrastructure</span>
+      <h2 class="ch-headline">The machine room<br><em>never sleeps.</em></h2>
+      <p class="ch-body">
+        Real AI isn't ChatGPT prompts. It's data pipelines,
+        harnesses, watchdogs, and agents that run at 4am without supervision.
+      </p>
+    </div>
 
-    <!-- Row 2: 4 × standard cells -->
-    <a href="/posts/autoquant.html" class="bento-cell bento-cell--std reveal reveal-delay-1">
-      <div class="bento-img">
-        <img src="/nvidia-images/GB200__grace-blackwell-superchip-d.jpg"
-             alt="NVIDIA GB200 Grace Blackwell Superchip" loading="lazy" />
-      </div>
-      <div class="bento-body">
-        <span class="bento-tag">Markets · Trading</span>
-        <h2 class="bento-title">AutoQuant: A Bayesian Signal Grader for Options Trading</h2>
-        <p class="bento-meta">Apr 5, 2026</p>
-      </div>
-    </a>
+    <!-- Chapter 2: Markets -->
+    <div class="story-chapter story-chapter--2">
+      <span class="ch-num">02 — Markets</span>
+      <h2 class="ch-headline">Algorithms that<br><em>think before they act.</em></h2>
+      <p class="ch-body">
+        AutoQuant, SwingTrader, Bayesian graders. Six months of
+        building trading systems that make decisions I'd be scared to
+        make manually.
+      </p>
+    </div>
 
-    <a href="/posts/portfolio-monitor.html" class="bento-cell bento-cell--std reveal reveal-delay-2">
-      <div class="bento-img">
-        <img src="/nvidia-images/Hopper_Arch__hopper-arch-transformer-2c50-d.jpg"
-             alt="Hopper transformer engine" loading="lazy" />
-      </div>
-      <div class="bento-body">
-        <span class="bento-tag">AI · Automation</span>
-        <h2 class="bento-title">I Built a 5am Portfolio Monitor That Texts Me Before the Market Opens</h2>
-        <p class="bento-meta">May 10, 2026</p>
-      </div>
-    </a>
+    <!-- Chapter 3: Field Notes -->
+    <div class="story-chapter story-chapter--3">
+      <span class="ch-num">03 — Field Notes</span>
+      <h2 class="ch-headline">Every build<br><em>becomes a post.</em></h2>
+      <p class="ch-body">
+        No theory, no hot takes. Each post is a real system, a real
+        trade, a real outcome. This is what the work actually looks like.
+      </p>
+    </div>
 
-    <a href="/posts/claude-code-retrospective.html" class="bento-cell bento-cell--std reveal reveal-delay-3">
-      <div class="bento-img">
-        <img src="/nvidia-images/L40S__llm-training-inference-fg-cc-i2of4-d.jpg"
-             alt="LLM training and inference" loading="lazy" />
-      </div>
-      <div class="bento-body">
-        <span class="bento-tag">Building in Public</span>
-        <h2 class="bento-title">30 Days of Claude Code: A Retrospective</h2>
-        <p class="bento-meta">Apr 28, 2026</p>
-      </div>
-    </a>
-
-    <a href="/posts/club-winner.html" class="bento-cell bento-cell--std reveal reveal-delay-4">
-      <div class="bento-img">
-        <img src="/nvidia-images/L40S__generative-ai-fg-cc-i1of5-d.jpg"
-             alt="Generative AI" loading="lazy" />
-      </div>
-      <div class="bento-body">
-        <span class="bento-tag">Sales Intelligence</span>
-        <h2 class="bento-title">Seven Things I Did Differently to Win 7× Club</h2>
-        <p class="bento-meta">May 3, 2026</p>
-      </div>
-    </a>
-
-    <!-- Row 3: wide + standard + subscribe dark panel -->
-    <a href="/posts/obsidian-vault.html" class="bento-cell bento-cell--std bento-cell--wide reveal reveal-delay-1">
-      <div class="bento-img" style="height:300px;">
-        <img src="/nvidia-images/Vera__gpu-rack-open-d.png"
-             alt="NVIDIA Vera Rubin GPU rack" loading="lazy" style="object-position: center 20%;" />
-      </div>
-      <div class="bento-body">
-        <span class="bento-tag">Knowledge Systems</span>
-        <h2 class="bento-title">How My Obsidian Vault Became an AI-Queryable Second Brain</h2>
-        <p class="bento-meta">Apr 19, 2026</p>
-      </div>
-    </a>
-
-    <a href="/posts/ai-first-outreach.html" class="bento-cell bento-cell--std reveal reveal-delay-2">
-      <div class="bento-img">
-        <img src="/nvidia-images/Cosmos__humanoid-robot-kitchen-d.jpg"
-             alt="NVIDIA Cosmos physical AI — humanoid robot" loading="lazy" />
-      </div>
-      <div class="bento-body">
-        <span class="bento-tag">AI · Sales</span>
-        <h2 class="bento-title">Building an AI-First Outreach Pipeline from Scratch</h2>
-        <p class="bento-meta">Apr 12, 2026</p>
-      </div>
-    </a>
-
-    <!-- Subscribe dark panel -->
-    <div class="bento-cell bento-cell--std bento-cell--dark reveal reveal-delay-3">
-      <div class="bento-subscribe">
-        <p class="bento-subscribe__eyebrow">Field Notes</p>
-        <h3 class="bento-subscribe__title">One essay per week.</h3>
-        <p class="bento-subscribe__body">AI infrastructure, trading systems, and what actually ships — no content strategy, just what I'm building.</p>
-        <form class="bento-subscribe__form" action="https://formspree.io/f/xwvwlybd" method="POST">
-          <input class="bento-subscribe__input" type="email" name="email" placeholder="your@email.com" required />
-          <button class="bento-subscribe__btn" type="submit">Subscribe →</button>
-        </form>
-      </div>
+    <!-- Chapter progress pills -->
+    <div class="story-progress">
+      <div class="s-pill active" data-ch="1"></div>
+      <div class="s-pill" data-ch="2"></div>
+      <div class="s-pill" data-ch="3"></div>
     </div>
 
   </div>
+</div>
 
-  <!-- RECENT POSTS STRIP (keynote crowd image + archive link) -->
-  <section style="display:grid;grid-template-columns:1fr 1fr;min-height:380px;">
-    <div style="overflow:hidden;position:relative;">
-      <img src="/nvidia-images/GTC26__keynote-crowd.jpg"
-           alt="GTC 2026 keynote"
-           loading="lazy"
-           style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;" />
-      <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(22,27,31,0.0) 60%, rgba(22,27,31,0.7));"></div>
-    </div>
-    <div style="background:#161b1f;display:flex;flex-direction:column;justify-content:center;padding:64px 56px;">
-      <p style="font-family:'Barlow',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-bottom:20px;">Archive</p>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3vw,3.5rem);font-weight:300;line-height:1.05;color:#ffffff;margin-bottom:20px;">15 essays.<br/><em style="color:rgba(255,255,255,0.62);">All still relevant.</em></h2>
-      <p style="font-family:'Barlow',sans-serif;font-size:14px;font-weight:300;line-height:1.7;color:rgba(255,255,255,0.55);margin-bottom:40px;max-width:340px;">Every essay stays live. The archive is where the compounding happens — old posts age into context.</p>
-      <a href="/archive.html" class="v2-button v2-button--white" style="align-self:flex-start;">Browse Archive</a>
-    </div>
-  </section>
-
-</main>
-
-<footer class="v2-footer">
-  <button class="v2-footer__scroll-up" onclick="window.scrollTo({top:0,behavior:'smooth'});" aria-label="Scroll to top">↑<br/>GO UP</button>
-  <div class="v2-footer__inner">
-    <nav class="v2-footer__nav" aria-label="Footer navigation">
-      <a href="/" class="footer__link">Essays</a>
-      <a href="/about.html" class="footer__link">About</a>
-      <a href="/archive.html" class="footer__link">Archive</a>
-      <a href="/tools.html" class="footer__link">Tools</a>
-      <a href="/resume.html" class="footer__link">Resume</a>
-      <a href="/rss.xml" class="footer__link">RSS</a>
-    </nav>
-    <div class="v2-footer__newsletter">
-      <div class="v2-footer__newsletter-title">Field Notes</div>
-      <p class="v2-footer__newsletter-text">One essay per week. AI infrastructure, trading systems, and what actually ships.</p>
-      <form class="v2-footer__email-form" action="https://formspree.io/f/xwvwlybd" method="POST">
-        <input class="v2-footer__email-input" type="email" name="email" placeholder="your@email.com" required />
-        <button class="v2-footer__email-submit" type="submit">Subscribe →</button>
-      </form>
-    </div>
+<!-- ═══ POSTS — cream editorial grid ═══ -->
+<section class="posts" id="posts">
+  <div class="posts-header">
+    <span class="posts-label">Latest writing</span>
+    <span class="posts-count">06 articles — 2026</span>
   </div>
-  <div class="v2-footer__bottom">
-    <span>© 2026 Sachin Rai · Field Notes from San Francisco</span>
-    <div class="v2-footer__social">
-      <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">X ↗</a>
-      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener">GitHub ↗</a>
-      <a href="/privacy.html">Privacy</a>
-    </div>
+
+  <div class="posts-grid">
+
+    <!-- Post 1: AI Trading system -->
+    <article class="post-card">
+      <div class="post-card-img-wrap">
+        <img class="post-card-img"
+          src="https://images.unsplash.com/photo-1645226880663-81561dcab0ae?w=800&q=85&auto=format&fit=crop"
+          alt="Trading chart data" loading="lazy">
+      </div>
+      <div class="post-card-body">
+        <span class="post-card-kicker">AI Systems · May 2026</span>
+        <h3 class="post-card-title">How I built a trading agent that thinks before it acts</h3>
+        <span class="post-card-meta">8 min read</span>
+      </div>
+    </article>
+
+    <!-- Post 2: Engineering / harness architecture -->
+    <article class="post-card">
+      <div class="post-card-img-wrap">
+        <img class="post-card-img"
+          src="https://images.unsplash.com/photo-1584169417032-d34e8d805e8b?w=800&q=85&auto=format&fit=crop"
+          alt="Data center infrastructure" loading="lazy">
+      </div>
+      <div class="post-card-body">
+        <span class="post-card-kicker">Engineering · Apr 2026</span>
+        <h3 class="post-card-title">The harness is the strategy, not the model</h3>
+        <span class="post-card-meta">6 min read</span>
+      </div>
+    </article>
+
+    <!-- Post 3: Sales outreach / cold email -->
+    <article class="post-card">
+      <div class="post-card-img-wrap">
+        <img class="post-card-img"
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85&auto=format&fit=crop"
+          alt="Server room outreach" loading="lazy">
+      </div>
+      <div class="post-card-body">
+        <span class="post-card-kicker">Sales × AI · Mar 2026</span>
+        <h3 class="post-card-title">What 300 cold emails taught me about machine outreach</h3>
+        <span class="post-card-meta">5 min read</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ═══ STATEMENT — dark bg, word scrub ═══ -->
+<section class="statement" id="statement">
+  <span class="statement-label">Why I write</span>
+  <p class="statement-text">
+    <span class="w">Writing</span>
+    <span class="w">at</span>
+    <span class="w">the</span>
+    <span class="w">intersection</span>
+    <span class="w">of</span>
+    <span class="w"><em>artificial</em></span>
+    <span class="w"><em>intelligence,</em></span>
+    <span class="w">enterprise</span>
+    <span class="w">sales,</span>
+    <span class="w">and</span>
+    <span class="w">the</span>
+    <span class="w">market.</span>
+    <span class="w">Because</span>
+    <span class="w">the</span>
+    <span class="w">future</span>
+    <span class="w">doesn't</span>
+    <span class="w">wait</span>
+    <span class="w">for</span>
+    <span class="w"><em>permission.</em></span>
+  </p>
+</section>
+
+<!-- ═══ SUBSCRIBE ═══ -->
+<section class="subscribe" id="subscribe">
+  <h2 class="subscribe-headline">
+    Field notes, delivered.<br>
+    <em>No noise. No spam.</em>
+  </h2>
+  <form class="subscribe-form" onsubmit="return false">
+    <input class="subscribe-input" type="email" placeholder="your@email.com">
+    <button class="subscribe-btn">Subscribe</button>
+  </form>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div>
+    <p class="footer-brand">Sachin Rai</p>
+    <p class="footer-tagline">Field Notes · 2026</p>
+  </div>
+  <div>
+    <p class="footer-col-label">Writing</p>
+    <ul class="footer-links">
+      <li><a href="#">AI Systems</a></li>
+      <li><a href="#">Enterprise Sales</a></li>
+      <li><a href="#">Trading</a></li>
+      <li><a href="#">All posts</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-label">Projects</p>
+    <ul class="footer-links">
+      <li><a href="#">AutoQuant</a></li>
+      <li><a href="#">SwingTrader</a></li>
+      <li><a href="#">AI Agents</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-label">Connect</p>
+    <ul class="footer-links">
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">Twitter / X</a></li>
+      <li><a href="#">RSS Feed</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© Sachin Rai 2026. All rights reserved.</span>
+    <span>Built in San Francisco</span>
   </div>
 </footer>
 
-<script src="/css/grove.js"></script>
+<!-- GSAP + ScrollTrigger + SplitType -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
+
 <script>
-/* Scroll-reveal via IntersectionObserver */
-(function(){
-  var els = document.querySelectorAll('.reveal');
-  if(!els.length) return;
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.classList.add('is-visible');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  els.forEach(function(el){ io.observe(el); });
-})();
-</script>
-<script type="module">
-import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';
-function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}
-onCLS(send);onINP(send);onFCP(send);onLCP(send);onTTFB(send);
+gsap.registerPlugin(ScrollTrigger);
+
+/* ─ Nav color helpers ─────────────────────── */
+function navLight() {
+  gsap.to('.nav-logo, .nav-link', { color: '#f4f1eb', duration: 0.4 });
+  gsap.to('.nav-cta', { color: '#0d0d0b', background: '#f4f1eb', duration: 0.4 });
+}
+function navDark() {
+  gsap.to('.nav-logo, .nav-link', { color: '#171614', duration: 0.4 });
+  gsap.to('.nav-cta', { color: '#f4f1eb', background: '#171614', duration: 0.4 });
+}
+
+/* ══ HERO — character reveal on load ════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  const split = new SplitType('.hero-headline', { types: 'chars,words' });
+
+  const tl = gsap.timeline({ delay: 0.2 });
+  tl.from(split.chars, {
+      y: '110%', opacity: 0,
+      duration: 0.82, stagger: 0.022, ease: 'power3.out',
+    })
+    .to('.hero-kicker', { opacity: 1, duration: 0.55, ease: 'power2.out' }, '-=0.6')
+    .from('.hero-photo', { opacity: 0, x: 35, duration: 1.3, ease: 'power2.out' }, 0.15)
+    .to('.hero-sub',  { opacity: 1, duration: 0.65, ease: 'power2.out' }, '-=0.55')
+    .to('.hero-cta',  { opacity: 1, duration: 0.5,  ease: 'power2.out' }, '-=0.35')
+    .to('.hero-scroll', { opacity: 0.5, duration: 0.4 }, '-=0.2');
+});
+
+/* Hero photo slow parallax */
+gsap.to('.hero-photo', {
+  yPercent: 16, ease: 'none',
+  scrollTrigger: {
+    trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true,
+  }
+});
+
+/* ══ STORY SCROLL — oryzo.ai 3-chapter pattern ═════ */
+
+/* Nav flips light when dark story section enters */
+ScrollTrigger.create({
+  trigger: '#story',
+  start: 'top 60%',
+  onEnter: navLight,
+  onLeaveBack: navDark,
+});
+
+/*
+  One scrubbed timeline drives all 3 chapter transitions.
+  Timeline progress 0→1 maps to scrolling through the 400vh container.
+  ch1→ch2 crossfade at ~28-38%
+  ch2→ch3 crossfade at ~62-72%
+*/
+const storyTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: '.story-scroll',
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: 1.6,
+  }
+});
+
+storyTl
+  /* — ch1 fades out — */
+  .to('.story-chapter--1', { opacity: 0, y: -44, duration: 0.35, ease: 'power2.in' }, 0.22)
+  /* — photo 1→2 crossfade — */
+  .to('.sp-1', { opacity: 0, scale: 1.06, duration: 0.45, ease: 'power2.inOut' }, 0.20)
+  .to('.sp-2', { opacity: 1, scale: 1,    duration: 0.45, ease: 'power2.inOut' }, 0.26)
+  /* — ch2 fades in — */
+  .fromTo('.story-chapter--2',
+    { opacity: 0, y: 44 },
+    { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' },
+    0.32
+  )
+  /* progress pill 2 */
+  .to('[data-ch="2"]', { '--x': 1, duration: 0.01,
+    onStart() { activePill(2); }
+  }, 0.32)
+
+  /* — ch2 fades out — */
+  .to('.story-chapter--2', { opacity: 0, y: -44, duration: 0.35, ease: 'power2.in' }, 0.60)
+  /* — photo 2→3 crossfade — */
+  .to('.sp-2', { opacity: 0, scale: 1.06, duration: 0.45, ease: 'power2.inOut' }, 0.58)
+  .to('.sp-3', { opacity: 1, scale: 1,    duration: 0.45, ease: 'power2.inOut' }, 0.64)
+  /* — ch3 fades in — */
+  .fromTo('.story-chapter--3',
+    { opacity: 0, y: 44 },
+    { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' },
+    0.70
+  )
+  /* progress pill 3 */
+  .to('[data-ch="3"]', { '--x': 1, duration: 0.01,
+    onStart() { activePill(3); },
+    onReverseComplete() { activePill(2); }
+  }, 0.70);
+
+/* Chapter 1 reverse restore */
+storyTl.eventCallback('onReverseComplete', () => activePill(1));
+
+function activePill(n) {
+  document.querySelectorAll('.s-pill').forEach(p => p.classList.remove('active'));
+  const target = document.querySelector(`[data-ch="${n}"]`);
+  if (target) target.classList.add('active');
+}
+
+/* Subtle parallax on all story photos */
+gsap.to('.story-photo', {
+  yPercent: 10, ease: 'none',
+  scrollTrigger: {
+    trigger: '.story-scroll',
+    start: 'top top', end: 'bottom bottom',
+    scrub: true,
+  }
+});
+
+/* ══ POSTS — nav flips dark, cards stagger ══════════ */
+ScrollTrigger.create({
+  trigger: '.posts',
+  start: 'top 55%',
+  onEnter: navDark,
+  onLeaveBack: navLight,
+});
+
+gsap.fromTo('.post-card',
+  { opacity: 0, y: 52 },
+  {
+    opacity: 1, y: 0,
+    stagger: 0.15, duration: 1.05, ease: 'power3.out',
+    scrollTrigger: { trigger: '.posts-grid', start: 'top 82%' }
+  }
+);
+
+/* Posts header rule reveals */
+gsap.from('.posts-header', {
+  opacity: 0, y: 20, duration: 0.8, ease: 'power2.out',
+  scrollTrigger: { trigger: '.posts-header', start: 'top 88%' }
+});
+
+/* ══ STATEMENT — nav light, word scrub ══════════════ */
+ScrollTrigger.create({
+  trigger: '.statement',
+  start: 'top 55%',
+  onEnter: navLight,
+  onLeaveBack: navDark,
+});
+
+gsap.to('.statement-text .w', {
+  opacity: 1, stagger: 0.07, ease: 'none',
+  scrollTrigger: {
+    trigger: '.statement',
+    start: 'top 70%', end: 'bottom 28%',
+    scrub: 1.8,
+  }
+});
+
+/* ══ SUBSCRIBE — nav dark ═══════════════════════════ */
+ScrollTrigger.create({
+  trigger: '.subscribe',
+  start: 'top 55%',
+  onEnter: navDark,
+  onLeaveBack: navLight,
+});
+
 </script>
 </body>
 </html>
