@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sachin Rai — Field Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+
+/* ── Reset ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: auto; }
+
+:root {
+  --cream:  #f4f1eb;
+  --ink:    #171614;
+  --muted:  rgba(23,22,20,0.42);
+  --gold:   #b8a882;
+  --dark:   #0d0d0b;
+  --serif:  'Cormorant Garamond', Georgia, serif;
+  --mono:   'JetBrains Mono', 'Courier New', monospace;
+  --scroll-ratio: 0;
+  --page-progress: 0;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--serif);
+  overflow-x: hidden;
+  cursor: default;
+}
+
+img { display: block; max-width: 100%; }
+
+/* ── NAV ───────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  padding: 28px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-links { display: flex; gap: 36px; align-items: center; }
+
+.nav-link {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  opacity: 0.5;
+}
+.nav-link:hover { opacity: 1; }
+
+.nav-cta {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--ink);
+  padding: 9px 18px;
+  text-decoration: none;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+/* ── HERO — editorial split, cream left / photo right ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 52% 48%;
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-left {
+  padding: 140px 64px 100px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-left::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 20%; height: 60%;
+  width: 1px;
+  background: rgba(23,22,20,0.1);
+}
+
+.hero-kicker {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 52px;
+  opacity: 0;
+}
+
+.hero-headline {
+  font-family: var(--serif);
+  font-size: clamp(52px, 6.5vw, 96px);
+  font-weight: 300;
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 44px;
+}
+
+.hero-headline .char { display: inline-block; }
+.hero-headline .hw { display: inline-block; transform-origin: center; will-change: transform; }
+#hero-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+
+.hero-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(15px, 1.3vw, 19px);
+  font-weight: 300;
+  line-height: 1.72;
+  color: var(--muted);
+  max-width: 360px;
+  margin-bottom: 52px;
+  opacity: 0;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  opacity: 0;
+  width: fit-content;
+}
+.hero-cta::after { content: '→'; font-family: serif; font-size: 16px; }
+.hero-cta:hover { text-decoration: underline; }
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px; left: 56px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0;
+}
+.hero-scroll::before {
+  content: '';
+  width: 36px; height: 1px;
+  background: currentColor;
+}
+
+.hero-right {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 110%;
+  top: -5%;
+  object-fit: cover;
+  object-position: center 30%;
+  will-change: transform;
+}
+
+.hero-issue {
+  position: absolute;
+  bottom: 40px; right: 20px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244,241,235,0.28);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* ── STORY — oryzo.ai scroll-story pattern ─── */
+/* 400vh scroll container; inner panel stays sticky (pinned) */
+.story-scroll { height: 400vh; position: relative; }
+
+.story-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Full-bleed photos — 3 images crossfade on scroll */
+.story-photos {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.story-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 110%;
+  top: -5%;
+  object-fit: cover;
+  object-position: center;
+  will-change: opacity, transform;
+}
+
+.sp-1 { opacity: 1; }
+.sp-2 { opacity: 0; }
+.sp-3 { opacity: 0; }
+
+/* Gradient veil — bottom-heavy so copy sits legibly */
+.story-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(13,13,11,0.88) 0%,
+    rgba(13,13,11,0.30) 45%,
+    rgba(13,13,11,0.10) 100%
+  );
+}
+
+/* Chapter copy — bottom-left editorial placement */
+.story-chapter {
+  position: absolute;
+  bottom: 13%;
+  left: 56px;
+  right: 320px;
+  z-index: 10;
+  color: var(--cream);
+  opacity: 0;
+  pointer-events: none;
+}
+.story-chapter--1 { opacity: 1; }
+
+.ch-num {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 24px;
+}
+
+.ch-headline {
+  font-family: var(--serif);
+  font-size: clamp(42px, 5.5vw, 80px);
+  font-weight: 300;
+  line-height: 1.01;
+  letter-spacing: -0.02em;
+  margin-bottom: 22px;
+}
+.ch-headline em { font-style: italic; }
+
+.ch-body {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 300;
+  line-height: 1.72;
+  color: rgba(244,241,235,0.58);
+  max-width: 440px;
+}
+
+/* Story progress — three vertical pills, bottom-right */
+.story-progress {
+  position: absolute;
+  bottom: 13%;
+  right: 56px;
+  z-index: 12;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.s-pill {
+  width: 2px;
+  height: 28px;
+  background: rgba(244,241,235,0.18);
+  border-radius: 1px;
+  position: relative;
+  overflow: hidden;
+}
+.s-pill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.35s ease;
+}
+.s-pill.active::after { transform: scaleY(1); }
+
+/* ── POSTS — cream editorial grid ─────────── */
+.posts {
+  padding: 160px 56px 140px;
+  background: var(--cream);
+  --scroll-ratio: 1;
+}
+
+.post-card { overflow: hidden; display: block; text-decoration: none; color: inherit; cursor: pointer; opacity: calc(var(--scroll-ratio) * 1); transform: translateY(calc((1 - var(--scroll-ratio)) * 36px)); transition: opacity 0.1s, transform 0.1s; }
+
+.posts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 20px;
+  margin-bottom: 64px;
+  border-bottom: 1px solid rgba(23,22,20,0.1);
+}
+
+.posts-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.posts-count {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+/* .post-card base styles moved above with scroll-driven opacity/transform */
+
+.post-card-img-wrap {
+  height: 280px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: #e8e4dc;
+}
+
+.post-card-img {
+  width: 100%; height: 110%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 800ms cubic-bezier(0.16,1,0.3,1);
+  transform: scale(1.05);
+}
+.post-card:hover .post-card-img { transform: scale(1.0); }
+
+.post-card-kicker {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.post-card-title {
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.post-card-meta {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── STATEMENT — dark bg, cream word-scrub ─── */
+.statement {
+  padding: 180px 56px;
+  background: var(--dark);
+  position: relative;
+}
+
+/* ── STATEMENT SCENE — sticky 350vh ────────── */
+.statement-scene {
+  height: 350vh;
+  position: relative;
+}
+
+.statement-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 56px;
+  background: var(--dark);
+}
+
+.statement-progress-line {
+  position: absolute;
+  right: 56px;
+  top: 20%;
+  width: 2px;
+  height: 60%;
+  background: rgba(184,168,130,0.12);
+}
+
+.statement-progress-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--scroll-ratio,0) * 100%);
+  background: var(--gold);
+}
+
+.statement-cta {
+  display: block;
+  margin-top: 52px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.statement-cta.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── CURSOR DOT — tier 3 ────────────────────── */
+#cursor-dot {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(23,22,20,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999;
+  transform: translate(-50%,-50%);
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+  will-change: left, top;
+}
+
+#cursor-dot.hovering {
+  width: 32px;
+  height: 32px;
+  border-color: var(--ink);
+}
+
+@media (hover: none) {
+  #cursor-dot { display: none; }
+}
+
+.statement-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 52px;
+  display: block;
+}
+
+.statement-text {
+  font-family: var(--serif);
+  font-size: clamp(30px, 4.2vw, 66px);
+  font-weight: 300;
+  line-height: 1.24;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+}
+
+.statement-text .w {
+  display: inline-block;
+  margin-right: 0.2em;
+  opacity: 0.09;
+}
+.statement-text em { font-style: italic; }
+
+/* ── SUBSCRIBE ──────────────────────────────── */
+.subscribe {
+  padding: 100px 56px;
+  background: var(--cream);
+  border-top: 1px solid rgba(23,22,20,0.08);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.subscribe-headline {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.subscribe-form { display: flex; }
+
+.subscribe-input {
+  flex: 1;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid rgba(23,22,20,0.25);
+  border-right: none;
+  padding: 14px 18px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.subscribe-input::placeholder { color: var(--muted); }
+.subscribe-input:focus { border-color: var(--ink); }
+
+.subscribe-btn {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 14px 24px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.subscribe-btn:hover { opacity: 0.8; }
+
+/* ── FOOTER ─────────────────────────────────── */
+.footer {
+  padding: 72px 56px 44px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+  background: var(--dark);
+  border-top: 1px solid rgba(244,241,235,0.06);
+}
+
+.footer-brand {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 10px;
+}
+
+.footer-tagline {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244,241,235,0.28);
+}
+
+.footer-col-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+.footer-links a {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(244,241,235,0.4);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-links a:hover { color: var(--cream); }
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  padding-top: 36px;
+  border-top: 1px solid rgba(244,241,235,0.05);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(244,241,235,0.16);
+}
+/* ── SCROLL SCRUB — progress bar ────────────── */
+#sr-progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: var(--gold);
+  width: calc(var(--page-progress, 0) * 100%);
+  z-index: 1000;
+  transition: none;
+  pointer-events: none;
+}
+
+</style>
+</head>
+<body>
+<div id="sr-progress-bar"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo">Sachin Rai</a>
+  <div class="nav-links">
+    <a href="/archive.html" class="nav-link">Writing</a>
+    <a href="/about.html"  class="nav-link">About</a>
+    <a href="/tools.html"  class="nav-link">Tools</a>
+    <a href="/resume.html" class="nav-link">Resume</a>
+    <a href="#subscribe" class="nav-cta">Subscribe</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO — cream left · photo right ═══ -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <p class="hero-kicker">Field Notes · San Francisco · 2026</p>
+
+    <h1 class="hero-headline" aria-label="The machines are learning. So am I.">
+      The machines<br>are learning.<br>So am I.
+    </h1>
+
+    <p class="hero-sub">
+      Writing at the intersection of AI, enterprise sales,
+      and trading systems. Field notes from the actual work —
+      no fluff, no hot takes.
+    </p>
+
+    <a href="/archive.html" class="hero-cta">Read the field notes</a>
+
+    <span class="hero-scroll">Scroll to read</span>
+  </div>
+
+  <div class="hero-right">
+    <img
+      class="hero-photo"
+      src="https://images.unsplash.com/photo-1529310399831-ed472b81d589?w=1800&q=90&auto=format&fit=crop"
+      alt="The idea" loading="eager" fetchpriority="high"
+    >
+    <p class="hero-issue">Est. 2026 · SF</p>
+  </div>
+</section>
+
+<!-- ═══ STORY SCROLL — oryzo.ai 3-chapter pinned story ═══ -->
+<!-- 400vh container; .story-sticky stays pinned while scroll plays chapters -->
+<div class="story-scroll" id="story">
+  <div class="story-sticky">
+
+    <!-- 3 full-bleed photos crossfade on scroll -->
+    <div class="story-photos">
+      <!-- Ch 1: data center / infrastructure -->
+      <img class="story-photo sp-1"
+        src="https://images.unsplash.com/photo-1682559736721-c2e77ff4c650?w=1800&q=85&auto=format&fit=crop"
+        alt="Data center cables" loading="lazy">
+      <!-- Ch 2: market data / trading -->
+      <img class="story-photo sp-2"
+        src="https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=1800&q=85&auto=format&fit=crop"
+        alt="Trading chart" loading="lazy">
+      <!-- Ch 3: code / engineering -->
+      <img class="story-photo sp-3"
+        src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1800&q=85&auto=format&fit=crop"
+        alt="Code and engineering" loading="lazy">
+    </div>
+
+    <div class="story-veil"></div>
+
+    <!-- Chapter 1: Infrastructure -->
+    <div class="story-chapter story-chapter--1">
+      <span class="ch-num">01 — Infrastructure</span>
+      <h2 class="ch-headline">The machine room<br><em>never sleeps.</em></h2>
+      <p class="ch-body">
+        Real AI isn't ChatGPT prompts. It's data pipelines,
+        harnesses, watchdogs, and agents that run at 4am without supervision.
+      </p>
+    </div>
+
+    <!-- Chapter 2: Markets -->
+    <div class="story-chapter story-chapter--2">
+      <span class="ch-num">02 — Markets</span>
+      <h2 class="ch-headline">Algorithms that<br><em>think before they act.</em></h2>
+      <p class="ch-body">
+        AutoQuant, SwingTrader, Bayesian graders. Six months of
+        building trading systems that make decisions I'd be scared to
+        make manually.
+      </p>
+    </div>
+
+    <!-- Chapter 3: Field Notes -->
+    <div class="story-chapter story-chapter--3">
+      <span class="ch-num">03 — Field Notes</span>
+      <h2 class="ch-headline">Every build<br><em>becomes a post.</em></h2>
+      <p class="ch-body">
+        No theory, no hot takes. Each post is a real system, a real
+        trade, a real outcome. This is what the work actually looks like.
+      </p>
+    </div>
+
+    <!-- Chapter progress pills -->
+    <div class="story-progress">
+      <div class="s-pill active" data-ch="1"></div>
+      <div class="s-pill" data-ch="2"></div>
+      <div class="s-pill" data-ch="3"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ POSTS — cream editorial grid ═══ -->
+<section class="posts" id="posts">
+  <div class="posts-header">
+    <span class="posts-label">Latest writing</span>
+    <span class="posts-count">03 articles — 2026</span>
+  </div>
+
+  <div class="posts-grid">
+
+    <!-- Post 1: AI Trading system -->
+    <a class="post-card" href="/posts/autoquant.html">
+      <div class="post-card-img-wrap">
+        <img class="post-card-img"
+          src="https://images.unsplash.com/photo-1645226880663-81561dcab0ae?w=800&q=85&auto=format&fit=crop"
+          alt="Trading chart data" loading="lazy">
+      </div>
+      <div class="post-card-body">
+        <span class="post-card-kicker">AI Systems · May 2026</span>
+        <h3 class="post-card-title">How I built a trading agent that thinks before it acts</h3>
+        <span class="post-card-meta">8 min read</span>
+      </div>
+    </a>
+
+    <!-- Post 2: Engineering / harness architecture -->
+    <a class="post-card" href="/posts/claude-code-retrospective.html">
+      <div class="post-card-img-wrap">
+        <img class="post-card-img"
+          src="https://images.unsplash.com/photo-1584169417032-d34e8d805e8b?w=800&q=85&auto=format&fit=crop"
+          alt="Data center infrastructure" loading="lazy">
+      </div>
+      <div class="post-card-body">
+        <span class="post-card-kicker">Engineering · Apr 2026</span>
+        <h3 class="post-card-title">The harness is the strategy, not the model</h3>
+        <span class="post-card-meta">6 min read</span>
+      </div>
+    </a>
+
+    <!-- Post 3: Sales outreach / cold email -->
+    <a class="post-card" href="/posts/ai-first-outreach.html">
+      <div class="post-card-img-wrap">
+        <img class="post-card-img"
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85&auto=format&fit=crop"
+          alt="Server room outreach" loading="lazy">
+      </div>
+      <div class="post-card-body">
+        <span class="post-card-kicker">Sales × AI · Mar 2026</span>
+        <h3 class="post-card-title">What 300 cold emails taught me about machine outreach</h3>
+        <span class="post-card-meta">5 min read</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ═══ STATEMENT — dark bg, word scrub, sticky scene ═══ -->
+<div class="statement-scene" id="statement-scene">
+  <div class="statement-sticky" id="statement">
+    <div class="statement-progress-line"></div>
+    <span class="statement-label">Why I write</span>
+    <p class="statement-text">
+      <span class="w">Writing</span>
+      <span class="w">at</span>
+      <span class="w">the</span>
+      <span class="w">intersection</span>
+      <span class="w">of</span>
+      <span class="w"><em>artificial</em></span>
+      <span class="w"><em>intelligence,</em></span>
+      <span class="w">enterprise</span>
+      <span class="w">sales,</span>
+      <span class="w">and</span>
+      <span class="w">the</span>
+      <span class="w">market.</span>
+      <span class="w">Because</span>
+      <span class="w">the</span>
+      <span class="w">future</span>
+      <span class="w">doesn't</span>
+      <span class="w">wait</span>
+      <span class="w">for</span>
+      <span class="w"><em>permission.</em></span>
+    </p>
+    <a class="statement-cta" href="/archive.html">Read the field notes →</a>
+  </div>
+</div>
+
+<!-- ═══ SUBSCRIBE ═══ -->
+<section class="subscribe" id="subscribe">
+  <h2 class="subscribe-headline">
+    Field notes, delivered.<br>
+    <em>No noise. No spam.</em>
+  </h2>
+  <form class="subscribe-form" id="home-subscribe-form">
+    <input class="subscribe-input" type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+    <button class="subscribe-btn" type="submit" id="home-subscribe-btn">Subscribe</button>
+  </form>
+  <p class="subscribe-msg" id="home-subscribe-msg" style="display:none;margin-top:.75rem;font-size:.8rem;letter-spacing:.12em;"></p>
+  <script>
+  (function(){
+    var form = document.getElementById('home-subscribe-form');
+    var btn  = document.getElementById('home-subscribe-btn');
+    var msg  = document.getElementById('home-subscribe-msg');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      btn.textContent = '...';
+      btn.disabled = true;
+      fetch('https://formspree.io/f/xwvwlybd', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function(r){ return r.json(); }).then(function(d){
+        if(d.ok){
+          form.style.display = 'none';
+          msg.style.display = 'block';
+          msg.style.color = 'var(--ink)';
+          msg.textContent = 'You\'re in. First note coming soon.';
+        } else {
+          btn.textContent = 'Subscribe';
+          btn.disabled = false;
+          msg.style.display = 'block';
+          msg.style.color = '#c0392b';
+          msg.textContent = 'Something went wrong — try again.';
+        }
+      }).catch(function(){
+        btn.textContent = 'Subscribe';
+        btn.disabled = false;
+        msg.style.display = 'block';
+        msg.style.color = '#c0392b';
+        msg.textContent = 'Network error — try again.';
+      });
+    });
+  })();
+  </script>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div>
+    <p class="footer-brand">Sachin Rai</p>
+    <p class="footer-tagline">Field Notes · 2026</p>
+  </div>
+  <div>
+    <p class="footer-col-label">Writing</p>
+    <ul class="footer-links">
+      <li><a href="/archive.html?filter=ai">AI Systems</a></li>
+      <li><a href="/archive.html?filter=strategy">Enterprise Sales</a></li>
+      <li><a href="/archive.html?filter=engineering">Trading</a></li>
+      <li><a href="/archive.html">All posts</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-label">Projects</p>
+    <ul class="footer-links">
+      <li><a href="/tools.html">AutoQuant</a></li>
+      <li><a href="/tools.html">SwingTrader</a></li>
+      <li><a href="/tools.html">AI Agents</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-label">Connect</p>
+    <ul class="footer-links">
+      <li><a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://x.com/sachinrai01" target="_blank" rel="noopener">Twitter / X</a></li>
+      <li><a href="/rss.xml">RSS Feed</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© Sachin Rai 2026. All rights reserved.</span>
+    <span>Built in San Francisco</span>
+  </div>
+</footer>
+
+<!-- Matter.js physics engine -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<!-- GSAP + ScrollTrigger + SplitType -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ─ Nav color helpers ─────────────────────── */
+function navLight() {
+  gsap.to('.nav-logo, .nav-link', { color: '#f4f1eb', duration: 0.4 });
+  gsap.to('.nav-cta', { color: '#0d0d0b', background: '#f4f1eb', duration: 0.4 });
+}
+function navDark() {
+  gsap.to('.nav-logo, .nav-link', { color: '#171614', duration: 0.4 });
+  gsap.to('.nav-cta', { color: '#f4f1eb', background: '#171614', duration: 0.4 });
+}
+
+/* ══ HERO — matter.js physics word drop on load ═════ */
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ── shared hero timeline (runs after physics or on mobile) ── */
+  function runHeroTimeline() {
+    const tl = gsap.timeline({ delay: 0.1 });
+    tl.to('.hero-kicker', { opacity: 1, duration: 0.55, ease: 'power2.out' })
+      .from('.hero-photo', { opacity: 0, x: 35, duration: 1.3, ease: 'power2.out' }, '-=0.4')
+      .to('.hero-sub',  { opacity: 1, duration: 0.65, ease: 'power2.out' }, '-=0.55')
+      .to('.hero-cta',  { opacity: 1, duration: 0.5,  ease: 'power2.out' }, '-=0.35')
+      .to('.hero-scroll', { opacity: 0.5, duration: 0.4 }, '-=0.2');
+  }
+
+  /* ── mobile: simple word reveal ── */
+  if (window.innerWidth < 768) {
+    const h1 = document.querySelector('.hero-headline');
+    const words = h1.textContent.trim().split(/\s+/);
+    h1.innerHTML = words.map(w => `<span class="hw">${w}</span>`).join(' ');
+    gsap.from('.hero-headline .hw', {
+      y: 30, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out',
+      onComplete: runHeroTimeline
+    });
+    return;
+  }
+
+  /* ── desktop: matter.js physics ── */
+  const { Engine, Render, Runner, Bodies, Body, World, Events } = Matter;
+
+  const heroLeft = document.querySelector('.hero-left');
+  const h1 = document.querySelector('.hero-headline');
+
+  /* 1. Split h1 into word spans, preserve line structure */
+  const rawWords = ['The', 'machines', 'are', 'learning.', 'So', 'am', 'I.'];
+  h1.innerHTML = rawWords.map(w => `<span class="hw">${w}</span>`).join(' ');
+
+  /* 2. Measure natural positions BEFORE hiding */
+  const heroLeftRect = heroLeft.getBoundingClientRect();
+  const wordSpans = Array.from(h1.querySelectorAll('.hw'));
+  const originalRects = wordSpans.map(span => {
+    const r = span.getBoundingClientRect();
+    return {
+      left: r.left - heroLeftRect.left,
+      top:  r.top  - heroLeftRect.top,
+      width:  r.width,
+      height: r.height,
+      cx: r.left - heroLeftRect.left + r.width  / 2,
+      cy: r.top  - heroLeftRect.top  + r.height / 2,
+    };
+  });
+
+  /* h1 bottom for ground plane */
+  const h1Rect = h1.getBoundingClientRect();
+  const groundY = (h1Rect.bottom - heroLeftRect.top) + 10;
+
+  /* 3. Hide h1 text, make spans absolutely positioned */
+  h1.style.visibility = 'hidden';
+  h1.style.position = 'relative';
+  wordSpans.forEach((span, i) => {
+    span.style.position  = 'absolute';
+    span.style.left      = originalRects[i].left + 'px';
+    span.style.top       = originalRects[i].top  + 'px';
+    span.style.opacity   = '0';
+    span.style.color     = 'var(--ink)';
+    span.style.whiteSpace = 'nowrap';
+    span.style.zIndex    = '10';
+  });
+  h1.style.visibility = 'visible'; /* show container but spans start hidden */
+
+  /* 4. Canvas */
+  const W = heroLeft.clientWidth;
+  const H = heroLeft.clientHeight;
+  const canvas = document.createElement('canvas');
+  canvas.id = 'hero-canvas';
+  canvas.width  = W;
+  canvas.height = H;
+  heroLeft.appendChild(canvas);
+
+  /* 5. Matter.js setup */
+  const engine = Engine.create({ gravity: { y: 1.4 } });
+  const render = Render.create({
+    canvas,
+    engine,
+    options: {
+      width: W,
+      height: H,
+      wireframes: false,
+      background: 'transparent',
+    }
+  });
+  const runner = Runner.create();
+
+  /* 6. Physics bodies for each word */
+  const bodies = wordSpans.map((span, i) => {
+    const rect = originalRects[i];
+    const startY = rect.cy - 400 + (i * -60);
+    const b = Bodies.rectangle(rect.cx, startY, rect.width + 8, rect.height + 4, {
+      restitution: 0.3,
+      frictionAir: 0.035,
+      friction: 0.5,
+      angle: (Math.random() - 0.5) * 0.4,
+      render: { visible: false },
+    });
+    return b;
+  });
+
+  /* 7. Ground, walls */
+  const ground = Bodies.rectangle(W / 2, groundY + 25, W * 2, 50, {
+    isStatic: true, render: { visible: false }
+  });
+  const wallL = Bodies.rectangle(-10, H / 2, 20, H * 4, {
+    isStatic: true, render: { visible: false }
+  });
+  const wallR = Bodies.rectangle(W + 10, H / 2, 20, H * 4, {
+    isStatic: true, render: { visible: false }
+  });
+
+  World.add(engine.world, [...bodies, ground, wallL, wallR]);
+
+  /* 8. Show word spans, sync DOM to physics each frame */
+  wordSpans.forEach(span => { span.style.opacity = '1'; });
+
+  Events.on(engine, 'afterUpdate', () => {
+    bodies.forEach((b, i) => {
+      const span = wordSpans[i];
+      const hw = span.offsetWidth;
+      const hh = span.offsetHeight;
+      span.style.left      = (b.position.x - hw / 2) + 'px';
+      span.style.top       = (b.position.y - hh / 2) + 'px';
+      span.style.transform = `rotate(${b.angle}rad)`;
+    });
+  });
+
+  Runner.run(runner, engine);
+  Render.run(render);
+
+  /* 9. After 1600ms freeze bodies */
+  setTimeout(() => {
+    bodies.forEach(b => Body.setStatic(b, true));
+  }, 1600);
+
+  /* 10. After 1800ms GSAP each span back to natural position */
+  setTimeout(() => {
+    const settlePromises = wordSpans.map((span, i) => {
+      return new Promise(resolve => {
+        gsap.to(span, {
+          left:     originalRects[i].left + 'px',
+          top:      originalRects[i].top  + 'px',
+          rotation: 0,
+          duration: 0.55,
+          delay:    i * 0.05,
+          ease:     'power2.inOut',
+          onComplete: resolve,
+        });
+      });
+    });
+
+    /* After last span settles: clean up and run hero timeline */
+    Promise.all(settlePromises).then(() => {
+      /* Destroy physics */
+      Render.stop(render);
+      Runner.stop(runner);
+      Engine.clear(engine);
+      canvas.remove();
+
+      /* Reset h1 to normal flow */
+      wordSpans.forEach(span => {
+        span.style.position  = '';
+        span.style.left      = '';
+        span.style.top       = '';
+        span.style.transform = '';
+        span.style.zIndex    = '';
+        span.style.whiteSpace = '';
+      });
+      h1.style.position = '';
+
+      runHeroTimeline();
+    });
+  }, 1800);
+
+  /* Safety net: if physics/GSAP stalls for any reason, ensure hero is visible after 4s */
+  setTimeout(() => {
+    document.querySelectorAll('.hero-kicker, .hero-sub, .hero-cta, .hero-scroll').forEach(el => {
+      if (parseFloat(getComputedStyle(el).opacity) < 0.5) {
+        el.style.opacity = '1';
+        el.style.transition = 'opacity 0.6s';
+      }
+    });
+  }, 4000);
+});
+
+/* Hero photo slow parallax */
+gsap.to('.hero-photo', {
+  yPercent: 16, ease: 'none',
+  scrollTrigger: {
+    trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true,
+  }
+});
+
+/* ══ STORY SCROLL — oryzo.ai 3-chapter pattern ═════ */
+
+/* Nav flips light when dark story section enters */
+ScrollTrigger.create({
+  trigger: '#story',
+  start: 'top 60%',
+  onEnter: navLight,
+  onLeaveBack: navDark,
+});
+
+/*
+  One scrubbed timeline drives all 3 chapter transitions.
+  Timeline progress 0→1 maps to scrolling through the 400vh container.
+  ch1→ch2 crossfade at ~28-38%
+  ch2→ch3 crossfade at ~62-72%
+*/
+const storyTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: '.story-scroll',
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: 1.6,
+  }
+});
+
+storyTl
+  /* — ch1 fades out — */
+  .to('.story-chapter--1', { opacity: 0, y: -44, duration: 0.35, ease: 'power2.in' }, 0.22)
+  /* — photo 1→2 crossfade — */
+  .to('.sp-1', { opacity: 0, scale: 1.06, duration: 0.45, ease: 'power2.inOut' }, 0.20)
+  .to('.sp-2', { opacity: 1, scale: 1,    duration: 0.45, ease: 'power2.inOut' }, 0.26)
+  /* — ch2 fades in — */
+  .fromTo('.story-chapter--2',
+    { opacity: 0, y: 44 },
+    { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' },
+    0.32
+  )
+  /* progress pill 2 */
+  .to('[data-ch="2"]', { '--x': 1, duration: 0.01,
+    onStart() { activePill(2); }
+  }, 0.32)
+
+  /* — ch2 fades out — */
+  .to('.story-chapter--2', { opacity: 0, y: -44, duration: 0.35, ease: 'power2.in' }, 0.60)
+  /* — photo 2→3 crossfade — */
+  .to('.sp-2', { opacity: 0, scale: 1.06, duration: 0.45, ease: 'power2.inOut' }, 0.58)
+  .to('.sp-3', { opacity: 1, scale: 1,    duration: 0.45, ease: 'power2.inOut' }, 0.64)
+  /* — ch3 fades in — */
+  .fromTo('.story-chapter--3',
+    { opacity: 0, y: 44 },
+    { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' },
+    0.70
+  )
+  /* progress pill 3 */
+  .to('[data-ch="3"]', { '--x': 1, duration: 0.01,
+    onStart() { activePill(3); },
+    onReverseComplete() { activePill(2); }
+  }, 0.70);
+
+/* Chapter 1 reverse restore */
+storyTl.eventCallback('onReverseComplete', () => activePill(1));
+
+function activePill(n) {
+  document.querySelectorAll('.s-pill').forEach(p => p.classList.remove('active'));
+  const target = document.querySelector(`[data-ch="${n}"]`);
+  if (target) target.classList.add('active');
+}
+
+/* Subtle parallax on all story photos */
+gsap.to('.story-photo', {
+  yPercent: 10, ease: 'none',
+  scrollTrigger: {
+    trigger: '.story-scroll',
+    start: 'top top', end: 'bottom bottom',
+    scrub: true,
+  }
+});
+
+/* ══ POSTS — nav flips dark, cards stagger ══════════ */
+ScrollTrigger.create({
+  trigger: '.posts',
+  start: 'top 55%',
+  onEnter: navDark,
+  onLeaveBack: navLight,
+});
+
+/* post-card and posts-header reveals handled by --scroll-ratio scrubber below */
+
+/* ══ STATEMENT — nav light, word scrub ══════════════ */
+ScrollTrigger.create({
+  trigger: '.statement-scene',
+  start: 'top 55%',
+  onEnter: navLight,
+  onLeaveBack: navDark,
+});
+
+gsap.to('.statement-text .w', {
+  opacity: 1, stagger: 0.07, ease: 'none',
+  scrollTrigger: {
+    trigger: '.statement-scene',
+    start: 'top 20%', end: 'bottom 70%',
+    scrub: 1.8,
+  }
+});
+
+/* ══ SUBSCRIBE — nav dark ═══════════════════════════ */
+ScrollTrigger.create({
+  trigger: '.subscribe',
+  start: 'top 55%',
+  onEnter: navDark,
+  onLeaveBack: navLight,
+});
+
+/* ══ SCROLL SCRUBBING ENGINE — Tier 1 ══════════════════════════════
+   Per-frame RAF loop. Reads window.scrollY, lerps to smoothY,
+   computes --scroll-ratio for each section and --page-progress globally.
+   No GSAP dependency. Pure momentum, no snap.
+*/
+(function () {
+  'use strict';
+
+  // ── helpers ────────────────────────────────────────────────────────
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+  function fit(v, i0, i1, o0, o1) {
+    if (i1 === i0) return o0;
+    var t = clamp((v - i0) / (i1 - i0), 0, 1);
+    return o0 + t * (o1 - o0);
+  }
+
+  // ── state ──────────────────────────────────────────────────────────
+  var smoothY = window.scrollY || 0;
+  var targetY = smoothY;
+
+  // ── element refs ──────────────────────────────────────────────────
+  var posts = document.getElementById('posts');
+  var stmt  = document.getElementById('statement');
+  var docEl = document.documentElement;
+
+  // ── RAF loop ──────────────────────────────────────────────────────
+  function tick() {
+    targetY = window.scrollY;
+    smoothY = lerp(smoothY, targetY, 0.092);
+
+    var vh   = window.innerHeight;
+    var docH = document.body.scrollHeight;
+
+    // — #posts section —
+    if (posts) {
+      var pTop   = posts.offsetTop;
+      var pRatio = fit(smoothY, pTop - vh, pTop + posts.offsetHeight * 0.5, 0, 1);
+      posts.style.setProperty('--scroll-ratio', pRatio);
+    }
+
+    // — #statement section —
+    if (stmt) {
+      var sTop   = stmt.offsetTop;
+      var sRatio = fit(smoothY, sTop - vh * 0.8, sTop + stmt.offsetHeight * 0.6, 0, 1);
+      stmt.style.setProperty('--scroll-ratio', sRatio);
+    }
+
+    // — global page progress bar —
+    var progress = docH > vh ? smoothY / (docH - vh) : 0;
+    docEl.style.setProperty('--page-progress', clamp(progress, 0, 1));
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+})();
+
+</script>
+
+<!-- Tier 3: Cursor lerp + velocity skew + statement CTA trigger -->
+<script>
+(function() {
+
+  /* ── Custom cursor dot ───────────────────────── */
+  var dot = document.createElement('div');
+  dot.id = 'cursor-dot';
+  document.body.appendChild(dot);
+
+  var mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  var cx = mx, cy = my;
+
+  window.addEventListener('mousemove', function(e) {
+    mx = e.clientX;
+    my = e.clientY;
+  });
+
+  /* Hover state on interactive elements */
+  document.querySelectorAll('a[href], button').forEach(function(el) {
+    el.addEventListener('mouseenter', function() { dot.classList.add('hovering'); });
+    el.addEventListener('mouseleave', function() { dot.classList.remove('hovering'); });
+  });
+
+  /* ── Velocity-based skew on .story-photo ────── */
+  var prevScrollY = window.scrollY;
+  var skewVel = 0;
+
+  /* ── RAF loop: lerp cursor + apply skew ─────── */
+  function loop() {
+    /* lerp cursor */
+    cx += (mx - cx) * 0.12;
+    cy += (my - cy) * 0.12;
+    dot.style.left = cx + 'px';
+    dot.style.top  = cy + 'px';
+
+    /* scroll velocity for skew */
+    var rawVel = (window.scrollY - prevScrollY) * 0.015;
+    prevScrollY = window.scrollY;
+    skewVel += (rawVel - skewVel) * 0.18;
+
+    var storyPhotos = document.querySelectorAll('.story-photo');
+    storyPhotos.forEach(function(img) {
+      /* preserve existing transform from GSAP where possible; apply additive skewY */
+      var base = img.style.transform || '';
+      /* strip any previous skewY we injected */
+      base = base.replace(/\s*skewY\([^)]*\)/g, '');
+      img.style.transform = base + ' skewY(' + (skewVel * 0.5) + 'deg)';
+    });
+
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+  /* ── Statement progress line scroll ratio ───── */
+  var scene = document.getElementById('statement-scene');
+  var progressLine = document.querySelector('.statement-progress-line');
+
+  if (scene && progressLine) {
+    window.addEventListener('scroll', function() {
+      var rect = scene.getBoundingClientRect();
+      var total = scene.offsetHeight - window.innerHeight;
+      var scrolled = -rect.top;
+      var ratio = Math.max(0, Math.min(1, scrolled / total));
+      progressLine.style.setProperty('--scroll-ratio', ratio);
+    }, { passive: true });
+  }
+
+  /* ── Statement CTA visibility trigger ───────── */
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.create({
+      trigger: '.statement-scene',
+      start: 'top+=80% center',
+      onEnter: function() {
+        var cta = document.querySelector('.statement-cta');
+        if (cta) cta.classList.add('visible');
+      },
+      onLeaveBack: function() {
+        var cta = document.querySelector('.statement-cta');
+        if (cta) cta.classList.remove('visible');
+      }
+    });
+  }
+
+})();
+</script>
+</body>
+</html>
