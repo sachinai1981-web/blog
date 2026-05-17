@@ -21,6 +21,8 @@ html { scroll-behavior: auto; }
   --dark:   #0d0d0b;
   --serif:  'Cormorant Garamond', Georgia, serif;
   --mono:   'JetBrains Mono', 'Courier New', monospace;
+  --scroll-ratio: 0;
+  --page-progress: 0;
 }
 
 body {
@@ -126,6 +128,8 @@ img { display: block; max-width: 100%; }
 }
 
 .hero-headline .char { display: inline-block; }
+.hero-headline .hw { display: inline-block; transform-origin: center; will-change: transform; }
+#hero-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
 
 .hero-sub {
   font-family: var(--serif);
@@ -323,7 +327,10 @@ img { display: block; max-width: 100%; }
 .posts {
   padding: 160px 56px 140px;
   background: var(--cream);
+  --scroll-ratio: 0;
 }
+
+.post-card { overflow: hidden; display: block; text-decoration: none; color: inherit; cursor: pointer; opacity: calc(var(--scroll-ratio) * 1); transform: translateY(calc((1 - var(--scroll-ratio)) * 36px)); transition: opacity 0.1s, transform 0.1s; }
 
 .posts-header {
   display: flex;
@@ -355,7 +362,7 @@ img { display: block; max-width: 100%; }
   gap: 40px;
 }
 
-.post-card { overflow: hidden; display: block; text-decoration: none; color: inherit; cursor: pointer; }
+/* .post-card base styles moved above with scroll-driven opacity/transform */
 
 .post-card-img-wrap {
   height: 280px;
@@ -405,6 +412,86 @@ img { display: block; max-width: 100%; }
   padding: 180px 56px;
   background: var(--dark);
   position: relative;
+}
+
+/* ── STATEMENT SCENE — sticky 350vh ────────── */
+.statement-scene {
+  height: 350vh;
+  position: relative;
+}
+
+.statement-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 56px;
+  background: var(--dark);
+}
+
+.statement-progress-line {
+  position: absolute;
+  right: 56px;
+  top: 20%;
+  width: 2px;
+  height: 60%;
+  background: rgba(184,168,130,0.12);
+}
+
+.statement-progress-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--scroll-ratio,0) * 100%);
+  background: var(--gold);
+}
+
+.statement-cta {
+  display: block;
+  margin-top: 52px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.statement-cta.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── CURSOR DOT — tier 3 ────────────────────── */
+#cursor-dot {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(23,22,20,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999;
+  transform: translate(-50%,-50%);
+  transition: width 0.2s, height 0.2s, border-color 0.2s;
+  will-change: left, top;
+}
+
+#cursor-dot.hovering {
+  width: 32px;
+  height: 32px;
+  border-color: var(--ink);
+}
+
+@media (hover: none) {
+  #cursor-dot { display: none; }
 }
 
 .statement-label {
@@ -545,10 +632,22 @@ img { display: block; max-width: 100%; }
   text-transform: uppercase;
   color: rgba(244,241,235,0.16);
 }
+/* ── SCROLL SCRUB — progress bar ────────────── */
+#sr-progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: var(--gold);
+  width: calc(var(--page-progress, 0) * 100%);
+  z-index: 1000;
+  transition: none;
+  pointer-events: none;
+}
 
 </style>
 </head>
 <body>
+<div id="sr-progress-bar"></div>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
@@ -711,31 +810,35 @@ img { display: block; max-width: 100%; }
   </div>
 </section>
 
-<!-- ═══ STATEMENT — dark bg, word scrub ═══ -->
-<section class="statement" id="statement">
-  <span class="statement-label">Why I write</span>
-  <p class="statement-text">
-    <span class="w">Writing</span>
-    <span class="w">at</span>
-    <span class="w">the</span>
-    <span class="w">intersection</span>
-    <span class="w">of</span>
-    <span class="w"><em>artificial</em></span>
-    <span class="w"><em>intelligence,</em></span>
-    <span class="w">enterprise</span>
-    <span class="w">sales,</span>
-    <span class="w">and</span>
-    <span class="w">the</span>
-    <span class="w">market.</span>
-    <span class="w">Because</span>
-    <span class="w">the</span>
-    <span class="w">future</span>
-    <span class="w">doesn't</span>
-    <span class="w">wait</span>
-    <span class="w">for</span>
-    <span class="w"><em>permission.</em></span>
-  </p>
-</section>
+<!-- ═══ STATEMENT — dark bg, word scrub, sticky scene ═══ -->
+<div class="statement-scene" id="statement-scene">
+  <div class="statement-sticky" id="statement">
+    <div class="statement-progress-line"></div>
+    <span class="statement-label">Why I write</span>
+    <p class="statement-text">
+      <span class="w">Writing</span>
+      <span class="w">at</span>
+      <span class="w">the</span>
+      <span class="w">intersection</span>
+      <span class="w">of</span>
+      <span class="w"><em>artificial</em></span>
+      <span class="w"><em>intelligence,</em></span>
+      <span class="w">enterprise</span>
+      <span class="w">sales,</span>
+      <span class="w">and</span>
+      <span class="w">the</span>
+      <span class="w">market.</span>
+      <span class="w">Because</span>
+      <span class="w">the</span>
+      <span class="w">future</span>
+      <span class="w">doesn't</span>
+      <span class="w">wait</span>
+      <span class="w">for</span>
+      <span class="w"><em>permission.</em></span>
+    </p>
+    <a class="statement-cta" href="/archive.html">Read the field notes →</a>
+  </div>
+</div>
 
 <!-- ═══ SUBSCRIBE ═══ -->
 <section class="subscribe" id="subscribe">
@@ -823,6 +926,8 @@ img { display: block; max-width: 100%; }
   </div>
 </footer>
 
+<!-- Matter.js physics engine -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
 <!-- GSAP + ScrollTrigger + SplitType -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
@@ -841,20 +946,184 @@ function navDark() {
   gsap.to('.nav-cta', { color: '#f4f1eb', background: '#171614', duration: 0.4 });
 }
 
-/* ══ HERO — character reveal on load ════════════════ */
+/* ══ HERO — matter.js physics word drop on load ═════ */
 document.addEventListener('DOMContentLoaded', () => {
-  const split = new SplitType('.hero-headline', { types: 'chars,words' });
 
-  const tl = gsap.timeline({ delay: 0.2 });
-  tl.from(split.chars, {
-      y: '110%', opacity: 0,
-      duration: 0.82, stagger: 0.022, ease: 'power3.out',
-    })
-    .to('.hero-kicker', { opacity: 1, duration: 0.55, ease: 'power2.out' }, '-=0.6')
-    .from('.hero-photo', { opacity: 0, x: 35, duration: 1.3, ease: 'power2.out' }, 0.15)
-    .to('.hero-sub',  { opacity: 1, duration: 0.65, ease: 'power2.out' }, '-=0.55')
-    .to('.hero-cta',  { opacity: 1, duration: 0.5,  ease: 'power2.out' }, '-=0.35')
-    .to('.hero-scroll', { opacity: 0.5, duration: 0.4 }, '-=0.2');
+  /* ── shared hero timeline (runs after physics or on mobile) ── */
+  function runHeroTimeline() {
+    const tl = gsap.timeline({ delay: 0.1 });
+    tl.to('.hero-kicker', { opacity: 1, duration: 0.55, ease: 'power2.out' })
+      .from('.hero-photo', { opacity: 0, x: 35, duration: 1.3, ease: 'power2.out' }, '-=0.4')
+      .to('.hero-sub',  { opacity: 1, duration: 0.65, ease: 'power2.out' }, '-=0.55')
+      .to('.hero-cta',  { opacity: 1, duration: 0.5,  ease: 'power2.out' }, '-=0.35')
+      .to('.hero-scroll', { opacity: 0.5, duration: 0.4 }, '-=0.2');
+  }
+
+  /* ── mobile: simple word reveal ── */
+  if (window.innerWidth < 768) {
+    const h1 = document.querySelector('.hero-headline');
+    const words = h1.textContent.trim().split(/\s+/);
+    h1.innerHTML = words.map(w => `<span class="hw">${w}</span>`).join(' ');
+    gsap.from('.hero-headline .hw', {
+      y: 30, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out',
+      onComplete: runHeroTimeline
+    });
+    return;
+  }
+
+  /* ── desktop: matter.js physics ── */
+  const { Engine, Render, Runner, Bodies, Body, World, Events } = Matter;
+
+  const heroLeft = document.querySelector('.hero-left');
+  const h1 = document.querySelector('.hero-headline');
+
+  /* 1. Split h1 into word spans, preserve line structure */
+  const rawWords = ['The', 'machines', 'are', 'learning.', 'So', 'am', 'I.'];
+  h1.innerHTML = rawWords.map(w => `<span class="hw">${w}</span>`).join(' ');
+
+  /* 2. Measure natural positions BEFORE hiding */
+  const heroLeftRect = heroLeft.getBoundingClientRect();
+  const wordSpans = Array.from(h1.querySelectorAll('.hw'));
+  const originalRects = wordSpans.map(span => {
+    const r = span.getBoundingClientRect();
+    return {
+      left: r.left - heroLeftRect.left,
+      top:  r.top  - heroLeftRect.top,
+      width:  r.width,
+      height: r.height,
+      cx: r.left - heroLeftRect.left + r.width  / 2,
+      cy: r.top  - heroLeftRect.top  + r.height / 2,
+    };
+  });
+
+  /* h1 bottom for ground plane */
+  const h1Rect = h1.getBoundingClientRect();
+  const groundY = (h1Rect.bottom - heroLeftRect.top) + 10;
+
+  /* 3. Hide h1 text, make spans absolutely positioned */
+  h1.style.visibility = 'hidden';
+  h1.style.position = 'relative';
+  wordSpans.forEach((span, i) => {
+    span.style.position  = 'absolute';
+    span.style.left      = originalRects[i].left + 'px';
+    span.style.top       = originalRects[i].top  + 'px';
+    span.style.opacity   = '0';
+    span.style.color     = 'var(--ink)';
+    span.style.whiteSpace = 'nowrap';
+    span.style.zIndex    = '10';
+  });
+  h1.style.visibility = 'visible'; /* show container but spans start hidden */
+
+  /* 4. Canvas */
+  const W = heroLeft.clientWidth;
+  const H = heroLeft.clientHeight;
+  const canvas = document.createElement('canvas');
+  canvas.id = 'hero-canvas';
+  canvas.width  = W;
+  canvas.height = H;
+  heroLeft.appendChild(canvas);
+
+  /* 5. Matter.js setup */
+  const engine = Engine.create({ gravity: { y: 1.4 } });
+  const render = Render.create({
+    canvas,
+    engine,
+    options: {
+      width: W,
+      height: H,
+      wireframes: false,
+      background: 'transparent',
+    }
+  });
+  const runner = Runner.create();
+
+  /* 6. Physics bodies for each word */
+  const bodies = wordSpans.map((span, i) => {
+    const rect = originalRects[i];
+    const startY = rect.cy - 400 + (i * -60);
+    const b = Bodies.rectangle(rect.cx, startY, rect.width + 8, rect.height + 4, {
+      restitution: 0.3,
+      frictionAir: 0.035,
+      friction: 0.5,
+      angle: (Math.random() - 0.5) * 0.4,
+      render: { visible: false },
+    });
+    return b;
+  });
+
+  /* 7. Ground, walls */
+  const ground = Bodies.rectangle(W / 2, groundY + 25, W * 2, 50, {
+    isStatic: true, render: { visible: false }
+  });
+  const wallL = Bodies.rectangle(-10, H / 2, 20, H * 4, {
+    isStatic: true, render: { visible: false }
+  });
+  const wallR = Bodies.rectangle(W + 10, H / 2, 20, H * 4, {
+    isStatic: true, render: { visible: false }
+  });
+
+  World.add(engine.world, [...bodies, ground, wallL, wallR]);
+
+  /* 8. Show word spans, sync DOM to physics each frame */
+  wordSpans.forEach(span => { span.style.opacity = '1'; });
+
+  Events.on(engine, 'afterUpdate', () => {
+    bodies.forEach((b, i) => {
+      const span = wordSpans[i];
+      const hw = span.offsetWidth;
+      const hh = span.offsetHeight;
+      span.style.left      = (b.position.x - hw / 2) + 'px';
+      span.style.top       = (b.position.y - hh / 2) + 'px';
+      span.style.transform = `rotate(${b.angle}rad)`;
+    });
+  });
+
+  Runner.run(runner, engine);
+  Render.run(render);
+
+  /* 9. After 1600ms freeze bodies */
+  setTimeout(() => {
+    bodies.forEach(b => Body.setStatic(b, true));
+  }, 1600);
+
+  /* 10. After 1800ms GSAP each span back to natural position */
+  setTimeout(() => {
+    const settlePromises = wordSpans.map((span, i) => {
+      return new Promise(resolve => {
+        gsap.to(span, {
+          left:     originalRects[i].left + 'px',
+          top:      originalRects[i].top  + 'px',
+          rotation: 0,
+          duration: 0.55,
+          delay:    i * 0.05,
+          ease:     'power2.inOut',
+          onComplete: resolve,
+        });
+      });
+    });
+
+    /* After last span settles: clean up and run hero timeline */
+    Promise.all(settlePromises).then(() => {
+      /* Destroy physics */
+      Render.stop(render);
+      Runner.stop(runner);
+      Engine.clear(engine);
+      canvas.remove();
+
+      /* Reset h1 to normal flow */
+      wordSpans.forEach(span => {
+        span.style.position  = '';
+        span.style.left      = '';
+        span.style.top       = '';
+        span.style.transform = '';
+        span.style.zIndex    = '';
+        span.style.whiteSpace = '';
+      });
+      h1.style.position = '';
+
+      runHeroTimeline();
+    });
+  }, 1800);
 });
 
 /* Hero photo slow parallax */
@@ -951,24 +1220,11 @@ ScrollTrigger.create({
   onLeaveBack: navLight,
 });
 
-gsap.fromTo('.post-card',
-  { opacity: 0, y: 52 },
-  {
-    opacity: 1, y: 0,
-    stagger: 0.15, duration: 1.05, ease: 'power3.out',
-    scrollTrigger: { trigger: '.posts-grid', start: 'top 110%' }
-  }
-);
-
-/* Posts header rule reveals */
-gsap.from('.posts-header', {
-  opacity: 0, y: 20, duration: 0.8, ease: 'power2.out',
-  scrollTrigger: { trigger: '.posts-header', start: 'top 110%' }
-});
+/* post-card and posts-header reveals handled by --scroll-ratio scrubber below */
 
 /* ══ STATEMENT — nav light, word scrub ══════════════ */
 ScrollTrigger.create({
-  trigger: '.statement',
+  trigger: '.statement-scene',
   start: 'top 55%',
   onEnter: navLight,
   onLeaveBack: navDark,
@@ -977,8 +1233,8 @@ ScrollTrigger.create({
 gsap.to('.statement-text .w', {
   opacity: 1, stagger: 0.07, ease: 'none',
   scrollTrigger: {
-    trigger: '.statement',
-    start: 'top 70%', end: 'bottom 28%',
+    trigger: '.statement-scene',
+    start: 'top 20%', end: 'bottom 70%',
     scrub: 1.8,
   }
 });
@@ -991,6 +1247,150 @@ ScrollTrigger.create({
   onLeaveBack: navLight,
 });
 
+/* ══ SCROLL SCRUBBING ENGINE — Tier 1 ══════════════════════════════
+   Per-frame RAF loop. Reads window.scrollY, lerps to smoothY,
+   computes --scroll-ratio for each section and --page-progress globally.
+   No GSAP dependency. Pure momentum, no snap.
+*/
+(function () {
+  'use strict';
+
+  // ── helpers ────────────────────────────────────────────────────────
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+  function fit(v, i0, i1, o0, o1) {
+    if (i1 === i0) return o0;
+    var t = clamp((v - i0) / (i1 - i0), 0, 1);
+    return o0 + t * (o1 - o0);
+  }
+
+  // ── state ──────────────────────────────────────────────────────────
+  var smoothY = window.scrollY || 0;
+  var targetY = smoothY;
+
+  // ── element refs ──────────────────────────────────────────────────
+  var posts = document.getElementById('posts');
+  var stmt  = document.getElementById('statement');
+  var docEl = document.documentElement;
+
+  // ── RAF loop ──────────────────────────────────────────────────────
+  function tick() {
+    targetY = window.scrollY;
+    smoothY = lerp(smoothY, targetY, 0.092);
+
+    var vh   = window.innerHeight;
+    var docH = document.body.scrollHeight;
+
+    // — #posts section —
+    if (posts) {
+      var pTop   = posts.offsetTop;
+      var pRatio = fit(smoothY, pTop - vh, pTop + posts.offsetHeight * 0.5, 0, 1);
+      posts.style.setProperty('--scroll-ratio', pRatio);
+    }
+
+    // — #statement section —
+    if (stmt) {
+      var sTop   = stmt.offsetTop;
+      var sRatio = fit(smoothY, sTop - vh * 0.8, sTop + stmt.offsetHeight * 0.6, 0, 1);
+      stmt.style.setProperty('--scroll-ratio', sRatio);
+    }
+
+    // — global page progress bar —
+    var progress = docH > vh ? smoothY / (docH - vh) : 0;
+    docEl.style.setProperty('--page-progress', clamp(progress, 0, 1));
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+})();
+
+</script>
+
+<!-- Tier 3: Cursor lerp + velocity skew + statement CTA trigger -->
+<script>
+(function() {
+
+  /* ── Custom cursor dot ───────────────────────── */
+  var dot = document.createElement('div');
+  dot.id = 'cursor-dot';
+  document.body.appendChild(dot);
+
+  var mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  var cx = mx, cy = my;
+
+  window.addEventListener('mousemove', function(e) {
+    mx = e.clientX;
+    my = e.clientY;
+  });
+
+  /* Hover state on interactive elements */
+  document.querySelectorAll('a[href], button').forEach(function(el) {
+    el.addEventListener('mouseenter', function() { dot.classList.add('hovering'); });
+    el.addEventListener('mouseleave', function() { dot.classList.remove('hovering'); });
+  });
+
+  /* ── Velocity-based skew on .story-photo ────── */
+  var prevScrollY = window.scrollY;
+  var skewVel = 0;
+
+  /* ── RAF loop: lerp cursor + apply skew ─────── */
+  function loop() {
+    /* lerp cursor */
+    cx += (mx - cx) * 0.12;
+    cy += (my - cy) * 0.12;
+    dot.style.left = cx + 'px';
+    dot.style.top  = cy + 'px';
+
+    /* scroll velocity for skew */
+    var rawVel = (window.scrollY - prevScrollY) * 0.015;
+    prevScrollY = window.scrollY;
+    skewVel += (rawVel - skewVel) * 0.18;
+
+    var storyPhotos = document.querySelectorAll('.story-photo');
+    storyPhotos.forEach(function(img) {
+      /* preserve existing transform from GSAP where possible; apply additive skewY */
+      var base = img.style.transform || '';
+      /* strip any previous skewY we injected */
+      base = base.replace(/\s*skewY\([^)]*\)/g, '');
+      img.style.transform = base + ' skewY(' + (skewVel * 0.5) + 'deg)';
+    });
+
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+  /* ── Statement progress line scroll ratio ───── */
+  var scene = document.getElementById('statement-scene');
+  var progressLine = document.querySelector('.statement-progress-line');
+
+  if (scene && progressLine) {
+    window.addEventListener('scroll', function() {
+      var rect = scene.getBoundingClientRect();
+      var total = scene.offsetHeight - window.innerHeight;
+      var scrolled = -rect.top;
+      var ratio = Math.max(0, Math.min(1, scrolled / total));
+      progressLine.style.setProperty('--scroll-ratio', ratio);
+    }, { passive: true });
+  }
+
+  /* ── Statement CTA visibility trigger ───────── */
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.create({
+      trigger: '.statement-scene',
+      start: 'top+=80% center',
+      onEnter: function() {
+        var cta = document.querySelector('.statement-cta');
+        if (cta) cta.classList.add('visible');
+      },
+      onLeaveBack: function() {
+        var cta = document.querySelector('.statement-cta');
+        if (cta) cta.classList.remove('visible');
+      }
+    });
+  }
+
+})();
 </script>
 </body>
 </html>
