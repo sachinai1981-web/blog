@@ -157,7 +157,7 @@ img { display: block; max-width: 100%; }
   width: fit-content;
 }
 .hero-cta::after { content: '→'; font-family: serif; font-size: 16px; }
-.hero-cta:hover text-decoration: underline;
+.hero-cta:hover { text-decoration: underline; }
 
 .hero-scroll {
   position: absolute;
@@ -327,7 +327,7 @@ img { display: block; max-width: 100%; }
 .posts {
   padding: 160px 56px 140px;
   background: var(--cream);
-  --scroll-ratio: 0;
+  --scroll-ratio: 1;
 }
 
 .post-card { overflow: hidden; display: block; text-decoration: none; color: inherit; cursor: pointer; opacity: calc(var(--scroll-ratio) * 1); transform: translateY(calc((1 - var(--scroll-ratio)) * 36px)); transition: opacity 0.1s, transform 0.1s; }
@@ -653,9 +653,8 @@ img { display: block; max-width: 100%; }
 <nav class="nav" id="nav">
   <a href="/" class="nav-logo">Sachin Rai</a>
   <div class="nav-links">
-    <a href="/archive.html" class="nav-link">Essays</a>
+    <a href="/archive.html" class="nav-link">Writing</a>
     <a href="/about.html"  class="nav-link">About</a>
-    <a href="/archive.html" class="nav-link">Archive</a>
     <a href="/tools.html"  class="nav-link">Tools</a>
     <a href="/resume.html" class="nav-link">Resume</a>
     <a href="#subscribe" class="nav-cta">Subscribe</a>
@@ -1124,6 +1123,16 @@ document.addEventListener('DOMContentLoaded', () => {
       runHeroTimeline();
     });
   }, 1800);
+
+  /* Safety net: if physics/GSAP stalls for any reason, ensure hero is visible after 4s */
+  setTimeout(() => {
+    document.querySelectorAll('.hero-kicker, .hero-sub, .hero-cta, .hero-scroll').forEach(el => {
+      if (parseFloat(getComputedStyle(el).opacity) < 0.5) {
+        el.style.opacity = '1';
+        el.style.transition = 'opacity 0.6s';
+      }
+    });
+  }, 4000);
 });
 
 /* Hero photo slow parallax */
