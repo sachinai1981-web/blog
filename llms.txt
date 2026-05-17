@@ -12,6 +12,7 @@ Sachin Rai writes about the intersection of AI and enterprise GTM:
 
 ## Posts
 
+- [AutoQuant: What I Learned After 6 Months of Bayesian Signal Grading](https://sachinai.com/posts/autoquant.html) — Building a scanner that grades its own trades, re-weights conviction over time, and auto-journals every autopsy.
 - [Win Rate Lies.](https://sachinai.com/posts/win-rate-trap.html) — A 90% win rate signal in my trading system was bleeding money at −1.04% expectancy per trade. The same Trojan Horse is hiding in every sales pipeline I've managed.
 - [I Renamed Seven AI Agents.](https://sachinai.com/posts/renamed-seven-agents.html) — Brick, Owl, Bull, Falcon, Spider, Arrow, Sage are dead. Scanner, Grader, SwingTrader, DayPut, DayCondor, Outreach, Vault are alive. The rename touched 26 files. The lessons compound.
 - [How I Built a Portfolio Monitor That Fires Every Morning at 5am](https://sachinai.com/posts/portfolio-monitor.html) — Connecting Alpaca, Claude, and launchd to build a fully autonomous pre-market briefing agent that wakes up before I do.
@@ -22,7 +23,6 @@ Sachin Rai writes about the intersection of AI and enterprise GTM:
 - [Most Second Brains Just Rotate.](https://sachinai.com/posts/compounding-systems.html) — I have 88 concept articles, 301 sources, 13 production agents. Most 'second brain' stacks fail because they confuse output with compounding. Three laws decide which yours is.
 - [7 Things Every Club Winner Knows That Average Reps Don't](https://sachinai.com/posts/club-winner.html) — After 7 President's Club wins, here are the patterns I see in every top performer. None of them are tactics.
 - [Claude Code Changed How I Build — A 30-Day Retrospective](https://sachinai.com/posts/claude-code-retrospective.html) — What happened when I stopped planning features and started just building them. The feedback loop is completely different now.
-- [AutoQuant: What I Learned After 6 Months of Bayesian Signal Grading](https://sachinai.com/posts/autoquant.html) — Building a scanner that grades its own trades, re-weights conviction over time, and auto-journals every autopsy.
 - [7 AI trends I'm tracking in 2026 — and the breakthrough nobody's talking about](https://sachinai.com/posts/ai-trends-2026-breakthrough-idea.html) — From compute explosions to org design collapse — what my AI research vault is actually telling me about where this goes next. Plus one non-obvious conclusion.
 - [The AI tools replacing my sales stack in 2026](https://sachinai.com/posts/ai-sales-stack-2026.html) — From cold email scoring to deal review to prospect research — what I've actually replaced with AI tools and what still needs a human.
 - [The Case for AI-First Outreach: How I Built My Own SDR in a Weekend](https://sachinai.com/posts/ai-first-outreach.html) — Using LangGraph, Apollo, and Claude to research prospects, score fit, and draft personalised emails — automatically.
