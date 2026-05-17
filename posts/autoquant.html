@@ -148,7 +148,14 @@
 
         <p>The critical insight is that signal performance is conditional. RSI divergence might have a 58% hit rate in low-volatility conditions and a 31% hit rate in high-VIX environments. A naive system treats these as the same signal. AutoQuant conditions each signal's weight on the market regime it is operating in. This means the same set of rules produces very different behavior depending on whether we are in a trending, volatile, or ranging environment.</p>
 
-        <h2 id="how-the-scanner-works">How the Scanner Works</h2>
+        
+<figure class="article-img-break">
+  <img class="article-img-break__img"
+       src="https://images.unsplash.com/photo-1776053473082-9520f829fbbb?w=1200&q=90&auto=format&fit=crop"
+       alt="3D Signal Architecture" loading="lazy">
+  <figcaption class="article-img-break__label">3D Signal Architecture</figcaption>
+</figure>
+<h2 id="how-the-scanner-works">How the Scanner Works</h2>
 
         <p>The scanner runs twice daily — at 9:15am ET (after pre-market settles) and at 2:30pm ET (before the close volatility window). Each run scans a watchlist of 80 names across six signal categories:</p>
 
@@ -188,7 +195,14 @@
           </div>
         </div>
 
-        <h2 id="what-6-months-of-data-taught-me">What 6 Months of Data Taught Me</h2>
+        
+<figure class="article-img-break">
+  <img class="article-img-break__img"
+       src="https://images.unsplash.com/photo-1742717817785-54249562494c?w=1200&q=90&auto=format&fit=crop"
+       alt="Market Regime Render" loading="lazy">
+  <figcaption class="article-img-break__label">Market Regime Render</figcaption>
+</figure>
+<h2 id="what-6-months-of-data-taught-me">What 6 Months of Data Taught Me</h2>
 
         <p>The most important thing the data showed me is not which signals work — it is which signals are real versus which feel real. There is a large category of signals that look compelling in a sample of 10-20 trades and statistically wash out across 100+. The Bayesian grader is ruthless about this. Signals that are noise will trend toward 50% win rates over time, and the system will de-weight them automatically.</p>
 

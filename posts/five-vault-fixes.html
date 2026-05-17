@@ -178,7 +178,14 @@
 
       <p>This post is the full receipt. Every check. Every fix. Every file touched. And the one pattern that fell out when it was done.</p>
 
-      <h2 id="checks">What the lint actually checks.</h2>
+      
+<figure class="article-img-break">
+  <img class="article-img-break__img"
+       src="https://images.unsplash.com/photo-1713640774386-86b5f18972f3?w=1200&q=90&auto=format&fit=crop"
+       alt="Vault Architecture" loading="lazy">
+  <figcaption class="article-img-break__label">Vault Architecture</figcaption>
+</figure>
+<h2 id="checks">What the lint actually checks.</h2>
 
       <p>Before walking through the fixes, it's worth knowing exactly what the lint is measuring. Most "vault hygiene" posts cover banners and orphaned notes and call it done. The interesting checks — contradiction detection, forgetting curves, retrieval coverage — are where the actual rot lives. Here's the full nine, with the before/after numbers:</p>
 
@@ -255,7 +262,14 @@
         <cite style="display:block;margin-top:.8rem;font-family:var(--font-body);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-muted);font-style:normal;">— Pattern that fell out at the end of this pass</cite>
       </div>
 
-      <h2 id="fix2">Fix #2 — Confidence backfill (versioning your claims).</h2>
+      
+<figure class="article-img-break">
+  <img class="article-img-break__img"
+       src="https://images.unsplash.com/photo-1778351983804-e1e267d1f94c?w=1200&q=90&auto=format&fit=crop"
+       alt="System Render" loading="lazy">
+  <figcaption class="article-img-break__label">System Render</figcaption>
+</figure>
+<h2 id="fix2">Fix #2 — Confidence backfill (versioning your claims).</h2>
 
       <p>The audit found 24 concept articles missing the v2 confidence fields: <code>confidence</code>, <code>sources_count</code>, <code>last_confirmed</code>, and <code>memory_tier</code>. These four fields are what the forgetting curve check reads. <strong>Without them, the lint can't run decay analysis on those notes.</strong> They're invisible to the temporal health check — and therefore invisible to any LLM query that weights notes by recency and confidence.</p>
 
