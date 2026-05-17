@@ -197,7 +197,7 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 768px) {
   .navbar-inner { padding: 0 var(--gutter-mobile); }
-  .navbar-left .navbar__link:not(:first-child) { display: none; }
+  .navbar-left .navbar__link:not(:first-child):not(:nth-child(2)) { display: none; }
   .navbar-right { min-width: auto; }
 }
 

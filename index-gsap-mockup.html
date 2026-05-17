@@ -554,11 +554,8 @@ img { display: block; max-width: 100%; }
 <nav class="nav" id="nav">
   <a href="/" class="nav-logo">Sachin Rai</a>
   <div class="nav-links">
-    <a href="/archive.html" class="nav-link">Essays</a>
+    <a href="/archive.html" class="nav-link">Writing</a>
     <a href="/about.html"  class="nav-link">About</a>
-    <a href="/archive.html" class="nav-link">Archive</a>
-    <a href="/tools.html"  class="nav-link">Tools</a>
-    <a href="/resume.html" class="nav-link">Resume</a>
     <a href="#subscribe" class="nav-cta">Subscribe</a>
   </div>
 </nav>
@@ -568,7 +565,7 @@ img { display: block; max-width: 100%; }
   <div class="hero-left">
     <p class="hero-kicker">Field Notes · San Francisco · 2026</p>
 
-    <h1 class="hero-headline" aria-label="The machines are learning. So am I.">
+    <h1 class="hero-headline">
       The machines<br>are learning.<br>So am I.
     </h1>
 
@@ -661,7 +658,7 @@ img { display: block; max-width: 100%; }
 <section class="posts" id="posts">
   <div class="posts-header">
     <span class="posts-label">Latest writing</span>
-    <span class="posts-count">03 articles — 2026</span>
+    <span class="posts-count">06 articles — 2026</span>
   </div>
 
   <div class="posts-grid">
@@ -743,47 +740,10 @@ img { display: block; max-width: 100%; }
     Field notes, delivered.<br>
     <em>No noise. No spam.</em>
   </h2>
-  <form class="subscribe-form" id="home-subscribe-form">
-    <input class="subscribe-input" type="email" name="email" placeholder="your@email.com" required autocomplete="email">
-    <button class="subscribe-btn" type="submit" id="home-subscribe-btn">Subscribe</button>
+  <form class="subscribe-form" onsubmit="return false">
+    <input class="subscribe-input" type="email" placeholder="your@email.com">
+    <button class="subscribe-btn">Subscribe</button>
   </form>
-  <p class="subscribe-msg" id="home-subscribe-msg" style="display:none;margin-top:.75rem;font-size:.8rem;letter-spacing:.12em;"></p>
-  <script>
-  (function(){
-    var form = document.getElementById('home-subscribe-form');
-    var btn  = document.getElementById('home-subscribe-btn');
-    var msg  = document.getElementById('home-subscribe-msg');
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      btn.textContent = '...';
-      btn.disabled = true;
-      fetch('https://formspree.io/f/xwvwlybd', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
-      }).then(function(r){ return r.json(); }).then(function(d){
-        if(d.ok){
-          form.style.display = 'none';
-          msg.style.display = 'block';
-          msg.style.color = 'var(--ink)';
-          msg.textContent = 'You\'re in. First note coming soon.';
-        } else {
-          btn.textContent = 'Subscribe';
-          btn.disabled = false;
-          msg.style.display = 'block';
-          msg.style.color = '#c0392b';
-          msg.textContent = 'Something went wrong — try again.';
-        }
-      }).catch(function(){
-        btn.textContent = 'Subscribe';
-        btn.disabled = false;
-        msg.style.display = 'block';
-        msg.style.color = '#c0392b';
-        msg.textContent = 'Network error — try again.';
-      });
-    });
-  })();
-  </script>
 </section>
 
 <!-- ═══ FOOTER ═══ -->
@@ -795,26 +755,26 @@ img { display: block; max-width: 100%; }
   <div>
     <p class="footer-col-label">Writing</p>
     <ul class="footer-links">
-      <li><a href="/archive.html?filter=ai">AI Systems</a></li>
-      <li><a href="/archive.html?filter=strategy">Enterprise Sales</a></li>
-      <li><a href="/archive.html?filter=engineering">Trading</a></li>
-      <li><a href="/archive.html">All posts</a></li>
+      <li><a href="#">AI Systems</a></li>
+      <li><a href="#">Enterprise Sales</a></li>
+      <li><a href="#">Trading</a></li>
+      <li><a href="#">All posts</a></li>
     </ul>
   </div>
   <div>
     <p class="footer-col-label">Projects</p>
     <ul class="footer-links">
-      <li><a href="/tools.html">AutoQuant</a></li>
-      <li><a href="/tools.html">SwingTrader</a></li>
-      <li><a href="/tools.html">AI Agents</a></li>
+      <li><a href="#">AutoQuant</a></li>
+      <li><a href="#">SwingTrader</a></li>
+      <li><a href="#">AI Agents</a></li>
     </ul>
   </div>
   <div>
     <p class="footer-col-label">Connect</p>
     <ul class="footer-links">
-      <li><a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn</a></li>
-      <li><a href="https://x.com/sachinrai01" target="_blank" rel="noopener">Twitter / X</a></li>
-      <li><a href="/rss.xml">RSS Feed</a></li>
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">Twitter / X</a></li>
+      <li><a href="#">RSS Feed</a></li>
     </ul>
   </div>
   <div class="footer-bottom">
@@ -956,14 +916,14 @@ gsap.fromTo('.post-card',
   {
     opacity: 1, y: 0,
     stagger: 0.15, duration: 1.05, ease: 'power3.out',
-    scrollTrigger: { trigger: '.posts-grid', start: 'top 110%' }
+    scrollTrigger: { trigger: '.posts-grid', start: 'top 82%' }
   }
 );
 
 /* Posts header rule reveals */
 gsap.from('.posts-header', {
   opacity: 0, y: 20, duration: 0.8, ease: 'power2.out',
-  scrollTrigger: { trigger: '.posts-header', start: 'top 110%' }
+  scrollTrigger: { trigger: '.posts-header', start: 'top 88%' }
 });
 
 /* ══ STATEMENT — nav light, word scrub ══════════════ */

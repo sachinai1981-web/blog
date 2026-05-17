@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>SACHIN!! — AI x Enterprise Selling 🌈⚡️🤖</title>
+  <meta name="description" content="Kidcore mockup — 90s toy-packaging energy turned up to 11. Build log from an Enterprise AE who ships AI tools at night." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Shade&family=Fredoka:wght@400;500;600;700&family=Lilita+One&family=Bowlby+One&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  /* Toy-aisle palette */
+  --pink:    #ff2d87;
+  --magenta: #d6006f;
+  --cyan:    #00d4ff;
+  --blue:    #0066ff;
+  --lime:    #c4ff00;
+  --green:   #00d96a;
+  --yellow:  #ffd400;
+  --orange:  #ff7a00;
+  --purple:  #8b5cf6;
+  --red:     #ff3030;
+  --cream:   #fff8e8;
+  --paper:   #fffaf0;
+  --ink:     #0a0a14;
+  --ink-2:   #1a1a2e;
+
+  --shadow-hard:  6px 6px 0 var(--ink);
+  --shadow-pop:   8px 8px 0 var(--ink);
+  --shadow-mega: 10px 10px 0 var(--ink);
+
+  --b: 4px solid var(--ink);
+  --b-thicc: 6px solid var(--ink);
+
+  --font-pop: 'Lilita One', system-ui, sans-serif;       /* bubble display */
+  --font-bungee: 'Bungee', system-ui, sans-serif;         /* condensed shouty */
+  --font-shade: 'Bungee Shade', system-ui, sans-serif;    /* 3D drop-shade */
+  --font-bowl: 'Bowlby One', system-ui, sans-serif;       /* chunky bowl */
+  --font-ui: 'Fredoka', system-ui, sans-serif;            /* rounded sans */
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box; margin:0; padding:0}
+html{scroll-behavior:smooth}
+body{
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-weight: 500;
+  line-height: 1.4;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img{display:block; max-width:100%}
+a{color:inherit; text-decoration:none}
+button{font: inherit; cursor: pointer}
+
+/* ────── HALFTONE DOT BG OVERLAY ────── */
+body::before{
+  content:'';
+  position:fixed; inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:.25;
+  background-image: radial-gradient(circle, var(--ink) 1px, transparent 1.5px);
+  background-size: 18px 18px;
+}
+
+/* Confetti dots floating — purely decorative */
+body::after{
+  content:'';
+  position:fixed; inset:0; z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 8% 12%, var(--pink) 0 6px, transparent 7px),
+    radial-gradient(circle at 92% 8%, var(--cyan) 0 5px, transparent 6px),
+    radial-gradient(circle at 4% 88%, var(--lime) 0 5px, transparent 6px),
+    radial-gradient(circle at 96% 92%, var(--yellow) 0 7px, transparent 8px),
+    radial-gradient(circle at 50% 5%, var(--orange) 0 4px, transparent 5px);
+}
+
+main, header, section, footer{position:relative; z-index:1}
+
+/* ────── SYSBAR (top tape banner) ────── */
+.tape{
+  background: var(--yellow);
+  border-bottom: var(--b-thicc);
+  padding: 10px 0;
+  font-family: var(--font-bungee);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+.tape-track{
+  display: inline-block;
+  animation: scroll-tape 28s linear infinite;
+  will-change: transform;
+}
+.tape-track span{ margin: 0 24px }
+.tape-track .star{ color: var(--red); font-size: 18px; vertical-align: -2px }
+.tape-track .dot{ color: var(--magenta); font-size: 22px; vertical-align: -3px }
+@keyframes scroll-tape{
+  from{ transform: translateX(0) }
+  to{ transform: translateX(-50%) }
+}
+@media (prefers-reduced-motion: reduce){
+  .tape-track{ animation: none }
+}
+
+/* ────── NAV ────── */
+nav.top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px clamp(20px, 5vw, 60px);
+  border-bottom: var(--b);
+  background: var(--paper);
+  position: relative;
+}
+nav.top .logo{
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+nav.top .logo .blob{
+  width: 56px; height: 56px;
+  background: var(--magenta);
+  border: var(--b);
+  border-radius: 50% 60% 55% 50% / 60% 50% 60% 55%;
+  box-shadow: var(--shadow-hard);
+  display: grid; place-items: center;
+  font-family: var(--font-bowl);
+  color: var(--cream);
+  font-size: 26px;
+  transform: rotate(-6deg);
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1);
+}
+nav.top .logo:hover .blob{ transform: rotate(-12deg) scale(1.1) }
+nav.top .logo .name{
+  font-family: var(--font-bowl);
+  font-size: 22px;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+nav.top .links{ display: flex; gap: 8px; flex-wrap: wrap }
+nav.top .links a{
+  padding: 8px 14px;
+  border: var(--b);
+  background: var(--cream);
+  font-family: var(--font-bungee);
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  border-radius: 999px;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform .15s, box-shadow .15s, background .15s;
+}
+nav.top .links a:nth-child(1):hover{ background: var(--pink); color: var(--cream) }
+nav.top .links a:nth-child(2):hover{ background: var(--cyan); color: var(--ink) }
+nav.top .links a:nth-child(3):hover{ background: var(--lime); color: var(--ink) }
+nav.top .links a:nth-child(4):hover{ background: var(--orange); color: var(--cream) }
+nav.top .links a:hover{
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+nav.top .links a:active{
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+/* ────── HERO ────── */
+.hero{
+  padding: clamp(50px, 8vw, 100px) clamp(20px, 5vw, 60px);
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+@media (max-width: 900px){
+  .hero{ grid-template-columns: 1fr; }
+}
+.hero-eyebrow{
+  display: inline-block;
+  background: var(--ink);
+  color: var(--lime);
+  padding: 6px 14px;
+  font-family: var(--font-bungee);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  border: var(--b);
+  transform: rotate(-2deg);
+  margin-bottom: 24px;
+  box-shadow: 4px 4px 0 var(--magenta);
+}
+h1.headline{
+  font-family: var(--font-shade);
+  font-size: clamp(48px, 10vw, 124px);
+  line-height: 0.85;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+h1.headline .pop{
+  display: inline-block;
+  background: var(--pink);
+  color: var(--cream);
+  padding: 0 14px;
+  border: var(--b);
+  box-shadow: var(--shadow-pop);
+  font-family: var(--font-bowl);
+  transform: rotate(-3deg) translateY(-6px);
+  -webkit-text-stroke: 0;
+}
+h1.headline .pop2{
+  display: inline-block;
+  background: var(--cyan);
+  color: var(--ink);
+  padding: 0 14px;
+  border: var(--b);
+  box-shadow: 8px 8px 0 var(--magenta);
+  font-family: var(--font-bowl);
+  transform: rotate(2deg);
+  -webkit-text-stroke: 0;
+}
+.lede{
+  font-size: clamp(18px, 2vw, 22px);
+  font-family: var(--font-ui);
+  font-weight: 500;
+  max-width: 540px;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  color: var(--ink-2);
+}
+.lede strong{ background: var(--yellow); padding: 0 6px; border: 2px solid var(--ink) }
+
+.cta-stack{ display: flex; gap: 14px; flex-wrap: wrap; align-items: center }
+.btn{
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-bungee);
+  font-size: 16px;
+  letter-spacing: 1px;
+  padding: 16px 26px;
+  border: var(--b-thicc);
+  border-radius: 14px;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-mega);
+  transition: transform .15s, box-shadow .15s;
+  cursor: pointer;
+}
+.btn:hover{ transform: translate(-3px, -3px); box-shadow: 13px 13px 0 var(--ink) }
+.btn:active{ transform: translate(3px, 3px); box-shadow: 4px 4px 0 var(--ink) }
+.btn-primary{ background: var(--lime); color: var(--ink) }
+.btn-secondary{ background: var(--orange); color: var(--cream) }
+
+/* ────── MASCOT (Sai-the-AI-pet) ────── */
+.mascot-stage{
+  position: relative;
+  display: grid; place-items: center;
+  min-height: 380px;
+}
+.mascot{
+  width: min(360px, 80%);
+  filter: drop-shadow(8px 8px 0 var(--ink));
+  animation: bob 3.2s ease-in-out infinite;
+}
+@keyframes bob{
+  0%, 100% { transform: translateY(0) rotate(-2deg) }
+  50%      { transform: translateY(-12px) rotate(2deg) }
+}
+@media (prefers-reduced-motion: reduce){
+  .mascot{ animation: none }
+}
+.starburst{
+  position: absolute;
+  font-family: var(--font-bowl);
+  font-size: 14px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+  display: grid; place-items: center;
+  border: var(--b);
+}
+.starburst.s1{
+  top: 10%; right: 8%;
+  width: 100px; height: 100px;
+  background: var(--yellow);
+  clip-path: polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  transform: rotate(15deg);
+}
+.starburst.s2{
+  bottom: 8%; left: 4%;
+  width: 88px; height: 88px;
+  background: var(--cyan);
+  border-radius: 50%;
+  transform: rotate(-10deg);
+}
+
+/* ────── STATS STRIP (toy badges) ────── */
+.stats{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  padding: 60px clamp(20px, 5vw, 60px);
+  border-top: var(--b);
+  border-bottom: var(--b);
+  background: var(--paper);
+}
+.stat{
+  border: var(--b);
+  padding: 24px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-pop);
+  position: relative;
+  transition: transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+.stat:hover{ transform: rotate(-2deg) scale(1.02) }
+.stat:nth-child(1){ background: var(--pink); color: var(--cream); transform: rotate(-1.5deg) }
+.stat:nth-child(2){ background: var(--cyan);  color: var(--ink);  transform: rotate(1deg) }
+.stat:nth-child(3){ background: var(--lime);  color: var(--ink);  transform: rotate(-0.5deg) }
+.stat:nth-child(4){ background: var(--orange); color: var(--cream); transform: rotate(2deg) }
+.stat .num{
+  font-family: var(--font-shade);
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+}
+.stat .label{
+  font-family: var(--font-bungee);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ────── SECTION HEADER ────── */
+.section-head{
+  padding: 80px clamp(20px, 5vw, 60px) 30px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.section-head h2{
+  font-family: var(--font-shade);
+  font-size: clamp(40px, 7vw, 80px);
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -1px;
+}
+.section-head h2 .scribble{
+  display: inline-block;
+  position: relative;
+}
+.section-head h2 .scribble::after{
+  content: '';
+  position: absolute;
+  left: -4px; right: -4px; bottom: -8px; height: 14px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M2,8 Q20,1 40,7 T80,8 T120,6 T160,9 T198,7' stroke='%23ff2d87' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;
+}
+.section-head .count{
+  font-family: var(--font-bungee);
+  background: var(--ink);
+  color: var(--lime);
+  padding: 8px 14px;
+  border: var(--b);
+  border-radius: 8px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  transform: rotate(3deg);
+}
+
+/* ────── POSTS GRID — sticker collage ────── */
+.posts{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 30px;
+  padding: 20px clamp(20px, 5vw, 60px) 80px;
+}
+.post{
+  border: var(--b-thicc);
+  border-radius: 22px;
+  padding: 26px;
+  background: var(--cream);
+  box-shadow: var(--shadow-pop);
+  position: relative;
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s;
+  display: flex; flex-direction: column;
+  min-height: 260px;
+}
+.post:hover{
+  transform: translate(-4px, -4px) rotate(-1deg);
+  box-shadow: 12px 12px 0 var(--ink);
+}
+.post .kicker{
+  display: inline-block;
+  font-family: var(--font-bungee);
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  align-self: flex-start;
+  margin-bottom: 14px;
+}
+.post h3{
+  font-family: var(--font-bowl);
+  font-size: 24px;
+  line-height: 1.05;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+.post p{
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  margin-bottom: 18px;
+  flex: 1;
+}
+.post .meta{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.post .meta .read{
+  font-family: var(--font-bungee);
+  font-size: 12px;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 6px 10px;
+  border-radius: 999px;
+  transition: background .2s;
+}
+.post:hover .meta .read{ background: var(--magenta) }
+
+/* sticker badges on cards */
+.post .badge{
+  position: absolute;
+  top: -16px; right: -16px;
+  width: 64px; height: 64px;
+  display: grid; place-items: center;
+  font-family: var(--font-bowl);
+  font-size: 13px;
+  text-align: center;
+  line-height: 1;
+  border: var(--b);
+  box-shadow: 4px 4px 0 var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  transform: rotate(15deg);
+  z-index: 2;
+}
+.badge.new{ background: var(--red); color: var(--cream); clip-path: polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%) }
+.badge.hot{ background: var(--yellow); border-radius: 50% }
+
+/* sticker rotation theme variations per card */
+.post:nth-child(1){ background: linear-gradient(135deg, var(--cream) 0%, #fff5d6 100%); transform: rotate(-1deg) }
+.post:nth-child(2){ background: linear-gradient(135deg, #ffe5f0 0%, var(--cream) 100%); transform: rotate(1deg) }
+.post:nth-child(3){ background: linear-gradient(135deg, #d6f7ff 0%, var(--cream) 100%); transform: rotate(-0.5deg) }
+.post:nth-child(4){ background: linear-gradient(135deg, var(--cream) 0%, #e8ffd6 100%); transform: rotate(0.8deg) }
+.post:nth-child(5){ background: linear-gradient(135deg, #ffd6e0 0%, var(--cream) 100%); transform: rotate(-1.5deg) }
+.post:nth-child(6){ background: linear-gradient(135deg, var(--cream) 0%, #d6e0ff 100%); transform: rotate(1.2deg) }
+.post:nth-child(7){ background: linear-gradient(135deg, #fff0d6 0%, var(--cream) 100%); transform: rotate(-0.8deg) }
+.post:nth-child(8){ background: linear-gradient(135deg, #f0d6ff 0%, var(--cream) 100%); transform: rotate(0.5deg) }
+
+.post .kicker.k-trade{ background: var(--lime); color: var(--ink) }
+.post .kicker.k-ai{    background: var(--cyan); color: var(--ink) }
+.post .kicker.k-sales{ background: var(--orange); color: var(--cream) }
+.post .kicker.k-vault{ background: var(--purple); color: var(--cream) }
+
+/* Span overrides for grid-breaking */
+.post.span-2{ grid-column: span 6 }
+.post.span-1{ grid-column: span 4 }
+.post.span-1-5{ grid-column: span 5 }
+.post.span-2-5{ grid-column: span 7 }
+@media (max-width: 1100px){
+  .post.span-2,.post.span-1,.post.span-1-5,.post.span-2-5{ grid-column: span 12 }
+}
+@media (min-width: 1101px) and (max-width: 1400px){
+  .post.span-2{ grid-column: span 6 }
+  .post.span-1{ grid-column: span 6 }
+  .post.span-1-5,.post.span-2-5{ grid-column: span 6 }
+}
+
+/* ────── BUILDS STRIP ────── */
+.builds{
+  background: var(--ink);
+  color: var(--cream);
+  padding: 80px clamp(20px, 5vw, 60px);
+  border-top: var(--b);
+  border-bottom: var(--b);
+}
+.builds h2{
+  font-family: var(--font-shade);
+  color: var(--lime);
+  font-size: clamp(40px, 7vw, 80px);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  line-height: 0.9;
+}
+.builds-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px }
+.build-card{
+  background: var(--cream);
+  color: var(--ink);
+  border: var(--b);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 6px 6px 0 var(--lime);
+  position: relative;
+  transition: transform .2s, box-shadow .2s;
+}
+.build-card:hover{ transform: translate(-3px,-3px); box-shadow: 10px 10px 0 var(--lime) }
+.build-card .icon{
+  width: 56px; height: 56px;
+  display: grid; place-items: center;
+  font-size: 32px;
+  border: var(--b);
+  border-radius: 16px;
+  margin-bottom: 14px;
+  background: var(--yellow);
+  transform: rotate(-5deg);
+}
+.build-card:nth-child(2) .icon{ background: var(--pink); color: var(--cream); transform: rotate(5deg) }
+.build-card:nth-child(3) .icon{ background: var(--cyan); transform: rotate(-3deg) }
+.build-card:nth-child(4) .icon{ background: var(--orange); color: var(--cream); transform: rotate(7deg) }
+.build-card h3{ font-family: var(--font-bowl); font-size: 22px; margin-bottom: 8px; letter-spacing: -0.3px }
+.build-card p{ font-size: 14px; color: var(--ink-2) }
+
+/* ────── SUBSCRIBE — toy controller layout ────── */
+.subscribe{
+  padding: 100px clamp(20px, 5vw, 60px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  background: var(--cream);
+}
+@media (max-width: 900px){ .subscribe{ grid-template-columns: 1fr } }
+.subscribe h2{
+  font-family: var(--font-shade);
+  font-size: clamp(40px, 7vw, 88px);
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.subscribe h2 .glow{
+  display: inline-block;
+  background: var(--yellow);
+  border: var(--b);
+  padding: 0 14px;
+  box-shadow: var(--shadow-pop);
+  transform: rotate(-2deg);
+  -webkit-text-stroke: 0;
+  font-family: var(--font-bowl);
+}
+.subscribe p{ font-size: 18px; color: var(--ink-2); max-width: 460px }
+.sub-form{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border: var(--b-thicc);
+  border-radius: 24px;
+  padding: 30px;
+  background: var(--paper);
+  box-shadow: var(--shadow-mega);
+  position: relative;
+}
+.sub-form::before{
+  content: 'INSERT EMAIL';
+  position: absolute;
+  top: -16px; left: 24px;
+  font-family: var(--font-bungee);
+  background: var(--red);
+  color: var(--cream);
+  padding: 4px 12px;
+  border: var(--b);
+  border-radius: 6px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  transform: rotate(-3deg);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.sub-form input[type=email]{
+  font-family: var(--font-mono);
+  font-size: 16px;
+  padding: 14px 18px;
+  border: var(--b);
+  border-radius: 12px;
+  background: var(--cream);
+  outline: none;
+}
+.sub-form input[type=email]:focus{
+  background: #fff;
+  box-shadow: 4px 4px 0 var(--magenta);
+  transform: translate(-2px, -2px);
+  transition: transform .15s, box-shadow .15s;
+}
+.sub-form button{
+  font-family: var(--font-bungee);
+  font-size: 16px;
+  padding: 16px 24px;
+  background: var(--lime);
+  border: var(--b-thicc);
+  border-radius: 12px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-pop);
+  transition: transform .15s, box-shadow .15s, background .15s;
+}
+.sub-form button:hover{
+  background: var(--yellow);
+  transform: translate(-3px,-3px);
+  box-shadow: 11px 11px 0 var(--ink);
+}
+.sub-form button:active{ transform: translate(3px,3px); box-shadow: 2px 2px 0 var(--ink) }
+.sub-form .meta{ font-size: 12px; color: var(--ink-2); font-family: var(--font-mono) }
+
+/* ────── FOOTER ────── */
+footer{
+  border-top: var(--b-thicc);
+  background: var(--ink);
+  color: var(--cream);
+  padding: 50px clamp(20px, 5vw, 60px);
+}
+.foot-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.foot-row .blob{
+  width: 48px; height: 48px;
+  background: var(--lime);
+  color: var(--ink);
+  border: var(--b);
+  border-radius: 50% 60% 55% 50% / 60% 50% 60% 55%;
+  display: grid; place-items: center;
+  font-family: var(--font-bowl);
+  font-size: 22px;
+  transform: rotate(8deg);
+  box-shadow: 4px 4px 0 var(--magenta);
+}
+.foot-row .links{ display: flex; gap: 20px; flex-wrap: wrap }
+.foot-row .links a{
+  font-family: var(--font-bungee);
+  font-size: 13px;
+  letter-spacing: 0.8px;
+  border-bottom: 3px solid var(--lime);
+  padding-bottom: 2px;
+  transition: color .15s, border-color .15s;
+}
+.foot-row .links a:hover{ color: var(--yellow); border-color: var(--yellow) }
+.foot-row .copy{ font-family: var(--font-mono); font-size: 12px; opacity: 0.8 }
+
+/* Lightning bolt decoration */
+.bolt{
+  position: absolute;
+  width: 40px; height: 60px;
+  background: var(--yellow);
+  border: var(--b);
+  clip-path: polygon(50% 0%, 0% 60%, 40% 60%, 25% 100%, 100% 35%, 60% 35%, 75% 0%);
+  filter: drop-shadow(3px 3px 0 var(--ink));
+}
+</style>
+</head>
+<body>
+
+  <!-- ── TAPE / NEWS TICKER ── -->
+  <div class="tape" aria-label="News ticker">
+    <div class="tape-track">
+      <span><span class="dot">●</span> NEW POST: Thirteen Agents in One Saturday</span>
+      <span><span class="star">★</span> 7× PRESIDENT'S CLUB</span>
+      <span><span class="dot">●</span> $2.3M ACV · 200% QUOTA YEAR 2</span>
+      <span><span class="star">★</span> NOW SHIPPING: gbrain Tier-2 wrappers</span>
+      <span><span class="dot">●</span> /ship-it · /gbrain-book · /gbrain-voice</span>
+      <span><span class="star">★</span> SACHIN LEVEL UP +1</span>
+      <!-- duplicated for seamless loop -->
+      <span><span class="dot">●</span> NEW POST: Thirteen Agents in One Saturday</span>
+      <span><span class="star">★</span> 7× PRESIDENT'S CLUB</span>
+      <span><span class="dot">●</span> $2.3M ACV · 200% QUOTA YEAR 2</span>
+      <span><span class="star">★</span> NOW SHIPPING: gbrain Tier-2 wrappers</span>
+      <span><span class="dot">●</span> /ship-it · /gbrain-book · /gbrain-voice</span>
+      <span><span class="star">★</span> SACHIN LEVEL UP +1</span>
+    </div>
+  </div>
+
+  <!-- ── NAV ── -->
+  <nav class="top">
+    <a href="#" class="logo" aria-label="Home">
+      <div class="blob">SR</div>
+      <div class="name">Sachin!!</div>
+    </a>
+    <div class="links">
+      <a href="#posts">Posts</a>
+      <a href="#builds">Builds</a>
+      <a href="#about">About</a>
+      <a href="#subscribe">Sign Up ↓</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div>
+      <span class="hero-eyebrow">★ WHERE AI MEETS ENTERPRISE SELLING ★</span>
+      <h1 class="headline">
+        BUILD<br>
+        <span class="pop">LOUD</span>
+        SHIP
+        <span class="pop2">FAST</span>
+      </h1>
+      <p class="lede">
+        Field notes from an <strong>Enterprise AE</strong> who closes 7-figure deals by day and ships <strong>AI agents</strong> by night. Trading systems, sales tools, knowledge stacks — built in public, shipped weekly.
+      </p>
+      <div class="cta-stack">
+        <a class="btn btn-primary" href="#posts">READ THE LATEST →</a>
+        <a class="btn btn-secondary" href="#subscribe">JOIN ↓</a>
+      </div>
+    </div>
+
+    <!-- Mascot: Sai (chunky AI Tamagotchi-style pet) -->
+    <div class="mascot-stage">
+      <div class="starburst s1">NEW<br>BUILDS!</div>
+      <div class="starburst s2" style="font-size:11px">7×<br>P-CLUB</div>
+      <svg class="mascot" viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg" aria-label="Sai mascot — your AI build pet">
+        <!-- antenna -->
+        <line x1="140" y1="40" x2="140" y2="10" stroke="#0a0a14" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="140" cy="8" r="10" fill="#ff2d87" stroke="#0a0a14" stroke-width="4"/>
+        <!-- body (rounded square / Tamagotchi) -->
+        <rect x="30" y="40" width="220" height="240" rx="60" fill="#00d4ff" stroke="#0a0a14" stroke-width="6"/>
+        <!-- screen -->
+        <rect x="60" y="80" width="160" height="120" rx="20" fill="#fff8e8" stroke="#0a0a14" stroke-width="5"/>
+        <!-- eyes (pixel style) -->
+        <rect x="92" y="115" width="20" height="28" fill="#0a0a14"/>
+        <rect x="168" y="115" width="20" height="28" fill="#0a0a14"/>
+        <!-- eye gleam -->
+        <rect x="96" y="119" width="6" height="6" fill="#fff"/>
+        <rect x="172" y="119" width="6" height="6" fill="#fff"/>
+        <!-- mouth -->
+        <path d="M 110 170 Q 140 195 170 170" stroke="#0a0a14" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <!-- cheeks -->
+        <circle cx="80" cy="160" r="10" fill="#ff2d87" opacity="0.8"/>
+        <circle cx="200" cy="160" r="10" fill="#ff2d87" opacity="0.8"/>
+        <!-- buttons under screen -->
+        <circle cx="90" cy="240" r="14" fill="#ffd400" stroke="#0a0a14" stroke-width="4"/>
+        <circle cx="140" cy="240" r="14" fill="#c4ff00" stroke="#0a0a14" stroke-width="4"/>
+        <circle cx="190" cy="240" r="14" fill="#ff7a00" stroke="#0a0a14" stroke-width="4"/>
+        <!-- name label -->
+        <rect x="100" y="265" width="80" height="22" rx="6" fill="#0a0a14"/>
+        <text x="140" y="281" text-anchor="middle" font-family="Bowlby One, sans-serif" font-size="14" fill="#c4ff00">SAI</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ── STATS ── -->
+  <section class="stats" aria-label="Career stats">
+    <div class="stat">
+      <div class="num">20+</div>
+      <div class="label">Years Enterprise SaaS</div>
+    </div>
+    <div class="stat">
+      <div class="num">$2.3M</div>
+      <div class="label">ACV @ 200% Quota</div>
+    </div>
+    <div class="stat">
+      <div class="num">7×</div>
+      <div class="label">President's Club</div>
+    </div>
+    <div class="stat">
+      <div class="num">8+</div>
+      <div class="label">AI Tools Shipped 2026</div>
+    </div>
+  </section>
+
+  <!-- ── POSTS ── -->
+  <div class="section-head">
+    <h2>The <span class="scribble">Posts!!</span></h2>
+    <span class="count">8 SHIPPED</span>
+  </div>
+
+  <section id="posts" class="posts">
+
+    <article class="post span-2">
+      <span class="badge new">NEW!</span>
+      <span class="kicker k-trade">▲ Trading</span>
+      <h3>Thirteen Agents in One Saturday.</h3>
+      <p>I spawned 13 parallel Claude Code agents on a Saturday morning. Each shipped one feature for my trading system. One of them overturned the hypothesis from feature #1.</p>
+      <div class="meta">
+        <span>2026-05-02</span>
+        <span class="read">READ →</span>
+      </div>
+    </article>
+
+    <article class="post span-1-5">
+      <span class="kicker k-vault">◆ Vault</span>
+      <h3>I Renamed Seven AI Agents.</h3>
+      <p>Brick, Owl, Bull, Falcon, Spider, Arrow, Sage are dead. Scanner, Grader, SwingTrader, DayPut, DayCondor, Outreach, Vault are alive. The rename touched 26 files.</p>
+      <div class="meta">
+        <span>2026-05-02</span>
+        <span class="read">READ →</span>
+      </div>
+    </article>
+
+    <article class="post span-2-5">
+      <span class="badge hot">HOT</span>
+      <span class="kicker k-ai">★ AI</span>
+      <h3>I built a personal LLM knowledge base in Obsidian.</h3>
+      <p>Raw data in, compiled wiki out. How I use Claude Code to turn everything I read and watch into a searchable, queryable knowledge base — and why this is the most underrated AI workflow right now.</p>
+      <div class="meta">
+        <span>2026-05-02</span>
+        <span class="read">READ →</span>
+      </div>
+    </article>
+
+    <article class="post span-1">
+      <span class="kicker k-vault">◆ Vault</span>
+      <h3>Five Cheap Fixes Took My Vault From 7.5 To 9.5.</h3>
+      <p>A 90-minute lint pass on a knowledge vault. 19 missing banners, 132 unindexed notes, 24 confidence gaps, 6 open concept gaps.</p>
+      <div class="meta">
+        <span>2026-05-02</span>
+        <span class="read">READ →</span>
+      </div>
+    </article>
+
+    <article class="post span-1-5">
+      <span class="kicker k-ai">★ AI</span>
+      <h3>Most Second Brains Just Rotate.</h3>
+      <p>I have 88 concept articles, 301 sources, 13 production agents. Most "second brain" stacks fail because they confuse output with compounding. Three laws decide which yours is.</p>
+      <div class="meta">
+        <span>2026-05-02</span>
+        <span class="read">READ →</span>
+      </div>
+    </article>
+
+    <article class="post span-2">
+      <span class="kicker k-ai">★ AI</span>
+      <h3>7 AI trends I'm tracking in 2026.</h3>
+      <p>From compute explosions to org-design collapse — what my AI research vault is actually telling me about where this goes next. Plus one non-obvious conclusion.</p>
+      <div class="meta">
+        <span>2026-04-04</span>
+        <span class="read">READ →</span>
+      </div>
+    </article>
+
+    <article class="post span-1-5">
+      <span class="kicker k-sales">● Sales</span>
+      <h3>The AI tools replacing my sales stack in 2026.</h3>
+      <p>From cold-email scoring to deal review to prospect research — what I've actually replaced with AI tools and what still needs a human.</p>
+      <div class="meta">
+        <span>2026-03-10</span>
+        <span class="read">READ →</span>
+      </div>
+    </article>
+
+    <article class="post span-2-5">
+      <span class="badge new">★</span>
+      <span class="kicker k-trade">▲ Trading</span>
+      <h3>Win Rate Lies.</h3>
+      <p>A 90% win rate signal in my trading system was bleeding money at −1.04% expectancy per trade. The same Trojan Horse is hiding in every sales pipeline I've managed.</p>
+      <div class="meta">
+        <span>2026-04-26</span>
+        <span class="read">READ →</span>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ── BUILDS STRIP ── -->
+  <section id="builds" class="builds">
+    <h2>Stuff I<br>Built ⚡</h2>
+    <div class="builds-grid">
+      <div class="build-card">
+        <div class="icon">📧</div>
+        <h3>Cold Email Generator</h3>
+        <p>AI-powered cold email writer for B2B outbound. Live and free.</p>
+      </div>
+      <div class="build-card">
+        <div class="icon">📊</div>
+        <h3>Subject Line Scorer</h3>
+        <p>Score and rewrite subject lines for higher open rates.</p>
+      </div>
+      <div class="build-card">
+        <div class="icon">🤖</div>
+        <h3>AutoQuant V6.12</h3>
+        <p>Multi-agent trading-rule discovery engine. 825 concept pages indexed.</p>
+      </div>
+      <div class="build-card">
+        <div class="icon">🧠</div>
+        <h3>gbrain Tier-2 Wrappers</h3>
+        <p>7 slash commands: book mirror, voice ingest, meeting prep, code search.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SUBSCRIBE ── -->
+  <section id="subscribe" class="subscribe">
+    <div>
+      <h2>Get the<br><span class="glow">Goods!</span></h2>
+      <p>One email a week. New post + a free build template. Drop your email — Sai will send it personally.</p>
+    </div>
+    <form class="sub-form" onsubmit="event.preventDefault(); alert('Mockup only — wire to real form later.');">
+      <input type="email" placeholder="you@aol.com" required aria-label="Email address" />
+      <button type="submit">Press START to Sign Up</button>
+      <span class="meta">No spam. Unsubscribe anytime. Mascot-approved.</span>
+    </form>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="foot-row">
+      <div style="display:flex; align-items:center; gap:14px">
+        <div class="blob">SR</div>
+        <span style="font-family:var(--font-bowl); font-size:18px">SACHIN!!</span>
+      </div>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/sachinr1/">LinkedIn</a>
+        <a href="https://x.com/sachinrai">Twitter / X</a>
+        <a href="mailto:sachinai1981@gmail.com">Email</a>
+        <a href="resume.html">Resume ↗</a>
+      </div>
+      <div class="copy">© 2026 SACHIN RAI · MOCKUP — KIDCORE V1</div>
+    </div>
+  </footer>
+
+</body>
+</html>
