@@ -151,14 +151,71 @@
 
         <p>The critical insight is that signal performance is conditional. RSI divergence might have a 58% hit rate in low-volatility conditions and a 31% hit rate in high-VIX environments. A naive system treats these as the same signal. AutoQuant conditions each signal's weight on the market regime it is operating in. This means the same set of rules produces very different behavior depending on whether we are in a trending, volatile, or ranging environment.</p>
 
-        
-<figure class="article-img-break">
-  <img class="article-img-break__img"
-       src="https://images.unsplash.com/photo-1776053473082-9520f829fbbb?w=1200&q=90&auto=format&fit=crop"
-       alt="3D Signal Architecture" loading="lazy">
-  <figcaption class="article-img-break__label">3D Signal Architecture</figcaption>
+
+<figure class="article-diagram" aria-label="Signal scoring architecture diagram">
+  <svg viewBox="0 0 860 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Six signal categories feed into the Bayesian Grader which outputs a conviction score">
+    <rect width="860" height="360" fill="#0d0d0b"/>
+    <!-- left column: 6 signal labels -->
+    <!-- pill rects at x=20, w=210, h=36, ry=2 -->
+    <!-- y centers: 48, 100, 152, 204, 256, 308 -->
+    <g fill="none" stroke="rgba(244,241,235,0.12)" stroke-width="1">
+      <rect x="20" y="30"  width="210" height="36" rx="2"/>
+      <rect x="20" y="82"  width="210" height="36" rx="2"/>
+      <rect x="20" y="134" width="210" height="36" rx="2"/>
+      <rect x="20" y="186" width="210" height="36" rx="2"/>
+      <rect x="20" y="238" width="210" height="36" rx="2"/>
+      <rect x="20" y="290" width="210" height="36" rx="2"/>
+    </g>
+    <g font-family="'Barlow',system-ui,sans-serif" font-size="10" font-weight="700" letter-spacing="0.18em" fill="rgba(244,241,235,0.6)" text-anchor="middle" text-transform="uppercase">
+      <text x="125" y="52" dominant-baseline="middle">MOMENTUM</text>
+      <text x="125" y="100" dominant-baseline="middle">MEAN-REVERSION</text>
+      <text x="125" y="152" dominant-baseline="middle">STRUCTURE</text>
+      <text x="125" y="204" dominant-baseline="middle">OPTIONS FLOW</text>
+      <text x="125" y="256" dominant-baseline="middle">MACRO REGIME</text>
+      <text x="125" y="308" dominant-baseline="middle">EARNINGS</text>
+    </g>
+    <!-- connector lines: from x=230 to x=310 -->
+    <g stroke="rgba(184,168,130,0.3)" stroke-width="1" fill="none">
+      <line x1="230" y1="48"  x2="310" y2="160"/>
+      <line x1="230" y1="100" x2="310" y2="175"/>
+      <line x1="230" y1="152" x2="310" y2="187"/>
+      <line x1="230" y1="204" x2="310" y2="200"/>
+      <line x1="230" y1="256" x2="310" y2="210"/>
+      <line x1="230" y1="308" x2="310" y2="222"/>
+    </g>
+    <!-- central grader box -->
+    <rect x="310" y="110" width="240" height="160" rx="2" fill="#161b1f" stroke="rgba(184,168,130,0.5)" stroke-width="1.5"/>
+    <text x="430" y="170" font-family="'Barlow',system-ui,sans-serif" font-size="9" font-weight="700" letter-spacing="0.32em" fill="#b8a882" text-anchor="middle" dominant-baseline="middle">BAYESIAN GRADER</text>
+    <line x1="360" y1="185" x2="500" y2="185" stroke="rgba(184,168,130,0.2)" stroke-width="1"/>
+    <text x="430" y="202" font-family="'Barlow',system-ui,sans-serif" font-size="9" letter-spacing="0.1em" fill="rgba(244,241,235,0.45)" text-anchor="middle" dominant-baseline="middle">P(win | signal, regime)</text>
+    <text x="430" y="222" font-family="'Barlow',system-ui,sans-serif" font-size="9" letter-spacing="0.1em" fill="rgba(244,241,235,0.45)" text-anchor="middle" dominant-baseline="middle">updates per trade outcome</text>
+    <!-- regime badge -->
+    <rect x="350" y="248" width="160" height="22" rx="1" fill="rgba(184,168,130,0.1)" stroke="rgba(184,168,130,0.3)" stroke-width="1"/>
+    <text x="430" y="259" font-family="'Barlow',system-ui,sans-serif" font-size="8" font-weight="700" letter-spacing="0.22em" fill="#b8a882" text-anchor="middle" dominant-baseline="middle">REGIME-CONDITIONED</text>
+    <!-- connector lines: from x=550 to x=620 -->
+    <g stroke="rgba(184,168,130,0.3)" stroke-width="1" fill="none">
+      <line x1="550" y1="165" x2="620" y2="130"/>
+      <line x1="550" y1="220" x2="620" y2="255"/>
+    </g>
+    <!-- output: TRADE QUEUE -->
+    <rect x="620" y="110" width="210" height="50" rx="2" fill="#1e2820" stroke="rgba(100,200,120,0.4)" stroke-width="1.5"/>
+    <text x="725" y="127" font-family="'Barlow',system-ui,sans-serif" font-size="9" font-weight="700" letter-spacing="0.28em" fill="rgba(100,220,130,0.85)" text-anchor="middle" dominant-baseline="middle">TRADE QUEUE</text>
+    <text x="725" y="146" font-family="'Barlow',system-ui,sans-serif" font-size="9" letter-spacing="0.1em" fill="rgba(244,241,235,0.4)" text-anchor="middle" dominant-baseline="middle">score ≥ threshold</text>
+    <!-- output: SKIP + LOG -->
+    <rect x="620" y="230" width="210" height="50" rx="2" fill="#1d1716" stroke="rgba(200,100,80,0.35)" stroke-width="1.5"/>
+    <text x="725" y="247" font-family="'Barlow',system-ui,sans-serif" font-size="9" font-weight="700" letter-spacing="0.28em" fill="rgba(220,120,100,0.75)" text-anchor="middle" dominant-baseline="middle">SKIP + LOG</text>
+    <text x="725" y="266" font-family="'Barlow',system-ui,sans-serif" font-size="9" letter-spacing="0.1em" fill="rgba(244,241,235,0.4)" text-anchor="middle" dominant-baseline="middle">updates prior anyway</text>
+    <!-- label: CONVICTION SCORE indicator dots -->
+    <g fill="rgba(184,168,130,0.6)">
+      <circle cx="430" cy="95" r="2"/>
+      <circle cx="442" cy="95" r="2"/>
+      <circle cx="454" cy="95" r="2"/>
+    </g>
+  </svg>
+  <figcaption>Signal Scoring Architecture</figcaption>
 </figure>
-<h2 id="how-the-scanner-works">How the Scanner Works</h2>
+
+        <h2 id="how-the-scanner-works">How the Scanner Works</h2>
 
         <p>The scanner runs twice daily — at 9:15am ET (after pre-market settles) and at 2:30pm ET (before the close volatility window). Each run scans a watchlist of 80 names across six signal categories:</p>
 
@@ -198,14 +255,94 @@
           </div>
         </div>
 
-        
-<figure class="article-img-break">
-  <img class="article-img-break__img"
-       src="https://images.unsplash.com/photo-1742717817785-54249562494c?w=1200&q=90&auto=format&fit=crop"
-       alt="Market Regime Render" loading="lazy">
-  <figcaption class="article-img-break__label">Market Regime Render</figcaption>
+
+<figure class="article-diagram" aria-label="Market regime signal weight diagram">
+  <svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Signal posterior weights across three market regimes: trending, volatile, ranging">
+    <rect width="860" height="300" fill="#0d0d0b"/>
+    <!-- title -->
+    <text x="430" y="32" font-family="'Barlow',system-ui,sans-serif" font-size="9" font-weight="700" letter-spacing="0.32em" fill="#b8a882" text-anchor="middle" dominant-baseline="middle">POSTERIOR WEIGHTS BY REGIME</text>
+    <!-- Regime labels at top -->
+    <text x="175" y="60" font-family="'Barlow',system-ui,sans-serif" font-size="9" font-weight="700" letter-spacing="0.22em" fill="rgba(100,220,130,0.8)" text-anchor="middle">TRENDING</text>
+    <text x="430" y="60" font-family="'Barlow',system-ui,sans-serif" font-size="9" font-weight="700" letter-spacing="0.22em" fill="rgba(220,180,80,0.8)" text-anchor="middle">VOLATILE</text>
+    <text x="685" y="60" font-family="'Barlow',system-ui,sans-serif" font-size="9" font-weight="700" letter-spacing="0.22em" fill="rgba(100,160,255,0.8)" text-anchor="middle">RANGING</text>
+    <!-- dividers -->
+    <line x1="300" y1="50" x2="300" y2="285" stroke="rgba(244,241,235,0.07)" stroke-width="1"/>
+    <line x1="560" y1="50" x2="560" y2="285" stroke="rgba(244,241,235,0.07)" stroke-width="1"/>
+    <!-- Signal rows: y positions 90,130,170,210,250 -->
+    <!-- Signal labels left side of each regime column (3x) -->
+    <!-- Regime 1: TRENDING -->
+    <!-- Options Flow 0.82, Momentum 0.73, Structure 0.61, RSI 0.38, BB 0.29 -->
+    <g font-family="'Barlow',system-ui,sans-serif" font-size="8" letter-spacing="0.1em" fill="rgba(244,241,235,0.4)" text-anchor="start">
+      <text x="30"  y="93">OPTIONS FLOW</text>
+      <text x="30"  y="133">MOMENTUM</text>
+      <text x="30"  y="173">STRUCTURE</text>
+      <text x="30"  y="213">RSI ALONE</text>
+      <text x="30"  y="253">BB TOUCH</text>
+    </g>
+    <!-- Trending bars (green) max bar width ~200 at x=30 -->
+    <g fill="rgba(100,220,130,0.22)" stroke="rgba(100,220,130,0.45)" stroke-width="1">
+      <rect x="30" y="98"  width="164" height="14" rx="1"/>
+      <rect x="30" y="138" width="146" height="14" rx="1"/>
+      <rect x="30" y="178" width="122" height="14" rx="1"/>
+      <rect x="30" y="218" width="76"  height="14" rx="1"/>
+      <rect x="30" y="258" width="58"  height="14" rx="1"/>
+    </g>
+    <g font-family="'Barlow',system-ui,sans-serif" font-size="8" font-weight="700" fill="rgba(100,220,130,0.7)" text-anchor="end">
+      <text x="200" y="109">0.82</text>
+      <text x="182" y="149">0.73</text>
+      <text x="158" y="189">0.61</text>
+      <text x="112" y="229">0.38</text>
+      <text x="94"  y="269">0.29</text>
+    </g>
+    <!-- Volatile bars (yellow) at x=310 -->
+    <g font-family="'Barlow',system-ui,sans-serif" font-size="8" letter-spacing="0.1em" fill="rgba(244,241,235,0.4)" text-anchor="start">
+      <text x="288" y="93">OPTIONS FLOW</text>
+      <text x="288" y="133">EARNINGS</text>
+      <text x="288" y="173">MACRO</text>
+      <text x="288" y="213">MOMENTUM</text>
+      <text x="288" y="253">RSI ALONE</text>
+    </g>
+    <g fill="rgba(220,180,80,0.2)" stroke="rgba(220,180,80,0.45)" stroke-width="1">
+      <rect x="288" y="98"  width="172" height="14" rx="1"/>
+      <rect x="288" y="138" width="148" height="14" rx="1"/>
+      <rect x="288" y="178" width="136" height="14" rx="1"/>
+      <rect x="288" y="218" width="94"  height="14" rx="1"/>
+      <rect x="288" y="258" width="50"  height="14" rx="1"/>
+    </g>
+    <g font-family="'Barlow',system-ui,sans-serif" font-size="8" font-weight="700" fill="rgba(220,180,80,0.7)" text-anchor="end">
+      <text x="466" y="109">0.69</text>
+      <text x="442" y="149">0.59</text>
+      <text x="430" y="189">0.54</text>
+      <text x="388" y="229">0.37</text>
+      <text x="344" y="269">0.20</text>
+    </g>
+    <!-- Ranging bars (blue) at x=568 -->
+    <g font-family="'Barlow',system-ui,sans-serif" font-size="8" letter-spacing="0.1em" fill="rgba(244,241,235,0.4)" text-anchor="start">
+      <text x="546" y="93">STRUCTURE</text>
+      <text x="546" y="133">MEAN-REV.</text>
+      <text x="546" y="173">OPTIONS FLOW</text>
+      <text x="546" y="213">MOMENTUM</text>
+      <text x="546" y="253">MACRO</text>
+    </g>
+    <g fill="rgba(100,160,255,0.18)" stroke="rgba(100,160,255,0.4)" stroke-width="1">
+      <rect x="546" y="98"  width="178" height="14" rx="1"/>
+      <rect x="546" y="138" width="160" height="14" rx="1"/>
+      <rect x="546" y="178" width="122" height="14" rx="1"/>
+      <rect x="546" y="218" width="72"  height="14" rx="1"/>
+      <rect x="546" y="258" width="48"  height="14" rx="1"/>
+    </g>
+    <g font-family="'Barlow',system-ui,sans-serif" font-size="8" font-weight="700" fill="rgba(100,160,255,0.65)" text-anchor="end">
+      <text x="730" y="109">0.71</text>
+      <text x="712" y="149">0.64</text>
+      <text x="674" y="189">0.49</text>
+      <text x="624" y="229">0.29</text>
+      <text x="600" y="269">0.19</text>
+    </g>
+  </svg>
+  <figcaption>Market Regime Signal Weights</figcaption>
 </figure>
-<h2 id="what-6-months-of-data-taught-me">What 6 Months of Data Taught Me</h2>
+
+        <h2 id="what-6-months-of-data-taught-me">What 6 Months of Data Taught Me</h2>
 
         <p>The most important thing the data showed me is not which signals work — it is which signals are real versus which feel real. There is a large category of signals that look compelling in a sample of 10-20 trades and statistically wash out across 100+. The Bayesian grader is ruthless about this. Signals that are noise will trend toward 50% win rates over time, and the system will de-weight them automatically.</p>
 

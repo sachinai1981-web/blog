@@ -1556,3 +1556,131 @@ body.hero-page { padding-top: 0; } /* hero pages — nav overlays hero */
   .article-img-break__img { height: 240px; }
   .article-img-break { margin: 48px 0; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   ARTICLE FLOWCHART
+   ══════════════════════════════════════════════════════════════ */
+.article-flowchart {
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(0,0,0,0.07);
+  padding: 52px 40px 48px;
+  margin: 48px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  font-family: var(--font-body);
+}
+
+.flow-node {
+  background: var(--color-bg);
+  border: 1px solid rgba(0,0,0,0.12);
+  padding: 14px 28px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  max-width: 340px;
+  width: 100%;
+  line-height: 1.5;
+}
+
+.flow-node--decision {
+  background: var(--color-text);
+  color: var(--color-bg);
+  border-color: var(--color-text);
+}
+
+.flow-arrow {
+  font-size: 22px;
+  color: var(--color-text-muted);
+  line-height: 1;
+  padding: 10px 0;
+  opacity: 0.45;
+}
+
+.flow-branch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+}
+
+.flow-branch::before {
+  content: '';
+  position: absolute;
+  top: 0; left: calc(50% - 16px); right: calc(50% - 16px);
+  height: 1px;
+  background: rgba(0,0,0,0.12);
+}
+
+.flow-branch-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding-top: 24px;
+}
+
+.flow-branch-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding-bottom: 12px;
+}
+
+.flow-branch-item .flow-node {
+  max-width: 260px;
+  font-size: 10px;
+}
+
+.flow-branch-item .flow-arrow {
+  padding: 8px 0;
+}
+
+@media (max-width: 600px) {
+  .article-flowchart { padding: 32px 20px; }
+  .flow-branch { grid-template-columns: 1fr; gap: 0; }
+  .flow-branch::before { display: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ARTICLE SVG DIAGRAM
+   ══════════════════════════════════════════════════════════════ */
+.article-diagram {
+  margin: 56px 0;
+  display: block;
+}
+
+.article-diagram figcaption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.article-diagram figcaption::before {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.25;
+}
+
+.article-diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(0,0,0,0.06);
+}
