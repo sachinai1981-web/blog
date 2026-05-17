@@ -429,7 +429,7 @@
       requestAnimationFrame(tick);
       obs.unobserve(el);
     });
-  }, {threshold: 0.5});
+  }, {threshold: 0.1, rootMargin: "0px 0px 50px 0px"});
   els.forEach(function(el){ obs.observe(el); });
 })();
 </script>

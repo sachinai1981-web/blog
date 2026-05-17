@@ -33,230 +33,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/css/grove.css" />
-<style>
-  /* About page extras */
-  .about-wrap {
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 7rem 3.125rem 5rem;
-  }
-  @media (max-width: 768px) {
-    .about-wrap { padding: 6rem 1.25rem 4rem; }
-  }
-  .about-eyebrow {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    margin-bottom: 1.25rem;
-    display: block;
-  }
-  .about-h1 {
-    font-family: var(--font-display);
-    font-size: clamp(2.8rem, 8vw, 5.5rem);
-    font-weight: 300;
-    line-height: 1;
-    margin-bottom: 3rem;
-  }
-
-  /* Bio 2-col */
-  .bio-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    margin-bottom: 5rem;
-    align-items: start;
-  }
-  @media (max-width: 768px) { .bio-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
-
-  .bio-text p {
-    font-family: var(--font-body);
-    font-size: 17px;
-    font-weight: 300;
-    line-height: 1.8;
-    letter-spacing: 0.5px;
-    color: var(--color-text);
-    margin-bottom: 1.25rem;
-  }
-  .bio-text p strong {
-    font-weight: 700;
-  }
-
-  .bio-meta { border-left: 1px solid var(--color-border); padding-left: 1.5rem; }
-  .bio-meta .meta-label {
-    font-family: var(--font-body);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    margin-bottom: 0.35rem;
-    margin-top: 1.5rem;
-  }
-  .bio-meta .meta-label:first-child { margin-top: 0; }
-  .bio-meta .meta-value {
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 300;
-    letter-spacing: 0.5px;
-    color: var(--color-text);
-    line-height: 1.6;
-  }
-  .bio-meta .meta-value a {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    color: inherit;
-  }
-  .bio-meta .meta-value a:hover { color: var(--color-text-secondary); }
-
-  /* Divider */
-  .about-divider {
-    border: none;
-    border-top: 1px solid rgba(0,0,0,0.08);
-    margin: 4rem 0;
-  }
-
-  /* Section header */
-  .about-section-label {
-    font-family: var(--font-body);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    margin-bottom: 2rem;
-    display: block;
-  }
-
-  /* Now list */
-  .now-list { list-style: none; padding: 0; }
-  .now-list li {
-    display: flex;
-    gap: 1.5rem;
-    padding: 1.25rem 0;
-    border-bottom: 1px solid rgba(0,0,0,0.07);
-    align-items: flex-start;
-  }
-  .now-list li:last-child { border-bottom: 0; }
-  .now-tag {
-    font-family: var(--font-body);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    background: var(--color-text);
-    color: #fff;
-    padding: 0.25rem 0.6rem;
-    flex-shrink: 0;
-    margin-top: 0.1rem;
-  }
-  .now-tag-alt { background: var(--color-bg-dark-nav); }
-  .now-text {
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 300;
-    letter-spacing: 0.5px;
-    line-height: 1.6;
-    color: var(--color-text);
-  }
-  .now-text small {
-    display: block;
-    font-size: 11px;
-    font-weight: 300;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    margin-top: 0.3rem;
-  }
-
-  /* Post cards */
-  .about-post-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: rgba(0,0,0,0.08);
-  }
-  @media (max-width: 600px) { .about-post-grid { grid-template-columns: 1fr; } }
-  .about-post-card {
-    background: var(--color-bg);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    text-decoration: none;
-    color: inherit;
-    transition: background 0.2s;
-  }
-  .about-post-card:hover { background: var(--color-bg-secondary); }
-  .about-post-num {
-    font-family: var(--font-body);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-  }
-  .about-post-title {
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 300;
-    line-height: 1.2;
-    color: var(--color-text);
-  }
-  .about-post-meta {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 300;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-  }
-
-  /* CTA block */
-  .about-cta {
-    background: var(--color-bg-dark-nav);
-    color: #fff;
-    padding: 3rem;
-    margin-top: 4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  .about-cta-text p:first-child {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 300;
-    margin-bottom: 0.4rem;
-  }
-  .about-cta-text p:last-child {
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 300;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-  }
-  .about-cta a {
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    padding: 0.85rem 1.5rem;
-    border: 1px solid rgba(255,255,255,0.3);
-    color: #fff;
-    white-space: nowrap;
-    transition: border-color 0.2s, background 0.2s;
-    text-decoration: none;
-  }
-  .about-cta a:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
-</style>
 </head>
-<body style="padding-top:60px;">
+<body>
 <div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#161b1f;color:#f4f1e8;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'Barlow',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;border-top:1px solid rgba(255,255,255,.15);">
   <span style="flex:1;opacity:.8;">sachinai.com uses analytics to understand what people read. No ads. Data stays in Google Analytics.</span>
   <div style="display:flex;gap:.5rem;flex-shrink:0;">
@@ -282,16 +60,14 @@
 <nav class="navbar navbar--dark" id="navbar">
   <div class="navbar-inner">
     <div class="navbar-left">
-      <a href="/" class="navbar__logo-link">Sachin Rai</a>
+      <a href="/" class="navbar__link">Writing</a>
+      <a href="/tools.html" class="navbar__link">Tools</a>
     </div>
     <div class="navbar-center">
-      <a href="/" class="navbar__link" style="margin:0 1rem;">Essays</a>
-      <a href="/about.html" class="navbar__link" style="margin:0 1rem;">About</a>
-      <a href="/archive.html" class="navbar__link" style="margin:0 1rem;">Archive</a>
-      <a href="/tools.html" class="navbar__link" style="margin:0 1rem;">Tools</a>
+      <a href="/" class="navbar__logo-link">◆ SACHIN RAI</a>
     </div>
     <div class="navbar-right">
-      <a href="/#subscribe" class="v2-button v2-button--white">Subscribe</a>
+      <a href="/about.html" class="navbar__link">About</a>
     </div>
   </div>
 </nav>
@@ -369,22 +145,22 @@
   <span class="about-section-label">Recent essays</span>
   <div class="about-post-grid">
     <a class="about-post-card" href="/posts/13-agents-one-saturday.html">
-      <span class="about-post-num">009 · Essay · AI</span>
+      <span class="about-post-num">001 · Essay · AI</span>
       <span class="about-post-title">Thirteen Agents in One Saturday.</span>
       <span class="about-post-meta">10 min · May 2026</span>
     </a>
     <a class="about-post-card" href="/posts/compounding-systems.html">
-      <span class="about-post-num">008 · Knowledge</span>
+      <span class="about-post-num">002 · Knowledge</span>
       <span class="about-post-title">Most Second Brains Just Rotate.</span>
       <span class="about-post-meta">10 min · May 2026</span>
     </a>
     <a class="about-post-card" href="/posts/win-rate-trap.html">
-      <span class="about-post-num">002 · Strategy</span>
+      <span class="about-post-num">007 · Strategy</span>
       <span class="about-post-title">Win Rate Lies.</span>
       <span class="about-post-meta">07 min · Apr 2026</span>
     </a>
     <a class="about-post-card" href="/posts/ai-sales-stack-2026.html">
-      <span class="about-post-num">005 · Strategy</span>
+      <span class="about-post-num">008 · Strategy</span>
       <span class="about-post-title">The AI Sales Stack I'd Build Today.</span>
       <span class="about-post-meta">08 min · Feb 2026</span>
     </a>
@@ -409,6 +185,7 @@
       <a href="/about.html" class="footer__link">About</a>
       <a href="/archive.html" class="footer__link">Archive</a>
       <a href="/tools.html" class="footer__link">Tools</a>
+      <a href="/resume.html" class="footer__link">Resume</a>
       <a href="/rss.xml" class="footer__link">RSS</a>
     </nav>
     <div class="v2-footer__newsletter">
@@ -421,10 +198,11 @@
     </div>
   </div>
   <div class="v2-footer__bottom">
-    <span>© 2026 Sachin Rai · Field notes from San Francisco</span>
+    <span>© 2026 Sachin Rai · Field Notes from San Francisco</span>
     <div class="v2-footer__social">
       <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">X ↗</a>
       <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener">GitHub ↗</a>
       <a href="/privacy.html">Privacy</a>
     </div>
   </div>

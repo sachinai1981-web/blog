@@ -812,34 +812,32 @@
 
 <!-- FOOTER -->
 <footer class="v2-footer">
-  <div class="container">
-    <div class="v2-footer__top">
-      <button class="v2-footer__go-up" id="go-up" aria-label="Scroll to top">GO UP ↑</button>
+  <button class="v2-footer__scroll-up" onclick="window.scrollTo({top:0,behavior:'smooth'});" aria-label="Scroll to top">↑<br/>GO UP</button>
+  <div class="v2-footer__inner">
+    <nav class="v2-footer__nav" aria-label="Footer navigation">
+      <a href="/" class="footer__link">Essays</a>
+      <a href="/about.html" class="footer__link">About</a>
+      <a href="/archive.html" class="footer__link">Archive</a>
+      <a href="/tools.html" class="footer__link">Tools</a>
+      <a href="/resume.html" class="footer__link">Resume</a>
+      <a href="/rss.xml" class="footer__link">RSS</a>
+    </nav>
+    <div class="v2-footer__newsletter">
+      <div class="v2-footer__newsletter-title">Field Notes</div>
+      <p class="v2-footer__newsletter-text">One essay per week. AI infrastructure, trading systems, and what actually ships.</p>
+      <form class="v2-footer__email-form" action="https://formspree.io/f/xwvwlybd" method="POST">
+        <input class="v2-footer__email-input" type="email" name="email" placeholder="your@email.com" required />
+        <button class="v2-footer__email-submit" type="submit">Subscribe →</button>
+      </form>
     </div>
-    <div class="v2-footer__mid">
-      <div class="v2-footer__newsletter">
-        <p class="v2-footer__newsletter-label">Field Notes — weekly</p>
-        <form class="v2-footer__email-form" action="https://formspree.io/f/xwvwlybd" method="POST">
-          <input type="email" name="email" class="v2-footer__email-input" placeholder="your@email.com" required />
-          <button type="submit" class="v2-footer__email-submit">Subscribe</button>
-        </form>
-      </div>
-      <nav class="v2-footer__nav">
-        <a href="/" class="v2-footer__nav-link">Essays</a>
-        <a href="/about.html" class="v2-footer__nav-link">About</a>
-        <a href="/archive.html" class="v2-footer__nav-link">Archive</a>
-        <a href="/tools.html" class="v2-footer__nav-link">Tools</a>
-        <a href="/resume.html" class="v2-footer__nav-link">Resume</a>
-        <a href="/rss.xml" class="v2-footer__nav-link">RSS</a>
-      </nav>
-      <div class="v2-footer__social">
-        <a href="https://x.com/sachinrai01" target="_blank" rel="noopener" class="v2-footer__social-link">X (Twitter)</a>
-        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener" class="v2-footer__social-link">LinkedIn</a>
-        <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener" class="v2-footer__social-link">GitHub</a>
-      </div>
-    </div>
-    <div class="v2-footer__bottom">
-      <p class="v2-footer__copy">© 2026 Sachin Rai · Field Notes from San Francisco · <a href="/privacy.html">Privacy</a></p>
+  </div>
+  <div class="v2-footer__bottom">
+    <span>© 2026 Sachin Rai · Field Notes from San Francisco</span>
+    <div class="v2-footer__social">
+      <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">X ↗</a>
+      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="/privacy.html">Privacy</a>
     </div>
   </div>
 </footer>

@@ -22,25 +22,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/css/grove.css" />
 <style>
-  .privacy-nav-bar {
-    background: var(--color-bg-dark-nav);
-    padding: 0.55rem 3.125rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.6);
-  }
-  .privacy-nav-bar a {
-    color: rgba(255,255,255,0.6);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .privacy-nav-bar a:hover { color: #fff; }
   .privacy-page-wrap {
     max-width: 680px;
     margin: 0 auto;
@@ -151,10 +132,20 @@
 })();
 </script>
 
-<div class="privacy-nav-bar">
-  <a href="/">Sachin Rai</a>
-  <span>Privacy Policy</span>
-</div>
+<nav class="navbar navbar--dark" id="navbar">
+  <div class="navbar-inner">
+    <div class="navbar-left">
+      <a href="/" class="navbar__link">Writing</a>
+      <a href="/tools.html" class="navbar__link">Tools</a>
+    </div>
+    <div class="navbar-center">
+      <a href="/" class="navbar__logo-link">◆ SACHIN RAI</a>
+    </div>
+    <div class="navbar-right">
+      <a href="/about.html" class="navbar__link">About</a>
+    </div>
+  </div>
+</nav>
 
 <main>
 <div class="privacy-page-wrap">
@@ -174,7 +165,7 @@
   <p>No cookies are set. No fingerprinting occurs. No third-party pixels or trackers are loaded.</p>
 
   <div class="privacy-h2">Analytics</div>
-  <p>No analytics are currently active on this site. If Google Analytics (GA4) is added in the future, this policy will be updated and a cookie consent banner will be displayed before any tracking begins.</p>
+  <p>This site uses Google Analytics (GA4) with consent-gating. Analytics tracking only activates after you explicitly accept via the cookie consent banner shown on your first visit. If you decline, no analytics data is collected. You can change your choice at any time by clearing your browser's localStorage for this domain.</p>
 
   <div class="privacy-h2">Third-party services</div>
   <ul>
@@ -195,6 +186,38 @@
 </div>
 </main>
 
+<footer class="v2-footer">
+  <button class="v2-footer__scroll-up" onclick="window.scrollTo({top:0,behavior:'smooth'});" aria-label="Scroll to top">↑<br/>GO UP</button>
+  <div class="v2-footer__inner">
+    <nav class="v2-footer__nav" aria-label="Footer navigation">
+      <a href="/" class="footer__link">Essays</a>
+      <a href="/about.html" class="footer__link">About</a>
+      <a href="/archive.html" class="footer__link">Archive</a>
+      <a href="/tools.html" class="footer__link">Tools</a>
+      <a href="/resume.html" class="footer__link">Resume</a>
+      <a href="/rss.xml" class="footer__link">RSS</a>
+    </nav>
+    <div class="v2-footer__newsletter">
+      <div class="v2-footer__newsletter-title">Field Notes</div>
+      <p class="v2-footer__newsletter-text">One essay per week. AI infrastructure, trading systems, and what actually ships.</p>
+      <form class="v2-footer__email-form" action="https://formspree.io/f/xwvwlybd" method="POST">
+        <input class="v2-footer__email-input" type="email" name="email" placeholder="your@email.com" required />
+        <button class="v2-footer__email-submit" type="submit">Subscribe →</button>
+      </form>
+    </div>
+  </div>
+  <div class="v2-footer__bottom">
+    <span>© 2026 Sachin Rai · Field Notes from San Francisco</span>
+    <div class="v2-footer__social">
+      <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">X ↗</a>
+      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="/privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/css/grove.js"></script>
 <script type="module">
 import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';
 function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}

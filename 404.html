@@ -20,12 +20,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/css/grove.css" />
 <style>
-  body { min-height: 100dvh; display: grid; place-items: center; padding: 2rem; }
+  body {
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    background: #161b1f;
+    color: #ffffff;
+  }
   .not-found-box {
     max-width: 560px;
     width: 100%;
-    border: 1px solid var(--color-border);
-    padding: 3rem 2.5rem;
+    text-align: center;
   }
   .not-found-eyebrow {
     font-family: var(--font-body);
@@ -33,16 +39,16 @@
     font-weight: 700;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--color-text-muted);
+    color: rgba(255,255,255,0.4);
     margin-bottom: 1.5rem;
     display: block;
   }
   .not-found-title {
     font-family: var(--font-display);
-    font-size: clamp(5rem, 18vw, 9rem);
+    font-size: 120px;
     font-weight: 300;
     line-height: 0.9;
-    color: var(--color-text);
+    color: #ffffff;
     margin-bottom: 1.5rem;
   }
   .not-found-body {
@@ -50,11 +56,13 @@
     font-size: 16px;
     font-weight: 300;
     line-height: 1.7;
-    color: var(--color-text-secondary);
+    color: rgba(255,255,255,0.55);
     margin-bottom: 2rem;
     max-width: 38ch;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .not-found-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .not-found-links { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
   .not-found-links a {
     font-family: var(--font-body);
     font-size: 12px;
@@ -62,24 +70,22 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     padding: 0.7rem 1.25rem;
-    border: 1px solid var(--color-border);
-    color: var(--color-text);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #ffffff;
     text-decoration: none;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.2s, border-color 0.2s;
   }
-  .not-found-links a:hover { background: var(--color-text); color: #fff; }
-  .not-found-links a.primary { background: var(--color-text); color: #fff; }
-  .not-found-links a.primary:hover { opacity: 0.8; }
+  .not-found-links a:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); }
+  .not-found-links a.primary { background: #ffffff; color: #161b1f; border-color: #ffffff; }
+  .not-found-links a.primary:hover { opacity: 0.85; }
   .not-found-status {
     font-family: var(--font-body);
     font-size: 11px;
     font-weight: 300;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-text-muted);
+    color: rgba(255,255,255,0.25);
     margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(0,0,0,0.08);
   }
 </style>
 </head>
