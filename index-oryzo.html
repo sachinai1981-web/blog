@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sachin Rai — Field Notes</title>
+<meta name="description" content="Writing at the intersection of AI, enterprise sales, and the market. Because the future doesn't wait for permission.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ──────────────────────────────────────────────── */
+:root {
+  --white:   #ffedd7;
+  --white-0: #ffedd700;
+  --black:   #100904;
+  --grey:    #6c5f51;
+  --orange:  #dc5000;
+  --brown:   #382416;
+  --gutter:  3.125vw;
+  --serif:   'Cormorant Garamond', Georgia, serif;
+  --sans:    'Barlow', system-ui, sans-serif;
+  --dash-bg: repeating-linear-gradient(90deg, var(--white) 0 2px, var(--white-0) 0 4px);
+}
+
+/* ── RESET ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--black); color: var(--white); font-family: var(--sans);
+  -ms-overflow-style: none; scrollbar-width: none; scroll-behavior: smooth; }
+html::-webkit-scrollbar { display: none; }
+body { overflow-x: hidden; overscroll-behavior: none; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--orange); color: var(--white); }
+
+/* ── TYPOGRAPHY ──────────────────────────────────────────── */
+h1 { font-family: var(--serif); font-size: clamp(64px, 11vw, 164px);
+  font-weight: 300; line-height: .9; letter-spacing: -.01em; }
+h2 { font-family: var(--sans); font-size: clamp(36px, 5.5vw, 80px);
+  font-weight: 500; line-height: .9; text-transform: uppercase; letter-spacing: -.01em; }
+h3 { font-family: var(--sans); font-size: clamp(24px, 3vw, 48px);
+  font-weight: 500; text-transform: uppercase; line-height: 1; }
+h4 { font-family: var(--sans); font-size: clamp(14px, 1.8vw, 24px);
+  font-weight: 500; text-transform: uppercase; line-height: 1.09; }
+h5 { font-family: var(--sans); font-size: clamp(11px, 1.2vw, 18px);
+  font-weight: 600; line-height: 1.2; }
+
+/* ── DASH LINE ───────────────────────────────────────────── */
+.dash { height: 1px; background: var(--dash-bg); opacity: .5; }
+.dash--solid { background: rgba(255,237,215,.12); opacity: 1; }
+
+/* ── BUTTON ──────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: .6em;
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 1.1em 2.2em; border-radius: 3em; border: 0;
+  cursor: pointer; white-space: nowrap; position: relative; overflow: hidden;
+  background: var(--brown); color: var(--white);
+  border: 2px solid transparent;
+  transition: border-color .25s;
+}
+.btn::before {
+  content: ''; position: absolute; inset: 0; border-radius: 3em;
+  box-shadow: inset 0 0 .75em rgba(220,80,0,0);
+  transition: box-shadow .25s;
+}
+.btn:hover { border-color: var(--orange); }
+.btn:hover::before { box-shadow: inset 0 0 .75em var(--orange); }
+.btn svg { height: 1em; flex-shrink: 0; }
+
+/* Flipper text effect inside btn */
+.btn .flip-wrap { overflow: hidden; display: flex; flex-direction: column; height: 1.1em; }
+.btn .flip-wrap span { display: block; line-height: 1.1; transition: transform .28s cubic-bezier(.4,0,.2,1); }
+.btn .flip-wrap span:last-child { position: absolute; transform: translateY(110%); }
+.btn:hover .flip-wrap span:first-child { transform: translateY(-110%); }
+.btn:hover .flip-wrap span:last-child { position: relative; transform: translateY(0); }
+
+/* ── NAV ─────────────────────────────────────────────────── */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--gutter) var(--gutter);
+}
+.nav-logo { font-weight: 600; font-size: 13px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--white); display: flex; align-items: center; gap: .5em; }
+.nav-logo::before { content: ''; width: 7px; height: 7px; background: var(--white);
+  border-radius: 50%; display: block; flex-shrink: 0; }
+.nav-links { display: flex; gap: 2.5em; }
+.nav-link { font-size: 12px; font-weight: 500; letter-spacing: .2em;
+  text-transform: uppercase; color: rgba(255,237,215,.55);
+  transition: color .18s; }
+.nav-link:hover { color: var(--white); }
+
+/* ── HERO ────────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh; display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr auto auto;
+  padding: calc(var(--gutter) * 4) var(--gutter) calc(var(--gutter) * 2.5);
+  gap: 0;
+  position: relative;
+}
+.hero-tagline {
+  grid-column: 2; grid-row: 1; align-self: start; padding-top: .25em;
+  font-size: 13px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(255,237,215,.45); text-align: right; line-height: 1.6;
+}
+.hero-h1 {
+  grid-column: 1 / -1; grid-row: 2;
+  margin-bottom: .6em;
+  font-family: var(--serif);
+  font-size: clamp(72px, 12vw, 180px);
+  font-weight: 300; line-height: .88; letter-spacing: -.02em;
+}
+.hero-h1 em { font-style: italic; }
+.hero-bottom {
+  grid-column: 1 / -1; grid-row: 3;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  padding-top: 2.5em;
+}
+.hero-bottom-left { display: flex; flex-direction: column; gap: 1.5em; }
+.hero-sub {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(16px, 1.5vw, 22px); font-weight: 300;
+  color: rgba(255,237,215,.5); max-width: 380px; line-height: 1.65;
+}
+.hero-meta {
+  display: flex; align-items: center; gap: 1.5em;
+  font-size: 11px; font-weight: 500; letter-spacing: .22em;
+  text-transform: uppercase; color: rgba(255,237,215,.3);
+}
+.hero-card {
+  background: var(--brown); border: 1px solid rgba(255,237,215,.1);
+  padding: 2em 2.2em; max-width: 320px;
+  display: flex; flex-direction: column; gap: 1.2em;
+}
+.hero-card h4 { font-size: 14px; line-height: 1.5; }
+.hero-card-foot { display: flex; flex-direction: column; gap: .4em; }
+.hero-card-foot span { font-size: 11px; letter-spacing: .18em;
+  text-transform: uppercase; color: rgba(255,237,215,.4); display: block; }
+.hero-scroll {
+  position: absolute; bottom: calc(var(--gutter) * 2); left: 50%; transform: translateX(-50%);
+  font-size: 10px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase;
+  color: rgba(255,237,215,.2);
+  display: flex; align-items: center; gap: .75em;
+}
+.hero-scroll::after {
+  content: '↓'; font-size: 1.2em; animation: bounce 2s ease-in-out infinite;
+}
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+
+/* ── AI SECTION ──────────────────────────────────────────── */
+#ai {
+  padding: clamp(80px,10vw,160px) var(--gutter);
+  border-top: 1px solid rgba(255,237,215,.08);
+}
+.ai-pre {
+  font-family: var(--serif); font-size: clamp(40px, 6vw, 88px);
+  font-weight: 300; color: rgba(255,237,215,.35); line-height: 1.05;
+  margin-bottom: 1em;
+}
+.ai-title {
+  font-family: var(--serif); font-size: clamp(56px, 9vw, 140px);
+  font-weight: 300; line-height: .88; letter-spacing: -.02em; color: var(--white);
+  margin-bottom: 1em;
+}
+.ai-title sup { font-size: .5em; vertical-align: super; color: var(--orange); }
+.ai-tagline { font-size: 13px; letter-spacing: .22em; text-transform: uppercase;
+  color: rgba(255,237,215,.4); margin-bottom: 3em; }
+.ai-disclaimer {
+  display: flex; align-items: center; gap: 1.5em;
+  font-size: 11px; font-weight: 500; letter-spacing: .28em;
+  text-transform: uppercase; color: rgba(255,237,215,.25);
+}
+.ai-disclaimer .dash { flex: 0 0 48px; }
+
+/* ── STATS ───────────────────────────────────────────────── */
+#stats {
+  border-top: 1px solid rgba(255,237,215,.08);
+  border-bottom: 1px solid rgba(255,237,215,.08);
+}
+.stats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+}
+.stat-cell {
+  padding: clamp(40px,5vw,72px) var(--gutter);
+  border-right: 1px solid rgba(255,237,215,.08);
+  position: relative;
+}
+.stat-cell:last-child { border-right: 0; }
+.stat-num {
+  font-family: var(--serif); font-size: clamp(64px, 9vw, 140px);
+  font-weight: 300; line-height: 1; letter-spacing: -.02em;
+  color: var(--white); display: block; margin-bottom: .3em;
+}
+.stat-label { font-size: 10px; font-weight: 500; letter-spacing: .28em;
+  text-transform: uppercase; color: var(--grey); }
+
+/* ── FEATURES ────────────────────────────────────────────── */
+#features {
+  padding: clamp(80px,10vw,160px) var(--gutter);
+  border-bottom: 1px solid rgba(255,237,215,.08);
+}
+.features-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 3em;
+}
+.features-label { font-size: 10px; font-weight: 700; letter-spacing: .32em;
+  text-transform: uppercase; color: rgba(255,237,215,.4); }
+.features-count { font-size: 10px; letter-spacing: .22em; color: rgba(255,237,215,.2); }
+.features-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border: 1px solid rgba(255,237,215,.08);
+}
+.feature-card {
+  padding: 3em 2.5em; border-right: 1px solid rgba(255,237,215,.08);
+  display: flex; flex-direction: column; gap: 1.5em;
+}
+.feature-card:last-child { border-right: 0; }
+.feature-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid rgba(255,237,215,.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.feature-tag { font-size: 10px; font-weight: 700; letter-spacing: .24em;
+  text-transform: uppercase; color: rgba(255,237,215,.35); }
+.feature-desc { font-size: 13px; font-weight: 300; line-height: 1.7;
+  color: rgba(255,237,215,.45); flex: 1; }
+.feature-title { font-family: var(--sans); font-size: clamp(18px, 2.2vw, 32px);
+  font-weight: 500; text-transform: uppercase; color: var(--white); }
+
+/* ── POSTS SCROLL ─────────────────────────────────────────── */
+#posts {
+  padding: clamp(60px,8vw,120px) 0;
+  border-bottom: 1px solid rgba(255,237,215,.08);
+  overflow: hidden;
+}
+.posts-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 var(--gutter); margin-bottom: 2.5em;
+}
+.posts-track {
+  display: flex; gap: 3px; padding: 0 var(--gutter);
+  overflow-x: auto; scrollbar-width: none; cursor: grab;
+}
+.posts-track::-webkit-scrollbar { display: none; }
+.post-card {
+  flex: 0 0 300px; height: 440px; position: relative; overflow: hidden;
+  display: block; border: 1px solid rgba(255,237,215,.08);
+  transition: border-color .3s;
+}
+.post-card:hover { border-color: rgba(255,237,215,.25); }
+.post-card-img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(.5) saturate(.6);
+  transition: transform .7s ease, filter .4s;
+}
+.post-card:hover .post-card-img {
+  transform: scale(1.05); filter: brightness(.6) saturate(.8);
+}
+.post-card-body {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 2em 1.8em;
+  background: linear-gradient(transparent, rgba(16,9,4,.92));
+}
+.post-card-kicker {
+  font-size: 9px; font-weight: 700; letter-spacing: .28em;
+  text-transform: uppercase; color: var(--orange);
+  display: block; margin-bottom: .75em;
+}
+.post-card-title {
+  font-family: var(--serif); font-size: 19px; font-weight: 300;
+  color: var(--white); line-height: 1.25; margin-bottom: .7em;
+}
+.post-card-meta {
+  font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(255,237,215,.3); display: block;
+}
+
+/* ── COMPARE TABLE ───────────────────────────────────────── */
+#compare {
+  padding: clamp(80px,10vw,160px) var(--gutter);
+  border-bottom: 1px solid rgba(255,237,215,.08);
+}
+.compare-header { margin-bottom: 3.5em; }
+.compare-kicker { font-size: 10px; font-weight: 700; letter-spacing: .32em;
+  text-transform: uppercase; color: rgba(255,237,215,.35); margin-bottom: 1em; display: block; }
+.compare-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase;
+}
+.compare-table th, .compare-table td {
+  padding: 1.4em 2em; text-align: left;
+  border-bottom: 1px solid rgba(255,237,215,.07);
+  border-right: 1px solid rgba(255,237,215,.07);
+}
+.compare-table th:last-child, .compare-table td:last-child { border-right: 0; }
+.compare-table thead th {
+  font-family: var(--sans); font-size: 12px; font-weight: 700;
+  color: var(--white); border-bottom: 1px solid rgba(255,237,215,.2);
+  padding-top: 0;
+}
+.compare-table thead th small {
+  display: block; font-weight: 400; font-size: 10px; letter-spacing: .2em;
+  color: var(--orange); margin-bottom: .5em; font-family: var(--sans);
+}
+.compare-table td { color: rgba(255,237,215,.4); }
+.compare-table td .hi { color: var(--white); font-weight: 700; }
+.compare-table tr:nth-child(odd) td { background: rgba(255,237,215,.02); }
+
+/* ── ABOUT ───────────────────────────────────────────────── */
+#about {
+  padding: clamp(80px,10vw,160px) var(--gutter);
+  border-bottom: 1px solid rgba(255,237,215,.08);
+}
+.about-kicker { font-size: 10px; font-weight: 700; letter-spacing: .32em;
+  text-transform: uppercase; color: rgba(255,237,215,.35); margin-bottom: 2em; display: block; }
+.about-h2 { margin-bottom: 3.5em; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5em; }
+.about-section-h { font-size: 10px; font-weight: 700; letter-spacing: .32em;
+  text-transform: uppercase; color: rgba(255,237,215,.35);
+  padding-bottom: .75em; border-bottom: 1px solid rgba(255,237,215,.08);
+  margin-bottom: 1.25em; display: block; }
+.about-body { font-size: 14px; font-weight: 300; line-height: 1.85;
+  color: rgba(255,237,215,.5); }
+.about-body .hi { color: var(--orange); }
+.about-pre { background: rgba(255,237,215,.06); padding: 1.5em;
+  font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.7;
+  color: rgba(255,237,215,.45); margin-top: 2em; white-space: pre-wrap; }
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 2.5em; }
+.about-stat { background: rgba(255,237,215,.04); padding: 1.8em 1.6em;
+  border: 1px solid rgba(255,237,215,.07); }
+.about-stat-num { font-family: var(--serif); font-size: clamp(32px, 4vw, 56px);
+  font-weight: 300; color: var(--white); line-height: 1; margin-bottom: .3em; }
+.about-stat-label { font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--grey); }
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+#footer {
+  padding: clamp(80px,10vw,160px) var(--gutter) clamp(40px,5vw,80px);
+}
+.footer-tagline { font-size: 10px; font-weight: 700; letter-spacing: .32em;
+  text-transform: uppercase; color: rgba(255,237,215,.3); margin-bottom: 2em; display: block; }
+.footer-h2 { max-width: 700px; margin-bottom: 3.5em; }
+.footer-h2 span { color: rgba(255,237,215,.35); display: block; }
+.footer-form {
+  display: flex; max-width: 480px; margin-bottom: 5em;
+  border-bottom: 1px solid rgba(255,237,215,.2);
+}
+.footer-input { flex: 1; background: transparent; border: 0; outline: none;
+  font-family: var(--sans); font-size: 14px; font-weight: 400; letter-spacing: .1em;
+  color: var(--white); padding: 0 0 1em; }
+.footer-input::placeholder { color: rgba(255,237,215,.3); text-transform: uppercase;
+  letter-spacing: .18em; font-size: 12px; }
+.footer-submit {
+  background: transparent; border: 0; padding: 0 0 1em;
+  font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--white); cursor: pointer;
+  display: flex; align-items: center; gap: .5em; transition: color .2s;
+}
+.footer-submit:hover { color: var(--orange); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 2.5em; border-top: 1px solid rgba(255,237,215,.07);
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255,237,215,.2);
+}
+.footer-links { display: flex; gap: 2em; }
+.footer-links a { color: rgba(255,237,215,.3); transition: color .2s; }
+.footer-links a:hover { color: var(--white); }
+
+/* ── CUSTOM CURSOR ───────────────────────────────────────── */
+#cursor {
+  position: fixed; width: 10px; height: 10px;
+  border: 1px solid rgba(255,237,215,.5); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%); transition: width .2s, height .2s, border-color .2s;
+}
+#cursor.hovering { width: 32px; height: 32px; border-color: var(--orange); }
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root { --gutter: 5vw; }
+  #hero { grid-template-columns: 1fr; }
+  .hero-tagline { grid-column: 1; grid-row: 1; text-align: left; padding-top: 0; }
+  .hero-card { display: none; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat-cell:nth-child(2) { border-right: 0; }
+  .stat-cell:nth-child(3) { grid-column: 1/-1; border-top: 1px solid rgba(255,237,215,.08); }
+  .features-grid { grid-template-columns: 1fr; }
+  .feature-card { border-right: 0; border-bottom: 1px solid rgba(255,237,215,.08); }
+  .about-grid { grid-template-columns: 1fr; gap: 3em; }
+  .compare-table { display: none; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 1.5em; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<!-- ── NAV ──────────────────────────────────────────────── -->
+<nav id="nav">
+  <a href="/" class="nav-logo">Sachin Rai</a>
+  <div class="nav-links">
+    <a href="/archive.html" class="nav-link">Writing</a>
+    <a href="/about.html"   class="nav-link">About</a>
+    <a href="/tools.html"   class="nav-link">Tools</a>
+    <a href="#footer"       class="nav-link">Subscribe</a>
+  </div>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-tagline">
+    Field Notes — 2026<br>San Francisco, CA
+  </div>
+
+  <h1 class="hero-h1">
+    The machines<br>
+    are learning.<br>
+    <em>So am I.</em>
+  </h1>
+
+  <div class="hero-bottom">
+    <div class="hero-bottom-left">
+      <p class="hero-sub">Writing at the intersection of artificial intelligence, enterprise sales, and the market. Because the future doesn't wait for permission.</p>
+      <div class="hero-meta">
+        <span>Sachin Rai</span>
+        <span>·</span>
+        <span>Senior AE · Freshworks</span>
+        <span>·</span>
+        <span>7× President's Club</span>
+      </div>
+      <div style="display:flex;gap:.75em;flex-wrap:wrap;margin-top:.5em;">
+        <a href="/archive.html" class="btn">
+          <span class="flip-wrap"><span>Read Field Notes</span><span>Read Field Notes</span></span>
+          <svg viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/about.html" class="btn" style="background:transparent;border-color:rgba(255,237,215,.2);">
+          <span class="flip-wrap"><span>About</span><span>About</span></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <h4>Writing at the frontier.<br>No polish. Just signal.</h4>
+      <div class="dash"></div>
+      <div class="hero-card-foot">
+        <span>The world's most unnecessarily</span>
+        <span>data-driven sales blog.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ── AI / INTRO ─────────────────────────────────────────── -->
+<section id="ai">
+  <p class="ai-pre">Isn't just<br>a newsletter.</p>
+  <h2 class="ai-title">Powered by<br>obsession<sup>*</sup></h2>
+  <div class="ai-tagline">Field Notes — Volume 1</div>
+  <div class="ai-disclaimer">
+    <div class="dash" style="flex:0 0 48px;"></div>
+    <span>* 200% Quota · 7× President's Club · Largest TCV deal in Freshworks history</span>
+  </div>
+</section>
+
+<!-- ── STATS ──────────────────────────────────────────────── -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="stat-cell">
+      <span class="stat-num" data-target="8">0</span>
+      <div class="stat-label">Field Notes Published</div>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num" data-target="847">0</span>
+      <div class="stat-label">Signals Scanned — AutoQuant</div>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num" data-target="200">0</span>
+      <div class="stat-label">% Quota Attained</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FEATURES ───────────────────────────────────────────── -->
+<section id="features">
+  <div class="features-header">
+    <span class="features-label">What I write about</span>
+    <span class="features-count">03 categories</span>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">⬡</div>
+      <div class="feature-tag">Category 01 — Built in public</div>
+      <p class="feature-desc">AutoQuant, SwingTrader, LangGraph pipelines, gbrain. I build things and write about what breaks, what ships, and what I'd do differently.</p>
+      <div class="dash"></div>
+      <div class="feature-title">AI Systems</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">◈</div>
+      <div class="feature-tag">Category 02 — Earned in the field</div>
+      <p class="feature-desc">President's Club, Seagate close, cold email experiments, pipeline forensics. What actually works in enterprise software sales in 2026.</p>
+      <div class="dash"></div>
+      <div class="feature-title">Enterprise Sales</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">◉</div>
+      <div class="feature-tag">Category 03 — Real capital, real rules</div>
+      <p class="feature-desc">Bayesian signal grading, options flow, regime detection. Trading systems that learn from every trade and update their own weights.</p>
+      <div class="dash"></div>
+      <div class="feature-title">Markets</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── POSTS ──────────────────────────────────────────────── -->
+<section id="posts">
+  <div class="posts-header">
+    <span class="features-label">Latest writing</span>
+    <a href="/archive.html" style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,237,215,.4);transition:color .2s;" onmouseover="this.style.color='#ffedd7'" onmouseout="this.style.color='rgba(255,237,215,.4)'">All posts →</a>
+  </div>
+  <div class="posts-track" id="postsTrack">
+    <a class="post-card" href="/posts/13-agents-one-saturday.html">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <div class="post-card-body">
+        <span class="post-card-kicker">AI · Engineering · May 2026</span>
+        <h3 class="post-card-title">Thirteen Agents in One Saturday.</h3>
+        <span class="post-card-meta">10 min read</span>
+      </div>
+    </a>
+    <a class="post-card" href="/posts/compounding-systems.html">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <div class="post-card-body">
+        <span class="post-card-kicker">Knowledge · May 2026</span>
+        <h3 class="post-card-title">Most Second Brains Just Rotate.</h3>
+        <span class="post-card-meta">10 min read</span>
+      </div>
+    </a>
+    <a class="post-card" href="/posts/five-vault-fixes.html">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <div class="post-card-body">
+        <span class="post-card-kicker">Ops · May 2026</span>
+        <h3 class="post-card-title">Vault: 7.5 → 9.5</h3>
+        <span class="post-card-meta">10 min read</span>
+      </div>
+    </a>
+    <a class="post-card" href="/posts/renamed-seven-agents.html">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <div class="post-card-body">
+        <span class="post-card-kicker">Engineering · May 2026</span>
+        <h3 class="post-card-title">I Renamed Seven Agents.</h3>
+        <span class="post-card-meta">10 min read</span>
+      </div>
+    </a>
+    <a class="post-card" href="/posts/autoquant.html">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1518085250887-2f903c200fee?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <div class="post-card-body">
+        <span class="post-card-kicker">Markets · Apr 2026</span>
+        <h3 class="post-card-title">6 Months of Bayesian Signal Grading.</h3>
+        <span class="post-card-meta">9 min read</span>
+      </div>
+    </a>
+    <a class="post-card" href="/posts/win-rate-trap.html">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <div class="post-card-body">
+        <span class="post-card-kicker">Strategy · Apr 2026</span>
+        <h3 class="post-card-title">Win Rate Lies.</h3>
+        <span class="post-card-meta">7 min read</span>
+      </div>
+    </a>
+    <a class="post-card" href="/posts/ai-trends-2026-breakthrough-idea.html">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <div class="post-card-body">
+        <span class="post-card-kicker">Strategy · Apr 2026</span>
+        <h3 class="post-card-title">7 AI Trends I'm Tracking in 2026.</h3>
+        <span class="post-card-meta">9 min read</span>
+      </div>
+    </a>
+    <a class="post-card" href="/posts/ai-sales-stack-2026.html">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <div class="post-card-body">
+        <span class="post-card-kicker">Sales · AI · Feb 2026</span>
+        <h3 class="post-card-title">The AI Sales Stack I'd Build Today.</h3>
+        <span class="post-card-meta">8 min read</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ── COMPARE TABLE ───────────────────────────────────────── -->
+<section id="compare">
+  <div class="compare-header">
+    <span class="compare-kicker">System Comparison — AutoQuant</span>
+    <h2>Static vs.<br>Adaptive</h2>
+  </div>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th><small>Legacy</small>Static Rules</th>
+        <th><small>AutoQuant v1</small>Bayesian Grader</th>
+        <th><small>The Edge</small>Human + System</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Fixed weights forever</td>
+        <td><span class="hi">Updates every trade</span></td>
+        <td><span class="hi">Pattern + intuition</span></td>
+      </tr>
+      <tr>
+        <td>Regime-blind</td>
+        <td><span class="hi">Regime-conditioned</span></td>
+        <td><span class="hi">Context-aware</span></td>
+      </tr>
+      <tr>
+        <td>Win Rate: <span class="hi">46%</span></td>
+        <td>Win Rate: <span class="hi">57%</span></td>
+        <td>Target: <span class="hi">&gt; 60%</span></td>
+      </tr>
+      <tr>
+        <td>Signal noise: high</td>
+        <td><span class="hi">De-correlated vector</span></td>
+        <td>Edge: <span class="hi">Sunday review</span></td>
+      </tr>
+      <tr>
+        <td>Journal: <span class="hi">never</span></td>
+        <td>Autopsy: <span class="hi">every trade</span></td>
+        <td>Learning loop: <span class="hi">weekly</span></td>
+      </tr>
+      <tr>
+        <td>Updates: <span class="hi">never</span></td>
+        <td>Runtime: <span class="hi">9:15am + 2:30pm ET</span></td>
+        <td>Horizon: <span class="hi">ongoing</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ── ABOUT ───────────────────────────────────────────────── -->
+<section id="about">
+  <span class="about-kicker">About the author</span>
+  <h2 class="about-h2">Sachin<br>Rai</h2>
+  <div class="about-grid">
+    <div>
+      <span class="about-section-h">Background</span>
+      <p class="about-body">Senior Strategic Account Executive at <span class="hi">Freshworks</span>, based in San Francisco. 7× President's Club. 200% quota. Closed <span class="hi">Seagate</span> as the largest TCV deal in company history.<br><br>Building AI tools on the side — <span class="hi">AutoQuant</span>, SwingTrader, LangGraph pipelines, a personal knowledge OS. Writing about what I find.</p>
+      <div class="about-stats">
+        <div class="about-stat">
+          <div class="about-stat-num">7×</div>
+          <div class="about-stat-label">President's Club</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">200%</div>
+          <div class="about-stat-label">Quota Attained</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">57%</div>
+          <div class="about-stat-label">AutoQuant Win Rate</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">847</div>
+          <div class="about-stat-label">Signals Scanned</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="about-section-h">Abstract</span>
+      <p class="about-body">Writing about the things I'm actually building and doing — not the polished version, the real version. <span class="hi">AutoQuant</span> when it breaks. The email that booked the Seagate meeting. The agent architecture that shipped in a weekend.<br><br>The thesis: AI + sales + markets are converging. The person who understands all three will be in a category of one. I'm trying to be that person. This blog is the log.</p>
+      <pre class="about-pre">@misc{sachinrai2026,
+  title  = {Field Notes from the Frontier},
+  author = {Sachin Rai},
+  year   = {2026},
+  note   = {AI + Sales + Markets.
+            Code: github.com/sachinai1981-web }
+}</pre>
+      <div style="display:flex;gap:.75em;flex-wrap:wrap;margin-top:2em;">
+        <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" class="btn" style="font-size:11px;padding:.9em 1.8em;">
+          <span class="flip-wrap"><span>LinkedIn ↗</span><span>LinkedIn ↗</span></span>
+        </a>
+        <a href="https://x.com/sachinrai01" target="_blank" class="btn" style="font-size:11px;padding:.9em 1.8em;background:transparent;border-color:rgba(255,237,215,.2);">
+          <span class="flip-wrap"><span>X / Twitter ↗</span><span>X / Twitter ↗</span></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER / SUBSCRIBE ─────────────────────────────────── -->
+<footer id="footer">
+  <span class="footer-tagline">Field notes, delivered</span>
+  <h2 class="footer-h2">
+    <span>We caught your attention</span>
+    with a blog about AI and enterprise sales.
+  </h2>
+  <form class="footer-form" action="https://formspree.io/f/xwvwlybd" method="POST">
+    <input class="footer-input" type="email" name="email" placeholder="Your email" required>
+    <button class="footer-submit" type="submit">
+      Subscribe
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <div class="dash" style="position:absolute;bottom:0;left:0;right:0;"></div>
+  </form>
+
+  <div class="footer-bottom">
+    <span>© 2026 Sachin Rai · Field Notes from San Francisco</span>
+    <div class="footer-links">
+      <a href="/archive.html">Writing</a>
+      <a href="/about.html">About</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/resume.html">Resume</a>
+      <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">X ↗</a>
+      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="/rss.xml">RSS</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── CURSOR ── */
+var cursor = document.getElementById('cursor');
+var cx = window.innerWidth/2, cy = window.innerHeight/2;
+var mx = cx, my = cy;
+window.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; });
+document.querySelectorAll('a,button').forEach(function(el){
+  el.addEventListener('mouseenter',function(){ cursor.classList.add('hovering'); });
+  el.addEventListener('mouseleave',function(){ cursor.classList.remove('hovering'); });
+});
+(function loop(){ cx+=(mx-cx)*.12; cy+=(my-cy)*.12;
+  cursor.style.left=cx+'px'; cursor.style.top=cy+'px';
+  requestAnimationFrame(loop); })();
+
+/* ── HERO ENTRANCE ── */
+gsap.from('.hero-tagline', { opacity:0, duration:.7, delay:.2, ease:'power2.out' });
+gsap.from('.hero-h1', { opacity:0, y:70, duration:1.3, delay:.3, ease:'power3.out' });
+gsap.from('.hero-sub', { opacity:0, y:30, duration:.9, delay:.8, ease:'power2.out' });
+gsap.from('.hero-meta', { opacity:0, duration:.7, delay:1, ease:'power2.out' });
+gsap.from('.hero-bottom .btn', { opacity:0, y:20, stagger:.1, duration:.7, delay:1.1, ease:'power2.out' });
+gsap.from('.hero-card', { opacity:0, x:40, duration:1, delay:.6, ease:'power2.out' });
+
+/* ── SECTION REVEALS ── */
+gsap.utils.toArray('#ai .ai-pre, #ai .ai-title, #ai .ai-tagline, #ai .ai-disclaimer').forEach(function(el,i){
+  gsap.from(el, { opacity:0, y:40, duration:.9, delay:i*.12, ease:'power2.out',
+    scrollTrigger:{ trigger:el, start:'top 88%', once:true } });
+});
+gsap.utils.toArray('.stat-cell').forEach(function(el,i){
+  gsap.from(el, { opacity:0, y:30, duration:.8, delay:i*.1, ease:'power2.out',
+    scrollTrigger:{ trigger:el, start:'top 85%', once:true } });
+});
+gsap.utils.toArray('.feature-card').forEach(function(el,i){
+  gsap.from(el, { opacity:0, y:40, duration:.9, delay:i*.12, ease:'power2.out',
+    scrollTrigger:{ trigger:el, start:'top 85%', once:true } });
+});
+gsap.utils.toArray('.post-card').forEach(function(el,i){
+  gsap.from(el, { opacity:0, y:30, duration:.8, delay:i*.07, ease:'power2.out',
+    scrollTrigger:{ trigger:'#posts', start:'top 80%', once:true } });
+});
+gsap.from('.compare-table', { opacity:0, y:40, duration:1, ease:'power2.out',
+  scrollTrigger:{ trigger:'#compare', start:'top 75%', once:true } });
+gsap.utils.toArray('.about-stat').forEach(function(el,i){
+  gsap.from(el, { opacity:0, scale:.95, duration:.7, delay:i*.08, ease:'power2.out',
+    scrollTrigger:{ trigger:'.about-stats', start:'top 85%', once:true } });
+});
+
+/* ── COUNTER ANIMATION ── */
+(function(){
+  var els = document.querySelectorAll('[data-target]');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target, target = parseInt(el.dataset.target,10);
+      var start = performance.now(), dur = 1600;
+      function tick(now){
+        var t = Math.min((now-start)/dur,1);
+        var ease = 1-Math.pow(1-t,3);
+        el.textContent = Math.round(ease*target);
+        if(t<1) requestAnimationFrame(tick);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(tick);
+      obs.unobserve(el);
+    });
+  },{threshold:.2});
+  els.forEach(function(el){ obs.observe(el); });
+})();
+
+/* ── DRAG SCROLL ON POSTS ── */
+var track = document.getElementById('postsTrack');
+var isDown=false, startX, scrollLeft;
+track.addEventListener('mousedown',function(e){ isDown=true; track.style.cursor='grabbing';
+  startX=e.pageX-track.offsetLeft; scrollLeft=track.scrollLeft; });
+track.addEventListener('mouseleave',function(){ isDown=false; track.style.cursor='grab'; });
+track.addEventListener('mouseup',function(){ isDown=false; track.style.cursor='grab'; });
+track.addEventListener('mousemove',function(e){
+  if(!isDown) return; e.preventDefault();
+  var x=e.pageX-track.offsetLeft, walk=(x-startX)*1.5;
+  track.scrollLeft=scrollLeft-walk;
+});
+
+/* ── NAV OPACITY ON SCROLL ── */
+ScrollTrigger.create({
+  start: 'top -80',
+  onUpdate: function(self) {
+    document.getElementById('nav').style.background =
+      self.progress > 0 ? 'rgba(16,9,4,.85)' : 'transparent';
+  }
+});
+</script>
+
+</body>
+</html>
