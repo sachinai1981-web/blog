@@ -1,0 +1,43 @@
+name: Publish Obsidian Notes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'obsidian/**.md'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install --quiet pyyaml Markdown
+
+      - name: Convert notes to HTML posts
+        run: python scripts/obsidian-to-post.py
+
+      - name: Rebuild sitemap and llms.txt
+        run: bash scripts/build-meta.sh
+
+      - name: Commit generated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add posts/ sitemap.xml llms.txt
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: publish Obsidian notes [skip ci]"
+            git push
+          fi
