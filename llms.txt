@@ -12,6 +12,11 @@ Sachin Rai writes about the intersection of AI and enterprise GTM:
 
 ## Posts
 
+- [The Trojan Horse Strategy](https://sachinai.com/posts/the-trojan-horse-strategy.html) — You cannot walk into a functioning system and announce you're going to change it. The system will reject you.
+- [The 90/10 Reliability Wall](https://sachinai.com/posts/the-90-10-reliability-wall.html) — Your enterprise AI demo crushed it. Six months later the deployment is on life support. This is not a capability problem.
+- [Memory Is the New Moat](https://sachinai.com/posts/memory-is-the-new-moat.html) — Everyone's optimizing the wrong layer. The companies winning in 2026 aren't running the best models — they're running systems that remember everything.
+- [Building a Second Brain That Actually Works](https://sachinai.com/posts/building-a-second-brain-that-actually-works.html) — I used to maintain a second brain I never actually used. Beautiful folders. Careful tags. My vault had thousands of notes. My thinking had zero of them.
+- [Boring Verticals Win](https://sachinai.com/posts/boring-verticals-win.html) — Everyone wants to build for creative agencies and tech startups. The money is in floor laminates.
 - [AutoQuant: What I Learned After 6 Months of Bayesian Signal Grading](https://sachinai.com/posts/autoquant.html) — Building a scanner that grades its own trades, re-weights conviction over time, and auto-journals every autopsy.
 - [Win Rate Lies.](https://sachinai.com/posts/win-rate-trap.html) — A 90% win rate signal in my trading system was bleeding money at −1.04% expectancy per trade. The same Trojan Horse is hiding in every sales pipeline I've managed.
 - [I Renamed Seven AI Agents.](https://sachinai.com/posts/renamed-seven-agents.html) — Brick, Owl, Bull, Falcon, Spider, Arrow, Sage are dead. Scanner, Grader, SwingTrader, DayPut, DayCondor, Outreach, Vault are alive. The rename touched 26 files. The lessons compound.
