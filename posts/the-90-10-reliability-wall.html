@@ -77,25 +77,6 @@
 </head>
 <body>
 
-<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#161b1f;color:#f5f0e8;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'Barlow',sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;border-top:2px solid #f69368;">
-  <span style="flex:1;opacity:.8;">SACHINAI.COM uses analytics to understand what people read. No ads. Data stays in Google Analytics.</span>
-  <div style="display:flex;gap:.5rem;flex-shrink:0;">
-    <button onclick="srConsent('granted')" style="padding:.4rem 1rem;background:#f69368;color:#161b1f;border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
-    <button onclick="srConsent('denied')" style="padding:.4rem 1rem;background:transparent;color:rgba(245,240,232,.55);border:1px solid rgba(245,240,232,.25);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
-  </div>
-</div>
-<script>
-(function(){
-  var b=document.getElementById('sr-consent');
-  if(!b)return;
-  if(!localStorage.getItem('sr_consent'))b.style.display='flex';
-  window.srConsent=function(v){
-    localStorage.setItem('sr_consent',v);
-    if(typeof gtag!=='undefined')gtag('consent','update',{analytics_storage:v});
-    b.style.display='none';
-  };
-})();
-</script>
 
 <nav class="navbar navbar--dark" id="navbar">
   <div class="navbar-inner">
