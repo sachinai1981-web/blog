@@ -12,13 +12,13 @@
 /* ── TOKENS ──────────────────────────────────────────────── */
 :root {
   --bg:        #ffffff;
-  --bg-2:      #f4f7ff;
-  --bg-3:      #eaf0ff;
+  --bg-2:      #f5f4f1;
+  --bg-3:      #eeece8;
   --ink:       #0a1628;
   --ink-0:     #0a162800;
   --blue:      #1a56ff;
   --blue-dark: #0033cc;
-  --blue-pale: #dce8ff;
+  --blue-pale: #e2e0db;
   --muted:     #6b7a99;
   --border:    rgba(10,22,40,.09);
   --gutter:    3.125vw;
@@ -96,7 +96,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 }
 .nav-logo::before {
   content: ''; width: 8px; height: 8px;
-  background: var(--blue); border-radius: 50%; display: block; flex-shrink: 0;
+  background: var(--ink); border-radius: 50%; display: block; flex-shrink: 0;
 }
 .nav-links { display: flex; gap: 2.5em; align-items: center; }
 .nav-link {
@@ -105,6 +105,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
   transition: color .15s;
 }
 .nav-link:hover { color: var(--ink); }
+.nav-link[aria-current="page"] { color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
 .nav-cta {
   font-size: 11px; font-weight: 600; letter-spacing: .18em;
   text-transform: uppercase; background: var(--blue); color: #fff;
@@ -115,7 +116,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 
 /* ── HERO ────────────────────────────────────────────────── */
 #hero {
-  min-height: 100vh; display: grid;
+  min-height: 100dvh; display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr auto auto;
   padding: calc(var(--gutter) * 5) var(--gutter) calc(var(--gutter) * 3);
@@ -254,11 +255,13 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 }
 .features-label {
   font-size: 10px; font-weight: 700; letter-spacing: .32em;
-  text-transform: uppercase; color: var(--blue);
+  text-transform: uppercase; color: var(--muted);
 }
 .features-count { font-size: 10px; letter-spacing: .2em; color: var(--muted); }
 .features-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
   border: 1px solid var(--border); background: var(--bg);
 }
 .feature-card {
@@ -267,16 +270,24 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
   transition: background .2s;
 }
 .feature-card:hover { background: var(--bg-3); }
+.feature-card:first-child {
+  grid-row: 1 / 3;
+  border-bottom: 0;
+}
+.feature-card:nth-child(2) {
+  border-right: 0;
+  border-bottom: 1px solid var(--border);
+}
 .feature-card:last-child { border-right: 0; }
 .feature-icon {
-  width: 40px; height: 40px; border-radius: 8px;
-  background: var(--blue-pale); color: var(--blue);
+  width: 40px; height: 40px; border-radius: 4px;
+  background: var(--ink); color: #fff;
   display: flex; align-items: center; justify-content: center;
   font-size: 16px; font-weight: 700;
 }
 .feature-tag {
   font-size: 9px; font-weight: 700; letter-spacing: .28em;
-  text-transform: uppercase; color: var(--blue);
+  text-transform: uppercase; color: var(--muted);
 }
 .feature-desc {
   font-size: 13px; font-weight: 300; line-height: 1.75;
@@ -299,7 +310,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 }
 .posts-all-link {
   font-size: 10px; font-weight: 700; letter-spacing: .22em;
-  text-transform: uppercase; color: var(--blue);
+  text-transform: uppercase; color: var(--ink);
   display: flex; align-items: center; gap: .4em;
   transition: gap .2s;
 }
@@ -329,7 +340,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 }
 .post-card-kicker {
   font-size: 9px; font-weight: 700; letter-spacing: .28em;
-  text-transform: uppercase; color: #5b8fff;
+  text-transform: uppercase; color: rgba(255,255,255,.55);
   display: block; margin-bottom: .65em;
 }
 .post-card-title {
@@ -349,7 +360,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 .compare-header { margin-bottom: 3.5em; }
 .compare-kicker {
   font-size: 10px; font-weight: 700; letter-spacing: .32em;
-  text-transform: uppercase; color: var(--blue);
+  text-transform: uppercase; color: var(--muted);
   margin-bottom: 1em; display: block;
 }
 .compare-table {
@@ -369,7 +380,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 }
 .compare-table thead th small {
   display: block; font-weight: 600; font-size: 9px; letter-spacing: .24em;
-  color: var(--blue); margin-bottom: .5em;
+  color: var(--muted); margin-bottom: .5em;
 }
 .compare-table td { color: var(--muted); }
 .compare-table td .hi { color: var(--ink); font-weight: 700; }
@@ -377,14 +388,14 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 .compare-table thead th:nth-child(2) {
   background: var(--ink); color: #fff;
 }
-.compare-table thead th:nth-child(2) small { color: #5b8fff; }
+.compare-table thead th:nth-child(2) small { color: rgba(255,255,255,.5); }
 .compare-table tbody tr td:nth-child(2) {
-  background: rgba(26,86,255,.04);
-  border-right-color: rgba(26,86,255,.15);
-  border-left: 1px solid rgba(26,86,255,.15);
+  background: rgba(10,22,40,.03);
+  border-right-color: rgba(10,22,40,.1);
+  border-left: 1px solid rgba(10,22,40,.1);
 }
 .compare-table tbody tr td:nth-child(2) .hi {
-  color: var(--blue-dark);
+  color: var(--ink);
 }
 
 /* ── ABOUT ───────────────────────────────────────────────── */
@@ -394,25 +405,25 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 }
 .about-kicker {
   font-size: 10px; font-weight: 700; letter-spacing: .32em;
-  text-transform: uppercase; color: var(--blue);
+  text-transform: uppercase; color: var(--muted);
   margin-bottom: 2em; display: block;
 }
 .about-h2 { margin-bottom: 3.5em; color: var(--ink); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5em; }
 .about-section-h {
   font-size: 10px; font-weight: 700; letter-spacing: .32em;
-  text-transform: uppercase; color: var(--blue);
-  padding-bottom: .75em; border-bottom: 2px solid var(--blue-pale);
+  text-transform: uppercase; color: rgba(10,22,40,.45);
+  padding-bottom: .75em; border-bottom: 1px solid var(--border);
   margin-bottom: 1.25em; display: block;
 }
 .about-body {
   font-size: 14px; font-weight: 300; line-height: 1.9;
   color: var(--muted);
 }
-.about-body .hi { color: var(--blue-dark); font-weight: 500; }
+.about-body .hi { color: var(--ink); font-weight: 500; }
 .about-pre {
   background: var(--ink); color: #5b8fff;
-  padding: 1.5em; font-family: 'Courier New', monospace;
+  padding: 1.5em; font-family: 'JetBrains Mono', 'Fira Code', 'Menlo', monospace;
   font-size: 12px; line-height: 1.7; margin-top: 2em;
   white-space: pre-wrap; border-left: 3px solid var(--blue);
 }
@@ -423,7 +434,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
   border: 1px solid var(--border);
   transition: background .2s, border-color .2s;
 }
-.about-stat:hover { background: var(--blue-pale); border-color: var(--blue); }
+.about-stat:hover { background: var(--bg-3); border-color: var(--ink); }
 .about-stat-num {
   font-family: var(--serif); font-size: clamp(28px, 3.5vw, 52px);
   font-weight: 300; color: var(--ink); line-height: 1; margin-bottom: .3em;
@@ -458,10 +469,10 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 .footer-submit {
   background: transparent; border: 0; padding: 0 0 1em;
   font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .22em;
-  text-transform: uppercase; color: var(--blue); cursor: pointer;
+  text-transform: uppercase; color: rgba(255,255,255,.6); cursor: pointer;
   display: flex; align-items: center; gap: .5em; transition: color .2s;
 }
-.footer-submit:hover { color: #5b8fff; }
+.footer-submit:hover { color: #fff; }
 .footer-bottom {
   display: flex; justify-content: space-between; align-items: center;
   padding-top: 2.5em; border-top: 1px solid rgba(255,255,255,.08);
@@ -475,8 +486,8 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 /* ── CUSTOM CURSOR ───────────────────────────────────────── */
 #cursor {
   position: fixed; width: 10px; height: 10px;
-  background: var(--blue); border-radius: 50%;
-  pointer-events: none; z-index: 9999; opacity: .7;
+  background: var(--ink); border-radius: 50%;
+  pointer-events: none; z-index: 200; opacity: .5;
   transform: translate(-50%,-50%);
   transition: width .2s, height .2s, opacity .2s;
   mix-blend-mode: multiply;
@@ -494,6 +505,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
   .stat-cell:nth-child(3) { grid-column: 1/-1; border-top: 1px solid var(--border); }
   .features-grid { grid-template-columns: 1fr; }
   .feature-card { border-right: 0; border-bottom: 1px solid var(--border); }
+  .feature-card:first-child { grid-row: auto; border-bottom: 1px solid var(--border); }
   .about-grid { grid-template-columns: 1fr; gap: 3em; }
   .compare-table { display: none; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 1.5em; }
@@ -629,7 +641,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
   </div>
   <div class="posts-track" id="postsTrack">
     <a class="post-card" href="/posts/memory-is-the-new-moat.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=700&q=85&auto=format&fit=crop" alt="Memory Is the New Moat" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">AI · Strategy · May 2026</span>
         <h3 class="post-card-title">Memory Is the New Moat.</h3>
@@ -637,7 +649,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card" href="/posts/the-90-10-reliability-wall.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=700&q=85&auto=format&fit=crop" alt="The 90/10 Reliability Wall" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Enterprise · AI · May 2026</span>
         <h3 class="post-card-title">The 90/10 Reliability Wall.</h3>
@@ -645,7 +657,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card" href="/posts/boring-verticals-win.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=85&auto=format&fit=crop" alt="Boring Verticals Win" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Venture · Strategy · May 2026</span>
         <h3 class="post-card-title">Boring Verticals Win.</h3>
@@ -653,7 +665,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card" href="/posts/the-trojan-horse-strategy.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=700&q=85&auto=format&fit=crop" alt="The Trojan Horse Strategy" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Strategy · Sales · May 2026</span>
         <h3 class="post-card-title">The Trojan Horse Strategy.</h3>
@@ -661,7 +673,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card" href="/posts/building-a-second-brain-that-actually-works.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=700&q=85&auto=format&fit=crop" alt="Building a Second Brain That Actually Works" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Knowledge · PKM · May 2026</span>
         <h3 class="post-card-title">Building a Second Brain That Actually Works.</h3>
@@ -669,7 +681,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card" href="/posts/13-agents-one-saturday.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=700&q=85&auto=format&fit=crop" alt="Thirteen Agents in One Saturday" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">AI · Engineering · May 2026</span>
         <h3 class="post-card-title">Thirteen Agents in One Saturday.</h3>
@@ -677,7 +689,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card" href="/posts/compounding-systems.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=700&q=85&auto=format&fit=crop" alt="Most Second Brains Just Rotate" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Knowledge · May 2026</span>
         <h3 class="post-card-title">Most Second Brains Just Rotate.</h3>
@@ -685,7 +697,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card" href="/posts/five-vault-fixes.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=700&q=85&auto=format&fit=crop" alt="Vault: 7.5 to 9.5" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Ops · May 2026</span>
         <h3 class="post-card-title">Vault: 7.5 → 9.5</h3>
@@ -693,7 +705,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card" href="/posts/renamed-seven-agents.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <img class="post-card-img" src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=700&q=85&auto=format&fit=crop" alt="I Renamed Seven Agents" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Engineering · May 2026</span>
         <h3 class="post-card-title">I Renamed Seven Agents.</h3>
