@@ -7,7 +7,7 @@
 <meta name="description" content="Writing at the intersection of AI, enterprise sales, and the market. Because the future doesn't wait for permission.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ── TOKENS ──────────────────────────────────────────────── */
 :root {
@@ -23,7 +23,9 @@
   --border:    rgba(10,22,40,.09);
   --gutter:    3.125vw;
   --serif:     'Cormorant Garamond', Georgia, serif;
-  --sans:      'Barlow', system-ui, sans-serif;
+  --sans:      'Space Grotesk', system-ui, sans-serif;
+  --kicker-size: 10px;
+  --kicker-tracking: 0.22em;
   --dash-bg:   repeating-linear-gradient(90deg, rgba(10,22,40,.2) 0 2px, transparent 0 4px);
 }
 
@@ -144,7 +146,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 
 .hero-eyebrow {
   grid-column: 1; grid-row: 1; align-self: end; padding-bottom: 1.8em;
-  font-size: 10px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase;
+  font-size: var(--kicker-size); font-weight: 600; letter-spacing: var(--kicker-tracking); text-transform: uppercase;
   color: var(--blue); display: flex; align-items: center; gap: .75em;
 }
 .hero-eyebrow::before {
@@ -152,7 +154,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 }
 .hero-tagline {
   grid-column: 2; grid-row: 1; align-self: end; padding-bottom: 1.8em;
-  font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+  font-size: var(--kicker-size); font-weight: 500; letter-spacing: var(--kicker-tracking); text-transform: uppercase;
   color: var(--muted); text-align: right; line-height: 1.7;
 }
 .hero-h1 {
@@ -176,7 +178,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 }
 .hero-meta {
   display: flex; align-items: center; gap: 1.2em; flex-wrap: wrap;
-  font-size: 10px; font-weight: 600; letter-spacing: .2em;
+  font-size: var(--kicker-size); font-weight: 500; letter-spacing: var(--kicker-tracking);
   text-transform: uppercase; color: rgba(10,22,40,.35);
 }
 .hero-btns { display: flex; gap: .6em; flex-wrap: wrap; margin-top: .25em; }
@@ -257,7 +259,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
   color: var(--ink); display: block; margin-bottom: .2em;
 }
 .stat-num span { color: var(--blue); }
-.stat-label { font-size: 10px; font-weight: 600; letter-spacing: .26em;
+.stat-label { font-size: var(--kicker-size); font-weight: 500; letter-spacing: var(--kicker-tracking);
   text-transform: uppercase; color: var(--muted); }
 
 /* ── FEATURES ────────────────────────────────────────────── */
@@ -270,7 +272,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
   margin-bottom: 3em;
 }
 .features-label {
-  font-size: 10px; font-weight: 700; letter-spacing: .32em;
+  font-size: var(--kicker-size); font-weight: 600; letter-spacing: var(--kicker-tracking);
   text-transform: uppercase; color: var(--muted);
 }
 .features-count { font-size: 10px; letter-spacing: .2em; color: var(--muted); }
@@ -307,11 +309,11 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
   font-size: 16px; font-weight: 700;
 }
 .feature-tag {
-  font-size: 9px; font-weight: 700; letter-spacing: .28em;
+  font-size: var(--kicker-size); font-weight: 500; letter-spacing: var(--kicker-tracking);
   text-transform: uppercase; color: var(--muted);
 }
 .feature-desc {
-  font-size: 13px; font-weight: 300; line-height: 1.75;
+  font-size: 14px; font-weight: 400; line-height: 1.75;
   color: var(--muted); flex: 1;
 }
 .feature-title {
@@ -360,7 +362,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
   background: linear-gradient(transparent, rgba(10,22,40,.96));
 }
 .post-card-kicker {
-  font-size: 9px; font-weight: 700; letter-spacing: .28em;
+  font-size: var(--kicker-size); font-weight: 500; letter-spacing: var(--kicker-tracking);
   text-transform: uppercase; color: rgba(255,255,255,.55);
   display: block; margin-bottom: .65em;
 }
@@ -380,7 +382,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 }
 .compare-header { margin-bottom: 3.5em; }
 .compare-kicker {
-  font-size: 10px; font-weight: 700; letter-spacing: .32em;
+  font-size: var(--kicker-size); font-weight: 600; letter-spacing: var(--kicker-tracking);
   text-transform: uppercase; color: var(--muted);
   margin-bottom: 1em; display: block;
 }
@@ -425,21 +427,21 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
   border-bottom: 1px solid var(--border); background: var(--bg);
 }
 .about-kicker {
-  font-size: 10px; font-weight: 700; letter-spacing: .32em;
+  font-size: var(--kicker-size); font-weight: 600; letter-spacing: var(--kicker-tracking);
   text-transform: uppercase; color: var(--muted);
   margin-bottom: 2em; display: block;
 }
 .about-h2 { margin-bottom: 3.5em; color: var(--ink); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5em; }
 .about-section-h {
-  font-size: 10px; font-weight: 700; letter-spacing: .32em;
+  font-size: var(--kicker-size); font-weight: 600; letter-spacing: var(--kicker-tracking);
   text-transform: uppercase; color: rgba(10,22,40,.45);
   padding-bottom: .75em; border-bottom: 1px solid var(--border);
   margin-bottom: 1.25em; display: block;
 }
 .about-body {
-  font-size: 14px; font-weight: 300; line-height: 1.9;
-  color: var(--muted);
+  font-size: 15px; font-weight: 400; line-height: 1.85;
+  color: var(--muted); max-width: 62ch;
 }
 .about-body .hi { color: var(--ink); font-weight: 500; }
 .about-pre {
@@ -470,7 +472,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
   font-weight: 300; color: var(--ink); line-height: 1; margin-bottom: .3em;
 }
 .about-stat-label {
-  font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted);
+  font-size: var(--kicker-size); letter-spacing: var(--kicker-tracking); text-transform: uppercase; color: var(--muted);
 }
 
 /* ── FOOTER ──────────────────────────────────────────────── */
