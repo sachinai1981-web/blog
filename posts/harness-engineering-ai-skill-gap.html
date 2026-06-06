@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{analytics_storage:'denied',wait_for_update:500});if(localStorage.getItem('sr_consent')==='granted')gtag('consent','update',{analytics_storage:'granted'});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CVBY6GSVNZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CVBY6GSVNZ');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The AI Skill Gap Nobody Is Teaching — Sachin Rai</title>
+  <meta name="description" content="Prompting gets all the attention. But the reason your agents fail at 3am isn't the prompt — it's what's missing around it." />
+  <link rel="canonical" href="https://sachinai.com/posts/harness-engineering-ai-skill-gap.html" />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="harness engineering, AI agents, production agents, circuit breakers, agent reliability, AI skill gap, agentic AI" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://sachinai.com/posts/harness-engineering-ai-skill-gap.html" />
+  <meta property="og:title" content="The AI Skill Gap Nobody Is Teaching" />
+  <meta property="og:description" content="Prompting gets all the attention. But the reason your agents fail at 3am isn't the prompt — it's what's missing around it." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=90&auto=format&fit=crop" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Sachin Rai" />
+  <meta property="article:published_time" content="2026-06-16" />
+  <meta property="article:author" content="Sachin Rai" />
+  <meta property="article:tag" content="AI" />
+  <meta property="article:tag" content="Engineering" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The AI Skill Gap Nobody Is Teaching" />
+  <meta name="twitter:description" content="Prompting gets all the attention. But the reason your agents fail at 3am isn't the prompt — it's what's missing around it." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=90&auto=format&fit=crop" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The AI Skill Gap Nobody Is Teaching",
+    "url": "https://sachinai.com/posts/harness-engineering-ai-skill-gap.html",
+    "datePublished": "2026-06-16",
+    "dateModified": "2026-06-16",
+    "author": {
+      "@type": "Person",
+      "name": "Sachin Rai",
+      "url": "https://sachinai.com/",
+      "sameAs": ["https://www.linkedin.com/in/sachinr1/"]
+    },
+    "publisher": { "@type": "Person", "name": "Sachin Rai", "url": "https://sachinai.com/" },
+    "description": "Prompting gets all the attention. But the reason your agents fail at 3am isn't the prompt — it's what's missing around it.",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=90&auto=format&fit=crop"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://sachinai.com/"},
+      {"@type":"ListItem","position":2,"name":"Archive","item":"https://sachinai.com/#archive"},
+      {"@type":"ListItem","position":3,"name":"The AI Skill Gap Nobody Is Teaching","item":"https://sachinai.com/posts/harness-engineering-ai-skill-gap.html"}
+    ]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23161b1f'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='13' fill='%23ffffff'>SR</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/grove.css" />
+</head>
+<body>
+
+
+<nav class="navbar navbar--dark" id="navbar">
+  <div class="navbar-inner">
+    <div class="navbar-left">
+      <a href="/archive.html" class="navbar__link">Essays</a>
+      <a href="/about.html"   class="navbar__link">About</a>
+      <a href="/archive.html" class="navbar__link">Archive</a>
+      <a href="/tools.html"   class="navbar__link">Tools</a>
+      <a href="/resume.html"  class="navbar__link">Resume</a>
+    </div>
+    <div class="navbar-center">
+      <a href="/" class="navbar__logo-link">&#9670; SACHIN RAI</a>
+    </div>
+    <div class="navbar-right">
+      <a href="/#subscribe" class="navbar__link">Subscribe</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Article Header -->
+<div class="psh-scroll" data-psh>
+  <div class="psh-sticky">
+    <img class="psh-photo psh-p1" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1800&q=90&auto=format&fit=crop" alt="" loading="eager" fetchpriority="high">
+    <img class="psh-photo psh-p2" src="https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=1800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+    <img class="psh-photo psh-p3" src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+    <div class="psh-veil"></div>
+    <div class="psh-text">
+      <span class="psh-category">AI · Engineering</span>
+      <h1 class="psh-title">The AI Skill Gap Nobody Is Teaching</h1>
+      <span class="psh-meta">June 16, 2026 · 7 min read</span>
+    </div>
+    <div class="psh-hint">Scroll</div>
+  </div>
+</div>
+
+<!-- Stats Strip -->
+<div class="stats-strip">
+  <div class="stats-strip__inner">
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="5">0</span>
+      <span class="stats-strip__label">Components in a Production Harness</span>
+    </div>
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="18">0</span>
+      <span class="stats-strip__label">Hours My Trading Agent Ran Unsupervised</span>
+    </div>
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="7">0</span>
+      <span class="stats-strip__label">Circuit Breakers in the Live System</span>
+    </div>
+    <div class="stats-strip__item">
+      <span class="stats-strip__number" data-target="0">0</span>
+      <span class="stats-strip__label">Courses Currently Teaching Harness Design</span>
+    </div>
+  </div>
+</div>
+
+<!-- Article Body -->
+<div class="article-body">
+  <div class="article-body__inner">
+
+    <!-- TOC -->
+    <aside class="article-toc">
+      <p class="article-toc__label">Contents</p>
+      <ul class="article-toc__list">
+        <li><a href="#section-what-harness">What a Harness Actually Is</a></li>
+        <li><a href="#section-five-components">The 5 Components of a Real Harness</a></li>
+        <li><a href="#section-career-skill">Why This Is a Career Skill</a></li>
+        <li><a href="#section-where-to-start">Where to Start</a></li>
+      </ul>
+    </aside>
+
+    <!-- Content -->
+    <div class="article-content">
+
+      <p>Last month, my trading agent ran for 18 hours unsupervised.</p>
+
+      <p>It opened positions at market open, adjusted stops at three checkpoints, and filed a structured journal entry at each one. It handled a partial fill, a cancelled order, and a circuit breaker event. It sent me an iMessage when it needed a decision and stayed quiet when it didn't.</p>
+
+      <p>It didn't hallucinate. It didn't spiral. It didn't destroy my portfolio.</p>
+
+      <p>Here's what made that possible: it wasn't the model. It wasn't even the prompt.</p>
+
+      <p>It was the harness.</p>
+
+      <h2 id="section-what-harness">What a Harness Actually Is</h2>
+
+      <p>Ask ten AI developers what a harness is and nine will say 'a testing framework.' That's not what I mean.</p>
+
+      <p>A harness — in the agentic sense — is the verification and safety layer that sits around your agent. It's the difference between an agent that can do something and one that reliably does it, survives edge cases, and fails safely when it breaks.</p>
+
+      <!-- Pull quote -->
+      <div style="border-left:4px solid var(--color-accent);margin:2.5rem 0;padding:1rem 1.5rem;background:var(--color-bg-secondary);">
+        <p style="font-family:var(--font-display);font-size:1.3rem;font-weight:300;line-height:1.3;letter-spacing:-0.02em;color:var(--color-text);margin:0;font-style:italic;">"A harness is not the agent. It's the environment the agent runs in. — Anthropic Engineering"</p>
+      </div>
+
+      <p>Nobody teaches this. There are a hundred courses on prompt engineering. Zero courses on harness design. And yet every serious production agent system lives or dies by it.</p>
+
+      <figure class="article-img-break">
+        <img class="article-img-break__img"
+             src="https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=1200&q=90&auto=format&fit=crop"
+             alt="The environment the agent runs in" loading="lazy">
+        <figcaption class="article-img-break__label">The environment the agent runs in — not the agent itself</figcaption>
+      </figure>
+
+      <h2 id="section-five-components">The 5 Components of a Real Harness</h2>
+
+      <!-- Stat card -->
+      <div style="border:1px solid var(--color-border);padding:1.4rem 1.6rem;margin:1.75rem 0;background:var(--color-bg-secondary);">
+        <p style="font-family:var(--font-body);font-size:0.62rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:0.85rem;">The 5-component stack</p>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:0.5rem;">
+          <div style="display:contents;">
+            <span style="font-family:var(--font-body);font-size:0.92rem;color:var(--color-text);padding:0.5rem 0;border-bottom:1px dashed var(--color-border);">Snapshot + rollback</span>
+            <span style="font-family:var(--font-body);font-size:0.92rem;font-weight:700;color:#2a7a4e;padding:0.5rem 0;border-bottom:1px dashed var(--color-border);text-align:right;">Before every action</span>
+          </div>
+          <div style="display:contents;">
+            <span style="font-family:var(--font-body);font-size:0.92rem;color:var(--color-text);padding:0.5rem 0;border-bottom:1px dashed var(--color-border);">Dry-run mode</span>
+            <span style="font-family:var(--font-body);font-size:0.92rem;font-weight:700;color:#2a7a4e;padding:0.5rem 0;border-bottom:1px dashed var(--color-border);text-align:right;">Before going live</span>
+          </div>
+          <div style="display:contents;">
+            <span style="font-family:var(--font-body);font-size:0.92rem;color:var(--color-text);padding:0.5rem 0;border-bottom:1px dashed var(--color-border);">Schema validation</span>
+            <span style="font-family:var(--font-body);font-size:0.92rem;font-weight:700;color:#2a7a4e;padding:0.5rem 0;border-bottom:1px dashed var(--color-border);text-align:right;">Every LLM output</span>
+          </div>
+          <div style="display:contents;">
+            <span style="font-family:var(--font-body);font-size:0.92rem;color:var(--color-text);padding:0.5rem 0;border-bottom:1px dashed var(--color-border);">Structured audit logging</span>
+            <span style="font-family:var(--font-body);font-size:0.92rem;font-weight:700;color:#2a7a4e;padding:0.5rem 0;border-bottom:1px dashed var(--color-border);text-align:right;">Every decision</span>
+          </div>
+          <div style="display:contents;">
+            <span style="font-family:var(--font-body);font-size:0.92rem;font-weight:700;color:var(--color-text);padding:0.5rem 0;">Circuit breakers</span>
+            <span style="font-family:var(--font-body);font-size:0.92rem;font-weight:700;color:var(--color-text);padding:0.5rem 0;text-align:right;">7 in my live system</span>
+          </div>
+        </div>
+      </div>
+
+      <p><strong>1. Snapshot and rollback.</strong></p>
+      <p>Before the agent acts, take a snapshot of state. If the action fails, roll back cleanly. In my trading system, every checkpoint writes a state file before touching positions. If the script crashes mid-run, the next checkpoint reads the last clean state and continues. No phantom positions, no double-fills.</p>
+
+      <p><strong>2. Dry-run mode.</strong></p>
+      <p>Every production action should have a dry-run equivalent. My system has DRY_RUN=1 as a gate on every order submission. I run dry-run for a full trading day before flipping live. The agent behaves identically — logs everything, makes every decision — but hits a wall before it reaches the brokerage API.</p>
+
+      <p><strong>3. Schema validation.</strong></p>
+      <p>If your agent returns JSON, validate the schema before you act on it. An agent that returns {"action": "buy", "size": null} should fail loudly at the validation layer, not silently at the execution layer. Silent failures are the worst kind — they succeed by doing nothing.</p>
+
+      <p><strong>4. Structured audit logging.</strong></p>
+      <p>Every agent decision should be logged with: timestamp, inputs considered, decision made, action taken, outcome observed. Not for debugging — for trust. The only way to let an agent run unsupervised is to be able to reconstruct exactly what it did and why. Without this, you're flying blind.</p>
+
+      <p><strong>5. Circuit breakers.</strong></p>
+      <p>Know in advance what constitutes an unacceptable state. Consecutive losses above a threshold. An API that stops responding. A position that crosses a hard stop. Build the circuit breaker before you need it. My system has seven of them. They've all fired at least once.</p>
+
+      <figure class="article-img-break">
+        <img class="article-img-break__img"
+             src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&q=90&auto=format&fit=crop"
+             alt="Infrastructure for trust" loading="lazy">
+        <figcaption class="article-img-break__label">Infrastructure for trust — the audit trail that makes unsupervised agents possible</figcaption>
+      </figure>
+
+      <h2 id="section-career-skill">Why This Is a Career Skill, Not Just a Best Practice</h2>
+
+      <p>Here is the talent gap that's about to matter enormously.</p>
+
+      <p>Every company is deploying agents. Most of those agents will fail in production — not because the model is bad, but because the harness doesn't exist. The agent works in the demo. It works on the test cases. It breaks at 3am on a Tuesday when an API returns a malformed response and nobody is watching.</p>
+
+      <!-- Pull quote -->
+      <div style="border-left:4px solid var(--color-accent);margin:2.5rem 0;padding:1rem 1.5rem;background:var(--color-bg-secondary);">
+        <p style="font-family:var(--font-display);font-size:1.3rem;font-weight:300;line-height:1.3;letter-spacing:-0.02em;color:var(--color-text);margin:0;font-style:italic;">"The engineer who can build reliable harnesses — who thinks in circuit breakers and rollbacks before they think in prompts — is the engineer every serious team needs right now."</p>
+      </div>
+
+      <p>This skill has no job title yet. It will.</p>
+
+      <p>The closest frame I have for it: harness engineering is what makes the difference between an agent that runs and an agent that runs in production. That gap is not small. That gap is the entire value proposition of deploying agents at all.</p>
+
+      <h2 id="section-where-to-start">Where to Start</h2>
+
+      <p>Build a harness for the smallest agent you have. Add one thing:</p>
+
+      <ul style="margin:1rem 0 1rem 1.5rem;line-height:1.9;">
+        <li>A dry-run flag that does everything except the irreversible action.</li>
+        <li>A state file that records what happened before the next run starts.</li>
+        <li>A schema check on every LLM output before you act on it.</li>
+      </ul>
+
+      <p>You don't need all five components on day one. You need one, running, in production, before the agent breaks.</p>
+
+      <p>Because it will break.</p>
+
+      <!-- Pull quote -->
+      <div style="border-left:4px solid var(--color-accent);margin:2.5rem 0;padding:1rem 1.5rem;background:var(--color-bg-secondary);">
+        <p style="font-family:var(--font-display);font-size:1.3rem;font-weight:300;line-height:1.3;letter-spacing:-0.02em;color:var(--color-text);margin:0;font-style:italic;">"The question is whether you're ready when it does."</p>
+      </div>
+
+      <div class="grove-seal" aria-hidden="true"></div>
+
+      <!-- Related Posts -->
+      <div class="related-posts">
+        <p class="related-posts__label">Read next</p>
+        <div class="related-posts__grid">
+          <a class="related-post-card" href="token-throughput-productivity.html">
+            <img class="related-post-card__image" src="https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+            <div class="related-post-card__body">
+              <p class="related-post-card__category">AI · Productivity</p>
+              <p class="related-post-card__title">The Metric That Actually Measures AI Productivity</p>
+            </div>
+          </a>
+          <a class="related-post-card" href="autoquant.html">
+            <img class="related-post-card__image" src="https://images.unsplash.com/photo-1518085250887-2f903c200fee?w=800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+            <div class="related-post-card__body">
+              <p class="related-post-card__category">AI · Trading</p>
+              <p class="related-post-card__title">6 Months of Bayesian Signal Grading</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /.article-content -->
+  </div><!-- /.article-body__inner -->
+</div><!-- /.article-body -->
+
+<!-- Footer -->
+<footer class="v2-footer">
+  <button class="v2-footer__scroll-up" onclick="window.scrollTo({top:0,behavior:'smooth'});" aria-label="Scroll to top">↑<br/>GO UP</button>
+  <div class="v2-footer__inner">
+    <nav class="v2-footer__nav" aria-label="Footer navigation">
+      <a href="/" class="footer__link">Essays</a>
+      <a href="/about.html" class="footer__link">About</a>
+      <a href="/archive.html" class="footer__link">Archive</a>
+      <a href="/tools.html" class="footer__link">Tools</a>
+      <a href="/resume.html" class="footer__link">Resume</a>
+      <a href="/rss.xml" class="footer__link">RSS</a>
+    </nav>
+    <div class="v2-footer__newsletter">
+      <div class="v2-footer__newsletter-title">Field Notes</div>
+      <p class="v2-footer__newsletter-text">One essay per week. AI infrastructure, trading systems, and what actually ships.</p>
+      <form class="v2-footer__email-form" action="https://formspree.io/f/xwvwlybd" method="POST">
+        <input class="v2-footer__email-input" type="email" name="email" placeholder="your@email.com" required />
+        <button class="v2-footer__email-submit" type="submit">Subscribe →</button>
+      </form>
+    </div>
+  </div>
+  <div class="v2-footer__bottom">
+    <span>© 2026 Sachin Rai · Field Notes from San Francisco</span>
+    <div class="v2-footer__social">
+      <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">X ↗</a>
+      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="/privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../css/grove.js"></script>
+<script>
+(function(){
+  var els = document.querySelectorAll('[data-target]');
+  if(!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target;
+      var target = parseInt(el.dataset.target, 10);
+      var prefix = el.dataset.prefix || '';
+      var suffix = el.dataset.suffix || '';
+      var duration = 1400;
+      var start = performance.now();
+      function tick(now){
+        var t = Math.min((now - start)/duration, 1);
+        var ease = 1 - Math.pow(1-t, 3);
+        el.textContent = prefix + Math.round(ease * target) + suffix;
+        if(t < 1) requestAnimationFrame(tick);
+        else el.textContent = prefix + target + suffix;
+      }
+      requestAnimationFrame(tick);
+      obs.unobserve(el);
+    });
+  }, {threshold: 0.1, rootMargin: "0px 0px 50px 0px"});
+  els.forEach(function(el){ obs.observe(el); });
+})();
+</script>
+<script type="module">
+import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';
+function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}
+onCLS(send);onINP(send);onFCP(send);onLCP(send);onTTFB(send);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="/js/post-story.js"></script>
+</body>
+</html>
