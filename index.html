@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sachin Rai — Field Notes</title>
 <meta name="description" content="Writing at the intersection of AI, enterprise sales, and the market. Because the future doesn't wait for permission.">
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sachinai.com/">
+<meta property="og:title" content="Sachin Rai — Field Notes">
+<meta property="og:description" content="Writing at the intersection of AI, enterprise sales, and the market. Because the future doesn't wait for permission.">
+<meta property="og:image" content="https://sachinai.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@sachinrai01">
+<meta name="twitter:creator" content="@sachinrai01">
+<meta name="twitter:title" content="Sachin Rai — Field Notes">
+<meta name="twitter:description" content="Writing at the intersection of AI, enterprise sales, and the market. Because the future doesn't wait for permission.">
+<meta name="twitter:image" content="https://sachinai.com/og-image.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%230a1628'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%231a56ff'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -527,6 +543,82 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 #cursor.hovering { width: 36px; height: 36px; opacity: .15; }
 
 /* ── RESPONSIVE ──────────────────────────────────────────── */
+/* ── COMPARE MOBILE ─────────────────────────────────────── */
+.compare-mobile { display: none; flex-direction: column; gap: 1em; }
+.compare-mobile-card {
+  border: 1px solid var(--border); padding: 1.5em;
+  background: var(--bg); border-radius: .5rem;
+}
+.compare-mobile-card.featured {
+  border-color: rgba(10,22,40,.15);
+}
+.compare-mobile-card-head {
+  font-size: 11px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ink);
+  padding-bottom: .75em; margin-bottom: 1em;
+  border-bottom: 2px solid var(--border);
+}
+.compare-mobile-card.featured .compare-mobile-card-head {
+  color: #fff; background: var(--ink);
+  margin: -1.5em -1.5em 1em; padding: 1em 1.5em;
+  border-radius: .5rem .5rem 0 0; border-bottom: none;
+}
+.compare-mobile-card-head small {
+  display: block; font-weight: 600; font-size: 9px;
+  letter-spacing: .24em; color: var(--muted); margin-bottom: .3em;
+}
+.compare-mobile-card.featured .compare-mobile-card-head small {
+  color: rgba(255,255,255,.5);
+}
+.compare-mobile-row {
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); padding: .5em 0;
+  border-bottom: 1px solid var(--border);
+}
+.compare-mobile-row:last-child { border-bottom: none; }
+.compare-mobile-row .hi { color: var(--ink); font-weight: 700; }
+
+@media (max-width: 768px) {
+  .compare-mobile { display: flex; }
+}
+
+/* ── HAMBURGER ───────────────────────────────────────────── */
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: .5em; background: none; border: none;
+}
+.nav-hamburger span {
+  display: block; width: 18px; height: 2px;
+  background: var(--ink); border-radius: 2px;
+  transition: transform .3s, opacity .3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+#mobile-menu {
+  display: none; position: fixed;
+  top: 5rem; left: 50%; transform: translateX(-50%);
+  background: rgba(255,255,255,0.97); backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border); border-radius: 1rem;
+  padding: 1.25em; width: calc(100% - 10vw); max-width: 320px;
+  z-index: 99; flex-direction: column; gap: .25em;
+  box-shadow: 0 8px 40px rgba(10,22,40,.13);
+}
+#mobile-menu.open { display: flex; }
+.mobile-menu-link {
+  font-size: 12px; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--ink);
+  padding: .85em 1em; border-radius: .5rem; transition: background .15s;
+}
+.mobile-menu-link:hover { background: var(--bg-2); }
+.mobile-menu-cta {
+  background: var(--blue); color: #fff !important;
+  text-align: center; margin-top: .5em;
+}
+.mobile-menu-cta:hover { background: var(--blue-dark) !important; }
+
 @media (max-width: 768px) {
   :root { --gutter: 5vw; }
   #hero { grid-template-columns: 1fr; }
@@ -540,7 +632,8 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
   .about-grid { grid-template-columns: 1fr; gap: 3em; }
   .compare-table { display: none; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 1.5em; }
-  .nav-links .nav-link:not(:last-child) { display: none; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
 }
 
 /* ── ENTRANCE ANIMATIONS ─────────────────────────────────── */
@@ -632,7 +725,17 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
     <a href="/tools.html"   class="nav-link">Tools</a>
     <a href="#footer"       class="nav-cta">Subscribe</a>
   </div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div id="mobile-menu" role="dialog" aria-label="Navigation menu">
+  <a href="/archive.html" class="mobile-menu-link">Writing</a>
+  <a href="/about.html"   class="mobile-menu-link">About</a>
+  <a href="/tools.html"   class="mobile-menu-link">Tools</a>
+  <a href="#footer"       class="mobile-menu-link mobile-menu-cta">Subscribe</a>
+</div>
 
 <!-- ── HERO ─────────────────────────────────────────────── -->
 <section id="hero">
@@ -696,7 +799,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
 <div id="stats">
   <div class="stats-grid">
     <div class="stat-cell reveal" data-delay="0ms">
-      <span class="stat-num" data-target="8">0</span>
+      <span class="stat-num" data-target="13">0</span>
       <div class="stat-label">Field Notes Published</div>
     </div>
     <div class="stat-cell reveal" data-delay="100ms">
@@ -755,7 +858,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
   </div>
   <div class="posts-track" id="postsTrack">
     <a class="post-card reveal" data-delay="0ms" href="/posts/memory-is-the-new-moat.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=700&q=85&auto=format&fit=crop" alt="Memory Is the New Moat" loading="lazy">
+      <img class="post-card-img" width="290" height="420" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=700&q=85&auto=format&fit=crop" alt="Memory Is the New Moat" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">AI · Strategy · May 2026</span>
         <h3 class="post-card-title">Memory Is the New Moat.</h3>
@@ -763,7 +866,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card reveal" data-delay="60ms" href="/posts/the-90-10-reliability-wall.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=700&q=85&auto=format&fit=crop" alt="The 90/10 Reliability Wall" loading="lazy">
+      <img class="post-card-img" width="290" height="420" src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=700&q=85&auto=format&fit=crop" alt="The 90/10 Reliability Wall" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Enterprise · AI · May 2026</span>
         <h3 class="post-card-title">The 90/10 Reliability Wall.</h3>
@@ -771,7 +874,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card reveal" data-delay="120ms" href="/posts/boring-verticals-win.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=85&auto=format&fit=crop" alt="Boring Verticals Win" loading="lazy">
+      <img class="post-card-img" width="290" height="420" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=85&auto=format&fit=crop" alt="Boring Verticals Win" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Venture · Strategy · May 2026</span>
         <h3 class="post-card-title">Boring Verticals Win.</h3>
@@ -779,7 +882,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card reveal" data-delay="180ms" href="/posts/the-trojan-horse-strategy.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=700&q=85&auto=format&fit=crop" alt="The Trojan Horse Strategy" loading="lazy">
+      <img class="post-card-img" width="290" height="420" src="https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=700&q=85&auto=format&fit=crop" alt="The Trojan Horse Strategy" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Strategy · Sales · May 2026</span>
         <h3 class="post-card-title">The Trojan Horse Strategy.</h3>
@@ -787,7 +890,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card reveal" data-delay="240ms" href="/posts/building-a-second-brain-that-actually-works.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=700&q=85&auto=format&fit=crop" alt="Building a Second Brain That Actually Works" loading="lazy">
+      <img class="post-card-img" width="290" height="420" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=700&q=85&auto=format&fit=crop" alt="Building a Second Brain That Actually Works" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Knowledge · PKM · May 2026</span>
         <h3 class="post-card-title">Building a Second Brain That Actually Works.</h3>
@@ -795,7 +898,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card reveal" data-delay="300ms" href="/posts/13-agents-one-saturday.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=700&q=85&auto=format&fit=crop" alt="Thirteen Agents in One Saturday" loading="lazy">
+      <img class="post-card-img" width="290" height="420" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=700&q=85&auto=format&fit=crop" alt="Thirteen Agents in One Saturday" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">AI · Engineering · May 2026</span>
         <h3 class="post-card-title">Thirteen Agents in One Saturday.</h3>
@@ -803,7 +906,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card reveal" data-delay="360ms" href="/posts/compounding-systems.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=700&q=85&auto=format&fit=crop" alt="Most Second Brains Just Rotate" loading="lazy">
+      <img class="post-card-img" width="290" height="420" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=700&q=85&auto=format&fit=crop" alt="Most Second Brains Just Rotate" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Knowledge · May 2026</span>
         <h3 class="post-card-title">Most Second Brains Just Rotate.</h3>
@@ -811,7 +914,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card reveal" data-delay="420ms" href="/posts/five-vault-fixes.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=700&q=85&auto=format&fit=crop" alt="Vault: 7.5 to 9.5" loading="lazy">
+      <img class="post-card-img" width="290" height="420" src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=700&q=85&auto=format&fit=crop" alt="Vault: 7.5 to 9.5" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Ops · May 2026</span>
         <h3 class="post-card-title">Vault: 7.5 → 9.5</h3>
@@ -819,7 +922,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card reveal" data-delay="480ms" href="/posts/renamed-seven-agents.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=700&q=85&auto=format&fit=crop" alt="I Renamed Seven Agents" loading="lazy">
+      <img class="post-card-img" width="290" height="420" src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=700&q=85&auto=format&fit=crop" alt="I Renamed Seven Agents" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Engineering · May 2026</span>
         <h3 class="post-card-title">I Renamed Seven Agents.</h3>
@@ -827,7 +930,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card" href="/posts/autoquant.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1518085250887-2f903c200fee?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <img class="post-card-img" width="290" height="420" src="https://images.unsplash.com/photo-1518085250887-2f903c200fee?w=700&q=85&auto=format&fit=crop" alt="6 Months of Bayesian Signal Grading" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Markets · Apr 2026</span>
         <h3 class="post-card-title">6 Months of Bayesian Signal Grading.</h3>
@@ -835,7 +938,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card" href="/posts/win-rate-trap.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <img class="post-card-img" width="290" height="420" src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=700&q=85&auto=format&fit=crop" alt="Win Rate Lies" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Strategy · Apr 2026</span>
         <h3 class="post-card-title">Win Rate Lies.</h3>
@@ -843,7 +946,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card" href="/posts/ai-trends-2026-breakthrough-idea.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <img class="post-card-img" width="290" height="420" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=700&q=85&auto=format&fit=crop" alt="7 AI Trends I'm Tracking in 2026" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Strategy · Apr 2026</span>
         <h3 class="post-card-title">7 AI Trends I'm Tracking in 2026.</h3>
@@ -851,7 +954,7 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </div>
     </a>
     <a class="post-card" href="/posts/ai-sales-stack-2026.html">
-      <img class="post-card-img" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700&q=85&auto=format&fit=crop" alt="" loading="lazy">
+      <img class="post-card-img" width="290" height="420" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700&q=85&auto=format&fit=crop" alt="The AI Sales Stack I'd Build Today" loading="lazy">
       <div class="post-card-body">
         <span class="post-card-kicker">Sales · AI · Feb 2026</span>
         <h3 class="post-card-title">The AI Sales Stack I'd Build Today.</h3>
@@ -908,6 +1011,36 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
       </tr>
     </tbody>
   </table>
+
+  <div class="compare-mobile">
+    <div class="compare-mobile-card">
+      <div class="compare-mobile-card-head"><small>Legacy</small>Static Rules</div>
+      <div class="compare-mobile-row">Fixed weights forever</div>
+      <div class="compare-mobile-row">Regime-blind</div>
+      <div class="compare-mobile-row">Win Rate: 46%</div>
+      <div class="compare-mobile-row">Signal noise: high</div>
+      <div class="compare-mobile-row">Journal: never</div>
+      <div class="compare-mobile-row">Updates: never</div>
+    </div>
+    <div class="compare-mobile-card featured">
+      <div class="compare-mobile-card-head"><small>AutoQuant v1</small>Bayesian Grader</div>
+      <div class="compare-mobile-row"><span class="hi">Updates every trade</span></div>
+      <div class="compare-mobile-row"><span class="hi">Regime-conditioned</span></div>
+      <div class="compare-mobile-row">Win Rate: <span class="hi">57%</span></div>
+      <div class="compare-mobile-row"><span class="hi">De-correlated vector</span></div>
+      <div class="compare-mobile-row"><span class="hi">Autopsy: every trade</span></div>
+      <div class="compare-mobile-row">Runtime: <span class="hi">9:15am + 2:30pm ET</span></div>
+    </div>
+    <div class="compare-mobile-card">
+      <div class="compare-mobile-card-head"><small>The Edge</small>Human + System</div>
+      <div class="compare-mobile-row"><span class="hi">Pattern + intuition</span></div>
+      <div class="compare-mobile-row"><span class="hi">Context-aware</span></div>
+      <div class="compare-mobile-row">Target: <span class="hi">&gt; 60%</span></div>
+      <div class="compare-mobile-row">Edge: <span class="hi">Sunday review</span></div>
+      <div class="compare-mobile-row">Learning loop: <span class="hi">weekly</span></div>
+      <div class="compare-mobile-row">Horizon: <span class="hi">ongoing</span></div>
+    </div>
+  </div>
 </section>
 
 <!-- ── ABOUT ───────────────────────────────────────────────── -->
@@ -995,8 +1128,8 @@ h5 { font-family: var(--sans); font-size: clamp(11px, 1.1vw, 16px);
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1011,6 +1144,33 @@ document.querySelectorAll('a,button').forEach(function(el){
 (function loop(){ cx+=(mx-cx)*.12; cy+=(my-cy)*.12;
   cursor.style.left=cx+'px'; cursor.style.top=cy+'px';
   requestAnimationFrame(loop); })();
+
+/* ── MOBILE NAV ── */
+(function(){
+  var hamburger = document.getElementById('navHamburger');
+  var mobileMenu = document.getElementById('mobile-menu');
+  if (!hamburger) return;
+  hamburger.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('click', function(e){
+    if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)){
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
 
 /* ── NAV SHADOW ── */
 window.addEventListener('scroll', function(){
