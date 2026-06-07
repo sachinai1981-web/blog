@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{analytics_storage:'denied',wait_for_update:500});if(localStorage.getItem('sr_consent')==='granted')gtag('consent','update',{analytics_storage:'granted'});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CVBY6GSVNZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CVBY6GSVNZ');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The 2026 AI Engineer's Stack: FastMCP, LangChain &amp; LangGraph — Deep Dive — Sachin Rai</title>
+<meta name="description" content="A deep dive on the three Python libraries every AI engineer needs in 2026: FastMCP for tool connectivity, LangChain for LLM applications, and LangGraph for stateful multi-agent systems. Core concepts, code examples, and a clear learning path." />
+<link rel="canonical" href="https://sachinai.com/posts/ai-engineer-stack-2026-fastmcp-langchain-langgraph.html" />
+<meta name="robots" content="index, follow" />
+<meta name="keywords" content="FastMCP, LangChain, LangGraph, AI engineer, MCP server, Python, LLM applications, stateful agents, multi-agent, 2026" />
+
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sachinai.com/posts/ai-engineer-stack-2026-fastmcp-langchain-langgraph.html" />
+<meta property="og:title" content="The 2026 AI Engineer's Stack: FastMCP, LangChain &amp; LangGraph" />
+<meta property="og:description" content="A deep dive on the three Python libraries every AI engineer needs in 2026: FastMCP for tool connectivity, LangChain for LLM applications, and LangGraph for stateful multi-agent systems." />
+<meta property="og:image" content="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=90&auto=format&fit=crop" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="Sachin Rai" />
+<meta property="article:published_time" content="2026-06-07" />
+<meta property="article:author" content="Sachin Rai" />
+<meta property="article:tag" content="AI" />
+<meta property="article:tag" content="Engineering" />
+<meta property="article:tag" content="Python" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@sachinrai01" />
+<meta name="twitter:title" content="The 2026 AI Engineer's Stack: FastMCP, LangChain &amp; LangGraph" />
+<meta name="twitter:description" content="A deep dive on the three Python libraries every AI engineer needs in 2026. Core concepts, code examples, and a clear learning path." />
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=90&auto=format&fit=crop" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "The 2026 AI Engineer's Stack: FastMCP, LangChain & LangGraph",
+  "url": "https://sachinai.com/posts/ai-engineer-stack-2026-fastmcp-langchain-langgraph.html",
+  "datePublished": "2026-06-07",
+  "dateModified": "2026-06-07",
+  "author": {
+    "@type": "Person",
+    "name": "Sachin Rai",
+    "url": "https://sachinai.com/",
+    "sameAs": ["https://www.linkedin.com/in/sachinr1/"]
+  },
+  "publisher": { "@type": "Person", "name": "Sachin Rai", "url": "https://sachinai.com/" },
+  "description": "A deep dive on FastMCP, LangChain, and LangGraph — the three Python libraries every AI engineer needs in 2026.",
+  "image": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=90&auto=format&fit=crop"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://sachinai.com/"},
+    {"@type":"ListItem","position":2,"name":"Archive","item":"https://sachinai.com/archive.html"},
+    {"@type":"ListItem","position":3,"name":"The 2026 AI Engineer's Stack","item":"https://sachinai.com/posts/ai-engineer-stack-2026-fastmcp-langchain-langgraph.html"}
+  ]
+}
+</script>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23161b1f'/><text x='50%25' y='62%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='13' fill='%23ffffff'>SR</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/grove.css" />
+<style>
+  .code-block {
+    background: #1a1f24;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #e2e8f0;
+  }
+  .code-block .kw { color: #a78bfa; }
+  .code-block .fn { color: #60a5fa; }
+  .code-block .st { color: #86efac; }
+  .code-block .cm { color: #94a3b8; font-style: italic; }
+  .code-block .dec { color: #fbbf24; }
+  .code-block .nm { color: #f9a8d4; }
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+  .concept-card {
+    background: var(--color-bg-secondary, #f8f8f6);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-left: 3px solid var(--color-accent, #8b6914);
+    padding: 1.25rem 1.5rem;
+    border-radius: 2px;
+  }
+  .concept-card__title {
+    font-family: 'Barlow', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-accent, #8b6914);
+    margin-bottom: 0.5rem;
+  }
+  .concept-card__desc {
+    font-size: 14px;
+    line-height: 1.65;
+    margin: 0;
+  }
+  .stack-diagram {
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 2rem 0;
+    font-family: 'Barlow', sans-serif;
+  }
+  .stack-layer {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .stack-layer:last-child { border-bottom: none; }
+  .stack-layer__badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .badge-gold { background: #8b6914; color: white; }
+  .badge-blue { background: #1d4ed8; color: white; }
+  .badge-green { background: #15803d; color: white; }
+  .stack-layer__text { font-size: 14px; line-height: 1.5; }
+  .stack-layer__name { font-weight: 700; }
+  .resource-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 14px; }
+  .resource-table th { background: var(--color-text, #161b1f); color: white; padding: 10px 14px; text-align: left; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .resource-table td { padding: 10px 14px; border-bottom: 1px solid rgba(0,0,0,0.08); vertical-align: top; line-height: 1.5; }
+  .resource-table tr:nth-child(even) td { background: var(--color-bg-secondary, #f8f8f6); }
+  .resource-table a { color: var(--color-accent, #8b6914); }
+</style>
+</head>
+<body>
+
+<!-- Consent banner -->
+<div id="sr-consent" aria-label="Cookie consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#161b1f;color:#ffffff;padding:.7rem 1.5rem;align-items:center;justify-content:space-between;gap:1rem;font-family:'Barlow',sans-serif;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid rgba(255,255,255,0.15);">
+  <span style="flex:1;opacity:.7;">sachinai.com uses Google Analytics to understand readership. No ads. No fingerprinting.</span>
+  <div style="display:flex;gap:.5rem;flex-shrink:0;">
+    <button onclick="srConsent('granted')" style="padding:.4rem 1.1rem;background:#ffffff;color:#161b1f;border:0;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Accept</button>
+    <button onclick="srConsent('denied')" style="padding:.4rem 1.1rem;background:transparent;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.2);cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;">Decline</button>
+  </div>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('sr-consent');
+  if(!b)return;
+  if(!localStorage.getItem('sr_consent'))b.style.display='flex';
+  window.srConsent=function(v){
+    localStorage.setItem('sr_consent',v);
+    if(typeof gtag!=='undefined')gtag('consent','update',{analytics_storage:v});
+    b.style.display='none';
+  };
+})();
+</script>
+
+<!-- NAV -->
+<nav class="navbar navbar--dark" id="navbar">
+  <div class="navbar-inner">
+    <div class="navbar-left">
+      <a href="/archive.html" class="navbar__link">Essays</a>
+      <a href="/about.html"   class="navbar__link">About</a>
+      <a href="/archive.html" class="navbar__link">Archive</a>
+      <a href="/tools.html"   class="navbar__link">Tools</a>
+      <a href="/resume.html"  class="navbar__link">Resume</a>
+    </div>
+    <div class="navbar-center">
+      <a href="/" class="navbar__logo-link">&#9670; SACHIN RAI</a>
+    </div>
+    <div class="navbar-right">
+      <a href="/#subscribe" class="navbar__link">Subscribe</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ARTICLE HEADER -->
+<div class="psh-scroll" data-psh>
+  <div class="psh-sticky">
+    <img class="psh-photo psh-p1" src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1800&q=90&auto=format&fit=crop" alt="" loading="eager" fetchpriority="high">
+    <img class="psh-photo psh-p2" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+    <img class="psh-photo psh-p3" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+    <div class="psh-veil"></div>
+    <div class="psh-text">
+      <span class="psh-category">AI + Engineering</span>
+      <h1 class="psh-title">The 2026 AI Engineer's Stack: FastMCP, LangChain &amp; LangGraph</h1>
+      <span class="psh-meta">June 7, 2026 &middot; 18 min read</span>
+    </div>
+    <div class="psh-hint">Scroll</div>
+  </div>
+</div>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="stats-strip__inner">
+      <div class="stats-strip__item">
+        <div class="stats-strip__number" data-target="1" data-suffix="M+">0M+</div>
+        <div class="stats-strip__label">FastMCP Downloads / Day</div>
+      </div>
+      <div class="stats-strip__item">
+        <div class="stats-strip__number" data-target="70" data-suffix="%">0%</div>
+        <div class="stats-strip__label">MCP Servers Powered by FastMCP</div>
+      </div>
+      <div class="stats-strip__item">
+        <div class="stats-strip__number" data-target="35" data-suffix="%">0%</div>
+        <div class="stats-strip__label">Fortune 500 Using LangChain</div>
+      </div>
+      <div class="stats-strip__item">
+        <div class="stats-strip__number" data-target="400" data-suffix="+">0+</div>
+        <div class="stats-strip__label">Companies on LangGraph Platform</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARTICLE BODY -->
+  <div class="article-body">
+    <div class="article-body__inner">
+
+      <aside class="article-toc">
+        <p class="article-toc__label">Contents</p>
+        <ul class="article-toc__list">
+          <li><a href="#why-these-three">Why These Three</a></li>
+          <li><a href="#fastmcp">FastMCP: The USB-C for AI</a></li>
+          <li><a href="#langchain">LangChain: The Agent Platform</a></li>
+          <li><a href="#langgraph">LangGraph: Stateful Agents</a></li>
+          <li><a href="#how-they-fit">How They Fit Together</a></li>
+          <li><a href="#learning-path">The Learning Path</a></li>
+          <li><a href="#resources">Resources &amp; Links</a></li>
+        </ul>
+      </aside>
+
+      <div class="article-content">
+
+        <h2 id="why-these-three">Why these three, and why now.</h2>
+
+        <p>A TikTok from <strong>Stekunda Henry</strong> recently made the rounds: <em>3 Python libraries you should learn to get hired as an AI Engineer in 2026.</em> The three were FastMCP, LangChain, and LangGraph. The take was right, but the format was a 60-second clip. It deserves a longer treatment.</p>
+
+        <p>These three libraries are not competitors. They occupy different layers of the same stack, and once you understand what layer each one owns, the question stops being "which one should I learn?" and becomes "in what order, and how deeply?" This post answers that question with code, context, and a clear learning path.</p>
+
+        <p>The short version: <strong>FastMCP</strong> gives your AI agent secure, standardised access to the outside world. <strong>LangChain</strong> is the high-level framework for building LLM-powered applications. <strong>LangGraph</strong> is the stateful runtime underneath LangChain that makes complex, multi-step agents reliable in production. Together, they cover every layer from protocol to orchestration.</p>
+
+        <div class="callout">
+          <p><strong>Current versions (June 2026):</strong> FastMCP 3.1 (GA: Feb 18, 2026) &middot; LangChain 1.0 (GA: Oct 22, 2025) &middot; LangGraph 1.2 (released: May 11, 2026)</p>
+        </div>
+
+        <h2 id="fastmcp">FastMCP: The USB-C for AI Tools.</h2>
+
+        <p>To understand FastMCP, you first need to understand the problem it solves.</p>
+
+        <p>Before November 2024, connecting an AI agent to an external system — a database, a Slack workspace, a REST API — meant writing a custom integration for each agent-tool pair. You had N agents and M tools, so you were writing up to N&times;M glue layers. Every framework had its own tool format. Nothing was portable.</p>
+
+        <p>On November 25, 2024, Anthropic released the <strong>Model Context Protocol (MCP)</strong> — an open JSON-RPC 2.0 specification that standardises how AI agents discover and call external capabilities. The analogy that stuck: <em>USB-C for AI.</em> One standard connector, everything plugs in.</p>
+
+        <p>MCP SDK downloads grew roughly <strong>970&times;</strong> in 18 months. By Q1 2026, every major AI vendor — Anthropic, OpenAI, Google, Microsoft — offers native MCP support. The protocol crossed 2,000 community server implementations and became the default way the industry thinks about tool connectivity.</p>
+
+        <p>FastMCP is the Python implementation that makes <em>building</em> MCP servers trivial. It is the fast, Pythonic way to create MCP servers and clients, and is downloaded over a million times a day. Some version of FastMCP powers approximately 70% of MCP servers across all languages.</p>
+
+        <h3>The three pillars of MCP</h3>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <p class="concept-card__title">Tools</p>
+            <p class="concept-card__desc">Functions an AI model can call. Think: search a database, send an email, run a calculation. The model decides when to call them based on the user's request.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Resources</p>
+            <p class="concept-card__desc">Read-only data the model can access. Think: a file, a database record, a URL's content. Resources provide context without executing actions.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Prompts</p>
+            <p class="concept-card__desc">Reusable prompt templates exposed by the server. Clients can list and use them to standardise how the model is instructed for common tasks.</p>
+          </div>
+        </div>
+
+        <h3>FastMCP in code</h3>
+
+        <p>This is the entire code for a working MCP server that exposes three tools:</p>
+
+<div class="code-block"><span class="kw">from</span> fastmcp <span class="kw">import</span> FastMCP
+<span class="kw">import</span> httpx
+
+<span class="cm"># 1. Create the server</span>
+mcp = <span class="fn">FastMCP</span>(<span class="st">"My AI Assistant"</span>)
+
+<span class="cm"># 2. Expose a tool — schema is auto-generated from the function signature</span>
+<span class="dec">@mcp.tool</span>
+<span class="kw">def</span> <span class="fn">add</span>(a: <span class="nm">int</span>, b: <span class="nm">int</span>) -> <span class="nm">int</span>:
+    <span class="st">"""Add two numbers together."""</span>
+    <span class="kw">return</span> a + b
+
+<span class="cm"># 3. Expose a resource</span>
+<span class="dec">@mcp.resource</span>(<span class="st">"config://settings"</span>)
+<span class="kw">def</span> <span class="fn">get_settings</span>() -> <span class="nm">str</span>:
+    <span class="st">"""Return application config as JSON."""</span>
+    <span class="kw">return</span> <span class="st">'{"env": "production", "version": "3.1"}'</span>
+
+<span class="cm"># 4. Expose a prompt template</span>
+<span class="dec">@mcp.prompt</span>
+<span class="kw">def</span> <span class="fn">summarize</span>(text: <span class="nm">str</span>) -> <span class="nm">str</span>:
+    <span class="kw">return</span> <span class="st">f"Summarize the following in 3 bullet points:\n\n{text}"</span>
+
+<span class="cm"># 5. Run the server</span>
+<span class="kw">if</span> __name__ == <span class="st">"__main__"</span>:
+    mcp.<span class="fn">run</span>()</div>
+
+        <p>That's it. FastMCP automatically generates the JSON Schema from your type hints, handles transport negotiation, manages authentication, and makes the server discoverable by any MCP client — Claude Desktop, VS Code Copilot, a LangGraph agent, or your own custom client.</p>
+
+        <p>The decorator pattern will feel familiar if you've used FastAPI. That's intentional. FastMCP was designed to have the same ergonomics for MCP that FastAPI has for REST.</p>
+
+        <h3>What FastMCP 3.0 added</h3>
+
+        <p>The 3.0 release (GA February 18, 2026) introduced the three-layer architecture that makes FastMCP composable at scale:</p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <p class="concept-card__title">Providers</p>
+            <p class="concept-card__desc">Where components come from. A provider can be decorated Python functions, a directory of files, a remote MCP server, or an OpenAPI spec. Swap providers without rewriting tools.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Transforms</p>
+            <p class="concept-card__desc">Middleware for the component pipeline. Intercept and modify the flow of tools, resources, and prompts between providers and clients. Use them for auth checks, logging, or schema transformation.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Client CLI</p>
+            <p class="concept-card__desc">Built-in commands: <code>fastmcp list</code>, <code>fastmcp call</code>, <code>fastmcp discover</code>. Generate a typed CLI script from any MCP server with <code>fastmcp generate-cli</code>.</p>
+          </div>
+        </div>
+
+        <p>FastMCP also ships with tool versioning (<code>@mcp.tool(version="2.0")</code>), OpenTelemetry instrumentation out of the box, and granular authorization scopes — production-ready by default, not as an afterthought.</p>
+
+        <div class="callout">
+          <p><strong>Why FastMCP matters for your career:</strong> MCP is now the default tool integration standard. Every enterprise AI project you'll work on in 2026 needs to connect agents to internal APIs, databases, and SaaS tools. FastMCP is how you build those bridges. It's a skill that compounds — one MCP server you build becomes reusable across every agent framework that speaks the protocol.</p>
+        </div>
+
+        <figure class="article-img-break">
+          <img class="article-img-break__img" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=90&auto=format&fit=crop" alt="Network connections" loading="lazy">
+          <figcaption class="article-img-break__label">The MCP protocol — one standard that connects AI to everything.</figcaption>
+        </figure>
+
+        <h2 id="langchain">LangChain: The agent engineering platform.</h2>
+
+        <p>LangChain launched in October 2022 as a toolkit for chaining LLM calls together. By October 2025, it reached 1.0 — a stable, production-committed release built around one insight: the hard part of building with LLMs isn't the model call. It's the orchestration around it.</p>
+
+        <p>LangChain 1.0 describes itself as the <em>"agent engineering platform."</em> 35% of Fortune 500 companies use it, primarily for conversational agents. 84.7% of its community codes in Python. It's the framework you reach for when you need to connect an LLM to the real world and don't want to rebuild every integration from scratch.</p>
+
+        <h3>The seven core components</h3>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <p class="concept-card__title">Chat Models</p>
+            <p class="concept-card__desc">A unified interface to 1,000+ LLM providers: OpenAI, Anthropic, Google, Cohere, Ollama (local), and more. Swap models without rewriting your application logic.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Prompt Templates</p>
+            <p class="concept-card__desc">Parameterised prompt structures that separate your instructions from your data. Composable, testable, and reusable across chains and agents.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Chains (LCEL)</p>
+            <p class="concept-card__desc">LangChain Expression Language — the composition layer. Pipe components together with <code>|</code> syntax. Chains are lazy, streaming-aware, and parallelism-friendly.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Tools &amp; Toolkits</p>
+            <p class="concept-card__desc">Python functions the agent can call. Over 300 pre-built integrations: web search, SQL databases, REST APIs, vector stores, calculators, and shell commands.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Memory</p>
+            <p class="concept-card__desc">Persistent context across turns. Short-term (in-context), long-term (vector store or database), and summary memory. The agent remembers your name next session.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Retrievers</p>
+            <p class="concept-card__desc">The RAG layer. Retrieval-Augmented Generation — pull relevant documents from a vector store at query time to ground the model's answers in your data.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Agents</p>
+            <p class="concept-card__desc">The decision loop. The model reasons about which tool to call, calls it, observes the result, and continues until the task is complete. Powered by LangGraph at the runtime layer.</p>
+          </div>
+        </div>
+
+        <h3>LangChain in code: a RAG pipeline</h3>
+
+        <p>This is a minimal Retrieval-Augmented Generation chain — the pattern behind most production knowledge-base assistants:</p>
+
+<div class="code-block"><span class="kw">from</span> langchain_openai <span class="kw">import</span> ChatOpenAI, OpenAIEmbeddings
+<span class="kw">from</span> langchain_community.vectorstores <span class="kw">import</span> FAISS
+<span class="kw">from</span> langchain_core.prompts <span class="kw">import</span> ChatPromptTemplate
+<span class="kw">from</span> langchain_core.output_parsers <span class="kw">import</span> StrOutputParser
+<span class="kw">from</span> langchain_core.runnables <span class="kw">import</span> RunnablePassthrough
+
+<span class="cm"># 1. Embed and index your documents</span>
+docs = [<span class="st">"FastMCP powers 70% of MCP servers."</span>, <span class="st">"LangGraph 1.0 shipped Oct 2025."</span>]
+vectorstore = FAISS.<span class="fn">from_texts</span>(docs, <span class="fn">OpenAIEmbeddings</span>())
+retriever = vectorstore.<span class="fn">as_retriever</span>()
+
+<span class="cm"># 2. Define a prompt with context injection</span>
+prompt = ChatPromptTemplate.<span class="fn">from_template</span>(<span class="st">"""
+Answer the question using only the context below.
+Context: {context}
+Question: {question}
+"""</span>)
+
+<span class="cm"># 3. Build the chain with LCEL pipe syntax</span>
+chain = (
+    {<span class="st">"context"</span>: retriever, <span class="st">"question"</span>: RunnablePassthrough()}
+    | prompt
+    | <span class="fn">ChatOpenAI</span>(model=<span class="st">"gpt-4o"</span>)
+    | <span class="fn">StrOutputParser</span>()
+)
+
+<span class="cm"># 4. Invoke it</span>
+result = chain.<span class="fn">invoke</span>(<span class="st">"When did LangGraph 1.0 ship?"</span>)
+<span class="fn">print</span>(result)  <span class="cm"># "LangGraph 1.0 shipped in October 2025."</span></div>
+
+        <p>The <code>|</code> pipe syntax is LCEL — LangChain Expression Language. Every step is a <code>Runnable</code> with a consistent interface. The chain streams by default, handles errors uniformly, and parallelises automatically when branches are independent.</p>
+
+        <h3>LangChain agents with tools</h3>
+
+<div class="code-block"><span class="kw">from</span> langchain_openai <span class="kw">import</span> ChatOpenAI
+<span class="kw">from</span> langchain.agents <span class="kw">import</span> create_react_agent, AgentExecutor
+<span class="kw">from</span> langchain_community.tools.tavily_search <span class="kw">import</span> TavilySearchResults
+<span class="kw">from</span> langchain_core.prompts <span class="kw">import</span> ChatPromptTemplate
+
+<span class="cm"># Tools the agent can use</span>
+tools = [<span class="fn">TavilySearchResults</span>(max_results=<span class="nm">3</span>)]
+
+llm = <span class="fn">ChatOpenAI</span>(model=<span class="st">"gpt-4o"</span>)
+prompt = ChatPromptTemplate.<span class="fn">from_template</span>(<span class="st">"""
+You are a helpful research assistant. Use tools to answer questions accurately.
+
+{input}
+{agent_scratchpad}
+"""</span>)
+
+<span class="cm"># Create a ReAct agent: Reason → Act → Observe loop</span>
+agent = <span class="fn">create_react_agent</span>(llm, tools, prompt)
+executor = <span class="fn">AgentExecutor</span>(agent=agent, tools=tools, verbose=<span class="nm">True</span>)
+
+result = executor.<span class="fn">invoke</span>({<span class="st">"input"</span>: <span class="st">"What is FastMCP 3.0 and when was it released?"</span>})
+<span class="fn">print</span>(result[<span class="st">"output"</span>])</div>
+
+        <h3>What changed in LangChain 1.0</h3>
+
+        <p>The 1.0 release committed to three things: no breaking changes until 2.0, LangGraph as the underlying agent runtime, and a middleware system for production concerns (human-in-the-loop, PII redaction, rate limiting). LangChain agents now run on LangGraph under the hood. The <code>create_agent</code> abstraction wraps a full LangGraph state machine.</p>
+
+        <p>This is the key architectural point: <strong>LangChain is now a high-level API on top of LangGraph.</strong> If you want the convenient batteries-included experience, use LangChain. If you need full control over the state machine, drop to LangGraph directly.</p>
+
+        <figure class="article-img-break">
+          <img class="article-img-break__img" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=90&auto=format&fit=crop" alt="Code on screen" loading="lazy">
+          <figcaption class="article-img-break__label">LangChain — 300+ integrations, one consistent interface.</figcaption>
+        </figure>
+
+        <h2 id="langgraph">LangGraph: Stateful agents that don't break.</h2>
+
+        <p>LangChain's simple agent loop — <em>Reason → Act → Observe → Repeat</em> — is fine for quick tasks. It breaks for anything long-running: multi-step research, approval workflows, agents that need to pause for human input, systems that must survive server restarts mid-task.</p>
+
+        <p>LangGraph is the answer. Released as 1.0 in October 2025 alongside LangChain 1.0, and updated to 1.2 in May 2026, it is a <em>"low-level orchestration framework for building, managing, and deploying long-running, stateful agents."</em> It draws inspiration from Google's Pregel and Apache Beam — the same graph-based computation models that power distributed data pipelines at scale.</p>
+
+        <p>Companies running LangGraph in production: Klarna (85M users, 80% reduction in resolution time), Uber (large-scale code migration agents), LinkedIn (SQL Bot — natural language to SQL for 20,000+ employees), Coinbase, BlackRock, JPMorgan, Cisco, and Replit. Over 400 companies run LangGraph Platform deployments.</p>
+
+        <h3>The core model: StateGraph</h3>
+
+        <p>LangGraph models an agent as a directed graph. Every node is a computation step. Every edge is a transition between steps. The entire graph shares a typed state object that flows through every node and is automatically checkpointed at each step.</p>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <p class="concept-card__title">State</p>
+            <p class="concept-card__desc">A TypedDict that holds everything the agent knows: conversation history, intermediate results, tool outputs, error counts. Every node reads and writes this shared object.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Nodes</p>
+            <p class="concept-card__desc">Python functions (sync or async) that take the current state, do work — call an LLM, invoke a tool, run code — and return an updated state. Nodes are your agent's steps.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Edges</p>
+            <p class="concept-card__desc">Connections between nodes. Static edges always go the same way. Conditional edges use a routing function: read the state, return the name of the next node. This is how you build branching logic and loops.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Checkpointing</p>
+            <p class="concept-card__desc">Every state transition is saved to a pluggable saver (memory, SQLite, Postgres). The graph can pause, resume, time-travel to any previous state, and survive server restarts.</p>
+          </div>
+        </div>
+
+        <h3>LangGraph in code: a research agent</h3>
+
+<div class="code-block"><span class="kw">from</span> typing <span class="kw">import</span> TypedDict, Annotated
+<span class="kw">from</span> langgraph.graph <span class="kw">import</span> StateGraph, END
+<span class="kw">from</span> langgraph.checkpoint.memory <span class="kw">import</span> MemorySaver
+<span class="kw">from</span> langchain_openai <span class="kw">import</span> ChatOpenAI
+
+<span class="cm"># 1. Define the state schema</span>
+<span class="kw">class</span> <span class="fn">AgentState</span>(TypedDict):
+    messages: Annotated[<span class="nm">list</span>, <span class="st">"conversation history"</span>]
+    research: <span class="nm">str</span>
+    draft: <span class="nm">str</span>
+    approved: <span class="nm">bool</span>
+
+llm = <span class="fn">ChatOpenAI</span>(model=<span class="st">"gpt-4o"</span>)
+
+<span class="cm"># 2. Define nodes — each takes state, returns partial state update</span>
+<span class="kw">def</span> <span class="fn">research_node</span>(state: AgentState) -> <span class="nm">dict</span>:
+    query = state[<span class="st">"messages"</span>][-<span class="nm">1</span>]
+    result = llm.<span class="fn">invoke</span>(<span class="st">f"Research this topic thoroughly: {query}"</span>)
+    <span class="kw">return</span> {<span class="st">"research"</span>: result.content}
+
+<span class="kw">def</span> <span class="fn">write_node</span>(state: AgentState) -> <span class="nm">dict</span>:
+    draft = llm.<span class="fn">invoke</span>(<span class="st">f"Write a summary based on: {state['research']}"</span>)
+    <span class="kw">return</span> {<span class="st">"draft"</span>: draft.content}
+
+<span class="kw">def</span> <span class="fn">review_node</span>(state: AgentState) -> <span class="nm">dict</span>:
+    <span class="cm"># Human-in-the-loop: graph pauses here, waits for approval</span>
+    <span class="kw">return</span> {}  <span class="cm"># Updated externally via graph.update_state()</span>
+
+<span class="kw">def</span> <span class="fn">route_after_review</span>(state: AgentState) -> <span class="nm">str</span>:
+    <span class="kw">return</span> END <span class="kw">if</span> state[<span class="st">"approved"</span>] <span class="kw">else</span> <span class="st">"write"</span>  <span class="cm"># Loop back if rejected</span>
+
+<span class="cm"># 3. Build the graph</span>
+workflow = <span class="fn">StateGraph</span>(AgentState)
+workflow.<span class="fn">add_node</span>(<span class="st">"research"</span>, research_node)
+workflow.<span class="fn">add_node</span>(<span class="st">"write"</span>, write_node)
+workflow.<span class="fn">add_node</span>(<span class="st">"review"</span>, review_node)
+
+workflow.<span class="fn">set_entry_point</span>(<span class="st">"research"</span>)
+workflow.<span class="fn">add_edge</span>(<span class="st">"research"</span>, <span class="st">"write"</span>)
+workflow.<span class="fn">add_edge</span>(<span class="st">"write"</span>, <span class="st">"review"</span>)
+workflow.<span class="fn">add_conditional_edges</span>(<span class="st">"review"</span>, route_after_review)
+
+<span class="cm"># 4. Compile with a checkpointer for persistence</span>
+checkpointer = <span class="fn">MemorySaver</span>()
+graph = workflow.<span class="fn">compile</span>(checkpointer=checkpointer, interrupt_before=[<span class="st">"review"</span>])
+
+<span class="cm"># 5. Run it — the graph pauses at "review" waiting for human input</span>
+config = {<span class="st">"configurable"</span>: {<span class="st">"thread_id"</span>: <span class="st">"session-001"</span>}}
+result = graph.<span class="fn">invoke</span>(
+    {<span class="st">"messages"</span>: [<span class="st">"Explain LangGraph for beginners"</span>], <span class="st">"approved"</span>: <span class="nm">False</span>},
+    config=config
+)</div>
+
+        <h3>The five capabilities that matter in production</h3>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <p class="concept-card__title">Durable Execution</p>
+            <p class="concept-card__desc">If your server restarts mid-workflow, LangGraph picks up exactly where it left off. Every transition is checkpointed. No lost progress, no re-running completed steps.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Human-in-the-Loop</p>
+            <p class="concept-card__desc"><code>interrupt_before=["approve"]</code> pauses the graph at any node for human review. A compliance officer can inspect the agent's proposed action before it executes. Resume with <code>graph.update_state()</code>.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Time-Travel Debugging</p>
+            <p class="concept-card__desc">Every past state is stored. You can fork the graph from any checkpoint, modify the state, and replay from there. Debug production failures by rewinding to the moment before things went wrong.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Multi-Agent Supervision</p>
+            <p class="concept-card__desc">Nodes can be other graphs. Build a supervisor that routes tasks to specialist sub-agents — Researcher, Writer, Critic. Each is a full StateGraph. The supervisor is the meta-graph.</p>
+          </div>
+          <div class="concept-card">
+            <p class="concept-card__title">Long-Term Memory</p>
+            <p class="concept-card__desc">Short-term memory lives in the checkpointed state. Long-term memory persists across separate sessions in Postgres or a vector store. The agent remembers user preferences from last week.</p>
+          </div>
+        </div>
+
+        <h3>The multi-agent supervisor pattern</h3>
+
+<div class="code-block"><span class="kw">from</span> langgraph.graph <span class="kw">import</span> StateGraph, END
+
+<span class="cm"># Each specialist is a compiled sub-graph</span>
+researcher_graph = <span class="fn">build_researcher_graph</span>()  <span class="cm"># searches and synthesises</span>
+writer_graph = <span class="fn">build_writer_graph</span>()          <span class="cm"># drafts content</span>
+critic_graph = <span class="fn">build_critic_graph</span>()          <span class="cm"># reviews and scores
+</span>
+<span class="kw">def</span> <span class="fn">supervisor</span>(state):
+    <span class="cm"># Decide which specialist to route to based on current state</span>
+    <span class="kw">if not</span> state[<span class="st">"research_done"</span>]:
+        <span class="kw">return</span> {<span class="st">"next"</span>: <span class="st">"researcher"</span>}
+    <span class="kw">elif not</span> state[<span class="st">"draft_done"</span>]:
+        <span class="kw">return</span> {<span class="st">"next"</span>: <span class="st">"writer"</span>}
+    <span class="kw">elif</span> state[<span class="st">"score"</span>] < <span class="nm">8</span>:
+        <span class="kw">return</span> {<span class="st">"next"</span>: <span class="st">"critic"</span>}  <span class="cm"># Loop: revise until score >= 8</span>
+    <span class="kw">else</span>:
+        <span class="kw">return</span> {<span class="st">"next"</span>: END}
+
+multi_agent = <span class="fn">StateGraph</span>(SupervisorState)
+multi_agent.<span class="fn">add_node</span>(<span class="st">"supervisor"</span>, supervisor)
+multi_agent.<span class="fn">add_node</span>(<span class="st">"researcher"</span>, researcher_graph)
+multi_agent.<span class="fn">add_node</span>(<span class="st">"writer"</span>, writer_graph)
+multi_agent.<span class="fn">add_node</span>(<span class="st">"critic"</span>, critic_graph)
+multi_agent.<span class="fn">set_entry_point</span>(<span class="st">"supervisor"</span>)
+<span class="cm"># Conditional routing: supervisor decides next step</span>
+multi_agent.<span class="fn">add_conditional_edges</span>(<span class="st">"supervisor"</span>, <span class="kw">lambda</span> s: s[<span class="st">"next"</span>])</div>
+
+        <div class="callout">
+          <p><strong>Why LangGraph matters for your career:</strong> Simple LangChain agents break at scale. LangGraph is what you need to build the kind of systems that Fortune 500 companies actually deploy — agents that survive failures, handle approvals, and coordinate multiple specialised sub-agents on complex tasks. If you want to build AI infrastructure, not just AI demos, LangGraph is the foundation.</p>
+        </div>
+
+        <figure class="article-img-break">
+          <img class="article-img-break__img" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&q=90&auto=format&fit=crop" alt="Abstract AI neural network" loading="lazy">
+          <figcaption class="article-img-break__label">LangGraph — stateful agents at production scale. Used by Klarna, Uber, LinkedIn, and 400+ others.</figcaption>
+        </figure>
+
+        <h2 id="how-they-fit">How the three layers fit together.</h2>
+
+        <p>The confusion most people have is treating these as alternatives. They're not. They form a stack, each at a different level of abstraction:</p>
+
+        <div class="stack-diagram">
+          <div class="stack-layer" style="background:#f8f8f6;">
+            <span class="stack-layer__badge badge-blue">Layer 3</span>
+            <div class="stack-layer__text">
+              <span class="stack-layer__name">LangChain</span> — High-level application framework. Provides chains, agents, memory, and 300+ integrations. The batteries-included API for building LLM apps quickly. Under the hood, LangChain agents now run on LangGraph.
+            </div>
+          </div>
+          <div class="stack-layer">
+            <span class="stack-layer__badge badge-green">Layer 2</span>
+            <div class="stack-layer__text">
+              <span class="stack-layer__name">LangGraph</span> — Stateful orchestration runtime. The state machine that controls agent loops, branching, checkpointing, and multi-agent coordination. Use directly when you need full control. Use implicitly through LangChain when you don't.
+            </div>
+          </div>
+          <div class="stack-layer" style="background:#f8f8f6;">
+            <span class="stack-layer__badge badge-gold">Layer 1</span>
+            <div class="stack-layer__text">
+              <span class="stack-layer__name">FastMCP</span> — Tool connectivity protocol. Defines and serves the tools your agents can call. Model-agnostic, framework-agnostic. One MCP server works with Claude Desktop, a LangGraph agent, or any other MCP client.
+            </div>
+          </div>
+        </div>
+
+        <p>In a real production system, the three work like this:</p>
+
+        <ol>
+          <li>Your team builds a <strong>FastMCP server</strong> that exposes your internal tools — a CRM query tool, a ticket creation tool, a SQL runner. One server, reusable by any agent framework.</li>
+          <li>A <strong>LangGraph</strong> state machine runs the agent loop — routing between an LLM reasoning node and a tool-execution node, checkpointing state at each step.</li>
+          <li><strong>LangChain</strong> provides the LLM interface, the prompt templates, and the MCP adapters that translate your FastMCP tools into LangChain-compatible tool objects.</li>
+        </ol>
+
+        <p>The LangChain MCP Adapters library is the glue:</p>
+
+<div class="code-block"><span class="kw">from</span> langchain_mcp_adapters.client <span class="kw">import</span> MultiServerMCPClient
+<span class="kw">from</span> langgraph.prebuilt <span class="kw">import</span> create_react_agent
+<span class="kw">from</span> langchain_anthropic <span class="kw">import</span> ChatAnthropic
+
+<span class="cm"># Connect to one or more FastMCP servers</span>
+<span class="kw">async with</span> <span class="fn">MultiServerMCPClient</span>({
+    <span class="st">"crm"</span>: {<span class="st">"url"</span>: <span class="st">"http://crm-mcp-server:8000/sse"</span>},
+    <span class="st">"ticketing"</span>: {<span class="st">"url"</span>: <span class="st">"http://tickets-mcp-server:8000/sse"</span>},
+}) <span class="kw">as</span> client:
+    <span class="cm"># MCP tools become first-class LangChain tools</span>
+    tools = <span class="kw">await</span> client.<span class="fn">get_tools</span>()
+
+    <span class="cm"># LangGraph ReAct agent with MCP tooling</span>
+    agent = <span class="fn">create_react_agent</span>(
+        <span class="fn">ChatAnthropic</span>(model=<span class="st">"claude-opus-4-8"</span>),
+        tools
+    )
+
+    result = <span class="kw">await</span> agent.<span class="fn">ainvoke</span>({
+        <span class="st">"messages"</span>: [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Find all open support tickets for Acme Corp."</span>}]
+    })</div>
+
+        <p>When to pick which approach:</p>
+
+        <div class="article-flowchart" style="overflow-x:auto;margin:2rem 0;">
+          <table style="width:100%;border-collapse:collapse;font-family:var(--font-body);font-size:14px;">
+            <thead>
+              <tr style="background:var(--color-text);color:var(--color-text-white);">
+                <th style="padding:10px 14px;text-align:left;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;font-size:11px;">Scenario</th>
+                <th style="padding:10px 14px;text-align:left;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;font-size:11px;">Use</th>
+                <th style="padding:10px 14px;text-align:left;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;font-size:11px;">Why</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(66,66,66,0.12);">
+                <td style="padding:10px 14px;">Exposing your internal APIs to any AI tool</td>
+                <td style="padding:10px 14px;font-weight:700;color:var(--color-accent);">FastMCP</td>
+                <td style="padding:10px 14px;color:var(--color-text-secondary);">Framework-agnostic. Build once, use everywhere MCP is supported.</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(66,66,66,0.12);background:var(--color-bg-secondary);">
+                <td style="padding:10px 14px;">Quick chatbot, single-turn Q&amp;A, simple RAG</td>
+                <td style="padding:10px 14px;font-weight:700;color:var(--color-accent);">LangChain</td>
+                <td style="padding:10px 14px;color:var(--color-text-secondary);">300+ integrations, fast prototyping, clean LCEL syntax.</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(66,66,66,0.12);">
+                <td style="padding:10px 14px;">Long-running agent, approval workflows, multi-step tasks</td>
+                <td style="padding:10px 14px;font-weight:700;color:var(--color-accent);">LangGraph</td>
+                <td style="padding:10px 14px;color:var(--color-text-secondary);">Checkpointing, human-in-the-loop, durable execution.</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(66,66,66,0.12);background:var(--color-bg-secondary);">
+                <td style="padding:10px 14px;">Multi-agent: Researcher + Writer + Critic loop</td>
+                <td style="padding:10px 14px;font-weight:700;color:var(--color-accent);">LangGraph + FastMCP</td>
+                <td style="padding:10px 14px;color:var(--color-text-secondary);">Supervisor graph with MCP tools shared across sub-agents.</td>
+              </tr>
+              <tr>
+                <td style="padding:10px 14px;">Full production system: tools + orchestration + apps</td>
+                <td style="padding:10px 14px;font-weight:700;color:var(--color-accent);">All three</td>
+                <td style="padding:10px 14px;color:var(--color-text-secondary);">FastMCP (tools) → LangGraph (runtime) → LangChain (API layer).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="learning-path">The learning path.</h2>
+
+        <p>The order matters. If you start with LangGraph before you understand what LangChain is doing, you'll be fighting the abstraction levels. Here's the sequence that works:</p>
+
+        <p><strong>Week 1–2: LangChain fundamentals.</strong> Understand what a chain is, how LCEL pipes components together, how a basic agent calls tools, and how RAG works. Build three things: a chatbot with memory, a document Q&amp;A pipeline, and a tool-calling research agent. Don't skip this even if you're impatient to get to LangGraph — LangGraph will make much more sense once you've felt the limits of the linear agent loop.</p>
+
+        <p><strong>Week 3–4: LangGraph.</strong> Start with the LangChain Academy course (free, official, 7 modules). Build a StateGraph with a conditional edge. Add a checkpointer and watch the graph survive a restart. Implement a human-in-the-loop approval step. Then build the multi-agent supervisor pattern — at that point, LangGraph clicks.</p>
+
+        <p><strong>Week 5–6: FastMCP.</strong> Build a FastMCP server that wraps an API you use: GitHub, Notion, a REST endpoint you own at work. Connect it to Claude Desktop to see it work instantly. Then wire it into your LangGraph agent using LangChain MCP Adapters. The integration is the real skill — not just building servers, but building servers that slot cleanly into agent systems.</p>
+
+        <p><strong>Ongoing: Build something real.</strong> The patterns that matter come from building, not reading. Suggestions: a personal research assistant that queries your notes and the web, an automated code review pipeline with a human approval gate, or a customer service agent that reads from your company's knowledge base and escalates to humans on uncertainty.</p>
+
+        <h2 id="resources">Resources and links.</h2>
+
+        <table class="resource-table">
+          <thead>
+            <tr>
+              <th>Resource</th>
+              <th>Type</th>
+              <th>What You Get</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>LangChain Academy</strong><br><a href="https://academy.langchain.com/" target="_blank" rel="noopener">academy.langchain.com</a></td>
+              <td>Free Course</td>
+              <td>7 modules. Module 0 (setup) through Module 5 (advanced LangGraph) to Module 6 (deployment). Official, up-to-date, with Jupyter notebooks and LangGraph Studio.</td>
+            </tr>
+            <tr>
+              <td><strong>FastMCP Official Docs</strong><br><a href="https://gofastmcp.com" target="_blank" rel="noopener">gofastmcp.com</a></td>
+              <td>Docs</td>
+              <td>Complete reference for FastMCP 3.1. Covers servers, clients, tools, resources, prompts, auth, and the 3.0 provider/transform architecture.</td>
+            </tr>
+            <tr>
+              <td><strong>LangChain Docs</strong><br><a href="https://python.langchain.com" target="_blank" rel="noopener">python.langchain.com</a></td>
+              <td>Docs</td>
+              <td>Official LangChain 1.0 docs. The concepts section is excellent for understanding LCEL and the component model. Connect via MCP for real-time answers in your IDE.</td>
+            </tr>
+            <tr>
+              <td><strong>LangGraph Docs</strong><br><a href="https://langchain-ai.github.io/langgraph/" target="_blank" rel="noopener">langchain-ai.github.io/langgraph</a></td>
+              <td>Docs</td>
+              <td>Official LangGraph 1.2 docs. The concepts and how-to sections cover every production pattern: checkpointing, human-in-the-loop, multi-agent, streaming.</td>
+            </tr>
+            <tr>
+              <td><strong>emarco177/langchain-course</strong><br><a href="https://github.com/emarco177/langchain-course" target="_blank" rel="noopener">github.com/emarco177/langchain-course</a></td>
+              <td>GitHub / Project-Based</td>
+              <td>9 real projects from beginner to advanced. Covers RAG, reflection agents, code interpreters, and agentic RAG. Uses LangChain 1.0+ and LangGraph. Highly recommended.</td>
+            </tr>
+            <tr>
+              <td><strong>Udemy: Agentic AI Engineering with LangChain &amp; LangGraph</strong></td>
+              <td>Paid Course</td>
+              <td>Re-recorded in 2026 for LangChain 1.2+. Production-ready agents, RAG systems, and deployment. Best structured course for going from zero to job-ready.</td>
+            </tr>
+            <tr>
+              <td><strong>FastMCP GitHub</strong><br><a href="https://github.com/prefecthq/fastmcp" target="_blank" rel="noopener">github.com/prefecthq/fastmcp</a></td>
+              <td>GitHub</td>
+              <td>Source, examples, and changelogs for FastMCP 3.x. The examples directory has production patterns for auth, versioning, and OpenAPI-to-MCP conversion.</td>
+            </tr>
+            <tr>
+              <td><strong>LangChain Academy GitHub</strong><br><a href="https://github.com/langchain-ai/langchain-academy" target="_blank" rel="noopener">github.com/langchain-ai/langchain-academy</a></td>
+              <td>GitHub</td>
+              <td>All notebook files from the Academy course. Clone and run locally. Each module has a <code>studio</code> subdirectory with pre-built graphs you can run in LangGraph Studio.</td>
+            </tr>
+            <tr>
+              <td><strong>Zero To Mastery: AI Engineering with LangChain</strong><br><a href="https://zerotomastery.io/courses/ai-application-development/" target="_blank" rel="noopener">zerotomastery.io</a></td>
+              <td>Paid Course</td>
+              <td>Covers LangChain, LangSmith, and LangGraph end-to-end with deployment. Good production coverage including observability with LangSmith.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <p><strong>One honest note on AI engineering in 2026:</strong> The field is moving fast enough that tutorial content ages within months. Prioritise the official documentation and the official Academy over third-party courses. When a course was recorded matters as much as its rating. Check the "last updated" date before purchasing.</p>
+        </div>
+
+        <div class="grove-seal" aria-hidden="true"></div>
+
+        <!-- RELATED POSTS -->
+        <div class="related-posts">
+          <p class="related-posts__label">Read next</p>
+          <div class="related-posts__grid">
+            <a class="related-post-card" href="/posts/13-agents-one-saturday.html">
+              <img class="related-post-card__image" src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+              <div class="related-post-card__body">
+                <p class="related-post-card__category">AI + Engineering</p>
+                <p class="related-post-card__title">Thirteen Agents in One Saturday.</p>
+              </div>
+            </a>
+            <a class="related-post-card" href="/posts/ai-trends-2026-breakthrough-idea.html">
+              <img class="related-post-card__image" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+              <div class="related-post-card__body">
+                <p class="related-post-card__category">AI</p>
+                <p class="related-post-card__title">AI Trends 2026: The Breakthrough Idea</p>
+              </div>
+            </a>
+            <a class="related-post-card" href="/posts/memory-is-the-new-moat.html">
+              <img class="related-post-card__image" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=90&auto=format&fit=crop" alt="" loading="lazy">
+              <div class="related-post-card__body">
+                <p class="related-post-card__category">AI</p>
+                <p class="related-post-card__title">Memory Is the New Moat</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="v2-footer">
+  <button class="v2-footer__scroll-up" onclick="window.scrollTo({top:0,behavior:'smooth'});" aria-label="Scroll to top">&uarr;<br/>GO UP</button>
+  <div class="v2-footer__inner">
+    <nav class="v2-footer__nav" aria-label="Footer navigation">
+      <a href="/" class="footer__link">Essays</a>
+      <a href="/about.html" class="footer__link">About</a>
+      <a href="/archive.html" class="footer__link">Archive</a>
+      <a href="/tools.html" class="footer__link">Tools</a>
+      <a href="/resume.html" class="footer__link">Resume</a>
+      <a href="/rss.xml" class="footer__link">RSS</a>
+    </nav>
+    <div class="v2-footer__newsletter">
+      <div class="v2-footer__newsletter-title">Field Notes</div>
+      <p class="v2-footer__newsletter-text">One essay per week. AI infrastructure, trading systems, and what actually ships.</p>
+      <form class="v2-footer__email-form" action="https://formspree.io/f/xwvwlybd" method="POST">
+        <input class="v2-footer__email-input" type="email" name="email" placeholder="your@email.com" required />
+        <button class="v2-footer__email-submit" type="submit">Subscribe &rarr;</button>
+      </form>
+    </div>
+  </div>
+  <div class="v2-footer__bottom">
+    <span>&copy; 2026 Sachin Rai &middot; Field Notes from San Francisco</span>
+    <div class="v2-footer__social">
+      <a href="https://x.com/sachinrai01" target="_blank" rel="noopener">X &nearr;</a>
+      <a href="https://www.linkedin.com/in/sachinr1/" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+      <a href="https://github.com/sachinai1981-web" target="_blank" rel="noopener">GitHub &nearr;</a>
+      <a href="/privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../css/grove.js"></script>
+<script>
+(function(){
+  var els = document.querySelectorAll('[data-target]');
+  if(!els.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target;
+      var target = parseInt(el.dataset.target, 10);
+      var prefix = el.dataset.prefix || '';
+      var suffix = el.dataset.suffix || '';
+      var duration = 1400;
+      var start = performance.now();
+      function tick(now){
+        var t = Math.min((now - start)/duration, 1);
+        var ease = 1 - Math.pow(1-t, 3);
+        el.textContent = prefix + Math.round(ease * target) + suffix;
+        if(t < 1) requestAnimationFrame(tick);
+        else el.textContent = prefix + target + suffix;
+      }
+      requestAnimationFrame(tick);
+      obs.unobserve(el);
+    });
+  }, {threshold: 0.1, rootMargin: "0px 0px 50px 0px"});
+  els.forEach(function(el){ obs.observe(el); });
+})();
+</script>
+<script type="module">
+import {onCLS,onINP,onFCP,onLCP,onTTFB} from 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.js';
+function send(m){if(typeof gtag==='undefined')return;gtag('event',m.name,{value:Math.round(m.name==='CLS'?m.delta*1000:m.delta),metric_id:m.id,non_interaction:true});}
+onCLS(send);onINP(send);onFCP(send);onLCP(send);onTTFB(send);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="/js/post-story.js"></script>
+</body>
+</html>
