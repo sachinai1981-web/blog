@@ -6,8 +6,33 @@
     <description>Field notes from where AI infrastructure meets enterprise selling.</description>
     <language>en-us</language>
     <copyright>© 2026 Sachin Rai</copyright>
-    <lastBuildDate>Sun, 11 May 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jun 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://sachinai.com/rss.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>The Compression Endgame</title>
+      <link>https://sachinai.com/posts/the-compression-endgame.html</link>
+      <guid>https://sachinai.com/posts/the-compression-endgame.html</guid>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate>
+      <description>Everyone is racing to build bigger. The most important AI results of the last year quietly argue the future of intelligence is smaller, denser, and measured in capability per compressed byte.</description>
+    </item>
+
+    <item>
+      <title>The Wanting Layer</title>
+      <link>https://sachinai.com/posts/the-wanting-layer.html</link>
+      <guid>https://sachinai.com/posts/the-wanting-layer.html</guid>
+      <pubDate>Sun, 21 Jun 2026 00:00:00 +0000</pubDate>
+      <description>As the cost of doing collapses to zero, all the value rushes to one human act: deciding what is worth doing. And that last human job is already being mapped.</description>
+    </item>
+
+    <item>
+      <title>Plan Slow, Ship Reflexes</title>
+      <link>https://sachinai.com/posts/plan-slow-ship-reflexes.html</link>
+      <guid>https://sachinai.com/posts/plan-slow-ship-reflexes.html</guid>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 +0000</pubDate>
+      <description>We're told the future is giant models thinking longer at the moment you ask. Two results from opposite ends of AI suggest the opposite: think slowly offline, act with cheap reflexes online.</description>
+    </item>
+
 
     <item>
       <title>Thirteen Agents in One Saturday.</title>

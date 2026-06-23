@@ -12,6 +12,9 @@ Sachin Rai writes about the intersection of AI and enterprise GTM:
 
 ## Posts
 
+- [The Wanting Layer](https://sachinai.com/posts/the-wanting-layer.html) — As the cost of doing collapses to zero, all the value rushes to one human act: deciding what is worth doing. And the strangest part — that last human job is already being mapped.
+- [The Compression Endgame](https://sachinai.com/posts/the-compression-endgame.html) — Everyone is racing to build bigger. The most important AI results of the last year quietly argue the future of intelligence is smaller, denser, and measured in a unit nobody is tracking: capability per compressed byte.
+- [Plan Slow, Ship Reflexes](https://sachinai.com/posts/plan-slow-ship-reflexes.html) — We're told the future is giant models thinking longer at the moment you ask. Two results from opposite ends of AI suggest the opposite shape: do the hard thinking offline, and act in the moment with something cheap and instant.
 - [The Metric That Actually Measures AI Productivity](https://sachinai.com/posts/token-throughput-productivity.html) — Andrej Karpathy gets nervous when he has subscription tokens left over. Once you understand why, you'll never measure AI productivity the same way again.
 - [The Player-Coach Fallacy](https://sachinai.com/posts/player-coach-fallacy.html) — Brian Armstrong cut 700 people and called it an AI org redesign. Here's why this specific management model — not the AI part — will fail.
 - [The AI Skill Gap Nobody Is Teaching](https://sachinai.com/posts/harness-engineering-ai-skill-gap.html) — Prompting gets all the attention. But the reason your agents fail at 3am isn't the prompt — it's what's missing around it.
